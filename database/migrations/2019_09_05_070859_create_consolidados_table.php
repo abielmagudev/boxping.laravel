@@ -16,10 +16,10 @@ class CreateConsolidadosTable extends Migration
         Schema::create('consolidados', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('numero');
-            $table->dateTime('notificacion')->nullable();
             $table->unsignedTinyInteger('palets')->nullable();
             $table->unsignedInteger('cliente_id');
             $table->boolean('cliente_alias_numero')->default(0);
+            $table->dateTime('notificacion')->nullable();
             $table->timestamps();
         });
     }
