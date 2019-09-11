@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             CodigosrTableSeeder::class,
             TransportadorasTableSeeder::class,
             EntradasTableSeeder::class,
+            EntradaObservacionesTableSeeder::class,
         ]);
     }
 }
