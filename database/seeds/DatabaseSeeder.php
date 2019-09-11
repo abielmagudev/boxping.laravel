@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
             CodigosrTableSeeder::class,
             ConductoresTableSeeder::class,
             ConsolidadosTableSeeder::class,
+            ReempacadoresTableSeeder::class,
             TransportadorasTableSeeder::class,
             VehiculosTableSeeder::class,
             EntradaObservacionesTableSeeder::class,
