@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
             ClientesTableSeeder::class,
             CodigosrTableSeeder::class,
             TransportadorasTableSeeder::class,
+            EntradasTableSeeder::class,
         ]);
     }
 }
