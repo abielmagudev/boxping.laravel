@@ -14,13 +14,14 @@ class DatabaseSeeder extends Seeder
         // $this->call(UsersTableSeeder::class);
 
         $this->call([
-            ConsolidadosTableSeeder::class,
             ClientesTableSeeder::class,
             CodigosrTableSeeder::class,
-            TransportadorasTableSeeder::class,
             ConductoresTableSeeder::class,
-            EntradasTableSeeder::class,
+            ConsolidadosTableSeeder::class,
+            TransportadorasTableSeeder::class,
+            VehiculosTableSeeder::class,
             EntradaObservacionesTableSeeder::class,
+            EntradasTableSeeder::class,
         ]);
     }
 }
