@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             ConsolidadosTableSeeder::class,
             ClientesTableSeeder::class,
+            CodigosrTableSeeder::class,
         ]);
     }
 }
