@@ -8,8 +8,9 @@
 </head>
 <body>
     <nav class="navbar navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">Navbar</a>
+        <a class="navbar-brand" href="#">Navbar</a>
     </nav>
+    <br>
     <div class="container">
         @yield('content')
     </div>
