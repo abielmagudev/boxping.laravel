@@ -12,6 +12,7 @@
     </nav>
     <br>
     <div class="container">
+        @include('components.notification')
         @yield('content')
     </div>
     <br>
