@@ -20,6 +20,8 @@ class CreateConsolidadosTable extends Migration
             $table->text('notas')->nullable();
             $table->boolean('cerrado')->default(0);
             $table->unsignedSmallInteger('cliente_id');
+            $table->unsignedSmallInteger('created_by_user');
+            $table->unsignedSmallInteger('updated_by_user');
             $table->timestamps();
         });
     }

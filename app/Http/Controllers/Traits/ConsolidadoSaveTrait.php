@@ -10,12 +10,21 @@ trait ConsolidadoSaveTrait {
             'notas'      => $validated['notas'],
             'cerrado'    => isset($validated['cerrado']) ? 1 : 0,
             'cliente_id' => $validated['cliente'],
+            'created_by_user' => 1,
+            'updated_by_user' => 1,
         );
     }
 
     private function prepareToUpdate($validated)
     {
-        return $this->prepareToStore($validated);
+        return array(
+            'numero'     => $validated['numero'],
+            'tarimas'    => $validated['tarimas'],
+            'notas'      => $validated['notas'],
+            'cerrado'    => isset($validated['cerrado']) ? 1 : 0,
+            'cliente_id' => $validated['cliente'],
+            'updated_by_user' => rand(1,10),
+        );
     }
 
     private function routeAfterStore($option, $consolidado_id)

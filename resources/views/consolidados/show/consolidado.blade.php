@@ -51,13 +51,19 @@
                         <td>
                             <small class="text-muted">CREADO</small>
                         </td>
-                        <td>{{ $consolidado->created_at }}</td>
+                        <td>
+                            <p class="m-0">{{ $consolidado->created_at }}</p>
+                            <p class="m-0">{{ $consolidado->creado->name }}</p>
+                        </td>
                     </tr>
                     <tr>
                         <td>
                             <small class="text-muted">ACTUALIZADO</small>
                         </td>
-                        <td>{{ $consolidado->updated_at }}</td>
+                        <td>
+                            <p class="m-0">{{ $consolidado->updated_at }}</p>
+                            <p class="m-0">{{ $consolidado->actualizado->name }}</p>
+                        </td>
                     </tr>
                 </tbody>
             </table>

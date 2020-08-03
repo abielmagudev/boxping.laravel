@@ -11,5 +11,7 @@ $factory->define(Consolidado::class, function (Faker $faker) {
         'numero' => $faker->randomNumber(),
         'tarimas' => $faker->numberBetween(1,5),
         'notas' => $faker->boolean ? $faker->sentence() : null,
+        'created_by_user' => 1,
+        'updated_by_user' => 1,
     ];
 });
