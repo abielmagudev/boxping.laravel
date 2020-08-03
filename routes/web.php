@@ -14,3 +14,7 @@
 Route::get('/', function () {
     return view('app');
 });
+
+Route::resource('consolidados', 'ConsolidadoController');
+Route::resource('clientes', 'ClienteController');
+Route::resource('entradas', 'EntradaController');
