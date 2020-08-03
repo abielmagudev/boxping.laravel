@@ -11,6 +11,6 @@ class EntradasTableSeeder extends Seeder
      */
     public function run()
     {
-        return factory(App\Entrada::class, 20)->create();
+        return factory(App\Entrada::class, 100)->create();
     }
 }

@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Consolidado;
 use Illuminate\Http\Request;
+use App\Http\Requests\SaveConsolidadoRequest;
+use App\Consolidado;
+use App\Cliente;
 
 class ConsolidadoController extends Controller
 {
+    use Traits\ConsolidadoSaveTrait;
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +18,9 @@ class ConsolidadoController extends Controller
      */
     public function index()
     {
-        //
+        return view('consolidados/index', [
+            'consolidados' => Consolidado::with('cliente')->orderBy('id', 'desc')->get(),
+        ]);
     }
 
     /**
@@ -24,7 +30,10 @@ class ConsolidadoController extends Controller
      */
     public function create()
     {
-        //
+        return view('consolidados.create', [
+            'consolidado' => new Consolidado,
+            'clientes' => Cliente::all(),
+        ]);
     }
 
     /**
@@ -33,9 +42,14 @@ class ConsolidadoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(SaveConsolidadoRequest $request)
     {
-        //
+        $to_store = $this->prepareToStore( $request->validated() );
+        if(! $consolidado = Consolidado::create($to_store) )
+            return back()->withInput()->with('failure', 'Hubo una falla al guardar consolidado. Intenta de nuevo.');
+
+        $route = $this->routeAfterStore($request->get('save'), $consolidado->id);
+        return redirect($route)->with('success', "Consolidado {$consolidado->numero} guardado");
     }
 
     /**
@@ -46,7 +60,9 @@ class ConsolidadoController extends Controller
      */
     public function show(Consolidado $consolidado)
     {
-        //
+        return view('consolidados.show', [
+            'consolidado' => $consolidado,
+        ]);
     }
 
     /**
@@ -57,7 +73,10 @@ class ConsolidadoController extends Controller
      */
     public function edit(Consolidado $consolidado)
     {
-        //
+        return view('consolidados.edit', [
+            'consolidado' => $consolidado,
+            'clientes' => Cliente::all(),
+        ]);
     }
 
     /**
@@ -67,9 +86,13 @@ class ConsolidadoController extends Controller
      * @param  \App\Consolidado  $consolidado
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Consolidado $consolidado)
+    public function update(SaveConsolidadoRequest $request, Consolidado $consolidado)
     {
-        //
+        $to_update = $this->prepareToUpdate( $request->validated() );
+        if(! Consolidado::find($consolidado->id)->update( $to_update ) )
+            return back()->with('failure', 'Hubo un error en la actualizacion del consolidado');
+
+        return back()->with('success', "Consolidado {$consolidado->numero} actualizado");
     }
 
     /**
@@ -80,6 +103,11 @@ class ConsolidadoController extends Controller
      */
     public function destroy(Consolidado $consolidado)
     {
-        //
+        $numero = $consolidado->numero;
+
+        if(! $consolidado->delete() )
+            return back()->with('failure', 'Hubo un error al eliminar consolidado');
+
+        return redirect()->route('consolidados.index')->with('success', "Consolidado {$numero} eliminado");
     }
 }
