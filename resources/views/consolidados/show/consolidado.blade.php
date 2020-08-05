@@ -11,55 +11,40 @@
     </div>
     <div class="card-body">
         <p class="text-center">
-            @component('components.consolidado-cerrado-badge')
-                @slot('closed', $consolidado->cerrado)
-                @slot('expanded', true)
-            @endcomponent
+            @include('consolidados.includes.cerrado-badge')
         </p>
         <div class="table-responsive">
-            <table class="table table-borderless table-sm">
+            <table class="table table-borderless table-sm small">
                 <tbody>
                     <tr>
-                        <td style="width:1%">
-                            <small class="text-muted">CLIENTE</small>
-                        </td>
+                        <td style="width:1%">Cliente</td>
                         <td>{{ $consolidado->cliente->nombre }}</td>
                     </tr>
                     <tr>
-                        <td>
-                            <small class="text-muted">NÚMERO</small>
-                        </td>
+                        <td>Número</td>
                         <td>{{ $consolidado->numero }}</td>
                     </tr>
                     <tr>
-                        <td>
-                            <small class="text-muted">TARIMAS</small>
-                        </td>
+                        <td>Tarimas</td>
                         <td>
                             <span>{{ $consolidado->tarimas }}</span>
                         </td>
                     </tr>
                     <tr>
-                        <td>
-                            <small class="text-muted">NOTAS</small>
-                        </td>
+                        <td>Notas</td>
                         <td>
                             <p class="text-monospace small">{{ $consolidado->notas }}</p>
                         </td>
                     </tr>
                     <tr>
-                        <td>
-                            <small class="text-muted">CREADO</small>
-                        </td>
+                        <td>Creado</td>
                         <td>
                             <p class="m-0">{{ $consolidado->created_at }}</p>
                             <p class="m-0">{{ $consolidado->creado->name }}</p>
                         </td>
                     </tr>
                     <tr>
-                        <td>
-                            <small class="text-muted">ACTUALIZADO</small>
-                        </td>
+                        <td>Actualizado</td>
                         <td>
                             <p class="m-0">{{ $consolidado->updated_at }}</p>
                             <p class="m-0">{{ $consolidado->actualizado->name }}</p>

@@ -36,9 +36,7 @@
                                 <span>{{ $consolidado->tarimas }}</span>
                             </td>
                             <td style="width:1%">
-                                @component('components.consolidado-cerrado-badge')
-                                    @slot('closed', $consolidado->cerrado)
-                                @endcomponent
+                                @include('consolidados.includes.cerrado-badge')
                             </td>
                         </tr>
                         @endforeach
