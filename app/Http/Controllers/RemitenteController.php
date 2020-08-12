@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\SaveRemitenteRequest;
+use App\Http\Requests\RemitenteSaveRequest;
 use App\Remitente;
 use App\Entrada;
 
@@ -18,12 +18,12 @@ class RemitenteController extends Controller
      */
     public function create(Request $request)
     {
-        if(! $request->has('entrada') )
+        if( Remitente::where('entrada_id', $request->input('entrada', null))->exists() ) 
             return back();
 
         return view('remitentes.create', [
+            'entrada'   => Entrada::find($request->get('entrada')),
             'remitente' => new Remitente,
-            'entrada' => Entrada::find($request->get('entrada')),
         ]);
     }
 
@@ -33,14 +33,15 @@ class RemitenteController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(SaveRemitenteRequest $request)
+    public function store(RemitenteSaveRequest $request)
     {
         $to_store = $this->prepareToStore( $request->validated() );
-
         if(! $remitente = Remitente::create($to_store) )
             return back()->with('failure', 'Error al agregar remitente');
 
-        return redirect()->route('entradas.show', $remitente->entrada_id)->with('success', 'Remitente agregado');
+        return redirect()
+                ->route('entradas.show', $remitente->entrada_id)
+                ->with('success', 'Remitente agregado');
     }
 
     /**
@@ -51,11 +52,12 @@ class RemitenteController extends Controller
      */
     public function edit($id)
     {
-        $remitente = Remitente::find($id);
+        if(! $remitente = Remitente::find($id) )
+            return back();
 
         return view('remitentes.edit', [
-            'remitente' => $remitente,
             'entrada' => Entrada::find($remitente->entrada_id),
+            'remitente' => $remitente,
         ]);
     }
 
@@ -66,11 +68,13 @@ class RemitenteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(SaveRemitenteRequest $request, $id)
+    public function update(RemitenteSaveRequest $request, $id)
     {
-        $remitente = Remitente::find($id);
+        if(! $remitente = Remitente::find($id) )
+            return back();
 
-        if(! $remitente->update($request->validated()) )
+        $to_update = $this->prepareToUpdate($request->validated());
+        if(! $remitente->update($to_update) )
             return back()->with('failure', 'Error al actualizar remitente');
 
         return redirect()->route('entradas.show', $remitente->entrada_id)->with('success', 'Remitente actualizado');

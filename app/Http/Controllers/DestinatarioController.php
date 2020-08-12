@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\SaveDestinatarioRequest;
+use App\Http\Requests\DestinatarioSaveRequest;
 use App\Entrada;
 use App\Destinatario;
 
@@ -18,15 +18,12 @@ class DestinatarioController extends Controller
      */
     public function create(Request $request)
     {
-        if(! $entrada = Entrada::find( $request->get('entrada') ) )
-            return back();
-
-        if( is_object($entrada->destinatario) )
+        if( Destinatario::where('entrada_id', $request->input('entrada', null))->exists() )
             return back();
 
         return view('destinatarios.create', [
+            'entrada' => Entrada::find( $request->get('entrada') ),
             'destinatario' => new Destinatario,
-            'entrada' => $entrada,
         ]);
     }
 
@@ -36,15 +33,11 @@ class DestinatarioController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(SaveDestinatarioRequest $request)
+    public function store(DestinatarioSaveRequest $request)
     {
         $to_store = $this->prepareToStore( $request->validated() );
-
         if(! $destinatario = Destinatario::create($to_store) )
-        {
-            return back()
-                    ->with('failure','Error al agregar destinatario');
-        }
+            return back()->with('failure','Error al agregar destinatario');
         
         return redirect()
                 ->route('entradas.show', $destinatario->entrada_id)
@@ -59,12 +52,12 @@ class DestinatarioController extends Controller
      */
     public function edit($id)
     {
-        if( !$destinatario = Destinatario::find($id) )
+        if(! $destinatario = Destinatario::find($id) )
             return back();
 
         return view('destinatarios.edit', [
-             'destinatario' => $destinatario,
-             'entrada' => Entrada::find( $destinatario->entrada_id ),
+            'entrada' => Entrada::find( $destinatario->entrada_id ),
+            'destinatario' => $destinatario,
         ]);
     }
 
@@ -75,13 +68,12 @@ class DestinatarioController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(SaveDestinatarioRequest $request, $id)
+    public function update(DestinatarioSaveRequest $request, $id)
     {
         if(! $destinatario = Destinatario::find($id) )
             return back()->with('failure', 'Destinatario no existe');
 
         $to_update = $this->prepareToUpdate($request->validated(), $destinatario);
-
         if(! $destinatario->update($to_update) )
             return back()->with('failure', 'Error al actualizar destinatario');
         

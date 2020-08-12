@@ -54,4 +54,3 @@ trait DestinatarioSaveTrait {
         return $verificado_by_user;
     }
 }
-

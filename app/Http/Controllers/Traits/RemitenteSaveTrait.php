@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Traits;
 
+use App\Remitente;
+
 trait RemitenteSaveTrait {
 
     private function prepareToStore($validated)
     {
-        $user_id = rand(1, 10);
+        $user_id = rand(1,10);
 
         return array(
             'entrada_id' => $validated['entrada'],

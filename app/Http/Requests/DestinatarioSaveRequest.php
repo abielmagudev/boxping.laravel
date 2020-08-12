@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class SaveRemitenteRequest extends FormRequest
+class DestinatarioSaveRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,27 +24,32 @@ class SaveRemitenteRequest extends FormRequest
     public function rules()
     {
         return [
-            'entrada' => ['required','integer'],
+            'entrada' => ['required', 'integer'],
             'nombre' => 'required',
             'direccion' => 'required',
-            'codigo_postal' => 'nullable',
+            'codigo_postal' => 'required',
             'ciudad' => 'required',
             'estado' => 'required',
             'pais' => 'required',
-            'telefono' => 'nullable',
+            'referencias' => 'nullable',
+            'telefono' => 'required',
+            'verificado' => 'integer',
         ];
     }
 
     public function messages()
     {
         return [
-            'entrada.required' => __('Require una entrada valida para agregar remitente'),
-            'entrada.integer' => __('Require una entrada valida para agregar remitente'),
+            'entrada.required' => __('Require una entrada valida para agregar destinatario'),
+            'entrada.integer' => __('Require una entrada valida para agregar destinatario'),
             'nombre.required' => __('Escribe el nombre'),
             'direccion.required' => __('Escribe la direccion'),
+            'codigo_postal.required' => __('Escribe el código postal'),
             'ciudad.required' => __('Escribe la ciudad'),
             'estado.required' => __('Escribe el estado'),
             'pais.required' => __('Escribe el pais'),
+            'telefono.required' => __('Escribe el telefono'),
+            'verificado.required' => __('Activa o desactiva la opcion de verificado'),
         ];
     }
 }

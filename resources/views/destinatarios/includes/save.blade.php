@@ -49,9 +49,7 @@
     <span>La informacion del destinatario ha sido confirmada y existente.</span>
   </label>
 </div>
-
-@else
-<input type="hidden" name="entrada" value="{{ $entrada->id }}">
-
 @endif
+
+<input type="hidden" name="entrada" value="{{ $entrada->id }}">
 <br>
