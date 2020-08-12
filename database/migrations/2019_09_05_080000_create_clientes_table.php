@@ -16,8 +16,8 @@ class CreateClientesTable extends Migration
         Schema::create('clientes', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('nombre');
-            $table->string('contacto');
             $table->string('alias');
+            $table->string('contacto');
             $table->string('telefono');
             $table->string('correo_electronico');
             $table->string('direccion');
@@ -25,6 +25,7 @@ class CreateClientesTable extends Migration
             $table->string('estado');
             $table->string('pais');
             $table->text('notas')->nullable();
+            $table->boolean('disponible')->default(1);
             $table->timestamps();
         });
     }
