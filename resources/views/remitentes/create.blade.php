@@ -6,7 +6,7 @@
         <span>Agregar remitente</span>
     </div>
     <div class="card-body">
-        <form action="{{ route('remitentes.store') }}" method="post">
+        <form action="{{ route('remitentes.store') }}" method="post" autocomplete="off">
             @include('remitentes.includes.save')
             <button type="submit" class="btn btn-success">Agregar remitente</button>
             <a href="{{ route('entradas.show', $entrada) }}" class="btn btn-secondary">Regresar</a>

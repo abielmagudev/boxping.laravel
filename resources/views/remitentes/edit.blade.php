@@ -6,7 +6,7 @@
         <span>Editar destinatario</span>
     </div>
     <div class="card-body">
-        <form action="{{ route('remitentes.update', $remitente) }}" method="post">
+        <form action="{{ route('remitentes.update', $remitente) }}" method="post" autocomplete="off">
             @method('put')
             @include('remitentes.includes.save')
             <button type="submit" class="btn btn-warning">Actualizar remitente</button>
