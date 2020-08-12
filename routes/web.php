@@ -18,3 +18,6 @@ Route::get('/', function () {
 Route::resource('consolidados', 'ConsolidadoController');
 Route::resource('clientes', 'ClienteController');
 Route::resource('entradas', 'EntradaController');
+
+Route::resource('remitentes', 'RemitenteController', ['except' => ['index', 'show', 'delete']]);
+Route::resource('destinatarios', 'DestinatarioController', ['except' => ['index', 'show', 'delete']]);

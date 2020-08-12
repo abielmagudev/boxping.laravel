@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRemitentesTable extends Migration
+class CreateDestinatariosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,19 @@ class CreateRemitentesTable extends Migration
      */
     public function up()
     {
-        Schema::create('remitentes', function (Blueprint $table) {
+        Schema::create('destinatarios', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedInteger('entrada_id');
             $table->string('nombre');
             $table->string('direccion');
-            $table->string('codigo_postal')->nullable();
+            $table->string('codigo_postal');
             $table->string('ciudad');
             $table->string('estado');
             $table->string('pais');
-            $table->string('telefono')->nullable();
+            $table->text('referencias')->nullable();
+            $table->string('telefono');
+            $table->datetime('verificado_at')->nullable();
+            $table->unsignedSmallInteger('verificado_by_user')->nullable();
             $table->unsignedSmallInteger('created_by_user');
             $table->unsignedSmallInteger('updated_by_user');
             $table->timestamps();
@@ -36,6 +39,6 @@ class CreateRemitentesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('remitentes');
+        Schema::dropIfExists('destinatarios');
     }
 }

@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Remitente extends Model
+class Destinatario extends Model
 {
     protected $fillable = array(
         'entrada_id',
@@ -14,7 +14,10 @@ class Remitente extends Model
         'ciudad',
         'estado',
         'pais',
+        'referencias',
         'telefono',
+        'verificado_at',
+        'verificado_by_user',
         'created_by_user',
         'updated_by_user',
     );
@@ -30,7 +33,12 @@ class Remitente extends Model
 
         return implode(', ', $localidad);
     }
-    
+
+    public function verificador()
+    {
+        return $this->belongsTo(User::class, 'verificado_by_user');
+    }
+
     public function creater()
     {
         return $this->belongsTo(User::class, 'created_by_user');
