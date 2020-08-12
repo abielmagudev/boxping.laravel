@@ -1,10 +1,10 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
-class CreateEntradaObservacionesTable extends Migration
+class CreateObservacionesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateEntradaObservacionesTable extends Migration
      */
     public function up()
     {
-        Schema::create('entrada_observaciones', function (Blueprint $table) {
+        Schema::create('observaciones', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->text('contenido');
-            $table->unsignedInteger('user_id');
             $table->unsignedInteger('entrada_id');
+            $table->unsignedInteger('user_id');
+            $table->text('contenido');
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ class CreateEntradaObservacionesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('entrada_observaciones');
+        Schema::dropIfExists('observaciones');
     }
 }

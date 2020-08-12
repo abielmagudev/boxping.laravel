@@ -2,84 +2,66 @@
 
 namespace App\Http\Controllers;
 
-use App\Observacion;
 use Illuminate\Http\Request;
+use App\Observacion;
+use App\Entrada;
 
 class ObservacionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        $this->validateRequest( $request );
+
+        $to_store = $this->prepareToSave( $request->all() );
+        if(! Observacion::create($to_store) )
+            return back()->with('failure', 'Error al agregar observacion');
+
+        return back()->with('success', 'Observacion agregada');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Observacion  $observacion
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Observacion $observacion)
+    // public function edit(Observacion $observacion)
+    // {
+    //     //
+    // }
+
+    // public function update(Request $request, Observacion $observacion)
+    // {
+    //     //
+    // }
+
+    // public function destroy(Observacion $observacion)
+    // {
+    //     //
+    // }
+
+    private function validateRequest( $request )
     {
-        //
+        $request->validate(
+            // Rules
+            [
+                'entrada' => ['required','integer'],
+                'contenido' => 'required',
+            ],
+            // Messages
+            [
+                'entrada.required'   => __('Requiere una entrada valida'),
+                'entrada.integer'    => __('Requiere una entrada valida'),
+                'contenido.required' => __('Escribe el contenido de la observacion'),
+            ]
+        );
+
+        if(! Entrada::where('id', $request->get('entrada'))->exists() )
+            return back()->with('failure', 'Entrada no es valida');
+        
+        return;
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Observacion  $observacion
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Observacion $observacion)
+    private function prepareToSave($validated)
     {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Observacion  $observacion
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Observacion $observacion)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Observacion  $observacion
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Observacion $observacion)
-    {
-        //
+        return array(
+            'entrada_id' => $validated['entrada'],
+            'contenido' => $validated['contenido'],
+            'user_id' => rand(1,10),
+        );
     }
 }
