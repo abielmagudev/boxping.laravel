@@ -13,7 +13,7 @@ class CreateCodigosrTable extends Migration
      */
     public function up()
     {
-        Schema::create('codigosr', function (Blueprint $table) {
+        Schema::create('codigos_reempacado', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('nombre');
             $table->text('descripcion')->nullable();

@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class Codigor extends Model
 {
-    protected $table = 'codigosr';
+    protected $table = 'codigos_reempacado';
 }
