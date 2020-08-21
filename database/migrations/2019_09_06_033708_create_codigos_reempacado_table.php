@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCodigosrTable extends Migration
+class CreateCodigosReempacadoTable extends Migration
 {
     /**
      * Run the migrations.
@@ -28,6 +28,6 @@ class CreateCodigosrTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('codigosr');
+        Schema::dropIfExists('codigos_reempacado');
     }
 }
