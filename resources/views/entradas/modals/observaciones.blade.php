@@ -3,7 +3,7 @@
   <div class="modal-dialog modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header border-0">
-        <p class="modal-title" id="entradaObservacionesModalLabel">{{ $entrada->alias_numero }}</p>
+        <p class="modal-title" id="entradaObservacionesModalLabel">{{ $entrada->alias_numero ?? $entrada->numero }}</p>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
