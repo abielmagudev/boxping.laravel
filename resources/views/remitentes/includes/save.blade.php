@@ -1,9 +1,5 @@
 @csrf
 <div class="form-group">
-    <label for="read-entrada" class="small">Entrada</label>
-    <div class="alert alert-secondary" id="read-entrada">{{ $entrada->numero }}</div>
-</div>
-<div class="form-group">
     <label for="input-nombre" class="small">Nombre</label>
     <input type="text" class="form-control" id="input-nombre" name="nombre" value="{{ old('nombre', $remitente->nombre) }}" required>
 </div>

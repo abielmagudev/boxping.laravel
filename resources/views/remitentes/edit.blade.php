@@ -1,6 +1,7 @@
 @extends('app')
 @section('content')
 @include('components.error')
+<div class="alert alert-info">Número de entrada: <b>{{ $entrada->numero }}</b></div>
 <div class="card">
     <div class="card-header">
         <span>Editar destinatario</span>
