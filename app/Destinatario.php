@@ -28,14 +28,14 @@ class Destinatario extends Model
 
             if( isset($this->$attr) ) return $this->$attr;
                 
-        }, ['ciudad','estado','pais',]);
+        }, ['ciudad','estado','pais']);
 
         return implode(', ', $localidad);
     }
 
     public function getVerificacionAttribute()
     {
-        return !is_null($this->verificado_by_user) && !is_null($this->verificado_at);
+        return !is_null($this->verificado_at) && !is_null($this->verificado_by_user);
     }
 
     public function verificador()
