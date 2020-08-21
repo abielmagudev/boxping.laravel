@@ -26,12 +26,16 @@ class Destinatario extends Model
     {
         $localidad = array_map(function ($attr) {
 
-            if( isset($this->$attr) )
-                return $this->$attr;
+            if( isset($this->$attr) ) return $this->$attr;
                 
         }, ['ciudad','estado','pais',]);
 
         return implode(', ', $localidad);
+    }
+
+    public function getVerificacionAttribute()
+    {
+        return !is_null($this->verificado_by_user) && !is_null($this->verificado_at);
     }
 
     public function verificador()

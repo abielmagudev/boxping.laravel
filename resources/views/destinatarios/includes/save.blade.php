@@ -1,13 +1,9 @@
 @csrf
 <div class="form-group">
-    <label for="read-entrada" class="small">Entrada</label>
-    <div class="alert alert-secondary" id="read-entrada">{{ $entrada->numero }}</div>
-</div>
-<div class="form-group">
     <label for="input-nombre" class="small">Nombre</label>
     <input type="text" class="form-control" id="input-nombre" name="nombre" value="{{ old('nombre', $destinatario->nombre) }}" required>
 </div>
-<div class="row">
+<div class="form-row">
     <div class="col-sm col-sm-8 form-group">
         <label for="input-direccion" class="small">Direccion</label>
         <input type="text" class="form-control" id="input-direccion" name="direccion" value="{{ old('direccion', $destinatario->direccion) }}" required>
@@ -17,7 +13,7 @@
         <input type="text" class="form-control" id="input-codigo-postal" name="codigo_postal" value="{{ old('codigo_postal', $destinatario->codigo_postal) }}" required>
     </div>
 </div>
-<div class="row">
+<div class="form-row">
     <div class="col-sm form-group">
         <label for="input-ciudad" class="small">Ciudad</label>
         <input type="text" class="form-control" id="input-ciudad" name="ciudad" value="{{ old('ciudad', $destinatario->ciudad) }}" required>
@@ -45,7 +41,7 @@
 <div class="form-check">
   <input class="form-check-input" type="checkbox" name="verificado" value="1" id="checkbox-verificado" value="1" {{ old('verificado', $destinatario->verificado_at) ? 'checked' : '' }}>
   <label class="form-check-label" for="checkbox-verificado">
-    <b class="mr-2">Verificado.</b>
+    <b class="mr-1">Verificado.</b>
     <span>La informacion del destinatario ha sido confirmada y existente.</span>
   </label>
 </div>
