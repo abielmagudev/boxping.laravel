@@ -24,7 +24,7 @@ class DestinatarioSaveRequest extends FormRequest
     public function rules()
     {
         return [
-            'entrada' => ['required', 'integer'],
+            'entrada' => ['required', 'integer', 'exists:entradas,id'],
             'nombre' => 'required',
             'direccion' => 'required',
             'codigo_postal' => 'required',

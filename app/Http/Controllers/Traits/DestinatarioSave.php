@@ -1,56 +1,74 @@
-<?php namespace App\Http\Controllers\Traits;
+<?php 
 
-trait DestinatarioSaveTrait {
+namespace App\Http\Controllers\Traits;
 
-    private function prepareToStore($validated)
+use App\Destinatario;
+
+trait DestinatarioSave {
+
+    private function storeDestinatario($request)
     {
-        $user_id = rand(1,10);
+        $prepared = $this->storePrepare($request);
+        return Destinatario::create($prepared);
+    }
+
+    private function updateDestinatario($request, $destinatario)
+    {
+        $prepared = $this->updatePrepare($request, $destinatario);
+        return $destinatario->fill($prepared)->save();
+    }
+
+    private function storePrepare($request)
+    {
+        $validated = (object) $request->validated();
 
         return array(
-            'entrada_id' => $validated['entrada'],
-            'nombre' => $validated['nombre'],
-            'direccion' => $validated['direccion'],
-            'codigo_postal' => $validated['codigo_postal'],
-            'ciudad' => $validated['ciudad'],
-            'estado' => $validated['estado'],
-            'pais' => $validated['pais'],
-            'referencias' => $validated['referencias'] ?? null,
-            'telefono' => $validated['telefono'],
-            'created_by_user' => $user_id,
-            'updated_by_user' => $user_id,
+            'entrada_id' => $validated->entrada,
+            'nombre' => $validated->nombre,
+            'direccion' => $validated->direccion,
+            'codigo_postal' => $validated->codigo_postal,
+            'ciudad' => $validated->ciudad,
+            'estado' => $validated->estado,
+            'pais' => $validated->pais,
+            'referencias' => $request->filled('referencias') ? $request->get('referencias') : null,
+            'telefono' => $validated->telefono,
+            'created_by_user' => $this->userlive(),
+            'updated_by_user' => $this->userlive(),
         );
     }
 
-    private function prepareToUpdate($validated, $stored)
+    private function updatePrepare($request, $stored)
     {        
+        $validated = (object) $request->validated();
+
         return array(
-            'nombre' => $validated['nombre'],
-            'direccion' => $validated['direccion'],
-            'codigo_postal' => $validated['codigo_postal'],
-            'ciudad' => $validated['ciudad'],
-            'estado' => $validated['estado'],
-            'pais' => $validated['pais'],
-            'referencias' => $validated['referencias'] ?? null,
-            'telefono' => $validated['telefono'],
-            'verificado_at' => isset($validated['verificado']) ? $this->verificadoAt($stored->verificado_at) : null,
-            'verificado_by_user' => isset($validated['verificado']) ? $this->verificadoUser($stored->verificado_by_user) : null,
-            'updated_by_user' => rand(1,10),
+            'nombre' => $validated->nombre,
+            'direccion' => $validated->direccion,
+            'codigo_postal' => $validated->codigo_postal,
+            'ciudad' => $validated->ciudad,
+            'estado' => $validated->estado,
+            'pais' => $validated->pais,
+            'referencias' => $request->filled('referencias') ? $request->input('referencias') : null,
+            'telefono' => $validated->telefono,
+            'verificado_at' => $request->has('verificado') ? $this->getVerificacionAt($request, $stored) : null,
+            'verificado_by_user' => $request->has('verificado') ? $this->getVerificacionUser($request, $stored) : null,
+            'updated_by_user' => $this->userlive(),
         );
     }
 
-    private function verificadoAt($verificado_at)
+    private function getVerificacionAt($request, $stored)
     {
-        if( is_null($verificado_at) )
-            return now();
+        if(! is_null($stored->verificado_at) )
+            return $stored->verificado_at;
         
-        return $verificado_at;
+        return now();
     }
 
-    private function verificadoUser($verificado_by_user)
+    private function getVerificacionUser($request, $stored)
     {
-        if( is_null($verificado_by_user) )
-            return rand(1,10);
-        
-        return $verificado_by_user;
+        if(! is_null($stored->verificado_by_user) )
+            return $stored->verificado_by_user;
+    
+        return $this->userlive();
     }
 }
