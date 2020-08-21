@@ -1,10 +1,12 @@
 @extends('app')
 @section('content')
 @include('components.error')
-<div class="alert alert-info">Número de entrada: <b>{{ $entrada->numero }}</b></div>
+<p class="text-info text-right small">
+    <b>{{ $entrada->alias_numero ?? $entrada->numero }}</b>
+</p>
 <div class="card">
     <div class="card-header">
-        <span>Editar destinatario</span>
+        <span>Editar remitente</span>
     </div>
     <div class="card-body">
         <form action="{{ route('remitentes.update', $remitente) }}" method="post" autocomplete="off">
