@@ -14,26 +14,33 @@ class CreateEntradasTable extends Migration
     public function up()
     {
         Schema::create('entradas', function (Blueprint $table) {
+            
+            // Entrada
             $table->bigIncrements('id');
             $table->string('numero');
-            $table->boolean('alias_cliente_numero');
-            $table->unsignedInteger('cliente_id');
             $table->unsignedInteger('consolidado_id')->nullable();
-            $table->unsignedInteger('vuelta')->nullable();
-            $table->dateTime('recibido_at')->nullable();
+            $table->unsignedInteger('cliente_id');
+            $table->boolean('cliente_alias_numero');
+
+            // Registro
+            $table->dateTime('registrado_at')->nullable();
 
             // Cruce
-            $table->unsignedInteger('conductor_id')->nullable();
             $table->unsignedInteger('vehiculo_id')->nullable();
-            $table->dateTime('cruce_at')->nullable();
+            $table->unsignedInteger('conductor_id')->nullable();
+            $table->unsignedInteger('vuelta')->nullable();
+            $table->date('cruce_fecha')->nullable();
+            $table->time('cruce_hora')->nullable();
 
             // Reempacado
-            $table->unsignedInteger('reempacador_id')->nullable();
             $table->unsignedInteger('codigor_id')->nullable();
-            $table->dateTime('reempacado_at')->nullable();
+            $table->unsignedInteger('reempacador_id')->nullable();
+            $table->date('reempacado_fecha')->nullable();
+            $table->time('reempacado_hora')->nullable();
 
-            $table->unsignedInteger('created_by');
-            $table->unsignedInteger('updated_by');
+            // Log
+            $table->unsignedInteger('created_by_user');
+            $table->unsignedInteger('updated_by_user');
             $table->timestamps();
         });
     }
