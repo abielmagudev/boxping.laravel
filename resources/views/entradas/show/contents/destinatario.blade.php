@@ -28,12 +28,18 @@
     <p>
         <small class="d-block text-muted">Verificación</small>
         <span>
-            {{ $entrada->destinatario->verificado_at }}
             @if( is_object($entrada->destinatario->verificador) )
-            <br>
             {{ $entrada->destinatario->verificador->name }}
+            <br>
             @endif
+            {{ $entrada->destinatario->verificado_at }}
         </span>
+    </p>
+    <p>
+        <small class="d-block text-muted">Actualizado</small>
+        <span>{{ $entrada->updater->name }}</span>
+        <br>
+        <span>{{ $entrada->updated_at }}</span>
     </p>
     <br>
 
