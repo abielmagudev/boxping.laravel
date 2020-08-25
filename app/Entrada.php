@@ -78,11 +78,6 @@ class Entrada extends Model
         return $this->belongsTo(Reempacador::class);
     }
 
-    public function observaciones()
-    {
-        return $this->hasMany(Observacion::class);
-    }
-
     public function remitente()
     {
         return $this->hasOne(Remitente::class);
@@ -91,6 +86,16 @@ class Entrada extends Model
     public function destinatario()
     {
         return $this->hasOne(Destinatario::class);
+    }
+
+    public function observaciones()
+    {
+        return $this->hasMany(Observacion::class);
+    }
+
+    public function medidas()
+    {
+        return $this->hasMany(Medida::class);
     }
 
     public function creater()
