@@ -6,12 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Observacion extends Model
 {
-    protected $table = 'observaciones';
+    protected $table = 'entrada_observaciones';
     
     protected $fillable = array(
         'entrada_id',
-        'contenido',
         'user_id',
+        'contenido',
     );
 
     public function user()
