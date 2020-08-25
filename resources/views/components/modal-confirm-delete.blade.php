@@ -16,7 +16,7 @@ $settings = (object) array(
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header bg-danger text-white">
-                <p class="modal-title" id="confirmDeleteModalLabel">Atención</p>
+                <p class="modal-title" id="confirmDeleteModalLabel"><b>ATENCION</b></p>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
