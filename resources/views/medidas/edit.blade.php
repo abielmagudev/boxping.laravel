@@ -14,9 +14,5 @@
 </div>
 <br>
 
-<form action="{{ route('medidas.destroy', $medida) }}" method="post" class="text-right">
-    @method('delete')
-    @csrf
-    <button class="btn btn-link btn-sm text-danger border-0 p-0" type="submit">Eliminar medida</button>
-</form>
+@include('medidas.includes.eliminar')
 @endsection
