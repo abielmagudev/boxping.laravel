@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class MedicionesTableSeeder extends Seeder
+class MedidorTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,6 +11,6 @@ class MedicionesTableSeeder extends Seeder
      */
     public function run()
     {
-        return factory(App\Medicion::class, 3)->create();
+        return factory(App\Medidor::class, 3)->create();
     }
 }
