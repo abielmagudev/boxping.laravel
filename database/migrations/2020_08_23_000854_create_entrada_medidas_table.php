@@ -27,6 +27,12 @@ class CreateEntradaMedidasTable extends Migration
             $table->unsignedInteger('updated_by_user');
             $table->timestamps();
         });
+        
+        // Schema::table('entrada_medidas', function ($table) {
+        //     $table->unsignedBigInteger('entrada_id')->index(); // Must be like id of entradas
+        //     $table->foreignId('entrada_id')->constrained('entradas')->onDelete('cascade');
+        //     $table->foreign('entrada_id')->references('id')->on('entradas')->onDelete('cascade');
+        // });
     }
 
     /**
