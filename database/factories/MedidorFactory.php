@@ -7,7 +7,7 @@ use Faker\Generator as Faker;
 
 $factory->define(Medidor::class, function (Faker $faker) {
     return [
-        'nombre' => $faker->unique(true)->randomElement(['Inicial','Nacional','Internacional','Bodega','Patio']),
+        'nombre' => 'Medidor ' . $faker->unique()->randomNumber(),
         'descripcion' => $faker->sentence(),
     ];
 });
