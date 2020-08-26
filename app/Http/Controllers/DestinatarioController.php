@@ -15,7 +15,6 @@ class DestinatarioController extends Controller
     public function index()
     {
         return view('destinatarios.index', [
-            'destinatarios_count' => Destinatario::all()->count(),
             'destinatarios' => Destinatario::orderBy('id', 'desc')->paginate(16),
         ]);
     }

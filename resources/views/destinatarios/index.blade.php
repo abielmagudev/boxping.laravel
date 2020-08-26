@@ -4,7 +4,7 @@
     <div class="card-header d-flex justify-content-between align-items-center">
         <div>
             <span>Destinatarios</span>
-            <span class="badge badge-primary">{{ $destinatarios_count }}</span>
+            <span class="badge badge-primary">{{ $destinatarios->total() }}</span>
         </div>
         <div>
             <a href="{{ route('destinatarios.create') }}" class="btn btn-primary btn-sm">Nuevo</a>

@@ -23,11 +23,13 @@ class Destinatario extends Model
 
     public function getLocalidadAttribute()
     {
-        $localidad = array_map(function ($attr) {
+        $localidad = array();
 
-            if( isset($this->$attr) ) return $this->$attr;
-                
-        }, ['ciudad','estado','pais']);
+        foreach(['ciudad','estado','pais',] as $attr)
+        {
+            if( isset($this->$attr) )
+                array_push($localidad, $this->$attr);
+        }
 
         return implode(', ', $localidad);
     }
