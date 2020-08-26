@@ -3,21 +3,26 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\DestinatarioCreateRequest;
 use App\Http\Requests\DestinatarioSaveRequest;
-
-use App\Entrada;
 use App\Destinatario;
+use App\Entrada;
 
 class DestinatarioController extends Controller
 {
     use Traits\Userlive,
         Traits\DestinatarioSave;
 
-    public function create(DestinatarioCreateRequest $request)
+    public function index()
+    {
+        return view('destinatarios.index', [
+            'destinatarios_count' => Destinatario::all()->count(),
+            'destinatarios' => Destinatario::orderBy('id', 'desc')->paginate(16),
+        ]);
+    }
+
+    public function create()
     {
         return view('destinatarios.create', [
-            'entrada' => Entrada::find( $request->entrada ),
             'destinatario' => new Destinatario,
         ]);
     }
@@ -27,15 +32,20 @@ class DestinatarioController extends Controller
         if(! $destinatario = $this->storeDestinatario($request) )
             return back()->with('failure','Error al agregar destinatario');
         
-        return redirect()
-                ->route('entradas.show', $destinatario->entrada_id)
-                ->with('success', 'Destinatario agregado');
+        return redirect()->route('destinatarios.index')->with('success', 'Destinatario agregado');
+    }
+
+    public function show(Destinatario $destinatario)
+    {
+        return view('destinatarios.show', [
+            'destinatario' => $destinatario,
+            'entradas' => Entrada::with(['consolidado', 'cliente'])->where('destinatario_id', $destinatario->id)->get()
+        ]);
     }
 
     public function edit(Destinatario $destinatario)
     {
         return view('destinatarios.edit', [
-            'entrada' => Entrada::find( $destinatario->entrada_id ),
             'destinatario' => $destinatario,
         ]);
     }
@@ -46,5 +56,13 @@ class DestinatarioController extends Controller
             return back()->with('failure', 'Error al actualizar destinatario');
         
         return back()->with('success', 'Destinatario actualizado');
+    }
+
+    public function destroy(Destinatario $destinatario)
+    {
+        if(! $destinatario->delete() )
+            return back()->with('failure', 'Error al eliminar destinatario');
+        
+        return redirect()->route('destinatarios.index')->with('success', 'Destinatario eliminado');
     }
 }

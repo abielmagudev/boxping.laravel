@@ -11,6 +11,6 @@ class DestinatarioSeeder extends Seeder
      */
     public function run()
     {
-        return factory(App\Destinatario::class, 25)->create();
+        return factory(App\Destinatario::class, 50)->create();
     }
 }

@@ -18,9 +18,10 @@ Route::get('/', function () {
 Route::resource('consolidados', 'ConsolidadoController');
 Route::resource('entradas', 'EntradaController');
 Route::resource('clientes', 'ClienteController');
-Route::resource('medidores', 'MedidorController', ['parameters' => ['medidores' => 'medidor'], 'except' => ['show']]);
 
-Route::resource('medidas', 'MedidaController', ['except' => ['index', 'show']]);
 Route::resource('remitentes', 'RemitenteController', ['except' => ['index', 'show']]);
-Route::resource('destinatarios', 'DestinatarioController', ['except' => ['index', 'show', 'destroy']]);
+Route::resource('destinatarios', 'DestinatarioController');
+
+Route::resource('medidores', 'MedidorController', ['parameters' => ['medidores' => 'medidor'], 'except' => ['show']]);
+Route::resource('medidas', 'MedidaController', ['except' => ['index', 'show']]);
 Route::resource('observaciones', 'ObservacionController', ['except' => ['index', 'show', 'destroy']]);

@@ -6,8 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Destinatario extends Model
 {
+    use \Illuminate\Database\Eloquent\SoftDeletes;
+
     protected $fillable = array(
-        'entrada_id',
         'nombre',
         'direccion',
         'codigo_postal',
@@ -16,8 +17,6 @@ class Destinatario extends Model
         'pais',
         'referencias',
         'telefono',
-        'verificado_at',
-        'verificado_by_user',
         'created_by_user',
         'updated_by_user',
     );
@@ -33,14 +32,9 @@ class Destinatario extends Model
         return implode(', ', $localidad);
     }
 
-    public function getVerificacionAttribute()
+    public function entradas()
     {
-        return !is_null($this->verificado_at) && !is_null($this->verificado_by_user);
-    }
-
-    public function verificador()
-    {
-        return $this->belongsTo(User::class, 'verificado_by_user');
+        return $this->hasMany(Entrada::class);
     }
 
     public function creater()

@@ -35,17 +35,4 @@
     <label for="input-telefono" class="small">Telefono</label>
     <input type="text" class="form-control" id="input-telefono" name="telefono" value="{{ old('telefono', $destinatario->telefono) }}" required>
 </div>
-
-@if( is_integer($destinatario->id) )
-<br>
-<div class="form-check">
-  <input class="form-check-input" type="checkbox" name="verificado" value="1" id="checkbox-verificado" value="1" {{ old('verificado', $destinatario->verificado_at) ? 'checked' : '' }}>
-  <label class="form-check-label" for="checkbox-verificado">
-    <b class="mr-1">Verificado.</b>
-    <span>La informacion del destinatario ha sido confirmada y existente.</span>
-  </label>
-</div>
-@endif
-
-<input type="hidden" name="entrada" value="{{ $entrada->id }}">
 <br>

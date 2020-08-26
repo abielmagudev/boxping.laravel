@@ -9,7 +9,7 @@
         <form action="{{ route('destinatarios.store') }}" method="post" autocomplete="off">
             @include('destinatarios.includes.save')
             <button type="submit" class="btn btn-success">Agregar destinatario</button>
-            <a href="{{ route('entradas.show', $entrada) }}" class="btn btn-secondary">Regresar</a>
+            <a href="{{ route('destinatarios.index') }}" class="btn btn-secondary">Cancelar</a>
         </form>
     </div>
 </div>
