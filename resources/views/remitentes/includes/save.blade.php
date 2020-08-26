@@ -16,11 +16,11 @@
 <div class="row">
     <div class="col-sm form-group">
         <label for="input-ciudad" class="small">Ciudad</label>
-        <input type="text" class="form-control" id="input-ciudad" name="ciudad" value="{{ old('ciudad', $remitente->ciudad) }}" required>
+        <input type="text" class="form-control" id="input-ciudad" name="ciudad" value="{{ old('ciudad', $remitente->ciudad) }}" placeholder="Opcional">
     </div>
     <div class="col-sm form-group">
         <label for="input-estado" class="small">Estado</label>
-        <input type="text" class="form-control" id="input-estado" name="estado" value="{{ old('estado', $remitente->estado) }}" required>
+        <input type="text" class="form-control" id="input-estado" name="estado" value="{{ old('estado', $remitente->estado) }}" placeholder="Opcional">
     </div>
     <div class="col-sm form-group">
         <label for="input-pais" class="small">Pais</label>
@@ -31,5 +31,4 @@
     <label for="input-telefono" class="small">Teléfono</label>
     <input type="text" class="form-control" id="input-telefono" name="telefono" value="{{ old('telefono', $remitente->telefono) }}" placeholder="Opcional">
 </div>
-<input type="hidden" name="entrada" value="{{ $entrada->id }}">
 <br>

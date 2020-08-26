@@ -23,7 +23,6 @@ trait RemitenteSave {
         $validated = (object) $request->validated();
 
         return [
-            'entrada_id' => $validated->entrada,
             'nombre' => $validated->nombre,
             'direccion' => $validated->direccion,
             'codigo_postal' => $validated->codigo_postal,

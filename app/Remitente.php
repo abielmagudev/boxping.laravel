@@ -6,8 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Remitente extends Model
 {
+    use \Illuminate\Database\Eloquent\SoftDeletes;
+
     protected $fillable = array(
-        'entrada_id',
         'nombre',
         'direccion',
         'codigo_postal',
@@ -21,12 +22,13 @@ class Remitente extends Model
 
     public function getLocalidadAttribute()
     {
-        $localidad = array_map(function ($attr) {
+        $localidad = array();
 
+        foreach(['ciudad','estado','pais',] as $attr)
+        {
             if( isset($this->$attr) )
-                return $this->$attr;
-                
-        }, ['ciudad','estado','pais',]);
+                array_push($localidad, $this->$attr);
+        }
 
         return implode(', ', $localidad);
     }

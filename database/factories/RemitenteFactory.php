@@ -7,7 +7,6 @@ use Faker\Generator as Faker;
 
 $factory->define(Remitente::class, function (Faker $faker) {
     return [
-        'entrada_id' => $faker->numberBetween(1,100),
         'nombre' => $faker->name(),
         'direccion' => $faker->streetAddress,
         'codigo_postal' => $faker->postcode,

@@ -9,7 +9,7 @@
         <form action="{{ route('remitentes.store') }}" method="post" autocomplete="off">
             @include('remitentes.includes.save')
             <button type="submit" class="btn btn-success">Agregar remitente</button>
-            <a href="{{ route('entradas.show', $entrada) }}" class="btn btn-secondary">Regresar</a>
+            <a href="{{ route('remitentes.index') }}" class="btn btn-secondary">Cancelar</a>
         </form>
     </div>
 </div>

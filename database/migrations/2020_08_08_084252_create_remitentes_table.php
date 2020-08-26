@@ -15,17 +15,17 @@ class CreateRemitentesTable extends Migration
     {
         Schema::create('remitentes', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedInteger('entrada_id');
             $table->string('nombre');
             $table->string('direccion');
             $table->string('codigo_postal')->nullable();
-            $table->string('ciudad');
-            $table->string('estado');
+            $table->string('ciudad')->nullable();
+            $table->string('estado')->nullable();
             $table->string('pais');
             $table->string('telefono')->nullable();
             $table->unsignedSmallInteger('created_by_user');
             $table->unsignedSmallInteger('updated_by_user');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
