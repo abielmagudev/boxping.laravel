@@ -8,8 +8,11 @@
     <div class="card-body">
         <form action="{{ route('remitentes.store') }}" method="post" autocomplete="off">
             @include('remitentes.includes.save')
+            @if( $entrada )
+            <input type="hidden" name="entrada" value="{{ $entrada }}">
+            @endif
             <button type="submit" class="btn btn-success">Agregar remitente</button>
-            <a href="{{ route('remitentes.index') }}" class="btn btn-secondary">Cancelar</a>
+            <a href="{{ $route_cancel }}" class="btn btn-secondary">Cancelar</a>
         </form>
     </div>
 </div>

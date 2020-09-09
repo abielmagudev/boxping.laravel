@@ -12,10 +12,10 @@
       <div class="card-header bg-transparent">
         <ul class="nav nav-tabs nav-fill card-header-tabs" id="tabsObservaciones" role="tablist">
           <li class="nav-item" role="presentation">
-            <a class="nav-link {{ $observaciones->count() > 0 ? 'active' : 'disabled' }}" id="observaciones-tab" data-toggle="tab" href="#observaciones" role="tab" aria-controls="observaciones" aria-selected="true">Observaciones</a>
+            <a class="nav-link {{ $entrada->observaciones->count() > 0 ? 'active' : 'disabled' }}" id="observaciones-tab" data-toggle="tab" href="#observaciones" role="tab" aria-controls="observaciones" aria-selected="true">Observaciones</a>
           </li>
           <li class="nav-item" role="presentation">
-            <a class="nav-link {{ $observaciones->count() == 0 ? 'active' : '' }}" id="nueva-observacion-tab" data-toggle="tab" href="#nueva-observacion" role="tab" aria-controls="nueva-observacion" aria-selected="false">Nueva observación</a>
+            <a class="nav-link {{ $entrada->observaciones->count() == 0 ? 'active' : '' }}" id="nueva-observacion-tab" data-toggle="tab" href="#nueva-observacion" role="tab" aria-controls="nueva-observacion" aria-selected="false">Nueva observación</a>
           </li>
         </ul>
       </div>
@@ -24,8 +24,9 @@
         <div class="tab-content" id="tabsContentObservaciones">
 
           <!-- Lista de observaciones -->
-          <div class="tab-pane fade {{ $observaciones->count() > 0 ? 'show active' : '' }}" id="observaciones" role="tabpanel" aria-labelledby="observaciones-tab">
+          <div class="tab-pane fade {{ $entrada->observaciones->count() > 0 ? 'show active' : '' }}" id="observaciones" role="tabpanel" aria-labelledby="observaciones-tab">
             <ul class="list-group list-group-flush">
+                <?php $observaciones = $entrada->observaciones->sortByDesc('id') ?>
                 @foreach($observaciones as $observacion)
                 <li class="list-group-item">
                     <div class="text-muted small">
@@ -40,7 +41,7 @@
           </div>
           
           <!-- Nueva observacion -->
-          <div class="tab-pane fade {{ $observaciones->count() == 0 ? 'show active' : '' }}" id="nueva-observacion" role="tabpanel" aria-labelledby="nueva-observacion-tab">
+          <div class="tab-pane fade {{ $entrada->observaciones->count() == 0 ? 'show active' : '' }}" id="nueva-observacion" role="tabpanel" aria-labelledby="nueva-observacion-tab">
             <form action="{{ route('observaciones.store') }}" method="post" atuocomplete="off" class="mt-3">
                 @csrf
                 <input type="hidden" name="entrada" value="{{ $entrada->id }}">

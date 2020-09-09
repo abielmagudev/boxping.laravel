@@ -6,25 +6,27 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class EntradaUpdateRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
+    private $updaters = array(
+        'entrada',
+        'recibido',
+        'cruce',
+        'reempaque',
+        'remitente',
+        'destinatario',
+        'verificacion',     
+    );
+
     public function authorize()
     {
         return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array
-     */
     public function rules()
     {
+        $updaters = $this->getUpdatersString();
+
         return [
-            'update' => ['required', 'in:entrada,cruce,reempaque'],
+            'update' => ['required', 'in:' . $updaters],
         ];
     }
 
@@ -34,5 +36,10 @@ class EntradaUpdateRequest extends FormRequest
             'update.required' => __('Actualizacion de entrada no valida'),
             'update.in' => __('Actualizacion de entrada no valida'),
         ];
+    }
+
+    private function getUpdatersString()
+    {
+        return implode(',', $this->updaters);
     }
 }

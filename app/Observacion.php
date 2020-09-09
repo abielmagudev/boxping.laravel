@@ -14,7 +14,7 @@ class Observacion extends Model
         'contenido',
     );
 
-    public function user()
+    public function creator()
     {
         return $this->belongsTo(User::class);
     }

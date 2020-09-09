@@ -24,15 +24,16 @@ class EntradaCreateRequest extends FormRequest
     public function rules()
     {
         return [
-            'consolidado' => 'integer|exists:consolidados,id'
+            'consolidado' => 'exists:consolidados,id',
+            'cliente' => 'exists:clientes,id',
         ];
     }
 
     public function messages()
     {
         return array(
-            'consolidado.integer' => __('Selecciona un consolidado válido'),
             'consolidado.exists' => __('Selecciona un consolidado válido'),
+            'cliente.exists' => __('Selecciona un cliente válido'),
         );
     }
 }

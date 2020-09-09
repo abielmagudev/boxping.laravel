@@ -5,11 +5,12 @@
                 <span>Medidas</span>
             </div>
             <div>
-                <a href="{{ route('medidas.create', ['entrada' => $entrada]) }}" class="btn btn-success btn-sm">Agregar</a>
+                <a href="{{ route('medidas.create', ['entrada' => $entrada]) }}" class="btn btn-primary btn-sm">Agregar</a>
             </div>
         </div>
     </div>
     <div class="card-body p-0">
+        @if( $entrada->medidas->count() )
         <div class="table-responsive">
             <table class="table table-hover small">
                 <thead>
@@ -26,9 +27,9 @@
                         <th></th>
                     </tr>
                 </thead>
-                @if( $entrada->medidas->count() )
                 <tbody>
-                    @foreach($entrada->medidas as $medida)
+                    <?php $medidas = $entrada->medidas->sortByDesc('id') ?>
+                    @foreach($medidas as $medida)
                     <tr>
                         <td class="align-middle">{{ $medida->medidor->nombre }}</td>
                         <td class="align-middle">{{ $medida->peso }}</td>
@@ -45,8 +46,12 @@
                     </tr>
                     @endforeach
                 </tbody>
-                @endif
             </table>
         </div>
+        @else
+        <br>
+        <p class="text-center lead">Sin medidas</p>
+        
+        @endif
     </div>
 </div>

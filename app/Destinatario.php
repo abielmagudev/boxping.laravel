@@ -3,8 +3,9 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Ahex\Zkeleton\Domain\SearchInterface as Search;
 
-class Destinatario extends Model
+class Destinatario extends Model implements Search
 {
     use \Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -47,5 +48,15 @@ class Destinatario extends Model
     public function updater()
     {
         return $this->belongsTo(User::class, 'updated_by_user');
+    }
+
+    public function scopeSearch($query, $value)
+    {
+        return $query->where('nombre', 'like', "%{$value}%")
+                    ->orWhere('direccion', 'like', "%{$value}%")
+                    ->orWhere('telefono', 'like', "%{$value}%")
+                    ->orWhere('ciudad', 'like', "%{$value}%")
+                    ->orderBy('id', 'desc')
+                    ->get();
     }
 }

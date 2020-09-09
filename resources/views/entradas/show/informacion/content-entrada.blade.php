@@ -32,6 +32,28 @@
         <div class="w-100 mb-2"></div>
 
         <div class="col-sm col-sm-3">
+            <small class="text-muted">Recibido</small>
+        </div>
+        <div class="col-sm">
+            @if( is_object($entrada->recibidor) )
+            <p class="m-0">{{ $entrada->recibidor->name }}</p>
+            @endif
+            <p class="m-0">{{ $entrada->recibido_at }}</p>
+        </div>
+
+        <div class="w-100 mb-2"></div>
+
+        <div class="col-sm col-sm-3">
+            <small class="text-muted">Creado</small>
+        </div>
+        <div class="col-sm">
+            <p class="m-0">{{ $entrada->creator->name }}</p>
+            <p class="m-0">{{ $entrada->created_at }}</p>
+        </div>
+
+        <div class="w-100 mb-2"></div>
+
+        <div class="col-sm col-sm-3">
             <small class="text-muted">Actualizado</small>
         </div>
         <div class="col-sm">
@@ -42,7 +64,7 @@
     <br>
     
     <div class="text-right">
-        <a href="{{ route('entradas.edit', [$entrada, 'form' => 'entrada']) }}" class="btn btn-warning btn-sm">
+        <a href="{{ route('entradas.edit', [$entrada, 'formulario' => 'entrada']) }}" class="btn btn-warning btn-sm">
             <span>Editar entrada</span>
         </a>
     </div>

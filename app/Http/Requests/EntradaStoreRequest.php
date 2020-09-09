@@ -6,42 +6,29 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class EntradaStoreRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
     public function authorize()
     {
         return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array
-     */
     public function rules()
     {
         return [
-            'consolidado'          => ['integer','exists:consolidados,id'],
-            'consolidado_numero'   => ['nullable','exists:consolidados,numero'],
-            'cliente'              => ['required','integer'],
-            'cliente_alias_numero' => 'integer',
+            'consolidado'          => 'exists:consolidados,id',
+            'cliente'              => ['required_without:consolidado','exists:clientes,id'],
             'numero'               => 'required',
+            'cliente_alias_numero' => ['sometimes','accepted'],
         ];
     }
 
     public function messages()
     {
         return [
-            'consolidado.integer'       => __('Selecciona un consolidado valido'),
-            'consolidado.exists'        => __('Selecciona un consolidado valido'),
-            'consolidado_numero.exists' => __('Escribe un número de consolidado valido'),
-            'cliente.required'          => __('Selecciona un cliente'),
-            'cliente.integer'           => __('Selecciona un cliente'),
-            'cliente_alias_numero.integer' => __('Activa o desactiva la opcion número con alias'),
-            'numero.required'           => __('Escribe el numero de la entrada'),          
+            'consolidado.exists'       => __('Selecciona un consolidado válido'),
+            'cliente.required_without' => __('Selecciona un cliente'),
+            'cliente.exists'           => __('Selecciona un cliente válido'),
+            'numero.required'          => __('Escribe el numero de la entrada'),          
+            'cliente_alias_numero.accepted' => __('Activa o desactiva la opcion "Alias del cliente..."'),
         ];
     }
 }

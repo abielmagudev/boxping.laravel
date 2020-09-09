@@ -36,13 +36,26 @@
         <a href="#1" class="btn btn-warning btn-sm">Editar salida</a>
     </p>
 
-    @elseif( is_object($entrada->destinatario) && $entrada->destinatario->verificacion )
+    @elseif( is_object($entrada->destinatario) && $entrada->hasVerificacion )
     <p class="text-center">
-        <a href="#!" class="btn btn-outline-success">Crear salida</a>
+        <a href="#!" class="btn btn-primary">Crear salida</a>
     </p>
 
+    @elseif( is_object($entrada->destinatario) && !$entrada->hasVerificacion  )
+    <form action="{{ route('entradas.update', $entrada) }}" method="post" autocomplete="off" class="text-center">
+        @method('put')
+        @csrf
+        <input type="hidden" name="update" value="verificacion">
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="verificacion" value="yes" id="checkbox-verificacion" required>
+            <label class="form-check-label" for="checkbox-verificacion">He verificado la dirección y el envio con el destinatario.</label>
+        </div>
+        <br>
+        <button class="btn btn-success btn-sm" type="submit">Guardar verificación</button>
+    </form>
+
     @else
-    <p class="text-center">Se require la <b>verificación del destinatario</b> para crear una guía de salida.</p>
+    <p class="text-center">Require agregar un destinatario</p>
 
     @endif
 </div>

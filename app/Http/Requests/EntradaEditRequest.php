@@ -24,15 +24,15 @@ class EntradaEditRequest extends FormRequest
     public function rules()
     {
         return [
-            'form' => ['required','in:entrada,cruce,reempaque']
+            'formulario' => ['required','in:entrada,cruce,reempaque']
         ];
     }
 
     public function messages()
     {
         return array(
-            'form.required' => __('Edicion de entrada no valido'),
-            'form.in' => __('Edicion de entrada no valido'),
+            'formulario.required' => __('Edición de entrada no valido'),
+            'formulario.in' => __('Edición de entrada no valido'),
         );
     }
 }

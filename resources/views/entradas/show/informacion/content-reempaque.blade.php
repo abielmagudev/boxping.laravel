@@ -46,7 +46,7 @@
     @else
 
     <p class="text-center">
-        <a href="{{ route('entradas.edit', [$entrada, 'form' => 'reempaque']) }}" class="btn btn-primary">Agregar reempaque</a>
+        <a href="{{ route('entradas.edit', [$entrada, 'formulario' => 'reempaque']) }}" class="btn btn-primary btn-sm">Agregar reempaque</a>
     </p>
     @endif
 </div>

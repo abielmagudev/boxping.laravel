@@ -10,7 +10,7 @@
             @method('patch')
             @include('destinatarios.includes.save')
             <button type="submit" class="btn btn-warning">Actualizar destinatario</button>
-            <a href="{{ route('destinatarios.show', $destinatario) }}" class="btn btn-secondary">Regresar</a>
+            <a href="{{ $route_back }}" class="btn btn-secondary">Regresar</a>
         </form>
     </div>
 </div>

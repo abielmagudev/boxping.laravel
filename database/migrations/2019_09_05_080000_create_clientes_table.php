@@ -25,8 +25,8 @@ class CreateClientesTable extends Migration
             $table->string('estado');
             $table->string('pais');
             $table->text('notas')->nullable();
-            $table->boolean('disponible')->default(1);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

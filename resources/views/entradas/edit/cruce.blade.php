@@ -2,6 +2,10 @@
 @section('update', 'cruce')
 @section('form_content')
     <div class="form-group">
+        <label for="read-entrada-numero" class="small">Número de entrada</label>
+        <div class="form-control bg-light">{{ $entrada->alias_numero ?? $entrada->numero }}</div>
+    </div>
+    <div class="form-group">
         <label for="select-vehiculo" class="small">Vehiculo</label>
         <select name="vehiculo" id="select-vehiculo" class="form-control" required>
             <option disabled selected></option>

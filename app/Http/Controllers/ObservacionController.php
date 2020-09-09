@@ -8,6 +8,8 @@ use App\Entrada;
 
 class ObservacionController extends Controller
 {
+    use Traits\Userlive;
+
     public function store(Request $request)
     {
         $this->validateRequest( $request );
@@ -19,27 +21,12 @@ class ObservacionController extends Controller
         return back()->with('success', 'Observacion agregada');
     }
 
-    // public function edit(Observacion $observacion)
-    // {
-    //     //
-    // }
-
-    // public function update(Request $request, Observacion $observacion)
-    // {
-    //     //
-    // }
-
-    // public function destroy(Observacion $observacion)
-    // {
-    //     //
-    // }
-
     private function validateRequest( $request )
     {
         $request->validate(
             // Rules
             [
-                'entrada' => ['required','integer'],
+                'entrada' => ['required','exists:entradas,id'],
                 'contenido' => 'required',
             ],
             // Messages
@@ -61,7 +48,7 @@ class ObservacionController extends Controller
         return array(
             'entrada_id' => $validated['entrada'],
             'contenido' => $validated['contenido'],
-            'user_id' => rand(1,10),
+            'user_id' => $this->userlive(),
         );
     }
 }

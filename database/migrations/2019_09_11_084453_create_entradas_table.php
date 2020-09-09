@@ -22,8 +22,13 @@ class CreateEntradasTable extends Migration
             $table->unsignedInteger('cliente_id');
             $table->boolean('cliente_alias_numero');
 
+            // Trayectoria
+            $table->unsignedInteger('destinatario_id')->nullable();
+            $table->unsignedInteger('remitente_id')->nullable();
+            
             // Registro
-            $table->dateTime('registrado_at')->nullable();
+            $table->datetime('recibido_at')->nullable();
+            $table->unsignedSmallInteger('recibido_by_user')->nullable();
 
             // Cruce
             $table->unsignedInteger('vehiculo_id')->nullable();
@@ -37,6 +42,10 @@ class CreateEntradasTable extends Migration
             $table->unsignedInteger('reempacador_id')->nullable();
             $table->date('reempacado_fecha')->nullable();
             $table->time('reempacado_hora')->nullable();
+
+            // Verificacion
+            $table->datetime('verificado_at')->nullable();
+            $table->unsignedSmallInteger('verificado_by_user')->nullable();
 
             // Log
             $table->unsignedInteger('created_by_user');

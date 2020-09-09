@@ -7,22 +7,141 @@ use Illuminate\Database\Eloquent\Model;
 class Entrada extends Model
 {
     protected $fillable = array(
+        // Entrada
         'numero',
         'consolidado_id',
         'cliente_id',
         'cliente_alias_numero',
+
+        // Trayectoria
+        'destinatario_id',
+        'remitente_id',
+
+        // Registro
+        'recibido_at',
+        'recibido_by_user',
+
+        // Cruce
         'vehiculo_id',
         'conductor_id',
         'vuelta',
         'cruce_fecha',
         'cruce_hora',
+
+        // Reempaque
         'codigor_id',
         'reempacador_id',
         'reempacado_fecha',
         'reempacado_hora',
+
+        // Verificacion
+        'verificado_at',
+        'verificado_by_user',
+
+        // Log
         'created_by_user',
         'updated_by_user',
     );
+
+
+
+    // Entrada
+
+    public function consolidado()
+    {
+        return $this->belongsTo(Consolidado::class);
+    }
+    
+    public function cliente()
+    {
+        return $this->belongsTo(Cliente::class);
+    }
+
+    public function medidas()
+    {
+        return $this->hasMany(Medida::class);
+    }
+
+    public function observaciones()
+    {
+        return $this->hasMany(Observacion::class);
+    }
+
+
+
+    // Trayectoria
+
+    public function remitente()
+    {
+        return $this->belongsTo(Remitente::class);
+    }
+
+    public function destinatario()
+    {
+        return $this->belongsTo(Destinatario::class);
+    }
+
+
+
+    // Cruce
+
+    public function vehiculo()
+    {
+        return $this->belongsTo(Vehiculo::class);
+    }
+
+    public function conductor()
+    {
+        return $this->belongsTo(Conductor::class);
+    }
+
+
+
+    // Reempaque
+
+    public function codigor()
+    {
+        return $this->belongsTo(Codigor::class);
+    }
+
+    public function reempacador()
+    {
+        return $this->belongsTo(Reempacador::class);
+    }
+
+
+
+    // Verificacion
+
+    public function verificador()
+    {
+        return $this->belongsTo(User::class, 'verificado_by_user');
+    }
+
+    // Recibido
+
+    public function recibidor()
+    {
+        return $this->belongsTo(User::class, 'recibido_by_user');
+    }
+
+
+
+    // Log
+
+    public function creator()
+    {
+        return $this->belongsTo(User::class, 'created_by_user');
+    }
+
+    public function updater()
+    {
+        return $this->belongsTo(User::class, 'updated_by_user');
+    }
+
+
+
+    // Atributos
 
     public function getAliasNumeroAttribute()
     {
@@ -48,63 +167,25 @@ class Entrada extends Model
         return date('h:i a', strtotime($this->reempacado_hora)) . ', ' . date('d M,Y', strtotime($this->reempacado_fecha));
     }
 
-    public function consolidado()
+    public function getHasVerificacionAttribute()
     {
-        return $this->belongsTo(Consolidado::class);
-    }
-    
-    public function cliente()
-    {
-        return $this->belongsTo(Cliente::class);
+        return is_string($this->verificado_at) && is_integer($this->verificado_by_user);
     }
 
-    public function vehiculo()
+
+    // Scopes
+    public function scopeWithMedidas($query)
     {
-        return $this->belongsTo(Vehiculo::class);
+        return $query->with([
+            'medidas.medidor',
+            'medidas.updater',
+        ]);
     }
 
-    public function conductor()
+    public function scopeWithObservaciones($query)
     {
-        return $this->belongsTo(Conductor::class);
-    }
-
-    public function codigor()
-    {
-        return $this->belongsTo(Codigor::class);
-    }
-
-    public function reempacador()
-    {
-        return $this->belongsTo(Reempacador::class);
-    }
-
-    public function remitente()
-    {
-        return $this->hasOne(Remitente::class);
-    }
-
-    public function destinatario()
-    {
-        return $this->hasOne(Destinatario::class);
-    }
-
-    public function observaciones()
-    {
-        return $this->hasMany(Observacion::class);
-    }
-
-    public function medidas()
-    {
-        return $this->hasMany(Medida::class);
-    }
-
-    public function creater()
-    {
-        return $this->belongsTo(User::class, 'created_by_user');
-    }
-
-    public function updater()
-    {
-        return $this->belongsTo(User::class, 'updated_by_user');
+        return $query->with([
+            'observaciones.creator',
+        ]);
     }
 }

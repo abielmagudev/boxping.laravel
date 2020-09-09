@@ -2,17 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Http\Requests\RemitenteCreateRequest;
-use App\Http\Requests\RemitenteSaveRequest;
-
 use App\Remitente;
 use App\Entrada;
 
+use App\Ahex\Remitente\Application\BelongsEntradaTrait as BelongsEntrada;
+use App\Ahex\Remitente\Application\RoutesTrait as Routes;
+use App\Ahex\Remitente\Application\StoreTrait as Store;
+use App\Ahex\Remitente\Application\UpdateTrait as Update;
+
+use App\Http\Requests\RemitenteSaveRequest as SaveRequest;
+use Illuminate\Http\Request;
+
 class RemitenteController extends Controller
 {
-    use Traits\Userlive,
-        Traits\RemitenteSave;
+    use BelongsEntrada, Routes, Store, Update;
 
     public function index()
     {
@@ -25,15 +28,18 @@ class RemitenteController extends Controller
     {
         return view('remitentes.create', [
             'remitente' => new Remitente,
+            'entrada' => request('entrada', false),
+            'route_cancel' => $this->routeCancel(),
         ]);
     }
 
-    public function store(RemitenteSaveRequest $request)
+    public function store(SaveRequest $request)
     {
         if(! $remitente = $this->storeRemitente($request) )
-            return back()->with('failure', 'Error al agregar remitente');
+            return back()->with('failure', 'Error al guardar remitente');
 
-        return redirect()->route('remitentes.index')->with('success', 'Remitente agregado');
+        $route = $this->routeAfterStore($remitente->nombre);
+        return redirect($route)->with('success', 'Remitente guardardo');
     }
 
     public function show(Remitente $remitente)
@@ -46,12 +52,15 @@ class RemitenteController extends Controller
 
     public function edit(Remitente $remitente)
     {
+        $this->comesFromEntrada($remitente->id);
+
         return view('remitentes.edit', [
             'remitente' => $remitente,
+            'route_back' => $this->routeBack( $remitente->id ),
         ]);
     }
 
-    public function update(RemitenteSaveRequest $request, Remitente $remitente)
+    public function update(SaveRequest $request, Remitente $remitente)
     {
         if(! $this->updateRemitente($request, $remitente) )
             return back()->with('failure', 'Error al actualizar remitente');

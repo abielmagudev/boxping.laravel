@@ -57,23 +57,6 @@
         <div class="w-100 mb-2"></div>
 
         <div class="col-sm col-sm-3">
-            <small class="text-muted">Verificación</small>
-        </div>
-        <div class="col-sm">
-            @if( is_object($entrada->destinatario->verificador) )
-            <p class="m-0">Si</p>
-            <p class="m-0">{{ $entrada->destinatario->verificador->name }}</p>
-            <p class="m-0">{{ $entrada->destinatario->verificado_at }}</p>
-            
-            @else
-            <span>No</span>
-
-            @endif
-        </div>
-
-        <div class="w-100 mb-2"></div>
-
-        <div class="col-sm col-sm-3">
             <small class="text-muted">Actualizado</small>
         </div>
         <div class="col-sm">
@@ -84,13 +67,16 @@
     <br>
 
     <div class="text-right">
-        <a href="{{ route('destinatarios.edit', $entrada->destinatario) }}" class="btn btn-warning btn-sm">Editar destinatario</a>
+        <button data-toggle="modal" data-target="#searchDestinatarios" type="button" class="btn btn-primary btn-sm">Cambiar destinatario</button>
+        <a href="{{ route('destinatarios.edit', ['destinatario' => $entrada->destinatario_id, 'entrada' => $entrada->id]) }}" class="btn btn-warning btn-sm">Editar destinatario</a>
     </div>
 
     @else
     <p class="text-center">
-        <a href="{{ route('destinatarios.create', ['entrada' => $entrada]) }}" class="btn btn-primary">Agregar destinatario</a>
+        <button data-toggle="modal" data-target="#searchDestinatarios" type="button" class="btn btn-primary btn-sm">Agregar destinatario</button>
     </p>
 
     @endif
+
+    @include('entradas.modals.search-destinatarios')
 </div>

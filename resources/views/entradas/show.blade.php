@@ -6,13 +6,13 @@
 
     <!-- Informacion -->
     <div class="col-sm">
-        @include('entradas.show.informacion')
+        @include('entradas.show.informacion.layout')
         <br>
     </div>
 
     <!-- Trayectoria -->
     <div class="col-sm">
-        @include('entradas.show.trayectoria')
+        @include('entradas.show.trayectoria.layout')
     </div>
 </div>
 <br>

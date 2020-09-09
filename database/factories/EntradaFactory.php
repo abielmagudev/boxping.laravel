@@ -7,18 +7,25 @@ use Faker\Generator as Faker;
 
 $factory->define(Entrada::class, function (Faker $faker) {
 
+    $recibido   = $faker->boolean;
     $cruce_id   = $faker->boolean ? $faker->numberBetween(1,10) : null;
     $codigor_id = $faker->boolean ? $faker->numberBetween(1,10) : null;
+    $verificado = $faker->boolean;
 
     return [
         // Entrada
         'numero' => $faker->uuid,
-        'consolidado_id' => $faker->numberBetween(1,10),
+        'consolidado_id' => $faker->boolean ? $faker->numberBetween(1,10) : null,
         'cliente_id' => $faker->numberBetween(1,10),
         'cliente_alias_numero' => $faker->boolean ? 1 : 0,
 
+        // Trayectoria 
+        'destinatario_id' => $faker->boolean ? $faker->numberBetween(1,50) : null,
+        'remitente_id' => $faker->boolean ? $faker->numberBetween(1,50) : null,
+        
         // Registro
-        'registrado_at' => $faker->boolean ? $faker->dateTime() : null,
+        'recibido_at' => $recibido ? $faker->datetime() : null,
+        'recibido_by_user' => $recibido ? $faker->numberBetween(1,10) : null,
 
         // Cruce
         'vehiculo_id' => $cruce_id,
@@ -33,6 +40,11 @@ $factory->define(Entrada::class, function (Faker $faker) {
         'reempacado_fecha' => $codigor_id ? $faker->date() : null,
         'reempacado_hora' => $codigor_id ? $faker->time() : null,
 
+        // Verificacion
+        'verificado_at' => $verificado ? $faker->dateTime() : null,
+        'verificado_by_user' => $verificado ? $faker->numberBetween(1,10) : null,
+
+        // Log
         'created_by_user' => $faker->numberBetween(1,10),
         'updated_by_user' => $faker->numberBetween(1,10),
     ];

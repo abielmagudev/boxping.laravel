@@ -2,6 +2,10 @@
 @section('update', 'reempaque')
 @section('form_content')
     <div class="form-group">
+        <label for="read-entrada-numero" class="small">Número de entrada</label>
+        <div class="form-control bg-light">{{ $entrada->alias_numero ?? $entrada->numero }}</div>
+    </div>
+    <div class="form-group">
         <label for="select-codigo-reempacado" class="small">Código de reempacado</label>
         <select name="codigo_reempacado" id="select-codigo-reempacado" class="form-control">
             <option disabled selected></option>

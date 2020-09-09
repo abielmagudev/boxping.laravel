@@ -16,6 +16,11 @@ Route::get('/', function () {
 });
 
 Route::resource('entradas', 'EntradaController');
+Route::prefix('entradas')->group( function () {
+    Route::get('{entrada}/agregar/remitente', 'EntradaController@agregarRemitente')->name('entradas.agregar.remitente');
+    Route::get('{entrada}/agregar/destinatario', 'EntradaController@agregarDestinatario')->name('entradas.agregar.destinatario');
+});
+
 Route::resource('consolidados', 'ConsolidadoController');
 Route::resource('clientes', 'ClienteController');
 Route::resource('destinatarios', 'DestinatarioController');

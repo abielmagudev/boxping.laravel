@@ -10,7 +10,7 @@
             @method('patch')
             @include('remitentes.includes.save')
             <button type="submit" class="btn btn-warning">Actualizar remitente</button>
-            <a href="{{ route('remitentes.show', $remitente) }}" class="btn btn-secondary">Regresar</a>
+            <a href="{{ $route_back }}" class="btn btn-secondary">Regresar</a>
         </form>
     </div>
 </div>
