@@ -38,7 +38,7 @@
 
     @elseif( is_object($entrada->destinatario) && $entrada->hasVerificacion )
     <p class="text-center">
-        <a href="#!" class="btn btn-primary">Crear salida</a>
+        <a href="#!" class="btn btn-primary btn-sm">Crear salida</a>
     </p>
 
     @elseif( is_object($entrada->destinatario) && !$entrada->hasVerificacion  )
