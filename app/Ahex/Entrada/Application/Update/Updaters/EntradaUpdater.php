@@ -100,8 +100,11 @@ Class EntradaUpdater extends Updater
 
     private function getIfConsolidadoAbierto( $numero )
     {
-        if( $this->entrada->consolidado_id && $this->entrada->consolidado->numero == $numero )
-            return $this->entrada->consolidado;
+        if( is_object( $this->entrada->consolidado ) )
+        {
+            if( $this->entrada->consolidado->numero == $numero )
+                return $this->entrada->consolidado;
+        }
 
         if( ! $consolidado = Consolidado::where('numero', $numero)->where('cerrado', 0)->first() )
             return back()->with('failure', 'Consolidado cerrado, no es posible agregar entradas.')->send();
