@@ -2,26 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Observacion;
 use App\Entrada;
+use App\Ahex\Fake\Domain\Fakeuser;
+use Illuminate\Http\Request;
 
 class ObservacionController extends Controller
 {
-    use Traits\Userlive;
-
     public function store(Request $request)
-    {
-        $this->validateRequest( $request );
-
-        $to_store = $this->prepareToSave( $request->all() );
-        if(! Observacion::create($to_store) )
-            return back()->with('failure', 'Error al agregar observacion');
-
-        return back()->with('success', 'Observacion agregada');
-    }
-
-    private function validateRequest( $request )
     {
         $request->validate(
             // Rules
@@ -31,24 +19,21 @@ class ObservacionController extends Controller
             ],
             // Messages
             [
-                'entrada.required'   => __('Requiere una entrada valida'),
-                'entrada.integer'    => __('Requiere una entrada valida'),
-                'contenido.required' => __('Escribe el contenido de la observacion'),
+                'entrada.required'   => __('Requiere la entrada'),
+                'entrada.exists'    => __('Requiere una entrada válida'),
+                'contenido.required' => __('Escribe el contenido de la observación'),
             ]
         );
 
-        if(! Entrada::where('id', $request->get('entrada'))->exists() )
-            return back()->with('failure', 'Entrada no es valida');
-        
-        return;
-    }
+        $filled = [
+            'entrada_id' => $request->entrada,
+            'contenido' => $request->contenido,
+            'created_by_user' => Fakeuser::live(),
+        ];
 
-    private function prepareToSave($validated)
-    {
-        return array(
-            'entrada_id' => $validated['entrada'],
-            'contenido' => $validated['contenido'],
-            'user_id' => $this->userlive(),
-        );
+        if( ! Observacion::create($filled) )
+            return back()->with('failure', 'Error al agregar observación');
+
+        return back()->with('success', 'Observacion agregada');
     }
 }

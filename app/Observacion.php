@@ -10,12 +10,12 @@ class Observacion extends Model
     
     protected $fillable = array(
         'entrada_id',
-        'user_id',
         'contenido',
+        'created_by_user',
     );
 
     public function creator()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'created_by_user');
     }
 }

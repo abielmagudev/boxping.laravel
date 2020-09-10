@@ -31,7 +31,7 @@
                 <li class="list-group-item">
                     <div class="text-muted small">
                       <div class="float-right">{{ $observacion->updated_at }}</div>
-                      <div class="float-left">{{ $observacion->user->name ?? 'Guest' }}</div>
+                      <div class="float-left">{{ $observacion->creator->name ?? 'Unkown' }}</div>
                     </div>
                     <br>
                     <p class="text-monospace small">{{ $observacion->contenido }}</p>

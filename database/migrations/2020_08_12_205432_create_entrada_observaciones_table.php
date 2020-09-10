@@ -16,8 +16,8 @@ class CreateEntradaObservacionesTable extends Migration
         Schema::create('entrada_observaciones', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedInteger('entrada_id');
-            $table->unsignedInteger('user_id');
             $table->text('contenido');
+            $table->unsignedInteger('created_by_user');
             $table->timestamps();
         });
     }
