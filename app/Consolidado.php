@@ -3,8 +3,9 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Ahex\Zkeleton\Domain\SearchInterface as Search;
 
-class Consolidado extends Model
+class Consolidado extends Model implements Search
 {
     protected $fillable = array(
         'numero',
@@ -26,13 +27,20 @@ class Consolidado extends Model
         return $this->hasMany(Entrada::class);
     }
 
-    public function creado()
+    public function creator()
     {
         return $this->belongsTo(User::class, 'created_by_user');
     }
 
-    public function actualizado()
+    public function updater()
     {
         return $this->belongsTo(User::class, 'updated_by_user');
+    }
+
+    public function scopeSearch($query, $value)
+    {
+        return $query->where('numero', 'like', "%{$value}%")
+                     ->orderBy('id','desc')
+                     ->get();
     }
 }

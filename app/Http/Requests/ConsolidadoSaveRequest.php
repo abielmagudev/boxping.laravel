@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class SaveConsolidadoRequest extends FormRequest
+class ConsolidadoSaveRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,12 +24,11 @@ class SaveConsolidadoRequest extends FormRequest
     public function rules()
     {
         return [
-            'cliente' => ['required','numeric'],
+            'cliente' => ['required','exists:clientes,id'],
             'numero'  => 'required',
             'tarimas' => ['required','numeric'],
             'notas'   => 'nullable',
-            'cerrado' => 'numeric',
-            'save'    => 'numeric',
+            'cerrado' => ['sometimes', 'accepted'],
         ];
     }
 
@@ -39,10 +38,8 @@ class SaveConsolidadoRequest extends FormRequest
             'numero.required'  => __('Ingresa el numero de consolidado'),
             'tarimas.required' => __('Ingresa la cantidad de tarimas del consolidado'),
             'tarimas.numeric'  => __('Ingresa la cantidad de tarimas del consolidado'),
-            'cliente.required' => __('Selecciona el cliente del consolidado'),
-            'cliente.numeric'  => __('Selecciona el cliente del consolidado'),
-            'cerrado.numeric'  => __('Habilita o deshabilita cerrar consolidado'),
-            'save.numeric'     => __('Selecciona una opcion para guardar el nuevo consolidado'),
+            'cliente.required' => __('Selecciona el cliente delconsolidado'),
+            'cliente.exists'   => __('Selecciona un cliente válido para el consolidado'),
         );
     }
 }

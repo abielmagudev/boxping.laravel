@@ -14,25 +14,48 @@
         </div>
     </div>
     <div class="card-body p-0">
+        @if( $consolidado->entradas->count() )
         <div class="table-responsive">
-            <table class="table table-hover">
+            <table class="table table-hover small">
                 <thead>
-                    <tr class="small">
-                        <td>Número</td>
-                        <td>Status</td>
+                    <tr class="">
+                        <th>Número</th>
+                        <th>Destinatario</th>
+                        <th>Salida</th>
+                        <th>Status</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach($consolidado->entradas as $entrada)
                     <tr>
-                        <td>
+                        <td class="align-middle">
                             <a href="{{ route('entradas.show', $entrada) }}">{{ $entrada->numero }}</a>
                         </td>
-                        <td></td>
+                        <td class="align-middle">
+                            @if( $entrada->destinatario )
+                            {{ $entrada->destinatario->localidad }}
+                            @endif
+                        </td>
+                        <td class="align-middle">
+                            @if( $salida = false )
+                            <span>Numero de sálida</span>
+                            @endif
+                        </td>
+                        <td class="align-middle">
+                            @if( $salida_status = false )
+                            <span>Numero de sálida</span>
+                            @endif
+                        </td>
                     </tr>
                     @endforeach
                 </tbody>
             </table>
         </div>
+
+        @else
+        <br>
+        <p class="text-center text-muted">Aún sin entradas</p>
+
+        @endif
     </div>
 </div>

@@ -4,18 +4,20 @@ namespace App\Http\Controllers;
 
 use App\Consolidado;
 use App\Cliente;
-
-use App\Http\Requests\SaveConsolidadoRequest as SaveRequest;
+use App\Ahex\Consolidado\Domain\Storer;
+use App\Ahex\Consolidado\Domain\Updater;
+use App\Ahex\Consolidado\Application\RoutesTrait as Routes;
+use App\Http\Requests\ConsolidadoSaveRequest as SaveRequest;
 use Illuminate\Http\Request;
 
 class ConsolidadoController extends Controller
 {
-    use Traits\ConsolidadoSaveTrait;
+    use Routes;
 
     public function index()
     {
         return view('consolidados/index', [
-            'consolidados' => Consolidado::with('cliente')->orderBy('id', 'desc')->get(),
+            'consolidados' => Consolidado::with(['cliente','entradas'])->orderBy('id', 'desc')->get(),
         ]);
     }
 
@@ -23,24 +25,25 @@ class ConsolidadoController extends Controller
     {
         return view('consolidados.create', [
             'consolidado' => new Consolidado,
-            'clientes' => Cliente::all(),
+            'clientes' => Cliente::all(['id','nombre','alias']),
         ]);
     }
 
-    public function store(SaveConsolidadoRequest $request)
+    public function store(SaveRequest $request)
     {
-        $to_store = $this->prepareToStore( $request->validated() );
-        if(! $consolidado = Consolidado::create($to_store) )
-            return back()->withInput()->with('failure', 'Hubo una falla al guardar consolidado. Intenta de nuevo.');
+        $validated = (object) $request->validated();
 
-        $route = $this->routeAfterStore($request->get('save'), $consolidado->id);
+        if( ! $consolidado = Storer::save( $validated ) )
+            return back()->withInput()->with('failure', 'Error al guardar consolidado');
+
+        $route = $this->routeAfterStore($request->input('save', 0), $consolidado->id);
         return redirect($route)->with('success', "Consolidado {$consolidado->numero} guardado");
     }
 
-    public function show(Consolidado $consolidado)
+    public function show($id)
     {
         return view('consolidados.show', [
-            'consolidado' => $consolidado,
+            'consolidado' => Consolidado::with(['entradas.destinatario'])->find($id),
         ]);
     }
 
@@ -48,17 +51,18 @@ class ConsolidadoController extends Controller
     {
         return view('consolidados.edit', [
             'consolidado' => $consolidado,
-            'clientes' => Cliente::all(),
+            'clientes' => Cliente::all(['id','nombre','alias']),
         ]);
     }
 
-    public function update(SaveConsolidadoRequest $request, Consolidado $consolidado)
+    public function update(SaveRequest $request, Consolidado $consolidado)
     {
-        $to_update = $this->prepareToUpdate( $request->validated() );
-        if(! Consolidado::find($consolidado->id)->update( $to_update ) )
-            return back()->with('failure', 'Hubo un error en la actualizacion del consolidado');
+        $validated = (object) $request->validated();
 
-        return back()->with('success', "Consolidado {$consolidado->numero} actualizado");
+        if( ! Updater::save( $validated, $consolidado ) )
+            return back()->with('failure', 'Error al actualizar consolidado');
+
+        return back()->with('success', 'Consolidado actualizado');
     }
 
     public function destroy(Consolidado $consolidado)
@@ -66,7 +70,7 @@ class ConsolidadoController extends Controller
         $numero = $consolidado->numero;
 
         if(! $consolidado->delete() )
-            return back()->with('failure', 'Hubo un error al eliminar consolidado');
+            return back()->with('failure', 'Error al eliminar consolidado');
 
         return redirect()->route('consolidados.index')->with('success', "Consolidado {$numero} eliminado");
     }

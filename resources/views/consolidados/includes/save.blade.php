@@ -2,10 +2,10 @@
 <div class="form-group">
     <label for="cliente">Cliente</label>
     <select name="cliente" id="cliente" class="form-control" required>
-        <option disabled selected label="..."></option>
-        <?php $consolido_cliente_id    = is_object($consolidado->cliente) ? $consolidado->cliente->id : null ?>
+        <option disabled selected label=""></option>
+        <?php $consolido_cliente_id = is_object($consolidado->cliente) ? $consolidado->cliente->id : null ?>
         @foreach($clientes as $cliente)
-        <option value="{{ $cliente->id }}" {{ $cliente->id == old('cliente', $consolido_cliente_id) ? 'selected' : '' }}>{{ $cliente->nombre }}</option>
+        <option value="{{ $cliente->id }}" {{ $cliente->id == old('cliente', $consolido_cliente_id) ? 'selected' : '' }}>{{ $cliente->nombre }} ({{ $cliente->alias }})</option>
         @endforeach
     </select>
     @error('cliente')

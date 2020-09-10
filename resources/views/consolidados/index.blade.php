@@ -20,6 +20,7 @@
                             <th class="border-0">Número</th>
                             <th class="border-0">Cliente</th>
                             <th class="border-0">Tarimas</th>
+                            <th class="border-0">Entradas</th>
                             <th class="border-0"></th>
                         </tr>
                     </thead>
@@ -34,6 +35,9 @@
                             </td>
                             <td>
                                 <span>{{ $consolidado->tarimas }}</span>
+                            </td>
+                            <td>
+                                <span>{{ $consolidado->entradas->count() }}</span>
                             </td>
                             <td style="width:1%">
                                 @include('consolidados.includes.cerrado-badge')

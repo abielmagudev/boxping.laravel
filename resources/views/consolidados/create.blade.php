@@ -13,8 +13,9 @@
                     <span>Guardar consolidado</span>
                 </button>
                 <div class="dropdown-menu" aria-labelledby="buttonDropdownStoreConsolidado">
-                    <button class="dropdown-item" type="submit" name="save" value="2">Agregar guias al consolidado</button>
-                    <button class="dropdown-item" type="submit" name="save" value="1">Regresar a nuevo consolidado</button>
+                    <span class="dropdown-header">Posteriomente:</span>
+                    <button class="dropdown-item" type="submit" name="save" value="2">Agregar entradas al consolidado</button>
+                    <button class="dropdown-item" type="submit" name="save" value="1">Crear nuevo consolidado</button>
                     <button class="dropdown-item" type="submit" name="save" value="0">Terminar</button>
                 </div>
             </div>
