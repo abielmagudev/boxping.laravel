@@ -6,7 +6,9 @@ use App\Consolidado;
 use App\Cliente;
 use App\Ahex\Consolidado\Domain\Storer;
 use App\Ahex\Consolidado\Domain\Updater;
+use App\Ahex\Consolidado\Domain\Decoupler;
 use App\Ahex\Consolidado\Application\RoutesTrait as Routes;
+use App\Ahex\Entrada\Domain\Destroyer as EntradaDestroyer;
 use App\Http\Requests\ConsolidadoSaveRequest as SaveRequest;
 use Illuminate\Http\Request;
 
@@ -65,13 +67,20 @@ class ConsolidadoController extends Controller
         return back()->with('success', 'Consolidado actualizado');
     }
 
-    public function destroy(Consolidado $consolidado)
+    public function destroy(Request $request, Consolidado $consolidado)
     {
-        $numero = $consolidado->numero;
-
-        if(! $consolidado->delete() )
+        $temp = (object) [
+            'numero'   => $consolidado->numero,
+            'entradas' => $consolidado->entradas->pluck('id')->all(),
+        ];
+        
+        if( ! $consolidado->delete() )
             return back()->with('failure', 'Error al eliminar consolidado');
+        
+        Decoupler::entradas( $request->input('eliminar_entradas','no'), $temp->entradas );
 
-        return redirect()->route('consolidados.index')->with('success', "Consolidado {$numero} eliminado");
+        return view('consolidados.delete');
+
+        return redirect()->route('consolidados.index')->with('success', "Consolidado {$temp->numero} eliminado");
     }
 }

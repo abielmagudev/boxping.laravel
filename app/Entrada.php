@@ -174,6 +174,7 @@ class Entrada extends Model
 
 
     // Scopes
+    
     public function scopeWithMedidas($query)
     {
         return $query->with([
