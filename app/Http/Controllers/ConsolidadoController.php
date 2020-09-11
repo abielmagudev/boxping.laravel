@@ -8,7 +8,6 @@ use App\Ahex\Consolidado\Domain\Storer;
 use App\Ahex\Consolidado\Domain\Updater;
 use App\Ahex\Consolidado\Domain\Decoupler;
 use App\Ahex\Consolidado\Application\RoutesTrait as Routes;
-use App\Ahex\Entrada\Domain\Destroyer as EntradaDestroyer;
 use App\Http\Requests\ConsolidadoSaveRequest as SaveRequest;
 use Illuminate\Http\Request;
 
