@@ -13,9 +13,10 @@ Abstract class Updater
         
         if( $response = $consolidado->fill( $filled )->save() )
         {
-            Entrada::where('consolidado_id', $consolidado->id)->update([
-                       'cliente_id' => $consolidado->cliente_id
-                   ]);
+            Entrada::where('consolidado_id', $consolidado->id)
+                    ->update([
+                        'cliente_id' => $consolidado->cliente_id
+                    ]);
         }
         
         return $response;
