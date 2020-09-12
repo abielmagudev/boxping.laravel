@@ -2,7 +2,7 @@
     <div class="card-header">
         <div class="d-flex justify-content-between align-items-center">
             <div>
-                <span>Consolidado </span>
+                <span>Consolidado</span>
             </div>
             <div>
                 @include('consolidados.includes.cerrado-badge')

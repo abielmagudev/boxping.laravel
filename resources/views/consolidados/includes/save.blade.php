@@ -3,9 +3,9 @@
     <label for="cliente">Cliente</label>
     <select name="cliente" id="cliente" class="form-control" required>
         <option disabled selected label=""></option>
-        <?php $consolido_cliente_id = is_object($consolidado->cliente) ? $consolidado->cliente->id : null ?>
         @foreach($clientes as $cliente)
-        <option value="{{ $cliente->id }}" {{ $cliente->id == old('cliente', $consolido_cliente_id) ? 'selected' : '' }}>{{ $cliente->nombre }} ({{ $cliente->alias }})</option>
+        <?php $selected = selectable( $cliente->id, old('cliente', $consolidado->cliente_id)) ?>
+        <option value="{{ $cliente->id }}" {{ $selected }}>{{ $cliente->nombre }} ({{ $cliente->alias }})</option>
         @endforeach
     </select>
     @error('cliente')
@@ -37,7 +37,8 @@
 
 @if(! is_null($consolidado->cerrado) )
 <div class="form-group">
-    <input type="checkbox" class="d-inline-block mr-1" id="checkbox-cerrado" name="cerrado" value="1" {{ $consolidado->cerrado ? 'checked' : '' }}>
+    <?php $checked = checkable(1, old('cerrado', $consolidado->cerrado)) ?>
+    <input type="checkbox" class="d-inline-block mr-1" id="checkbox-cerrado" name="cerrado" value="1" {{ $checked }}>
     <label for="checkbox-cerrado">
         <span class="text-danger font-weight-bold">CERRAR CONSOLIDADO</span>
         <span class=""> - No sera posible agregar más entradas.</span>
