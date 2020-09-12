@@ -28,7 +28,7 @@ Abstract class Updater
             'numero'     => $validated->numero,
             'tarimas'    => $validated->tarimas,
             'notas'      => $validated->notas,
-            'cerrado'    => isset($validated->cerrado) ? 1 : 0,
+            'abierto'    => isset($validated->cerrado) ? 0 : 1,
             'cliente_id' => $validated->cliente,
             'updated_by_user' => Fakeuser::live(),
         ];

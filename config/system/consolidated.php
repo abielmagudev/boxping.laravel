@@ -3,8 +3,8 @@
 return array(
 
     'colors' => [
-        0 => '#28A745', // Abierto
-        1 => '#DC3645', // Cerrado
+        0 => '#DC3645', // Cerrado
+        1 => '#28A745', // Abierto
     ],
 
 );

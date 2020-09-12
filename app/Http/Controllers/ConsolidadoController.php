@@ -37,7 +37,7 @@ class ConsolidadoController extends Controller
         if( ! $consolidado = Storer::save( $validated ) )
             return back()->withInput()->with('failure', 'Error al guardar consolidado');
 
-        $route = $this->routeAfterStore($request->input('save', 0), $consolidado->id);
+        $route = $this->routeAfterStore($request->input('guardar', 0), $consolidado->id);
         return redirect($route)->with('success', "Consolidado {$consolidado->numero} guardado");
     }
 
@@ -77,8 +77,6 @@ class ConsolidadoController extends Controller
             return back()->with('failure', 'Error al eliminar consolidado');
         
         Decoupler::entradas( $request->input('eliminar_entradas','no'), $temp->entradas );
-
-        return view('consolidados.delete');
 
         return redirect()->route('consolidados.index')->with('success', "Consolidado {$temp->numero} eliminado");
     }

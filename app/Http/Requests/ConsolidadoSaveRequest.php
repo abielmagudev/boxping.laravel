@@ -28,7 +28,7 @@ class ConsolidadoSaveRequest extends FormRequest
             'numero'  => 'required',
             'tarimas' => ['required','numeric'],
             'notas'   => 'nullable',
-            'cerrado' => ['sometimes', 'accepted'],
+            'cerrado' => ['sometimes', 'boolean'],
         ];
     }
 

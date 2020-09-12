@@ -11,7 +11,7 @@ class Consolidado extends Model implements Search
         'numero',
         'tarimas',
         'notas',
-        'cerrado',
+        'abierto',
         'cliente_id',
         'created_by_user',
         'updated_by_user',
@@ -35,6 +35,11 @@ class Consolidado extends Model implements Search
     public function updater()
     {
         return $this->belongsTo(User::class, 'updated_by_user');
+    }
+
+    public function scopeIsAbierto($query, $numero, $column = 'numero')
+    {
+        return $query->where($column, $numero)->where('abierto', 1)->exists();
     }
 
     public function scopeSearch($query, $value)

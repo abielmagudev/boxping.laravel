@@ -7,7 +7,7 @@
             </div>
             <div>
                 <a href="#!" class="btn btn-primary btn-sm">Imprimir</a>
-                @if(! $consolidado->cerrado )
+                @if( $consolidado->abierto )
                 <a href="{{ route('entradas.create', ['consolidado' => $consolidado]) }}" class="btn btn-primary btn-sm">Agregar</a>
                 @endif
             </div>

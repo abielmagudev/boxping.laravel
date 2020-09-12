@@ -39,6 +39,12 @@ class EntradaController extends Controller
     {   
         $consolidado_id = $request->input('consolidado', false);
 
+        if( $consolidado_id )
+        {
+            if( ! \App\Consolidado::isAbierto($consolidado_id, 'id') )
+                return back()->with('failure', 'Consolidado cerrado, no es posible agregar entradas.')->send();
+        }
+
         $cast = new CastViewCreate( $consolidado_id );
 
         return view($cast->template, $cast->data);

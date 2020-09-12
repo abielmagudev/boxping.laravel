@@ -9,6 +9,10 @@ Class EntradaUpdater extends Updater
 {
     private $filled;
 
+
+
+    // Validate
+
     public function validate()
     {
         $this->request->validate(
@@ -29,15 +33,41 @@ Class EntradaUpdater extends Updater
             ]
         );
         
-        return $this;
+        if( ! $this->request->has('consolidado_numero') )
+            return $this;
+
+        if( $this->hasSameConsolidado($this->request->numero) )
+            return $this;
+
+        if( $this->isConsolidadoAbierto($this->request->numero) )
+            return $this;
+        
+        return back()->with('failure', 'Consolidado cerrado, no es posible agregar entradas.')->send();
     }
+
+    private function hasSameConsolidado($consolidado_numero)
+    {
+        if( ! is_object($this->entrada->consolidado) )
+            return false;
+
+        return $this->entrada->consolidado->numero == $consolidado_numero;
+    }
+
+    private function isConsolidadoAbierto($consolidado_numero)
+    {
+        return Consolidado::where('numero', $consolidado_numero)->where('abierto', 1)->exists();
+    }
+
+
+
+    // Values
 
     public function values()
     {
         if( ! $this->request->filled('consolidado_numero') )
             return $this->valuesWithoutConsolidado();
 
-        $consolidado = $this->getIfConsolidadoAbierto( $this->request->consolidado_numero );
+        $consolidado_numero = Consolidado::where('numero', $this->request->consolidado_numero)->where('abierto', 1)->first();
         return $this->valuesWithConsolidado( $consolidado );
     }
 
@@ -89,26 +119,11 @@ Class EntradaUpdater extends Updater
         return $this->entrada->recibido_by_user;
     }
 
-
     public function redirect($saved)
     {
         if( ! $saved )
             return back()->with('failure', 'Error al actualizar entrada');
 
         return back()->with('success', 'Entrada actualizada');
-    }
-
-    private function getIfConsolidadoAbierto( $numero )
-    {
-        if( is_object( $this->entrada->consolidado ) )
-        {
-            if( $this->entrada->consolidado->numero == $numero )
-                return $this->entrada->consolidado;
-        }
-
-        if( ! $consolidado = Consolidado::where('numero', $numero)->where('cerrado', 0)->first() )
-            return back()->with('failure', 'Consolidado cerrado, no es posible agregar entradas.')->send();
-
-        return $consolidado;
     }
 }

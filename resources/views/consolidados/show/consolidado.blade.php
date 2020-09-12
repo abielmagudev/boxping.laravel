@@ -5,7 +5,7 @@
                 <span>Consolidado</span>
             </div>
             <div>
-                @include('consolidados.includes.cerrado-badge')
+                @include('consolidados.includes.badge-abierto')
                 <a href="{{ route('consolidados.edit', $consolidado->id) }}" class="btn btn-warning btn-sm">e</a>
             </div>
         </div>

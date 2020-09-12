@@ -40,7 +40,7 @@
                                 <span>{{ $consolidado->entradas->count() }}</span>
                             </td>
                             <td style="width:1%">
-                                @include('consolidados.includes.cerrado-badge')
+                                @include('consolidados.includes.badge-abierto')
                             </td>
                         </tr>
                         @endforeach

@@ -19,7 +19,6 @@ Abstract class Storer
             'numero'     => $validated->numero,
             'tarimas'    => $validated->tarimas,
             'notas'      => $validated->notas,
-            'cerrado'    => isset($validated->cerrado) ? 1 : 0,
             'cliente_id' => $validated->cliente,
             'created_by_user' => Fakeuser::live(),
             'updated_by_user' => Fakeuser::live(),
