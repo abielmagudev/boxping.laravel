@@ -35,11 +35,11 @@ class ConsolidadoSaveRequest extends FormRequest
     public function messages()
     {
         return array(
+            'cliente.required' => __('Selecciona el cliente delconsolidado'),
+            'cliente.exists'   => __('Selecciona un cliente válido para el consolidado'),
             'numero.required'  => __('Ingresa el numero de consolidado'),
             'tarimas.required' => __('Ingresa la cantidad de tarimas del consolidado'),
             'tarimas.numeric'  => __('Ingresa la cantidad de tarimas del consolidado'),
-            'cliente.required' => __('Selecciona el cliente delconsolidado'),
-            'cliente.exists'   => __('Selecciona un cliente válido para el consolidado'),
         );
     }
 }

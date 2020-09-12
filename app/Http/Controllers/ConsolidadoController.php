@@ -33,18 +33,21 @@ class ConsolidadoController extends Controller
     public function store(SaveRequest $request)
     {
         $validated = (object) $request->validated();
+        $option    = $request->input('guardar', 0);
 
         if( ! $consolidado = Storer::save( $validated ) )
-            return back()->withInput()->with('failure', 'Error al guardar consolidado');
+            return back()->with('failure', 'Error al guardar consolidado');
 
-        $route = $this->routeAfterStore($request->input('guardar', 0), $consolidado->id);
+        $route = $this->routeAfterStore($option, $consolidado->id);
         return redirect($route)->with('success', "Consolidado {$consolidado->numero} guardado");
     }
 
     public function show($id)
     {
+        $consolidado = Consolidado::with(['entradas.destinatario'])->findOrFail($id);
+
         return view('consolidados.show', [
-            'consolidado' => Consolidado::with(['entradas.destinatario'])->find($id),
+            'consolidado' => $consolidado,
         ]);
     }
 
@@ -66,18 +69,17 @@ class ConsolidadoController extends Controller
         return back()->with('success', 'Consolidado actualizado');
     }
 
-    public function destroy(Request $request, Consolidado $consolidado)
+    public function destroy(Consolidado $consolidado)
     {
-        $temp = (object) [
-            'numero'   => $consolidado->numero,
-            'entradas' => $consolidado->entradas->pluck('id')->all(),
-        ];
+        $eliminar_entradas    = request('eliminar_entradas', 'no');
+        $consolidado_entradas = $consolidado->entradas->pluck('id')->all();
+        $consolidado_numero   = $consolidado->numero;
         
         if( ! $consolidado->delete() )
             return back()->with('failure', 'Error al eliminar consolidado');
         
-        Decoupler::entradas( $request->input('eliminar_entradas','no'), $temp->entradas );
+        Decoupler::entradas($eliminar_entradas, $consolidado_entradas);
 
-        return redirect()->route('consolidados.index')->with('success', "Consolidado {$temp->numero} eliminado");
+        return redirect()->route('consolidados.index')->with('success', "Consolidado {$consolidado_numero} eliminado");
     }
 }

@@ -8,11 +8,11 @@ use App\Ahex\Zkeleton\Domain\SearchInterface as Search;
 class Consolidado extends Model implements Search
 {
     protected $fillable = array(
+        'cliente_id',
         'numero',
         'tarimas',
         'notas',
         'abierto',
-        'cliente_id',
         'created_by_user',
         'updated_by_user',
     );
@@ -37,15 +37,13 @@ class Consolidado extends Model implements Search
         return $this->belongsTo(User::class, 'updated_by_user');
     }
 
-    public function scopeIsAbierto($query, $numero, $column = 'numero')
+    public function scopeIsAbierto($query, $value, $column = 'numero')
     {
-        return $query->where($column, $numero)->where('abierto', 1)->exists();
+        return $query->where($column, $value)->where('abierto', 1)->exists();
     }
 
-    public function scopeSearch($query, $value)
+    public function scopeSearch($query, $value, $order = 'desc')
     {
-        return $query->where('numero', 'like', "%{$value}%")
-                     ->orderBy('id','desc')
-                     ->get();
+        return $query->where('numero', 'like', "%{$value}%")->orderBy('id',$order);
     }
 }

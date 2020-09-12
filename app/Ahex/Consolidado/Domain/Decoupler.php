@@ -11,12 +11,12 @@ Abstract class Decoupler
     public static function entradas($request, $entradas)
     {
         if( ! count($entradas) )
-            return; // Retorna si contiene entradas
+            return; // Retorna si no contiene entradas
 
-        if( ! self::willDelete($request) ) 
-            return self::unbind($entradas); // True: Actualiza las entradas
-
-        return self::delete($entradas); // False: Elimina las entradas
+        if( self::willDelete($request) ) 
+            return self::delete($entradas); // True: Elimina las entradas
+        
+        return self::unbind($entradas); // False: Actualiza las entradas
     }
 
     /**

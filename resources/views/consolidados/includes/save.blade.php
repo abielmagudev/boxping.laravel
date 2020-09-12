@@ -30,8 +30,8 @@
 </div>
 
 <div class="form-group">
-    <label for="tarimas">Notas</label>
-    <textarea name="notas" id="notas" cols="30" rows="5" class="form-control"></textarea>
+    <label for="notas">Notas</label>
+    <textarea name="notas" id="notas" cols="30" rows="5" class="form-control">{{ old('notas', $consolidado->notas) }}</textarea>
 </div>
 <br>
 

@@ -54,7 +54,7 @@
 
         @else
         <br>
-        <p class="text-center text-muted">Aún sin entradas</p>
+        <p class="text-center text-muted">Sin entradas</p>
 
         @endif
     </div>

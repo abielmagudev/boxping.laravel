@@ -16,12 +16,6 @@
                 <tbody>
                     <tr>
                         <td style="width:1%">
-                            <small class="text-muted">Cliente</small>
-                        </td>
-                        <td>{{ $consolidado->cliente->nombre }}</td>
-                    </tr>
-                    <tr>
-                        <td>
                             <small class="text-muted">Número</small>
                         </td>
                         <td>{{ $consolidado->numero }}</td>
@@ -41,6 +35,12 @@
                         <td>
                             <p class="text-monospace small">{{ $consolidado->notas }}</p>
                         </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <small class="text-muted">Cliente</small>
+                        </td>
+                        <td>{{ $consolidado->cliente->nombre }}</td>
                     </tr>
                     <tr>
                         <td>

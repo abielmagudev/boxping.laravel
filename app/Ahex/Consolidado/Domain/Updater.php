@@ -9,16 +9,11 @@ Abstract class Updater
 {
     public static function save( object $validated, $consolidado )
     {
-        $filled = self::fill( $validated );
+        $data = self::fill( $validated );
         
-        if( $response = $consolidado->fill( $filled )->save() )
-        {
-            Entrada::where('consolidado_id', $consolidado->id)
-                    ->update([
-                        'cliente_id' => $consolidado->cliente_id
-                    ]);
-        }
-        
+        if( $response = $consolidado->fill($data)->save() )
+            self::updateHisEntradas($consolidado);
+
         return $response;
     }
     
@@ -32,5 +27,10 @@ Abstract class Updater
             'cliente_id' => $validated->cliente,
             'updated_by_user' => Fakeuser::live(),
         ];
+    }
+
+    private static function updateHisEntradas( $consolidado )
+    {
+        return Entrada::where('consolidado_id', $consolidado->id)->update(['cliente_id' => $consolidado->cliente_id]);
     }
 }

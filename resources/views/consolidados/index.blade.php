@@ -21,7 +21,7 @@
                             <th class="border-0">Cliente</th>
                             <th class="border-0">Tarimas</th>
                             <th class="border-0">Entradas</th>
-                            <th class="border-0"></th>
+                            <th class="border-0">Status</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -31,7 +31,7 @@
                                 <a href="{{ route('consolidados.show', $consolidado) }}">{{ $consolidado->numero }}</a>
                             </td>
                             <td>
-                                <a href="{{ route('clientes.show', $consolidado->cliente->id) }}">{{ $consolidado->cliente->nombre }}</a>
+                                <span>{{ $consolidado->cliente->nombre }}</span>
                             </td>
                             <td>
                                 <span>{{ $consolidado->tarimas }}</span>
