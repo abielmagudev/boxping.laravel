@@ -1,6 +1,6 @@
 <?php 
 
-namespace App\Ahex\Entrada\Application\Update;
+namespace App\Ahex\Entrada\Domain;
 
 use App\Ahex\Zkeleton\Application\Factory;
 
@@ -14,8 +14,8 @@ Class UpdaterFactory extends Factory
 
     private function __construct($updatername)
     {
-        $this->filepath  = app_path('Ahex/Entrada/Application/Update/Updaters');
-        $this->namespace = 'App\Ahex\Entrada\Application\Update\Updaters';
+        $this->filepath  = app_path('Ahex/Entrada/Domain/Updaters');
+        $this->namespace = 'App\Ahex\Entrada\Domain\Updaters';
         $this->classname = ucfirst( strtolower($updatername) ) . 'Updater';
     }
 }

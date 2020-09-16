@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Ahex\Entrada\Application\Update\Updaters;
+namespace App\Ahex\Entrada\Domain\Updaters;
 
 Abstract class Updater
 {

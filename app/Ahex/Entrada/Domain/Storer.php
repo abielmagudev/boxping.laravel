@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Ahex\Entrada\Application;
+namespace App\Ahex\Entrada\Domain;
 
 use App\Ahex\Fake\Domain\Fakeuser;
 use App\Entrada;

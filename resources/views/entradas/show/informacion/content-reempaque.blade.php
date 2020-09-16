@@ -39,7 +39,7 @@
     <br>
 
     <div class="text-right">
-        <a href="{{ route('entradas.edit', [$entrada, 'form' => 'reempaque']) }}" class="btn btn-warning btn-sm">
+        <a href="{{ route('entradas.edit', [$entrada, 'formulario' => 'reempaque']) }}" class="btn btn-warning btn-sm">
             <span>Editar reempaque</span>
         </a>
     </div>

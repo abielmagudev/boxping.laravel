@@ -31,8 +31,8 @@ class EntradaEditRequest extends FormRequest
     public function messages()
     {
         return array(
-            'formulario.required' => __('Edición de entrada no valido'),
-            'formulario.in' => __('Edición de entrada no valido'),
+            'formulario.required' => __('Edición de entrada requerida'),
+            'formulario.in' => __('Edición de entrada valido'),
         );
     }
 }

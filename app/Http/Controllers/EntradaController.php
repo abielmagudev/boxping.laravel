@@ -2,20 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Entrada;
 use App\Cliente;
+use App\Entrada;
+
 use App\Ahex\Entrada\Application\AgregarDestinatarioTrait as AgregarDestinatario;
 use App\Ahex\Entrada\Application\AgregarRemitenteTrait as AgregarRemitente;
-use App\Ahex\Entrada\Application\RoutesTrait as Routes;
 use App\Ahex\Entrada\Application\CastViewCreate;
 use App\Ahex\Entrada\Application\CastViewEdit;
-use App\Ahex\Entrada\Application\Storer;
-
-use App\Ahex\Entrada\Application\Edit\EditorFactory;
-use App\Ahex\Entrada\Application\Update\UpdaterFactory;
-// use App\Ahex\Entrada\Application\BelongsConsolidadoTrait as BelongsConsolidado;
-// use App\Ahex\Zkeleton\Application\RoutingInterface as Routing;
-
+use App\Ahex\Entrada\Application\RoutesTrait as Routes;
+use App\Ahex\Entrada\Domain\Storer;
+use App\Ahex\Entrada\Domain\UpdaterFactory;
 use App\Http\Requests\EntradaCreateRequest as CreateRequest;
 use App\Http\Requests\EntradaEditRequest as EditRequest;
 use App\Http\Requests\EntradaStoreRequest as StoreRequest;
@@ -37,16 +33,7 @@ class EntradaController extends Controller
 
     public function create(CreateRequest $request)
     {   
-        $consolidado_id = $request->input('consolidado', false);
-
-        if( $consolidado_id )
-        {
-            if( ! \App\Consolidado::isAbierto($consolidado_id, 'id') )
-                return back()->with('failure', 'Consolidado cerrado, no es posible agregar entradas.')->send();
-        }
-
-        $cast = new CastViewCreate( $consolidado_id );
-
+        $cast = new CastViewCreate( $request->input('consolidado', false) );
         return view($cast->template, $cast->data);
     }
 
@@ -63,19 +50,14 @@ class EntradaController extends Controller
 
     public function show($id)
     {
-        $entrada = Entrada::withMedidas()->withObservaciones()->findOrFail($id);
-
         return view('entradas.show', [
-            'entrada' => $entrada,
+            'entrada' => Entrada::withMedidas()->withObservaciones()->findOrFail($id),
         ]);
     }
 
     public function edit(EditRequest $request, Entrada $entrada)
     {
-        $form = $request->formulario;
-
-        $cast = new CastViewEdit($form, $entrada);
-
+        $cast = new CastViewEdit($request->formulario, $entrada);
         return view($cast->template, $cast->data);
     }
 
