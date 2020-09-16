@@ -23,17 +23,25 @@ class EntradaCreateRequest extends FormRequest
      */
     public function rules()
     {
+        $this->setRedirect( $this->input('consolidado', false) );
+
         return [
-            'consolidado' => 'exists:consolidados,id',
-            'cliente' => 'exists:clientes,id',
+            'consolidado' => 'exists:consolidados,id,abierto,1',
         ];
     }
 
     public function messages()
     {
         return array(
-            'consolidado.exists' => __('Selecciona un consolidado válido'),
-            'cliente.exists' => __('Selecciona un cliente válido'),
+            'consolidado.exists' => __('Selecciona un consolidado válido y abierto'),
         );
+    }
+
+    private function setRedirect( $with_consolidado )
+    {
+        if( $with_consolidado ) 
+            $this->redirect = route('consolidados.show', $with_consolidado);
+
+        return;
     }
 }
