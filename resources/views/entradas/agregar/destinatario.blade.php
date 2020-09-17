@@ -1,5 +1,6 @@
 @extends('app')
 @section('content')
+@include('components.notification')
 
 <div class="d-flex justify-content-between align-items-center">
    <div>
@@ -50,7 +51,7 @@
       <form action="{{ route('entradas.update', $entrada) }}" method="post" id="form-update-destinatario">
          @method('put')
          @csrf
-         <input type="hidden" name="update" value="destinatario">
+         <input type="hidden" name="actualizar" value="destinatario">
       </form>
 
       @else

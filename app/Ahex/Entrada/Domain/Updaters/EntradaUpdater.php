@@ -2,128 +2,80 @@
 
 namespace App\Ahex\Entrada\Domain\Updaters;
 
+use App\Entrada;
 use App\Consolidado;
+use App\Http\Requests\EntradaUpdateRequest;
 use App\Ahex\Fake\Domain\Fakeuser;
+use Illuminate\Validation\Rule;
 
 Class EntradaUpdater extends Updater
 {
-    private $filled;
-
-
-
-    // Validate
-
-    public function validate()
+    public function __construct(EntradaUpdateRequest $request, Entrada $entrada)
     {
-        $this->request->validate(
+        $this->entrada = $entrada;
+        $this->validate( $request );
+        $this->fill( $request->all() );
+    }
+
+    public function validate( object $request )
+    {
+        $consolidado_id = $this->entrada->consolidado_id;
+
+        $request->validate(
             [
-                'consolidado_numero' => ['nullable','exists:consolidados,numero'],
+                'consolidado_numero' => [
+                    'nullable',
+                    Rule::unique('consolidados', 'numero')->where('abierto',0)->ignore($consolidado_id),
+                ],
                 'cliente' => ['required_if:consolidado_numero,null','exists:clientes,id'],
                 'numero' => ['required'],
                 'cliente_alias_numero' => ['sometimes','accepted'],
-                'recibido' => ['sometimes','accepted'],
             ],
             [
-                'consolidado_numero.exists' => __('Escribe un número de consolidado válido'),
+                'consolidado_numero.unique' => __('Escribe un número de consolidado válido y abierto'),
                 'cliente.required_without' => __('Selecciona un cliente'),
                 'cliente.exists' => __('Selecciona un cliente válido.'),
                 'numero.required' => __('Escribe el número de entrada'),
                 'cliente_alias_numero.accepted' => __('Activa o desactiva la opción del alias del cliente en el número de entrada'),
-                'recibido.accepted' => __('Activa o desactiva la opción de recibido'),
             ]
         );
+    }
+
+    public function fill( array $validated )
+    {
+        $consolidado = $this->getConsolidado($validated); 
+        $cliente = $this->getCliente($validated);
         
-        if( ! $this->request->has('consolidado_numero') )
-            return $this;
-
-        if( $this->hasSameConsolidado($this->request->numero) )
-            return $this;
-
-        if( $this->isConsolidadoAbierto($this->request->numero) )
-            return $this;
-        
-        return back()->with('failure', 'Consolidado cerrado, no es posible agregar entradas.')->send();
-    }
-
-    private function hasSameConsolidado($consolidado_numero)
-    {
-        if( ! is_object($this->entrada->consolidado) )
-            return false;
-
-        return $this->entrada->consolidado->numero == $consolidado_numero;
-    }
-
-    private function isConsolidadoAbierto($consolidado_numero)
-    {
-        return Consolidado::where('numero', $consolidado_numero)->where('abierto', 1)->exists();
-    }
-
-
-
-    // Values
-
-    public function values()
-    {
-        if( ! $this->request->filled('consolidado_numero') )
-            return $this->valuesWithoutConsolidado();
-
-        $consolidado_numero = Consolidado::where('numero', $this->request->consolidado_numero)->where('abierto', 1)->first();
-        return $this->valuesWithConsolidado( $consolidado );
-    }
-
-    private function valuesWithoutConsolidado()
-    {
-        return [
-            'numero'               => $this->request->numero,
-            'consolidado_id'       => null,
-            'cliente_id'           => $this->request->cliente ?? $this->entrada->cliente_id,
-            'cliente_alias_numero' => $this->request->input('cliente_alias_numero', 0),
-            'recibido_at'          => $this->recibidoAt( $this->request->input('recibido', false) ),
-            'recibido_by_user'     => $this->recibidoByUser( $this->request->input('recibido', false) ),
-            'updated_by_user'      => Fakeuser::live(),
+        $this->data = [
+            'numero' => $validated['numero'],
+            'consolidado_id' => is_object($consolidado) ? $consolidado->id : null,
+            'cliente_id' => is_object($consolidado) ? $consolidado->cliente_id : $cliente,
+            'cliente_alias_numero' => isset($validated['cliente_alias_numero']) ? 1 : 0,
+            'updated_by_user' => Fakeuser::live(),
         ];
     }
 
-    private function valuesWithConsolidado( $consolidado )
-    {
-        return [
-            'numero'               => $this->request->numero,
-            'consolidado_id'       => $consolidado->id,
-            'cliente_id'           => $consolidado->cliente_id,
-            'cliente_alias_numero' => $this->request->input('cliente_alias_numero', 0),
-            'recibido_at'          => $this->recibidoAt( $this->request->input('recibido', false) ),
-            'recibido_by_user'     => $this->recibidoByUser( $this->request->input('recibido', false) ),
-            'updated_by_user'      => Fakeuser::live(),
-        ];
-    }
-
-    private function recibidoAt( $has_request_recibido )
-    {
-        if( ! $has_request_recibido )
-            return null;
-
-        if( ! $this->entrada->recibido_at )
-            return now();
-
-        return $this->entrada->recibido_at;
-    }
-
-    private function recibidoByUser( $has_request_recibido )
-    {
-        if( ! $has_request_recibido )
-            return null;
-
-        if( ! $this->entrada->recibido_by_user )
-            return Fakeuser::live();
-
-        return $this->entrada->recibido_by_user;
-    }
-
-    public function redirect($saved)
+    public function message( bool $saved )
     {
         if( ! $saved )
-            return back()->with('failure', 'Error al actualizar entrada');
+            return 'Error al actualizar entrada';
 
-        return back()->with('success', 'Entrada actualizada');
+        return 'Entrada actualizada';
+    }
+    
+    private function getCliente($validated)
+    {
+        if( ! isset($validated['cliente']) )
+            return $this->entrada->cliente_id;
+
+        return $validated['cliente'];
+    }
+
+    private function getConsolidado($validated)
+    {
+        if( ! isset($validated['consolidado_numero']) )
+            return false;
+
+        return Consolidado::where('numero', $validated['consolidado_numero'])->first();
     }
 }

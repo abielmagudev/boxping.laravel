@@ -25,10 +25,6 @@ class CreateEntradasTable extends Migration
             // Trayectoria
             $table->unsignedInteger('destinatario_id')->nullable();
             $table->unsignedInteger('remitente_id')->nullable();
-            
-            // Registro
-            $table->datetime('recibido_at')->nullable();
-            $table->unsignedSmallInteger('recibido_by_user')->nullable();
 
             // Cruce
             $table->unsignedInteger('vehiculo_id')->nullable();

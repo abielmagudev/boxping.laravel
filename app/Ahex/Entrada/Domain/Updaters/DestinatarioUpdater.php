@@ -2,13 +2,24 @@
 
 namespace App\Ahex\Entrada\Domain\Updaters;
 
+use App\Entrada;
 use App\Ahex\Fake\Domain\Fakeuser;
 
 Class DestinatarioUpdater extends Updater
 {
-    public function validate()
+    public $redirect;
+
+    public function __construct($request, $entrada)
     {
-        $this->request->validate(
+        $this->entrada = $entrada;
+        $this->validate( $request );
+        $this->fill( $request->all() );
+        $this->redirect = route('entradas.show', $entrada);
+    }
+
+    public function validate($request)
+    {
+        $request->validate(
             [
                 'destinatario' => ['required', 'exists:destinatarios,id']
             ],
@@ -17,25 +28,23 @@ Class DestinatarioUpdater extends Updater
                 'destinatario.exists'   => 'Selecciona un destinatario existente.',
             ]
         );
-        
-        return $this;
     }
 
-    public function values()
+    public function fill($validated)
     {
-        return [
-            'destinatario_id' => $this->request->destinatario,
+        $this->data = [
+            'destinatario_id' => $validated['destinatario'],
             'verificado_at' => null,
             'verificado_by_user' => null,
             'updated_by_user' => Fakeuser::live(),
         ];
     }
 
-    public function redirect($saved)
+    public function message($saved)
     {
         if( ! $saved )
-            return back()->with('failure', 'Error al agregar destinatario');
+            return 'Error al agregar destinatario';
 
-        return redirect()->route('entradas.show', $this->entrada)->with('success', 'Destinatario agregado');
+        return 'Destinatario agregado';
     }
 }

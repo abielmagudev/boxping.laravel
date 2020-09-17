@@ -24,11 +24,11 @@ Trait RoutesTrait
                 break;
 
             default:
-                return $this->routeToTerminar( $consolidado_id );
+                return $this->routeToTerminarAgregar( $consolidado_id );
         }
     }
 
-    public function routeToAgregar($consolidado_id)
+    public function routeToAgregarMas($consolidado_id)
     {
         if( $consolidado_id )
             return route('entradas.create', ['consolidado' => $consolidado_id]);
@@ -36,7 +36,7 @@ Trait RoutesTrait
         return route('entradas.create');
     }
 
-    public function routeToTerminar($consolidado_id)
+    public function routeToTerminarAgregar($consolidado_id)
     {
         if( $consolidado_id )
             return route('consolidados.show', $consolidado_id);

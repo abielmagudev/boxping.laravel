@@ -6,9 +6,16 @@ use App\Ahex\Fake\Domain\Fakeuser;
 
 Class VerificacionUpdater extends Updater
 {
-    public function validate()
+    public function __construct($request, $entrada)
     {
-        $this->request->validate(
+        $this->validate($request);
+        $this->fill( $request->all() );
+        $this->entrada = $entrada;
+    }
+
+    public function validate($request)
+    {
+        $request->validate(
             [
                 'verificacion' => ['required','accepted'],
             ], 
@@ -17,23 +24,21 @@ Class VerificacionUpdater extends Updater
                 'verificacion.accepted' => __('Activa la opción válida de verificación'),
             ]
         );
-        
-        return $this;
     }
 
-    public function values()
+    public function fill($validated)
     {
-        return [
+        $this->data = [
             'verificado_at' => now(),
             'verificado_by_user' => Fakeuser::live(),
         ];
     }
 
-    public function redirect($saved)
+    public function message($saved)
     {
         if( ! $saved )
-            return back()->with('failure', 'Error al actualizar verificación');
+            return 'Error al actualizar verificación';
 
-        return back()->with('success', 'Verificación actualizado');
+        return 'Verificación actualizada';
     }
 }

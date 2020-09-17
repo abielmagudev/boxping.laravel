@@ -6,16 +6,6 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class EntradaUpdateRequest extends FormRequest
 {
-    private $updaters = array(
-        'entrada',
-        'recibido',
-        'cruce',
-        'reempaque',
-        'remitente',
-        'destinatario',
-        'verificacion',     
-    );
-
     public function authorize()
     {
         return true;
@@ -23,23 +13,28 @@ class EntradaUpdateRequest extends FormRequest
 
     public function rules()
     {
-        $updaters = $this->getUpdatersString();
-
         return [
-            'update' => ['required', 'in:' . $updaters],
+            'actualizar' => ['required', 'in:' . $this->getUpdaters()],
         ];
     }
 
     public function messages()
     {
         return [
-            'update.required' => __('Actualizacion de entrada no valida'),
-            'update.in' => __('Actualizacion de entrada no valida'),
+            'actualizar.required' => __('Actualización de entrada requerida'),
+            'actualizar.in' => __('Actualización de entrada no válida'),
         ];
     }
 
-    private function getUpdatersString()
+    private function getUpdaters()
     {
-        return implode(',', $this->updaters);
+        return implode(',', [
+            'cruce',
+            'destinatario',
+            'entrada',
+            'reempaque',
+            'remitente',
+            'verificacion', 
+        ]);
     }
 }

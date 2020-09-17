@@ -22,10 +22,6 @@ $factory->define(Entrada::class, function (Faker $faker) {
         // Trayectoria 
         'destinatario_id' => $faker->boolean ? $faker->numberBetween(1,50) : null,
         'remitente_id' => $faker->boolean ? $faker->numberBetween(1,50) : null,
-        
-        // Registro
-        'recibido_at' => $recibido ? $faker->datetime() : null,
-        'recibido_by_user' => $recibido ? $faker->numberBetween(1,10) : null,
 
         // Cruce
         'vehiculo_id' => $cruce_id,

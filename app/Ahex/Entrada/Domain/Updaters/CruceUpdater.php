@@ -2,13 +2,22 @@
 
 namespace App\Ahex\Entrada\Domain\Updaters;
 
+use App\Entrada;
 use App\Ahex\Fake\Domain\Fakeuser;
+use App\Http\Requests\EntradaUpdateRequest;
 
 Class CruceUpdater extends Updater
 {
-    public function validate()
+    public function __construct(EntradaUpdateRequest $request, Entrada $entrada)
     {
-        $this->request->validate(
+        $this->validate($request);
+        $this->fill( $request->all() );
+        $this->entrada = $entrada;
+    }
+
+    public function validate(object $request)
+    {
+        $request->validate(
             [
                 'vehiculo' => ['required','integer'],
                 'conductor'=> ['required','integer'],
@@ -29,27 +38,25 @@ Class CruceUpdater extends Updater
                 'cruce_hora.date' => __('Escribe la hora de cruce válido'),
             ]
         );
-        
-        return $this;
     }
 
-    public function values()
+    public function fill(array $validated)
     {
-        return [
-            'vehiculo_id'  => $this->request->vehiculo,
-            'conductor_id' => $this->request->conductor,
-            'vuelta'       => $this->request->vuelta,
-            'cruce_fecha'  => $this->request->cruce_fecha,
-            'cruce_hora'   => $this->request->cruce_hora,
+        $this->data = [
+            'vehiculo_id'  => $validated['vehiculo'],
+            'conductor_id' => $validated['conductor'],
+            'vuelta'       => $validated['vuelta'],
+            'cruce_fecha'  => $validated['cruce_fecha'],
+            'cruce_hora'   => $validated['cruce_hora'],
             'updated_by_user' => Fakeuser::live(),
         ];
     }
 
-    public function redirect($saved)
+    public function message(bool $saved)
     {
         if( ! $saved )
-            return back()->with('failure', 'Error al actualizar cruce');
+            return 'Error al actualizar cruce';
 
-        return back()->with('success', 'Cruce actualizado');
+        return 'Cruce actualizado';
     }
 }

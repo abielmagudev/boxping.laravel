@@ -2,20 +2,27 @@
 
 namespace App\Ahex\Entrada\Domain;
 
-use App\Ahex\Zkeleton\Application\Factory;
+use App\Ahex\Zkeleton\Application\InspectorClass;
+use App\Ahex\Zkeleton\Application\InstantiatorClass;
 
-Class UpdaterFactory extends Factory
+Abstract class UpdaterFactory
 {
-    public static function make($updatername, $params = [])
+    private static $classname;
+    private static $filepath;
+    private static $namespace_classname;
+
+    public static function make($name, $parameters)
     {
-        $factory = new self($updatername);
-        return $factory->validate()->build($params);
+        self::setup($name);
+        return InstantiatorClass::build(self::$namespace_classname, $parameters);
     }
 
-    private function __construct($updatername)
+    private static function setup($name)
     {
-        $this->filepath  = app_path('Ahex/Entrada/Domain/Updaters');
-        $this->namespace = 'App\Ahex\Entrada\Domain\Updaters';
-        $this->classname = ucfirst( strtolower($updatername) ) . 'Updater';
+        self::$classname = ucfirst( strtolower($name) ) . 'Updater';
+        self::$filepath = app_path('Ahex/Entrada/Domain/Updaters/' . self::$classname . '.php');
+        self::$namespace_classname = __NAMESPACE__ . '\Updaters\\' . self::$classname;
+        
+        InspectorClass::validate(self::$filepath, self::$namespace_classname);
     }
 }

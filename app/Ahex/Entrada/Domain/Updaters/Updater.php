@@ -4,45 +4,16 @@ namespace App\Ahex\Entrada\Domain\Updaters;
 
 Abstract class Updater
 {
-    private $params_required = [
-        'entrada',
-        'request',
-    ];
-
     protected $entrada;
-    protected $request;
+    protected $data;
 
-    final function __construct($params)
-    {
-        $this->hasRequiredParams($params);
-
-        $this->entrada = $params['entrada'];
-        $this->request = $params['request'];
-    }
-
-    private function hasRequiredParams($params)
-    {
-        $params_found = $this->findRequiredParams($params);
-
-        if( count($params_found) < count($this->params_required) )
-            throw new \Exception('Updater does not have all the necessary parameters.');
-
-        return true;
-    }
-
-    private function findRequiredParams($params)
-    {
-        return array_filter($this->params_required, function ($required) use ($params) {
-            return array_key_exists($required, $params) ;
-        });
-    }
+    abstract public function validate( object $request);
+    abstract public function fill( array $validated);
+    abstract public function message( bool $saved);
 
     public function save()
     {
-        return $this->entrada->fill( $this->values() )->save();
+        $data = $this->data;
+        return $this->entrada->fill( $data )->save();
     }
-
-    abstract public function validate();
-    abstract public function values();
-    abstract public function redirect($saved);
 }

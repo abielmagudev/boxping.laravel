@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Entrada extends Model
 {
     protected $fillable = array(
+        
         // Entrada
         'numero',
         'consolidado_id',
@@ -16,10 +17,6 @@ class Entrada extends Model
         // Trayectoria
         'destinatario_id',
         'remitente_id',
-
-        // Registro
-        'recibido_at',
-        'recibido_by_user',
 
         // Cruce
         'vehiculo_id',
@@ -116,13 +113,6 @@ class Entrada extends Model
     public function verificador()
     {
         return $this->belongsTo(User::class, 'verificado_by_user');
-    }
-
-    // Recibido
-
-    public function recibidor()
-    {
-        return $this->belongsTo(User::class, 'recibido_by_user');
     }
 
 

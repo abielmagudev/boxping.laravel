@@ -32,18 +32,6 @@
         <div class="w-100 mb-2"></div>
 
         <div class="col-sm col-sm-3">
-            <small class="text-muted">Recibido</small>
-        </div>
-        <div class="col-sm">
-            @if( is_object($entrada->recibidor) )
-            <p class="m-0">{{ $entrada->recibidor->name }}</p>
-            @endif
-            <p class="m-0">{{ $entrada->recibido_at }}</p>
-        </div>
-
-        <div class="w-100 mb-2"></div>
-
-        <div class="col-sm col-sm-3">
             <small class="text-muted">Creado</small>
         </div>
         <div class="col-sm">

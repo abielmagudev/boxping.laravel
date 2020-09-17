@@ -45,7 +45,7 @@
     <form action="{{ route('entradas.update', $entrada) }}" method="post" autocomplete="off" class="text-center">
         @method('put')
         @csrf
-        <input type="hidden" name="update" value="verificacion">
+        <input type="hidden" name="actualizar" value="verificacion">
         <div class="form-check">
             <input class="form-check-input" type="checkbox" name="verificacion" value="yes" id="checkbox-verificacion" required>
             <label class="form-check-label" for="checkbox-verificacion">He verificado la dirección y el envio con el destinatario.</label>

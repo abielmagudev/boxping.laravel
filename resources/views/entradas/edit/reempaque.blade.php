@@ -1,5 +1,6 @@
 @extends('entradas.edit')
-@section('update', 'reempaque')
+@section('actualizar', 'reempaque')
+
 @section('form_content')
     <div class="form-group">
         <label for="read-entrada-numero" class="small">Número de entrada</label>

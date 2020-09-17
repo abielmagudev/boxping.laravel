@@ -13,8 +13,8 @@ use App\Ahex\Entrada\Application\RoutesTrait as Routes;
 use App\Ahex\Entrada\Domain\Storer;
 use App\Ahex\Entrada\Domain\UpdaterFactory;
 use App\Http\Requests\EntradaCreateRequest as CreateRequest;
-use App\Http\Requests\EntradaEditRequest as EditRequest;
 use App\Http\Requests\EntradaStoreRequest as StoreRequest;
+use App\Http\Requests\EntradaEditRequest as EditRequest;
 use App\Http\Requests\EntradaUpdateRequest as UpdateRequest;
 use Illuminate\Http\Request;
 
@@ -63,22 +63,25 @@ class EntradaController extends Controller
 
     public function update(UpdateRequest $request, Entrada $entrada)
     {
-        $updater = UpdaterFactory::make($request->update, [
-            'entrada' => $entrada,
-            'request' => $request,
+        $updater = UpdaterFactory::make($request->actualizar, [
+            $request,
+            $entrada,
         ]);
+        
+        if( ! $updater->save() )
+            return back()->with('failure', $updater->message(false));
+        
+        if( ! isset($updater->redirect) )
+            return back()->with('success', $updater->message(true));
 
-        if( ! $updater->validate()->save() )
-            return $updater->redirect( false );
-
-        return $updater->redirect( true );
+        return redirect( $updater->redirect )->with('success', $updater->message(true));
     }
 
     public function destroy(Entrada $entrada)
     {
         $route = $this->routeAfterDestroy($entrada->consolidado_id);
         
-        if(! $entrada->delete() )
+        if( ! $entrada->delete() )
             return back()->with('failure', 'Error al eliminar entrada');
         
         return redirect($route)->with('success', 'Entrada eliminada');

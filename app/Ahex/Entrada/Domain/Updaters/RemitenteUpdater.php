@@ -6,9 +6,19 @@ use App\Ahex\Fake\Domain\Fakeuser;
 
 Class RemitenteUpdater extends Updater
 {
-    public function validate()
+    public $redirect;
+
+    public function __construct($request, $entrada)
     {
-        $this->request->validate(
+        $this->validate($request);
+        $this->fill( $request->all() );
+        $this->entrada = $entrada;
+        $this->redirect = route('entradas.show', $entrada);
+    }
+
+    public function validate($request)
+    {
+        $request->validate(
             [
                 'remitente' => ['required', 'exists:remitentes,id']
             ],
@@ -17,23 +27,21 @@ Class RemitenteUpdater extends Updater
                 'remitente.exists'   => 'Selecciona un remitente existente.',
             ]
         );
-        
-        return $this;
     }
 
-    public function values()
+    public function fill($validated)
     {
-        return [
-            'remitente_id' => $this->request->remitente,
+        $this->data = [
+            'remitente_id' => $validated['remitente'],
             'updated_by_user' => Fakeuser::live(),
         ];
     }
 
-    public function redirect($saved)
+    public function message($saved)
     {
         if( ! $saved )
-            return back()->with('failure', 'Error al agregar remitente');
+            return 'Error al agregar remitente';
 
-        return redirect()->route('entradas.show', $this->entrada)->with('success', 'Remitente agregado');
+        return 'Remitente agregado';
     }
 }
