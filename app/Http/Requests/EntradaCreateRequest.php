@@ -22,7 +22,7 @@ class EntradaCreateRequest extends FormRequest
      * @return array
      */
     public function rules()
-    {
+    {        
         $this->setRedirect( $this->input('consolidado', false) );
 
         return [
@@ -37,10 +37,10 @@ class EntradaCreateRequest extends FormRequest
         );
     }
 
-    private function setRedirect( $with_consolidado )
+    private function setRedirect( $consolidado_id )
     {
-        if( $with_consolidado ) 
-            $this->redirect = route('consolidados.show', $with_consolidado);
+        if( $consolidado_id ) 
+            $this->redirect = route('consolidados.show', $consolidado_id);
 
         return;
     }

@@ -20,6 +20,7 @@ Class EntradaUpdater extends Updater
     public function validate( object $request )
     {
         $consolidado_id = $this->entrada->consolidado_id;
+        $entrada_id = $this->entrada->id;
 
         $request->validate(
             [
@@ -28,7 +29,7 @@ Class EntradaUpdater extends Updater
                     Rule::unique('consolidados', 'numero')->where('abierto',0)->ignore($consolidado_id),
                 ],
                 'cliente' => ['required_if:consolidado_numero,null','exists:clientes,id'],
-                'numero' => ['required'],
+                'numero' => ['required','unique:entradas,numero,' . $entrada_id],
                 'cliente_alias_numero' => ['sometimes','accepted'],
             ],
             [
@@ -36,6 +37,7 @@ Class EntradaUpdater extends Updater
                 'cliente.required_without' => __('Selecciona un cliente'),
                 'cliente.exists' => __('Selecciona un cliente válido.'),
                 'numero.required' => __('Escribe el número de entrada'),
+                'numero.unique' => __('Escribe un número de entrada diferente'),
                 'cliente_alias_numero.accepted' => __('Activa o desactiva la opción del alias del cliente en el número de entrada'),
             ]
         );

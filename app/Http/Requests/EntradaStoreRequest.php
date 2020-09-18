@@ -16,7 +16,7 @@ class EntradaStoreRequest extends FormRequest
         return [
             'consolidado'          => 'exists:consolidados,id',
             'cliente'              => ['required_without:consolidado','exists:clientes,id'],
-            'numero'               => 'required',
+            'numero'               => ['required','unique:entradas'],
             'cliente_alias_numero' => ['sometimes','accepted'],
         ];
     }
@@ -27,7 +27,8 @@ class EntradaStoreRequest extends FormRequest
             'consolidado.exists'       => __('Selecciona un consolidado válido'),
             'cliente.required_without' => __('Selecciona un cliente'),
             'cliente.exists'           => __('Selecciona un cliente válido'),
-            'numero.required'          => __('Escribe el numero de la entrada'),          
+            'numero.required'          => __('Escribe el número de entrada'),          
+            'numero.unique'            => __('Escribe el número de entrada diferente'),          
             'cliente_alias_numero.accepted' => __('Activa o desactiva la opcion "Alias del cliente..."'),
         ];
     }
