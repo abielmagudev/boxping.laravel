@@ -26,9 +26,9 @@ class DatabaseSeeder extends Seeder
             TransportadorasTableSeeder::class,
             UsersTableSeeder::class,
             VehiculosTableSeeder::class,
+            EntradasTableSeeder::class,
             EntradaObservacionesTableSeeder::class,
             EntradaMedidasTableSeeder::class,
-            EntradasTableSeeder::class,
         ]);
     }
 }

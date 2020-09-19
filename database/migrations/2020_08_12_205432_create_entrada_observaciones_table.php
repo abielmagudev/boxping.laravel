@@ -15,11 +15,17 @@ class CreateEntradaObservacionesTable extends Migration
     {
         Schema::create('entrada_observaciones', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedInteger('entrada_id');
+            $table->unsignedBigInteger('entrada_id');
             $table->text('contenido');
             $table->unsignedInteger('created_by_user');
             $table->timestamps();
+            $table->foreign('entrada_id')
+                  ->references('id')->on('entradas')
+                  ->onDelete('cascade');
         });
+
+        // Schema::enableForeignKeyConstraints();
+        // Schema::disableForeignKeyConstraints();
     }
 
     /**
