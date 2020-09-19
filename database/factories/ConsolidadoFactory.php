@@ -8,7 +8,7 @@ use Faker\Generator as Faker;
 $factory->define(Consolidado::class, function (Faker $faker) {
     return [
         'cliente_id' => $faker->numberBetween(1,10),
-        'numero' => $faker->unique()->randomNumber(),
+        'numero' => $faker->unique(true)->randomNumber . time(),
         'tarimas' => $faker->numberBetween(1,5),
         'notas' => $faker->boolean ? $faker->sentence() : null,
         'abierto' => $faker->boolean ? 1 : 0,
