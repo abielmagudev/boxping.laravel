@@ -26,7 +26,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($consolidado->entradas as $entrada)
+                    @foreach($consolidado->entradas->sortByDesc('id') as $entrada)
                     <tr>
                         <td class="align-middle">
                             <a href="{{ route('entradas.show', $entrada) }}">{{ $entrada->numero }}</a>
