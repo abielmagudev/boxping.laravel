@@ -28,4 +28,5 @@ Route::resource('remitentes', 'RemitenteController');
 
 Route::resource('medidores', 'MedidorController', ['parameters' => ['medidores' => 'medidor'], 'except' => ['show']]);
 Route::resource('medidas', 'MedidaController', ['except' => ['index', 'show']]);
+Route::resource('etapas', 'EtapaController');
 Route::resource('observaciones', 'ObservacionController', ['except' => ['index', 'show', 'destroy']]);
