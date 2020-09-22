@@ -19,7 +19,6 @@ class DatabaseSeeder extends Seeder
             ConductoresTableSeeder::class,
             ConsolidadosTableSeeder::class,
             DestinatariosSeeder::class,
-            MedidorTableSeeder::class,
             ReempacadoresTableSeeder::class,
             RemitentesTableSeeder::class,
             TransportadorasTableSeeder::class,
@@ -29,7 +28,6 @@ class DatabaseSeeder extends Seeder
             EntradasTableSeeder::class,
             EntradasEtapasTableSeeder::class,
             EntradaObservacionesTableSeeder::class,
-            // EntradaMedidasTableSeeder::class,
         ]);
     }
 }
