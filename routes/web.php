@@ -19,14 +19,22 @@ Route::resource('entradas', 'EntradaController');
 Route::prefix('entradas')->group( function () {
     Route::get('{entrada}/agregar/remitente', 'EntradaController@agregarRemitente')->name('entradas.agregar.remitente');
     Route::get('{entrada}/agregar/destinatario', 'EntradaController@agregarDestinatario')->name('entradas.agregar.destinatario');
+    
+    Route::resource('{entrada}/etapas', 'EntradaEtapasController', [
+            'except' => ['index', 'show']
+        ])->names([
+            'create'  => 'entrada.etapas.create',
+            'store'   => 'entrada.etapas.store',
+            'edit'    => 'entrada.etapas.edit',
+            'update'  => 'entrada.etapas.update',
+            'destroy' => 'entrada.etapas.destroy',
+    ]);
 });
 
+Route::resource('observaciones', 'ObservacionController', ['except' => ['index', 'show', 'destroy']]);
+
+Route::resource('etapas', 'EtapaController');
 Route::resource('consolidados', 'ConsolidadoController');
 Route::resource('clientes', 'ClienteController');
 Route::resource('destinatarios', 'DestinatarioController');
 Route::resource('remitentes', 'RemitenteController');
-
-Route::resource('medidores', 'MedidorController', ['parameters' => ['medidores' => 'medidor'], 'except' => ['show']]);
-Route::resource('medidas', 'MedidaController', ['except' => ['index', 'show']]);
-Route::resource('etapas', 'EtapaController');
-Route::resource('observaciones', 'ObservacionController', ['except' => ['index', 'show', 'destroy']]);
