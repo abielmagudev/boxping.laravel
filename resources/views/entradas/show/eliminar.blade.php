@@ -4,6 +4,6 @@
     'trigger_text' => 'Eliminar entrada',
 ])
     @slot('warning')
-    <p>Deseas eliminar entrada <b>{{ $entrada->numero }}</b>?</p>
+    <p>Deseas eliminar la entrada <br><b>{{ $entrada->numero }}</b>?</p>
     @endslot
 @endcomponent
