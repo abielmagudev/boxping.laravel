@@ -7,7 +7,6 @@ use Faker\Generator as Faker;
 
 $factory->define(Entrada::class, function (Faker $faker) {
 
-    $recibido   = $faker->boolean;
     $cruce_id   = $faker->boolean ? $faker->numberBetween(1,10) : null;
     $codigor_id = $faker->boolean ? $faker->numberBetween(1,10) : null;
     $verificado = $faker->boolean;
@@ -26,7 +25,7 @@ $factory->define(Entrada::class, function (Faker $faker) {
         // Cruce
         'vehiculo_id' => $cruce_id,
         'conductor_id' => $cruce_id,
-        'vuelta' => $cruce_id ? $faker->randomDigit() : null,
+        'vuelta' => $cruce_id ? $faker->randomDigit : null,
         'cruce_fecha' => $cruce_id ? $faker->date() : null,
         'cruce_hora' => $cruce_id ? $faker->time() : null,
 
