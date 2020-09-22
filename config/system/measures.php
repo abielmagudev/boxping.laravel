@@ -1,12 +1,12 @@
 <?php 
 
 return array(
-    'pesajes' => [
+    'peso' => [
         'g'  => 'gramos',
         'kg' => 'kilogramos',
         'lb' => 'libras',
     ],
-    'volumenes' => [
+    'dimension' => [
         'cm' => 'centimetros',
         'm'  => 'metros',
         'in' => 'pulgadas',
