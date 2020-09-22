@@ -17,8 +17,8 @@
 </div>
 <br>
 
-<!-- Medidas -->
-@include('entradas.show.medidas')
+<!-- Etapas -->
+@include('entradas.show.etapas')
 <br>
 
 <div class="float-right">
