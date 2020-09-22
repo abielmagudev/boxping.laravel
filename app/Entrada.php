@@ -54,17 +54,6 @@ class Entrada extends Model
         return $this->belongsTo(Cliente::class);
     }
 
-    public function medidas()
-    {
-        return $this->hasMany(Medida::class);
-    }
-
-    public function observaciones()
-    {
-        return $this->hasMany(Observacion::class);
-    }
-
-
 
     // Trayectoria
 
@@ -77,7 +66,6 @@ class Entrada extends Model
     {
         return $this->belongsTo(Destinatario::class);
     }
-
 
 
     // Cruce
@@ -93,7 +81,6 @@ class Entrada extends Model
     }
 
 
-
     // Reempaque
 
     public function codigor()
@@ -107,14 +94,12 @@ class Entrada extends Model
     }
 
 
-
     // Verificacion
 
     public function verificador()
     {
         return $this->belongsTo(User::class, 'verificado_by_user');
     }
-
 
 
     // Log
@@ -130,6 +115,35 @@ class Entrada extends Model
     }
 
 
+    // With
+
+    public function etapas()
+    {
+        return $this->belongsToMany(Etapa::class, 'entradas_etapas')
+                    ->withPivot(['id','peso','peso_en','ancho','altura','largo','dimensiones_en'])
+                    ->withTimestamps();
+    }
+
+    public function observaciones()
+    {
+        return $this->hasMany(Observacion::class);
+    }
+    
+
+    // Scopes
+
+    public function scopeConEtapas()
+    {
+        return $this->with('etapas');
+    }
+
+    public function scopeWithObservaciones($query)
+    {
+        return $query->with([
+            'observaciones.creator',
+        ]);
+    }
+    
 
     // Atributos
 
@@ -160,23 +174,5 @@ class Entrada extends Model
     public function getHasVerificacionAttribute()
     {
         return is_string($this->verificado_at) && is_integer($this->verificado_by_user);
-    }
-
-
-    // Scopes
-    
-    public function scopeWithMedidas($query)
-    {
-        return $query->with([
-            'medidas.medidor',
-            'medidas.updater',
-        ]);
-    }
-
-    public function scopeWithObservaciones($query)
-    {
-        return $query->with([
-            'observaciones.creator',
-        ]);
     }
 }
