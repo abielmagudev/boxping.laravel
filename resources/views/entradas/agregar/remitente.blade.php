@@ -42,7 +42,7 @@
                <td class="align-middle">{{ $remitente->localidad }}</td>
                <td class="align-middle">{{ $remitente->telefono }}</td>
                <td class="align-middle">
-                  <button name="remitente" value="{{ $remitente->id }}" class="btn btn-success btn-sm" form="form-update-remitente" type="submit">Agregar</button>
+                  <button name="remitente" value="{{ $remitente->id }}" class="btn btn-outline-success btn-sm" form="form-update-remitente" type="submit">Agregar</button>
                </td>
             </tr>
             @endforeach
