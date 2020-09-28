@@ -2,13 +2,15 @@
 
 namespace App\Ahex\Entrada\Application;
 
+use App\Consolidado;
+
 Trait RoutesTrait
 {
     public function routeCancel($id)
     {
         if( is_numeric($id) )
         {
-            if( \App\Consolidado::where('id', $id)->exists() )
+            if( Consolidado::where('id', $id)->exists() )
                 return route('consolidados.show', $id);
         }
 
