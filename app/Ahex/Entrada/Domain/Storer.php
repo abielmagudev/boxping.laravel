@@ -29,8 +29,8 @@ Abstract class Storer
             'numero' => $validated->numero,
             'cliente_id' => $validated->cliente,
             'cliente_alias_numero' => isset( $validated->cliente_alias_numero ) ? 1 : 0,
-            'created_by_user' => Fakeuser::live(),
-            'updated_by_user' => Fakeuser::live(),
+            'created_by' => Fakeuser::live(),
+            'updated_by' => Fakeuser::live(),
         ];
     }
 
@@ -41,8 +41,8 @@ Abstract class Storer
             'consolidado_id' => $consolidado->id,
             'cliente_id' => $consolidado->cliente_id,
             'cliente_alias_numero' => isset( $validated->cliente_alias_numero ) ? 1 : 0,
-            'created_by_user' => Fakeuser::live(),
-            'updated_by_user' => Fakeuser::live(),
+            'created_by' => Fakeuser::live(),
+            'updated_by' => Fakeuser::live(),
         ];
     }
 }

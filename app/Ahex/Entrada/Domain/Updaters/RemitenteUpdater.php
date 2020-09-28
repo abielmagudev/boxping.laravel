@@ -33,7 +33,7 @@ Class RemitenteUpdater extends Updater
     {
         $this->data = [
             'remitente_id' => $validated['remitente'],
-            'updated_by_user' => Fakeuser::live(),
+            'updated_by' => Fakeuser::live(),
         ];
     }
 

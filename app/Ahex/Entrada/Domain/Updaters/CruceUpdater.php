@@ -48,7 +48,7 @@ Class CruceUpdater extends Updater
             'vuelta'       => $validated['vuelta'],
             'cruce_fecha'  => $validated['cruce_fecha'],
             'cruce_hora'   => $validated['cruce_hora'],
-            'updated_by_user' => Fakeuser::live(),
+            'updated_by'   => Fakeuser::live(),
         ];
     }
 

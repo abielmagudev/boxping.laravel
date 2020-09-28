@@ -40,12 +40,12 @@ class CreateEntradasTable extends Migration
             $table->time('reempacado_hora')->nullable();
 
             // Verificacion
+            $table->unsignedSmallInteger('verificado_by')->nullable();
             $table->datetime('verificado_at')->nullable();
-            $table->unsignedSmallInteger('verificado_by_user')->nullable();
 
             // Log
-            $table->unsignedInteger('created_by_user');
-            $table->unsignedInteger('updated_by_user');
+            $table->unsignedInteger('created_by');
+            $table->unsignedInteger('updated_by');
             $table->timestamps();
         });
     }

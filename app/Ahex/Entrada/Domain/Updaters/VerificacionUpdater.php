@@ -29,8 +29,8 @@ Class VerificacionUpdater extends Updater
     public function fill($validated)
     {
         $this->data = [
+            'verificado_by' => Fakeuser::live(),
             'verificado_at' => now(),
-            'verificado_by_user' => Fakeuser::live(),
         ];
     }
 

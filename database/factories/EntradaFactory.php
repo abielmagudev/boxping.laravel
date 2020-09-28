@@ -12,6 +12,7 @@ $factory->define(Entrada::class, function (Faker $faker) {
     $verificado = $faker->boolean;
 
     return [
+        
         // Entrada
         'numero' => $faker->unique()->uuid,
         'consolidado_id' => $faker->boolean ? $faker->numberBetween(1,10) : null,
@@ -36,11 +37,11 @@ $factory->define(Entrada::class, function (Faker $faker) {
         'reempacado_hora' => $codigor_id ? $faker->time() : null,
 
         // Verificacion
+        'verificado_by' => $verificado ? $faker->numberBetween(1,10) : null,
         'verificado_at' => $verificado ? $faker->dateTime() : null,
-        'verificado_by_user' => $verificado ? $faker->numberBetween(1,10) : null,
 
         // Log
-        'created_by_user' => $faker->numberBetween(1,10),
-        'updated_by_user' => $faker->numberBetween(1,10),
+        'created_by' => $faker->numberBetween(1,10),
+        'updated_by' => $faker->numberBetween(1,10),
     ];
 });

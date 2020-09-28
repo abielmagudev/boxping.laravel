@@ -32,12 +32,12 @@ class Entrada extends Model
         'reempacado_hora',
 
         // Verificacion
+        'verificado_by',
         'verificado_at',
-        'verificado_by_user',
 
         // Log
-        'created_by_user',
-        'updated_by_user',
+        'created_by',
+        'updated_by',
     );
 
 
@@ -98,7 +98,7 @@ class Entrada extends Model
 
     public function verificador()
     {
-        return $this->belongsTo(User::class, 'verificado_by_user');
+        return $this->belongsTo(User::class, 'verificado_by');
     }
 
 
@@ -106,12 +106,12 @@ class Entrada extends Model
 
     public function creator()
     {
-        return $this->belongsTo(User::class, 'created_by_user');
+        return $this->belongsTo(User::class, 'created_by');
     }
 
     public function updater()
     {
-        return $this->belongsTo(User::class, 'updated_by_user');
+        return $this->belongsTo(User::class, 'updated_by');
     }
 
 
@@ -184,6 +184,6 @@ class Entrada extends Model
 
     public function getHasVerificacionAttribute()
     {
-        return is_string($this->verificado_at) && is_integer($this->verificado_by_user);
+        return is_string($this->verificado_at) && is_integer($this->verificado_by);
     }
 }

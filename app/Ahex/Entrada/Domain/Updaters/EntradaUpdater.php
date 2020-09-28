@@ -53,7 +53,7 @@ Class EntradaUpdater extends Updater
             'consolidado_id' => is_object($consolidado) ? $consolidado->id : null,
             'cliente_id' => is_object($consolidado) ? $consolidado->cliente_id : $cliente,
             'cliente_alias_numero' => isset($validated['cliente_alias_numero']) ? 1 : 0,
-            'updated_by_user' => Fakeuser::live(),
+            'updated_by' => Fakeuser::live(),
         ];
     }
 

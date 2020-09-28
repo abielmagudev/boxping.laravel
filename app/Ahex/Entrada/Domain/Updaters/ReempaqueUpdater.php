@@ -42,7 +42,7 @@ Class ReempaqueUpdater extends Updater
             'reempacador_id' => $validate['reempacador'],
             'reempacado_fecha' => $validate['reempacado_fecha'],
             'reempacado_hora' => $validate['reempacado_hora'],
-            'updated_by_user' => Fakeuser::live(),
+            'updated_by' => Fakeuser::live(),
         ];
     }
 

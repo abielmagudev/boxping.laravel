@@ -34,9 +34,9 @@ Class DestinatarioUpdater extends Updater
     {
         $this->data = [
             'destinatario_id' => $validated['destinatario'],
+            'verificado_by' => null,
             'verificado_at' => null,
-            'verificado_by_user' => null,
-            'updated_by_user' => Fakeuser::live(),
+            'updated_by' => Fakeuser::live(),
         ];
     }
 

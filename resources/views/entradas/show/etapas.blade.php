@@ -28,7 +28,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php $etapas = $entrada->etapas->sortBy('pivot.id') ?>
+                    <?php $etapas = $entrada->etapas()->get()->sortBy('id') ?>
                     @foreach($etapas as $etapa)
                     <tr>
                         <td class="align-middle">{{ $etapa->nombre }}</td>
