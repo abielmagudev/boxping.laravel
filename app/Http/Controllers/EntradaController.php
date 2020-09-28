@@ -80,10 +80,11 @@ class EntradaController extends Controller
     public function destroy(Entrada $entrada)
     {
         $route = $this->routeAfterDestroy($entrada->consolidado_id);
-        
+        $numero = $entrada->numero;
+
         if( ! $entrada->delete() )
             return back()->with('failure', 'Error al eliminar entrada');
         
-        return redirect($route)->with('success', 'Entrada eliminada');
+        return redirect($route)->with('success', "Entrada {$numero} eliminada");
     }
 }
