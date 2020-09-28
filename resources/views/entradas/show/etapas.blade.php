@@ -3,6 +3,7 @@
         <div class="d-flex justify-content-between align-items-center">
             <div>
                 <span>Etapas</span>
+                <span class="badge badge-primary">{{ $entrada->etapas->count() }}</span>
             </div>
             <div>
                 <a href="{{ route('entrada.etapas.create', $entrada) }}" class="btn btn-primary btn-sm">Agregar</a>
@@ -23,12 +24,11 @@
                         <th>Largo</th>
                         <th>Dimensiones en</th>
                         <th>Actualizado</th>
-                        <th>Usuario</th>
                         <th></th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php $etapas = $entrada->etapas->sortByDesc('id') ?>
+                    <?php $etapas = $entrada->etapas->sortBy('pivot.id') ?>
                     @foreach($etapas as $etapa)
                     <tr>
                         <td class="align-middle">{{ $etapa->nombre }}</td>
@@ -50,10 +50,12 @@
 
                         @endif
 
-                        <td class="align-middle text-nowrap">{{ $etapa->pivot->updated_at }}</td>
-                        <td class="align-middle text-nowrap">{{ $etapa->updater->name }}</td>
                         <td class="align-middle text-nowrap">
-                            <a href="{{ route('entrada.etapas.edit', ['entrada' => $entrada->id, 'etapa' => $etapa->pivot->id]) }}" class="btn btn-warning btn-sm">e</a>
+                            <p class="m-0">{{ $etapa->updater->name }}</p>
+                            <p class="m-0">{{ $etapa->pivot->updated_at }}</p>
+                        </td>
+                        <td class="align-middle text-nowrap">
+                            <a href="{{ route('entrada.etapas.edit', ['entrada' => $entrada, 'etapa' => $etapa]) }}" class="btn btn-warning btn-sm">e</a>
                         </td>
                     </tr>
                     @endforeach
