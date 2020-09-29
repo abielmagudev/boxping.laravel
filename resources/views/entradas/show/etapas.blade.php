@@ -33,7 +33,7 @@
                     <tr>
                         <td class="align-middle">{{ $etapa->nombre }}</td>
 
-                        @if( $etapa->realizar_medicion )
+                        @if( $etapa->realizar_medicion && $etapa->pivot->peso )
                         <td class="align-middle">{{ $etapa->pivot->peso }}</td>
                         <td class="align-middle text-capitalize">{{ $etapa->pivot->peso_en }}</td>
                         <td class="align-middle">{{ $etapa->pivot->ancho }}</td>
