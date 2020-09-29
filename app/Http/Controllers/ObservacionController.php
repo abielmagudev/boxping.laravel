@@ -23,7 +23,7 @@ class ObservacionController extends Controller
         $filled = [
             'entrada_id' => $entrada->id,
             'contenido' => $request->contenido,
-            'created_by_user' => Fakeuser::live(),
+            'created_by' => Fakeuser::live(),
         ];
 
         if( ! Observacion::create($filled) )

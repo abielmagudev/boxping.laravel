@@ -17,7 +17,7 @@ class CreateEntradaObservacionesTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('entrada_id');
             $table->text('contenido');
-            $table->unsignedInteger('created_by_user');
+            $table->unsignedInteger('created_by');
             $table->timestamps();
             $table->foreign('entrada_id')
                   ->references('id')->on('entradas')
