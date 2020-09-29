@@ -42,9 +42,8 @@
           
           <!-- Nueva observacion -->
           <div class="tab-pane fade {{ $entrada->observaciones->count() == 0 ? 'show active' : '' }}" id="nueva-observacion" role="tabpanel" aria-labelledby="nueva-observacion-tab">
-            <form action="{{ route('observaciones.store') }}" method="post" atuocomplete="off" class="mt-3">
+            <form action="{{ route('observaciones.store', $entrada) }}" method="post" atuocomplete="off" class="mt-3">
                 @csrf
-                <input type="hidden" name="entrada" value="{{ $entrada->id }}">
                 <div class="form-group">
                     <label for="textarea-contenido" class="">Escribe la observación</label>
                     <textarea name="contenido" id="textarea-contenido" cols="30" rows="5" class="form-control" required></textarea>

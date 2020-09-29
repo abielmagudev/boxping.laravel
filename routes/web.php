@@ -18,10 +18,10 @@ Route::get('/', function () {
 Route::resource('entradas', 'EntradaController');
 Route::prefix('entradas')->group( function () {
     
-    // Route::resource('{entrada}/observaciones', 'ObservacionController', 
-    //     [
-    //         'except' => ['index', 'create', 'show', 'edit', 'destroy']
-    //     ]);
+    Route::resource('{entrada}/observaciones', 'ObservacionController', 
+        [
+            'except' => ['index', 'create', 'show', 'edit', 'destroy']
+        ]);
 
     Route::resource('{entrada}/etapas', 'EntradaEtapasController',
         [
@@ -38,11 +38,6 @@ Route::prefix('entradas')->group( function () {
     Route::get('{entrada}/agregar/remitente', 'EntradaController@agregarRemitente')->name('entradas.agregar.remitente');
     Route::get('{entrada}/agregar/destinatario', 'EntradaController@agregarDestinatario')->name('entradas.agregar.destinatario');
 });
-
-Route::resource('observaciones', 'ObservacionController', 
-    [
-        'except' => ['index', 'create', 'show', 'edit', 'destroy']
-    ]);
 
 Route::resources([
     'clientes' => ClienteController::class,

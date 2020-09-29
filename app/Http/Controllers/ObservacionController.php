@@ -9,24 +9,19 @@ use Illuminate\Http\Request;
 
 class ObservacionController extends Controller
 {
-    public function store(Request $request)
+    public function store(Request $request, Entrada $entrada)
     {
         $request->validate(
-            // Rules
             [
-                'entrada' => ['required','exists:entradas,id'],
                 'contenido' => 'required',
             ],
-            // Messages
             [
-                'entrada.required'   => __('Requiere la entrada'),
-                'entrada.exists'    => __('Requiere una entrada válida'),
                 'contenido.required' => __('Escribe el contenido de la observación'),
             ]
         );
 
         $filled = [
-            'entrada_id' => $request->entrada,
+            'entrada_id' => $entrada->id,
             'contenido' => $request->contenido,
             'created_by_user' => Fakeuser::live(),
         ];
