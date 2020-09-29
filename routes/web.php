@@ -17,24 +17,37 @@ Route::get('/', function () {
 
 Route::resource('entradas', 'EntradaController');
 Route::prefix('entradas')->group( function () {
-    Route::get('{entrada}/agregar/remitente', 'EntradaController@agregarRemitente')->name('entradas.agregar.remitente');
-    Route::get('{entrada}/agregar/destinatario', 'EntradaController@agregarDestinatario')->name('entradas.agregar.destinatario');
     
-    Route::resource('{entrada}/etapas', 'EntradaEtapasController', [
+    // Route::resource('{entrada}/observaciones', 'ObservacionController', 
+    //     [
+    //         'except' => ['index', 'create', 'show', 'edit', 'destroy']
+    //     ]);
+
+    Route::resource('{entrada}/etapas', 'EntradaEtapasController',
+        [
             'except' => ['index', 'show']
-        ])->names([
+        ])
+        ->names([
             'create'  => 'entrada.etapas.create',
             'store'   => 'entrada.etapas.store',
             'edit'    => 'entrada.etapas.edit',
             'update'  => 'entrada.etapas.update',
             'destroy' => 'entrada.etapas.destroy',
-    ]);
+        ]);
+
+    Route::get('{entrada}/agregar/remitente', 'EntradaController@agregarRemitente')->name('entradas.agregar.remitente');
+    Route::get('{entrada}/agregar/destinatario', 'EntradaController@agregarDestinatario')->name('entradas.agregar.destinatario');
 });
 
-Route::resource('observaciones', 'ObservacionController', ['except' => ['index', 'show', 'destroy']]);
+Route::resource('observaciones', 'ObservacionController', 
+    [
+        'except' => ['index', 'create', 'show', 'edit', 'destroy']
+    ]);
 
-Route::resource('etapas', 'EtapaController');
-Route::resource('consolidados', 'ConsolidadoController');
-Route::resource('clientes', 'ClienteController');
-Route::resource('destinatarios', 'DestinatarioController');
-Route::resource('remitentes', 'RemitenteController');
+Route::resources([
+    'clientes' => ClienteController::class,
+    'consolidados' => ConsolidadoController::class,
+    'destinatarios' => DestinatariosController::class,
+    'etapas' => EtapaController::class,
+    'remitentes' => RemitenteController::class,
+]);
