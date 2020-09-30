@@ -5,10 +5,9 @@ namespace App\Http\Controllers;
 use App\Cliente;
 use App\Entrada;
 
-use App\Ahex\Entrada\Application\AgregarDestinatarioTrait as AgregarDestinatario;
-use App\Ahex\Entrada\Application\AgregarRemitenteTrait as AgregarRemitente;
 use App\Ahex\Entrada\Application\CastViewCreate;
 use App\Ahex\Entrada\Application\CastViewEdit;
+use App\Ahex\Entrada\Application\TrayectoriaTrait as Trayectoria;
 use App\Ahex\Entrada\Application\RoutesTrait as Routes;
 use App\Ahex\Entrada\Domain\Storer;
 use App\Ahex\Entrada\Domain\UpdaterFactory;
@@ -20,9 +19,7 @@ use Illuminate\Http\Request;
 
 class EntradaController extends Controller
 {
-    use AgregarRemitente, 
-        AgregarDestinatario,
-        Routes;
+    use Trayectoria, Routes;
 
     public function index()
     {
