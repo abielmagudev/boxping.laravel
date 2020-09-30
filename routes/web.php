@@ -17,16 +17,8 @@ Route::get('/', function () {
 
 Route::resource('entradas', 'EntradaController');
 Route::prefix('entradas')->group( function () {
-    
-    Route::resource('{entrada}/observaciones', 'ObservacionController', 
-        [
-            'except' => ['index', 'create', 'show', 'edit', 'destroy']
-        ]);
-
-    Route::resource('{entrada}/etapas', 'EntradaEtapasController',
-        [
-            'except' => ['index', 'show']
-        ])
+    Route::resource('{entrada}/etapas', 'EntradaEtapasController')
+        ->except(['index', 'show'])
         ->names([
             'create'  => 'entrada.etapas.create',
             'store'   => 'entrada.etapas.store',
@@ -34,7 +26,7 @@ Route::prefix('entradas')->group( function () {
             'update'  => 'entrada.etapas.update',
             'destroy' => 'entrada.etapas.destroy',
         ]);
-
+    Route::post('{entrada}/observaciones', 'ObservacionController@store')->name('observaciones.store');
     Route::get('{entrada}/agregar/remitente', 'EntradaController@agregarRemitente')->name('entradas.agregar.remitente');
     Route::get('{entrada}/agregar/destinatario', 'EntradaController@agregarDestinatario')->name('entradas.agregar.destinatario');
 });

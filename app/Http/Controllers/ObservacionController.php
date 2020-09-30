@@ -11,18 +11,16 @@ class ObservacionController extends Controller
 {
     public function store(Request $request, Entrada $entrada)
     {
-        $request->validate(
-            [
+        $request->validate([
                 'contenido' => 'required',
-            ],
-            [
+            ], [
                 'contenido.required' => __('Escribe el contenido de la observación'),
             ]
         );
 
         $filled = [
             'entrada_id' => $entrada->id,
-            'contenido' => $request->contenido,
+            'contenido'  => $request->contenido,
             'created_by' => Fakeuser::live(),
         ];
 
