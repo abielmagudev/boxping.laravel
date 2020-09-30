@@ -8,7 +8,7 @@
     <div class="card-body">
         <form action="{{ route('entradas.store') }}" method="post" autocomplete="off">
             @yield('form_content')
-            @include('entradas.includes.save')
+            @include('entradas._save')
             <br>
             <div class="btn-group">
                 <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
