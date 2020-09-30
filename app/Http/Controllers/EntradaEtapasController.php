@@ -17,7 +17,7 @@ class EntradaEtapasController extends Controller
     {
         $entrada_etapas_id = $entrada->etapas()->get()->pluck('id');
 
-        return view('entradas.agregar.etapas.create', [
+        return view('entradas.etapas.create', [
             'entrada' => $entrada,
             'etapa' => EntradaEtapa::nulo(),
             'etapas' => Etapa::whereNotIn('id', $entrada_etapas_id)->get(),
@@ -38,7 +38,7 @@ class EntradaEtapasController extends Controller
 
     public function edit(Entrada $entrada, $id)
     {
-        return view('entradas.agregar.etapas.edit', [
+        return view('entradas.etapas.edit', [
             'entrada' => $entrada,
             'etapa' => $entrada->etapas()->find($id),
             'peso_options' => config('system.measures.peso'),

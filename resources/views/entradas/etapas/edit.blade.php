@@ -6,7 +6,7 @@
     <div class="card-body">
         <form action="{{ route('entrada.etapas.update', ['entrada' => $entrada, 'etapa' => $etapa]) }}" method="post" autocomplete="off">
             @method('patch')
-            @include('entradas.agregar.etapas._save')
+            @include('entradas.etapas._save')
             <button class="btn btn-warning" type="submit">Actualizar etapa</button>
             <a href="{{ route('entradas.show', $entrada) }}" class="btn btn-secondary">Cancelar</a>
         </form>
