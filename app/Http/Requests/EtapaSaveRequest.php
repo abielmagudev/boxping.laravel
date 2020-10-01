@@ -25,7 +25,7 @@ class EtapaSaveRequest extends FormRequest
     public function rules()
     {
         return [
-            'nombre' => ['required','unique:etapas'],
+            'nombre' => ['required','regex:/^[A-Za-z0-9 ]+$/','unique:etapas,id,' . $this->getEtapaId()],
             'descripcion' => 'nullable',
             'realizar_medicion' => ['required','boolean'],
             'peso_en' => ['nullable','in:' . $this->peso_options],
@@ -37,10 +37,19 @@ class EtapaSaveRequest extends FormRequest
     {
         return [
             'nombre.required' => __('Requiere el nombre de la etapa'),
+            'nombre.regex' => __('Solo letras, números y espacios debe contener el nombre'),
             'nombre.unique' => __('Escribe un nombre diferente de la etapa'),
             'realizar_medicion.required' => __('Selecciona una opción de medición'),
             'peso_en.in' => __('Selecciona una opción valida en peso'),
             'volumen_en.in' => __('Selecciona una opción valida en volúmen'),
         ];
+    }
+
+    public function getEtapaId()
+    {
+        if( $etapa = $this->route('etapa') )
+            return $etapa->id;
+
+        return 0;
     }
 }
