@@ -8,9 +8,9 @@
     <div class="card-body">
         <form action="{{ route('etapas.update', $etapa) }}" method="post" autocomplete="off">
             @method('patch')
-            @include('etapas.includes.save')
+            @include('etapas._save')
             <button class="btn btn-warning" type="submit">Actualizar etapa</button>
-            <a href="{{ route('etapas.index') }}" class="btn btn-secondary">Regresar</a>
+            <a href="{{ route('etapas.show', $etapa) }}" class="btn btn-secondary">Regresar</a>
         </form>
     </div>
 </div>

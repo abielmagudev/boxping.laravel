@@ -6,20 +6,21 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateEtapasTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
-        Schema::create('etapas', function (Blueprint $table) {
+        $peso_en = config('system.measures.peso');
+        $volumen_en = config('system.measures.volumen');
+
+        Schema::create('etapas', function (Blueprint $table) use ($peso_en, $volumen_en) {
             $table->bigIncrements('id');
             $table->string('nombre')->unique();
+            $table->string('slug')->unique();
             $table->text('descripcion')->nullable();
-            $table->boolean('realizar_medicion')->default(0);
-            $table->unsignedInteger('created_by_user');
-            $table->unsignedInteger('updated_by_user');
+            $table->boolean('realizar_medicion')->default(1);
+            $table->enum('peso_en', $peso_en)->nullable();
+            $table->enum('volumen_en', $volumen_en)->nullable();
+            $table->unsignedInteger('created_by');
+            $table->unsignedInteger('updated_by');
             $table->timestamps();
             $table->softDeletes();
         });

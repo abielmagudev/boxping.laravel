@@ -18,7 +18,11 @@ class EtapaController extends Controller
 
     public function create()
     {
-        return view('etapas.create')->with('etapa', new Etapa);
+        return view('etapas.create', [
+            'etapa' => new Etapa,
+            'options_peso_en' => config('system.measures.peso'),
+            'options_volumen_en' => config('system.measures.volumen'),
+        ]);
     }
 
     public function store(SaveRequest $request)
@@ -31,13 +35,19 @@ class EtapaController extends Controller
 
     public function show(Etapa $etapa)
     {
-        return redirect()->route('etapas.index');
+        return view('etapas.show', [
+            'etapa' => $etapa,
+        ]);
     }
 
 
     public function edit(Etapa $etapa)
     {
-        return view('etapas.edit')->with('etapa', $etapa);
+        return view('etapas.edit', [
+            'etapa' => $etapa,
+            'options_peso_en' => config('system.measures.peso'),
+            'options_volumen_en' => config('system.measures.volumen'),
+        ]);
     }
 
     public function update(SaveRequest $request, Etapa $etapa)
