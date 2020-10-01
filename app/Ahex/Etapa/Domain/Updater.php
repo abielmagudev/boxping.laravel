@@ -3,12 +3,10 @@
 namespace App\Ahex\Etapa\Domain;
 
 use App\Ahex\Fake\Domain\Fakeuser;
-use App\Ahex\Etapa\Application\SlugNameTrait as SlugName;
+use App\Ahex\Zkeleton\Application\Slugger;
 
 Abstract class Updater
 {
-    use SlugName;
-
     public static function save($validated, $etapa)
     {
         $data = self::fill($validated);
@@ -18,8 +16,8 @@ Abstract class Updater
     public static function fill($validated)
     {
         return [
-           'nombre' => $validated['nombre'],
-            'slug' => self::slugName( $validated['nombre'] ),
+            'nombre' => $validated['nombre'],
+            'slug' => Slugger::do( $validated['nombre'] ),
             'descripcion' => $validated['descripcion'],
             'realizar_medicion' => $validated['realizar_medicion'] ? 1 : 0,
             'peso_en' => isset($validated['peso_en']) ? $validated['peso_en'] : null,

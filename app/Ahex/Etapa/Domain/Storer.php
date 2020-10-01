@@ -4,11 +4,10 @@ namespace App\Ahex\Etapa\Domain;
 
 use App\Etapa;
 use App\Ahex\Fake\Domain\Fakeuser;
-use App\Ahex\Etapa\Application\SlugNameTrait as SlugName;
+use App\Ahex\Zkeleton\Application\Slugger;
 
 Abstract class Storer
 {
-    use SlugName;
 
     public static function save($validated)
     {
@@ -20,7 +19,7 @@ Abstract class Storer
     {
         return [
             'nombre' => $validated['nombre'],
-            'slug' => self::slugName( $validated['nombre'] ),
+            'slug' => Slugger::do( $validated['nombre'] ),
             'descripcion' => $validated['descripcion'],
             'realizar_medicion' => $validated['realizar_medicion'] ? 1 : 0,
             'peso_en' => isset($validated['peso_en']) ? $validated['peso_en'] : null,
