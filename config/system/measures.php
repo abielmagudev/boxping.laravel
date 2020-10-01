@@ -6,7 +6,7 @@ return array(
         'kg' => 'kilogramos',
         'lb' => 'libras',
     ],
-    'dimension' => [
+    'volumen' => [
         'cm' => 'centimetros',
         'm'  => 'metros',
         'in' => 'pulgadas',
