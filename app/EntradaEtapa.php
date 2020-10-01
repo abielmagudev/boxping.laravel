@@ -29,9 +29,9 @@ class EntradaEtapa extends Pivot
                 'ancho' => null,
                 'altura' => null,
                 'largo' => null,
-                'dimensiones_en' => null,
-                'created_by_user' => null,
-                'updated_by_user' => null,
+                'volumen_en' => null,
+                'created_by' => null,
+                'updated_by' => null,
             ],
         ];
     }

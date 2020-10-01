@@ -22,7 +22,7 @@ class CreateEntradasEtapasTable extends Migration
             $table->decimal('ancho',6,2)->nullable();
             $table->decimal('altura',6,2)->nullable();
             $table->decimal('largo',6,2)->nullable();
-            $table->string('dimensiones_en')->nullable();
+            $table->string('volumen_en')->nullable();
             $table->unsignedInteger('created_by');
             $table->unsignedInteger('updated_by');
             $table->timestamps();

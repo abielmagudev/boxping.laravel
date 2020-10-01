@@ -128,7 +128,7 @@ class Entrada extends Model
                         'ancho',
                         'altura',
                         'largo',
-                        'dimensiones_en',
+                        'volumen_en',
                         'created_by',
                         'updated_by',
                     ])
