@@ -27,7 +27,7 @@
     <div class="col-sm form-group">
         <label for="select-peso_en" class="small">Peso en</label>
         <select name="peso_en" id="select-peso_en" class="form-control">
-            <option selected></option>
+            <option label="Opcional" selected></option>
             @foreach($options_peso_en as $abbr => $value)
             <option value="{{ $value }}" {{ selectable($value, old('peso_en', $etapa->peso_en)) }}>{{ ucfirst($value) }}</option>
             @endforeach
@@ -36,7 +36,7 @@
     <div class="col-sm form-group">
         <label for="select-volumen_en" class="small">Volúmen en</label>
         <select name="volumen_en" id="select-volumen_en" class="form-control">
-            <option selected></option>
+            <option label="Opcional" selected></option>
             @foreach($options_volumen_en as $abbr => $value)
             <option value="{{ $value }}" {{ selectable($value, old('volumen_en', $etapa->volumen_en)) }}>{{ ucfirst($value) }}</option>
             @endforeach
