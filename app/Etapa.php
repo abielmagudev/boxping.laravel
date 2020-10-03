@@ -25,6 +25,11 @@ class Etapa extends Model
         return $this->belongsToMany(Entrada::class, 'entradas_etapas');
     }
 
+    public function zonas()
+    {
+        return $this->hasMany(Zona::class);
+    }
+
     public function creator()
     {
         return $this->belongsTo(User::class, 'created_by');

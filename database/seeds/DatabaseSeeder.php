@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
             UsersTableSeeder::class,
             VehiculosTableSeeder::class,
             EtapasTableSeeder::class,
+            EtapaZonasTableSeeder::class,
             EntradasTableSeeder::class,
             EntradasEtapasTableSeeder::class,
             EntradaObservacionesTableSeeder::class,

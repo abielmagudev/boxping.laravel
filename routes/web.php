@@ -31,10 +31,15 @@ Route::prefix('entradas')->group( function () {
     Route::get('{entrada}/agregar/destinatario', 'EntradaController@agregarDestinatario')->name('entradas.agregar.destinatario');
 });
 
+Route::resource('etapas', 'EtapaController');
+Route::prefix('etapas')->group( function () {
+    Route::resource('{etapa}/zonas', 'ZonaController')
+         ->except(['index', 'show']);
+});
+
 Route::resources([
     'clientes' => ClienteController::class,
     'consolidados' => ConsolidadoController::class,
-    'destinatarios' => DestinatariosController::class,
-    'etapas' => EtapaController::class,
+    'destinatarios' => DestinatarioController::class,
     'remitentes' => RemitenteController::class,
 ]);
