@@ -4,6 +4,7 @@ return array(
     'peso' => [
         'g'  => 'gramos',
         'kg' => 'kilogramos',
+        'oz' => 'onzas',
         'lb' => 'libras',
     ],
     'volumen' => [
