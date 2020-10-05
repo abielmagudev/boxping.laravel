@@ -17,20 +17,16 @@
                             <td>{{ $etapa->nombre }}</td>
                         </tr>
                         <tr>
-                            <td class="small text-muted">Descripción</td>
-                            <td>{{ $etapa->descripcion }}</td>
+                            <td class="small text-muted">Realiza medición</td>
+                            <td>{{ $etapa->realiza_medicion ? 'Si' : 'No' }}</td>
                         </tr>
                         <tr>
-                            <td class="small text-muted">Realizar medición</td>
-                            <td>{{ $etapa->realizar_medicion ? 'Si' : 'No' }}</td>
+                            <td class="small text-muted">Medida de peso</td>
+                            <td class="text-capitalize">{{ $etapa->medida_peso?? 'Opcional' }}</td>
                         </tr>
                         <tr>
-                            <td class="small text-muted">Peso en</td>
-                            <td>{{ ucfirst($etapa->peso_en) }}</td>
-                        </tr>
-                        <tr>
-                            <td class="small text-muted text-nowrap">Volúmen en</td>
-                            <td>{{ ucfirst($etapa->volumen_en) }}</td>
+                            <td class="small text-muted text-nowrap">Medida de volúmen</td>
+                            <td class="text-capitalize">{{ $etapa->medida_volumen ?? 'Opcional' }}</td>
                         </tr>
                         <tr>
                             <td class="small text-muted">Actualizado</td>

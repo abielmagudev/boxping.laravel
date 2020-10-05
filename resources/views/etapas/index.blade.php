@@ -7,7 +7,9 @@
             <span class="badge badge-primary">{{ $etapas->count() }}</span>
         </div>
         <div>
-            <a href="{{ route('etapas.create') }}" class="btn btn-primary btn-sm">Nueva etapa</a>
+            <a href="{{ route('etapas.create') }}" class="btn btn-primary btn-sm">
+                <b>+</b>
+            </a>
         </div>
     </div>
     <div class="card-body p-0">
@@ -16,8 +18,9 @@
                 <thead class="small">
                     <tr>
                         <th>Nombre</th>
-                        <th>Descripción</th>
-                        <th colspan="2">Medición</th>
+                        <th>Realiza medición</th>
+                        <th>Medida de peso</th>
+                        <th>Medida de volúmen</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -26,8 +29,9 @@
                         <td>
                             <a href="{{ route('etapas.show', $etapa) }}">{{ $etapa->nombre }}</a>
                         </td>
-                        <td>{{ $etapa->descripcion }}</td>
-                        <td>{{ $etapa->realizar_medicion ? 'Si' : 'No' }}</td>
+                        <td>{{ $etapa->realiza_medicion ? 'Si' : 'No' }}</td>
+                        <td>{{ $etapa->medida_peso ?? 'Opcional' }}</td>
+                        <td>{{ $etapa->medida_volumen ?? 'Opcional' }}</td>
                     </tr>
                     @endforeach
                 </tbody>   

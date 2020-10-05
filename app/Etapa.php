@@ -12,10 +12,9 @@ class Etapa extends Model
     protected $fillable = [
         'nombre',
         'slug',
-        'descripcion',
-        'realizar_medicion',
-        'peso_en',
-        'volumen_en',
+        'realiza_medicion',
+        'medida_peso',
+        'medida_volumen',
         'created_by',
         'updated_by',
     ];

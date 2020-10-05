@@ -3,14 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Etapa;
+use App\Ahex\Etapa\Domain\FillingTrait as Filling;
 use App\Http\Requests\EtapaSaveRequest as SaveRequest;
 use Illuminate\Http\Request;
 
-use App\Ahex\Etapa\Domain\Storer;
-use App\Ahex\Etapa\Domain\Updater;
-
 class EtapaController extends Controller
 {
+    use Filling;
+
     public function index()
     {
         return view('etapas.index')->with('etapas', Etapa::all()->sortByDesc('id'));
@@ -20,14 +20,16 @@ class EtapaController extends Controller
     {
         return view('etapas.create', [
             'etapa' => new Etapa,
-            'options_peso_en' => config('system.measures.peso'),
-            'options_volumen_en' => config('system.measures.volumen'),
+            'medidas_peso' => config('system.measures.peso'),
+            'medidas_volumen' => config('system.measures.volumen'),
         ]);
     }
 
     public function store(SaveRequest $request)
     {
-        if( ! $etapa = Storer::save($request->validated()) )
+        $data = $this->fill( $request->validated() );
+
+        if( ! $etapa = Etapa::create($data) )
             return back()->withInput()->with('failure', 'Error al guardar etapa.');
 
         return redirect()->route('etapas.index')->with('success', 'Etapa guardada.');
@@ -35,24 +37,23 @@ class EtapaController extends Controller
 
     public function show(Etapa $etapa)
     {
-        return view('etapas.show', [
-            'etapa' => $etapa,
-        ]);
+        return view('etapas.show')->with('etapa', $etapa);
     }
-
 
     public function edit(Etapa $etapa)
     {
         return view('etapas.edit', [
             'etapa' => $etapa,
-            'options_peso_en' => config('system.measures.peso'),
-            'options_volumen_en' => config('system.measures.volumen'),
+            'medidas_peso' => config('system.measures.peso'),
+            'medidas_volumen' => config('system.measures.volumen'),
         ]);
     }
 
     public function update(SaveRequest $request, Etapa $etapa)
     {
-        if( ! Updater::save($request->validated(), $etapa) )
+        $data = $this->fill( $request->validated() );
+
+        if( ! $etapa->fill($data)->save() )
             return back()->with('failure', 'Error al actualizar la entrada');
 
         return back()->with('success', 'Etapa actualizada');
@@ -60,11 +61,14 @@ class EtapaController extends Controller
 
     public function destroy(Etapa $etapa)
     {
-        $nombre = $etapa->nombre;
+        $destroyed = (object) [
+            'id' => $etapa->id,
+            'nombre' => $etapa->nombre,
+        ];
 
         if( ! $etapa->delete() )
             return back()->with('failure', 'Error al eliminar etapa');
 
-        return redirect()->route('etapas.index')->with('success', "{$nombre} eliminada");
+        return redirect()->route('etapas.index')->with('success', "{$destroyed->nombre} eliminada");
     }
 }

@@ -7,18 +7,17 @@ use Faker\Generator as Faker;
 
 $factory->define(Etapa::class, function (Faker $faker) {
 
-    $nombre = 'Etapa ' . $faker->unique(true)->randomNumber();
+    $nombre = 'Stage ' . $faker->unique(true)->randomNumber();
     $slug = str_replace(' ', '-', $nombre);
-    $peso_en = config('system.measures.peso');
-    $volumen_en = config('system.measures.volumen');
+    $medidas_peso = config('system.measures.peso');
+    $medidas_volumen = config('system.measures.volumen');
 
     return [
         'nombre' => $nombre,
         'slug' => strtolower($slug),
-        'descripcion' => $faker->sentence(),
-        'realizar_medicion' => $faker->boolean ? 1 : 0,
-        'peso_en' => $faker->randomElement($peso_en),
-        'volumen_en' => $faker->randomElement($volumen_en),
+        'realiza_medicion' => $faker->boolean ? 1 : 0,
+        'medida_peso' => $faker->randomElement($medidas_peso),
+        'medida_volumen' => $faker->randomElement($medidas_volumen),
         'created_by' => $faker->randomDigitNotNull,
         'updated_by' => $faker->randomDigitNotNull,
     ];
