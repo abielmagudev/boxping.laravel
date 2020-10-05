@@ -19,15 +19,9 @@ Trait FillingTrait
             'updated_by' => Fakeuser::live(),
         ];
 
-        if( $this->requestRouteMethod() === 'POST' )
+        if( requestMethod() === 'POST' )
             $filled['created_by'] = Fakeuser::live();
 
         return $filled;
-    }
-
-    private function requestRouteMethod()
-    {
-        $methods = request()->route()->methods();
-        return array_shift( $methods );
     }
 }
