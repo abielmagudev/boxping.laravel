@@ -18,7 +18,7 @@ Trait FillingTrait
             'updated_by' => Fakeuser::live(),
         ];
 
-        if( requestMethod() === 'POST' )
+        if( request()->isMethod('post') )
             $filled['created_by'] = Fakeuser::live();
 
         return $filled;
