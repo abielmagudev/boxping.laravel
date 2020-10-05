@@ -48,7 +48,7 @@ class EntradaController extends Controller
     public function show($id)
     {
         return view('entradas.show', [
-            'entrada' => Entrada::conEtapas()->withObservaciones()->findOrFail($id),
+            'entrada' => Entrada::conEtapas()->conComentarios()->findOrFail($id),
         ]);
     }
 

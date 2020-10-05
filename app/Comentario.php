@@ -4,9 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Observacion extends Model
+class Comentario extends Model
 {
-    protected $table = 'entrada_observaciones';
+    protected $table = 'entrada_comentarios';
     
     protected $fillable = array(
         'entrada_id',

@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class EntradaObservacionesTableSeeder extends Seeder
+class EntradaComentariosTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,6 +11,6 @@ class EntradaObservacionesTableSeeder extends Seeder
      */
     public function run()
     {
-        return factory(App\Observacion::class, 40)->create();
+        return factory(App\Comentario::class, 40)->create();
     }
 }

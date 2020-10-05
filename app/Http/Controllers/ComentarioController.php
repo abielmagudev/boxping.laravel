@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Observacion;
+use App\Comentario;
 use App\Entrada;
 use App\Ahex\Fake\Domain\Fakeuser;
 use Illuminate\Http\Request;
 
-class ObservacionController extends Controller
+class ComentarioController extends Controller
 {
     public function store(Request $request, Entrada $entrada)
     {
         $request->validate([
                 'contenido' => 'required',
             ], [
-                'contenido.required' => __('Escribe el contenido de la observación'),
+                'contenido.required' => __('Escribe el contenido del comentario'),
             ]
         );
 
@@ -24,9 +24,9 @@ class ObservacionController extends Controller
             'created_by' => Fakeuser::live(),
         ];
 
-        if( ! Observacion::create($filled) )
-            return back()->with('failure', 'Error al agregar observación');
+        if( ! Comentario::create($filled) )
+            return back()->with('failure', 'Error al agregar comentario');
 
-        return back()->with('success', 'Observacion agregada');
+        return back()->with('success', 'Nuevo comentario agregado');
     }
 }

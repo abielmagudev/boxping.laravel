@@ -135,9 +135,9 @@ class Entrada extends Model
                     ->withTimestamps();
     }
 
-    public function observaciones()
+    public function comentarios()
     {
-        return $this->hasMany(Observacion::class);
+        return $this->hasMany(Comentario::class);
     }
     
 
@@ -148,11 +148,9 @@ class Entrada extends Model
         return $this->with('etapas');
     }
 
-    public function scopeWithObservaciones($query)
+    public function scopeConComentarios($query)
     {
-        return $query->with([
-            'observaciones.creator',
-        ]);
+        return $query->with(['comentarios.creator']);
     }
     
 

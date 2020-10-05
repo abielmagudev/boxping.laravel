@@ -26,7 +26,7 @@ Route::prefix('entradas')->group( function () {
             'update'  => 'entrada.etapas.update',
             'destroy' => 'entrada.etapas.destroy',
         ]);
-    Route::post('{entrada}/observaciones', 'ObservacionController@store')->name('observaciones.store');
+    Route::post('{entrada}/comentarios', 'ComentarioController@store')->name('comentarios.store');
     Route::get('{entrada}/agregar/remitente', 'EntradaController@agregarRemitente')->name('entradas.agregar.remitente');
     Route::get('{entrada}/agregar/destinatario', 'EntradaController@agregarDestinatario')->name('entradas.agregar.destinatario');
 });
