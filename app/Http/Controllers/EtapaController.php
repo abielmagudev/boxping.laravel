@@ -62,7 +62,6 @@ class EtapaController extends Controller
     public function destroy(Etapa $etapa)
     {
         $destroyed = (object) [
-            'id' => $etapa->id,
             'nombre' => $etapa->nombre,
         ];
 
