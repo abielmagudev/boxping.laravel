@@ -2,7 +2,6 @@
 
 namespace App\Ahex\Etapa\Domain;
 
-use App\Etapa;
 use App\Ahex\Zkeleton\Application\Slugger;
 use App\Ahex\Fake\Domain\Fakeuser;
 
