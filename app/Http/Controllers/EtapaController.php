@@ -30,9 +30,9 @@ class EtapaController extends Controller
         $data = $this->fill( $request->validated() );
 
         if( ! $etapa = Etapa::create($data) )
-            return back()->withInput()->with('failure', 'Error al guardar etapa.');
+            return back()->withInput()->with('failure', 'Error al guardar etapa');
 
-        return redirect()->route('etapas.index')->with('success', 'Etapa guardada.');
+        return redirect()->route('etapas.index')->with('success', "Etapa {$etapa->nombre} guardada");
     }
 
     public function show(Etapa $etapa)
@@ -68,6 +68,6 @@ class EtapaController extends Controller
         if( ! $etapa->delete() )
             return back()->with('failure', 'Error al eliminar etapa');
 
-        return redirect()->route('etapas.index')->with('success', "{$destroyed->nombre} eliminada");
+        return redirect()->route('etapas.index')->with('success', "Etapa {$destroyed->nombre} eliminada");
     }
 }

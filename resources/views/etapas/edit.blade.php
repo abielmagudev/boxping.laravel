@@ -20,9 +20,8 @@
         @slot('text', 'Eliminar etapa')
         @slot('route', route('etapas.destroy', $etapa))
         @slot('content')
-        <p class="lead text-center">Deseas eliminar la etapa con nombre <b>"{{ $etapa->nombre }}"</b>?</p>
+        <p class="lead text-center">Deseas eliminar la etapa  <b>{{ $etapa->nombre }}</b>?</p>
         @endslot
     @endcomponent
 </div>
-
 @endsection
