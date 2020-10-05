@@ -143,12 +143,12 @@ class Entrada extends Model
 
     // Scopes
 
-    public function scopeConEtapas()
+    public function scopeWithEtapas()
     {
         return $this->with('etapas');
     }
 
-    public function scopeConComentarios($query)
+    public function scopeWithComentarios($query)
     {
         return $query->with(['comentarios.creator']);
     }
