@@ -13,8 +13,8 @@ class EntradasEtapasTableSeeder extends Seeder
         $entradas = Entrada::all(['id']);
         $etapas = Etapa::all();
 
-        $peso_en = config('system.measures.peso');
-        $volumen_en = config('system.measures.volumen');
+        $medidas_peso = config('system.measures.peso');
+        $medidas_volumen = config('system.measures.volumen');
         
         foreach($entradas as $entrada)
         {
@@ -26,14 +26,15 @@ class EntradasEtapasTableSeeder extends Seeder
             foreach($etapas_sliced as $e)
             {
                 $data = [
-                    'peso' => $e->realizar_medicion ? $faker->randomFloat(2, 0.1, 999) : null,
-                    'peso_en' => $faker->randomElement( $peso_en ),
-                    'ancho'  => $e->realizar_medicion ? $faker->randomFloat(2, 0.1, 999) : null,
-                    'altura' => $e->realizar_medicion ? $faker->randomFloat(2, 0.1, 999) : null,
-                    'largo'  => $e->realizar_medicion ? $faker->randomFloat(2, 0.1, 999) : null,
-                    'volumen_en' => $faker->randomElement( $volumen_en ),
+                    'peso' => $e->realiza_medicion ? $faker->randomFloat(2, 0.1, 999) : null,
+                    'medida_peso' => $faker->randomElement( $medidas_peso ),
+                    'ancho'  => $e->realiza_medicion ? $faker->randomFloat(2, 0.1, 999) : null,
+                    'altura' => $e->realiza_medicion ? $faker->randomFloat(2, 0.1, 999) : null,
+                    'largo'  => $e->realiza_medicion ? $faker->randomFloat(2, 0.1, 999) : null,
+                    'medida_volumen' => $faker->randomElement( $medidas_volumen ),
                     'created_by' => $faker->numberBetween(1,10),
                     'updated_by' => $faker->numberBetween(1,10),
+                    'zona_id' => $faker->boolean ? $faker->numberBetween(1,5) : null,
                 ];
     
                 $entrada->etapas()->attach($e->id, $data);

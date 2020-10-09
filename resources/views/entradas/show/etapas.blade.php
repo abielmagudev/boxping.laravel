@@ -18,28 +18,29 @@
                     <tr class="bg-white">
                         <th>Nombre</th>
                         <th>Peso</th>
-                        <th>Peso en</th>
+                        <th>Medida de peso</th>
                         <th>Ancho</th>
                         <th>Altura</th>
                         <th>Largo</th>
-                        <th>Dimensiones en</th>
+                        <th>Medida de volúmen</th>
+                        <th>Zona</th>
                         <th>Actualizado</th>
                         <th></th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php $etapas = $entrada->etapas()->get()->sortBy('id') ?>
+                    <?php $etapas = $entrada->etapas->sortBy('id') ?>
                     @foreach($etapas as $etapa)
                     <tr>
                         <td class="align-middle">{{ $etapa->nombre }}</td>
 
-                        @if( $etapa->realizar_medicion && $etapa->pivot->peso )
+                        @if( $etapa->realiza_medicion && $etapa->pivot->peso )
                         <td class="align-middle">{{ $etapa->pivot->peso }}</td>
-                        <td class="align-middle text-capitalize">{{ $etapa->pivot->peso_en }}</td>
+                        <td class="align-middle text-capitalize">{{ $etapa->pivot->medida_peso }}</td>
                         <td class="align-middle">{{ $etapa->pivot->ancho }}</td>
                         <td class="align-middle">{{ $etapa->pivot->altura }}</td>
                         <td class="align-middle">{{ $etapa->pivot->largo }}</td>
-                        <td class="align-middle text-capitalize">{{ $etapa->pivot->dimensiones_en }}</td>
+                        <td class="align-middle text-capitalize">{{ $etapa->pivot->medida_volumen }}</td>
 
                         @else
                         <td class="align-middle" colspan="6">
@@ -49,9 +50,13 @@
                         </td>
 
                         @endif
-
+                        <td>
+                            @if( $etapa->pivot->zona )
+                            <span>{{ $etapa->pivot->zona->nombre }}</span>
+                            @endif
+                        </td>
                         <td class="align-middle text-nowrap">
-                            <p class="m-0">{{ $etapa->updater->name }}</p>
+                            <p class="m-0">{{ $etapa->pivot->updater->name }}</p>
                             <p class="m-0">{{ $etapa->pivot->updated_at }}</p>
                         </td>
                         <td class="align-middle text-nowrap">

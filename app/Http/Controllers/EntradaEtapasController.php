@@ -6,23 +6,22 @@ use App\Entrada;
 use App\Etapa;
 use App\EntradaEtapa;
 use App\Http\Requests\EntradaEtapaSaveRequest as SaveRequest;
+use App\Ahex\EntradaEtapa\Application\FormCreateTrait as FormCreate;
 use App\Ahex\EntradaEtapa\Domain\FillingTrait as Filling;
 use Illuminate\Http\Request;
 
 class EntradaEtapasController extends Controller
 {
-    use Filling;
+    use FormCreate, Filling;
 
-    public function create(Entrada $entrada)
+    public function create(Request $request, Entrada $entrada)
     {
-        $entrada_etapas_id = $entrada->etapas()->get()->pluck('id');
-
         return view('entradas.etapas.create', [
             'entrada' => $entrada,
-            'etapa' => EntradaEtapa::nulo(),
-            'etapas' => Etapa::whereNotIn('id', $entrada_etapas_id)->get(),
-            'peso_options' => config('system.measures.peso'),
-            'dimension_options' => config('system.measures.dimension'),
+            'etapa' => $this->etapaSelected($request),
+            'etapas' => $this->etapasNotHaveEntrada( $entrada->etapas()->get() ),
+            'medidas_peso' => config('system.measures.peso'),
+            'medidas_volumen' => config('system.measures.volumen'),
         ]);
     }
 
@@ -41,8 +40,8 @@ class EntradaEtapasController extends Controller
         return view('entradas.etapas.edit', [
             'entrada' => $entrada,
             'etapa' => $entrada->etapas()->find($id),
-            'peso_options' => config('system.measures.peso'),
-            'dimension_options' => config('system.measures.dimension'),
+            'medidas_peso' => config('system.measures.peso'),
+            'medidas_volumen' => config('system.measures.volumen'),
         ]);
     }
 

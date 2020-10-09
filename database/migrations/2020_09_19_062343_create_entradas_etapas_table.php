@@ -15,17 +15,18 @@ class CreateEntradasEtapasTable extends Migration
     {
         Schema::create('entradas_etapas', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('entrada_id')->index();
-            $table->unsignedBigInteger('etapa_id')->index();
             $table->decimal('peso',6,2)->nullable();
-            $table->string('peso_en')->nullable();
+            $table->string('medida_peso')->nullable();
             $table->decimal('ancho',6,2)->nullable();
             $table->decimal('altura',6,2)->nullable();
             $table->decimal('largo',6,2)->nullable();
-            $table->string('volumen_en')->nullable();
+            $table->string('medida_volumen')->nullable();
             $table->unsignedInteger('created_by');
             $table->unsignedInteger('updated_by');
             $table->timestamps();
+            $table->unsignedBigInteger('entrada_id')->index();
+            $table->unsignedInteger('etapa_id')->index();
+            $table->unsignedInteger('zona_id')->nullable();
             $table->foreign('entrada_id')
                   ->references('id')->on('entradas')
                   ->onDelete('cascade');

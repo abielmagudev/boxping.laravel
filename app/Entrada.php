@@ -122,15 +122,15 @@ class Entrada extends Model
         return $this->belongsToMany(Etapa::class, 'entradas_etapas')
                     ->using(EntradaEtapa::class)
                     ->withPivot([
-                        'etapa_id',
                         'peso',
-                        'peso_en',
+                        'medida_peso',
                         'ancho',
                         'altura',
                         'largo',
-                        'volumen_en',
+                        'medida_volumen',
                         'created_by',
                         'updated_by',
+                        'zona_id',
                     ])
                     ->withTimestamps();
     }

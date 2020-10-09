@@ -45,11 +45,9 @@ class EntradaController extends Controller
         return redirect($route)->with('success', "Entrada {$entrada->numero} guardada");
     }
 
-    public function show($id)
+    public function show(Entrada $entrada)
     {
-        return view('entradas.show', [
-            'entrada' => Entrada::withEtapas()->withComentarios()->findOrFail($id),
-        ]);
+        return view('entradas.show')->with('entrada', $entrada);
     }
 
     public function edit(EditRequest $request, Entrada $entrada)

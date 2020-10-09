@@ -4,10 +4,29 @@
 <div class="card">
     <div class="card-header">Editar etapa</div>
     <div class="card-body">
-        <form action="{{ route('entrada.etapas.update', ['entrada' => $entrada, 'etapa' => $etapa]) }}" method="post" autocomplete="off">
+        <!-- Entrada -->
+        <div class="form-group">
+            <label for="">
+                <small>Entrada</small>
+            </label>
+            <div class="form-control bg-light">{{ $entrada->numero }}</div>
+        </div>
+
+        <!-- Etapa -->
+        <div class="form-group">
+            <label for="">
+                <small>Etapa</small>
+            </label>
+            <div class="form-control bg-light">{{ $etapa->nombre }}</div>
+        </div>
+        
+        <form action="{{ route('entrada.etapas.update', [$entrada, $etapa]) }}" method="post" autocomplete="off">
             @method('patch')
-            @include('entradas.etapas._save')
-            <button class="btn btn-warning" type="submit">Actualizar etapa</button>
+            @csrf
+            @include('entradas.etapas._medidas')
+            @include('entradas.etapas._zonas')
+            <br>
+            <button class="btn btn-warning" type="submit" name="etapa" value="{{ $etapa->id }}">Actualizar etapa</button>
             <a href="{{ route('entradas.show', $entrada) }}" class="btn btn-secondary">Cancelar</a>
         </form>
     </div>

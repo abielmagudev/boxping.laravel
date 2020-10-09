@@ -9,12 +9,13 @@ Trait FillingTrait
     private function fill(array $validated)
     {
         $filled = [
-            'peso' => $validated['peso'],
-            'peso_en' => $validated['peso_en'],
-            'ancho' => $validated['ancho'],
-            'altura' => $validated['altura'],
-            'largo' => $validated['largo'],
-            'dimensiones_en' => $validated['dimensiones_en'],
+            'peso' => $validated['peso'] ?? null,
+            'medida_peso' => $validated['medida_peso'] ?? null,
+            'ancho' => $validated['ancho'] ?? null,
+            'altura' => $validated['altura'] ?? null,
+            'largo' => $validated['largo'] ?? null,
+            'medida_volumen' => $validated['medida_volumen'] ?? null,
+            'zona_id' => $validated['zona'] ?? null,
             'updated_by' => Fakeuser::live(),
         ];
 

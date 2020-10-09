@@ -18,21 +18,8 @@ class EntradaEtapa extends Pivot
         return $this->belongsTo(User::class, 'updated_by');
     }
 
-    public function scopeNulo()
+    public function zona()
     {
-        return (object) [
-            'entrada_id' => null,
-            'etapa_id' => null,
-            'pivot' => (object) [
-                'peso' => null,
-                'peso_en' => null,
-                'ancho' => null,
-                'altura' => null,
-                'largo' => null,
-                'volumen_en' => null,
-                'created_by' => null,
-                'updated_by' => null,
-            ],
-        ];
+        return $this->belongsTo(Zona::class, 'zona_id');
     }
 }
