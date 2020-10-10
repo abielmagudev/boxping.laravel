@@ -5,10 +5,10 @@
 <div class="d-flex justify-content-between align-items-center">
    <div>
       <a href="{{ route('entradas.show', $entrada) }}" class="btn btn-secondary btn-sm">Regresar</a>
+      <button data-toggle="modal" data-target="#searchDestinatarios" type="button" class="btn btn-primary btn-sm">Buscar</button>
    </div>
    <div>
-      <button data-toggle="modal" data-target="#searchDestinatarios" type="button" class="btn btn-primary btn-sm">Buscar de nuevo</button>
-      <a href="{{ route('destinatarios.create', ['entrada' => $entrada->id]) }}" class="btn btn-primary btn-sm">Crear destinatario</a>
+      <a href="{{ route('destinatarios.create', ['entrada' => $entrada->id]) }}" class="btn btn-primary btn-sm">Nuevo destinatario</a>
    </div>
 </div>
 <br>
