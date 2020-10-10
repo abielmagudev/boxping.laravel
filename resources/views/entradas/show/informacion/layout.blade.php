@@ -1,14 +1,14 @@
-<div class="card">
+<div class="card h-100">
     <div class="card-header">
         <p>Información</p>
         @include('entradas.show.informacion.tabs')
     </div>
-    <div class="card-body">
+    <div class="card-body overflow-auto" style="height:320px">
         <br>
-        <div class="tab-content" id="entrada-tabs-contents">
+        <div class="tab-content" id="informacion-tabs-contents">
             @include('entradas.show.informacion.content-entrada')
-            @include('entradas.show.informacion.content-cruce')
             @include('entradas.show.informacion.content-reempaque')
+            @include('entradas.show.informacion.content-cruce')
         </div>
     </div>
 </div>

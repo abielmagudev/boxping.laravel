@@ -67,8 +67,8 @@
     <br>
 
     <div class="text-right">
-        <button data-toggle="modal" data-target="#searchDestinatarios" type="button" class="btn btn-primary btn-sm">Cambiar destinatario</button>
-        <a href="{{ route('destinatarios.edit', ['destinatario' => $entrada->destinatario_id, 'entrada' => $entrada->id]) }}" class="btn btn-warning btn-sm">Editar destinatario</a>
+        <button data-toggle="modal" data-target="#searchDestinatarios" type="button" class="btn btn-outline-primary btn-sm">Cambiar destinatario</button>
+        <a href="{{ route('destinatarios.edit', ['destinatario' => $entrada->destinatario_id, 'entrada' => $entrada->id]) }}" class="btn btn-outline-warning btn-sm">Editar destinatario</a>
     </div>
 
     @else

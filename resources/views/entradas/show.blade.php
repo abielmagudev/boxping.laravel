@@ -2,12 +2,11 @@
 @section('content')
 @include('components.error')
 @include('entradas.show.acciones')
-<div class="row">
 
+<div class="row" style="height:512px">
     <!-- Informacion -->
-    <div class="col-sm">
+    <div class="col-sm mb-3 mb-md-0">
         @include('entradas.show.informacion.layout')
-        <br>
     </div>
 
     <!-- Trayectoria -->

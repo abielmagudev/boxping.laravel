@@ -52,7 +52,7 @@
     <br>
     
     <div class="text-right">
-        <a href="{{ route('entradas.edit', [$entrada, 'formulario' => 'entrada']) }}" class="btn btn-warning btn-sm">
+        <a href="{{ route('entradas.edit', [$entrada, 'formulario' => 'entrada']) }}" class="btn btn-outline-warning btn-sm">
             <span>Editar entrada</span>
         </a>
     </div>

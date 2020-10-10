@@ -58,8 +58,8 @@
     <br>
 
     <div class="text-right">
-        <button data-toggle="modal" data-target="#searchRemitentes" type="button" class="btn btn-primary btn-sm">Cambiar remitente</button>
-        <a href="{{ route('remitentes.edit', ['remitente' => $entrada->remitente->id, 'entrada' => $entrada->id]) }}" class="btn btn-warning btn-sm">Editar remitente</a>
+        <button data-toggle="modal" data-target="#searchRemitentes" type="button" class="btn btn-outline-primary btn-sm">Cambiar remitente</button>
+        <a href="{{ route('remitentes.edit', ['remitente' => $entrada->remitente->id, 'entrada' => $entrada->id]) }}" class="btn btn-outline-warning btn-sm">Editar remitente</a>
     </div>
 
     @else

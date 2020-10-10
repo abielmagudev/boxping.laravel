@@ -1,8 +1,8 @@
 <?php
 $items = array(
   'entrada'      => ['class' => 'active', 'aria_selected' => 'true'],
-  'cruce'        => ['class' => null, 'aria_selected' => 'false'],
   'reempaque'    => ['class' => null, 'aria_selected' => 'false'],
+  'cruce'        => ['class' => null, 'aria_selected' => 'false'],
 );
 ?>
 

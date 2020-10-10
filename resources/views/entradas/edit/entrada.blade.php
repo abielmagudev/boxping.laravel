@@ -24,5 +24,5 @@
         @endif
     </div>
 
-    @include('entradas.includes.save')
+    @include('entradas._save')
 @endsection
