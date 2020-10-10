@@ -8,7 +8,7 @@ use Faker\Generator as Faker;
 $factory->define(Transportadora::class, function (Faker $faker) {
     return [
         'nombre' => $faker->company,
-        'web' => $faker->domainName,
+        'web' => 'https://www.' . $faker->domainName,
         'telefono' => $faker->phoneNumber,
         'notas' => $faker->text(),
     ];

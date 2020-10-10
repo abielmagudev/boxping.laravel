@@ -42,4 +42,5 @@ Route::resources([
     'consolidados' => ConsolidadoController::class,
     'destinatarios' => DestinatarioController::class,
     'remitentes' => RemitenteController::class,
+    'transportadoras' => TransportadoraController::class,
 ]);

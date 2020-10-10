@@ -15,11 +15,12 @@ class CreateTransportadorasTable extends Migration
     {
         Schema::create('transportadoras', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('nombre');
-            $table->string('web');
-            $table->string('telefono');
-            $table->text('notas');
+            $table->string('nombre')->unique();
+            $table->string('web')->nullable();
+            $table->string('telefono')->nullable();
+            $table->text('notas')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -30,6 +31,9 @@ class CreateTransportadorasTable extends Migration
      */
     public function down()
     {
+        // Schema::table('transportadoras', function (Blueprint $table) {
+        //     $table->dropSoftDeletes();
+        // });
         Schema::dropIfExists('transportadoras');
     }
 }

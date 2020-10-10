@@ -3,83 +3,54 @@
 namespace App\Http\Controllers;
 
 use App\Transportadora;
+use App\Http\Requests\TransportadoraSaveRequest as SaveRequest;
 use Illuminate\Http\Request;
 
 class TransportadoraController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
+        return view('transportadoras.index')->with('transportadoras', Transportadora::orderBy('id', 'desc')->get() );
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
+        return view('transportadoras.create')->with('transportadora', new Transportadora);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function store(SaveRequest $request)
     {
-        //
+        if( ! $transportadora = Transportadora::create( $request->validated() ) )
+            return back()->with('failure', 'Error al guardar transportadora');
+
+        return redirect()->route('transportadoras.index')->with('success', 'Transportadora guardada');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Transportadora  $transportadora
-     * @return \Illuminate\Http\Response
-     */
     public function show(Transportadora $transportadora)
     {
-        //
+        return view('transportadoras.show')->with('transportadora', $transportadora);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Transportadora  $transportadora
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Transportadora $transportadora)
     {
-        //
+        return view('transportadoras.edit')->with('transportadora', $transportadora);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Transportadora  $transportadora
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Transportadora $transportadora)
+    public function update(SaveRequest $request, Transportadora $transportadora)
     {
-        //
+        if( ! $transportadora->fill( $request->validated() )->save() )
+            return back()->with('failure', 'Error al actualizar transportadora');
+            
+        return back()->with('success', 'Transportadora actualizada');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Transportadora  $transportadora
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Transportadora $transportadora)
     {
-        //
+        $nombre = $transportadora->nombre;
+
+        if( ! $transportadora->delete() )
+            return back()->with('failure', 'Error al eliminar transportadora');
+
+        return redirect()->route('transportadoras.index')->with('success', "Transportadora {$nombre} eliminada");
     }
 }
