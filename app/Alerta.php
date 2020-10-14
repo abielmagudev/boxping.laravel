@@ -9,5 +9,6 @@ class Alerta extends Model
     protected $fillable = [
         'nombre',
         'nivel',
+        'descripcion',
     ];
 }
