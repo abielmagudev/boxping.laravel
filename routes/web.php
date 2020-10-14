@@ -43,4 +43,5 @@ Route::resources([
     'destinatarios' => DestinatarioController::class,
     'remitentes' => RemitenteController::class,
     'transportadoras' => TransportadoraController::class,
+    'alertas' => AlertaController::class,
 ]);
