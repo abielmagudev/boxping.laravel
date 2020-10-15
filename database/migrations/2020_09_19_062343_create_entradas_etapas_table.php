@@ -21,12 +21,12 @@ class CreateEntradasEtapasTable extends Migration
             $table->decimal('altura',6,2)->nullable();
             $table->decimal('largo',6,2)->nullable();
             $table->string('medida_volumen')->nullable();
+            $table->unsignedInteger('zona_id')->nullable();
             $table->unsignedInteger('created_by');
             $table->unsignedInteger('updated_by');
             $table->timestamps();
             $table->unsignedBigInteger('entrada_id')->index();
             $table->unsignedInteger('etapa_id')->index();
-            $table->unsignedInteger('zona_id')->nullable();
             $table->foreign('entrada_id')
                   ->references('id')->on('entradas')
                   ->onDelete('cascade');
