@@ -4,11 +4,13 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Alerta extends Model
+class Observacion extends Model
 {
+    protected $table = 'observaciones';
+    
     protected $fillable = [
+        'tipo',
         'nombre',
-        'nivel',
         'descripcion',
     ];
 }

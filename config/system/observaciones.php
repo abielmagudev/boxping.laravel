@@ -4,15 +4,15 @@
 
 return [
     'aviso' => [
-        'color' => '#FECE06',
+        'color' => '#FFC108',
         'descripcion' => 'No es necesario internvenir ni detener el proceso',
     ],
-    'advertencia' => [
-        'color' => '#E55905',
+    'alerta' => [
+        'color' => '#FF8218',
         'descripcion' => 'Intervenir para solucionar pero no detener el proceso.',
     ],
     'critico' => [
-        'color' => '#B20409',
-        'descripcion' => 'Detener el proceso y intervenir para una solucíon.',
+        'color' => '#FF2A2A',
+        'descripcion' => 'Detener el proceso e intervenir para una solucíon.',
     ],
 ];

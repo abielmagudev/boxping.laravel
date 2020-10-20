@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class AlertasTableSeeder extends Seeder
+class ObservacionesTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,6 +11,6 @@ class AlertasTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Alerta::class, 7)->create();
+        factory(App\Observacion::class, 7)->create();
     }
 }
