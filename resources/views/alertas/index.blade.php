@@ -3,13 +3,13 @@
 <div class="card">
     <div class="card-header">
         <div class="float-right">
-            <a href="{{ route('observaciones.create') }}" class="btn btn-primary btn-sm">
+            <a href="{{ route('alertas.create') }}" class="btn btn-primary btn-sm">
                 <b>+</b>
             </a>
         </div>
         <div>
-            <span>Observaciones</span>
-            <span class="badge badge-primary">{{ $observaciones->count() }}</span>
+            <span>Alertas</span>
+            <span class="badge badge-primary">{{ $alertas->count() }}</span>
         </div>
     </div>
     <div class="card-body p-0">
@@ -17,23 +17,23 @@
             <table class="table table-hover">
                 <thead>
                     <tr class="small">
-                        <th>Tipo</th>
+                        <th>Nivel</th>
                         <th>Nombre</th>
                         <th colspan="2">Descripción</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($observaciones as $observacion)
+                    @foreach($alertas as $alerta)
                     <tr>
                         <td style="width:1%">
-                            <span class="badge d-block" style="background-color:{{ $config[$observacion->tipo]['color'] }}">
-                                {{ ucfirst($observacion->tipo) }}
+                            <span class="badge d-block" style="background-color:{{ $config[$alerta->nivel]['color'] }}">
+                                {{ ucfirst($alerta->nivel) }}
                             </span>
                         </td>
-                        <td>{{ $observacion->nombre }}</td>
-                        <td>{{ $observacion->descripcion }}</td>
+                        <td>{{ $alerta->nombre }}</td>
+                        <td>{{ $alerta->descripcion }}</td>
                         <td class="text-right">
-                            <a href="{{ route('observaciones.edit', $observacion) }}" class="btn btn-warning btn-sm">e</a>
+                            <a href="{{ route('alertas.edit', $alerta) }}" class="btn btn-warning btn-sm">e</a>
                         </td>
                     </tr>
                     @endforeach

@@ -4,14 +4,14 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ObservacionSaveRequest extends FormRequest
+class AlertaSaveRequest extends FormRequest
 {
     public function __construct()
     {
         parent::__construct();
 
-        $tipos = array_keys( config('system.observaciones') );
-        $this->tipos = implode(',', $tipos);
+        $niveles = array_keys( config('system.alertas') );
+        $this->niveles = implode(',', $niveles);
     }
 
     /**
@@ -31,11 +31,11 @@ class ObservacionSaveRequest extends FormRequest
      */
     public function rules()
     {
-        $observacion_id = $this->route('observacion')->id ?? 0;
+        $alerta_id = $this->route('alerta')->id ?? 0;
 
         return [
-            'tipo' => ['required', 'in:' . $this->tipos],
-            'nombre' => ['required', 'unique:observaciones,nombre,' . $observacion_id],
+            'nivel' => ['required', 'in:' . $this->niveles],
+            'nombre' => ['required', 'unique:alertas,nombre,' . $alerta_id],
             'descripcion' => 'nullable',
         ];
     }
@@ -45,8 +45,8 @@ class ObservacionSaveRequest extends FormRequest
         return [
             'nombre.required' => __('Escribe el nombre de obsevación'),
             'nombre.unique' => __('Escribe un nombre diferente de observación'),
-            'tipo.required' => __('Selecciona el tipo de observación'),
-            'tipo.in' => __('Selecciona un tipo válido de observación'),
+            'nivel.required' => __('Selecciona el nivel de alerta'),
+            'nivel.in' => __('Selecciona un nivel válido de alerta'),
         ];
     }
 }

@@ -3,15 +3,15 @@
 // nivel => [color, descripcion] - props
 
 return [
-    'aviso' => [
+    'bajo' => [
         'color' => '#FFC108',
         'descripcion' => 'No es necesario internvenir ni detener el proceso',
     ],
-    'alerta' => [
+    'medio' => [
         'color' => '#FF8218',
         'descripcion' => 'Intervenir para solucionar pero no detener el proceso.',
     ],
-    'critico' => [
+    'alto' => [
         'color' => '#FF2A2A',
         'descripcion' => 'Detener el proceso e intervenir para una solucíon.',
     ],

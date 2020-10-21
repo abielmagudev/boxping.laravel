@@ -24,12 +24,12 @@ class DatabaseSeeder extends Seeder
             TransportadorasTableSeeder::class,
             UsersTableSeeder::class,
             VehiculosTableSeeder::class,
-            ObservacionesTableSeeder::class,
+            AlertasTableSeeder::class,
             EtapasTableSeeder::class,
             EtapaZonasTableSeeder::class,
             EntradasTableSeeder::class,
             EntradasEtapasTableSeeder::class,
-            EtapasObservacionesTableSeeder::class,
+            // EtapasAlertasTableSeeder::class,
             EntradaComentariosTableSeeder::class,
         ]);
     }

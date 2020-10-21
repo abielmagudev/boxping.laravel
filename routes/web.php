@@ -37,14 +37,11 @@ Route::prefix('etapas')->group( function () {
          ->except(['index', 'show']);
 });
 
-Route::resource('observaciones',  ObservacionController::class)->parameters([
-    'observaciones' => 'observacion',
-]);
-
 Route::resources([
     'clientes' => ClienteController::class,
     'consolidados' => ConsolidadoController::class,
     'destinatarios' => DestinatarioController::class,
     'remitentes' => RemitenteController::class,
     'transportadoras' => TransportadoraController::class,
+    'alertas' => AlertaController::class,
 ]);

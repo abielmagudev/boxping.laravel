@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateObservacionesTable extends Migration
+class CreateAlertasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateObservacionesTable extends Migration
      */
     public function up()
     {
-        $tipos = array_keys( config('system.observaciones') );
+        $niveles = array_keys( config('system.alertas') );
 
-        Schema::create('observaciones', function (Blueprint $table) use ($tipos) {
+        Schema::create('alertas', function (Blueprint $table) use ($niveles) {
             $table->bigIncrements('id');
-            $table->enum('tipo', $tipos);
+            $table->enum('nivel', $niveles);
             $table->string('nombre')->unique();
             $table->text('descripcion')->nullable();
             $table->timestamps();
@@ -31,6 +31,6 @@ class CreateObservacionesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('observaciones');
+        Schema::dropIfExists('alertas');
     }
 }
