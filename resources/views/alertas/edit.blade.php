@@ -3,7 +3,7 @@
 @include('components.error')
 <div class="card">
     <div class="card-header">
-        <span>Editar alertaa</span>
+        <span>Editar alerta</span>
     </div>
     <div class="card-body">
         <form action="{{ route('alertas.update', $alerta) }}" method="post" autocomplete="off">
