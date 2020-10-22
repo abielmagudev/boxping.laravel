@@ -9,8 +9,9 @@ class Zona extends Model
     protected $table = 'etapa_zonas';
 
     protected $fillable = [
-        'etapa_id',
         'nombre',
+        'descripcion',
+        'etapa_id',
     ];
 
     public function etapa()

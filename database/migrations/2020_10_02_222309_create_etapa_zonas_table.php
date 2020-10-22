@@ -11,6 +11,7 @@ class CreateEtapaZonasTable extends Migration
         Schema::create('etapa_zonas', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('nombre')->index();
+            $table->text('descripcion')->nullable();
             $table->timestamps();
             $table->unsignedBigInteger('etapa_id')->index();
             $table->foreign('etapa_id')

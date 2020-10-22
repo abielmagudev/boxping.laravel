@@ -15,7 +15,8 @@ class ZonaSaveRequest extends FormRequest
     public function rules()
     {
         return [
-            'nombre' => 'required'
+            'nombre' => 'required',
+            'descripcion' => 'nullable',
         ];
     }
     
