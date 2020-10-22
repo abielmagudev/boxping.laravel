@@ -19,9 +19,9 @@ class ZonaController extends Controller
 
     public function store(SaveRequest $request, Etapa $etapa)
     {
-        $data = array_merge(['etapa_id' => $etapa->id], $request->validated());
+        $validated = array_merge(['etapa_id' => $etapa->id], $request->validated());
 
-        if( ! Zona::create( $data ) )
+        if( ! Zona::create( $validated ) )
             return back()->with('failure', 'Error al guardar nueva zona');
 
         return redirect()->route('etapas.show', $etapa)->with('success', 'Zona guardada');
