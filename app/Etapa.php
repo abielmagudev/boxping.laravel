@@ -13,16 +13,11 @@ class Etapa extends Model
         'nombre',
         'slug',
         'realiza_medicion',
-        'medida_peso',
-        'medida_volumen',
+        'unica_medida_peso',
+        'unica_medida_volumen',
         'created_by',
         'updated_by',
     ];
-
-    public function entradas()
-    {
-        return $this->belongsToMany(Entrada::class, 'entradas_etapas');
-    }
 
     public function zonas()
     {

@@ -13,8 +13,8 @@ class EtapaSaveRequest extends FormRequest
     public function __construct()
     {
         parent::__construct();
-        $this->medidas_peso = implode(',', config('system.measures.peso'));
-        $this->medidas_volumen = implode(',', config('system.measures.volumen'));
+        $this->medidas_peso = implode(',', config('system.medidas.peso'));
+        $this->medidas_volumen = implode(',', config('system.medidas.volumen'));
     }
 
     public function authorize()
@@ -29,8 +29,8 @@ class EtapaSaveRequest extends FormRequest
         return [
             'nombre' => ['required','regex:/^[A-Za-z0-9 ]+$/','unique:etapas,id,' . $this->etapa_id],
             'realiza_medicion' => ['required','boolean'],
-            'medida_peso' => ['nullable','in:' . $this->medidas_peso],
-            'medida_volumen' => ['nullable','in:' . $this->medidas_volumen],
+            'unica_medida_peso' => ['nullable','in:' . $this->medidas_peso],
+            'unica_medida_volumen' => ['nullable','in:' . $this->medidas_volumen],
         ];
     }
 
@@ -41,8 +41,8 @@ class EtapaSaveRequest extends FormRequest
             'nombre.regex' => __('Solo letras, números y espacios debe contener el nombre'),
             'nombre.unique' => __('Escribe un nombre diferente de la etapa'),
             'realiza_medicion.required' => __('Selecciona una opción de medición'),
-            'medida_peso.in' => __('Selecciona una opción valida en peso'),
-            'medida_volumen.in' => __('Selecciona una opción valida en volúmen'),
+            'unica_medida_peso.in' => __('Selecciona una opción valida en peso'),
+            'unica_medida_volumen.in' => __('Selecciona una opción valida en volúmen'),
         ];
     }
 }

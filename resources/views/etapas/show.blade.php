@@ -1,7 +1,7 @@
 @extends('app')
 @section('content')
 <div class="row">
-    <div class="col-sm">
+    <div class="col-sm col-sm-4">
         <div class="card">
             <div class="card-header d-flex align-items-center justify-content-between">
                 <span>Etapa</span>
@@ -10,34 +10,37 @@
                 </span>
             </div>
             <div class="card-body">
-                <table class="table table-borderless">
-                    <tbody>
-                        <tr>
-                            <td class="small text-muted">Nombre</td>
-                            <td>{{ $etapa->nombre }}</td>
-                        </tr>
-                        <tr>
-                            <td class="small text-muted">Realiza medición</td>
-                            <td>{{ $etapa->realiza_medicion ? 'Si' : 'No' }}</td>
-                        </tr>
-                        <tr>
-                            <td class="small text-muted">Medida de peso</td>
-                            <td class="text-capitalize">{{ $etapa->medida_peso?? 'Opcional' }}</td>
-                        </tr>
-                        <tr>
-                            <td class="small text-muted text-nowrap">Medida de volúmen</td>
-                            <td class="text-capitalize">{{ $etapa->medida_volumen ?? 'Opcional' }}</td>
-                        </tr>
-                        <tr>
-                            <td class="small text-muted">Actualizado</td>
-                            <td>
-                                <span>{{ $etapa->updater->name }}</span>
-                                <br>
-                                <span>{{ $etapa->updated_at }}</span>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                <p>
+                    <span>{{ $etapa->nombre }}</span>
+                    <br>
+                    <small class="text-muted">Nombre</small>
+                </p>
+
+                <p>
+                    <span>{{ $etapa->realiza_medicion ? 'Si' : 'No' }}</span>
+                    <br>
+                    <small class="text-muted">Realiza medición</small>
+                </p>
+
+                <p>
+                    <span class="text-capitalize">{{ $etapa->unica_medida_peso ?? 'Opcional' }}</span>
+                    <br>
+                    <small class="text-muted">Única medida de peso</small>
+                </p>
+
+                <p>
+                    <span class="text-capitalize">{{ $etapa->unica_medida_volúmen ?? 'Opcional' }}</span>
+                    <br>
+                    <small class="text-muted">Única medida de volúmen</small>
+                </p>
+
+                <p>
+                    <span>{{ $etapa->updater->name }}</span>
+                    <br>
+                    <span>{{ $etapa->updated_at }}</span>
+                    <br>
+                    <small class="text-muted">Actualización</small>
+                </p>
             </div>
         </div>
     </div>
@@ -61,6 +64,7 @@
                         <thead>
                             <tr class="small">
                                 <th>Nombre</th>
+                                <th>Descripción</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -68,6 +72,7 @@
                             @foreach($etapa->zonas->sortByDesc('id') as $zona)
                             <tr>
                                 <td>{{ $zona->nombre }}</td>
+                                <td>{{ $zona->descripcion }}</td>
                                 <td class="text-right">
                                     <a href="{{ route('zonas.edit', [$etapa, $zona]) }}" class="btn btn-warning btn-sm">e</a>
                                 </td>

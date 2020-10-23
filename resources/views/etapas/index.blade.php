@@ -30,8 +30,8 @@
                             <a href="{{ route('etapas.show', $etapa) }}">{{ $etapa->nombre }}</a>
                         </td>
                         <td>{{ $etapa->realiza_medicion ? 'Si' : 'No' }}</td>
-                        <td class="text-capitalize">{{ $etapa->medida_peso ?? 'opcional' }}</td>
-                        <td class="text-capitalize">{{ $etapa->medida_volumen ?? 'Opcional' }}</td>
+                        <td class="text-capitalize {{ $etapa->unica_medida_peso ? '' : 'text-muted' }}">{{ $etapa->unica_medida_peso ?? 'opcional' }}</td>
+                        <td class="text-capitalize {{ $etapa->unica_medida_volumen ? '' : 'text-muted' }}">{{ $etapa->unica_medida_volumen ?? 'opcional' }}</td>
                     </tr>
                     @endforeach
                 </tbody>   

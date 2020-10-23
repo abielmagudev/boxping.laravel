@@ -14,9 +14,6 @@ class CreateEtapaZonasTable extends Migration
             $table->text('descripcion')->nullable();
             $table->timestamps();
             $table->unsignedBigInteger('etapa_id')->index();
-            $table->foreign('etapa_id')
-                  ->references('id')->on('etapas')
-                  ->onDelete('cascade');
         });
     }
 

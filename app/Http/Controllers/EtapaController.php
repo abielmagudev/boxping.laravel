@@ -16,12 +16,14 @@ class EtapaController extends Controller
         return view('etapas.index')->with('etapas', Etapa::all()->sortByDesc('id'));
     }
 
-    public function create()
+    public function create(Etapa $etapa)
     {
+        $etapa->realiza_medicion = 1;
+
         return view('etapas.create', [
-            'etapa' => new Etapa,
-            'medidas_peso' => config('system.measures.peso'),
-            'medidas_volumen' => config('system.measures.volumen'),
+            'etapa' => $etapa,
+            'medidas_peso' => config('system.medidas.peso'),
+            'medidas_volumen' => config('system.medidas.volumen'),
         ]);
     }
 
@@ -44,8 +46,8 @@ class EtapaController extends Controller
     {
         return view('etapas.edit', [
             'etapa' => $etapa,
-            'medidas_peso' => config('system.measures.peso'),
-            'medidas_volumen' => config('system.measures.volumen'),
+            'medidas_peso' => config('system.medidas.peso'),
+            'medidas_volumen' => config('system.medidas.volumen'),
         ]);
     }
 
