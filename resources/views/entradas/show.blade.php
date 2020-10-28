@@ -25,5 +25,5 @@
 </div>
 <br>
 
-@include('entradas.modals.comentarios')
+@include('entradas.show.modal-comentarios')
 @endsection

@@ -3,9 +3,13 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Ahex\Entrada\Domain\Attributes;
+use App\Ahex\Entrada\Domain\Scopes;
 
 class Entrada extends Model
 {
+    use Attributes, Scopes;
+
     protected $fillable = array(
         
         // Entrada
@@ -40,10 +44,6 @@ class Entrada extends Model
         'updated_by',
     );
 
-
-
-    // Entrada
-
     public function consolidado()
     {
         return $this->belongsTo(Consolidado::class);
@@ -53,9 +53,6 @@ class Entrada extends Model
     {
         return $this->belongsTo(Cliente::class);
     }
-
-
-    // Trayectoria
 
     public function remitente()
     {
@@ -67,9 +64,6 @@ class Entrada extends Model
         return $this->belongsTo(Destinatario::class);
     }
 
-
-    // Cruce
-
     public function vehiculo()
     {
         return $this->belongsTo(Vehiculo::class);
@@ -79,9 +73,6 @@ class Entrada extends Model
     {
         return $this->belongsTo(Conductor::class);
     }
-
-
-    // Reempaque
 
     public function codigor()
     {
@@ -93,16 +84,10 @@ class Entrada extends Model
         return $this->belongsTo(Reempacador::class);
     }
 
-
-    // Verificacion
-
     public function verificador()
     {
         return $this->belongsTo(User::class, 'verificado_by');
     }
-
-
-    // Log
 
     public function creator()
     {
@@ -114,8 +99,10 @@ class Entrada extends Model
         return $this->belongsTo(User::class, 'updated_by');
     }
 
-
-    // With
+    public function comentarios()
+    {
+        return $this->hasMany(Comentario::class);
+    }
 
     public function etapas()
     {
@@ -128,60 +115,11 @@ class Entrada extends Model
                         'altura',
                         'largo',
                         'medida_volumen',
+                        'zona_id',
+                        'alertas_id',
                         'created_by',
                         'updated_by',
-                        'zona_id',
                     ])
                     ->withTimestamps();
-    }
-
-    public function comentarios()
-    {
-        return $this->hasMany(Comentario::class);
-    }
-    
-
-    // Scopes
-
-    public function scopeWithEtapas()
-    {
-        return $this->with('etapas');
-    }
-
-    public function scopeWithComentarios($query)
-    {
-        return $query->with(['comentarios.creator']);
-    }
-    
-
-    // Atributos
-
-    public function getAliasNumeroAttribute()
-    {
-        if( $this->cliente_alias_numero )
-            return $this->cliente->alias . $this->numero;
-        
-        return;
-    }
-
-    public function getCruceHorarioAttribute()
-    {
-        if( is_null($this->cruce_fecha) && is_null($this->cruce_hora) )
-            return '';
-
-        return date('h:i a', strtotime($this->cruce_hora)) . ', ' . date('d M,Y', strtotime($this->cruce_fecha));
-    }
-
-    public function getReempacadoHorarioAttribute()
-    {
-        if( is_null($this->reempacado_fecha) && is_null($this->reempacado_hora) )
-            return '';
-
-        return date('h:i a', strtotime($this->reempacado_hora)) . ', ' . date('d M,Y', strtotime($this->reempacado_fecha));
-    }
-
-    public function getHasVerificacionAttribute()
-    {
-        return is_string($this->verificado_at) && is_integer($this->verificado_by);
     }
 }

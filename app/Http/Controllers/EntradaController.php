@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Cliente;
 use App\Entrada;
+use App\Cliente;
+use App\Comentario;
+use App\EntradaEtapa;
+use App\EntradaEtapaPivot;
 
 use App\Ahex\Entrada\Application\CastViewCreate;
 use App\Ahex\Entrada\Application\CastViewEdit;
@@ -47,7 +50,11 @@ class EntradaController extends Controller
 
     public function show(Entrada $entrada)
     {
-        return view('entradas.show')->with('entrada', $entrada);
+        return view('entradas.show', [
+            'entrada' => $entrada,
+            'comentarios' => Comentario::where('entrada_id', $entrada->id)->orderBy('id', 'desc')->get(),
+            'config_alertas' => config('system.alertas'),
+        ]);
     }
 
     public function edit(EditRequest $request, Entrada $entrada)

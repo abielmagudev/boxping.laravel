@@ -18,19 +18,18 @@
                     <tr class="bg-white">
                         <th>Nombre</th>
                         <th>Peso</th>
-                        <th>Medida de peso</th>
+                        <th>Medida</th>
                         <th>Ancho</th>
                         <th>Altura</th>
                         <th>Largo</th>
-                        <th>Medida de volúmen</th>
+                        <th>Medida</th>
                         <th>Zona</th>
-                        <th>Actualizado</th>
+                        <th>Alertas</th>
                         <th></th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php $etapas = $entrada->etapas->sortBy('id') ?>
-                    @foreach($etapas as $etapa)
+                    @foreach($entrada->etapas as $etapa)
                     <tr>
                         <td class="align-middle">{{ $etapa->nombre }}</td>
 
@@ -50,15 +49,27 @@
                         </td>
 
                         @endif
-                        <td>
+                        <td class="align-middle">
                             @if( $etapa->pivot->zona )
                             <span>{{ $etapa->pivot->zona->nombre }}</span>
                             @endif
                         </td>
-                        <td class="align-middle text-nowrap">
-                            <p class="m-0">{{ $etapa->pivot->updater->name }}</p>
-                            <p class="m-0">{{ $etapa->pivot->updated_at }}</p>
+                        <td class="align-middle text-center">
+                        @if( $etapa_alertas = $etapa->pivot->alertas() )
+                            @foreach($etapa_alertas as $alerta)
+                                @component('components.icon-alert')
+                                    @slot('color', $config_alertas[$alerta->nivel]['color'])
+                                    @slot('nombre', $alerta->nombre)
+                                @endcomponent
+                            @endforeach
+                        @endif
                         </td>
+                        <?php /*
+                        <td class="align-middle text-nowrap">
+                            <p class="m-0">{-{ $etapa->updater->name }}</p>
+                            <p class="m-0">{-{ $etapa->updated_at }}</p>
+                        </td>
+                        */ ?>
                         <td class="align-middle text-nowrap">
                             <a href="{{ route('entrada.etapas.edit', ['entrada' => $entrada, 'etapa' => $etapa]) }}" class="btn btn-warning btn-sm">e</a>
                         </td>

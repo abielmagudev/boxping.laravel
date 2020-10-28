@@ -45,15 +45,17 @@
             <span>{{ $entrada->remitente->telefono }}</span>
         </div>
 
+        <!-- 
         <div class="w-100 mb-2"></div>
 
         <div class="col-sm col-sm-3">
             <small class="text-muted">Actualizado</small>
         </div>
         <div class="col-sm">
-            <p class="m-0">{{ $entrada->updater->name }}</p>
-            <p class="m-0">{{ $entrada->updated_at }}</p>
+            <p class="m-0">{ $entrada->updater->name }</p>
+            <p class="m-0">{ $entrada->updated_at }</p>
         </div>
+        -->
     </div>
     <br>
 
@@ -69,5 +71,5 @@
 
     @endif
 
-    @include('entradas.modals.search-remitentes')
+    @include('entradas.show.modal-search-remitentes')
 </div>
