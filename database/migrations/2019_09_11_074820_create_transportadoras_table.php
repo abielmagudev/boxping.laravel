@@ -15,7 +15,7 @@ class CreateTransportadorasTable extends Migration
     {
         Schema::create('transportadoras', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('nombre')->unique();
+            $table->string('nombre')->unique()->index();
             $table->string('web')->nullable();
             $table->string('telefono')->nullable();
             $table->text('notas')->nullable();

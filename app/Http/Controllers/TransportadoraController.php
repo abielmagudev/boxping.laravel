@@ -51,6 +51,6 @@ class TransportadoraController extends Controller
         if( ! $transportadora->delete() )
             return back()->with('failure', 'Error al eliminar transportadora');
 
-        return redirect()->route('transportadoras.index')->with('success', "Transportadora {$nombre} eliminada");
+        return redirect()->route('transportadoras.index')->with('success', "{$nombre} eliminada");
     }
 }
