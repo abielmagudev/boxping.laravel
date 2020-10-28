@@ -14,4 +14,7 @@
         </form>
     </div>
 </div>
+<br>
+@include('transportadoras._eliminar')
+<br>
 @endsection
