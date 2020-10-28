@@ -3,7 +3,7 @@
 @include('components.error')
 @include('entradas.show.acciones')
 
-<div class="row" style="height:512px">
+<div class="row" style="height:448px">
     <!-- Informacion -->
     <div class="col-sm mb-3 mb-md-0">
         @include('entradas.show.informacion.layout')

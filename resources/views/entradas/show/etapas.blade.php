@@ -64,13 +64,7 @@
                             @endforeach
                         @endif
                         </td>
-                        <?php /*
-                        <td class="align-middle text-nowrap">
-                            <p class="m-0">{-{ $etapa->updater->name }}</p>
-                            <p class="m-0">{-{ $etapa->updated_at }}</p>
-                        </td>
-                        */ ?>
-                        <td class="align-middle text-nowrap">
+                        <td class="align-middle text-right">
                             <a href="{{ route('entrada.etapas.edit', ['entrada' => $entrada, 'etapa' => $etapa]) }}" class="btn btn-warning btn-sm">e</a>
                         </td>
                     </tr>
