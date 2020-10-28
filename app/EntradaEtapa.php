@@ -6,8 +6,11 @@ use Illuminate\Database\Eloquent\Relations\Pivot;
 
 class EntradaEtapa extends Pivot
 {
-    public $incrementing = true;
-
+    public function zona()
+    {
+        return $this->belongsTo(Zona::class, 'zona_id');
+    }
+    
     public function creator()
     {
         return $this->belongsTo(User::class, 'created_by');
@@ -18,8 +21,11 @@ class EntradaEtapa extends Pivot
         return $this->belongsTo(User::class, 'updated_by');
     }
 
-    public function zona()
+    public function scopeAlertas()
     {
-        return $this->belongsTo(Zona::class, 'zona_id');
+        if( ! $this->alertas_id )
+            return;
+
+        return Alerta::whereIn('id', json_decode($this->alertas_id))->get();
     }
 }

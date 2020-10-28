@@ -4,15 +4,15 @@
 
 return [
     'bajo' => [
-        'color' => '#FFC108',
+        'color' => '#FFC706',
         'descripcion' => 'No es necesario internvenir ni detener el proceso',
     ],
     'medio' => [
-        'color' => '#FF8218',
+        'color' => '#FF8706',
         'descripcion' => 'Intervenir para solucionar pero no detener el proceso.',
     ],
     'alto' => [
-        'color' => '#FF2A2A',
+        'color' => '#FF060D',
         'descripcion' => 'Detener el proceso e intervenir para una solucíon.',
     ],
 ];

@@ -14,14 +14,14 @@ class CreateEntradasEtapasTable extends Migration
     public function up()
     {
         Schema::create('entradas_etapas', function (Blueprint $table) {
-            $table->bigIncrements('id');
             $table->decimal('peso',6,2)->nullable();
             $table->string('medida_peso')->nullable();
             $table->decimal('ancho',6,2)->nullable();
             $table->decimal('altura',6,2)->nullable();
             $table->decimal('largo',6,2)->nullable();
             $table->string('medida_volumen')->nullable();
-            $table->unsignedInteger('zona_id')->nullable();
+            $table->unsignedInteger('zona_id')->nullable()->index();
+            $table->string('alertas_id')->nullable()->index();
             $table->unsignedInteger('created_by');
             $table->unsignedInteger('updated_by');
             $table->timestamps();

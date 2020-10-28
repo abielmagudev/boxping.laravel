@@ -29,7 +29,6 @@ class DatabaseSeeder extends Seeder
             EtapaZonasTableSeeder::class,
             EntradasTableSeeder::class,
             EntradasEtapasTableSeeder::class,
-            // EtapasAlertasTableSeeder::class,
             EntradaComentariosTableSeeder::class,
         ]);
     }

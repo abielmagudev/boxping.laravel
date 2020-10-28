@@ -32,6 +32,7 @@
             @csrf    
             @include('entradas.etapas._medidas')
             @include('entradas.etapas._zonas')
+            @include('entradas.etapas._alertas')
             <br>
             <button class="btn btn-success" type="submit" name="etapa" value="{{ $etapa->id }}">Guardar etapa</button>
             <a href="{{ route('entradas.show', $entrada) }}" class="btn btn-secondary">Cancelar</a>

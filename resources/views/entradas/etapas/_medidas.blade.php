@@ -13,14 +13,14 @@
             <small>Medida de peso</small>
         </label>
         <select name="medida_peso" id="select-medida_peso" class="form-control">
-        @if( ! $etapa->medida_peso )
+        @if( ! $etapa->unica_medida_peso )
             <?php $medida_peso_stored = $etapa->pivot->medida_peso ?? null ?>
             @foreach($medidas_peso as $abbr => $medida)
             <option value="{{ $medida }}" {{ selectable(old('medida_peso', $medida_peso_stored), $medida) }}>{{ ucfirst($medida) }}</option>
             @endforeach
 
         @else
-            <option value="{{ $etapa->medida_peso }}">{{ ucfirst($etapa->medida_peso) }}</option>
+            <option value="{{ $etapa->unica_medida_peso }}">{{ ucfirst($etapa->unica_medida_peso) }}</option>
 
         @endif
         </select>
@@ -55,14 +55,14 @@
             <small>Medida de volúmen</small>
         </label>
         <select name="medida_volumen" id="select-medida_volumen" class="form-control">
-        @if( ! $etapa->medida_volumen )
+        @if( ! $etapa->unica_medida_volumen )
             <?php $medida_volumen_stored = $etapa->pivot->medida_peso ?? null ?>
             @foreach($medidas_volumen as $abbr => $medida)
             <option value="{{ $medida }}" {{ selectable(old('medida_volumen', $medida_volumen_stored), $medida) }}>{{ ucfirst($medida) }}</option>
             @endforeach
         
         @else
-            <option value="{{ $etapa->medida_volumen }}">{{ ucfirst($etapa->medida_volumen) }}</option>
+            <option value="{{ $etapa->unica_medida_volumen }}">{{ ucfirst($etapa->unica_medida_volumen) }}</option>
 
         @endif
         </select>

@@ -13,8 +13,8 @@ Trait FillingTrait
             'nombre' => $validated['nombre'],
             'slug' => Slugger::do( $validated['nombre'] ),
             'realiza_medicion' => $validated['realiza_medicion'] ? 1 : 0,
-            'medida_peso' => isset($validated['medida_peso']) ? $validated['medida_peso'] : null,
-            'medida_volumen' => isset($validated['medida_volumen']) ? $validated['medida_volumen'] : null,
+            'unica_medida_peso' => isset($validated['unica_medida_peso']) ? $validated['unica_medida_peso'] : null,
+            'unica_medida_volumen' => isset($validated['unica_medida_volumen']) ? $validated['unica_medida_volumen'] : null,
             'updated_by' => Fakeuser::live(),
         ];
 

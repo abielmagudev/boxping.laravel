@@ -16,6 +16,7 @@ Trait FillingTrait
             'largo' => $validated['largo'] ?? null,
             'medida_volumen' => $validated['medida_volumen'] ?? null,
             'zona_id' => $validated['zona'] ?? null,
+            'alertas_id' => isset($validated['alertas']) ? json_encode($validated['alertas']) : null,
             'updated_by' => Fakeuser::live(),
         ];
 

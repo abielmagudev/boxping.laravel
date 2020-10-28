@@ -13,8 +13,8 @@ class EntradaEtapaSaveRequest extends FormRequest
     {
         parent::__construct();
 
-        $this->medidas_peso = implode(',', config('system.measures.peso'));
-        $this->medidas_volumen = implode(',', config('system.measures.volumen'));
+        $this->medidas_peso = implode(',', config('system.medidas.peso'));
+        $this->medidas_volumen = implode(',', config('system.medidas.volumen'));
     }
 
     public function authorize()
@@ -33,6 +33,7 @@ class EntradaEtapaSaveRequest extends FormRequest
             'largo' => ['nullable','min:0'],
             'medida_volumen' => ['nullable','in:' . $this->medidas_volumen],
             'zona' => ['nullable','exists:etapa_zonas,id'],
+            'alertas' => ['nullable','array'],
         ];
     }
 
