@@ -7,9 +7,7 @@
     <title>{{ config('app.name') }}</title>
 </head>
 <body>
-    <nav class="navbar navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">Navbar</a>
-    </nav>
+    @include('layout.navbar')
     <br>
     <div class="container">
         @include('components.notification')

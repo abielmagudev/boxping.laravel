@@ -14,7 +14,7 @@ class VehiculoController extends Controller
      */
     public function index()
     {
-        //
+        return 'Vehiculos...';
     }
 
     /**

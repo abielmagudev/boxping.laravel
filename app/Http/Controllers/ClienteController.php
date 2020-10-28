@@ -14,7 +14,7 @@ class ClienteController extends Controller
      */
     public function index()
     {
-        //
+        return 'Clientes...';
     }
 
     /**

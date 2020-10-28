@@ -14,7 +14,7 @@ class ReempacadorController extends Controller
      */
     public function index()
     {
-        //
+        return 'Reempacadores...';
     }
 
     /**

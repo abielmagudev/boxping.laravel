@@ -14,7 +14,7 @@ class CodigorController extends Controller
      */
     public function index()
     {
-        //
+        return 'Codigos de reempacado...';
     }
 
     /**

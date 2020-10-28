@@ -15,33 +15,39 @@ Route::get('/', function () {
     return view('app');
 });
 
-Route::resource('entradas', 'EntradaController');
+Route::resources([
+    'alertas' => AlertaController::class,
+    'clientes' => ClienteController::class,
+    'codigosr' => CodigorController::class,
+    'conductores' => ConductorController::class,
+    'consolidados' => ConsolidadoController::class,
+    'destinatarios' => DestinatarioController::class,
+    'entradas' => EntradaController::class,
+    'etapas' => EtapaController::class,
+    'reempacadores' => ReempacadorController::class,
+    'remitentes' => RemitenteController::class,
+    'transportadoras' => TransportadoraController::class,
+    'vehiculos' => VehiculoController::class,
+]);
+
+// Entrada > Comentario, Destinario, Remitente
 Route::prefix('entradas')->group( function () {
+    Route::post('{entrada}/comentarios', 'ComentarioController@store')->name('comentarios.store');
+    Route::get('{entrada}/agregar/remitente', 'EntradaController@agregarRemitente')->name('entradas.agregar.remitente');
+    Route::get('{entrada}/agregar/destinatario', 'EntradaController@agregarDestinatario')->name('entradas.agregar.destinatario');
     Route::resource('{entrada}/etapas', 'EntradaEtapasController')
-        ->except(['index', 'show'])
-        ->names([
+         ->except(['index', 'show'])
+         ->names([
             'create'  => 'entrada.etapas.create',
             'store'   => 'entrada.etapas.store',
             'edit'    => 'entrada.etapas.edit',
             'update'  => 'entrada.etapas.update',
             'destroy' => 'entrada.etapas.destroy',
-        ]);
-    Route::post('{entrada}/comentarios', 'ComentarioController@store')->name('comentarios.store');
-    Route::get('{entrada}/agregar/remitente', 'EntradaController@agregarRemitente')->name('entradas.agregar.remitente');
-    Route::get('{entrada}/agregar/destinatario', 'EntradaController@agregarDestinatario')->name('entradas.agregar.destinatario');
+    ]);
 });
 
-Route::resource('etapas', 'EtapaController');
+// Etapa > Zonas
 Route::prefix('etapas')->group( function () {
     Route::resource('{etapa}/zonas', 'ZonaController')
          ->except(['index', 'show']);
 });
-
-Route::resources([
-    'clientes' => ClienteController::class,
-    'consolidados' => ConsolidadoController::class,
-    'destinatarios' => DestinatarioController::class,
-    'remitentes' => RemitenteController::class,
-    'transportadoras' => TransportadoraController::class,
-    'alertas' => AlertaController::class,
-]);
