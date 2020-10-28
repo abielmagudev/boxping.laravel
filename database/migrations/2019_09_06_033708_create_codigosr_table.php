@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCodigosReempacadoTable extends Migration
+class CreateCodigosrTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreateCodigosReempacadoTable extends Migration
      */
     public function up()
     {
-        Schema::create('codigos_reempacado', function (Blueprint $table) {
+        Schema::create('codigosr', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('nombre');
+            $table->string('nombre')->index();
             $table->text('descripcion')->nullable();
             $table->timestamps();
         });
@@ -28,6 +28,6 @@ class CreateCodigosReempacadoTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('codigos_reempacado');
+        Schema::dropIfExists('codigosr');
     }
 }
