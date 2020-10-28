@@ -12,10 +12,10 @@
       <div class="card-header bg-transparent">
         <ul class="nav nav-tabs nav-fill card-header-tabs" id="tabsComentarios" role="tablist">
           <li class="nav-item" role="presentation">
-            <a class="nav-link {{ $entrada->comentarios->count() > 0 ? 'active' : 'disabled' }}" id="comentarios-tab" data-toggle="tab" href="#comentarios" role="tab" aria-controls="comentarios" aria-selected="true">Comentarios</a>
+            <a class="nav-link {{ $comentarios->count() > 0 ? 'active' : 'disabled' }}" id="comentarios-tab" data-toggle="tab" href="#comentarios" role="tab" aria-controls="comentarios" aria-selected="true">Comentarios</a>
           </li>
           <li class="nav-item" role="presentation">
-            <a class="nav-link {{ $entrada->comentarios->count() == 0 ? 'active' : '' }}" id="nueva-observacion-tab" data-toggle="tab" href="#nuevo-comentario" role="tab" aria-controls="nuevo-comentario" aria-selected="false">Nuevo comentario</a>
+            <a class="nav-link {{ $comentarios->count() == 0 ? 'active' : '' }}" id="nueva-observacion-tab" data-toggle="tab" href="#nuevo-comentario" role="tab" aria-controls="nuevo-comentario" aria-selected="false">Nuevo comentario</a>
           </li>
         </ul>
       </div>
@@ -24,14 +24,13 @@
         <div class="tab-content" id="tabsContentComentarios">
 
           <!-- Lista de comentarios -->
-          <div class="tab-pane fade {{ $entrada->comentarios->count() > 0 ? 'show active' : '' }}" id="comentarios" role="tabpanel" aria-labelledby="comentarios-tab">
+          <div class="tab-pane fade {{ $comentarios->count() > 0 ? 'show active' : '' }}" id="comentarios" role="tabpanel" aria-labelledby="comentarios-tab">
             <ul class="list-group list-group-flush">
-                <?php $comentarios = $entrada->comentarios->sortByDesc('id') ?>
                 @foreach($comentarios as $comentario)
                 <li class="list-group-item">
                     <div class="text-muted small">
-                      <div class="float-right">{{ $comentario->updated_at }}</div>
-                      <div class="float-left">{{ $comentario->creator->name ?? 'Unkown' }}</div>
+                      <div class="float-right">{{ $comentario->created_at }}</div>
+                      <div class="float-left">{{ $comentario->creator->name ?? 'Desconocido' }}</div>
                     </div>
                     <br>
                     <p class="text-monospace small">{{ $comentario->contenido }}</p>
@@ -41,7 +40,7 @@
           </div>
           
           <!-- Nuevo comentario -->
-          <div class="tab-pane fade {{ $entrada->comentarios->count() == 0 ? 'show active' : '' }}" id="nuevo-comentario" role="tabpanel" aria-labelledby="nuevo-comentario-tab">
+          <div class="tab-pane fade {{ $comentarios->count() == 0 ? 'show active' : '' }}" id="nuevo-comentario" role="tabpanel" aria-labelledby="nuevo-comentario-tab">
             <form action="{{ route('comentarios.store', $entrada) }}" method="post" atuocomplete="off" class="mt-3">
                 @csrf
                 <div class="form-group">

@@ -8,10 +8,12 @@ class Comentario extends Model
 {
     protected $table = 'entrada_comentarios';
     
+    protected $with = ['creator'];
+    
     protected $fillable = array(
-        'entrada_id',
         'contenido',
         'created_by',
+        'entrada_id',
     );
 
     public function creator()
