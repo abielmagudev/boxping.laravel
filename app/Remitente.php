@@ -64,12 +64,12 @@ Class Remitente extends Model implements Search
     public static function prepare($validated)
     {
         $prepared = [
-            'nombre' => $validated['nombre'],
+            'nombre' => capitalize($validated['nombre']),
             'direccion' => $validated['direccion'],
             'codigo_postal' => $validated['codigo_postal'],
-            'ciudad' => $validated['ciudad'],
-            'estado' => $validated['estado'],
-            'pais' => $validated['pais'],
+            'ciudad' => capitalize($validated['ciudad']),
+            'estado' => capitalize($validated['estado']),
+            'pais' => capitalize($validated['pais']),
             'telefono' => $validated['telefono'],
             'updated_by' => Fakeuser::live(),
         ];
