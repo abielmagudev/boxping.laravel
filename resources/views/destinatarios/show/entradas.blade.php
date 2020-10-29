@@ -36,7 +36,7 @@
         
         @else
         <br>
-        <p class="text-center text-muted text-uppercase">Sin entradas</p>
+        <p class="text-center text-muted">Sin entradas</p>
         
         @endif
     </div>

@@ -15,7 +15,7 @@ $factory->define(Destinatario::class, function (Faker $faker) {
         'pais' => $faker->country,
         'referencias' => $faker->boolean ? $faker->paragraph() : null,
         'telefono' => $faker->phoneNumber,
-        'created_by_user' => $faker->numberBetween(1,10),
-        'updated_by_user' => $faker->numberBetween(1,10),
+        'created_by' => $faker->numberBetween(1,10),
+        'updated_by' => $faker->numberBetween(1,10),
     ];
 });

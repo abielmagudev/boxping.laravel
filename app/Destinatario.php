@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Ahex\Fake\Domain\Fakeuser;
 use Illuminate\Database\Eloquent\Model;
 use App\Ahex\Zkeleton\Domain\SearchInterface as Search;
 
@@ -18,9 +19,24 @@ class Destinatario extends Model implements Search
         'pais',
         'referencias',
         'telefono',
-        'created_by_user',
-        'updated_by_user',
+        'created_by',
+        'updated_by',
     );
+
+    public function creator()
+    {
+        return $this->belongsTo(User::class, 'created_by');
+    }
+
+    public function updater()
+    {
+        return $this->belongsTo(User::class, 'updated_by');
+    }
+
+    public function entradas()
+    {
+        return $this->hasMany(Entrada::class);
+    }
 
     public function getLocalidadAttribute()
     {
@@ -35,28 +51,34 @@ class Destinatario extends Model implements Search
         return implode(', ', $localidad);
     }
 
-    public function entradas()
-    {
-        return $this->hasMany(Entrada::class);
-    }
-
-    public function creater()
-    {
-        return $this->belongsTo(User::class, 'created_by_user');
-    }
-
-    public function updater()
-    {
-        return $this->belongsTo(User::class, 'updated_by_user');
-    }
-
     public function scopeSearch($query, $value)
     {
         return $query->where('nombre', 'like', "%{$value}%")
                     ->orWhere('direccion', 'like', "%{$value}%")
-                    ->orWhere('telefono', 'like', "%{$value}%")
+                    ->orWhere('codigo_postal', 'like', "%{$value}%")
                     ->orWhere('ciudad', 'like', "%{$value}%")
+                    ->orWhere('telefono', 'like', "%{$value}%")
                     ->orderBy('id', 'desc')
                     ->get();
+    }
+
+    public static function prepare($validated)
+    {
+        $prepared = [
+            'nombre' => capitalize($validated['nombre']),
+            'direccion' => $validated['direccion'],
+            'codigo_postal' => $validated['codigo_postal'],
+            'ciudad' => capitalize($validated['ciudad']),
+            'estado' => capitalize($validated['estado']),
+            'pais' => capitalize($validated['pais']),
+            'referencias' => $validated['referencias'] ?? null,
+            'telefono' => $validated['telefono'],
+            'updated_by' => Fakeuser::live(),
+        ];
+
+        if( request()->isMethod('post') )
+            $prepared['created_by'] = Fakeuser::live();
+
+        return $prepared;
     }
 }

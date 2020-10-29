@@ -7,7 +7,9 @@
             <span class="badge badge-primary">{{ $destinatarios->total() }}</span>
         </div>
         <div>
-            <a href="{{ route('destinatarios.create') }}" class="btn btn-primary btn-sm">Nuevo</a>
+            <a href="{{ route('destinatarios.create') }}" class="btn btn-primary btn-sm">
+                <b>+</b>
+            </a>
         </div>
     </div>
     <div class="card-body p-0">
@@ -40,6 +42,8 @@
     </div>
 </div>
 <br>
-{{ $destinatarios->links() }}
+@component('components.pagination-simple')
+    @slot('collection', $destinatarios)
+@endcomponent
 <br>
 @endsection

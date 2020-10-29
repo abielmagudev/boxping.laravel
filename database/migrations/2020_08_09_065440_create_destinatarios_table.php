@@ -15,16 +15,16 @@ class CreateDestinatariosTable extends Migration
     {
         Schema::create('destinatarios', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('nombre');
-            $table->string('direccion');
-            $table->string('codigo_postal');
-            $table->string('ciudad');
+            $table->string('nombre')->index();
+            $table->string('direccion')->index();
+            $table->string('codigo_postal')->index();
+            $table->string('ciudad')->index();
             $table->string('estado');
             $table->string('pais');
             $table->text('referencias')->nullable();
-            $table->string('telefono');
-            $table->unsignedSmallInteger('created_by_user');
-            $table->unsignedSmallInteger('updated_by_user');
+            $table->string('telefono')->index();
+            $table->unsignedSmallInteger('created_by');
+            $table->unsignedSmallInteger('updated_by');
             $table->timestamps();
             $table->softDeletes();
         });

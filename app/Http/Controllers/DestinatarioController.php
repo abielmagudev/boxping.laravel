@@ -4,41 +4,39 @@ namespace App\Http\Controllers;
 
 use App\Destinatario;
 use App\Entrada;
-
-use App\Ahex\Destinatario\Application\BelongsEntradaTrait as BelongsEntrada;
-use App\Ahex\Destinatario\Application\RoutesTrait as Routes;
-use App\Ahex\Destinatario\Application\StoreTrait as Store;
-use App\Ahex\Destinatario\Application\UpdateTrait as Update;
-
+use App\Ahex\Destinatario\Application\RoutingTrait as Routing;
+use App\Ahex\Destinatario\Application\RelationsTrait as Relations;
 use App\Http\Requests\DestinatarioSaveRequest as SaveRequest;
 use Illuminate\Http\Request;
 
 class DestinatarioController extends Controller
 {
-    use BelongsEntrada,Routes,Store,Update;
+    use Routing, Relations, Store, Update;
 
     public function index()
     {
-        return view('destinatarios.index', [
-            'destinatarios' => Destinatario::orderBy('id', 'desc')->paginate(16),
-        ]);
+        return view('destinatarios.index')->with('destinatarios', Destinatario::orderBy('id', 'desc')->paginate());
     }
 
-    public function create()
+    public function create(Request $request)
     {
+        $entrada_id = $request->input('entrada', false);
+
         return view('destinatarios.create', [
             'destinatario' => new Destinatario,
-            'entrada' => request('entrada', false),
-            'route_cancel' => $this->routeCancel(),
+            'returning' => $this->routeReturning($entrada_id),
+            'entrada_id' => $entrada_id,
         ]);
     }
 
     public function store(SaveRequest $request)
     {
-        if(! $destinatario = $this->storeDestinatario($request) )
+        $prepared = Destinatario::prepare($request->validated());
+
+        if(! $destinatario = Destinatario::create($prepared) )
             return back()->with('failure','Error al guardar destinatario');
         
-        $route = $this->routeAfterStore( $destinatario->nombre );
+        $route = $this->routeAfterStore($request->input('entrada', false), $destinatario->nombre);
         return redirect($route)->with('success', 'Destinatario guardado');
     }
 
@@ -50,21 +48,24 @@ class DestinatarioController extends Controller
         ]);
     }
 
-    public function edit(Destinatario $destinatario)
+    public function edit(Request $request, Destinatario $destinatario)
     {
-        $this->comesFromEntrada($destinatario->id);
+        $entrada_id = $request->input('entrada', false);
+        $this->validateRelationshipEntrada($entrada_id, $destinatario->id);
 
         return view('destinatarios.edit', [
             'destinatario' => $destinatario,
-            'route_back' => $this->routeBack($destinatario->id),
+            'returning' => $this->routeReturning($entrada_id, $destinatario->id),
         ]);
     }
 
     public function update(SaveRequest $request, Destinatario $destinatario)
     {
-        if(! $this->updateDestinatario($request, $destinatario) )
-            return back()->with('failure', 'Error al actualizar destinatario');
+        $prepared = Destinatario::prepare( $request->validated() );
         
+        if(! $destinatario->fill( $prepared )->save() )
+            return back()->with('failure', 'Error al actualizar destinatario');
+
         return back()->with('success', 'Destinatario actualizado');
     }
 

@@ -9,38 +9,38 @@
     </div>
     <div class="card-body">
         <p>
-            <small class="d-block text-muted">Nombre</small>
             <span>{{ $destinatario->nombre }}</span>
+            <small class="d-block text-muted">Nombre</small>
         </p>
         <p>
-            <small class="d-block text-muted">Dirección</small>
             <span>{{ $destinatario->direccion }}</span>
+            <small class="d-block text-muted">Dirección</small>
         </p>
         <p>
-            <small class="d-block text-muted">Código postal</small>
             <span>{{ $destinatario->codigo_postal }}</span>
+            <small class="d-block text-muted">Código postal</small>
         </p>
         <p>
-            <small class="d-block text-muted">Localidad</small>
             <span>{{ $destinatario->localidad }}</span>
+            <small class="d-block text-muted">Localidad</small>
         </p>
         <p>
-            <small class="d-block text-muted">Referencias</small>
             <span>{{ $destinatario->referencias }}</span>
+            <small class="d-block text-muted">Referencias</small>
         </p>
         <p>
-            <small class="d-block text-muted">Teléfono</small>
             <span>{{ $destinatario->telefono }}</span>
+            <small class="d-block text-muted">Teléfono</small>
         </p>
         <p>
-            <small class="d-block text-muted">Creado</small>
-            <span class="d-block">{{ $destinatario->creater->name }}</span>
+            <span class="d-block">{{ $destinatario->creator->name }}</span>
             <span class="d-block">{{ $destinatario->created_at }}</span>
+            <small class="d-block text-muted">Creado</small>
         </p>
         <p>
-            <small class="d-block text-muted">Actualizado</small>
             <span class="d-block">{{ $destinatario->updater->name }}</span>
             <span class="d-block">{{ $destinatario->updated_at }}</span>
+            <small class="d-block text-muted">Actualizado</small>
         </p>
     </div>
 </div>
