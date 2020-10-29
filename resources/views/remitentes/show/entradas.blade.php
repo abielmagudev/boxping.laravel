@@ -7,8 +7,8 @@
         @if( $entradas->count() )
         <div class="table-responsive">
             <table class="table table-hover">
-                <thead>
-                    <tr class="small">
+                <thead class="small">
+                    <tr>
                         <th>Número</th>
                         <th>Consolidado</th>
                         <th>Cliente</th>
@@ -36,7 +36,7 @@
         
         @else
         <br>
-        <p class="text-center text-muted text-uppercase">Sin entradas</p>
+        <p class="text-center text-muted">Sin entradas</p>
         
         @endif
     </div>

@@ -7,7 +7,9 @@
             <span class="badge badge-primary">{{ $remitentes->total() }}</span>
         </div>
         <div>
-            <a href="{{ route('remitentes.create') }}" class="btn btn-primary btn-sm">Nuevo</a>
+            <a href="{{ route('remitentes.create') }}" class="btn btn-primary btn-sm">
+                <b>+</b>
+            </a>
         </div>
     </div>
     <div class="card-body p-0">
@@ -19,6 +21,7 @@
                         <th>Nombre</th>
                         <th>Dirección</th>
                         <th>Localidad</th>
+                        <th>Teléfono</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -29,6 +32,7 @@
                         </td>
                         <td>{{ $remitente->direccion }}</td>
                         <td>{{ $remitente->localidad }}</td>
+                        <td>{{ $remitente->telefono }}</td>
                     </tr>
                     @endforeach
                 </tbody>

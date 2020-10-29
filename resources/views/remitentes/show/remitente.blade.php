@@ -9,34 +9,34 @@
     </div>
     <div class="card-body">
         <p>
-            <small class="d-block text-muted">Nombre</small>
             <span>{{ $remitente->nombre }}</span>
+            <small class="d-block text-muted">Nombre</small>
         </p>
         <p>
-            <small class="d-block text-muted">Dirección</small>
             <span>{{ $remitente->direccion }}</span>
+            <small class="d-block text-muted">Dirección</small>
         </p>
         <p>
-            <small class="d-block text-muted">Código postal</small>
             <span>{{ $remitente->codigo_postal }}</span>
+            <small class="d-block text-muted">Código postal</small>
         </p>
         <p>
-            <small class="d-block text-muted">Localidad</small>
             <span>{{ $remitente->localidad }}</span>
+            <small class="d-block text-muted">Localidad</small>
         </p>
         <p>
-            <small class="d-block text-muted">Teléfono</small>
             <span>{{ $remitente->telefono }}</span>
+            <small class="d-block text-muted">Teléfono</small>
         </p>
         <p>
-            <small class="d-block text-muted">Creado</small>
-            <span class="d-block">{{ $remitente->creater->name }}</span>
+            <span class="d-block">{{ $remitente->creator->name }}</span>
             <span class="d-block">{{ $remitente->created_at }}</span>
+            <small class="d-block text-muted">Creado</small>
         </p>
         <p>
-            <small class="d-block text-muted">Actualizado</small>
             <span class="d-block">{{ $remitente->updater->name }}</span>
             <span class="d-block">{{ $remitente->updated_at }}</span>
+            <small class="d-block text-muted">Actualizado</small>
         </p>
     </div>
 </div>

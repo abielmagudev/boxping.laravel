@@ -4,41 +4,39 @@ namespace App\Http\Controllers;
 
 use App\Remitente;
 use App\Entrada;
-
-use App\Ahex\Remitente\Application\BelongsEntradaTrait as BelongsEntrada;
-use App\Ahex\Remitente\Application\RoutesTrait as Routes;
-use App\Ahex\Remitente\Application\StoreTrait as Store;
-use App\Ahex\Remitente\Application\UpdateTrait as Update;
-
+use App\Ahex\Remitente\Application\RoutingTrait as Routing;
+use App\Ahex\Remitente\Application\RelationsTrait as Relations;
 use App\Http\Requests\RemitenteSaveRequest as SaveRequest;
 use Illuminate\Http\Request;
 
 class RemitenteController extends Controller
 {
-    use BelongsEntrada, Routes, Store, Update;
+    use Routing, Relations;
 
     public function index()
     {
-        return view('remitentes.index', [
-            'remitentes' => Remitente::orderBy('id', 'desc')->paginate(16)
-        ]);
+        return view('remitentes.index')->with('remitentes', Remitente::orderBy('id', 'desc')->paginate(16));
     }
 
-    public function create()
+    public function create(Request $request)
     {
+        $entrada_id = $request->input('entrada', false);
+
         return view('remitentes.create', [
             'remitente' => new Remitente,
-            'entrada' => request('entrada', false),
-            'route_cancel' => $this->routeCancel(),
+            'returning' => $this->routeReturning($entrada_id),
+            'entrada_id' => $entrada_id,
         ]);
     }
 
     public function store(SaveRequest $request)
     {
-        if(! $remitente = $this->storeRemitente($request) )
+        $prepared = Remitente::prepare( $request->validated() );
+
+        if(! $remitente = Remitente::create($prepared) )
             return back()->with('failure', 'Error al guardar remitente');
 
-        $route = $this->routeAfterStore($remitente->nombre);
+        $route = $this->routeAfterStore($request->input('entrada', false), $remitente->nombre);
         return redirect($route)->with('success', 'Remitente guardardo');
     }
 
@@ -50,19 +48,22 @@ class RemitenteController extends Controller
         ]);
     }
 
-    public function edit(Remitente $remitente)
+    public function edit(Request $request, Remitente $remitente)
     {
-        $this->comesFromEntrada($remitente->id);
+        $entrada_id = $request->input('entrada', false);
+        $this->validateRelationshipEntrada($entrada_id, $remitente->id);
 
         return view('remitentes.edit', [
             'remitente' => $remitente,
-            'route_back' => $this->routeBack( $remitente->id ),
+            'returning' => $this->routeReturning($entrada_id, $remitente->id),
         ]);
     }
 
     public function update(SaveRequest $request, Remitente $remitente)
     {
-        if(! $this->updateRemitente($request, $remitente) )
+        $prepared = Remitente::prepare( $request->validated() );
+        
+        if(! $remitente->fill( $prepared )->save() )
             return back()->with('failure', 'Error al actualizar remitente');
 
         return back()->with('success', 'Remitente actualizado');

@@ -14,7 +14,7 @@ $factory->define(Remitente::class, function (Faker $faker) {
         'estado' => $faker->state,
         'pais' => $faker->country,
         'telefono' => $faker->phoneNumber,
-        'created_by_user' => $faker->numberBetween(1,10),
-        'updated_by_user' => $faker->numberBetween(1,10),
+        'created_by' => $faker->numberBetween(1,10),
+        'updated_by' => $faker->numberBetween(1,10),
     ];
 });

@@ -3,16 +3,14 @@
 @include('components.error')
 <div class="card">
     <div class="card-header">
-        <span>Agregar remitente</span>
+        <span>Nuevo remitente</span>
     </div>
     <div class="card-body">
-        <form action="{{ route('remitentes.store') }}" method="post" autocomplete="off">
-            @include('remitentes.includes.save')
-            @if( $entrada )
-            <input type="hidden" name="entrada" value="{{ $entrada }}">
-            @endif
-            <button type="submit" class="btn btn-success">Agregar remitente</button>
-            <a href="{{ $route_cancel }}" class="btn btn-secondary">Cancelar</a>
+        <?php $route = $entrada_id ? route('remitentes.store', ['entrada' => $entrada_id]) : route('remitentes.store') ?>
+        <form action="{{ $route }}" method="post" autocomplete="off">
+            @include('remitentes._save')
+            <button type="submit" class="btn btn-success">Guardar remitente</button>
+            <a href="{{ $returning }}" class="btn btn-secondary">Cancelar</a>
         </form>
     </div>
 </div>

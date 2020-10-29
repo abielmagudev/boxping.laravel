@@ -8,9 +8,9 @@
     <div class="card-body">
         <form action="{{ route('remitentes.update', $remitente) }}" method="post" autocomplete="off">
             @method('patch')
-            @include('remitentes.includes.save')
+            @include('remitentes._save')
             <button type="submit" class="btn btn-warning">Actualizar remitente</button>
-            <a href="{{ $route_back }}" class="btn btn-secondary">Regresar</a>
+            <a href="{{ $returning }}" class="btn btn-secondary">Regresar</a>
         </form>
     </div>
 </div>
