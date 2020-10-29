@@ -27,12 +27,12 @@
                 <tbody>
                     @foreach($remitentes as $remitente)
                     <tr>
-                        <td>
+                        <td class="align-middle">
                             <a href="{{ route('remitentes.show', $remitente) }}">{{ $remitente->nombre }}</a>
                         </td>
-                        <td>{{ $remitente->direccion }}</td>
-                        <td>{{ $remitente->localidad }}</td>
-                        <td>{{ $remitente->telefono }}</td>
+                        <td class="align-middle">{{ $remitente->direccion }}</td>
+                        <td class="align-middle">{{ $remitente->localidad }}</td>
+                        <td class="align-middle">{{ $remitente->telefono }}</td>
                     </tr>
                     @endforeach
                 </tbody>
