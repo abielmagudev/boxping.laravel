@@ -32,6 +32,11 @@ Class Remitente extends Model implements Search
         return $this->belongsTo(User::class, 'updated_by');
     }
 
+    public function entradas()
+    {
+        return $this->hasMany(Entrada::class);
+    }
+
     public function getLocalidadAttribute()
     {
         $localidad = array();
