@@ -42,6 +42,8 @@
     </div>
 </div>
 <br>
-{{ $remitentes->links() }}
+@component('components.pagination-simple')
+    @slot('collection', $remitentes)
+@endcomponent
 <br>
 @endsection
