@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 
 class DestinatarioController extends Controller
 {
-    use Routing, Relations, Store, Update;
+    use Routing, Relations;
 
     public function index()
     {
