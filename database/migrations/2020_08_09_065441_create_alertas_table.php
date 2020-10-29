@@ -17,8 +17,8 @@ class CreateAlertasTable extends Migration
 
         Schema::create('alertas', function (Blueprint $table) use ($niveles) {
             $table->bigIncrements('id');
-            $table->enum('nivel', $niveles);
-            $table->string('nombre')->unique();
+            $table->enum('nivel', $niveles)->index();
+            $table->string('nombre')->unique()->index();
             $table->text('descripcion')->nullable();
             $table->timestamps();
         });

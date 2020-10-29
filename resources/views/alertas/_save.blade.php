@@ -5,26 +5,34 @@
         <small>Nivel</small>
     </label>
     <div class="border rounded p-3" style="border-color:#CED4DA !important">
-        <div class="form-check">
-            <input class="form-check-input" type="radio" name="nivel" value="bajo" id="radio-nivel-bajo" checked>
-            <label class="form-check-label" for="radio-nivel-bajo">
-                <span class="">Bajo - </span>
-                <small class="">{{ $config['bajo']['descripcion'] }}</small>
-            </label>
-        </div>
-        <div class="form-check">
-            <input class="form-check-input" type="radio" name="nivel" value="medio" id="radio-nivel-medio" {{ checkable('medio', $alerta->nivel) }}>
-            <label class="form-check-label" for="radio-nivel-medio">
-                <span>Medio - </span>
-                <small>{{ $config['medio']['descripcion'] }}</small>
-            </label>
-        </div>
-        <div class="form-check">
-            <input class="form-check-input" type="radio" name="nivel" value="alto" id="radio-nivel-alto" {{ checkable('alto', $alerta->nivel) }}>
-            <label class="form-check-label" for="radio-nivel-alto">
-                <span>Alto - </span>
-                <small>{{ $config['alto']['descripcion'] }}</small>
-            </label>
+        <div class="d-table">
+            <div class="d-table-row">
+                <div class="d-table-cell form-check">
+                    <input class="form-check-input" type="radio" name="nivel" value="alto" id="radio-nivel-alto" checked>
+                    <label class="form-check-label" for="radio-nivel-alto">Alto</label>
+                </div>
+                <div class="d-table-cell">
+                    <small class="text-muted">{{ $config['alto']['descripcion'] }}</small>
+                </div>
+            </div>
+            <div class="d-table-row">
+                <div class="d-table-cell form-check pr-3">
+                    <input class="form-check-input" type="radio" name="nivel" value="medio" id="radio-nivel-medio" {{ checkable('medio', $alerta->nivel) }}>
+                    <label class="form-check-label" for="radio-nivel-medio">Medio</label>
+                </div>
+                <div class="d-table-cell">
+                    <small class="text-muted">{{ $config['medio']['descripcion'] }}</small>
+                </div>
+            </div>
+            <div class="d-table-row">
+                <div class="d-table-cell form-check">
+                    <input class="form-check-input" type="radio" name="nivel" value="bajo" id="radio-nivel-bajo" {{ checkable('bajo', $alerta->nivel) }}>
+                    <label class="form-check-label" for="radio-nivel-bajo">Bajo</label>
+                </div>
+                <div class="d-table-cell">
+                    <small class="text-muted">{{ $config['bajo']['descripcion'] }}</small>
+                </div>
+            </div>
         </div>
     </div>
 </div>
