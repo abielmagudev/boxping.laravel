@@ -3,14 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Etapa;
-use App\Ahex\Etapa\Domain\FillingTrait as Filling;
 use App\Http\Requests\EtapaSaveRequest as SaveRequest;
 use Illuminate\Http\Request;
 
 class EtapaController extends Controller
 {
-    use Filling;
-
     public function index()
     {
         return view('etapas.index')->with('etapas', Etapa::all()->sortByDesc('id'));
@@ -29,9 +26,9 @@ class EtapaController extends Controller
 
     public function store(SaveRequest $request)
     {
-        $data = $this->fill( $request->validated() );
+        $data = Etapa::prepare($request->validated());
 
-        if( ! $etapa = Etapa::create($data) )
+        if(! $etapa = Etapa::create($data) )
             return back()->withInput()->with('failure', 'Error al guardar etapa');
 
         return redirect()->route('etapas.index')->with('success', "Etapa {$etapa->nombre} guardada");
@@ -53,9 +50,9 @@ class EtapaController extends Controller
 
     public function update(SaveRequest $request, Etapa $etapa)
     {
-        $data = $this->fill( $request->validated() );
+        $data = Etapa::prepare($request->validated());
 
-        if( ! $etapa->fill($data)->save() )
+        if(! $etapa->fill($data)->save() )
             return back()->with('failure', 'Error al actualizar la entrada');
 
         return back()->with('success', 'Etapa actualizada');
@@ -63,13 +60,11 @@ class EtapaController extends Controller
 
     public function destroy(Etapa $etapa)
     {
-        $destroyed = (object) [
-            'nombre' => $etapa->nombre,
-        ];
+        $nombre = $etapa->nombre;
 
-        if( ! $etapa->delete() )
+        if(! $etapa->delete() )
             return back()->with('failure', 'Error al eliminar etapa');
 
-        return redirect()->route('etapas.index')->with('success', "Etapa {$destroyed->nombre} eliminada");
+        return redirect()->route('etapas.index')->with('success', "{$nombre} eliminada");
     }
 }

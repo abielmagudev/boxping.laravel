@@ -6,7 +6,6 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class EtapaSaveRequest extends FormRequest
 {
-    private $etapa_id = 0;
     private $medidas_peso = [];
     private $medidas_volumen = [];
 
@@ -24,10 +23,10 @@ class EtapaSaveRequest extends FormRequest
 
     public function rules()
     {
-        if( $etapa = $this->route('etapa') ) $this->etapa_id = $etapa->id;
+        $etapa_id = $this->route('etapa')->id ?? 0;
 
         return [
-            'nombre' => ['required','regex:/^[A-Za-z0-9 ]+$/','unique:etapas,id,' . $this->etapa_id],
+            'nombre' => ['required','regex:/^[A-Za-z0-9 ]+$/','unique:etapas,nombre,' . $etapa_id],
             'realiza_medicion' => ['required','boolean'],
             'unica_medida_peso' => ['nullable','in:' . $this->medidas_peso],
             'unica_medida_volumen' => ['nullable','in:' . $this->medidas_volumen],

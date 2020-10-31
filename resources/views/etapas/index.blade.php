@@ -19,8 +19,8 @@
                     <tr>
                         <th>Nombre</th>
                         <th>Realiza medición</th>
-                        <th>Medida de peso</th>
-                        <th>Medida de volúmen</th>
+                        <th>Única medida de peso</th>
+                        <th>Única medida de volúmen</th>
                     </tr>
                 </thead>
                 <tbody>

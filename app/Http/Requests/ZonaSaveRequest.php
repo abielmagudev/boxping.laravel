@@ -36,33 +36,26 @@ class ZonaSaveRequest extends FormRequest
      */
     public function withValidator($validator)
     {
-        if( ! $validator->fails() )
+        if( $validator->fails() )
+            return;
+        
+        if( $this->existsZonaEtapa() )
         {
-            if( $this->existsZonaEtapa() )
-            {
-                $validator->after( function ($validator) {
-                    $validator->errors()->add('message', 'Escribe un nombre diferente de zona');
-                });
-            }
+            $validator->after( function ($validator) {
+                $validator->errors()->add('message', 'Escribe un nombre diferente de zona');
+            });
         }
     }
 
     public function existsZonaEtapa()
     {
-        list($zona_nombre, $zona_id, $etapa_id) = $this->formInputs();
+        $etapa_id = $this->route('etapa')->id;
+        $zona_nombre = $this->input('nombre');
+        $zona_id = $this->route('zona')->id ?? 0;
 
         return Zona::where('nombre', $zona_nombre)
                    ->where('etapa_id', $etapa_id)
                    ->where('id', '<>', $zona_id)
                    ->exists();
     } 
-    
-    public function formInputs()
-    {
-        return [
-            $this->input('nombre'),
-            $this->route('zona')->id ?? 0,
-            $this->route('etapa')->id,
-        ];
-    }
 }

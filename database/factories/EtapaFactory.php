@@ -8,14 +8,14 @@ use Faker\Generator as Faker;
 $factory->define(Etapa::class, function (Faker $faker) {
 
     $nombre = 'Stage ' . $faker->unique(true)->randomNumber();
-    $slug = str_replace(' ', '-', $nombre);
+    $slug = strtolower( str_replace(' ', '-', $nombre) );
     $realiza_medicion = $faker->boolean;
     $medidas_peso = config('system.medidas.peso');
     $medidas_volumen = config('system.medidas.volumen');
 
     return [
         'nombre' => $nombre,
-        'slug' => strtolower($slug),
+        'slug' => $slug,
         'realiza_medicion' => $realiza_medicion ? 1 : 0,
         'unica_medida_peso' => $realiza_medicion ? $faker->randomElement($medidas_peso) : null,
         'unica_medida_volumen' => $realiza_medicion ? $faker->randomElement($medidas_volumen) : null,

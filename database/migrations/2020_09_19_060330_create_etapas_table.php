@@ -13,7 +13,7 @@ class CreateEtapasTable extends Migration
 
         Schema::create('etapas', function (Blueprint $table) use ($medidas_peso, $medidas_volumen) {
             $table->bigIncrements('id');
-            $table->string('nombre')->unique();
+            $table->string('nombre')->unique()->index();
             $table->string('slug')->unique()->index();
             $table->boolean('realiza_medicion')->default(1);
             $table->enum('unica_medida_peso', $medidas_peso)->nullable();
