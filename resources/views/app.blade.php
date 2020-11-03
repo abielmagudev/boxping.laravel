@@ -10,6 +10,7 @@
     @include('layout.navbar')
     <br>
     <div class="container">
+        @include('components.errors')
         @include('components.notification')
         @yield('content')
     </div>

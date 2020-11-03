@@ -1,5 +1,5 @@
 <div class="float-right">
-    @component('components.confirm-delete-bundle')
+    @component('components.modal-confirm-delete-bundle')
         @slot('text', 'Eliminar etapa')
         @slot('route', route('etapas.destroy', $etapa))
         @slot('content')

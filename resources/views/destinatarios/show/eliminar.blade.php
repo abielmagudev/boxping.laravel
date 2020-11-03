@@ -1,4 +1,4 @@
-@component('components.confirm-delete-bundle')
+@component('components.modal-confirm-delete-bundle')
     @slot('route', route('destinatarios.destroy', $destinatario))
     @slot('text', 'Eliminar destinatario')
     @slot('content')

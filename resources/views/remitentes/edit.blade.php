@@ -1,6 +1,5 @@
 @extends('app')
 @section('content')
-@include('components.error')
 <div class="card">
     <div class="card-header">
         <span>Editar remitente</span>

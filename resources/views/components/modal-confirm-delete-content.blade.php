@@ -12,7 +12,7 @@ $settings = (object) [
         <div class="modal-content">
             <div class="modal-header bg-danger text-white">
                 <p class="modal-title" id="confirmDeleteModalLabel">
-                    <b>ATENCIÓN</b>
+                    <b>CONFIRMAR</b>
                 </p>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>

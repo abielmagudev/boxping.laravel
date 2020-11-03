@@ -8,11 +8,11 @@ $settings = (object) array(
 
 ?>
 
-@component('components.confirm-delete-button')
+@component('components.modal-confirm-delete-button')
     @slot('text', $settings->text)
 @endcomponent
 
-@component('components.confirm-delete-modal')
+@component('components.modal-confirm-delete-content')
     @slot('route', $settings->route)
     @slot('content', $settings->content)
 @endcomponent

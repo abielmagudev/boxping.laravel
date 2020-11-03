@@ -26,9 +26,9 @@
                     @foreach($alertas as $alerta)
                     <tr>
                         <td class="align-middle text-center" style="width:1%">
-                            @component('components.icon-alert')
+                            @component('components.tooltip-shape')
+                                @slot('title', ucfirst($alerta->nivel))
                                 @slot('color', $config[$alerta->nivel]['color'])
-                                @slot('nombre', ucfirst($alerta->nivel))
                             @endcomponent
                         </td>
                         <td class="align-middle">{{ $alerta->nombre }}</td>

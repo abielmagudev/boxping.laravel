@@ -1,6 +1,5 @@
 @extends('app')
 @section('content')
-@include('components.error')
 <div class="card">
     <div class="card-header">
         <span>Editar zona</span>
@@ -16,11 +15,11 @@
 </div>
 <br>
 <div class="float-right">
-    @component('components.confirm-delete-bundle')
+    @component('components.modal-confirm-delete-bundle')
         @slot('text', 'Eliminar zona')
         @slot('route', route('zonas.destroy', [$etapa, $zona]))
         @slot('content')
-        <p class="text-center">Deseas eliminar la zona <b>{{ $zona->nombre }}</b>?</p>
+        <p class="lead text-center m-0">Deseas eliminar zona <b>{{ $zona->nombre }}</b>?</p>
         @endslot
     @endcomponent
 </div>

@@ -1,6 +1,5 @@
 @extends('app')
 @section('content')
-@include('components.error')
 <div class="card">
     <div class="card-header">
         <span>Editar alerta</span>
@@ -17,9 +16,8 @@
     </div>
 </div>
 <br>
-
 <div class="float-right">
-    @component('components.confirm-delete-bundle')
+    @component('components.modal-confirm-delete-bundle')
         @slot('text', 'Eliminar alerta')
         @slot('route', route('alertas.destroy', $alerta))
         @slot('content')
