@@ -7,7 +7,7 @@
     <div class="card-body">
         <form action="{{ route('zonas.update', [$etapa, $zona]) }}" method="post" autocomplete="off">
             @method('patch')
-            @include('etapas.zonas._save')
+            @include('zonas._save')
             <button class="btn btn-warning" type="submit">Actualizar zona</button>
             <a href="{{ route('etapas.show', $etapa) }}" class="btn btn-secondary">Regresar</a>
         </form>

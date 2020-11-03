@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Etapa;
 use App\Zona;
+use App\Etapa;
 use App\Http\Requests\ZonaSaveRequest as SaveRequest;
 use Illuminate\Http\Request;
 
@@ -11,7 +11,7 @@ class ZonaController extends Controller
 {
     public function create(Etapa $etapa)
     {
-        return view('etapas.zonas.create', [
+        return view('zonas.create', [
             'etapa' => $etapa,
             'zona' => new Zona,
         ]);
@@ -29,7 +29,7 @@ class ZonaController extends Controller
 
     public function edit(Etapa $etapa, Zona $zona)
     {
-        return view('etapas.zonas.edit', [
+        return view('zonas.edit', [
             'etapa' => $etapa,
             'zona' => $zona,
         ]);
