@@ -21,7 +21,7 @@
         @slot('text', 'Eliminar alerta')
         @slot('route', route('alertas.destroy', $alerta))
         @slot('content')
-        <p class="text-center">Deseas eliminar la alerta <b>{{ $alerta->nombre }}</b>?</p>
+        <p class="lead text-center m-0">Deseas eliminar la alerta <b>{{ $alerta->nombre }}</b>?</p>
         @endslot
     @endcomponent
 </div>
