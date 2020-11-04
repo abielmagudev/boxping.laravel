@@ -26,12 +26,12 @@ class EtapaController extends Controller
 
     public function store(SaveRequest $request)
     {
-        $data = Etapa::prepare($request->validated());
+        $prepared = Etapa::prepare($request->validated());
 
-        if(! $etapa = Etapa::create($data) )
+        if(! $etapa = Etapa::create($prepared) )
             return back()->withInput()->with('failure', 'Error al guardar etapa');
 
-        return redirect()->route('etapas.index')->with('success', "Etapa {$etapa->nombre} guardada");
+        return redirect()->route('etapas.index')->with('success', "{$etapa->nombre} guardada");
     }
 
     public function show(Etapa $etapa)
@@ -50,9 +50,9 @@ class EtapaController extends Controller
 
     public function update(SaveRequest $request, Etapa $etapa)
     {
-        $data = Etapa::prepare($request->validated());
+        $prepared = Etapa::prepare($request->validated());
 
-        if(! $etapa->fill($data)->save() )
+        if(! $etapa->fill($prepared)->save() )
             return back()->with('failure', 'Error al actualizar la entrada');
 
         return back()->with('success', 'Etapa actualizada');
@@ -60,11 +60,9 @@ class EtapaController extends Controller
 
     public function destroy(Etapa $etapa)
     {
-        $nombre = $etapa->nombre;
-
         if(! $etapa->delete() )
             return back()->with('failure', 'Error al eliminar etapa');
 
-        return redirect()->route('etapas.index')->with('success', "{$nombre} eliminada");
+        return redirect()->route('etapas.index')->with('success', "{$etapa->nombre} eliminada");
     }
 }

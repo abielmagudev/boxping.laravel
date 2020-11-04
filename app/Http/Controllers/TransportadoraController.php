@@ -46,11 +46,9 @@ class TransportadoraController extends Controller
 
     public function destroy(Transportadora $transportadora)
     {
-        $nombre = $transportadora->nombre;
-
         if( ! $transportadora->delete() )
             return back()->with('failure', 'Error al eliminar transportadora');
 
-        return redirect()->route('transportadoras.index')->with('success', "{$nombre} eliminada");
+        return redirect()->route('transportadoras.index')->with('success', "{$transportadora->nombre} eliminada");
     }
 }

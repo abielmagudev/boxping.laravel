@@ -45,11 +45,9 @@ class ZonaController extends Controller
 
     public function destroy(Etapa $etapa, Zona $zona)
     {
-        $zona_nombre = $zona->nombre;
-
         if( ! $zona->delete() )
             return back()->with('failure', 'Error al eliminar zona');
         
-        return redirect()->route('etapas.show', $etapa)->with('success', "Zona {$zona_nombre} eliminada");
+        return redirect()->route('etapas.show', $etapa)->with('success', "{$zona->nombre} eliminada");
     }
 }

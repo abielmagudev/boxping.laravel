@@ -56,11 +56,9 @@ class AlertaController extends Controller
 
     public function destroy(Alerta $alerta)
     {
-        $nombre = $alerta->nombre;
-
         if( ! $alerta->delete() )
             return back()->with('failure', 'Error al eliminar alerta');
 
-        return redirect()->route('alertas.index')->with('success', "<b>{$nombre}</b> eliminada");
+        return redirect()->route('alertas.index')->with('success', "{$alerta->nombre} eliminada");
     }
 }
