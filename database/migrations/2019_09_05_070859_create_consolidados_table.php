@@ -15,13 +15,13 @@ class CreateConsolidadosTable extends Migration
     {
         Schema::create('consolidados', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedSmallInteger('cliente_id');
-            $table->string('numero', 80)->unique();
+            $table->string('numero', 80)->unique()->index();
             $table->unsignedTinyInteger('tarimas')->nullable();
-            $table->text('notas')->nullable();
             $table->boolean('abierto')->default(1);
-            $table->unsignedSmallInteger('created_by_user');
-            $table->unsignedSmallInteger('updated_by_user');
+            $table->text('notas')->nullable();
+            $table->unsignedSmallInteger('cliente_id');
+            $table->unsignedSmallInteger('created_by');
+            $table->unsignedSmallInteger('updated_by');
             $table->timestamps();
         });
     }

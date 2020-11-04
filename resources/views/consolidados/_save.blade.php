@@ -40,7 +40,7 @@
     <?php $checked = checkable(0, old('cerrado', $consolidado->abierto)) ?>
     <input type="checkbox" class="d-inline-block mr-1" id="checkbox-cerrado" name="cerrado" value="0" {{ $checked }}>
     <label for="checkbox-cerrado">
-        <span class="text-danger font-weight-bold">CERRAR</span>
+        <span class="text-danger font-weight-bold">CERRADO</span>
         <span class=""> - No sera posible agregar más entradas al consolidado.</span>
     </label>
 </div>

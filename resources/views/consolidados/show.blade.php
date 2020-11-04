@@ -2,15 +2,15 @@
 @section('content')
 <div class="row">
     <div class="col-sm">
-        @include('consolidados.show.consolidado')
+        @include('consolidados.show._consolidado')
         <br>
     </div>
     <div class="col-sm col-sm-8">
-        @include('consolidados.show.entradas')
+        @include('consolidados.show._entradas')
     </div>
 </div>
 <br>
 <div class="float-right">
-    @include('consolidados.show.eliminar')
+    @include('consolidados.show._eliminar')
 </div>
 @endsection

@@ -1,6 +1,5 @@
 @extends('app')
 @section('content')
-@include('components.error')
 <div class="card">
     <div class="card-header">
         <span>Editar consolidado</span>
@@ -8,7 +7,7 @@
     <div class="card-body">
         <form action="{{ route('consolidados.update', $consolidado) }}" method="post" autocomplete="off">
             @method('patch')
-            @include('consolidados.includes.save')
+            @include('consolidados._save')
             <button class="btn btn-warning" type="submit">Actualizar consolidado</button>
             <a href="{{ route('consolidados.show', $consolidado) }}" class="btn btn-outline-secondary">Regresar</a>
         </form>

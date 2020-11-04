@@ -6,9 +6,16 @@
                 <span class="badge badge-primary">{{ $consolidado->entradas->count() }}</span>
             </div>
             <div>
-                <a href="#!" class="btn btn-primary btn-sm">Imprimir</a>
+                <a href="#!" class="btn btn-primary btn-sm">
+                    @component('components.symbol')
+                        @slot('symbol', 'print')
+                    @endcomponent
+                </a>
+                
                 @if( $consolidado->abierto )
-                <a href="{{ route('entradas.create', ['consolidado' => $consolidado]) }}" class="btn btn-primary btn-sm">Agregar</a>
+                <a href="{{ route('entradas.create', ['consolidado' => $consolidado]) }}" class="btn btn-primary btn-sm">
+                    <b>+</b>
+                </a>
                 @endif
             </div>
         </div>
@@ -16,9 +23,9 @@
     <div class="card-body p-0">
         @if( $consolidado->entradas->count() )
         <div class="table-responsive">
-            <table class="table table-hover small">
+            <table class="table table-hover">
                 <thead>
-                    <tr class="">
+                    <tr class="small">
                         <th>Número</th>
                         <th>Destinatario</th>
                         <th>Salida</th>
@@ -28,7 +35,7 @@
                 <tbody>
                     @foreach($consolidado->entradas->sortByDesc('id') as $entrada)
                     <tr>
-                        <td class="align-middle">
+                        <td class="align-middle text-nowrap">
                             <a href="{{ route('entradas.show', $entrada) }}">{{ $entrada->numero }}</a>
                         </td>
                         <td class="align-middle">

@@ -1,13 +1,12 @@
 @extends('app')
 @section('content')
-@include('components.error')
 <div class="card">
     <div class="card-header">
         <span>Nuevo consolidado</span>
     </div>
     <div class="card-body">
         <form action="{{ route('consolidados.store') }}" method="post" autocomplete="off">
-            @include('consolidados.includes.save')
+            @include('consolidados._save')
             <div class="btn-group" role="group">
                 <button id="buttonDropdownStoreConsolidado" type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <span>Guardar consolidado</span>

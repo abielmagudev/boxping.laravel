@@ -4,21 +4,23 @@ namespace App\Http\Controllers;
 
 use App\Consolidado;
 use App\Cliente;
-use App\Ahex\Consolidado\Domain\Storer;
-use App\Ahex\Consolidado\Domain\Updater;
 use App\Ahex\Consolidado\Domain\Decoupler;
-use App\Ahex\Consolidado\Application\RoutesTrait as Routes;
+use App\Ahex\Consolidado\Application\RoutingTrait as Routing;
+use App\Ahex\Consolidado\Application\HandlerTrait as Handler;
 use App\Http\Requests\ConsolidadoSaveRequest as SaveRequest;
 use Illuminate\Http\Request;
 
 class ConsolidadoController extends Controller
 {
-    use Routes;
+    use Routing, Handler;
 
     public function index()
     {
+        $consolidados = Consolidado::with(['cliente','entradas'])->orderBy('id', 'desc')->paginate();
+
         return view('consolidados/index', [
-            'consolidados' => Consolidado::with(['cliente','entradas'])->orderBy('id', 'desc')->get(),
+            'consolidados' => $consolidados,
+            'config_consolidados' => config('system.consolidados'),
         ]);
     }
 
@@ -31,14 +33,13 @@ class ConsolidadoController extends Controller
     }
 
     public function store(SaveRequest $request)
-    {
-        $validated = (object) $request->validated();
-        $option    = $request->input('guardar', 0);
-
-        if( ! $consolidado = Storer::save( $validated ) )
+    {       
+        $prepared = Consolidado::prepare($request->validated());
+        
+        if( ! $consolidado = Consolidado::create($prepared) )
             return back()->with('failure', 'Error al guardar consolidado');
-
-        $route = $this->routeAfterStore($option, $consolidado->id);
+        
+        $route = $this->routeAfterStore($request->input('guardar', 0), $consolidado->id);
         return redirect($route)->with('success', "Consolidado {$consolidado->numero} guardado");
     }
 
@@ -48,6 +49,7 @@ class ConsolidadoController extends Controller
 
         return view('consolidados.show', [
             'consolidado' => $consolidado,
+            'config_consolidados' => config('system.consolidados'),
         ]);
     }
 
@@ -61,25 +63,24 @@ class ConsolidadoController extends Controller
 
     public function update(SaveRequest $request, Consolidado $consolidado)
     {
-        $validated = (object) $request->validated();
+        $prepared = Consolidado::prepare( $request->validated() );
 
-        if( ! Updater::save( $validated, $consolidado ) )
+        if( ! $consolidado->fill($prepared)->save() )
             return back()->with('failure', 'Error al actualizar consolidado');
+
+        $this->updateEntradas($consolidado);
 
         return back()->with('success', 'Consolidado actualizado');
     }
 
     public function destroy(Consolidado $consolidado)
-    {
-        $eliminar_entradas    = request('eliminar_entradas', 'no');
-        $consolidado_entradas = $consolidado->entradas->pluck('id')->all();
-        $consolidado_numero   = $consolidado->numero;
-        
-        if( ! $consolidado->delete() )
+    {   
+        if(! $consolidado->delete() )
             return back()->with('failure', 'Error al eliminar consolidado');
         
-        Decoupler::entradas($eliminar_entradas, $consolidado_entradas);
+        if( $consolidado->entradas->count() )
+            $this->uncoupleEntradas($consolidado->id);
 
-        return redirect()->route('consolidados.index')->with('success', "Consolidado {$consolidado_numero} eliminado");
+        return redirect()->route('consolidados.index')->with('success', "{$consolidado->numero} eliminado");
     }
 }

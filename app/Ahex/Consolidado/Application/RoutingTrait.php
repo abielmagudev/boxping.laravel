@@ -2,7 +2,7 @@
 
 namespace App\Ahex\Consolidado\Application;
 
-Trait RoutesTrait
+Trait RoutingTrait
 {
     public function routeAfterStore($option, $consolidado_id)
     {

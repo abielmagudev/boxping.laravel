@@ -24,34 +24,26 @@ class ConsolidadoSaveRequest extends FormRequest
      */
     public function rules()
     {
-        $consolidado_id = $this->getConsolidadoId();
+        $consolidado_id = $this->route('consolidado')->id ?? 0;
 
         return [
             'cliente' => ['required','exists:clientes,id'],
             'numero'  => ['required','unique:consolidados,numero,' . $consolidado_id],
             'tarimas' => ['required','numeric'],
-            'notas'   => 'nullable',
             'cerrado' => ['sometimes', 'boolean'],
+            'notas'   => 'nullable',
         ];
     }
 
     public function messages()
     {
         return array(
-            'cliente.required' => __('Selecciona el cliente delconsolidado'),
-            'cliente.exists'   => __('Selecciona un cliente válido para el consolidado'),
+            'cliente.required' => __('Selecciona el cliente'),
+            'cliente.exists'   => __('Selecciona un cliente válido'),
             'numero.required'  => __('Escribe el número de consolidado'),
             'numero.unique'    => __('Escribe un número de consolidado diferente'),
-            'tarimas.required' => __('Escribe la cantidad de tarimas del consolidado'),
-            'tarimas.numeric'  => __('Escribe la cantidad de tarimas del consolidado'),
+            'tarimas.required' => __('Escribe la cantidad de tarimas'),
+            'tarimas.numeric'  => __('Escribe la número de tarimas'),
         );
-    }
-
-    public function getConsolidadoId()
-    {
-        if( $consolidado = $this->route('consolidado') )
-            return $consolidado->id;
-
-        return 0;
     }
 }
