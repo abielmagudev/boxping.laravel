@@ -12,8 +12,8 @@ class Comentario extends Model
     
     protected $fillable = array(
         'contenido',
-        'created_by',
         'entrada_id',
+        'created_by',
     );
 
     public function creator()

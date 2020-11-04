@@ -12,8 +12,8 @@ class CreateEtapaZonasTable extends Migration
             $table->bigIncrements('id');
             $table->string('nombre')->index();
             $table->text('descripcion')->nullable();
-            $table->timestamps();
             $table->unsignedBigInteger('etapa_id')->index();
+            $table->timestamps();
         });
     }
 

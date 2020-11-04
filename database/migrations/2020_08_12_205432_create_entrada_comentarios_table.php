@@ -16,9 +16,9 @@ class CreateEntradaComentariosTable extends Migration
         Schema::create('entrada_comentarios', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->text('contenido');
+            $table->unsignedBigInteger('entrada_id');
             $table->unsignedInteger('created_by');
             $table->timestamps();
-            $table->unsignedBigInteger('entrada_id');
             $table->foreign('entrada_id')
                   ->references('id')->on('entradas')
                   ->onDelete('cascade');
