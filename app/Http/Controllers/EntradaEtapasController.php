@@ -58,7 +58,8 @@ class EntradaEtapasController extends Controller
         if(! $entrada->etapas()->updateExistingPivot($id, $prepared) )
             return back()->with('failure', 'Error al actualizar etapa');
         
-        return redirect()->route('entradas.show', $entrada)->with('success', 'Etapa actualizada');
+        return back()->with('success', 'Etapa actualizada');
+        // return redirect()->route('entradas.show', $entrada)->with('success', 'Etapa actualizada');
     }
 
     public function destroy(Entrada $entrada, Etapa $etapa)

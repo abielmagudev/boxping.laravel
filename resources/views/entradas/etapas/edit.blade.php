@@ -28,7 +28,7 @@
             @include('entradas.etapas._alertas')
             <br>
             <button class="btn btn-warning" type="submit" name="etapa" value="{{ $etapa->id }}">Actualizar etapa</button>
-            <a href="{{ route('entradas.show', $entrada) }}" class="btn btn-secondary">Cancelar</a>
+            <a href="{{ route('entradas.show', $entrada) }}" class="btn btn-secondary">Regresar</a>
         </form>
     </div>
 </div>
