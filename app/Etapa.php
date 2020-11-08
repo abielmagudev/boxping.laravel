@@ -36,6 +36,11 @@ class Etapa extends Model
         return $this->belongsTo(User::class, 'updated_by');
     }
 
+    public function scopeSlug($query, $slug)
+    {
+        return $query->where('slug', $slug)->first();
+    }
+
     public static function prepare($validated)
     {
         $slugger = new Slugger;
