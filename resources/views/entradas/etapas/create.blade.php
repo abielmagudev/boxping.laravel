@@ -18,15 +18,15 @@
                 </label>
                 <select name="slug" id="select-slug" class="form-control" onchange="submit()">
                     <option label="Selecciona..." disabled selected></option>
-                    <?php $etapa_slug = $etapa->slug ?? null ?>
-                    @foreach($etapas as $e)
-                    <option value="{{ $e->slug }}" {{ selectable($etapa_slug, $e->slug) }}>{{ $e->nombre }}</option>
+                    @foreach($etapas as $stage)
+                    <option value="{{ $stage->slug }}" {{ selectable($etapa->slug, $stage->slug) }}>{{ $stage->nombre }}</option>
                     @endforeach
                 </select>
             </div>
         </form> 
              
-        @if( is_object($etapa) )
+        <!-- Etapa -->
+        @if( $etapa->id )
         <form action="{{ route('entrada.etapas.store', $entrada) }}" method="post" autocomplete="off">
             @csrf    
             @include('entradas.etapas._medidas')

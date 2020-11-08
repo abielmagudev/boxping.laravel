@@ -9,17 +9,15 @@ class EntradaEtapaSaveRequest extends FormRequest
     private $medidas_peso;
     private $medidas_volumen;
 
-    public function __construct()
-    {
-        parent::__construct();
-
-        $this->medidas_peso = implode(',', config('system.medidas.peso'));
-        $this->medidas_volumen = implode(',', config('system.medidas.volumen'));
-    }
-
     public function authorize()
     {
         return true;
+    }
+
+    protected function prepareForValidation()
+    {
+        $this->medidas_peso = implode(',', config('system.medidas.peso'));
+        $this->medidas_volumen = implode(',', config('system.medidas.volumen'));
     }
 
     public function rules()

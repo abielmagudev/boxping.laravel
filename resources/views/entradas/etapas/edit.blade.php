@@ -19,6 +19,7 @@
             <div class="form-control bg-light">{{ $etapa->nombre }}</div>
         </div>
         
+        <!-- Mediciones, zonas, alertas -->
         <form action="{{ route('entrada.etapas.update', [$entrada, $etapa]) }}" method="post" autocomplete="off">
             @method('patch')
             @csrf

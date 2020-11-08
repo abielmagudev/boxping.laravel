@@ -17,10 +17,10 @@ class EntradasEtapasTableSeeder extends Seeder
         
         foreach($entradas as $entrada)
         {      
-            $etapas_sliced = $etapas->slice( rand(1, $etapas->count()) );
             $alertas_integers = range( rand(1, 3), rand(4, 7) );
             $alertas_id = array_map('strval', $alertas_integers);
-
+            $etapas_sliced = $etapas->slice( rand(1, $etapas->count()) );
+            
             foreach($etapas_sliced as $e)
             {
                 $data = [
