@@ -1,5 +1,3 @@
-@extends('entradas.create')
-@section('form_content')
 <div class="form-group">
     <label for="read-consolidado-numero" class="small">Número de consolidado</label>
     <div class="form-control bg-light">Sin consolidar</div>
@@ -13,5 +11,3 @@
         @endforeach
     </select>
 </div>
-@parent
-@endsection

@@ -49,13 +49,13 @@
                     </label>
                     <textarea name="contenido" id="textarea-contenido" cols="30" rows="5" class="form-control" required></textarea>
                 </div>
-                <button class="btn btn-success btn-block" type="submit">Agregar comentario</button>
+                <button class="btn btn-success btn-block" type="submit">Guardar comentario</button>
             </form>
           </div>
         </div>
       </div>
 
-      <div class="modal-footer">
+      <div class="modal-footer d-none">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
       </div>
     </div>

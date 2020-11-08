@@ -1,6 +1,5 @@
 @extends('app')
 @section('content')
-@include('components.error')
 <div class="card">
     <div class="card-header">Agregar etapa</div>
     <div class="card-body">

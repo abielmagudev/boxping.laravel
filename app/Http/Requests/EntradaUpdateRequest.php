@@ -3,18 +3,27 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
+use App\Ahex\Entrada\Domain\UpdaterFactory;
 
 class EntradaUpdateRequest extends FormRequest
 {
+    private $updaters_name;
+
     public function authorize()
     {
         return true;
     }
 
+    protected function prepareForValidation()
+    {
+        $this->updaters_name = implode(',', UpdaterFactory::names());
+    }
+
     public function rules()
     {
         return [
-            'actualizar' => ['required', 'in:' . $this->getUpdaters()],
+            'actualizar' => ['required', 'in:' . $this->updaters_name],
         ];
     }
 
@@ -24,17 +33,5 @@ class EntradaUpdateRequest extends FormRequest
             'actualizar.required' => __('Actualización de entrada requerida'),
             'actualizar.in' => __('Actualización de entrada no válida'),
         ];
-    }
-
-    private function getUpdaters()
-    {
-        return implode(',', [
-            'cruce',
-            'destinatario',
-            'entrada',
-            'reempaque',
-            'remitente',
-            'verificacion', 
-        ]);
     }
 }

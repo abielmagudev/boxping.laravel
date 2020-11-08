@@ -1,7 +1,13 @@
 <div class="tab-pane fade" id="reempaque" role="tabpanel" aria-labelledby="reempaque-tab">
     @if( is_object($entrada->codigor) )
+    <p class="text-right">
+        <a href="{{ route('entradas.edit', [$entrada, 'formulario' => 'reempaque']) }}" class="btn btn-warning btn-sm" data-toggle="tooltip" data-placement="left" title="Editar reempaque">
+            <b>e</b>
+        </a>
+    </p>
+    
     <div class="row">
-        <div class="col-sm col-sm-3">
+        <div class="col-sm col-sm-3 text-left text-md-right">
             <small class="text-muted">Código R</small>
         </div>
         <div class="col-sm">
@@ -10,7 +16,7 @@
 
         <div class="w-100 mb-2"></div>
 
-        <div class="col-sm col-sm-3">
+        <div class="col-sm col-sm-3 text-left text-md-right">
             <small class="text-muted">Descripción</small>
         </div>
         <div class="col-sm">
@@ -19,7 +25,7 @@
 
         <div class="w-100 mb-2"></div>
 
-        <div class="col-sm col-sm-3">
+        <div class="col-sm col-sm-3 text-left text-md-right">
             <small class="text-muted">Reempacador</small>
         </div>
         <div class="col-sm">
@@ -28,22 +34,16 @@
 
         <div class="w-100 mb-2"></div>
 
-        <div class="col-sm col-sm-3">
+        <div class="col-sm col-sm-3 text-left text-md-right">
             <small class="text-muted">Horario</small>
         </div>
         <div class="col-sm">
             <span>{{ $entrada->reempacado_horario }}</span>
         </div>
     </div>
-    <br>
-
-    <div class="text-right">
-        <a href="{{ route('entradas.edit', [$entrada, 'formulario' => 'reempaque']) }}" class="btn btn-outline-warning btn-sm">
-            <span>Editar reempaque</span>
-        </a>
-    </div>
     @else
 
+    <br>
     <p class="text-center">
         <a href="{{ route('entradas.edit', [$entrada, 'formulario' => 'reempaque']) }}" class="btn btn-primary btn-sm">Agregar reempaque</a>
     </p>

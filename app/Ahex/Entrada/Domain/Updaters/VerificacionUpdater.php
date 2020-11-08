@@ -6,37 +6,33 @@ use App\Ahex\Fake\Domain\Fakeuser;
 
 Class VerificacionUpdater extends Updater
 {
-    public function __construct($request, $entrada)
+    public function rules()
     {
-        $this->validate($request);
-        $this->fill( $request->all() );
-        $this->entrada = $entrada;
-    }
-
-    public function validate($request)
-    {
-        $request->validate(
-            [
-                'verificacion' => ['required','accepted'],
-            ], 
-            [
-                'verificacion.required' => __('Activa la opción de verificación'),
-                'verificacion.accepted' => __('Activa la opción válida de verificación'),
-            ]
-        );
-    }
-
-    public function fill($validated)
-    {
-        $this->data = [
-            'verificado_by' => Fakeuser::live(),
-            'verificado_at' => now(),
+        return [
+            'verificacion' => ['required','accepted'],
         ];
     }
 
-    public function message($saved)
+    public function messages()
     {
-        if( ! $saved )
+        return [
+            'verificacion.required' => __('Activa la opción de verificación'),
+            'verificacion.accepted' => __('Activa la opción válida de verificación'),
+        ];
+    }
+    
+    public function prepare($validated)
+    {
+        return [
+            'verificado_by' => Fakeuser::live(),
+            'verificado_at' => now(),
+            'updated_by' => Fakeuser::live(),
+        ];
+    }
+
+    public function notification($saved = true)
+    {
+        if(! $saved )
             return 'Error al actualizar verificación';
 
         return 'Verificación actualizada';

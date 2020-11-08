@@ -19,8 +19,8 @@ class CreateEntradasTable extends Migration
             $table->bigIncrements('id');
             $table->string('numero')->unique();
             $table->unsignedInteger('consolidado_id')->nullable();
-            $table->unsignedInteger('cliente_id');
             $table->boolean('cliente_alias_numero');
+            $table->unsignedInteger('cliente_id');
 
             // Trayectoria
             $table->unsignedInteger('destinatario_id')->nullable();

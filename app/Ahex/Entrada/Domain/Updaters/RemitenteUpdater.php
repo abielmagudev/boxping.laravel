@@ -8,38 +8,38 @@ Class RemitenteUpdater extends Updater
 {
     public $redirect;
 
-    public function __construct($request, $entrada)
+    public function __construct($entrada)
     {
-        $this->validate($request);
-        $this->fill( $request->all() );
-        $this->entrada = $entrada;
+        parent::__construct($entrada);
         $this->redirect = route('entradas.show', $entrada);
     }
 
-    public function validate($request)
+    public function rules()
     {
-        $request->validate(
-            [
-                'remitente' => ['required', 'exists:remitentes,id']
-            ],
-            [
-                'remitente.required' => 'Selecciona un remitente válido.',
-                'remitente.exists'   => 'Selecciona un remitente existente.',
-            ]
-        );
+        return [
+            'remitente' => ['required', 'exists:remitentes,id']
+        ];
     }
 
-    public function fill($validated)
+    public function messages()
     {
-        $this->data = [
+        return [
+            'remitente.required' => 'Selecciona un remitente válido.',
+            'remitente.exists'   => 'Selecciona un remitente existente.',
+        ];
+    }
+
+    public function prepare($validated)
+    {
+        return [
             'remitente_id' => $validated['remitente'],
             'updated_by' => Fakeuser::live(),
         ];
     }
 
-    public function message($saved)
+    public function notification(bool $saved = true)
     {
-        if( ! $saved )
+        if(! $saved )
             return 'Error al agregar remitente';
 
         return 'Remitente agregado';

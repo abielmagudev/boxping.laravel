@@ -1,6 +1,5 @@
 @extends('app')
 @section('content')
-@include('components.error')
 <div class="card">
     <div class="card-header">Editar etapa</div>
     <div class="card-body">
@@ -34,12 +33,13 @@
 </div>
 <br>
 <div class="float-right">
-    @component('components.confirm-delete-bundle')
+    @component('components.modal-confirm-delete-bundle')
         @slot('text', 'Eliminar etapa')
         @slot('route', route('entrada.etapas.destroy', [$entrada, $etapa]))
         @slot('content')
-        <p class="text-center">Deseas eliminar etapa <b>{{ $etapa->nombre }}</b> de la entrada?</p>
+        <p class="lead text-center m-0">Deseas eliminar etapa <b>{{ $etapa->nombre }}</b> de la entrada?</p>
         @endslot
     @endcomponent
 </div>
+<br>
 @endsection

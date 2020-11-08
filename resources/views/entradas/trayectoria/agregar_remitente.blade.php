@@ -1,15 +1,15 @@
 @extends('app')
 @section('content')
-@include('components.error')
 @include('components.notification')
 
 <div class="d-flex justify-content-between align-items-center">
    <div>
-      <a href="{{ route('entradas.show', $entrada) }}" class="btn btn-secondary btn-sm">Regresar</a>
-      <button data-toggle="modal" data-target="#searchRemitentes" type="button" class="btn btn-primary btn-sm">Buscar</button>
+      <button data-toggle="modal" data-target="#searchRemitentes" type="button" class="btn btn-primary btn-sm">Buscar remitente</button>
    </div>
    <div>
-      <a href="{{ route('remitentes.create', ['entrada' => $entrada->id]) }}" class="btn btn-primary btn-sm">Nuevo remitente</a>
+      <a href="{{ route('remitentes.create', ['entrada' => $entrada->id]) }}" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="left" title="Nuevo remitente">
+         <b>+</b>
+      </a>
    </div>
 </div>
 <br>
@@ -65,5 +65,5 @@
    </div>
 </div>
 
-@include('entradas.modals.search-remitentes')
+@include('entradas.trayectoria.modal-search-remitentes')
 @endsection

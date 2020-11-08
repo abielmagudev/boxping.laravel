@@ -9,30 +9,30 @@ Class DestinatarioUpdater extends Updater
 {
     public $redirect;
 
-    public function __construct($request, $entrada)
+    public function __construct($entrada)
     {
-        $this->entrada = $entrada;
-        $this->validate( $request );
-        $this->fill( $request->all() );
+        parent::__construct($entrada);
         $this->redirect = route('entradas.show', $entrada);
     }
 
-    public function validate($request)
+    public function rules()
     {
-        $request->validate(
-            [
-                'destinatario' => ['required', 'exists:destinatarios,id']
-            ],
-            [
-                'destinatario.required' => 'Selecciona un destinatario válido.',
-                'destinatario.exists'   => 'Selecciona un destinatario existente.',
-            ]
-        );
+        return [
+            'destinatario' => ['required', 'exists:destinatarios,id']
+        ];
     }
 
-    public function fill($validated)
+    public function messages()
     {
-        $this->data = [
+        return [
+            'destinatario.required' => 'Selecciona un destinatario válido.',
+            'destinatario.exists'   => 'Selecciona un destinatario existente.',
+        ];
+    }
+
+    public function prepare($validated)
+    {
+        return [
             'destinatario_id' => $validated['destinatario'],
             'verificado_by' => null,
             'verificado_at' => null,
@@ -40,9 +40,9 @@ Class DestinatarioUpdater extends Updater
         ];
     }
 
-    public function message($saved)
+    public function notification(bool $saved = true)
     {
-        if( ! $saved )
+        if(! $saved )
             return 'Error al agregar destinatario';
 
         return 'Destinatario agregado';

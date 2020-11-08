@@ -6,7 +6,9 @@
                 <span class="badge badge-primary">{{ $entrada->etapas->count() }}</span>
             </div>
             <div>
-                <a href="{{ route('entrada.etapas.create', $entrada) }}" class="btn btn-primary btn-sm">Agregar</a>
+                <a href="{{ route('entrada.etapas.create', $entrada) }}" class="btn btn-primary btn-sm">
+                    <b>+</b>
+                </a>
             </div>
         </div>
     </div>
@@ -57,9 +59,9 @@
                         <td class="align-middle text-center">
                         @if( $etapa_alertas = $etapa->pivot->alertas() )
                             @foreach($etapa_alertas as $alerta)
-                                @component('components.icon-alert')
+                                @component('components.tooltip-shape')
+                                    @slot('title', $alerta->nombre)
                                     @slot('color', $config_alertas[$alerta->nivel]['color'])
-                                    @slot('nombre', $alerta->nombre)
                                 @endcomponent
                             @endforeach
                         @endif

@@ -4,16 +4,19 @@ namespace App\Ahex\Entrada\Domain\Updaters;
 
 Abstract class Updater
 {
+    public $redirect;
     protected $entrada;
-    protected $data;
 
-    abstract public function validate( object $request);
-    abstract public function fill( array $validated);
-    abstract public function message( bool $saved);
-
-    public function save()
+    public function __construct($entrada)
     {
-        $data = $this->data;
-        return $this->entrada->fill( $data )->save();
+        $this->entrada = $entrada;
     }
+
+    abstract public function rules();
+
+    abstract public function messages();
+
+    abstract public function prepare(array $validated);
+
+    abstract public function notification(bool $saved = true);
 }

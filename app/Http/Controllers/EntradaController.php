@@ -8,12 +8,10 @@ use App\Comentario;
 use App\EntradaEtapa;
 use App\EntradaEtapaPivot;
 
-use App\Ahex\Entrada\Application\CastViewCreate;
-use App\Ahex\Entrada\Application\CastViewEdit;
-use App\Ahex\Entrada\Application\TrayectoriaTrait as Trayectoria;
-use App\Ahex\Entrada\Application\RoutesTrait as Routes;
-use App\Ahex\Entrada\Domain\Storer;
+use App\Ahex\Entrada\Application\CastSaveForm;
 use App\Ahex\Entrada\Domain\UpdaterFactory;
+use App\Ahex\Entrada\Application\RoutingTrait as Routing;
+use App\Ahex\Entrada\Application\TrayectoriaTrait as Trayectoria;
 use App\Http\Requests\EntradaCreateRequest as CreateRequest;
 use App\Http\Requests\EntradaStoreRequest as StoreRequest;
 use App\Http\Requests\EntradaEditRequest as EditRequest;
@@ -22,7 +20,7 @@ use Illuminate\Http\Request;
 
 class EntradaController extends Controller
 {
-    use Trayectoria, Routes;
+    use Routing, Trayectoria;
 
     public function index()
     {
@@ -33,19 +31,19 @@ class EntradaController extends Controller
 
     public function create(CreateRequest $request)
     {   
-        $cast = new CastViewCreate( $request->input('consolidado', false) );
-        return view($cast->template, $cast->data);
+        $cast = CastSaveForm::create( $request->input('consolidado', false) );
+        return view('entradas.create', $cast);
     }
 
     public function store(StoreRequest $request)
     {
-        $validated = (object) $request->validated();
+        $prepared = Entrada::prepare($request->validated());
 
-        if( ! $entrada = Storer::save( $validated ) )
+        if(! $entrada = Entrada::create($prepared) )
             return back()->with('failure', 'Error al guardar entrada');
         
-        $route = $this->routeAfterStore( $entrada->consolidado_id );
-        return redirect($route)->with('success', "Entrada {$entrada->numero} guardada");
+        $route = $this->routeAfterStore($entrada->consolidado_id);
+        return redirect($route)->with('success', "{$entrada->numero} guardada");
     }
 
     public function show(Entrada $entrada)
@@ -59,34 +57,32 @@ class EntradaController extends Controller
 
     public function edit(EditRequest $request, Entrada $entrada)
     {
-        $cast = new CastViewEdit($request->formulario, $entrada);
-        return view($cast->template, $cast->data);
+        $cast = CastSaveForm::edit($request->formulario, $entrada);
+        return view('entradas.edit', $cast);
     }
 
     public function update(UpdateRequest $request, Entrada $entrada)
     {
-        $updater = UpdaterFactory::make($request->actualizar, [
-            $request,
-            $entrada,
-        ]);
+        $updater = UpdaterFactory::make($request->actualizar, $entrada);
+        $validated = $request->validate($updater->rules(), $updater->messages());
+        $prepared = $updater->prepare($validated);
         
-        if( ! $updater->save() )
-            return back()->with('failure', $updater->message(false));
+        if(! $entrada->fill($prepared)->save() )
+            return back()->with('failure', $updater->notification(false));
         
-        if( ! isset($updater->redirect) )
-            return back()->with('success', $updater->message(true));
+        if(! $updater->redirect )
+            return back()->with('success', $updater->notification());
 
-        return redirect( $updater->redirect )->with('success', $updater->message(true));
+        return redirect( $updater->redirect )->with('success', $updater->notification());
     }
 
     public function destroy(Entrada $entrada)
     {
         $route = $this->routeAfterDestroy($entrada->consolidado_id);
-        $numero = $entrada->numero;
 
-        if( ! $entrada->delete() )
+        if(! $entrada->delete() )
             return back()->with('failure', 'Error al eliminar entrada');
         
-        return redirect($route)->with('success', "Entrada {$numero} eliminada");
+        return redirect($route)->with('success', "{$entrada->numero} eliminada");
     }
 }

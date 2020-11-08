@@ -4,7 +4,6 @@
         @include('entradas.show.informacion.tabs')
     </div>
     <div class="card-body overflow-auto" style="height:320px">
-        <br>
         <div class="tab-content" id="informacion-tabs-contents">
             @include('entradas.show.informacion.content-entrada')
             @include('entradas.show.informacion.content-reempaque')

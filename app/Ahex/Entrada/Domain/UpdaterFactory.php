@@ -1,28 +1,34 @@
-<?php 
+<?php
 
 namespace App\Ahex\Entrada\Domain;
 
-use App\Ahex\Zkeleton\Application\InspectorClass;
-use App\Ahex\Zkeleton\Application\InstantiatorClass;
+use App\Ahex\Zkeleton\Application\Instantiator;
 
 Abstract class UpdaterFactory
 {
-    private static $classname;
-    private static $filepath;
-    private static $namespace_classname;
+    const NAMESPACE_UPDATERS = __NAMESPACE__ . '\Updaters\\';
 
-    public static function make($name, $parameters)
+    public static function make(string $name, $entrada)
     {
-        self::setup($name);
-        return InstantiatorClass::build(self::$namespace_classname, $parameters);
+        $classname = self::classname($name);          
+        return Instantiator::build($classname, [$entrada]);
     }
 
-    private static function setup($name)
+    public static function classname($name)
     {
-        self::$classname = ucfirst( strtolower($name) ) . 'Updater';
-        self::$filepath = app_path('Ahex/Entrada/Domain/Updaters/' . self::$classname . '.php');
-        self::$namespace_classname = __NAMESPACE__ . '\Updaters\\' . self::$classname;
-        
-        InspectorClass::validate(self::$filepath, self::$namespace_classname);
+        $capitalized = ucfirst( strtolower($name) );
+        return self::NAMESPACE_UPDATERS . $capitalized . 'Updater';
+    }
+
+    public static function names()
+    {
+        return [
+            'entrada',
+            'reempaque',
+            'cruce',
+            'destinatario',
+            'remitente',
+            'verificacion',
+        ];
     }
 }

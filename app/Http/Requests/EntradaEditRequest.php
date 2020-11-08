@@ -6,33 +6,32 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class EntradaEditRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
+    private $forms;
+
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->forms = implode(',', ['entrada','cruce','reempaque']);
+    }
+
     public function authorize()
     {
         return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array
-     */
     public function rules()
     {
         return [
-            'formulario' => ['required','in:entrada,cruce,reempaque']
+            'formulario' => ['required','in:' . $this->forms]
         ];
     }
 
     public function messages()
     {
         return array(
-            'formulario.required' => __('Edición de entrada requerida'),
-            'formulario.in' => __('Edición de entrada valido'),
+            'formulario.required' => __('Se requiere una editor de información'),
+            'formulario.in' => __('Selecciona un editor valido de información'),
         );
     }
 }

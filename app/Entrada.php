@@ -3,15 +3,18 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Ahex\Entrada\Domain\Attributes;
-use App\Ahex\Entrada\Domain\Scopes;
+use App\Ahex\Entrada\Domain\RelationshipsTrait as Relationships;
+use App\Ahex\Entrada\Domain\AttributesTrait as Attributes;
+use App\Ahex\Entrada\Domain\ScopesTrait as Scopes;
+use App\Ahex\Fake\Domain\Fakeuser;
 
 class Entrada extends Model
 {
-    use Attributes, Scopes;
+    use Relationships, Attributes, Scopes;
+    
+    const SIN_CONSOLIDADO = null;
 
     protected $fillable = array(
-        
         // Entrada
         'numero',
         'consolidado_id',
@@ -44,82 +47,32 @@ class Entrada extends Model
         'updated_by',
     );
 
-    public function consolidado()
+    public static function prepare($validated)
     {
-        return $this->belongsTo(Consolidado::class);
-    }
-    
-    public function cliente()
-    {
-        return $this->belongsTo(Cliente::class);
+        $consolidado = self::findConsolidado($validated);
+
+        $prepared = [
+            'numero' => $validated['numero'],
+            'consolidado_id' => $consolidado->id ?? null,
+            'cliente_id' => $consolidado->cliente_id ?? $validated['cliente'],
+            'cliente_alias_numero' => isset($validated['cliente_alias_numero']) ? 1 : 0,
+            'updated_by' => Fakeuser::live(),
+        ];
+
+        if( request()->isMethod('post') )
+            $prepared['created_by'] = Fakeuser::live();
+
+        return $prepared;
     }
 
-    public function remitente()
+    private static function findConsolidado($validated)
     {
-        return $this->belongsTo(Remitente::class);
-    }
+        if( isset($validated['consolidado_numero']) )
+            return Consolidado::where('numero', $validated['consolidado_numero'])->first();
 
-    public function destinatario()
-    {
-        return $this->belongsTo(Destinatario::class);
-    }
-
-    public function vehiculo()
-    {
-        return $this->belongsTo(Vehiculo::class);
-    }
-
-    public function conductor()
-    {
-        return $this->belongsTo(Conductor::class);
-    }
-
-    public function codigor()
-    {
-        return $this->belongsTo(Codigor::class);
-    }
-
-    public function reempacador()
-    {
-        return $this->belongsTo(Reempacador::class);
-    }
-
-    public function verificador()
-    {
-        return $this->belongsTo(User::class, 'verificado_by');
-    }
-
-    public function creator()
-    {
-        return $this->belongsTo(User::class, 'created_by');
-    }
-
-    public function updater()
-    {
-        return $this->belongsTo(User::class, 'updated_by');
-    }
-
-    public function comentarios()
-    {
-        return $this->hasMany(Comentario::class);
-    }
-
-    public function etapas()
-    {
-        return $this->belongsToMany(Etapa::class, 'entradas_etapas')
-                    ->using(EntradaEtapa::class)
-                    ->withPivot([
-                        'peso',
-                        'medida_peso',
-                        'ancho',
-                        'altura',
-                        'largo',
-                        'medida_volumen',
-                        'zona_id',
-                        'alertas_id',
-                        'created_by',
-                        'updated_by',
-                    ])
-                    ->withTimestamps();
+        if( isset($validated['consolidado']) )
+            return Consolidado::find($validated['consolidado']);  
+        
+        return self::SIN_CONSOLIDADO;
     }
 }

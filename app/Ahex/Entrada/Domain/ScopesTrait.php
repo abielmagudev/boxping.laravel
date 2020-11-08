@@ -2,7 +2,7 @@
 
 namespace App\Ahex\Entrada\Domain;
 
-Trait Scopes
+Trait ScopesTrait
 {
     public function scopeWithEtapas()
     {

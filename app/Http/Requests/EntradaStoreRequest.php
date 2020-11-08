@@ -14,7 +14,7 @@ class EntradaStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'consolidado'          => 'exists:consolidados,id',
+            'consolidado'          => 'exists:consolidados,id,abierto,1',
             'cliente'              => ['required_without:consolidado','exists:clientes,id'],
             'numero'               => ['required','unique:entradas'],
             'cliente_alias_numero' => ['sometimes','accepted'],
@@ -24,7 +24,7 @@ class EntradaStoreRequest extends FormRequest
     public function messages()
     {
         return [
-            'consolidado.exists'       => __('Selecciona un consolidado válido'),
+            'consolidado.exists'       => __('Selecciona un consolidado válido y abierto'),
             'cliente.required_without' => __('Selecciona un cliente'),
             'cliente.exists'           => __('Selecciona un cliente válido'),
             'numero.required'          => __('Escribe el número de entrada'),          

@@ -4,11 +4,12 @@
 
 <div class="d-flex justify-content-between align-items-center">
    <div>
-      <a href="{{ route('entradas.show', $entrada) }}" class="btn btn-secondary btn-sm">Regresar</a>
-      <button data-toggle="modal" data-target="#searchDestinatarios" type="button" class="btn btn-primary btn-sm">Buscar</button>
+      <button data-toggle="modal" data-target="#searchDestinatarios" type="button" class="btn btn-primary btn-sm">Buscar destinatario</button>
    </div>
    <div>
-      <a href="{{ route('destinatarios.create', ['entrada' => $entrada->id]) }}" class="btn btn-primary btn-sm">Nuevo destinatario</a>
+      <a href="{{ route('destinatarios.create', ['entrada' => $entrada->id]) }}" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="left" title="Nuevo destinatario">
+         <b>+</b>
+      </a>
    </div>
 </div>
 <br>
@@ -64,5 +65,5 @@
    </div>
 </div>
 
-@include('entradas.modals.search-destinatarios')
+@include('entradas.trayectoria.modal-search-destinatarios')
 @endsection

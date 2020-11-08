@@ -6,25 +6,16 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class EntradaCreateRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
     public function authorize()
     {
+        if( $this->filled('consolidado') && is_numeric($this->consolidado) ) 
+            $this->redirect = route('consolidados.show', $this->consolidado);
+
         return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array
-     */
     public function rules()
     {        
-        $this->setRedirect( $this->input('consolidado', false) );
-
         return [
             'consolidado' => 'exists:consolidados,id,abierto,1',
         ];
@@ -32,16 +23,8 @@ class EntradaCreateRequest extends FormRequest
 
     public function messages()
     {
-        return array(
-            'consolidado.exists' => __('Selecciona un consolidado válido y abierto'),
-        );
-    }
-
-    private function setRedirect( $consolidado_id )
-    {
-        if( $consolidado_id ) 
-            $this->redirect = route('consolidados.show', $consolidado_id);
-
-        return;
+        return [
+            'consolidado.exists' => __('Requiere un consolidado válido y abierto para la nueva entrada'),
+        ];
     }
 }

@@ -2,7 +2,7 @@
 
 namespace App\Ahex\Entrada\Domain;
 
-Trait Attributes
+Trait AttributesTrait
 {
     public function getAliasNumeroAttribute()
     {
