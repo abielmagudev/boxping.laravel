@@ -43,7 +43,7 @@ class EntradaController extends Controller
             return back()->with('failure', 'Error al guardar entrada');
         
         $route = $this->routeAfterStore($entrada->consolidado_id);
-        return redirect($route)->with('success', "{$entrada->numero} guardada");
+        return redirect($route)->withInput( $request->only('cliente') )->with('success', "{$entrada->numero} guardada");
     }
 
     public function show(Entrada $entrada)
