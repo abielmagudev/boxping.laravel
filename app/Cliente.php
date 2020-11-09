@@ -56,7 +56,7 @@ class Cliente extends Model
         $prepared = [
             'nombre' => $validated['nombre'],
             'alias' => $validated['alias'],
-            'contacto' => $validated['contacto'],
+            'contacto' => capitalize($validated['contacto']),
             'telefono' => $validated['telefono'],
             'correo_electronico' => $validated['correo_electronico'],
             'direccion' => $validated['direccion'],
