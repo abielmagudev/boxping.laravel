@@ -3,83 +3,62 @@
 namespace App\Http\Controllers;
 
 use App\Cliente;
+use App\Entrada;
+use App\Http\Requests\ClienteSaveRequest as SaveRequest;
 use Illuminate\Http\Request;
 
 class ClienteController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        return 'Clientes...';
+        return view('clientes.index')->with('clientes', Cliente::all()->sortByDesc('id'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
+        return view('clientes.create')->with('cliente', new Cliente);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function store(SaveRequest $request)
     {
-        //
+        $prepared = Cliente::prepare($request->validated());
+
+        if(! $cliente = Cliente::create($prepared) )
+            return back()->with('failure', 'Error al guardar cliente');
+
+        return redirect()->route('clientes.index')->with('success', 'Cliente guardado');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Cliente  $cliente
-     * @return \Illuminate\Http\Response
-     */
     public function show(Cliente $cliente)
     {
-        //
+        $entradas = Entrada::with(['destinatario'])->where('cliente_id', $cliente->id)->orderBy('id', 'desc')->get();
+        
+        return view('clientes.show', [
+            'cliente' => $cliente,
+            'entradas' => $entradas,
+        ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Cliente  $cliente
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Cliente $cliente)
     {
-        //
+        return view('clientes.edit')->with('cliente', $cliente);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Cliente  $cliente
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Cliente $cliente)
+    public function update(SaveRequest $request, Cliente $cliente)
     {
-        //
+        $prepared = Cliente::prepare($request->validated());
+
+        if(! $cliente->fill($prepared)->save() )
+            return back()->with('failure', 'Error al actualizar cliente');
+        
+        return back()->with('success', 'Cliente actualizado');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Cliente  $cliente
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Cliente $cliente)
     {
-        //
+        if(! $cliente->delete() )
+            return back()->with('failure', 'Error al eliminar cliente');
+        
+        return redirect()->route('clientes.index')->with('success', "{$cliente->nombre} ({$cliente->alias}) eliminado");
     }
 }

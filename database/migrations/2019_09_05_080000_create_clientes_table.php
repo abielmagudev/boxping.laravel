@@ -15,8 +15,8 @@ class CreateClientesTable extends Migration
     {
         Schema::create('clientes', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('nombre');
-            $table->string('alias');
+            $table->string('nombre')->unique()->index();
+            $table->string('alias')->unique()->index();
             $table->string('contacto');
             $table->string('telefono');
             $table->string('correo_electronico');
@@ -25,6 +25,8 @@ class CreateClientesTable extends Migration
             $table->string('estado');
             $table->string('pais');
             $table->text('notas')->nullable();
+            $table->unsignedTinyInteger('created_by')->index();
+            $table->unsignedTinyInteger('updated_by')->index();
             $table->timestamps();
             $table->softDeletes();
         });
