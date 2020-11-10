@@ -26,22 +26,22 @@ class CreateEntradasTable extends Migration
             $table->unsignedInteger('destinatario_id')->nullable();
             $table->unsignedInteger('remitente_id')->nullable();
 
-            // Cruce
+            // Importacion
             $table->unsignedInteger('vehiculo_id')->nullable();
             $table->unsignedInteger('conductor_id')->nullable();
-            $table->unsignedInteger('vuelta')->nullable();
-            $table->date('cruce_fecha')->nullable();
-            $table->time('cruce_hora')->nullable();
+            $table->unsignedInteger('numero_cruce')->nullable();
+            $table->date('importado_fecha')->nullable();
+            $table->time('importado_hora')->nullable();
 
-            // Reempacado
+            // Reempaque
             $table->unsignedInteger('codigor_id')->nullable();
             $table->unsignedInteger('reempacador_id')->nullable();
             $table->date('reempacado_fecha')->nullable();
             $table->time('reempacado_hora')->nullable();
 
-            // Verificacion
-            $table->unsignedSmallInteger('verificado_by')->nullable();
-            $table->datetime('verificado_at')->nullable();
+            // Confirmación
+            $table->unsignedSmallInteger('confirmado_by')->nullable();
+            $table->datetime('confirmado_at')->nullable();
 
             // Log
             $table->unsignedInteger('created_by');

@@ -42,6 +42,6 @@ Class RemitenteUpdater extends Updater
         if(! $saved )
             return 'Error al agregar remitente';
 
-        return 'Remitente agregado';
+        return 'Remitente de la entrada agregado';
     }
 }

@@ -1,11 +1,10 @@
-<div class="tab-pane fade" id="cruce" role="tabpanel" aria-labelledby="cruce-tab">
+<div class="tab-pane fade" id="importacion" role="tabpanel" aria-labelledby="importacion-tab">
     @if( is_object($entrada->vehiculo) )
     <p class="text-right">
-        <a href="{{ route('entradas.edit', [$entrada, 'formulario' => 'cruce']) }}" class="btn btn-warning btn-sm" data-toggle="tooltip" data-placement="left" title="Editar cruce">
+        <a href="{{ route('entradas.edit', [$entrada, 'formulario' => 'importacion']) }}" class="btn btn-warning btn-sm" data-toggle="tooltip" data-placement="left" title="Editar importación">
             <b>e</b>
         </a>
     </p>
-
     <div class="row">
         <div class="col-sm col-sm-3 text-left text-md-right">
             <small class="text-muted">Vehículo</small>
@@ -26,10 +25,10 @@
         <div class="w-100 mb-2"></div>
 
         <div class="col-sm col-sm-3 text-left text-md-right">
-            <small class="text-muted">Vuelta</small>
+            <small class="text-muted">Número de cruce</small>
         </div>
         <div class="col-sm">
-            <span>{{ $entrada->vuelta }}</span>
+            <span>{{ $entrada->numero_cruce }}</span>
         </div>
 
         <div class="w-100 mb-2"></div>
@@ -38,14 +37,15 @@
             <small class="text-muted">Horario</small>
         </div>
         <div class="col-sm">
-            <span>{{ $entrada->cruce_horario }}</span>
+            <span>{{ $entrada->importado_horario }}</span>
         </div>
     </div>
-    @else
 
+    @else
     <br>
     <p class="text-center">
-        <a href="{{ route('entradas.edit', [$entrada, 'formulario' => 'cruce']) }}" class="btn btn-primary btn-sm">Agregar cruce</a>
+        <a href="{{ route('entradas.edit', [$entrada, 'formulario' => 'importacion']) }}" class="btn btn-primary btn-sm">Agregar importación</a>
     </p>
+
     @endif
 </div>

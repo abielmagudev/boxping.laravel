@@ -46,6 +46,6 @@ Class ReempaqueUpdater extends Updater
         if(! $saved )
             return 'Error al actualizar reempaque';
 
-        return 'Reempaque actualizado';
+        return 'Reempaque de la entrada actualizada';
     }
 }

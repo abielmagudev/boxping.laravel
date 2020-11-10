@@ -25,10 +25,10 @@ Abstract class UpdaterFactory
         return [
             'entrada',
             'reempaque',
-            'cruce',
+            'importacion',
             'destinatario',
             'remitente',
-            'verificacion',
+            'confirmacion',
         ];
     }
 }

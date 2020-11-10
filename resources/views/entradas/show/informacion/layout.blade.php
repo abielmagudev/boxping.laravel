@@ -7,7 +7,7 @@
         <div class="tab-content" id="informacion-tabs-contents">
             @include('entradas.show.informacion.content-entrada')
             @include('entradas.show.informacion.content-reempaque')
-            @include('entradas.show.informacion.content-cruce')
+            @include('entradas.show.informacion.content-importacion')
         </div>
     </div>
 </div>

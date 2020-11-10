@@ -8,11 +8,9 @@ class EntradaEditRequest extends FormRequest
 {
     private $forms;
 
-    public function __construct()
+    public function prepareForValidation()
     {
-        parent::__construct();
-
-        $this->forms = implode(',', ['entrada','cruce','reempaque']);
+        $this->forms = implode(',', ['entrada','reempaque','importacion']);
     }
 
     public function authorize()

@@ -21,17 +21,17 @@
     </select>
 </div>
 <div class="form-group">
-    <label for="vuelta" class="small">Vuelta</label>
-    <input type="number" class="form-control" min="1" step="1" id="vuelta" name="vuelta" value="{{ $entrada->vuelta }}" required>
+    <label for="input-numero_cruce" class="small">Número de cruce</label>
+    <input type="number" class="form-control" min="1" step="1" id="input-numero_cruce" name="numero_cruce" value="{{ $entrada->numero_cruce }}" required>
 </div>
 <div class="form-group">
     <label class="small">Fecha y hora</label>
     <div class="form-row">
         <div class="col-sm">
-            <input name="cruce_fecha" value="{{ old('cruce_fecha', $entrada->cruce_fecha) }}" type="date" class="form-control" required>
+            <input name="importado_fecha" value="{{ old('importado_fecha', $entrada->importado_fecha) }}" type="date" class="form-control" required>
         </div>
         <div class="col-sm">
-            <input name="cruce_hora" value="{{ old('cruce_hora', $entrada->cruce_hora) }}" type="time" step="1" class="form-control" required>
+            <input name="importado_hora" value="{{ old('importado_hora', $entrada->importado_hora) }}" type="time" step="1" class="form-control" required>
         </div>
     </div>
 </div>

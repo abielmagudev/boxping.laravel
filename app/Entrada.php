@@ -25,12 +25,12 @@ class Entrada extends Model
         'destinatario_id',
         'remitente_id',
 
-        // Cruce
+        // Importacion
         'vehiculo_id',
         'conductor_id',
-        'vuelta',
-        'cruce_fecha',
-        'cruce_hora',
+        'numero_cruce',
+        'importado_fecha',
+        'importado_hora',
 
         // Reempaque
         'codigor_id',
@@ -38,9 +38,9 @@ class Entrada extends Model
         'reempacado_fecha',
         'reempacado_hora',
 
-        // Verificacion
-        'verificado_by',
-        'verificado_at',
+        // Confirmación
+        'confirmado_by',
+        'confirmado_at',
 
         // Log
         'created_by',

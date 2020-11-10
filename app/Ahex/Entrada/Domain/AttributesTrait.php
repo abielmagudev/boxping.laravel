@@ -12,12 +12,12 @@ Trait AttributesTrait
         return;
     }
 
-    public function getCruceHorarioAttribute()
+    public function getImportadoHorarioAttribute()
     {
-        if( is_null($this->cruce_fecha) && is_null($this->cruce_hora) )
+        if( is_null($this->importado_fecha) && is_null($this->importado_hora) )
             return '';
 
-        return date('h:i a', strtotime($this->cruce_hora)) . ', ' . date('d M,Y', strtotime($this->cruce_fecha));
+        return date('h:i a', strtotime($this->importado_hora)) . ', ' . date('d M,Y', strtotime($this->importado_fecha));
     }
 
     public function getReempacadoHorarioAttribute()
@@ -28,8 +28,8 @@ Trait AttributesTrait
         return date('h:i a', strtotime($this->reempacado_hora)) . ', ' . date('d M,Y', strtotime($this->reempacado_fecha));
     }
 
-    public function getHasVerificacionAttribute()
+    public function getConfirmadoAttribute()
     {
-        return is_string($this->verificado_at) && is_integer($this->verificado_by);
+        return is_integer($this->confirmado_by) && is_string($this->confirmado_at);
     }
 }

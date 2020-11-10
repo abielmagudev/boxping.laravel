@@ -48,8 +48,8 @@ Abstract class CastSaveForm
                 return self::editReempaque($entrada);
                 break;
 
-            case 'cruce':
-                return self::editCruce($entrada);
+            case 'importacion':
+                return self::editImportacion($entrada);
                 break;
 
             default:
@@ -67,10 +67,10 @@ Abstract class CastSaveForm
         );
     }
 
-    public static function editCruce($entrada)
+    public static function editImportacion($entrada)
     {
         return array(
-            'template' => 'cruce',
+            'template' => 'importacion',
             'entrada' => $entrada,
             'vehiculos' => Vehiculo::all(),
             'conductores' => Conductor::all(),

@@ -45,6 +45,6 @@ Class DestinatarioUpdater extends Updater
         if(! $saved )
             return 'Error al agregar destinatario';
 
-        return 'Destinatario agregado';
+        return 'Destinatario de la entrada agregado';
     }
 }
