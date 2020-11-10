@@ -9,7 +9,7 @@
             @method('patch')
             @include('destinatarios._save')
             <button type="submit" class="btn btn-warning">Actualizar destinatario</button>
-            <a href="{{ $returning }}" class="btn btn-secondary">Regresar</a>
+            <a href="{{ $goback }}" class="btn btn-secondary">Regresar</a>
         </form>
     </div>
 </div>

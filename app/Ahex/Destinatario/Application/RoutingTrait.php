@@ -4,7 +4,7 @@ namespace App\Ahex\Destinatario\Application;
 
 Trait RoutingTrait
 {
-    private function routeReturning($entrada_id, $destinatario_id = false)
+    private function routeGoback($entrada_id, $destinatario_id = false)
     {
         if( is_numeric($entrada_id)  )
             return route('entradas.show', $entrada_id);

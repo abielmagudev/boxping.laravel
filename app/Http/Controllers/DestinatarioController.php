@@ -24,8 +24,8 @@ class DestinatarioController extends Controller
 
         return view('destinatarios.create', [
             'destinatario' => new Destinatario,
-            'returning' => $this->routeReturning($entrada_id),
             'entrada_id' => $entrada_id,
+            'goback' => $this->routeGoback($entrada_id),
         ]);
     }
 
@@ -55,7 +55,7 @@ class DestinatarioController extends Controller
 
         return view('destinatarios.edit', [
             'destinatario' => $destinatario,
-            'returning' => $this->routeReturning($entrada_id, $destinatario->id),
+            'goback' => $this->routeGoback($entrada_id, $destinatario->id),
         ]);
     }
 

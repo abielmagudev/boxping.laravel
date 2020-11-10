@@ -9,7 +9,7 @@
         <form action="{{ $route }}" method="post" autocomplete="off">
             @include('destinatarios._save')
             <button type="submit" class="btn btn-success">Guardar destinatario</button>
-            <a href="{{ $returning }}" class="btn btn-secondary">Cancelar</a>
+            <a href="{{ $goback }}" class="btn btn-secondary">Cancelar</a>
         </form>
     </div>
 </div>
