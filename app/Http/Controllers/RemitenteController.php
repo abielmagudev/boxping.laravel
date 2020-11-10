@@ -24,8 +24,8 @@ class RemitenteController extends Controller
 
         return view('remitentes.create', [
             'remitente' => new Remitente,
-            'returning' => $this->routeReturning($entrada_id),
             'entrada_id' => $entrada_id,
+            'goback' => $this->routeGoback($entrada_id),
         ]);
     }
 
@@ -55,7 +55,7 @@ class RemitenteController extends Controller
 
         return view('remitentes.edit', [
             'remitente' => $remitente,
-            'returning' => $this->routeReturning($entrada_id, $remitente->id),
+            'goback' => $this->routeGoback($entrada_id, $remitente->id),
         ]);
     }
 
