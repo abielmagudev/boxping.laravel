@@ -7,7 +7,7 @@
     <select name="vehiculo" id="select-vehiculo" class="form-control" required>
         <option disabled selected></option>
         @foreach($vehiculos as $vehiculo)
-        <option value="{{ $vehiculo->id }}" {{ selectable($vehiculo->id, old('vehiculo', $entrada->vehiculo_id)) }}>{{ $vehiculo->nombre }}</option>
+        <option value="{{ $vehiculo->id }}" {{ selectable($vehiculo->id, old('vehiculo', $entrada->vehiculo_id)) }}>{{ $vehiculo->alias }}</option>
         @endforeach
     </select>
 </div>

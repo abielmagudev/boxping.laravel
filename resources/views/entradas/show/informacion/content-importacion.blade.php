@@ -10,7 +10,7 @@
             <small class="text-muted">Vehículo</small>
         </div>
         <div class="col-sm">
-            <span>{{ is_object($entrada->vehiculo) ? $entrada->vehiculo->nombre : '' }}</span>
+            <span>{{ is_object($entrada->vehiculo) ? $entrada->vehiculo->alias : '' }}</span>
         </div>
 
         <div class="w-100 mb-2"></div>
