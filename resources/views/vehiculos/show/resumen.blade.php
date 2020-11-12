@@ -2,7 +2,7 @@
     <div class="col-sm">
         <div class="card h-100">
             <div class="card-body text-center">
-                <p class="small">CRUCES</p>
+                <p class="small">ENTRADAS</p>
                 <p class="display-4 m-0">{{ $entradas->count() }}</p>
             </div>
         </div>
@@ -14,7 +14,7 @@
                     <thead>
                         <tr>
                             <th>Conductor</th>
-                            <th>Cruces</th>
+                            <th>Entradas</th>
                         </tr>
                     </thead>
                     <tbody>
