@@ -7,8 +7,8 @@ use Faker\Generator as Faker;
 
 $factory->define(Entrada::class, function (Faker $faker) {
 
-    $cruce_id   = $faker->boolean ? $faker->numberBetween(1,10) : null;
-    $codigor_id = $faker->boolean ? $faker->numberBetween(1,10) : null;
+    $cruce_id   = $faker->boolean;
+    $codigor_id = $faker->boolean;
     $confirmado = $faker->boolean;
 
     return [
@@ -24,15 +24,15 @@ $factory->define(Entrada::class, function (Faker $faker) {
         'remitente_id' => $faker->boolean ? $faker->numberBetween(1,50) : null,
 
         // Importacion
-        'vehiculo_id' => $cruce_id,
-        'conductor_id' => $cruce_id,
+        'vehiculo_id' => $cruce_id ? rand(1,10) : null,
+        'conductor_id' => $cruce_id ? rand(1,5) : null,
         'numero_cruce' => $cruce_id ? $faker->randomDigit : null,
         'importado_fecha' => $cruce_id ? $faker->date() : null,
         'importado_hora' => $cruce_id ? $faker->time() : null,
 
         // Reempaque
-        'codigor_id' => $codigor_id,
-        'reempacador_id' => $codigor_id,
+        'codigor_id' => $codigor_id ? rand(1,10) : null,
+        'reempacador_id' => $codigor_id ? rand(1,10) : null,
         'reempacado_fecha' => $codigor_id ? $faker->date() : null,
         'reempacado_hora' => $codigor_id ? $faker->time() : null,
 
