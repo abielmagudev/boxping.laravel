@@ -8,9 +8,7 @@
         @include('vehiculos.show.entradas')
     </div>
 </div>
-<br>
-<div class="float-right">
-    @include('vehiculos._delete')
-</div>
-<br>
+
+@include('vehiculos.show.delete')
+
 @endsection
