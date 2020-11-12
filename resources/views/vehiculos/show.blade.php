@@ -2,10 +2,10 @@
 @section('content')
 <div class="row">
     <div class="col-sm">
-        @include('vehiculos.show.informacion')
+        @include('vehiculos.show.general')
     </div>
     <div class="col-sm col-sm-8">
-        @include('vehiculos.show.resumen')
+        @include('vehiculos.show.entradas')
     </div>
 </div>
 <br>

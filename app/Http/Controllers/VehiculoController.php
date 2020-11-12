@@ -41,7 +41,7 @@ class VehiculoController extends Controller
         return view('vehiculos.show', [
             'vehiculo' => $vehiculo,
             'entradas' => $entradas,
-            'entradas_take' => 7,
+            'entradas_take' => 10,
             'conductores' => $conductores,
         ]);
     }

@@ -1,36 +1,3 @@
-<div class="row">
-    <div class="col-sm">
-        <div class="card h-100">
-            <div class="card-body text-center">
-                <p class="small">ENTRADAS</p>
-                <p class="display-4 m-0">{{ $entradas->count() }}</p>
-            </div>
-        </div>
-    </div>
-    <div class="col-sm">
-        <div class="card h-100">
-            <div class="card-body">
-                <table class="table table-borderless table-sm small m-0">
-                    <thead>
-                        <tr>
-                            <th>Conductor</th>
-                            <th>Entradas</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($conductores as $id => $conductor)
-                        <tr>
-                            <td>{{ $conductor['nombre'] }}</td>
-                            <td>{{ $conductor['cruces'] }}</td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-</div>
-<br>
 <div class="card">
     <div class="card-header">
         <b class="align-middle">{{ $entradas_take }}</b>

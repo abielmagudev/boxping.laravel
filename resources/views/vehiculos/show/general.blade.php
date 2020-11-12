@@ -36,3 +36,33 @@
         </p>
     </div>
 </div>
+<br>
+
+<div class="card">
+    <div class="card-body text-center">
+        <p class="small m-0">ENTRADAS</p>
+        <p class="display-4 m-0">{{ $entradas->count() }}</p>
+    </div>
+</div>
+<br>
+
+<div class="card">
+    <div class="card-body">
+        <table class="table table-borderless table-sm small m-0">
+            <thead>
+                <tr>
+                    <th>Conductor</th>
+                    <th>Entradas</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($conductores as $id => $conductor)
+                <tr>
+                    <td>{{ $conductor['nombre'] }}</td>
+                    <td>{{ $conductor['cruces'] }}</td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+</div>
