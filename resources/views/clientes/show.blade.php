@@ -8,5 +8,5 @@
         @include('clientes.show.entradas')
     </div>
 </div>
-@include('clientes.show.eliminar')
+@include('clientes.show.delete')
 @endsection
