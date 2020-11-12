@@ -58,7 +58,7 @@
                             <span>{{ $entrada->destinatario->localidad }}</span>
 
                             @else
-                            <small class="text-muted">Sin destinatario</small>
+                            <span class="text-muted">Sin destinatario</span>
 
                             @endif
                         </td>
