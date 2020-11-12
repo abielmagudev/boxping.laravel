@@ -36,6 +36,7 @@ class ClienteController extends Controller
         return view('clientes.show', [
             'cliente' => $cliente,
             'entradas' => $entradas,
+            'entradas_take' => 10
         ]);
     }
 
