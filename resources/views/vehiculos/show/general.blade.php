@@ -1,7 +1,7 @@
 <div class="card">
     <div class="card-header d-flex align-items-center justify-content-between">
         <div>
-            <span>Información</span>
+            <span>Vehículo</span>
         </div>
         <div class="text-right">
             <a href="{{ route('vehiculos.edit', $vehiculo) }}" class="btn btn-warning btn-sm">
