@@ -34,7 +34,10 @@ class VehiculoController extends Controller
 
     public function show(Vehiculo $vehiculo)
     {
-        $entradas = Entrada::with(['destinatario','conductor'])->where('vehiculo_id', $vehiculo->id)->get();
+        $entradas = Entrada::with(['destinatario','conductor'])
+                            ->where('vehiculo_id', $vehiculo->id)
+                            ->orderBy('id', 'desc')
+                            ->get();
         
         $conductores = $this->conductoresDelVehiculo($entradas);
 
