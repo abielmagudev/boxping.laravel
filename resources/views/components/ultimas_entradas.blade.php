@@ -15,6 +15,7 @@ $ultimas_entradas = $entradas->take( $settings->take );
         <span class="align-middle">últimas entradas</span>
     </div>
     <div class="card-body p-0">
+        @if( $entradas->count() )
         <div class="table-responsive">
             <table class="table table-hover">
                 <thead class="small">
@@ -45,5 +46,12 @@ $ultimas_entradas = $entradas->take( $settings->take );
                 </tbody>
             </table>
         </div>
+
+        @else
+        <p class="text-center text-muted">
+            <small>SIN ENTRADAS</small>
+        </p>
+
+        @endif
     </div>
 </div>
