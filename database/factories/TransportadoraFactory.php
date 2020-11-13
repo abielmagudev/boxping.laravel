@@ -11,5 +11,7 @@ $factory->define(Transportadora::class, function (Faker $faker) {
         'web' => 'https://www.' . $faker->domainName,
         'telefono' => $faker->phoneNumber,
         'notas' => $faker->text(),
+        'created_by' => rand(1,10),
+        'updated_by' => rand(1,10),
     ];
 });

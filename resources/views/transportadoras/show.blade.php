@@ -1,30 +1,11 @@
 @extends('app')
 @section('content')
-<div class="card">
-    <div class="card-header">
-        <span>Transportadora</span>
+<div class="row">
+    <div class="col-sm">
+        @include('transportadoras.show.general')
     </div>
-    <div class="card-body">
-        <p>
-            <small class="d-block text-muted">Nombre</small>
-            <span>{{ $transportadora->nombre }}</span>
-        </p>
-        <p>
-            <small class="d-block text-muted">Sitio web</small>
-            <span>{{ $transportadora->web }}</span>
-        </p>
-        <p>
-            <small class="d-block text-muted">Teléfono</small>
-            <span>{{ $transportadora->telefono }}</span>
-        </p>
-        <p>
-            <small class="d-block text-muted">Notas</small>
-            <span>{{ $transportadora->notas }}</span>
-        </p>
-        <br>
-        <div class="text-right">
-            <a href="{{ route('transportadoras.edit', $transportadora) }}" class="btn btn-outline-warning">Editar transportadora</a>
-        </div>
+    <div class="col-sm col-sm-8">
     </div>
 </div>
+@include('transportadoras.show.delete')
 @endsection

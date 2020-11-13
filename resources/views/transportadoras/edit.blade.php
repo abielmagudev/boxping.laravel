@@ -9,11 +9,8 @@
             @method('put')
             @include('transportadoras._save')
             <button type="submit" class="btn btn-warning">Actualizar transportadora</button>
-            <a href="{{ route('transportadoras.index') }}" class="btn btn-secondary">Regresar</a>
+            <a href="{{ route('transportadoras.show', $transportadora) }}" class="btn btn-secondary">Regresar</a>
         </form>
     </div>
 </div>
-<br>
-@include('transportadoras._eliminar')
-<br>
 @endsection

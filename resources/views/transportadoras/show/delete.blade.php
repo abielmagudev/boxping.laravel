@@ -1,3 +1,4 @@
+<br>
 <div class="float-right">
     @component('components.modal-confirm-delete-bundle')
         @slot('route', route('transportadoras.destroy', $transportadora))
@@ -7,3 +8,4 @@
         @endslot
     @endcomponent
 </div>
+<br>

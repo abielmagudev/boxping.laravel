@@ -20,7 +20,9 @@ class TransportadoraController extends Controller
 
     public function store(SaveRequest $request)
     {
-        if( ! $transportadora = Transportadora::create( $request->validated() ) )
+        $prepared = Transportadora::prepare( $request->validated() );
+
+        if( ! $transportadora = Transportadora::create( $prepared ) )
             return back()->with('failure', 'Error al guardar transportadora');
 
         return redirect()->route('transportadoras.index')->with('success', 'Transportadora guardada');
@@ -28,7 +30,9 @@ class TransportadoraController extends Controller
 
     public function show(Transportadora $transportadora)
     {
-        return view('transportadoras.show')->with('transportadora', $transportadora);
+        return view('transportadoras.show', [
+            'transportadora' => $transportadora,
+        ]);
     }
 
     public function edit(Transportadora $transportadora)
@@ -38,7 +42,9 @@ class TransportadoraController extends Controller
 
     public function update(SaveRequest $request, Transportadora $transportadora)
     {
-        if( ! $transportadora->fill( $request->validated() )->save() )
+        $prepared = Transportadora::prepare( $request->validated() );
+
+        if( ! $transportadora->fill( $prepared )->save() )
             return back()->with('failure', 'Error al actualizar transportadora');
             
         return back()->with('success', 'Transportadora actualizada');

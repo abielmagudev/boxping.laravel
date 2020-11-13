@@ -19,6 +19,8 @@ class CreateTransportadorasTable extends Migration
             $table->string('web')->nullable();
             $table->string('telefono')->nullable();
             $table->text('notas')->nullable();
+            $table->unsignedSmallInteger('created_by');
+            $table->unsignedSmallInteger('updated_by');
             $table->timestamps();
             $table->softDeletes();
         });
