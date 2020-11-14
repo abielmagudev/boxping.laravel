@@ -24,17 +24,17 @@ Trait RelationshipsTrait
     
     public function cliente()
     {
-        return $this->belongsTo(Cliente::class);
+        return $this->belongsTo(Cliente::class)->withTrashed();
     }
 
     public function remitente()
     {
-        return $this->belongsTo(Remitente::class);
+        return $this->belongsTo(Remitente::class)->withTrashed();
     }
 
     public function destinatario()
     {
-        return $this->belongsTo(Destinatario::class);
+        return $this->belongsTo(Destinatario::class)->withTrashed();
     }
 
     public function vehiculo()
@@ -80,6 +80,7 @@ Trait RelationshipsTrait
     public function etapas()
     {
         return $this->belongsToMany(Etapa::class, 'entradas_etapas')
+                    ->withTrashed()
                     ->using(EntradaEtapa::class)
                     ->withPivot([
                         'peso',
