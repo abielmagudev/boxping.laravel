@@ -2,10 +2,14 @@
  
 $colors = [
     'primary',
-    'danger',
-    'link',
     'secondary',
     'success',
+    'info',
+    'warning',
+    'danger',
+    'light',
+    'dark',
+    'link',
 ];
 
 $sizes = [
