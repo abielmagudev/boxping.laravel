@@ -3,83 +3,62 @@
 namespace App\Http\Controllers;
 
 use App\Conductor;
+use App\Entrada;
+use App\Http\Requests\ConductorSaveRequest as SaveRequest;
 use Illuminate\Http\Request;
 
 class ConductorController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        return 'Conductores...';
+        return view('conductores.index')->with('conductores', Conductor::all()->sortByDesc('id'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
+        return view('conductores.create')->with('conductor', new Conductor);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function store(SaveRequest $request)
     {
-        //
+        $prepared = Conductor::prepare( $request->validated() );
+
+        if(! $conductor = Conductor::create($prepared) )
+            return back()->with('failure', 'Error al guardar conductor');
+
+        return redirect()->route('conductores.index')->with('success', 'Conductor guardado');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Conductor  $conductor
-     * @return \Illuminate\Http\Response
-     */
     public function show(Conductor $conductor)
     {
-        //
+        $entradas = Entrada::with(['destinatario'])->where('conductor_id', $conductor->id)->get();
+        
+        return view('conductores.show', [
+            'conductor' => $conductor,
+            'entradas' => $entradas,
+        ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Conductor  $conductor
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Conductor $conductor)
     {
-        //
+        return view('conductores.edit')->with('conductor', $conductor);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Conductor  $conductor
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Conductor $conductor)
+    public function update(SaveRequest $request, Conductor $conductor)
     {
-        //
+        $prepared = Conductor::prepare( $request->validated() );
+
+        if(! $conductor->fill($prepared)->save() )
+            return back()->with('failure', 'Error al actualizar conductor');
+
+        return back()->with('success', 'Conductor actualizado');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Conductor  $conductor
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Conductor $conductor)
     {
-        //
+        if(! $conductor->delete() )
+            return back()->with('failure', 'Error al eliminar conductor');
+
+        return redirect()->route('conductores.index')->with('success', "{$conductor->nombre} eliminado");
     }
 }

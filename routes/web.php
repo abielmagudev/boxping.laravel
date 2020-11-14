@@ -28,6 +28,10 @@ Route::resources([
     'remitentes' => RemitenteController::class,
     'transportadoras' => TransportadoraController::class,
     'vehiculos' => VehiculoController::class,
+],[
+    'parameters' => [
+        'conductores' => 'conductor'
+    ],
 ]);
 
 // Entrada > Comentario, Destinario, Remitente

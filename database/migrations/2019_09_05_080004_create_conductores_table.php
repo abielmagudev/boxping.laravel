@@ -15,8 +15,11 @@ class CreateConductoresTable extends Migration
     {
         Schema::create('conductores', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('nombre');
+            $table->string('nombre')->index();
+            $table->unsignedSmallInteger('created_by');
+            $table->unsignedSmallInteger('updated_by');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

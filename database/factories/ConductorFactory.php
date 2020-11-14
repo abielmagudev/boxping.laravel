@@ -8,5 +8,7 @@ use Faker\Generator as Faker;
 $factory->define(Conductor::class, function (Faker $faker) {
     return [
         'nombre' => $faker->name(),
+        'created_by' => rand(1,10),
+        'updated_by' => rand(1,10),
     ];
 });
