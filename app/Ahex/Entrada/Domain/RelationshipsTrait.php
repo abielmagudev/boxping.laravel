@@ -39,12 +39,12 @@ Trait RelationshipsTrait
 
     public function vehiculo()
     {
-        return $this->belongsTo(Vehiculo::class);
+        return $this->belongsTo(Vehiculo::class)->withTrashed();
     }
 
     public function conductor()
     {
-        return $this->belongsTo(Conductor::class);
+        return $this->belongsTo(Conductor::class)->withTrashed();
     }
 
     public function codigor()
