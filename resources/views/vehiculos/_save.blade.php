@@ -3,7 +3,7 @@
     <label for="input-alias">
         <small>Alias</small>
     </label>
-    <input type="text" class="form-control" id="input-alias" name="alias" value="{{ old('alias', $vehiculo->alias) }}">
+    <input type="text" class="form-control" id="input-alias" name="alias" value="{{ old('alias', $vehiculo->alias) }}" required>
 </div>
 <div class="form-group">
     <label for="textarea-descripcion">
