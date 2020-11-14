@@ -48,6 +48,7 @@ $ultimas_entradas = $entradas->take( $settings->take );
         </div>
 
         @else
+        <br>
         <p class="text-center text-muted">
             <small>SIN ENTRADAS</small>
         </p>
