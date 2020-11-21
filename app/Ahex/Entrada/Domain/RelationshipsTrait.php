@@ -2,18 +2,18 @@
 
 namespace App\Ahex\Entrada\Domain;
 
-use App\Consolidado;
 use App\Cliente;
-use App\Remitente;
-use App\Destinatario;
-use App\Vehiculo;
-use App\Conductor;
 use App\Codigor;
-use App\Reempacador;
 use App\Comentario;
-use App\Etapa;
+use App\Conductor;
+use App\Consolidado;
+use App\Destinatario;
 use App\EntradaEtapa;
+use App\Etapa;
+use App\Reempacador;
+use App\Remitente;
 use App\User;
+use App\Vehiculo;
 
 Trait RelationshipsTrait
 {
