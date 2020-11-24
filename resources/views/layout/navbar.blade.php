@@ -41,7 +41,7 @@ $dropdown = array(
         'route' => route('conductores.index'),
     ],
     (object) [
-        'title' => 'codigosr',
+        'title' => 'códigos R',
         'route' => route('codigosr.index'),
     ],
     (object) [
