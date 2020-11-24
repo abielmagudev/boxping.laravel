@@ -25,12 +25,12 @@ $placements = [
 ];
 
 $settings = (object) array(
-    'title'   => isset($title)   && is_string($title) ? $title : 'title?',
     'link'    => isset($link)    && is_string($link) ? $link : '#link?',
     'color'   => isset($color)   && in_array($color, $colors) ? "btn-{$color}" : 'btn-primary',
     'size'    => isset($size)    && in_array($size, $sizes) ? "btn-{$size}" : 'btn-sm',
     'tooltip' => isset($tooltip) && is_string($tooltip) ? $tooltip : '',
     'placement' => isset($placement) && in_array($placement, $placements) ? $placement : 'left',
+    'title'   => isset($title) ? $title : 'title?',
     'content' => isset($content) ? $content : 'content?',
 );
 
