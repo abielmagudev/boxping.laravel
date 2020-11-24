@@ -1,6 +1,6 @@
 <div class="card">
     @component('components.card-header-with-link', [
-        'title'   => 'Información',
+        'title'   => 'Código de reempacado',
         'link'    => route('codigosr.edit', $codigor),
         'color'   => 'warning',
         'tooltip' => 'Editar código',
@@ -34,3 +34,4 @@
         </p>
     </div>
 </div>
+<br>
