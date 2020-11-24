@@ -3,83 +3,66 @@
 namespace App\Http\Controllers;
 
 use App\Reempacador;
+use App\Entrada;
+use App\Http\Requests\ReempacadorSaveRequest as SaveRequest;
 use Illuminate\Http\Request;
+use App\Ahex\Reempacador\Application\CodigosrTrait as Codigosr;
 
 class ReempacadorController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    use Codigosr;
+
     public function index()
     {
-        return 'Reempacadores...';
+        return view('reempacadores.index')->with('reempacadores', Reempacador::all()->sortByDesc('id'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
+        return view('reempacadores.create')->with('reempacador', new Reempacador);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function store(SaveRequest $request)
     {
-        //
+        $prepared = Reempacador::prepare($request->validated());
+
+        if(! Reempacador::create($prepared) )
+            return back()->with('failure'. 'Error al guardar reempacador');
+
+        return redirect()->route('reempacadores.index')->with('success', 'Reempacador guardado');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Reempacador  $reempacador
-     * @return \Illuminate\Http\Response
-     */
     public function show(Reempacador $reempacador)
     {
-        //
+        $entradas = Entrada::with(['destinatario', 'codigor'])->where('reempacador_id', $reempacador->id)->get();
+        
+        return view('reempacadores.show', [
+            'reempacador' => $reempacador,
+            'entradas' => $entradas,
+            'codigosr' => $this->codigosr($entradas),
+        ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Reempacador  $reempacador
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Reempacador $reempacador)
     {
-        //
+        return view('reempacadores.edit')->with('reempacador', $reempacador);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Reempacador  $reempacador
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Reempacador $reempacador)
+    public function update(SaveRequest $request, Reempacador $reempacador)
     {
-        //
+        $prepared = Reempacador::prepare( $request->validated() );
+
+        if(! $reempacador->fill($prepared)->save() )
+            return back()->with('failure', 'Error al actualizar reempacador');
+
+        return back()->with('success', 'Reempacador actualizado');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Reempacador  $reempacador
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Reempacador $reempacador)
     {
-        //
+        if(! $reempacador->delete() )
+            return back()->with('failure', 'Error al eliminar reempacador');
+
+        return redirect()->route('reempacadores.index')->with('success', "{$reempacador->nombre} eliminado");
     }
 }

@@ -15,9 +15,12 @@ class CreateReempacadoresTable extends Migration
     {
         Schema::create('reempacadores', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('nombre');
+            $table->string('nombre')->unique()->index();
             $table->string('clave');
+            $table->unsignedSmallInteger('created_by');
+            $table->unsignedSmallInteger('updated_by');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

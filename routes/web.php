@@ -30,8 +30,9 @@ Route::resources([
     'vehiculos' => VehiculoController::class,
 ],[
     'parameters' => [
-        'conductores' => 'conductor',
-        'codigosr'    => 'codigor',
+        'codigosr'      => 'codigor',
+        'conductores'   => 'conductor',
+        'reempacadores' => 'reempacador',
     ],
 ]);
 
