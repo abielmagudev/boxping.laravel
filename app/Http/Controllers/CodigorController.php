@@ -3,83 +3,66 @@
 namespace App\Http\Controllers;
 
 use App\Codigor;
+use App\Entrada;
+use App\Http\Requests\CodigorSaveRequest as SaveRequest;
 use Illuminate\Http\Request;
+use App\Ahex\Codigor\Application\ReempacadoresTrait as Reempacadores;
 
 class CodigorController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    use Reempacadores;
+
     public function index()
     {
-        return 'Codigos de reempacado...';
+        return view('codigosr.index')->with('codigosr', Codigor::all()->sortByDesc('id'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
+        return view('codigosr.create')->with('codigor', new Codigor);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function store(SaveRequest $request)
     {
-        //
+        $prepared = Codigor::prepare( $request->validated() );
+
+        if(! $codigor = Codigor::create($prepared) )
+            return back()->with('failire', 'Error al guardar código de reempacado');
+
+        return redirect()->route('codigosr.index')->with('success', 'Código de reempacado guardado');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Codigor  $codigor
-     * @return \Illuminate\Http\Response
-     */
     public function show(Codigor $codigor)
     {
-        //
+        $entradas = Entrada::with(['destinatario','reempacador'])->where('codigor_id', $codigor->id)->get();
+
+        return view('codigosr.show', [
+            'codigor' => $codigor,
+            'entradas' => $entradas,
+            'reempacadores' => $this->reempacadores($entradas),
+        ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Codigor  $codigor
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Codigor $codigor)
     {
-        //
+        return view('codigosr.edit')->with('codigor', $codigor);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Codigor  $codigor
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Codigor $codigor)
+    public function update(SaveRequest $request, Codigor $codigor)
     {
-        //
+        $prepared = Codigor::prepare( $request->validated() );
+
+        if(! $codigor->fill($prepared)->save() )
+            return back()->with('failure', 'Error al actualizar código de reempacado');
+
+        return back()->with('success', 'Código de reempacado actualizado');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Codigor  $codigor
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Codigor $codigor)
     {
-        //
+        if(! $codigor->delete() )
+            return back()->with('failure', 'Error al eliminar código de reempacado');
+
+        return redirect()->route('codigosr.index')->with('success', "{$codigor->nombre} eliminado");
     }
 }

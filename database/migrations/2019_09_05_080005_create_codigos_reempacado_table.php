@@ -4,8 +4,9 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCodigosrTable extends Migration
+class CreateCodigosReempacadoTable extends Migration
 {
+    private $table_name = 'codigos_reempacado';
     /**
      * Run the migrations.
      *
@@ -13,11 +14,14 @@ class CreateCodigosrTable extends Migration
      */
     public function up()
     {
-        Schema::create('codigosr', function (Blueprint $table) {
+        Schema::create($this->table_name, function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('nombre')->index();
+            $table->string('nombre')->unique()->index();
             $table->text('descripcion')->nullable();
+            $table->unsignedSmallInteger('created_by');
+            $table->unsignedSmallInteger('updated_by');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -28,6 +32,6 @@ class CreateCodigosrTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('codigosr');
+        Schema::dropIfExists($this->table_name);
     }
 }
