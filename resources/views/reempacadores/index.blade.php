@@ -2,10 +2,14 @@
 @section('content')
 <div class="card">
     @component('components.card-header-with-link',[
-        'title' => 'Reempacadores',
         'link' => route('reempacadores.create'),
         'tooltip' => 'Nuevo reempacador'
     ])
+        @slot('title')
+        <span>Reempacadores</span>
+        <span class="badge badge-primary">{{ $reempacadores->count() }}</span>
+        @endslot
+
         @slot('content')
         <b>+</b>
         @endslot

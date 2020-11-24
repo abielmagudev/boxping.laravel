@@ -1,23 +1,22 @@
 <div class="card">
-    <div class="card-header">
-        <div class="d-flex justify-content-between align-items-center">
-            <div>
-                <span class="align-middle">Consolidado</span>
-                <?php $status = $consolidado->abierto ? 'abierto' : 'cerrado' ?>
-                @component('components.tooltip-shape')
-                    @slot('title', ucfirst($status))
-                    @slot('color', $config_consolidados['colores'][$status])
-                @endcomponent
-            </div>
-            <div>
-                <a href="{{ route('consolidados.edit', $consolidado->id) }}" class="btn btn-warning btn-sm">
-                    @component('components.symbol')
-                        @slot('symbol', 'pencil-right')
-                    @endcomponent
-                </a>
-            </div>
-        </div>
-    </div>
+    @component('components.card-header-with-link', [
+        'tooltip' => 'Editar',
+        'link' => route('consolidados.edit', $consolidado),
+        'color' => 'warning',
+    ])
+        @slot('title')
+        <span class="align-middle">Consolidado</span>
+        <?php $status = $consolidado->abierto ? 'abierto' : 'cerrado' ?>
+        @component('components.tooltip-shape')
+            @slot('title', ucfirst($status))
+            @slot('color', $config_consolidados['colores'][$status])
+        @endcomponent
+        @endslot
+
+        @slot('content')
+        <b>e</b>
+        @endslot
+    @endcomponent
     <div class="card-body">
         <p>
             <span>{{ $consolidado->numero }}</span>

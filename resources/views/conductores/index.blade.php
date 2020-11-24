@@ -2,11 +2,17 @@
 @section('content')
 <div class="card">
     @component('components.card-header-with-link', [
-        'title' => 'Conductores',
         'link'  => route('conductores.create'),
         'tooltip' => 'Nuevo conductor',
     ])
-        @slot('content')<b>+</b>@endslot
+        @slot('title')
+        <span>Conductores</span>
+        <span class="badge badge-primary">{{ $conductores->count() }}</span>
+        @endslot
+
+        @slot('content')
+        <b>+</b>
+        @endslot
     @endcomponent
     <div class="card-body p-0">
         <div class="table-responsive">

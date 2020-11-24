@@ -3,6 +3,7 @@
         'title' => 'Conductor',
         'link'  => route('conductores.edit', $conductor),
         'color' => 'warning',
+        'tooltip' => 'Editar',
     ])
         @slot('content')
         <b>e</b>

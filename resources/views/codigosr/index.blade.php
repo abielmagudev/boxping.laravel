@@ -2,11 +2,17 @@
 @section('content')
 <div class="card">
     @component('components.card-header-with-link', [
-        'title' => 'Códigos de reempacado',
         'link' => route('codigosr.create'),
-        'content' => '+',
         'tooltip' => 'Nuevo código'
     ])
+        @slot('title')
+        <span>Códigos de reempacado</span>
+        <span class="badge badge-primary">{{ $codigosr->count() }}</span>
+        @endslot
+
+        @slot('content')
+        <b>+</b>
+        @endslot
     @endcomponent
     
     <div class="card-body p-0">

@@ -1,17 +1,19 @@
 @extends('app')
 @section('content')
 <div class="card">
-    <div class="card-header d-flex align-items-center justify-content-between">
-        <div class="align-middle">
-            <span>Clientes</span>
-            <span class="badge badge-primary">{{ $clientes->count() }}</span>
-        </div>
-        <div>
-            <a href="{{ route('clientes.create') }}" class="btn btn-primary btn-sm">
-                <b>+</b>
-            </a>
-        </div>
-    </div>
+    @component('components.card-header-with-link', [
+        'tooltip' => 'Nuevo cliente',
+        'link' => route('clientes.create'),
+    ])
+        @slot('title')
+        <span>Clientes</span>
+        <span class="badge badge-primary">{{ $clientes->count() }}</span>
+        @endslot
+
+        @slot('content')
+        <b>+</b>
+        @endslot
+    @endcomponent
     <div class="card-body p-0">
         <div class="table-responsive">
             <table class="table table-hover">

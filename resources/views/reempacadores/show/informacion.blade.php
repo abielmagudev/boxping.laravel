@@ -3,8 +3,11 @@
         'title' => 'Reempacador',
         'link' => route('reempacadores.edit', $reempacador),
         'color' => 'warning',
+        'tooltip' => 'Editar'
     ])
-        @slot('content')<b>e</b>@endslot()
+        @slot('content')
+        <b>e</b>
+        @endslot
     @endcomponent
 
     <div class="card-body">

@@ -1,17 +1,19 @@
 @extends('app')
 @section('content')
 <div class="card">
-    <div class="card-header d-flex justify-content-between align-items-center">
-        <div>
-            <span>Remitentes</span>
-            <span class="badge badge-primary">{{ $remitentes->total() }}</span>
-        </div>
-        <div>
-            <a href="{{ route('remitentes.create') }}" class="btn btn-primary btn-sm">
-                <b>+</b>
-            </a>
-        </div>
-    </div>
+    @component('components.card-header-with-link', [
+        'tooltip' => 'Nuevo remitente',
+        'link' => route('remitentes.create'),
+    ])
+        @slot('title')
+        <span>Remitentes</span>
+        <span class="badge badge-primary">{{ $remitentes->total() }}</span>
+        @endslot
+
+        @slot('content')
+        <b>+</b>
+        @endslot
+    @endcomponent
     <div class="card-body p-0">
         @if( $remitentes->count() )
         <div class="table-responsive">

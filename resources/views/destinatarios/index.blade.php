@@ -1,17 +1,19 @@
 @extends('app')
 @section('content')
 <div class="card">
-    <div class="card-header d-flex justify-content-between align-items-center">
-        <div>
-            <span>Destinatarios</span>
-            <span class="badge badge-primary">{{ $destinatarios->total() }}</span>
-        </div>
-        <div>
-            <a href="{{ route('destinatarios.create') }}" class="btn btn-primary btn-sm">
-                <b>+</b>
-            </a>
-        </div>
-    </div>
+    @component('components.card-header-with-link', [
+        'tooltip' => 'Nuevo destinatario',
+        'link' => route('destinatarios.create'),
+    ])
+        @slot('title')
+        <span>Destinatarios</span>
+        <span class="badge badge-primary">{{ $destinatarios->total() }}</span>
+        @endslot
+
+        @slot('content')
+        <b>+</b>
+        @endslot
+    @endcomponent
     <div class="card-body p-0">
         <div class="table-responsive">
             <table class="table table-hover">

@@ -3,9 +3,11 @@
         'title'   => 'Código de reempacado',
         'link'    => route('codigosr.edit', $codigor),
         'color'   => 'warning',
-        'tooltip' => 'Editar código',
-        'content' => 'e',
+        'tooltip' => 'Editar',
     ])
+        @slot('content')
+        <b>e</b>
+        @endslot
     @endcomponent
     <div class="card-body">
         <p>

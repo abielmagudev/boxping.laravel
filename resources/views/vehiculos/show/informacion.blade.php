@@ -1,14 +1,14 @@
 <div class="card">
-    <div class="card-header d-flex align-items-center justify-content-between">
-        <div>
-            <span>Vehículo</span>
-        </div>
-        <div class="text-right">
-            <a href="{{ route('vehiculos.edit', $vehiculo) }}" class="btn btn-warning btn-sm">
-                <b>e</b>
-            </a>
-        </div>
-    </div>
+    @component('components.card-header-with-link', [
+        'title' => 'Vehículo',
+        'link'  => route('vehiculos.edit', $vehiculo),
+        'color' => 'warning',
+        'tooltip' => 'Editar'
+    ])
+        @slot('content')
+        <b>e</b>
+        @endslot
+    @endcomponent
     <div class="card-body">
         <p>
             <span>{{ $vehiculo->alias }}</span>

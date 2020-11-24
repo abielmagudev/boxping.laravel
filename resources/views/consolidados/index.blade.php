@@ -1,19 +1,19 @@
 @extends('app')
 @section('content')
 <div class="card">
-    <div class="card-header">
-        <div class="d-flex justify-content-between align-items-center">
-            <div>
-                <span>Consolidados</span>
-                <span class="badge badge-primary">{{ $consolidados->count() }}</span>
-            </div>
-            <div>
-                <a href="{{ route('consolidados.create') }}" class="btn btn-primary btn-sm">
-                    <b>+</b>
-                </a>
-            </div>
-        </div>
-    </div>
+    @component('components.card-header-with-link', [
+        'tooltip' => 'Nuevo consolidado',
+        'link' => route('consolidados.create'),
+    ])
+        @slot('title')
+        <span>Consolidados</span>
+        <span class="badge badge-primary">{{ $consolidados->count() }}</span>
+        @endslot
+
+        @slot('content')
+        <b>+</b>
+        @endslot
+    @endcomponent
     <div class="card-body p-0">
         <div class="table-container">
             <table class="table table-hover">
