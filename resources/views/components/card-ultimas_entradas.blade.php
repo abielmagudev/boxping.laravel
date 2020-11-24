@@ -11,8 +11,8 @@ $ultimas_entradas = $entradas->take( $settings->take );
 
 <div class="card">
     <div class="card-header">
-        <b class="align-middle">{{ $settings->take }}</b>
-        <span class="align-middle">últimas entradas</span>
+        <span class="badge badge-secondary align-middle">{{ $settings->take }}</span>
+        <span class="align-middle">Últimas entradas</span>
     </div>
     <div class="card-body p-0">
         @if( $entradas->count() )
