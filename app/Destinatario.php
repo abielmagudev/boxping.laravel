@@ -5,6 +5,7 @@ namespace App;
 use App\Ahex\Fake\Domain\Fakeuser;
 use Illuminate\Database\Eloquent\Model;
 use App\Ahex\Zkeleton\Domain\SearchInterface as Search;
+use App\Ahex\Zkeleton\Domain\ModifiersTrait as Modifiers;
 
 class Destinatario extends Model implements Search
 {
@@ -22,16 +23,6 @@ class Destinatario extends Model implements Search
         'created_by',
         'updated_by',
     );
-
-    public function creator()
-    {
-        return $this->belongsTo(User::class, 'created_by');
-    }
-
-    public function updater()
-    {
-        return $this->belongsTo(User::class, 'updated_by');
-    }
 
     public function entradas()
     {

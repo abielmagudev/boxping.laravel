@@ -2,8 +2,8 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
 use App\Ahex\Fake\Domain\Fakeuser;
+use Illuminate\Database\Eloquent\Model;
 
 class Comentario extends Model
 {

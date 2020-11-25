@@ -4,11 +4,13 @@ namespace App;
 
 use App\Ahex\Fake\Domain\Fakeuser;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Ahex\Zkeleton\Domain\SearchInterface as Search;
+use App\Ahex\Zkeleton\Domain\ModifiersTrait as Modifiers;
 
 Class Remitente extends Model implements Search
 {
-    use \Illuminate\Database\Eloquent\SoftDeletes;
+    use SoftDeletes, Modifiers;
 
     protected $fillable = array(
         'nombre',
@@ -21,16 +23,6 @@ Class Remitente extends Model implements Search
         'created_by',
         'updated_by',
     );
-    
-    public function creator()
-    {
-        return $this->belongsTo(User::class, 'created_by');
-    }
-
-    public function updater()
-    {
-        return $this->belongsTo(User::class, 'updated_by');
-    }
 
     public function entradas()
     {

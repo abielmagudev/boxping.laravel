@@ -2,11 +2,11 @@
 
 namespace App;
 
+use App\Ahex\Fake\Domain\Fakeuser;
 use Illuminate\Database\Eloquent\Model;
 use App\Ahex\Entrada\Domain\RelationshipsTrait as Relationships;
 use App\Ahex\Entrada\Domain\AttributesTrait as Attributes;
 use App\Ahex\Entrada\Domain\ScopesTrait as Scopes;
-use App\Ahex\Fake\Domain\Fakeuser;
 
 class Entrada extends Model
 {

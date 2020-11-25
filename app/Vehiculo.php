@@ -5,10 +5,11 @@ namespace App;
 use App\Ahex\Fake\Domain\Fakeuser;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Ahex\Zkeleton\Domain\ModifiersTrait as Modifiers;
 
 class Vehiculo extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes, Modifiers;
 
     protected $fillable = [
         'alias',
@@ -16,16 +17,6 @@ class Vehiculo extends Model
         'created_by',
         'updated_by',
     ];
-
-    public function creator()
-    {
-        return $this->belongsTo(User::class, 'created_by');
-    }
-
-    public function updater()
-    {
-        return $this->belongsTo(User::class, 'updated_by');
-    }
 
     public function entradas()
     {

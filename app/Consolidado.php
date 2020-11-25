@@ -2,12 +2,15 @@
 
 namespace App;
 
+use App\Ahex\Fake\Domain\Fakeuser;
 use Illuminate\Database\Eloquent\Model;
 use App\Ahex\Zkeleton\Domain\SearchInterface as Search;
-use App\Ahex\Fake\Domain\Fakeuser;
+use App\Ahex\Zkeleton\Domain\ModifiersTrait as Modifiers;
 
 class Consolidado extends Model implements Search
 {
+    use Modifiers;
+
     protected $fillable = array(
         'numero',
         'tarimas',
@@ -26,16 +29,6 @@ class Consolidado extends Model implements Search
     public function cliente()
     {
         return $this->belongsTo(Cliente::class);
-    }
-
-    public function creator()
-    {
-        return $this->belongsTo(User::class, 'created_by');
-    }
-
-    public function updater()
-    {
-        return $this->belongsTo(User::class, 'updated_by');
     }
 
     public function scopeIsAbierto($query, $value, $column = 'numero')

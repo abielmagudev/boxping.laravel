@@ -2,10 +2,10 @@
 
 namespace App;
 
+use App\Ahex\Fake\Domain\Fakeuser;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Ahex\Zkeleton\Domain\ModifiersTrait as Modifiers;
-use App\Ahex\Fake\Domain\Fakeuser;
 
 class Codigor extends Model
 {
