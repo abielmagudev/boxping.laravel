@@ -27,5 +27,19 @@
             <span>{{ $transportadora->notas }}</span>
             <small class="d-block text-muted">Notas</small>
         </p>
+        <p>
+            <span>{{ $transportadora->creator->name }}</span>
+            <br>
+            <span>{{ $transportadora->created_at }}</span>
+            <br>
+            <small class="d-block text-muted">Creado</small>
+        </p>
+        <p>
+            <span>{{ $transportadora->updater->name }}</span>
+            <br>
+            <span>{{ $transportadora->updated_at }}</span>
+            <br>
+            <small class="d-block text-muted">Actualizado</small>
+        </p>
     </div>
 </div>
