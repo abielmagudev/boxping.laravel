@@ -11,7 +11,7 @@ $ultimas_entradas = $entradas->take( $settings->take );
 
 <div class="card">
     <div class="card-header">
-        <span class="badge badge-secondary align-middle">{{ $settings->take }}</span>
+        <span class="badge badge-primary align-middle">{{ $settings->take }}</span>
         <span class="align-middle">Últimas entradas</span>
     </div>
     <div class="card-body p-0">
