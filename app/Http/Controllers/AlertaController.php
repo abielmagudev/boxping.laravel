@@ -26,7 +26,9 @@ class AlertaController extends Controller
 
     public function store(SaveRequest $request)
     {
-        if( ! $alerta = Alerta::create( $request->validated() ) )
+        $prepared = Alerta::prepare($request->validated());
+
+        if(! $alerta = Alerta::create($prepared) )
             return back()->with('failure', 'Error al guardar alerta');
 
         return redirect()->route('alertas.index')->with('success', 'Alerta guardada');
@@ -48,7 +50,9 @@ class AlertaController extends Controller
 
     public function update(SaveRequest $request, Alerta $alerta)
     {
-        if( ! $alerta->fill( $request->validated() )->save() )
+        $prepared = Alerta::prepare($request->validated());
+
+        if(! $alerta->fill($prepared)->save() )
             return back()->with('failure', 'Error al actualizar la alerta');
 
         return back()->with('success', 'Alerta actualizada') ;
@@ -56,7 +60,7 @@ class AlertaController extends Controller
 
     public function destroy(Alerta $alerta)
     {
-        if( ! $alerta->delete() )
+        if(! $alerta->delete() )
             return back()->with('failure', 'Error al eliminar alerta');
 
         return redirect()->route('alertas.index')->with('success', "{$alerta->nombre} eliminada");

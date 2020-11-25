@@ -16,5 +16,7 @@ $factory->define(Alerta::class, function (Faker $faker) use ($niveles) {
         'nivel' => $alerta_nivel,
         'nombre' => $alerta_nombre,
         'descripcion' => $faker->sentence,
+        'created_by' => rand(1,10),
+        'updated_by' => rand(1,10),
     ];
 });

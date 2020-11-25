@@ -20,6 +20,8 @@ class CreateAlertasTable extends Migration
             $table->enum('nivel', $niveles)->index();
             $table->string('nombre')->unique()->index();
             $table->text('descripcion')->nullable();
+            $table->unsignedSmallInteger('created_by');
+            $table->unsignedSmallInteger('updated_by');
             $table->timestamps();
         });
     }
