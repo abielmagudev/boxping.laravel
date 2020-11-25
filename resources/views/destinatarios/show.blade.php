@@ -2,15 +2,11 @@
 @section('content')
 <div class="row">
     <div class="col-sm col-sm-4">
-        @include('destinatarios.show._destinatario')
+        @include('destinatarios.show.informacion')
     </div>
     <div class="col-sm">
-        @include('destinatarios.show._entradas')
+        @include('destinatarios.show.entradas')
     </div>
 </div>
-<br>
-<div class="float-right">
-@include('destinatarios.show._eliminar')
-</div>
-<br>
+@include('destinatarios.show.eliminar')
 @endsection

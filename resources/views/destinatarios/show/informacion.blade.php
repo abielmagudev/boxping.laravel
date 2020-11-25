@@ -27,10 +27,12 @@
             <span>{{ $destinatario->localidad }}</span>
             <small class="d-block text-muted">Localidad</small>
         </p>
+        @if( $destinatario->referencias )
         <p>
             <span>{{ $destinatario->referencias }}</span>
             <small class="d-block text-muted">Referencias</small>
         </p>
+        @endif
         <p>
             <span>{{ $destinatario->telefono }}</span>
             <small class="d-block text-muted">Teléfono</small>
