@@ -7,10 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 use App\Ahex\Entrada\Domain\RelationshipsTrait as Relationships;
 use App\Ahex\Entrada\Domain\AttributesTrait as Attributes;
 use App\Ahex\Entrada\Domain\ScopesTrait as Scopes;
+use App\Ahex\Zkeleton\Domain\ModifiersTrait as Modifiers;
 
 class Entrada extends Model
 {
-    use Relationships, Attributes, Scopes;
+    use Relationships, Attributes, Scopes, Modifiers;
     
     const SIN_CONSOLIDADO = null;
 
