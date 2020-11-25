@@ -9,6 +9,6 @@
     </div>
 </div>
 
-@include('vehiculos.show.delete')
+@include('vehiculos.show.eliminar')
 
 @endsection

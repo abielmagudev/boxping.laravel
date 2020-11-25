@@ -2,13 +2,11 @@
 @section('content')
 <div class="row">
     <div class="col-sm col-sm-4">
-        @include('etapas.show._etapa')
+        @include('etapas.show.informacion')
     </div>
     <div class="col-sm">
-        @include('etapas.show._zonas')
+        @include('etapas.show.zonas')
     </div>
 </div>
-<br>
-@include('etapas.show._eliminar')
-<br>
+@include('etapas.show.eliminar')
 @endsection

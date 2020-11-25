@@ -1,3 +1,4 @@
+<br>
 <div class="float-right">
     @component('components.modal-confirm-delete-bundle')
         @slot('text', 'Eliminar etapa')
@@ -7,3 +8,4 @@
         @endslot
     @endcomponent
 </div>
+<br>
