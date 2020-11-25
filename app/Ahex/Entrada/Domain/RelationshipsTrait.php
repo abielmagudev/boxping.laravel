@@ -16,6 +16,16 @@ use App\Vehiculo;
 
 Trait RelationshipsTrait
 {
+    public function comentarios()
+    {
+        return $this->hasMany(Comentario::class);
+    }
+    
+    public function verificador()
+    {
+        return $this->belongsTo(User::class, 'verificado_by');
+    }
+
     public function consolidado()
     {
         return $this->belongsTo(Consolidado::class);
@@ -26,14 +36,14 @@ Trait RelationshipsTrait
         return $this->belongsTo(Cliente::class)->withTrashed();
     }
 
-    public function remitente()
-    {
-        return $this->belongsTo(Remitente::class)->withTrashed();
-    }
-
     public function destinatario()
     {
         return $this->belongsTo(Destinatario::class)->withTrashed();
+    }
+
+    public function remitente()
+    {
+        return $this->belongsTo(Remitente::class)->withTrashed();
     }
 
     public function vehiculo()
@@ -48,22 +58,12 @@ Trait RelationshipsTrait
 
     public function codigor()
     {
-        return $this->belongsTo(Codigor::class);
+        return $this->belongsTo(Codigor::class)->withTrashed();
     }
 
     public function reempacador()
     {
-        return $this->belongsTo(Reempacador::class);
-    }
-
-    public function verificador()
-    {
-        return $this->belongsTo(User::class, 'verificado_by');
-    }
-
-    public function comentarios()
-    {
-        return $this->hasMany(Comentario::class);
+        return $this->belongsTo(Reempacador::class)->withTrashed();
     }
 
     public function etapas()
