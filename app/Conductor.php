@@ -5,10 +5,11 @@ namespace App;
 use App\Ahex\Fake\Domain\Fakeuser;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Ahex\Zkeleton\Domain\ModifiersTrait as Modifiers;
 
 class Conductor extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes, Modifiers;
 
     protected $table = 'conductores';
 
