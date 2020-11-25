@@ -1,17 +1,17 @@
 <div class="card">
-    <div class="card-header">
-        <div class="d-flex justify-content-between align-items-center">
-            <div>
-                <span>Etapas</span>
-                <span class="badge badge-primary">{{ $entrada->etapas->count() }}</span>
-            </div>
-            <div>
-                <a href="{{ route('entrada.etapas.create', $entrada) }}" class="btn btn-primary btn-sm">
-                    <b>+</b>
-                </a>
-            </div>
-        </div>
-    </div>
+    @component('components.card-header-with-link', [
+        'link' => route('entrada.etapas.create', $entrada),
+        'tooltip' => 'Agregar etapa',
+    ])
+        @slot('title')
+        <span>Etapas</span>
+        <span class="badge badge-primary">{{ $entrada->etapas->count() }}</span>
+        @endslot
+
+        @slot('content')
+        <b>+</b>
+        @endslot
+    @endcomponent
     <div class="card-body p-0">
         @if( $entrada->etapas->count() )
         <div class="table-responsive">
