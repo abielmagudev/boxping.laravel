@@ -24,8 +24,10 @@ Route::resources([
     'destinatarios' => DestinatarioController::class,
     'entradas' => EntradaController::class,
     'etapas' => EtapaController::class,
+    'incidentes' => IncidenteController::class,
     'reempacadores' => ReempacadorController::class,
     'remitentes' => RemitenteController::class,
+    'salidas' => SalidaController::class,
     'transportadoras' => TransportadoraController::class,
     'vehiculos' => VehiculoController::class,
 ],[
