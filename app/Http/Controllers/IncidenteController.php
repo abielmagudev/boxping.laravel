@@ -50,7 +50,7 @@ class IncidenteController extends Controller
 
     public function destroy(Incidente $incidente)
     {
-        if( $incidente->delete() )
+        if( ! $incidente->delete() )
             return back()->with('failure', 'Error al eliminar incidente');
 
         return redirect()->route('incidentes.index')->with('success', "{$incidente->titulo} eliminado");

@@ -14,4 +14,5 @@
         </form>
     </div>
 </div>
+@include('incidentes._eliminar')
 @endsection
