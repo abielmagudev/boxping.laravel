@@ -48,6 +48,14 @@ $dropdown = array(
         'title' => 'reempacadores',
         'route' => route('reempacadores.index'),
     ],
+    (object) [
+        'title' => 'incidentes',
+        'route' => route('incidentes.index'),
+    ],
+    (object) [
+        'title' => 'salidas',
+        'route' => route('salidas.index'),
+    ],
 );
 ?>
 
