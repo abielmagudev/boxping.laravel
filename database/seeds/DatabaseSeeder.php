@@ -30,6 +30,8 @@ class DatabaseSeeder extends Seeder
             EntradasTableSeeder::class,
             EntradasEtapasTableSeeder::class,
             EntradaComentariosTableSeeder::class,
+            IncidentesTableSeeder::class,
+            SalidasTableSeeder::class,
         ]);
     }
 }

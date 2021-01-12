@@ -40,7 +40,7 @@
 
         @if( $entrada->confirmado )
         <p class="text-center">
-            <a href="#!" class="btn btn-primary btn-sm">Crear salida</a>
+            <a href="{{ route('salidas.create', ['entrada' => $entrada->id]) }}" class="btn btn-primary btn-sm">Crear salida</a>
         </p>
 
         @else
