@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Salida;
 use App\Incidente;
 use App\Transportadora;
+use App\Http\Requests\SalidaCreateRequest as CreateRequest;
 use App\Http\Requests\SalidaSaveRequest as SaveRequest;
 use Illuminate\Http\Request;
 
@@ -13,20 +14,20 @@ class SalidaController extends Controller
     public function index()
     {
         return view('salidas.index', [
-            'salidas' => Salida::with(['transportadora','entrada'])->get()->sortByDesc('id'),
+            'salidas' => Salida::with(['transportadora','entrada.destinatario','incidentes'])->get()->sortByDesc('id'),
             'config_cobertura' => config('system.salidas.cobertura'),
             'config_status'    => config('system.salidas.status'),
         ]);
     }
 
-    public function create()
+    public function create(CreateRequest $request)
     {
         return view('salidas.create', [
+            'entrada'          => $request->entrada,
             'salida'           => new Salida,
             'transportadoras'  => Transportadora::all(),
             'incidentes'       => Incidente::all(),
             'config_cobertura' => config('system.salidas.cobertura'),
-            'config_status'    => config('system.salidas.status'),
         ]);
     }
 
@@ -37,8 +38,8 @@ class SalidaController extends Controller
         if(! $salida = Salida::create($prepared) )
             return back()->with('failure', 'Error al guardar salida');
 
-        if( $request->has('incidentes') )
-            $salida->incidentes()->sync( $request->incidentes );
+        // if( $request->has('incidentes') )
+        //     $salida->incidentes()->sync( $request->incidentes );
 
         return redirect()->route('salidas.index')->with('success','Salida guardada');
     }

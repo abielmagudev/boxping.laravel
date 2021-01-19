@@ -32,14 +32,14 @@
         <div class="form-group">
             <label class="d-block small">Cobertura</label>
             <div class="form-check xform-check-inline">
-                <input class="form-check-input" type="radio" id="radio-cobertura-domicilio" name="cobertura" value="domicilio" {{ $salida->cobertura == 'domicilio' ? 'checked' : '' }}>
+                <input class="form-check-input" type="radio" id="radio-cobertura-domicilio" name="cobertura" value="domicilio" checked>
                 <label class="form-check-label" for="radio-cobertura-domicilio">
                     <span>Domicilio</span>
                     <small class="text-muted">({{ $config_cobertura['domicilio']['descripcion'] }})</small>
                 </label>
             </div>
             <div class="form-check">
-                <input class="form-check-input" type="radio" id="radio-cobertura-ocurre" name="cobertura" value="ocurre" {{ $salida->cobertura == 'ocurre' ? 'checked' : '' }}>
+                <input class="form-check-input" type="radio" id="radio-cobertura-ocurre" name="cobertura" value="ocurre" {{  old('cobertura', $salida->cobertura) == 'ocurre' ? 'checked' : '' }}>
                 <label class="form-check-label" for="radio-cobertura-ocurre">
                     <span>Ocurre</span>
                     <small class="text-muted">({{ $config_cobertura['ocurre']['descripcion'] }})</small>
@@ -108,7 +108,7 @@
         @endif
         <div class="form-group">
             <label for="textarea-notas" class="small">Notas</label>
-            <textarea cols="30" rows="3" class="form-control" id="textarea-notas" name="notas">{{ old('notas', $salida->notas) }}</textarea>
+            <textarea cols="30" rows="5" class="form-control" id="textarea-notas" name="notas">{{ old('notas', $salida->notas) }}</textarea>
         </div>
     </div>
 </div>

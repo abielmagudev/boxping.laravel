@@ -47,34 +47,35 @@ class Salida extends Model
         return $this->incidentes->implode('titulo', '<br>');
     }
 
+    public function scopeExistsWithEntrada($query, $entrada_id)
+    {
+        return $query->where('entrada_id', $entrada_id)->exists();
+    }
+
     public static function prepare($validated)
     {
-        if( $validated['cobertura'] == 'ocurre' )
-        {
-            $direccion = $validated['direccion'];
-            $postal = $validated['postal'];
-            $ciudad = $validated['ciudad'];
-            $estado = $validated['estado'];
-            $pais = $validated['pais'];
-        }
-
         $prepared = [
             'rastreo'      => $validated['rastreo'] ?? null,
             'confirmacion' => $validated['confirmacion'] ?? null,
             'cobertura'    => $validated['cobertura'],
-            'direccion'    => $direccion ?? null,
-            'postal'       => $postal ?? null,
-            'ciudad'       => $ciudad ?? null,
-            'estado'       => $estado ?? null,
-            'pais'         => $pais ?? null,
+            'direccion'    => $validated['direccion'] ?? null,
+            'postal'       => $validated['postal'] ?? null,
+            'ciudad'       => $validated['ciudad'] ?? null,
+            'estado'       => $validated['estado'] ?? null,
+            'pais'         => $validated['pais'] ?? null,
             'notas'        => $validated['notas'] ?? null,
-            'status'       => $validated['status'],
+            'status'       => $validated['status'] ?? array_key_first( config('system.salidas.status') ),
             'transportadora_id' => $validated['transportadora'] ?? null,
             'updated_by'   => Fakeuser::live(),
         ];
 
         if( request()->isMethod('post') )
-            $prepared['created_by'] = Fakeuser::live();
+        {
+            $prepared = array_merge($prepared, [
+                'entrada_id' => $validated['entrada'],
+                'created_by' => Fakeuser::live(),
+            ]);
+        }
 
         return $prepared;
     }

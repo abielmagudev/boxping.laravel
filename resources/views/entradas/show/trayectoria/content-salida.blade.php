@@ -39,11 +39,13 @@
     @elseif( is_object($entrada->destinatario) )
 
         @if( $entrada->confirmado )
+        <br>
         <p class="text-center">
-            <a href="{{ route('salidas.create', ['entrada' => $entrada->id]) }}" class="btn btn-primary btn-sm">Crear salida</a>
+            <a href="{{ route('salidas.create', ['entrada' => $entrada->id]) }}" class="btn btn-success">Crear salida</a>
         </p>
 
         @else
+        <br>
         <form action="{{ route('entradas.update', $entrada) }}" method="post" autocomplete="off" class="text-center">
             @method('put')
             @csrf
@@ -58,6 +60,7 @@
         @endif
 
     @else
+    <br>
     <p class="text-center">Require agregar un destinatario</p>
 
     @endif
