@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Entrada;
 use App\Salida;
 use App\Incidente;
 use App\Transportadora;
@@ -23,7 +24,7 @@ class SalidaController extends Controller
     public function create(CreateRequest $request)
     {
         return view('salidas.create', [
-            'entrada'          => $request->entrada,
+            'entrada'          => Entrada::find($request->entrada),
             'salida'           => new Salida,
             'transportadoras'  => Transportadora::all(),
             'incidentes'       => Incidente::all(),
