@@ -23,7 +23,7 @@
                     @foreach($salidas as $salida)
                     <tr>
                         <td class="align-middle">
-                            <a href="#">{{ $salida->entrada->numero }}</a>
+                            <a href="{{ route('entradas.show', $salida->entrada) }}">{{ $salida->entrada->numero }}</a>
                         </td>
                         <td class="align-middle">
                             <span>{{ $salida->transportadora->nombre }}</span>

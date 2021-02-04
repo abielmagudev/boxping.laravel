@@ -21,7 +21,7 @@
             @include('salidas._save')
             <div class="text-right">
                 <button class="btn btn-warning" type="submit">Actualizar salida</button>
-                <a href="{{ route('salidas.index') }}" class="btn btn-outline-secondary">Regresar</a>
+                <a href="{{ route('entradas.show', $salida->entrada) }}" class="btn btn-outline-secondary">Regresar</a>
             </div>
         </form>
     </div>
