@@ -38,6 +38,15 @@
         <div class="w-100 mb-2"></div>
 
         <div class="col-sm col-sm-3 text-left text-md-right">
+            <small class="text-muted">Contenido</small>
+        </div>
+        <div class="col-sm">
+            <span>{{ $entrada->contenido }}</span>
+        </div>
+
+        <div class="w-100 mb-2"></div>
+
+        <div class="col-sm col-sm-3 text-left text-md-right">
             <small class="text-muted">Creado</small>
         </div>
         <div class="col-sm">

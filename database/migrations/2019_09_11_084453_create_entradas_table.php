@@ -21,6 +21,7 @@ class CreateEntradasTable extends Migration
             $table->unsignedInteger('consolidado_id')->nullable();
             $table->boolean('cliente_alias_numero');
             $table->unsignedInteger('cliente_id');
+            $table->text('contenido')->nullable();
 
             // Trayectoria
             $table->unsignedInteger('destinatario_id')->nullable();

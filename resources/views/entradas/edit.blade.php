@@ -6,8 +6,8 @@
     </div> 
     <div class="card-body">
         <form action="{{ route('entradas.update', $entrada) }}" method="post" autocomplete="off">
-            @csrf
             @method('patch')
+            @csrf
             @include('entradas.edit.' . $template)
             <br>
             <button class="btn btn-warning" type="submit" name="actualizar" value="{{ $template }}">Actualizar {{ $template }}</button>

@@ -6,4 +6,7 @@
     <input name="cliente_alias_numero" value="1" id="checkbox-cliente-alias-numero" type="checkbox" class="form-check-input" {{ checkable(1, old('cliente_alias_numero', $entrada->cliente_alias_numero)) }}>
     <label for="checkbox-cliente-alias-numero" class="form-check-label small">Alias del cliente al comienzo del número de entrada.</label>
 </div>
-@csrf
+<div class="form-group mt-3">
+    <label for="textarea-contenido" class="small">Contenido</label>
+    <textarea name="contenido" id="textarea-contenido" cols="30" rows="5" class="form-control">{{ old('contenido', $entrada->contenido) }}</textarea>
+</div>

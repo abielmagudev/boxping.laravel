@@ -18,6 +18,7 @@ Class EntradaUpdater extends Updater
             'cliente' => ['required_if:consolidado_numero,null','exists:clientes,id'],
             'numero' => ['required','unique:entradas,numero,' . $this->entrada->id],
             'cliente_alias_numero' => ['sometimes','accepted'],
+            'contenido' => 'nullable',
         ];
     }
 

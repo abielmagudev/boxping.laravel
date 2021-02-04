@@ -21,6 +21,7 @@ class Entrada extends Model
         'consolidado_id',
         'cliente_id',
         'cliente_alias_numero',
+        'contenido',
 
         // Trayectoria
         'destinatario_id',
@@ -57,6 +58,7 @@ class Entrada extends Model
             'consolidado_id' => $consolidado->id ?? null,
             'cliente_id' => $consolidado->cliente_id ?? $validated['cliente'],
             'cliente_alias_numero' => isset($validated['cliente_alias_numero']) ? 1 : 0,
+            'contenido' => $validated['contenido'] ?? null,
             'updated_by' => Fakeuser::live(),
         ];
 

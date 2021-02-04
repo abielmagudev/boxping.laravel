@@ -18,6 +18,7 @@ class EntradaStoreRequest extends FormRequest
             'cliente'              => ['required_without:consolidado','exists:clientes,id'],
             'numero'               => ['required','unique:entradas'],
             'cliente_alias_numero' => ['sometimes','accepted'],
+            'contenido' => 'nullable',
         ];
     }
 

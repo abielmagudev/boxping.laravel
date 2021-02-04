@@ -6,6 +6,7 @@
     </div> 
     <div class="card-body">
         <form action="{{ route('entradas.store') }}" method="post" autocomplete="off">
+            @csrf
             @include('entradas.create.' . $template)
             @include('entradas._save')
             <br>

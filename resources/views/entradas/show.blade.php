@@ -1,7 +1,7 @@
 @extends('app')
 @section('content')
 @include('entradas.show.acciones')
-<div class="row" style="height:432px">
+<div class="row" style="height:480px">
     <!-- Informacion -->
     <div class="col-sm mb-3 mb-md-0">
         @include('entradas.show.informacion.layout')
@@ -12,6 +12,7 @@
         @include('entradas.show.trayectoria.layout')
     </div>
 </div>
+<br>
 <br>
 
 <!-- Etapas -->
