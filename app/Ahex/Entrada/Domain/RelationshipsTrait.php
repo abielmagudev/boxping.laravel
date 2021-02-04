@@ -12,6 +12,7 @@ use App\EntradaEtapa;
 use App\Etapa;
 use App\Reempacador;
 use App\Remitente;
+use App\Salida;
 use App\Vehiculo;
 
 Trait RelationshipsTrait
@@ -84,5 +85,10 @@ Trait RelationshipsTrait
                         'updated_by',
                     ])
                     ->withTimestamps();
+    }
+
+    public function salida()
+    {
+        return $this->hasOne(Salida::class);
     }
 }
