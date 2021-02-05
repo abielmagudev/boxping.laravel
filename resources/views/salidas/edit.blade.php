@@ -1,5 +1,9 @@
 @extends('app')
 @section('content')
+<p class="small text-right">
+    <span class="text-muted mr-1">Entrada</span>
+    <span>{{ $salida->entrada->numero }}</span>
+</p>
 <div class="card">
     <div class="card-header">
         <span>Editar salida</span>
@@ -7,17 +11,6 @@
     <div class="card-body">
         <form action="{{ route('salidas.update', $salida) }}" method="post" autocomplete="off">
             @method('put')
-            <div class="row">
-                <div class="col-sm">
-                    <p class="">Entrada</p> 
-                </div>
-                <div class="col-sm col-sm-10">
-                    <div class="form-group">
-                        <label class="small">Número</label>
-                        <div class="form-control border-0">{{ $salida->entrada->numero }}</div>
-                    </div>
-                </div>
-            </div>
             @include('salidas._save')
             <div class="text-right">
                 <button class="btn btn-warning" type="submit">Actualizar salida</button>

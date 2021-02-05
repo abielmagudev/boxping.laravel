@@ -1,16 +1,6 @@
 @csrf
 <div class="row">
     <div class="col-sm">
-        <p>Entrada</p>
-    </div>
-    <div class="col-sm col-sm-10">
-        <p>{{ $entrada->numero }}</p>
-    </div>
-</div>
-<br>
-
-<div class="row">
-    <div class="col-sm">
         <p class="">Envio</p> 
     </div>
     <div class="col-sm col-sm-10">
