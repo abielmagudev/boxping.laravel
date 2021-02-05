@@ -17,6 +17,7 @@
             <table class="table table-hover">
                 <thead class="small">
                     <tr>
+                        <th>Orden</th>
                         <th>Nombre</th>
                         <th>Realiza medición</th>
                         <th>Única medida de peso</th>
@@ -26,6 +27,7 @@
                 <tbody>
                     @foreach($etapas as $etapa)
                     <tr>
+                        <td>{{ $etapa->orden }}</td>
                         <td>
                             <a href="{{ route('etapas.show', $etapa) }}">{{ $etapa->nombre }}</a>
                         </td>

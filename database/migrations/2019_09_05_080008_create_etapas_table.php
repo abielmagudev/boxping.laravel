@@ -15,6 +15,7 @@ class CreateEtapasTable extends Migration
             $table->bigIncrements('id');
             $table->string('nombre')->unique()->index();
             $table->string('slug')->unique()->index();
+            $table->unsignedTinyInteger('orden')->default(1);
             $table->boolean('realiza_medicion')->default(1);
             $table->enum('unica_medida_peso', $medidas_peso)->nullable();
             $table->enum('unica_medida_volumen', $medidas_volumen)->nullable();

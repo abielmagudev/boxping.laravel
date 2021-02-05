@@ -1,8 +1,11 @@
 @csrf
-
 <div class="form-group">
     <label for="input-nombre" class="small">Nombre</label>
     <input name="nombre" value="{{ old('nombre', $etapa->nombre) }}" id="input-nombre" type="text" class="form-control" required>
+</div>
+<div class="form-group">
+    <label for="input-orden" class="small">Orden</label>
+    <input name="orden" value="{{ old('orden', $etapa->orden) }}" id="input-orden" type="number" min="1" step="1" class="form-control" required>
 </div>
 <div class="form-group">
     <label class="small">Realiza medición</label>

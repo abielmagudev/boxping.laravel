@@ -27,6 +27,7 @@ class EtapaSaveRequest extends FormRequest
 
         return [
             'nombre' => ['required','regex:/^[A-Za-z0-9 ]+$/','unique:etapas,nombre,' . $etapa_id],
+            'orden' => ['required','integer','min:1',],
             'realiza_medicion' => ['required','boolean'],
             'unica_medida_peso' => ['nullable','in:' . $this->medidas_peso],
             'unica_medida_volumen' => ['nullable','in:' . $this->medidas_volumen],
@@ -39,6 +40,9 @@ class EtapaSaveRequest extends FormRequest
             'nombre.required' => __('Requiere el nombre de la etapa'),
             'nombre.regex' => __('Solo letras, números y espacios debe contener el nombre'),
             'nombre.unique' => __('Escribe un nombre diferente de la etapa'),
+            'orden.required' => __('Escribe el orden correspondiente a la etapa'),
+            'orden.integer' => __('La propiedad orden debe ser numerico entero'),
+            'orden.min' => __('La propiedad orden de etapa es 1'),
             'realiza_medicion.required' => __('Selecciona una opción de medición'),
             'unica_medida_peso.in' => __('Selecciona una opción valida en peso'),
             'unica_medida_volumen.in' => __('Selecciona una opción valida en volúmen'),

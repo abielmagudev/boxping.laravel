@@ -10,7 +10,7 @@ class EtapaController extends Controller
 {
     public function index()
     {
-        return view('etapas.index')->with('etapas', Etapa::all()->sortByDesc('id'));
+        return view('etapas.index')->with('etapas', Etapa::all()->sortBy('orden'));
     }
 
     public function create(Etapa $etapa)

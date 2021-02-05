@@ -16,6 +16,7 @@ $factory->define(Etapa::class, function (Faker $faker) {
     return [
         'nombre' => $nombre,
         'slug' => $slug,
+        'orden' => $faker->numberBetween(1,20),
         'realiza_medicion' => $realiza_medicion ? 1 : 0,
         'unica_medida_peso' => $realiza_medicion ? $faker->randomElement($medidas_peso) : null,
         'unica_medida_volumen' => $realiza_medicion ? $faker->randomElement($medidas_volumen) : null,
