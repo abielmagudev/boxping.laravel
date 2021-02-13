@@ -1,4 +1,4 @@
-
-require('./libs/getbootstrap');
-require('./libs/bootstrap.app');
+// Requires for App
+require('./libs/settings');
+require('./libs/customs');
 require('./bootstrap');

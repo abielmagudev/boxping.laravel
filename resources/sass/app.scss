@@ -1,8 +1,12 @@
 // Fonts
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap');
+// @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+// V1 = @import url('https://fonts.googleapis.com/css2?family=Dosis:wght@200;400;700&display=swap');
+// V2 = @import url('https://fonts.googleapis.com/css?family=Dosis:200,400,700&display=swap');
 
-// App
-@import "resources/sass/style";
+// Custom variables bootstrap
+@import 'custom-bootstrap';
 
 // Bootstrap
-@import "~bootstrap/scss/bootstrap";
+// @import '~bootstrap-icons/font/bootstrap-icons';
+@import url('https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css');
+@import '~bootstrap/scss/bootstrap';
