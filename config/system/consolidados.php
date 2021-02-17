@@ -2,7 +2,7 @@
 
 return array(
     'colores' => [
-        'cerrado' => '#DC3645',
-        'abierto' => '#28A745',
+        'cerrado' => '#666666', // Red: #DC3645
+        'abierto' => '#28A745', // Green: #28A745
     ],
 );
