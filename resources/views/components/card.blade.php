@@ -7,6 +7,7 @@ $card = (object) array(
     'header_center'  => $header_center ?? null,
     'header_options' => $header_options ?? null,
     'header_badge'   => isset($header_badge) ? strval($header_badge) : false,
+    'body_classes'   => isset($body_classes) ? strval($body_classes) : null,
     'body_padding'   => isset($body_padding) && $body_padding === false ? 'p-0' : null,
     'body'           => isset($body) ? $body : false,
     'has_footer'     => isset($footer),
@@ -35,7 +36,7 @@ $card = (object) array(
     @endif
 
     @if( ! is_bool($card->body) )
-    <div class="card-body {{ $card->body_padding }}">{{ $card->body }}</div>
+    <div class="card-body {{ $card->body_classes }} {{ $card->body_padding }}">{{ $card->body }}</div>
     @endif
 
     @if( $card->has_footer )
