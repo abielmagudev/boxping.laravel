@@ -59,20 +59,29 @@ $dropdown = array(
 );
 ?>
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="{{ url('/') }}" style="font-size:1rem">
-        <span>Boxping</span>
-    </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="navbar-nav">
-            <li class="nav-item active d-none">
-                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="{{ url('/') }}">
+            <span class="lead">Boxping</span>
+        </a>
+
+        <!-- Toggle collapse -->
+        <button class="navbar-toggler d-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- In collapse -->
+        <div class="collapse navbar-collapse d-none" id="navbarContent">
+            <ul class="navbar-nav">
+                <li class="nav-item active d-none">
+                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+            </ul>     
+        </div>
+
+        <div class="d-flex">
+            <div>
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <span>Navegacion</span>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
@@ -80,7 +89,22 @@ $dropdown = array(
                     <a class="dropdown-item" href="{{ $item->route }}">{{ ucfirst($item->title) }}</a>
                 @endforeach
                 </div>
+            </div>
+        </div>
+        
+        <!-- Out collapse -->
+        <ul class="navbar-nav">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownUser" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="bi bi-person-circle"></i>
+                </a>
+                <div class="dropdown-menu dropdown-menu-end border-0 shadow-lg" aria-labelledby="navbarDropdownUser">
+                    <a class="dropdown-item" href="#">Cuenta</a>
+                    <a class="dropdown-item" href="#">Preferencias</a>
+                    <a class="dropdown-item text-danger" href="#">Salir</a>
+                </div>
             </li>
         </ul>
+
     </div>
 </nav>
