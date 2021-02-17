@@ -9,10 +9,17 @@
 <body>
     @include('layout.navbar')
     <br>
-    <div class="container">
-        @include('components.errors')
-        @include('components.notification')
-        @yield('content')
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm d-none d-lg-block">
+                @include('layout.menubar')
+            </div>
+            <div class="col-sm col-sm-12 col-lg-10">
+                @include('components.errors')
+                @include('components.notification')
+                @yield('content')
+            </div>
+        </div>
     </div>
     <br>
     <script src="{{ asset('js/app.js') }}"></script>
