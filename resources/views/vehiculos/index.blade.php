@@ -1,40 +1,36 @@
 @extends('app')
 @section('content')
-<div class="card">
-    @component('components.card-header-with-link', [
-        'tooltip' => 'Nuevo vehículo',
-        'link' => route('vehiculos.create'),
-    ])
-        @slot('title')
-        <span>Vehículos</span>
-        <span class="badge badge-primary">{{ $vehiculos->count() }}</span>
-        @endslot
-
-        @slot('content')
-        <b>+</b>
+@component('components.card')
+    @slot('header_title')
+    <span>Vehículos</span>
+    <span class="badge bg-secondary rounded-pill">{{ $vehiculos->count() }}</span>
+    @endslot
+    @slot('header_options')
+    <a href="{{ route('vehiculos.create') }}" class="btn btn-sm btn-outline-primary">Nuevo vehículo</a>
+    @endslot
+    @slot('body')
+    @component('components.table')
+        @slot('hover', true)
+        @slot('thead', ['Alias','Descripción',''])
+        @slot('tbody')
+            @foreach($vehiculos as $vehiculo)
+            <tr>
+                <td style="min-width:288px">{{ $vehiculo->alias }}</td>
+                <td style="min-width:288px">{{ $vehiculo->descripcion }}</td>
+                <td class="text-nowrap">
+                    <a href="{{ route('vehiculos.show', $vehiculo) }}" class="btn btn-sm btn-primary">
+                        @component('components.icon', ['icon' => 'eye'])
+                        @endcomponent
+                    </a>
+                    <a href="{{ route('vehiculos.edit', $vehiculo) }}" class="btn btn-sm btn-warning">
+                        @component('components.icon', ['icon' => 'pencil'])
+                        @endcomponent
+                    </a>
+                </td>
+            </tr>
+            @endforeach
         @endslot
     @endcomponent
-    <div class="card-body p-0">
-        <div class="table-responsive">
-            <table class="table table-hover">
-                <thead class="small">
-                    <tr>
-                        <th>Alias</th>
-                        <th>Descripción</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($vehiculos as $vehiculo)
-                    <tr>
-                        <td class="text-nowrap align-middle">
-                            <a href="{{ route('vehiculos.show', $vehiculo) }}">{{ $vehiculo->alias }}</a>
-                        </td>
-                        <td class="align-middle">{{ $vehiculo->descripcion }}</td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
+    @endslot
+@endcomponent
 @endsection

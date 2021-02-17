@@ -1,12 +1,14 @@
 @extends('app')
 @section('content')
 
-@component('components.card')
-    @slot('header_title')
-    <small class="d-block small">Conductor</small>
-    <span class="">{{ $conductor->nombre }}</span>
-    @endslot
+@component('partials.header-show', [
+    'title' => $conductor->nombre,
+    'subtitle' => 'Conductor',
+    'goback' => route('importacion.index'),
+])
+@endcomponent
 
+@component('components.card')
     @slot('header_options')
     <form action="{{ route('conductores.show', $conductor) }}" method="get" class="d-flex align-items-center">
         <div>
@@ -24,32 +26,7 @@
     @endslot
 
     @slot('body')
-        @component('components.table')
-            @slot('hover', true)
-            @slot('thead', ['Número','Destinatario',''])
-            @slot('tbody')
-            @foreach($entradas as $entrada)
-            <tr>
-                <td style="min-width:288px">{{ $entrada->numero }}</td>
-                <td style="min-width:288px">
-                    @if( $entrada->destinatario )
-                    <span class="d-block">{{ $entrada->destinatario->direccion ?? '' }}</span>
-                    <small>{{ $entrada->destinatario->localidad }}</small>
-
-                    @else
-                    <small class="text-muted">Pendiente</small>
-
-                    @endif
-                </td>
-                <td class='text-end'>
-                    <a href="{{ route('entradas.show', $entrada) }}" class="btn btn-sm btn-primary">
-                        @component('components.icon', ['icon' => 'eye'])
-                        @endcomponent
-                    </a>
-                </td>
-            </tr>
-            @endforeach
-            @endslot
+        @component('partials.table-summary-entradas', ['entradas' => $entradas])
         @endcomponent
     @endslot
 @endcomponent

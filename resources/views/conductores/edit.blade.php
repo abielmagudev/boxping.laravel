@@ -7,11 +7,10 @@
             @method('put')
             @include('conductores._save')
             <br>
+            <button class="btn btn-outline-warning">Actualizar conductor</button>
             <a href="{{ route('importacion.index') }}" class="btn btn-secondary">Regresar</a>
-            <button class="btn btn-warning">Actualizar conductor</button>
         </form>
     @endslot
-
     @slot('footer')
         @component('partials.modal-confirm-delete', [
             'content'       => "Se eliminará el conductor <span class='d-block fw-bold'>{$conductor->nombre}</span>",
@@ -19,12 +18,11 @@
             'trigger_align' => 'right',
             'trigger_text'  => 'Eliminar conductor',
         ])
-
         @endcomponent
     @endslot
 @endcomponent
 
-@component('partials.modifiers', [
+@component('partials.section-modifiers', [
     'created_by' => $conductor->creator->name,
     'created_at' => $conductor->created_at,
     'updated_by' => $conductor->updater->name,
