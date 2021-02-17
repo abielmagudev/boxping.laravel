@@ -29,13 +29,19 @@ class ConductorController extends Controller
         return redirect()->route('conductores.index')->with('success', 'Conductor guardado');
     }
 
-    public function show(Conductor $conductor)
+    public function show(Request $request, Conductor $conductor)
     {
-        $entradas = Entrada::with(['destinatario'])->where('conductor_id', $conductor->id)->get();
+        $ultimas_entradas = $request->input('ultimas', 5);
+        $limit = $ultimas_entradas <> 'todas' ? $ultimas_entradas : false;
+
+        $entradas = is_numeric($limit)
+                 ? Entrada::with(['destinatario'])->where('conductor_id', $conductor->id)->limit($limit)->get()
+                 : Entrada::with(['destinatario'])->where('conductor_id', $conductor->id)->get();
         
         return view('conductores.show', [
             'conductor' => $conductor,
             'entradas' => $entradas,
+            'ultimas_entradas' => $ultimas_entradas,
         ]);
     }
 

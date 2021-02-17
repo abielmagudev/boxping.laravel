@@ -1,38 +1,37 @@
 @extends('app')
 @section('content')
-<div class="card">
-    @component('components.card-header-with-link', [
-        'link'  => route('conductores.create'),
-        'tooltip' => 'Nuevo conductor',
-    ])
-        @slot('title')
-        <span>Conductores</span>
-        <span class="badge badge-primary">{{ $conductores->count() }}</span>
-        @endslot
 
-        @slot('content')
-        <b>+</b>
+@component('components.card')
+    @slot('header_title', 'Conductores')
+    @slot('header_badge', $conductores->count())
+    @slot('header_options')
+    <a href="{{ route('conductores.create') }}" class="btn btn-sm btn-outline-primary">Nuevo conductor</a>
+    @endslot
+    
+    @slot('body')
+    @component('components.table')
+        @slot('hover', true)
+        @slot('thead', ['Nombre',''])
+        @slot('tbody')
+            @foreach($conductores as $conductor)
+            <tr>
+                <td>{{ $conductor->nombre }}</td>
+                <td class="text-end">
+                    <a href="{{ route('conductores.show',$conductor) }}" class="btn btn-sm btn-primary">
+                        @component('components.icon', ['icon' => 'eye'])
+                        @endcomponent
+                    </a>
+                    <a href="{{ route('conductores.edit',$conductor) }}" class="btn btn-sm btn-warning">
+                        @component('components.icon', ['icon' => 'pencil'])
+                        @endcomponent
+                    </a>
+                </td>
+            </tr>
+            @endforeach
         @endslot
     @endcomponent
-    <div class="card-body p-0">
-        <div class="table-responsive">
-            <table class="table table-hover">
-                <thead class="small">
-                    <tr>
-                        <th>Nombre</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($conductores as $conductor)
-                    <tr>
-                        <td>
-                            <a href="{{ route('conductores.show', $conductor) }}">{{ $conductor->nombre }}</a>
-                        </td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
+    @endslot
+
+@endcomponent
+
 @endsection
