@@ -26,10 +26,7 @@ $summary = (object) array(
                 @endif
             </td>
             <td class='text-end'>
-                <a href="{{ route('entradas.show', $entrada) }}" class="btn btn-sm btn-primary">
-                    @component('components.icon', ['icon' => 'eye'])
-                    @endcomponent
-                </a>
+                <a href="{{ route('entradas.show', $entrada) }}" class="btn btn-sm btn-primary">{!! $icons->eye !!}</a>
             </td>
         </tr>
         @endforeach

@@ -6,11 +6,11 @@ $aligns = [
 ];
 
 $modal = (object) array(
-    'content' => isset($content) ? $content : false,
-    'route'   => isset($route) && is_string($route) ? $route : false,
-    'trigger_align'   => isset($trigger_align, $aligns[$trigger_align]) ? $aligns[$trigger_align] : 'text-start',
+    'body' => isset($body) ? $body : false,
+    'route' => isset($route) && is_string($route) ? $route : false,
+    'trigger_align' => isset($trigger_align, $aligns[$trigger_align]) ? $aligns[$trigger_align] : 'text-start',
     'trigger_display' => isset($trigger_display) && $trigger_display == 'inline' ? 'd-inline-block' : 'd-block',
-    'trigger_text'    => isset($trigger_text) && is_string($trigger_text) ? $trigger_text : 'Eliminar',
+    'trigger_text' => isset($trigger_text) && is_string($trigger_text) ? $trigger_text : 'Eliminar',
 );
 
 ?>
@@ -46,8 +46,8 @@ $modal = (object) array(
                 <form action="{{ $modal->route }}" method="post" id="form-confirm-delete">
                     @csrf
                     @method('delete')
-                    @if( ! is_bool($modal->content) )
-                    <div class='text-muted lead mb-4'><?= $modal->content ?></div>
+                    @if( ! is_bool($modal->body) )
+                    <div class='text-muted mb-4'>{!! $modal->body !!}</div>
                     @endif
                 </form>
             </div>
