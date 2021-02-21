@@ -58,6 +58,7 @@ class ConsolidadoController extends Controller
         return view('consolidados.edit', [
             'consolidado' => $consolidado,
             'clientes' => Cliente::all(['id','nombre','alias']),
+            'config_consolidados' => (object) config('system.consolidados'),
         ]);
     }
 

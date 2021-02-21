@@ -25,13 +25,7 @@
                 @slot('tbody')
                 <tr class="text-capitalize">
                     <td class="text-muted small" style="width:1%">Status</td>
-                    @if( $consolidado->abierto )
-                    <td class="fw-bold" style="color:{{ $config_consolidados->colores['abierto'] }}">abierto</td>
-                    
-                    @else
-                    <td class="fw-bold" style="color:{{ $config_consolidados->colores['cerrado'] }}">cerrado</td>
-                
-                    @endif
+                    <td class="fw-bold" style="color:{{ $config_consolidados->status[$consolidado->status]['color'] }}">{{ ucfirst($consolidado->status) }}</td>
                 </tr>
                 <tr>
                     <td class="text-muted small">Cliente</td>
@@ -67,7 +61,7 @@
         {!! $icons->printer !!}
     </a>
 
-    @if( $consolidado->abierto )
+    @if( $consolidado->status == 'abierto' )
     <a href="{{ route('entradas.create', ['consolidado' => $consolidado]) }}" class="btn btn-sm btn-outline-primary">
         {!! $icons->plus !!}
     </a>

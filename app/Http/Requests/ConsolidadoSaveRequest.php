@@ -25,12 +25,14 @@ class ConsolidadoSaveRequest extends FormRequest
     public function rules()
     {
         $consolidado_id = $this->route('consolidado')->id ?? 0;
+        $config_consolidados = (object) config('system.consolidados');
+        $all_status = implode(',', array_keys($config_consolidados->status));
 
         return [
             'cliente' => ['required','exists:clientes,id'],
             'numero'  => ['required','unique:consolidados,numero,' . $consolidado_id],
             'tarimas' => ['required','numeric'],
-            'cerrado' => ['integer'],
+            'status'  => ['in:' . $all_status],
             'notas'   => 'nullable',
         ];
     }
@@ -44,6 +46,7 @@ class ConsolidadoSaveRequest extends FormRequest
             'numero.unique'    => __('Escribe un número de consolidado diferente'),
             'tarimas.required' => __('Escribe la cantidad de tarimas'),
             'tarimas.numeric'  => __('Escribe la número de tarimas'),
+            'status.in'        => __('Selecciona un status válido'),
         );
     }
 }

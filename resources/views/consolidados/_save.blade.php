@@ -34,12 +34,13 @@
     <textarea name="notas" id="notas" cols="30" rows="5" class="form-control">{{ old('notas', $consolidado->notas) }}</textarea>
 </div>
 
-@if( ! is_null($consolidado->abierto) )
+@if( ! is_null($consolidado->status) )
 <div class="mb-3">
     <label for="select-status" class="form-label small">Status</label>
-    <select name="cerrado" id="select-status" class="form-control">
-        <option value="1" {{ $consolidado->abierto ? 'selected' : '' }}>Abierto - Es posible agregar entradas al consolidado.</option>
-        <option value="0" {{ $consolidado->abierto ? '' : 'selected' }}>Cerrado - No es posible agregar entradas al consolidado.</option>
+    <select name="status" id="select-status" class="form-control">
+        @foreach( $config_consolidados->status as $status => $props )
+        <option value="{{ $status }}" {{ $consolidado->status <> $status ?: 'selected' }}>{{ ucfirst($status) }} - {{ $config_consolidados->status[$status]['descripcion'] }}</option>
+        @endforeach
     </select>
 </div>
 @endif

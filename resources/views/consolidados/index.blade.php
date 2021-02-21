@@ -13,12 +13,12 @@
         @slot('background_color', 'light')
         @slot('body')
         <div class="text-center">
-            <span class="badge rounded-pill" style="background-color:{{ $config_consolidados->colores['abierto'] }}">
-                {{ $consolidados->where('abierto', 1)->count() }}
+            <span class="badge rounded-pill" style="background-color:{{ $config_consolidados->status['abierto']['color'] }}">
+                {{ $consolidados->where('status', 'abierto')->count() }}
             </span>
             <span class="me-3 align-middle">Abierto</span>
-            <span class="badge rounded-pill" style="background-color:{{ $config_consolidados->colores['cerrado'] }}">
-                {{ $consolidados->where('abierto', 0)->count() }}
+            <span class="badge rounded-pill" style="background-color:{{ $config_consolidados->status['cerrado']['color'] }}">
+                {{ $consolidados->where('status', 'cerrado')->count() }}
             </span>
             <span class="align-middle">Cerrado</span>   
         </div>
@@ -35,8 +35,8 @@
         @foreach($consolidados as $consolidado)
         <tr>
             <td class="text-center" style="width:1%">
-                <?php $status = $consolidado->abierto ? 'abierto' : 'cerrado' ?>
-                <span daa-bs-title="{{ ucfirst($status) }}" data-bs-toggle="tooltip" data-bs-placement="top" style="color:{{ $config_consolidados->colores[$status] }}">
+                <?php $color = $config_consolidados->status[$consolidado->status]['color'] ?>
+                <span data-bs-title="{{ ucfirst($consolidado->status) }}" data-bs-toggle="tooltip" data-bs-placement="top" style="color:{{ $color }}">
                     {!! $symbols->circle !!}
                 </span>
             </td>

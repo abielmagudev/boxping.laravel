@@ -5,11 +5,14 @@
 use App\Consolidado;
 use Faker\Generator as Faker;
 
-$factory->define(Consolidado::class, function (Faker $faker) {
+$config_consolidados = config('system.consolidados');
+$all_status = array_keys($config_consolidados['status']);
+
+$factory->define(Consolidado::class, function (Faker $faker) use($all_status) {
     return [
         'numero' => $faker->unique(true)->randomNumber . time(),
         'tarimas' => $faker->numberBetween(1,5),
-        'abierto' => $faker->boolean ? 1 : 0,
+        'status' => $faker->randomElement( $all_status ),
         'notas' => $faker->boolean ? $faker->sentence() : null,
         'cliente_id' => $faker->numberBetween(1,10),
         'created_by' => 1,

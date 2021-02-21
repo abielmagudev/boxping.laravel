@@ -14,7 +14,7 @@ class Consolidado extends Model implements Search
     protected $fillable = array(
         'numero',
         'tarimas',
-        'abierto',
+        'status',
         'notas',
         'cliente_id',
         'created_by',
@@ -46,8 +46,8 @@ class Consolidado extends Model implements Search
         $prepared = [
             'numero'     => $validated['numero'],
             'tarimas'    => $validated['tarimas'],
+            'status'     => isset($validated['status']) ? $validated['status'] : 'abierto',
             'notas'      => $validated['notas'],
-            'abierto'    => isset($validated['cerrado']) ? $validated['cerrado'] : 1,
             'cliente_id' => $validated['cliente'],
             'updated_by' => Fakeuser::live(),
         ];
