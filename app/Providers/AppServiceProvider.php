@@ -24,7 +24,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        View::share('symbols', config('system.symbols'));
-        View::share('icons', config('system.icons-bs'));
+        View::share('symbols', config('resources.symbols'));
+        View::share('icons', config('resources.icons-bs'));
     }
 }
