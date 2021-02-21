@@ -9,7 +9,6 @@ $summary = (object) array(
 @if( ! is_bool($summary->entradas ) )
 
     @component('components.table')
-        @slot('hover', true)
         @slot('thead', ['Número','Destinatario',''])
         @slot('tbody')
         @foreach($summary->entradas as $entrada)

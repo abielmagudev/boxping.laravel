@@ -22,7 +22,7 @@ $table = (object) array(
     'classes'      => isset($classes) && is_string($classes) ? $classes : null,
     'border'       => isset($border) && array_key_exists($border, $table_borders) ? $table_borders[ $border ] : null,
     'color'        => isset($color) && array_key_exists($color, $table_colors) ? $table_colors[ $color ] : null,
-    'hover'        => isset($hover) && $hover === true ? 'table-hover' : null,
+    'hover'        => isset($hover) && $hover === false ? null : 'table-hover',
     'small'        => isset($small) && $small === true ? 'table-sm' : null,
     'striped'      => isset($striped) && $striped === true ? 'table-striped' : null,
     'thead'        => isset($thead) && is_array($thead) ? $thead : false,
