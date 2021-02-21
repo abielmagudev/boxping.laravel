@@ -21,6 +21,7 @@
             @slot('body')
             <p class="small text-muted">Información</p>
             @component('components.table')
+                @slot('hover', false)
                 @slot('classes', 'm-0')
                 @slot('tbody')
                 <tr class="text-capitalize">

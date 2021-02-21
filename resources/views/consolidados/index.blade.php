@@ -26,11 +26,9 @@
     @endcomponent
     <br>
 
-    @component('components.table', [
-        'hover' => true,
-        'size'  => 'small',
-        'thead' => ['Status','Número','Cliente','Tarimas','Entradas','']
-    ])
+    @component('components.table')
+        @slot('size', 'small')
+        @slot('thead', ['Status','Número','Cliente','Tarimas','Entradas',''])
         @slot('tbody')
         @foreach($consolidados as $consolidado)
         <tr>
