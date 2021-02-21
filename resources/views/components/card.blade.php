@@ -31,7 +31,7 @@ $card = (object) array(
         <div class="text-center">{{ $card->header_center }}</div>
 
         <!-- Header options -->
-        <div class="text-right">{{ $card->header_options }}</div>
+        <div class="text-end">{{ $card->header_options }}</div>
     </div>
     @endif
 
