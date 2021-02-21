@@ -30,7 +30,7 @@ class ConsolidadoSaveRequest extends FormRequest
             'cliente' => ['required','exists:clientes,id'],
             'numero'  => ['required','unique:consolidados,numero,' . $consolidado_id],
             'tarimas' => ['required','numeric'],
-            'cerrado' => ['sometimes', 'boolean'],
+            'cerrado' => ['integer'],
             'notas'   => 'nullable',
         ];
     }

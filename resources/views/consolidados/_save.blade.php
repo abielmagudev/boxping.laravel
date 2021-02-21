@@ -1,6 +1,6 @@
 @csrf
-<div class="form-group">
-    <label for="cliente">Cliente</label>
+<div class="mb-3">
+    <label for="cliente" class="form-label small">Cliente</label>
     <select name="cliente" id="cliente" class="form-control" required>
         <option disabled selected label=""></option>
         @foreach($clientes as $cliente)
@@ -13,35 +13,34 @@
     @enderror
 </div>
 
-<div class="form-group">
-    <label for="numero">Número</label>
+<div class="mb-3">
+    <label for="numero" class="form-label small">Número</label>
     <input type="text" class="form-control" id="numero" name="numero" value="{{ old('numero', $consolidado->numero) }}" required>
     @error('numero')
     <span class="invalid-feedback d-block" role="alert">Escribe el numero de consolidado</span>
     @enderror
 </div>
 
-<div class="form-group">
-    <label for="tarimas">Tarimas</label>
+<div class="mb-3">
+    <label for="tarimas" class="form-label small">Tarimas</label>
     <input type="number" class="form-control" id="tarimas" name="tarimas" value="{{ old('tarimas', $consolidado->tarimas) ?? 1 }}" step="1" min="1" required>
     @error('tarimas')
     <span class="invalid-feedback d-block" role="alert">Escribe la cantidad de tarimas</span>
     @enderror
 </div>
 
-<div class="form-group">
-    <label for="notas">Notas</label>
+<div class="mb-3">
+    <label for="notas" class="form-label small">Notas</label>
     <textarea name="notas" id="notas" cols="30" rows="5" class="form-control">{{ old('notas', $consolidado->notas) }}</textarea>
 </div>
-<br>
 
 @if( ! is_null($consolidado->abierto) )
-<div class="form-group">
-    <?php $checked = checkable(0, old('cerrado', $consolidado->abierto)) ?>
-    <input type="checkbox" class="d-inline-block mr-1" id="checkbox-cerrado" name="cerrado" value="0" {{ $checked }}>
-    <label for="checkbox-cerrado">
-        <span class="text-danger font-weight-bold">CERRADO</span>
-        <span class=""> - No sera posible agregar más entradas al consolidado.</span>
-    </label>
+<div class="mb-3">
+    <label for="select-status" class="form-label small">Status</label>
+    <select name="cerrado" id="select-status" class="form-control">
+        <option value="1" {{ $consolidado->abierto ? 'selected' : '' }}>Abierto - Es posible agregar entradas al consolidado.</option>
+        <option value="0" {{ $consolidado->abierto ? '' : 'selected' }}>Cerrado - No es posible agregar entradas al consolidado.</option>
+    </select>
 </div>
 @endif
+<br>

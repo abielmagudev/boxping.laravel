@@ -47,7 +47,7 @@ class Consolidado extends Model implements Search
             'numero'     => $validated['numero'],
             'tarimas'    => $validated['tarimas'],
             'notas'      => $validated['notas'],
-            'abierto'    => isset($validated['cerrado']) ? 0 : 1,
+            'abierto'    => isset($validated['cerrado']) ? $validated['cerrado'] : 1,
             'cliente_id' => $validated['cliente'],
             'updated_by' => Fakeuser::live(),
         ];

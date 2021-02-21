@@ -20,7 +20,7 @@ class ConsolidadoController extends Controller
 
         return view('consolidados/index', [
             'consolidados' => $consolidados,
-            'config_consolidados' => config('system.consolidados'),
+            'config_consolidados' => (object) config('system.consolidados'),
         ]);
     }
 
@@ -49,7 +49,7 @@ class ConsolidadoController extends Controller
 
         return view('consolidados.show', [
             'consolidado' => $consolidado,
-            'config_consolidados' => config('system.consolidados'),
+            'config_consolidados' => (object) config('system.consolidados'),
         ]);
     }
 
