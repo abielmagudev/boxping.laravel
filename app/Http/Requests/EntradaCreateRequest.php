@@ -20,7 +20,7 @@ class EntradaCreateRequest extends FormRequest
     public function rules()
     {        
         return [
-            'consolidado' => 'exists:consolidados,id,abierto,1',
+            'consolidado' => 'exists:consolidados,id,status,abierto',
         ];
     }
 

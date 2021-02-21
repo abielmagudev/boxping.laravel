@@ -14,7 +14,7 @@ class EntradaStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'consolidado'          => 'exists:consolidados,id,abierto,1',
+            'consolidado'          => 'exists:consolidados,id,status,abierto',
             'cliente'              => ['required_without:consolidado','exists:clientes,id'],
             'numero'               => ['required','unique:entradas'],
             'cliente_alias_numero' => ['sometimes','accepted'],

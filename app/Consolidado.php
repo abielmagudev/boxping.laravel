@@ -33,7 +33,7 @@ class Consolidado extends Model implements Search
 
     public function scopeIsAbierto($query, $value, $column = 'numero')
     {
-        return $query->where($column, $value)->where('abierto', 1)->exists();
+        return $query->where($column, $value)->where('status', 'abierto')->exists();
     }
 
     public function scopeSearch($query, $value, $order = 'desc')
