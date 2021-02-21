@@ -20,7 +20,7 @@ $header = (object) array(
         <small class="d-block small text-muted">{{ $header->pretitle }}</small>
         @endif
 
-        <span>{{ $header->title }}</span>
+        <span>{!! $header->title !!}</span>
 
         @if( $header->subtitle )
         <small class="d-block small text-muted">{{ $header->subtitle }}</small>
@@ -34,7 +34,10 @@ $header = (object) array(
         @endif
 
         @if( $header->goback )
-        <a href="{{ $header->goback }}" class="btn btn-sm btn-outline-secondary">{{ $header->goback_text }}</a>
+        <a href="{{ $header->goback }}" class="btn btn-sm btn-secondary">
+            {!! $icons->arrow_left_circle !!}
+            <span class="d-none d-md-inline-block ms-1">{{ $header->goback_text }}</span>
+        </a>
         @endif
     </div>
 </div>
