@@ -9,6 +9,7 @@ $header_nav_types = [
 $card = (object) array(
     'classes'        => isset($classes) ? (string) $classes : null,
     'header_classes' => isset($header_classes) ? strval($header_classes) : null,
+    'header_styles'  => isset($header_styles) && is_string($header_styles) ? "style='{$header_styles} !important'" : null,
     'has_headers'    => isset($header_title) || isset($header_center) || isset($header_options) || isset($header_nav) && is_array($header_nav),
     'has_header'     => isset($header_title) || isset($header_center) || isset($header_options),
     'header_title'   => $header_title ?? null,
@@ -30,7 +31,7 @@ $card = (object) array(
 
 <div class="card shadow border-0 {{ $card->classes }}">
     @if( $card->has_headers  )
-    <div class="card-header border-0 {{ $card->header_classes ?? 'bg-transparent' }}">
+    <div class="card-header border-0 {{ $card->header_classes ?? 'bg-transparent' }}" {!! $card->header_styles !!}>
         
         @if( $card->has_header )
         <!-- Header default -->
