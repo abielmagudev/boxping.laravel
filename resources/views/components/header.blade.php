@@ -15,7 +15,7 @@ $header = (object) array(
 
 <div class="row align-items-center">
     @if( $header->has_heading )
-    <div class="col-8">
+    <div class="col-8 overflow-auto">
         @if( $header->pretitle )
         <small class="d-block small text-muted">{{ $header->pretitle }}</small>
         @endif

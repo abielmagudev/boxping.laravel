@@ -60,7 +60,7 @@ $modal = (object) array(
             
             @if( $modal->has_header )
             <div class="modal-header border-0 align-items-start {{ $modal->header_classes }}">
-                <div id='modal-header-content'>
+                <div id='modal-header-content' style="overflow:auto">
                     <h5 class="modal-title" id="{{ $modal->id }}-label">{{ $modal->header_title }}</h5>
                     @if( $modal->header_subtitle )
                     <h6 class="text-muted">{{ $modal->header_subtitle }}</h6>
@@ -68,7 +68,7 @@ $modal = (object) array(
                 </div>
 
                 @if( $modal->header_close )
-                <div id='modal-header-close' class="mt-1">
+                <div id='modal-header-close' class="mt-1 ps-3">
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 @endif
