@@ -6,10 +6,10 @@
 
 try
 {
-    // window.$ = window.jQuery = require('jquery');
-    window.Popper = require('@popperjs/core').default;
+    // window.Popper = require('@popperjs/core').default;
     // window.Popper = require('popper.js').default;
-    require('bootstrap')
+    // window.$ = window.jQuery = require('jquery');
+    // require('bootstrap')
 } 
 catch (e)
 {

@@ -1,4 +1,5 @@
 // Requires for App
-require('./libs/settings');
-require('./libs/customs');
 require('./bootstrap');
+require('./libs/settings');
+// require('./libs/bootstrap-ui');
+require('./libs/customs');
