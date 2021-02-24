@@ -59,9 +59,11 @@ $modal = (object) array(
         <div class="modal-content {{ $modal->classes }}">
             
             @if( $modal->has_header )
-            <div class="modal-header border-0 align-items-start {{ $modal->header_classes }}">
-                <div id='modal-header-content' style="overflow:auto">
-                    <h5 class="modal-title" id="{{ $modal->id }}-label">{{ $modal->header_title }}</h5>
+            <div class="modal-header border-0 {{ $modal->header_classes }}">
+                <div id='modal-header-content'>
+                    <h5 class="modal-title text-break" id="{{ $modal->id }}-label">
+                        {{ $modal->header_title }}
+                    </h5>
                     @if( $modal->header_subtitle )
                     <h6 class="text-muted">{{ $modal->header_subtitle }}</h6>
                     @endif

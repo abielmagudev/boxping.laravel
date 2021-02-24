@@ -15,12 +15,14 @@ $header = (object) array(
 
 <div class="row align-items-center">
     @if( $header->has_heading )
-    <div class="col-8 overflow-auto">
+    <div class="col-8">
         @if( $header->pretitle )
         <small class="d-block small text-muted">{{ $header->pretitle }}</small>
         @endif
 
-        <span>{!! $header->title !!}</span>
+        <div class="w-100 overflow-auto">
+            <span>{!! $header->title !!}</span>
+        </div>
 
         @if( $header->subtitle )
         <small class="d-block small text-muted">{{ $header->subtitle }}</small>

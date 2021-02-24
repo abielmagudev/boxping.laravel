@@ -59,7 +59,7 @@ $card = (object) array(
 
         @if( $card->has_header_nav )
         <!-- Header nav -->
-            <ul class="nav flex-nowrap overflow-auto mt-3 pt-1 px-1 {{ $card->header_nav_type }}">
+            <ul class="nav flex-nowrap overflow-auto mt-3 px-1 {{ $card->header_nav_type }}" style="height:40px">
                 @foreach($card->header_nav as $item)
                 <li class="nav-item">
                     {!! $item !!}
