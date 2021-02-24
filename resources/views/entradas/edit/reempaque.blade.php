@@ -1,9 +1,8 @@
-<div class="form-group">
-    <label for="read-entrada-numero" class="small">Número de entrada</label>
-    <div class="form-control bg-light">{{ $entrada->alias_numero ?? $entrada->numero }}</div>
+<div class="text-muted small mb-4">
+    <div class="">Entrada <br> {{ $entrada->alias_numero ?? $entrada->numero }}</div>
 </div>
-<div class="form-group">
-    <label for="select-codigo-reempacado" class="small">Código de reempacado</label>
+<div class="mb-3">
+    <label for="select-codigo-reempacado" class="form-label small">Código de reempacado</label>
     <select name="codigo_reempacado" id="select-codigo-reempacado" class="form-control">
         <option disabled selected></option>
         @foreach($codigosr as $codigor)
@@ -11,8 +10,8 @@
         @endforeach
     </select>
 </div>
-<div class="form-group">
-    <label for="select-reempacador" class="small">Reempacador</label>
+<div class="mb-3">
+    <label for="select-reempacador" class="form-label small">Reempacador</label>
     <select name="reempacador" id="select-reempacador" class="form-control">
         <option disabled selected></option>
         @foreach($reempacadores as $reempacador)
@@ -20,9 +19,9 @@
         @endforeach
     </select>
 </div>
-<div class="form-group">
-    <label class="small">Fecha y hora</label>
-    <div class="form-row">
+<div class="mb-3">
+    <label class="form-label small">Fecha y hora</label>
+    <div class="row">
         <div class="col-sm">
             <input name="reempacado_fecha" value="{{ old('reempacado_fecha', $entrada->reempacado_fecha) }}" type="date" class="form-control">
         </div>

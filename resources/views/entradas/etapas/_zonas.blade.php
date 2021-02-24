@@ -1,8 +1,6 @@
 @if( $etapa->zonas->count() )
-<div class="form-group">
-    <label for="select-zonas">
-        <small>Zonas</small>
-    </label>
+<div class="mb-3">
+    <label for="select-zonas" class="form-label small">Zonas</label>
     <select name="zona" id="select-zonas" class="form-control">
         <option disabled selected></option>
         <?php $zona_pivot = $etapa->pivot->zona_id ?? null ?>

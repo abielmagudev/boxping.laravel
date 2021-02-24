@@ -1,9 +1,9 @@
-<div class="form-group">
-    <label for="read-consolidado-numero" class="small">Número de consolidado</label>
+<div class="mb-3">
+    <label for="read-consolidado-numero" class="form-label small">Número de consolidado</label>
     <div class="form-control bg-light">Sin consolidar</div>
 </div>
-<div class="form-group">
-    <label for="select-cliente" class="small">Cliente</label>
+<div class="mb-1">
+    <label for="select-cliente" class="form-label small">Cliente</label>
     <select name="cliente" id="select-cliente" class="form-control" required>
         <option disabled selected></option>
         @foreach($clientes as $cliente)

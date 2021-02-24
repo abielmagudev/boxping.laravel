@@ -8,8 +8,8 @@ use App\Comentario;
 use App\EntradaEtapa;
 use App\EntradaEtapaPivot;
 
-use App\Ahex\Entrada\Application\CastSaveForm;
 use App\Ahex\Entrada\Domain\UpdaterFactory;
+use App\Ahex\Entrada\Application\CastSaveForm;
 use App\Ahex\Entrada\Application\RoutingTrait as Routing;
 use App\Ahex\Entrada\Application\TrayectoriaTrait as Trayectoria;
 use App\Http\Requests\EntradaCreateRequest as CreateRequest;

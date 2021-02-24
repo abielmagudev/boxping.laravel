@@ -1,8 +1,6 @@
 @if( $alertas->count() )
-<div class="form-group">
-    <label>
-        <small>Alertas</small>
-    </label>
+<div class="mb-3">
+    <label class="form-label small">Alertas</label>
     <div class="border rounded p-3">
     @foreach($alertas as $alerta)
     <div class="form-check">

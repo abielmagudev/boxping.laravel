@@ -1,46 +1,46 @@
 @extends('app')
 @section('content')
-<div class="card">
-    <div class="card-header">Editar etapa</div>
-    <div class="card-body">
-        <!-- Entrada -->
-        <div class="form-group">
-            <label for="">
-                <small>Entrada</small>
-            </label>
-            <div class="form-control bg-light">{{ $entrada->numero }}</div>
-        </div>
 
-        <!-- Etapa -->
-        <div class="form-group">
-            <label for="">
-                <small>Etapa</small>
-            </label>
-            <div class="form-control bg-light">{{ $etapa->nombre }}</div>
-        </div>
-        
-        <!-- Mediciones, zonas, alertas -->
-        <form action="{{ route('entrada.etapas.update', [$entrada, $etapa]) }}" method="post" autocomplete="off">
-            @method('patch')
-            @csrf
-            @include('entradas.etapas._medidas')
-            @include('entradas.etapas._zonas')
-            @include('entradas.etapas._alertas')
-            <br>
-            <button class="btn btn-warning" type="submit" name="etapa" value="{{ $etapa->id }}">Actualizar etapa</button>
-            <a href="{{ route('entradas.show', $entrada) }}" class="btn btn-secondary">Regresar</a>
-        </form>
+@component('components.header', [
+    'title' => $entrada->numero,
+    'subtitle' => 'Entrada',
+])
+@endcomponent
+
+@component('components.card', [
+    'header_title' => 'Editar etapa'
+])
+    @slot('body')
+    <div class="mb-3">
+        <label class="form-label small">Etapa</label>
+        <div class="form-control bg-light">{{ $etapa->nombre }}</div>
     </div>
-</div>
-<br>
-<div class="float-right">
-    @component('components.modal-confirm-delete-bundle')
-        @slot('text', 'Eliminar etapa')
-        @slot('route', route('entrada.etapas.destroy', [$entrada, $etapa]))
-        @slot('content')
-        <p class="lead text-center m-0">Deseas eliminar etapa <b>{{ $etapa->nombre }}</b> de la entrada?</p>
+
+    <form action="{{ route('entrada.etapas.update', [$entrada, $etapa]) }}" method="post" autocomplete="off">
+        @method('patch')
+        @csrf
+        @include('entradas.etapas._medidas')
+        @include('entradas.etapas._zonas')
+        @include('entradas.etapas._alertas')
+        <br>
+        <button class="btn btn-warning" type="submit" name="etapa" value="{{ $etapa->id }}">Actualizar etapa</button>
+        <a href="{{ route('entradas.show', $entrada) }}" class="btn btn-secondary">Regresar</a>
+    </form>
+    @endslot
+
+    @slot('footer')
+    @component('partials.modal-confirm-delete', [
+        'route' => route('entrada.etapas.destroy', [$entrada, $etapa]),
+        'trigger_align' => 'right',
+        'trigger_text' => 'Eliminar etapa',
+    ])
+        @slot('body')
+        <p>Se eliminará la etapa <span class="fw-bold">{{ $etapa->nombre }}</span> <br> de la entrada <span class="fw-bold">{{ $entrada->numero }}</span></p>
         @endslot
     @endcomponent
-</div>
+    @endslot
+    
+@endcomponent
 <br>
+
 @endsection
