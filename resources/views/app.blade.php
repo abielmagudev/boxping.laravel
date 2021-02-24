@@ -21,7 +21,6 @@
             </div>
         </div>
     </div>
-    <br>
-    <script src="{{ asset('js/app.js') }}"></script>
+    @include('layout.scripts')
 </body>
 </html>
