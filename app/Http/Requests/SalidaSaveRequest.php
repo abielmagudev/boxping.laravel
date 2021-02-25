@@ -36,20 +36,20 @@ class SalidaSaveRequest extends FormRequest
             'pais'           => ['nullable','required_if:cobertura,ocurre'],
         ];
 
-        if( $this->isMethod('post') )
-        {
-            $rules = array_merge([
-                'entrada' => ['bail','exists:entradas,id','unique:salidas,entrada_id']
-            ], $rules);
-        }
-
-        if( in_array($this->method(), ['put', 'patch']) )
+        if( in_array($this->method(), ['put','PUT','patch','PATCH']) )
         {
             $rules = array_merge($rules, [
                 'status'     => ['required','in:'.implode(',',$this->status)],
                 'incidentes' => ['nullable','array'],
                 'notas'      => 'nullable',
             ]);
+        }
+
+        if( $this->isMethod('post') )
+        {
+            $rules = array_merge([
+                'entrada' => ['bail','exists:entradas,id','unique:salidas,entrada_id']
+            ], $rules);
         }
 
         return $rules;

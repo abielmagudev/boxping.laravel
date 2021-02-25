@@ -42,12 +42,13 @@ class SalidaController extends Controller
         // if( $request->has('incidentes') )
         //     $salida->incidentes()->sync( $request->incidentes );
 
-        return redirect()->route('salidas.index')->with('success','Salida guardada');
+        return redirect()->route('entradas.show', $salida->entrada_id)->with('success','Salida guardada');
     }
 
     public function show(Salida $salida)
     {
-        return view('salidas.show')->with('salida', $salida);
+        return redirect()->route('entradas.show', $salida->entrada_id);
+       // return view('salidas.show')->with('salida', $salida);
     }
 
     public function edit(Salida $salida)
@@ -71,7 +72,7 @@ class SalidaController extends Controller
         if( $request->has('incidentes') )
             $salida->incidentes()->sync( $request->incidentes );
         
-            return back()->with('success', 'Salida actualizada');
+        return back()->with('success', 'Salida actualizada');
     }
 
     public function destroy(Salida $salida)
@@ -79,7 +80,7 @@ class SalidaController extends Controller
         if( ! $salida->delete() )
             return back()->with('failure', 'Error al eliminar salida');
 
-        $rastreo = $salida->rastreo ?? 'Salida sin rastreo';
-        return redirect()->route('salidas.index')->with('success', "{$rastreo} eliminado");
+        $rastreo = "con número de rastreo {$salida->rastreo}" ?? 'sin número de rastreo';
+        return redirect()->route('entradas.show', $salida->entrada_id)->with('success', "Salida {$rastreo} eliminado");
     }
 }
