@@ -1,69 +1,60 @@
 @extends('app')
 @section('content')
-@include('components.notification')
 
-<div class="d-flex justify-content-between align-items-center">
-   <div>
-      <button data-toggle="modal" data-target="#searchDestinatarios" type="button" class="btn btn-primary btn-sm">Buscar destinatario</button>
-   </div>
-   <div>
-      <a href="{{ route('destinatarios.create', ['entrada' => $entrada->id]) }}" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="left" title="Nuevo destinatario">
-         <b>+</b>
-      </a>
-   </div>
-</div>
-<br>
+<p class="text-end">
+   <a href="{{ route('entradas.show', $entrada) }}" class="btn btn-sm btn-secondary">Regresar</a>
+</p>
 
-<div class="card">
-   <div class="card-header">
-         <span>Destinatarios</span>
-         <span class="badge badge-primary">{{ $destinatarios->count() }}</span>
-   </div>
-   <div class="card-body p-0">
-      @if( $destinatarios->count() )
-      <div class="table-responsive">
-         <table class="table table-hover">
-            <thead>
-               <tr class="small">
-                  <th>Nombre</th>
-                  <th>Dirección</th>
-                  <th class="text-nowrap">Código postal</th>
-                  <th>Localidad</th>
-                  <th>Teléfono</th>
-                  <th></th>
-               </tr>
-            </thead>
-            <tbody>
-            @foreach($destinatarios as $destinatario)
-            <tr>
-               <td class="align-middle">{{ $destinatario->nombre }}</td>
-               <td class="align-middle">{{ $destinatario->direccion }}</td>
-               <td class="align-middle">{{ $destinatario->codigo_postal }}</td>
-               <td class="align-middle">{{ $destinatario->localidad }}</td>
-               <td class="align-middle">{{ $destinatario->telefono }}</td>
-               <td class="align-middle text-right">
-                  <button name="destinatario" value="{{ $destinatario->id }}" class="btn btn-outline-success btn-sm" form="form-update-destinatario" type="submit">Agregar</button>
-               </td>
-            </tr>
-            @endforeach
-            </tbody>
-         </table>
-      </div>
-      <form action="{{ route('entradas.update', $entrada) }}" method="post" id="form-update-destinatario">
-         @method('put')
-         @csrf
-         <input type="hidden" name="actualizar" value="destinatario">
-      </form>
+@component('components.card', [
+   'header_title' => 'Destinatarios encontrados',
+   'header_title_badge' => $destinatarios->count(),
+])
+   @slot('header_options')
+   <button data-bs-toggle="modal" data-bs-target="#modal-search-destinatarios" type="button" class="btn btn-primary btn-sm">
+      {!! $icons->search !!}
+   </button>
+   <a href="{{ route('destinatarios.create', ['entrada' => $entrada->id]) }}" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="left" title="Nuevo destinatario">
+      <span>{!! $icons->plus !!}</span>
+   </a>
+   @endslot
 
-      @else
-      <div class="text-center py-5 px-3">
-         <p class="h3">Sin resultados</p>
-         <p class="text-muted">Intenta buscar nuevamente o crea un nuevo destinatario.</p>
-      </div>
+   @slot('body')
+   @if( $destinatarios->count() )
 
-      @endif
-   </div>
-</div>
+   @component('components.table', [
+      'thead' => ['Nombre', 'Dirección','Postal', 'Localidad', 'Teléfono',''],
+   ])
+      @slot('tbody')
+         @foreach($destinatarios as $destinatario)
+         <tr>
+            <td class="">{{ $destinatario->nombre }}</td>
+            <td class="">{{ $destinatario->direccion }}</td>
+            <td class="">{{ $destinatario->codigo_postal }}</td>
+            <td class="">{{ $destinatario->localidad }}</td>
+            <td class="">{{ $destinatario->telefono }}</td>
+            <td class="text-end">
+               <button name="destinatario" value="{{ $destinatario->id }}" class="btn btn-success btn-sm" form="form-update-destinatario" type="submit">Agregar</button>
+            </td>
+         </tr>
+         @endforeach
+      @endslot
+   @endcomponent
+
+   <form action="{{ route('entradas.update', $entrada) }}" method="post" id="form-update-destinatario">
+      @method('put')
+      @csrf
+      <input type="hidden" name="actualizar" value="destinatario">
+   </form>
+   
+   @else
+   <p class="text-center lead">
+      <span class="text-muted">Sin resultados de</span>
+      <b class="">{{ $searched }}</b>
+   </p>
+
+   @endif
+   @endslot
+@endcomponent
 
 @include('entradas.trayectoria.modal-search-destinatarios')
 @endsection

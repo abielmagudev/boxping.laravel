@@ -18,7 +18,7 @@
     <br>
 
     <div class="text-end">
-        <button data-toggle="modal" data-target="#searchRemitentes" type="button" class="btn btn-outline-primary btn-sm">
+        <button data-bs-toggle="modal" data-bs-target="#modal-search-remitentes" type="button" class="btn btn-outline-primary btn-sm">
             <span>Cambiar remitente</span>
         </button>
         <a href="{{ route('remitentes.edit', ['remitente' => $entrada->remitente->id, 'entrada' => $entrada->id]) }}" class="btn btn-warning btn-sm" data-toggle="tooltip" data-placement="left" title="Editar remitente">
@@ -28,7 +28,7 @@
 
     @else
     <p class="text-center mt-5">
-        <button type="button" data-toggle="modal" data-target="#searchRemitentes" class="btn btn-primary btn-lg">Agregar remitente</button>
+        <button type="button" data-bs-toggle="modal" data-bs-target="#modal-search-remitentes" class="btn btn-primary btn-lg">Agregar remitente</button>
     </p>
 
     @endif

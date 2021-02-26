@@ -15,6 +15,7 @@ trait TrayectoriaTrait
         return view('entradas.trayectoria.agregar_remitente',[
             'entrada' => $entrada,
             'remitentes' => $request->filled('search') ? Remitente::search( $request->search ) : null,
+            'searched' => $request->input('search', '...'),
         ]);
     }
 
@@ -23,6 +24,7 @@ trait TrayectoriaTrait
         return view('entradas.trayectoria.agregar_destinatario',[
             'entrada' => $entrada,
             'destinatarios' => $request->filled('search') ? Destinatario::search( $request->search ) : null,
+            'searched' => $request->input('search', '...'),
         ]);
     }
 }

@@ -19,7 +19,7 @@
 
     <p>
         <small class="d-block text-muted">Contenido</small>
-        <span>{{ $entrada->contenido }}</span>
+        <span>{{ $entrada->contenido ?? 'Desconocido' }}</span>
     </p>
 
     <p>
