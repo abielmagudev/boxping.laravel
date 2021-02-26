@@ -74,6 +74,6 @@ class RemitenteController extends Controller
         if(! $remitente->delete() )
             return back()->with('failure', 'Error al eliminar remitente');
 
-        return redirect()->route('remitentes.index')->with('success', 'Remitente eliminado');
+        return redirect()->route('remitentes.index')->with('success', "Remitente {$remitente->nombre} eliminado");
     }
 }

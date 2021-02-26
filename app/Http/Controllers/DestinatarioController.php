@@ -74,6 +74,6 @@ class DestinatarioController extends Controller
         if(! $destinatario->delete() )
             return back()->with('failure', 'Error al eliminar destinatario');
         
-        return redirect()->route('destinatarios.index')->with('success', 'Destinatario eliminado');
+        return redirect()->route('destinatarios.index')->with('success', "Destinatario {$destinatario->nombre} eliminado");
     }
 }
