@@ -11,10 +11,11 @@
     </form>
     @endslot
     @slot('footer')
-        @component('partials.modal-confirm-delete')
-            @slot('route', route('consolidados.destroy', $consolidado))
-            @slot('trigger_text', 'Eliminar consolidado')
-            @slot('trigger_align', 'right')
+        @component('partials.modal-confirm-delete', [
+            'route' => route('consolidados.destroy', $consolidado),
+            'trigger_align' => 'right',
+            'trigger_text' => 'Eliminar consolidado',
+        ])
             @slot('body')
             <p class="text-center">
                 <span>Se eliminará consolidado</span>
