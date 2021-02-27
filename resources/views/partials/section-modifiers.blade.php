@@ -1,36 +1,40 @@
 <?php 
 
+$modifiers = [
+    'creator',
+    'updater',
+];
+
+$has_concept = isset($concept) && is_object($concept);
+$has_only = isset($only) && in_array($only, $modifiers);
+
 $info = (object) array(
-    'has_creator' => isset($created_by) || isset($created_at),
-    'created_by'  => isset($created_by) ? (string) $created_by : null,
-    'created_at'  => isset($created_at) ? (string) $created_at : null,
-    'has_updater' => isset($updated_by) || isset($updated_at),
-    'updated_by'  => isset($updated_by) ? (string) $updated_by : null,
-    'updated_at'  => isset($updated_at) ? (string) $updated_at : null,
+    'has_concept' => $has_concept,
+    'concept'     => $has_concept ? $concept : false,
+    'has_only'    => $has_only,
+    'only'        => $has_only ? [$only] : $modifiers,
 );
 
 ?>
 
-<section class="row rounded my-3 mx-1 text-black-50 small" style="background:rgba(0,0,0,0.02)">
-    @if( $info->has_updater )
-    <div class="col-sm p-3">
-        <span class="d-block text-capitalize">{{ $info->updated_by }}</span>
-        <span class="d-block">{{ $info->updated_at }}</span>
-        <small class="text-uppercase">Actualizado</small>
+<section class="row rounded my-3 mx-1 p-5" style="background:rgba(0,0,0,0.02)">
+    @if( in_array('creator', $info->only) )
+    <div class="col-sm text-center text-md-end">
+        <small class="d-block text-black-50">Actualizado</small>
+        <span class="d-block text-capitalize">{{ $info->concept->updater->name }}</span>
+        <span class="">{{ $info->concept->updated_at }}</span>
     </div>
     @endif
 
-    @if( $info->has_updater && $info->has_creator )
     <div class="col-sm d-md-none">
-        <hr class="my-1">
+        <hr class="my-4">
     </div>
-    @endif
 
-    @if( $info->has_creator )
-    <div class="col-sm p-3">
-        <span class="d-block text-capitalize">{{ $info->created_by }}</span>
-        <span class="d-block">{{ $info->created_at }}</span>
-        <small class="text-uppercase">Creado</small>
+    @if( in_array('updater', $info->only) )
+    <div class="col-sm text-center text-md-start">
+        <small class="d-block text-black-50">Creado</small>
+        <span class="d-block text-capitalize">{{ $info->concept->creator->name }}</span>
+        <span class="">{{ $info->concept->created_at }}</span>
     </div>
     @endif
 </section>
