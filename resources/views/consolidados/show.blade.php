@@ -30,11 +30,11 @@
                 </tr>
                 <tr>
                     <td class="text-muted small">Cliente</td>
-                    <td>{{ $consolidado->cliente->nombre }}</td>
+                    <td>{{ $consolidado->cliente_id ? "{$consolidado->cliente->nombre} ({$consolidado->cliente->alias})" : 'Ninguno' }}</td>
                 </tr>
-                <tr>
-                    <td class="text-muted small">Tarimas</td>
-                    <td>{{ $consolidado->tarimas }}</td>
+                <tr class="">
+                    <td class="text-muted small border-0">Tarimas</td>
+                    <td class="border-0">{{ $consolidado->tarimas }}</td>
                 </tr>
                 @endslot
             @endcomponent

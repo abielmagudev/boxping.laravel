@@ -39,7 +39,7 @@
                 </span>
             </td>
             <td class="min-width:288px">{{ $consolidado->numero }}</td>
-            <td>{{ $consolidado->cliente->nombre }}</td>
+            <td>{{ $consolidado->cliente_id ? "{$consolidado->cliente->nombre}" : '<small>Ninguno</small>' }}</td>
             <td>{{ $consolidado->tarimas }}</td>
             <td>{{ $consolidado->entradas->count() }}</td>
             <td class="text-nowrap text-end">
