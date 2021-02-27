@@ -39,4 +39,5 @@ $info = (object) array(
     </div>
     @endif
 </section>
+<br>
 @endif
