@@ -17,6 +17,7 @@ $info = (object) array(
 
 ?>
 
+@if( $info->has_concept )
 <section class="row rounded my-3 mx-1 p-5" style="background:rgba(0,0,0,0.02)">
     @if( in_array('creator', $info->only) )
     <div class="col-sm text-center text-md-end">
@@ -38,3 +39,4 @@ $info = (object) array(
     </div>
     @endif
 </section>
+@endif
