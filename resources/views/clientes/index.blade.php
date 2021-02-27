@@ -2,7 +2,7 @@
 @section('content')
 
 @component('components.card', [
-    'header_title' => 'Nuevo cliente',
+    'header_title' => 'Clientes',
     'header_title_badge' => $clientes->count(),
 ])
     @slot('header_options')
