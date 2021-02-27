@@ -19,7 +19,7 @@ $info = (object) array(
 
 @if( $info->has_concept )
 <section class="row rounded my-3 mx-1 p-5" style="background:rgba(0,0,0,0.02)">
-    @if( in_array('creator', $info->only) )
+    @if( in_array('updater', $info->only) )
     <div class="col-sm text-center text-md-end">
         <small class="d-block text-black-50">Actualizado</small>
         <span class="d-block text-capitalize">{{ $info->concept->updater->name ?? 'Desconocido' }}</span>
@@ -31,7 +31,7 @@ $info = (object) array(
         <hr class="my-4">
     </div>
 
-    @if( in_array('updater', $info->only) )
+    @if( in_array('creator', $info->only) )
     <div class="col-sm text-center text-md-start">
         <small class="d-block text-black-50">Creado</small>
         <span class="d-block text-capitalize">{{ $info->concept->creator->name ?? 'Desconocido' }}</span>
