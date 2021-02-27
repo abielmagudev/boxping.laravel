@@ -22,7 +22,7 @@ $info = (object) array(
     @if( in_array('creator', $info->only) )
     <div class="col-sm text-center text-md-end">
         <small class="d-block text-black-50">Actualizado</small>
-        <span class="d-block text-capitalize">{{ $info->concept->updater->name }}</span>
+        <span class="d-block text-capitalize">{{ $info->concept->updater->name ?? 'Desconocido' }}</span>
         <span class="">{{ $info->concept->updated_at }}</span>
     </div>
     @endif
@@ -34,7 +34,7 @@ $info = (object) array(
     @if( in_array('updater', $info->only) )
     <div class="col-sm text-center text-md-start">
         <small class="d-block text-black-50">Creado</small>
-        <span class="d-block text-capitalize">{{ $info->concept->creator->name }}</span>
+        <span class="d-block text-capitalize">{{ $info->concept->creator->name ?? 'Desconocido' }}</span>
         <span class="">{{ $info->concept->created_at }}</span>
     </div>
     @endif
