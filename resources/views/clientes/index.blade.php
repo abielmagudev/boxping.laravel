@@ -1,46 +1,36 @@
 @extends('app')
 @section('content')
-<div class="card">
-    @component('components.card-header-with-link', [
-        'tooltip' => 'Nuevo cliente',
-        'link' => route('clientes.create'),
-    ])
-        @slot('title')
-        <span>Clientes</span>
-        <span class="badge badge-primary">{{ $clientes->count() }}</span>
-        @endslot
 
-        @slot('content')
-        <b>+</b>
+@component('components.card', [
+    'header_title' => 'Nuevo cliente',
+    'header_title_badge' => $clientes->count(),
+])
+    @slot('header_options')
+    <a href="{{ route('clientes.create') }}" class="btn btn-sm btn-outline-primary">Nuevo cliente</a>
+    @endslot
+
+    @slot('body')
+    @component('components.table', [
+        'thead' => ['Nombre','Alias','Contacto','Correo electrónico','Teléfono',''],
+    ])
+        @slot('tbody')
+        @foreach($clientes as $cliente)
+        <tr>
+            <td class="text-nowrap">{{ $cliente->nombre }}</td>
+            <td>{{ $cliente->alias }}</td>
+            <td class="text-nowrap">{{ $cliente->contacto }}</td>
+            <td class="text-nowrap">{{ $cliente->correo_electronico }}</td>
+            <td class="text-nowrap">{{ $cliente->telefono }}</td>
+            <td class="text-end">
+                <a href="{{ route('clientes.show', $cliente) }}" class="btn btn-sm btn-primary">
+                    {!! $icons->eye !!}
+                </a>
+            </td>
+        </tr>
+        @endforeach
         @endslot
     @endcomponent
-    <div class="card-body p-0">
-        <div class="table-responsive">
-            <table class="table table-hover">
-                <thead class="small">
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Alias</th>
-                        <th>Contacto</th>
-                        <th>Correo electrónico</th>
-                        <th>Teléfono</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($clientes as $cliente)
-                    <tr>
-                        <td>
-                            <a href="{{ route('clientes.show', $cliente) }}">{{ $cliente->nombre }}</a>
-                        </td>
-                        <td>{{ $cliente->alias }}</td>
-                        <td>{{ $cliente->contacto }}</td>
-                        <td>{{ $cliente->correo_electronico }}</td>
-                        <td>{{ $cliente->telefono }}</td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
+    @endslot
+@endcomponent
+
 @endsection
