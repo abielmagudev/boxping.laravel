@@ -28,7 +28,7 @@ class Consolidado extends Model implements Search
 
     public function cliente()
     {
-        return $this->belongsTo(Cliente::class);
+        return $this->belongsTo(Cliente::class)->withTrashed();
     }
 
     public function scopeIsAbierto($query, $value, $column = 'numero')
