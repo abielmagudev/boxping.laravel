@@ -63,6 +63,6 @@ class CodigorController extends Controller
         if(! $codigor->delete() )
             return back()->with('failure', 'Error al eliminar código de reempacado');
 
-        return redirect()->route('reempaque.index')->with('success', "{$codigor->nombre} eliminado");
+        return redirect()->route('reempaque.index')->with('success', "Código {$codigor->nombre} eliminado");
     }
 }
