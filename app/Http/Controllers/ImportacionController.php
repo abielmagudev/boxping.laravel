@@ -12,8 +12,8 @@ class ImportacionController extends Controller
     public function index()
     {
         return view('importacion.index', [
-            'vehiculos' => Vehiculo::all(),
-            'conductores' => Conductor::all(),
+            'vehiculos' => Vehiculo::all()->sortByDesc('id'),
+            'conductores' => Conductor::all()->sortByDesc('id'),
         ]);
     }
 }

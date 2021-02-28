@@ -29,7 +29,7 @@ class VehiculoController extends Controller
         if(! $vehiculo = Vehiculo::create($prepared) )
             return back()->with('failure', 'Error al guardar vehículo');
 
-        return redirect()->route('vehiculos.index')->with('success', 'Vehículo guardado');
+        return redirect()->route('importacion.index')->with('success', 'Vehículo guardado');
     }
 
     public function show(Vehiculo $vehiculo)
