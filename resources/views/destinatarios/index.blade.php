@@ -1,51 +1,40 @@
 @extends('app')
 @section('content')
-<div class="card">
-    @component('components.card-header-with-link', [
-        'tooltip' => 'Nuevo destinatario',
-        'link' => route('destinatarios.create'),
-    ])
-        @slot('title')
-        <span>Destinatarios</span>
-        <span class="badge badge-primary">{{ $destinatarios->total() }}</span>
-        @endslot
+@component('components.card', [
+    'header_title' => 'Destinatarios',
+    'header_title_badge' => $destinatarios->total(),
+])
+    @slot('header_options')
+    <a href="{{ route('destinatarios.create') }}" class="btn btn-sm btn-outline-primary">Nuevo destinatario</a>
+    @endslot
 
-        @slot('content')
-        <b>+</b>
+    @slot('body')
+    @component('components.table', [
+        'thead' => ['Nombre','Dirección','Postal','Localidad']
+    ])
+        @slot('tbody')
+        @foreach($destinatarios as $destinatario)
+        <tr>
+            <td class="text-nowrap">{{ $destinatario->nombre }}</td>
+            <td class="text-nowrap">{{ $destinatario->direccion }}</td>
+            <td class="text-nowrap">{{ $destinatario->codigo_postal }}</td>
+            <td class="text-nowrap">{{ $destinatario->localidad }}</td>
+            <td class="text-nowrap text-end">
+                <a href="{{ route('destinatarios.show', $destinatario) }}" class="btn btn-sm btn-primary">
+                    {!! $icons->eye !!}
+                </a>
+            </td>
+        </tr>
+        @endforeach
         @endslot
     @endcomponent
-    <div class="card-body p-0">
-        <div class="table-responsive">
-            <table class="table table-hover">
-                <thead>
-                    <tr class="small">
-                        <th>Nombre</th>
-                        <th>Dirección</th>
-                        <th class="text-nowrap">Código postal</th>
-                        <th>Localidad</th>
-                        <th>Teléfono</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($destinatarios as $destinatario)
-                    <tr>
-                        <td class="align-middle">
-                            <a href="{{ route('destinatarios.show', $destinatario) }}">{{ $destinatario->nombre }}</a>
-                        </td>
-                        <td class="align-middle">{{ $destinatario->direccion }}</td>
-                        <td class="align-middle">{{ $destinatario->codigo_postal }}</td>
-                        <td class="align-middle">{{ $destinatario->localidad }}</td>
-                        <td class="align-middle">{{ $destinatario->telefono }}</td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
+    @endslot
+@endcomponent
 <br>
+
 @component('components.pagination-simple')
     @slot('collection', $destinatarios)
 @endcomponent
 <br>
+
 @endsection

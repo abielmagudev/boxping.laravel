@@ -9,7 +9,7 @@
     <form action="{{ $route }}" method="post" autocomplete="off">
         @include('remitentes._save')
         <button type="submit" class="btn btn-success">Guardar remitente</button>
-        <a href="{{ $goback }}" class="btn btn-secondary">Cancelar</a>
+        <a href="{{ $goback }}" class="btn btn-outline-secondary">Cancelar</a>
     </form>
     @endslot
 @endcomponent

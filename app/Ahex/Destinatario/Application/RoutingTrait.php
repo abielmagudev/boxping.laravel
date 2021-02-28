@@ -12,13 +12,13 @@ Trait RoutingTrait
         if( is_numeric($destinatario_id) )
             return route('destinatarios.show', $destinatario_id);
 
-        return route('destinatarios.index');
+        return route('trayectoria.index');
     }
 
     private function routeAfterStore($entrada_id, $destinatario_value)
     {
-        if(! $entrada_id )
-            return route('destinatarios.index');
+        if( ! $entrada_id )
+            return route('trayectoria.index');
 
         return route('entradas.agregar.destinatario', [
             'entrada' => $entrada_id,

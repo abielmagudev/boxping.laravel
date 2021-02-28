@@ -40,6 +40,11 @@ $menu = array(
         'route' => route('reempaque.index'),
         'active' => false,
     ],
+    (object) [
+        'title' => 'trayectoria',
+        'route' => route('trayectoria.index'),
+        'active' => false,
+    ],
 );
 ?>
 
