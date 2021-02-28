@@ -65,10 +65,6 @@
                 @endslot
             @endcomponent
 
-            @else
-            <br>
-            <p class="text-center text-muted">Sin zonas</p>
-
             @endif
             @endslot
         @endcomponent     
