@@ -21,6 +21,7 @@ $card = (object) array(
     'header_nav_type' => isset($header_nav_type, $header_nav_types[$header_nav_type]) ? $header_nav_types[$header_nav_type] : $header_nav_types['pills'],
     'has_body'       => isset($body),
     'body_classes'   => isset($body_classes) ? strval($body_classes) : null,
+    'body_centered'  => isset($body_centered) && $body_centered === true ? 'd-flex align-items-center justify-content-center' : null,
     'body'           => isset($body) ? $body : false,
     'has_footer'     => isset($footer),
     'footer_classes' => isset($footer_classes) ? strval($footer_classes) : null,
@@ -72,7 +73,7 @@ $card = (object) array(
     @endif
 
     @if( $card->has_body )
-    <div class="card-body {{ $card->body_classes }}">{{ $card->body }}</div>
+    <div class="card-body {{ $card->body_classes }} {{ $card->body_centered }}">{{ $card->body }}</div>
     @endif
 
     @if( $card->has_footer )
