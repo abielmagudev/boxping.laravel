@@ -29,7 +29,7 @@ class CodigorController extends Controller
         if(! $codigor = Codigor::create($prepared) )
             return back()->with('failire', 'Error al guardar código de reempacado');
 
-        return redirect()->route('codigosr.index')->with('success', 'Código de reempacado guardado');
+        return redirect()->route('reempaque.index')->with('success', 'Código de reempacado guardado');
     }
 
     public function show(Codigor $codigor)
@@ -63,6 +63,6 @@ class CodigorController extends Controller
         if(! $codigor->delete() )
             return back()->with('failure', 'Error al eliminar código de reempacado');
 
-        return redirect()->route('codigosr.index')->with('success', "{$codigor->nombre} eliminado");
+        return redirect()->route('reempaque.index')->with('success', "{$codigor->nombre} eliminado");
     }
 }
