@@ -62,3 +62,7 @@ Route::prefix('etapas')->group( function () {
 
 // Importacion: vehiculos, conductores
 Route::get('importacion', 'ImportacionController@index')->name('importacion.index');
+// Reemapque: codigos de reempacado, reempacadores
+Route::get('reempaque', 'ReempaqueController@index')->name('reempaque.index');
+// Importacion: remitentes, destinatarios
+Route::get('trayectoria', 'TrayectoriaController@index')->name('trayectoria.index');

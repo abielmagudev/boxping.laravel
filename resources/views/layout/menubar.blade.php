@@ -35,6 +35,11 @@ $menu = array(
         'route' => route('importacion.index'),
         'active' => false,
     ],
+    (object) [
+        'title' => 'reempaque',
+        'route' => route('reempaque.index'),
+        'active' => false,
+    ],
 );
 ?>
 
