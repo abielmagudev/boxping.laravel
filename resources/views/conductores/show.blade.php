@@ -4,10 +4,8 @@
 @component('components.header', [
     'title' => $conductor->nombre,
     'subtitle' => 'Conductor',
+    'goback' => route('importacion.index'),
 ])
-    @slot('options')
-    <a href="{{ route('importacion.index') }}" class="btn btn-sm btn-secondary">Regresar</a>
-    @endslot
 @endcomponent
 
 @component('components.card', [

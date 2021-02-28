@@ -1,7 +1,7 @@
 @extends('app')
 @section('content')
 
-@component('partials.header-show', [
+@component('components.header', [
     'title' => $vehiculo->alias,
     'subtitle' => 'Vehículo',
     'goback' => route('importacion.index'),
@@ -15,8 +15,8 @@
             @slot('body_classes', 'd-flex align-items-center justify-content-center')
             @slot('body')
             <div class="text-center">
-                <p class="small m-0">ENTRADAS</p>
-                <p class="display-4 m-0">{{ $entradas->count() }}</p>
+                <p class="m-0">ENTRADAS</p>
+                <a class="display-4 text-decoration-none m-0" href="#!">{{ $entradas->count() }}</a>
             </div>
             @endslot
         @endcomponent
@@ -28,6 +28,7 @@
             @slot('body')
                 @component('components.table', [
                         'border' => 'less',
+                        'hover' => false,
                         'size'   => 'small',
                         'classes' => 'm-0'
                     ])
@@ -47,7 +48,9 @@
 </div>
 <br>
 
-@component('components.card')
+@component('components.card', [
+    'header_title' => 'Últimas entradas',
+])
     @slot('body')
         @component('partials.table-summary-entradas', ['entradas' => $entradas])
         @endcomponent  

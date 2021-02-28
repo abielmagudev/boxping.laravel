@@ -47,18 +47,14 @@
             'header_title' => 'Resúmen',
         ])
             @slot('body')
-            <div class="d-flex justify-content-around align-items-center text-center">
-                <div>
+            <div class="row align-items-center text-center">
+                <div class="col">
                     <p class="small mb-1">CONSOLIDADOS</p>
-                    <p class="display-6">
-                        <a href="#!" class="text-decoration-none">{{ $cliente->consolidados->count() }}</a>
-                    </p>
+                    <a class="display-6 text-decoration-none" href="#!">{{ $cliente->consolidados->count() }}</a>
                 </div>
-                <div>
+                <div class="col">
                     <p class="small mb-1">ENTRADAS</p>
-                    <p class="display-6">
-                        <a href="#!" class="text-decoration-none">{{ $entradas->count() }}</a>
-                    </p>
+                    <a class="display-6 text-decoration-none" href="#!">{{ $entradas->count() }}</a>
                 </div>
             </div>
             @endslot
@@ -77,7 +73,7 @@
 </div>
 
 @component('components.card', [
-    'header_title' => 'Entradas',
+    'header_title' => 'Últimas entradas',
     'header_title_badge' => $entradas->count(),
 ])
     @slot('body')
