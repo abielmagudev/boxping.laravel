@@ -1,34 +1,33 @@
 @extends('app')
 @section('content')
-<div class="card">
-    @component('components.card-header-with-link',[
-        'link' => route('reempacadores.create'),
-        'tooltip' => 'Nuevo reempacador'
-    ])
-        @slot('title')
-        <span>Reempacadores</span>
-        <span class="badge badge-primary">{{ $reempacadores->count() }}</span>
-        @endslot
 
-        @slot('content')
-        <b>+</b>
+@component('components.card', [
+    'header_title' => 'Reempacadores',
+    'header_title_badge' => $reempacadores->count(),
+])
+    @slot('header_options')
+    <a href="{{ route('reempacadores.create') }}" class="btn btn-sm btn-outline-primary">Nuevo reempacador</a>
+    @endslot
+
+    @slot('body')
+    @component('components.table')
+        @slot('tbody')
+        @foreach($reempacadores as $reempacador)
+        <tr>
+            <td>{{ $reempacador->nombre }}</td>
+            <td class="text-nowrap text-end">
+                <a href="{{ route('reempacadores.show', $reempacador) }}" class="btn btn-sm btn-primary">
+                    {!! $icons->eye !!}
+                </a>
+                <a href="{{ route('reempacadores.edit', $reempacador) }}" class="btn btn-sm btn-warning">
+                    {!! $icons->pencil !!}
+                </a>
+            </td>
+        </tr>
+        @endforeach
         @endslot
     @endcomponent
-    
-    <div class="card-body p-0">
-        <div class="table-responsive">
-            <table class="table table-hover m-0">
-                <tbody>
-                    @foreach($reempacadores as $reempacador)
-                    <tr>
-                        <td>
-                            <a href="{{ route('reempacadores.show', $reempacador) }}">{{ $reempacador->nombre }}</a>
-                        </td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
+    @endslot
+@endcomponent
+
 @endsection

@@ -1,41 +1,36 @@
 @extends('app')
 @section('content')
-<div class="card">
-    @component('components.card-header-with-link', [
-        'link' => route('codigosr.create'),
-        'tooltip' => 'Nuevo código'
-    ])
-        @slot('title')
-        <span>Códigos de reempacado</span>
-        <span class="badge badge-primary">{{ $codigosr->count() }}</span>
-        @endslot
 
-        @slot('content')
-        <b>+</b>
+@component('components.card', [
+    'header_title' => 'Códigos de reempacado',
+    'header_title_badge' => $codigosr->count(),
+])
+    @slot('header_options')
+    <a href="{{ route('codigosr.create') }}" class="btn btn-sm btn-outline-primary">Nuevo código</a>
+    @endslot
+
+    @slot('body')
+    @component('components.table', [
+        'thead' => ['Nombre','Descripción',''],
+    ])
+        @slot('tbody')
+        @foreach($codigosr as $codigor)
+        <tr>
+            <td>{{ $codigor->nombre }}</td>
+            <td>{{ $codigor->descripcion }}</td>
+            <td class="text-nowrap text-end">
+                <a href="{{ route('codigosr.show', $codigor) }}" class="btn btn-sm btn-primary">
+                    {!! $icons->eye !!}
+                </a>
+                <a href="{{ route('codigosr.edit', $codigor) }}" class="btn btn-sm btn-warning">
+                    {!! $icons->pencil !!}
+                </a>
+            </td>
+        </tr>
+        @endforeach
         @endslot
     @endcomponent
-    
-    <div class="card-body p-0">
-        <div class="table-responsive">
-            <table class="table table-hover">
-                <thead class="small">
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Descripción</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($codigosr as $codigor)
-                    <tr>
-                        <td>
-                            <a href="{{ route('codigosr.show', $codigor) }}">{{ $codigor->nombre }}</a>
-                        </td>
-                        <td>{{ $codigor->descripcion }}</td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
+    @endslot
+@endcomponent
+
 @endsection
