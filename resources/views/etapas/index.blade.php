@@ -1,6 +1,10 @@
 @extends('app')
 @section('content')
 
+@component('partials.subnav-etapas')
+    @slot('active','etapas')
+@endcomponent
+
 @component('components.card', [
     'header_title' => 'Etapas',
     'header_title_badge' => $etapas->count(),

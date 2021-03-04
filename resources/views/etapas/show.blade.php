@@ -4,6 +4,7 @@
 @component('components.header', [
     'title' => $etapa->nombre,
     'subtitle' => 'Etapa', 
+    'goback' => route('etapas.index'),
 ])
     @slot('options')
     <a href="{{ route('etapas.edit', $etapa) }}" class="btn btn-sm btn-warning">Editar etapa</a>
