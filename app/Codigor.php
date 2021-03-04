@@ -11,7 +11,7 @@ class Codigor extends Model
 {
     use SoftDeletes, Modifiers;
 
-    protected $table = 'codigos_reempacado';
+    protected $table = 'codigosr';
 
     protected $fillable = [
         'nombre',

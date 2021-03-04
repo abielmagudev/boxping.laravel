@@ -6,7 +6,7 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateCodigosReempacadoTable extends Migration
 {
-    private $table_name = 'codigos_reempacado';
+    private $table_name = 'codigosr';
     /**
      * Run the migrations.
      *
