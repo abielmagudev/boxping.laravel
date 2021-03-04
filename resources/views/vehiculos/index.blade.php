@@ -1,5 +1,10 @@
 @extends('app')
 @section('content')
+
+@component('partials.subnav-importacion')
+    @slot('active', 'vehículos')
+@endcomponent
+
 @component('components.card')
     @slot('header_title')
     <span>Vehículos</span>

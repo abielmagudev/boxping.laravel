@@ -7,7 +7,7 @@
         @include('conductores._save')
         <br>
         <button class="btn btn-success">Guardar conductor</button>
-        <a href="{{ route('importacion.index') }}" class="btn btn-outline-secondary">Cancelar</a>
+        <a href="{{ route('conductores.index') }}" class="btn btn-outline-secondary">Cancelar</a>
     </form>
     @endslot
 @endcomponent

@@ -7,7 +7,7 @@
         @include('vehiculos._save')
         <br>
         <button class="btn btn-success" type="submit">Guardar vehículo</button>
-        <a href="{{ route('importacion.index') }}" class="btn btn-outline-secondary">Cancelar</a>
+        <a href="{{ route('vehiculos.index') }}" class="btn btn-outline-secondary">Cancelar</a>
     </form>
     @endslot
 @endcomponent

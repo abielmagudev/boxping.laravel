@@ -8,7 +8,7 @@
             @include('conductores._save')
             <br>
             <button class="btn btn-warning">Actualizar conductor</button>
-            <a href="{{ route('importacion.index') }}" class="btn btn-secondary">Regresar</a>
+            <a href="{{ route('conductores.index') }}" class="btn btn-secondary">Regresar</a>
         </form>
     @endslot
     @slot('footer')

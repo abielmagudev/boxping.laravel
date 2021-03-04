@@ -8,7 +8,7 @@
         @include('vehiculos._save')
         <br>
         <button class="btn btn-warning" type="submit">Actualizar vehículo</button>
-        <a href="{{ route('importacion.index') }}" class="btn btn-secondary">Regresar</a>
+        <a href="{{ route('vehiculos.index') }}" class="btn btn-secondary">Regresar</a>
     </form>
     @endslot
     @slot('footer')

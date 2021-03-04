@@ -4,7 +4,7 @@
 @component('components.header', [
     'title' => $conductor->nombre,
     'subtitle' => 'Conductor',
-    'goback' => route('importacion.index'),
+    'goback' => route('conductores.index'),
 ])
 @endcomponent
 

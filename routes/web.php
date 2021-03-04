@@ -59,6 +59,3 @@ Route::prefix('etapas')->group( function () {
     Route::resource('{etapa}/zonas', 'ZonaController')
          ->except(['index', 'show']);
 });
-
-// Importacion: vehiculos, conductores
-Route::get('importacion', 'ImportacionController@index')->name('importacion.index');

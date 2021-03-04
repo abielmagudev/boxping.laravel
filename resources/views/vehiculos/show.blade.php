@@ -4,7 +4,7 @@
 @component('components.header', [
     'title' => $vehiculo->alias,
     'subtitle' => 'Vehículo',
-    'goback' => route('importacion.index'),
+    'goback' => route('vehiculos.index'),
 ])
 @endcomponent
 

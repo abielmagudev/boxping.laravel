@@ -32,7 +32,7 @@ $menu = array(
     ],
     (object) [
         'title' => 'importación',
-        'route' => route('importacion.index'),
+        'route' => route('conductores.index'),
         'active' => false,
     ],
     (object) [

@@ -1,6 +1,10 @@
 @extends('app')
 @section('content')
 
+@component('partials.subnav-importacion')
+    @slot('active', 'conductores')
+@endcomponent
+
 @component('components.card')
     @slot('header_title', 'Conductores')
     @slot('header_badge', $conductores->count())
