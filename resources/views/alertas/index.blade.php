@@ -16,6 +16,16 @@
     @endslot
 
     @slot('body')
+
+    <p class="text-center small">
+        <span class="badge rounded-pill" style="background-color:{{ $config['bajo']['color'] }}">{{ $alertas->where('nivel', 'bajo')->count() }}</span>
+        <span class="align-middle me-2">Bajo</span>
+        <span class="badge rounded-pill" style="background-color:{{ $config['medio']['color'] }}">{{ $alertas->where('nivel', 'medio')->count() }}</span>
+        <span class="align-middle me-2">Medio</span>
+        <span class="badge rounded-pill" style="background-color:{{ $config['alto']['color'] }}">{{ $alertas->where('nivel', 'alto')->count() }}</span>
+        <span class="align-middle me-2">Alto</span>
+    </p>
+
     @component('components.table', [
         'thead' => ['Nivel','Nombre','Descripción']
     ])
