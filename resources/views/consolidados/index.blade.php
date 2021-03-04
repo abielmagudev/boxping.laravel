@@ -3,7 +3,7 @@
 
 @component('components.card')
     @slot('header_title', 'Consolidados')
-    @slot('header_badge', $consolidados->count())
+    @slot('header_title_badge', $consolidados->count())
     @slot('header_options')
     <a href="{{ route('consolidados.create') }}" class="btn btn-sm btn-outline-primary">Nuevo consolidado</a>
     @endslot

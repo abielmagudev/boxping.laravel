@@ -3,7 +3,7 @@
 
 @component('components.card')
     @slot('header_title', 'Entradas')
-    @slot('header_badge', $entradas->total())
+    @slot('header_title_badge', $entradas->total())
     @slot('header_options')
     <a href="{{ route('entradas.create') }}" class="btn btn-sm btn-outline-primary">
         <span>Nueva entrada</span>
