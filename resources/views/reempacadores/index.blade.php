@@ -1,6 +1,10 @@
 @extends('app')
 @section('content')
 
+@component('partials.subnav-reempaque')
+    @slot('active', 'reempacadores')
+@endcomponent
+
 @component('components.card', [
     'header_title' => 'Reempacadores',
     'header_title_badge' => $reempacadores->count(),

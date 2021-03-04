@@ -1,6 +1,10 @@
 @extends('app')
 @section('content')
 
+@component('partials.subnav-reempaque')
+    @slot('active', 'códigos')
+@endcomponent
+
 @component('components.card', [
     'header_title' => 'Códigos de reempacado',
     'header_title_badge' => $codigosr->count(),

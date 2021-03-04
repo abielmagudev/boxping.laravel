@@ -37,7 +37,7 @@ $menu = array(
     ],
     (object) [
         'title' => 'reempaque',
-        'route' => route('reempaque.index'),
+        'route' => route('reempacadores.index'),
         'active' => false,
     ],
     (object) [

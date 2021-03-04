@@ -9,7 +9,7 @@
         @include('codigosr._save')
         <br>
         <button class="btn btn-warning" type="submit">Actualizar código</button>
-        <a href="{{ route('reempaque.index') }}" class="btn btn-secondary">Regresar</a>
+        <a href="{{ route('codigosr.index') }}" class="btn btn-secondary">Regresar</a>
     </form>
     @endslot
 

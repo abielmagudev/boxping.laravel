@@ -4,7 +4,7 @@
 @component('components.header', [
     'title' => $reempacador->nombre,
     'subtitle' => 'Reempacador',
-    'goback' => route('reempaque.index'),
+    'goback' => route('reempacadores.index'),
 ])
 @endcomponent
 

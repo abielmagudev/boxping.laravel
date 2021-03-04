@@ -9,7 +9,7 @@
         @include('reempacadores._save')
         <br>
         <button class="btn btn-warning" type="submit">Actualizar reempacador</button>
-        <a href="{{ route('reempaque.index') }}" class="btn btn-secondary">Regresar</a>
+        <a href="{{ route('reempacadores.index') }}" class="btn btn-secondary">Regresar</a>
     </form>
     @endslot
 

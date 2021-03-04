@@ -8,7 +8,7 @@
         @include('reempacadores._save')
         <br>
         <button class="btn btn-success" type="submit">Guardar reempacador</button>
-        <a href="{{ route('reempaque.index') }}" class="btn btn-outline-secondary">Cancelar</a>
+        <a href="{{ route('reempacadores.index') }}" class="btn btn-outline-secondary">Cancelar</a>
     </form>
     @endslot
 @endcomponent

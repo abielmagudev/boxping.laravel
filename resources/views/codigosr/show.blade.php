@@ -4,7 +4,7 @@
 @component('components.header', [
     'title' => $codigor->nombre,
     'subtitle' => 'Código de reempacado',
-    'goback' => route('reempaque.index'),
+    'goback' => route('codigosr.index'),
 ])
 @endcomponent
 

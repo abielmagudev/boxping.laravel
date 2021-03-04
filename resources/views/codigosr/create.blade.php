@@ -8,7 +8,7 @@
         @include('codigosr._save')
         <br>
         <button class="btn btn-success" type="submit">Guardar código</button>
-        <a href="{{ route('reempaque.index') }}" class="btn btn-outline-secondary">Cancelar</a>
+        <a href="{{ route('codigosr.index') }}" class="btn btn-outline-secondary">Cancelar</a>
     </form>
     @endslot
 @endcomponent
