@@ -51,7 +51,7 @@ return [
         'success'   => 'btn-success',
         'warning'   => 'btn-warning',
     ],
-    'button-outline' => [
+    'button_outline' => [
         'danger'    => 'btn-outline-danger',
         'dark'      => 'btn-outline-dark',
         'info'      => 'btn-outline-info',
@@ -82,7 +82,7 @@ return [
         'success'   => 'link-success',
         'warning'   => 'link-warning',
     ],
-    'list-group-item' => [
+    'list_group_item' => [
         'danger'    => 'list-group-item-danger',
         'dark'      => 'list-group-item-dark',
         'info'      => 'list-group-item-info',
