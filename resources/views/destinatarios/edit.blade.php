@@ -25,10 +25,7 @@
 @endcomponent
 
 @component('partials.section-modifiers', [
-    'created_at' => $destinatario->created_at,
-    'created_by' => $destinatario->creator->name,
-    'updated_at' => $destinatario->updated_at,
-    'updated_by' => $destinatario->updater->name,
+    'concept' => $destinatario,
 ])
 @endcomponent
 <br>

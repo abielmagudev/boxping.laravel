@@ -42,7 +42,7 @@ $menu = array(
     ],
     (object) [
         'title' => 'trayectoria',
-        'route' => route('trayectoria.index'),
+        'route' => route('destinatarios.index'),
         'active' => false,
     ],
 );

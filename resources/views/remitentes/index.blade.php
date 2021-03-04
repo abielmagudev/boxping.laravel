@@ -1,5 +1,10 @@
 @extends('app')
 @section('content')
+
+@component('partials.subnav-trayectoria')
+    @slot('active','remitentes')
+@endcomponent
+
 @component('components.card', [
     'header_title' => 'Remitentes',
     'header_title_badge' => $remitentes->total(),

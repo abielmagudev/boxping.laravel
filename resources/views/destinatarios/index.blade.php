@@ -1,5 +1,10 @@
 @extends('app')
 @section('content')
+
+@component('partials.subnav-trayectoria')
+    @slot('active','destinatarios')
+@endcomponent
+
 @component('components.card', [
     'header_title' => 'Destinatarios',
     'header_title_badge' => $destinatarios->total(),

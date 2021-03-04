@@ -3,7 +3,7 @@
 @component('components.header', [
     'title' => $remitente->nombre,
     'subtitle' => 'Remitente',
-    'goback' => route('trayectoria.index'),
+    'goback' => route('remitentes.index'),
 ])
     @slot('options')
     <a href="{{ route('remitentes.edit', $remitente) }}" class="btn btn-sm btn-warning">Editar</a>
@@ -44,10 +44,12 @@
             'header_title' => 'Últimas entradas',
         ])
             @slot('body')
+            @if( count($entradas) )
             @component('partials.table-summary-entradas', [
                 'entradas' => $entradas,
             ])
             @endcomponent
+            @endif
             @endslot
         @endcomponent
     </div>
