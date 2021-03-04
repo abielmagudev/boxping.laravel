@@ -9,21 +9,16 @@
     @endslot
     @slot('body')
     
-    @component('components.wrapper')
-        @slot('background_color', 'light')
-        @slot('body')
-        <div class="text-center">
-            <span class="badge rounded-pill" style="background-color:{{ $config_consolidados->status['abierto']['color'] }}">
-                {{ $consolidados->where('status', 'abierto')->count() }}
-            </span>
-            <span class="me-3 align-middle">Abierto</span>
-            <span class="badge rounded-pill" style="background-color:{{ $config_consolidados->status['cerrado']['color'] }}">
-                {{ $consolidados->where('status', 'cerrado')->count() }}
-            </span>
-            <span class="align-middle">Cerrado</span>   
-        </div>
-        @endslot
-    @endcomponent
+    <p class="text-center small">
+        <span class="badge rounded-pill" style="background-color:{{ $config_consolidados->status['abierto']['color'] }}">
+            {{ $consolidados->where('status', 'abierto')->count() }}
+        </span>
+        <span class="me-3 align-middle">Abierto</span>
+        <span class="badge rounded-pill" style="background-color:{{ $config_consolidados->status['cerrado']['color'] }}">
+            {{ $consolidados->where('status', 'cerrado')->count() }}
+        </span>
+        <span class="align-middle">Cerrado</span>   
+    </p>
     <br>
 
     @component('components.table')
