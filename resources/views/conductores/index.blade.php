@@ -7,7 +7,7 @@
 
 @component('components.card')
     @slot('header_title', 'Conductores')
-    @slot('header_badge', $conductores->count())
+    @slot('header_title_badge', $conductores->count())
     @slot('header_options')
     <a href="{{ route('conductores.create') }}" class="btn btn-sm btn-outline-primary">Nuevo conductor</a>
     @endslot
