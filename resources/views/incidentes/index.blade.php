@@ -1,45 +1,37 @@
 @extends('app')
 @section('content')
-<div class="card">
-    @component('components.card-header-with-link', [
-        'tooltip' => 'Nuevo incidente',
-        'link' => route('incidentes.create'),
-    ])
-        @slot('title')
-        <span>Incidentes</span>
-        <span class="badge badge-primary">{{ $incidentes->count() }}</span>
-        @endslot
 
-        @slot('content')
-        <b>+</b>
+@component('partials.subnav-salidas')
+    @slot('active','incidentes')
+@endcomponent
+
+@component('components.card', [
+    'header_title' => 'Incidentes',
+    'header_title_badge' => $incidentes->count(),
+])
+    @slot('header_options')
+    <a href="{{ route('incidentes.create') }}" class="btn btn-sm btn-outline-primary">Nuevo incidente</a>
+    @endslot
+
+    @slot('body')
+    @component('components.table', [
+        'thead' => ['Título','Descripción'],
+    ])
+        @slot('tbody')
+        @foreach($incidentes as $incidente)
+        <tr>
+            <td class="text-nowrap">{{ $incidente->titulo }}</td>
+            <td class="text-nowrap">{{ $incidente->descripcion }}</td>
+            <td class="text-nowrap text-end">
+                <a href="{{ route('incidentes.edit', $incidente) }}" class="btn btn-warning btn-sm">
+                    {!! $icons->pencil !!}
+                </a>
+            </td>
+        </tr>
+        @endforeach
         @endslot
     @endcomponent
-    <div class="card-body p-0">
-        <div class="table-responsive">
-            <table class="table table-hover">
-                <thead class="small">
-                    <tr>
-                        <th>Título</th>
-                        <th colspan="2">Descripción</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($incidentes as $incidente)
-                    <tr>
-                        <td class="text-nowrap align-middle">
-                            <a href="{{ route('incidentes.show', $incidente) }}">{{ $incidente->titulo }}</a>
-                        </td>
-                        <td class="align-middle">{{ $incidente->descripcion }}</td>
-                        <td class="align-middle text-right">
-                            <a href="{{ route('incidentes.edit', $incidente) }}" class="btn btn-warning btn-sm">
-                                <b>e</b>
-                            </a>
-                        </td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
+    @endslot
+@endcomponent
+<br>
 @endsection

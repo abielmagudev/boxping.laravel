@@ -34,7 +34,7 @@ class Salida extends Model
     
     public function transportadora()
     {
-        return $this->belongsTo(Transportadora::class);
+        return $this->belongsTo(Transportadora::class)->withTrashed();
     }
 
     public function incidentes()

@@ -1,6 +1,10 @@
 @extends('app')
 @section('content')
 
+@component('partials.subnav-salidas')
+    @slot('active','salidas')
+@endcomponent
+
 @component('components.card', [
     'header_title' => 'Salidas',
     'header_title_badge' => $salidas->count(),
@@ -12,18 +16,22 @@
         @slot('tbody')
         @foreach($salidas as $salida)
         <tr>
-            <td class="">
-                <a href="{{ route('entradas.show', $salida->entrada) }}" class="text-nowrap">{{ $salida->entrada->numero }}</a>
-            </td>
+            <td class="text-nowrap">{{ $salida->entrada->numero }}</td>
             <td class="text-nowrap">
-                @if( $salida->transportadora->web  )
+                @if( $salida->transportadora )
+                @if( $salida->transportadora->web )
                 <a href="{{ $salida->transportadora->web }}" target="_blank" class="me-1">{!! $icons->globe !!}</a>
+                
+                @else
+                <span class="text-muted">{!! $icons-globe !!}</span>
+
                 @endif
                 <span>{{ $salida->transportadora->nombre }}</span>
+                @endif
             </td>
-            <td class="">{{ $salida->rastreo ?? '...' }}</td>
-            <td class="">{{ $salida->confirmacion ?? '...' }}</td>
-            <td class="">
+            <td class="text-nowrap">{{ $salida->rastreo ?? '...' }}</td>
+            <td class="text-nowrap">{{ $salida->confirmacion ?? '...' }}</td>
+            <td class="text-nowrap">
                 <?php 
                 
                 if( $salida->cobertura == 'domicilio' && is_object($salida->entrada->destinatario) )
@@ -63,7 +71,7 @@
                     ?>
                     @if( is_string($incidentes_content) )
                         <button  
-                            class="btn btn-sm btn-danger text-white text-decoration-none small py-0 px-2 ms-1" 
+                            class="btn btn-sm btn-danger rounded-pill py-0 px-2 ms-1" 
                             tabindex="0" 
                             title="Incidentes" 
                             type="button"
@@ -77,7 +85,10 @@
                     @endif     
                 </div>
             </td>
-            <td class="text-end">
+            <td class="text-nowrap text-end">
+                <a href="{{ route('salidas.show', $salida) }}" class="btn btn-primary btn-sm">
+                    {!! $icons->eye !!}
+                </a>
                 <a href="{{ route('salidas.edit', $salida) }}" class="btn btn-warning btn-sm">
                     {!! $icons->pencil !!}
                 </a>
