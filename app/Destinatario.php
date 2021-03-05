@@ -58,7 +58,7 @@ class Destinatario extends Model implements Search
     {
         $prepared = [
             'nombre' => capitalize($validated['nombre']),
-            'direccion' => $validated['direccion'],
+            'direccion' => capitalize($validated['direccion']),
             'codigo_postal' => $validated['codigo_postal'],
             'ciudad' => capitalize($validated['ciudad']),
             'estado' => capitalize($validated['estado']),
