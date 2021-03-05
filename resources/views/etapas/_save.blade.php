@@ -26,7 +26,7 @@
     <div class="col-sm">
         <div class="mb-3">
             <label for="select-medida_peso" class="form-label small">Única medida de peso</label>
-            <select name="unica_medida_peso" id="select-medida_peso" class="form-control">
+            <select name="unica_medida_peso" id="select-medida_peso" class="form-select">
                 <option label="Opcional" selected></option>
                 @foreach($medidas_peso as $abbr => $value)
                 <option value="{{ $value }}" {{ selectable($value, old('medida_peso', $etapa->unica_medida_peso)) }}>{{ ucfirst($value) }}</option>
@@ -37,7 +37,7 @@
     <div class="col-sm">
         <div class="mb-3">
             <label for="select-medida_volumen" class="form-label small">Única medida de volúmen</label>
-            <select name="unica_medida_volumen" id="select-medida_volumen" class="form-control">
+            <select name="unica_medida_volumen" id="select-medida_volumen" class="form-select">
                 <option label="Opcional" selected></option>
                 @foreach($medidas_volumen as $abbr => $value)
                 <option value="{{ $value }}" {{ selectable($value, old('medida_volumen', $etapa->unica_medida_volumen)) }}>{{ ucfirst($value) }}</option>
