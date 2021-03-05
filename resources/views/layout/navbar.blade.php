@@ -78,19 +78,6 @@ $dropdown = array(
                 </li>
             </ul>     
         </div>
-
-        <div class="d-flex">
-            <div>
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <span>Navegacion</span>
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                @foreach($dropdown as $item)
-                    <a class="dropdown-item" href="{{ $item->route }}">{{ ucfirst($item->title) }}</a>
-                @endforeach
-                </div>
-            </div>
-        </div>
         
         <!-- Out collapse -->
         <ul class="navbar-nav">
