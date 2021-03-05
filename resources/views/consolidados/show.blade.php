@@ -8,8 +8,7 @@
 
     @slot('options')
     <a href="{{ route('consolidados.edit', $consolidado) }}" class="btn btn-sm btn-warning">
-        {!! $icons->pencil !!}
-        <span class="d-none d-md-inline-block ms-1">Editar</span>
+        <span class="">Editar</span>
     </a>
     @endslot
 @endcomponent

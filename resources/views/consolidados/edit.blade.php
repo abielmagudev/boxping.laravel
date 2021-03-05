@@ -30,10 +30,7 @@
 @endcomponent
 
 @component('partials.section-modifiers', [
-    'created_by' => $consolidado->creator->name,
-    'created_at' => $consolidado->created_at,
-    'updated_by' => $consolidado->updater->name,
-    'updated_at' => $consolidado->updated_at,
+    'concept' => $consolidado,
 ])
 @endcomponent
 @endsection
