@@ -2,7 +2,7 @@
 @section('content')
 
 @component('components.header', [
-    'title' => $cliente->nombre,
+    'title' => "{$cliente->nombre} ({$cliente->alias})",
     'subtitle' => 'Cliente'
 ])
     @slot('options')

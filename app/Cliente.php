@@ -46,13 +46,13 @@ class Cliente extends Model
     {
         $prepared = [
             'nombre' => $validated['nombre'],
-            'alias' => $validated['alias'],
+            'alias' => strtoupper($validated['alias']),
             'contacto' => capitalize($validated['contacto']),
             'telefono' => $validated['telefono'],
-            'correo_electronico' => $validated['correo_electronico'],
-            'direccion' => $validated['direccion'],
-            'ciudad' => $validated['ciudad'],
-            'estado' => $validated['estado'],
+            'correo_electronico' => strtolower($validated['correo_electronico']),
+            'direccion' => capitalize($validated['direccion']),
+            'ciudad' => capitalize($validated['ciudad']),
+            'estado' => capitalize($validated['estado']),
             'pais' => $validated['pais'],
             'notas'  => $validated['notas'],
             'updated_by' => Fakeuser::live(),
