@@ -1,42 +1,20 @@
 @csrf
 <div class="mb-3">
     <label for="select-nivel" class="form-label small">Nivel</label>
-    <!-- Alto -->
+    @foreach($config as $level => $prop)
+    <!-- {{ $level }} -->
     <div class="row mb-3 mb-md-0">
         <div class="col-sm col-sm-1">
             <div class="form-check">
-                <input class="form-check-input" type="radio" name="nivel" value="alto" id="radio-nivel-alto" checked>
-                <label class="form-check-label" for="radio-nivel-alto">Alto</label>
+                <input class="form-check-input" type="radio" name="nivel" value="{{ $level }}" id="radio-nivel-{{ $level }}" style="border: 2px solid {{ $prop['color'] }}" {{ $loop->first ? 'checked' : '' }} {{ checkable($level, $alerta->nivel) }}>
+                <label class="form-check-label" for="radio-nivel-{{ $level }}">{{ ucfirst($level) }}</label>
             </div>             
         </div>
         <div class="col-sm">
-            <small class="text-muted">{{ $config['alto']['descripcion'] }}</small>
+            <small class="text-muted">{{ $prop['descripcion'] }}</small>
         </div>
     </div>
-    <!-- Medio -->
-    <div class="row mb-3 mb-md-0">
-        <div class="col-sm col-sm-1">
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="nivel" value="medio" id="radio-nivel-medio" {{ checkable('medio', $alerta->nivel) }}>
-                <label class="form-check-label" for="radio-nivel-medio">Medio</label>
-            </div>             
-        </div>
-        <div class="col-sm">
-            <small class="text-muted">{{ $config['medio']['descripcion'] }}</small>
-        </div>
-    </div>
-    <!-- Nivel bajo -->
-    <div class="row mb-3 mb-md-0">
-        <div class="col-sm col-sm-1">
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="nivel" value="bajo" id="radio-nivel-bajo" {{ checkable('bajo', $alerta->nivel) }}>
-                <label class="form-check-label" for="radio-nivel-bajo">Bajo</label>
-            </div>             
-        </div>
-        <div class="col-sm">
-            <small class="text-muted">{{ $config['bajo']['descripcion'] }}</small>
-        </div>
-    </div>
+    @endforeach
 </div>
 
 <div class="mb-3">

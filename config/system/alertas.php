@@ -5,7 +5,7 @@
 return [
     'bajo' => [
         'color' => '#FFAB06',
-        'descripcion' => 'No es necesario internvenir ni detener el proceso',
+        'descripcion' => 'No es necesario internvenir ni detener el proceso.',
     ],
     'medio' => [
         'color' => '#FF7806',
