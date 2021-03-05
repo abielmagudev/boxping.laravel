@@ -1,7 +1,7 @@
 @csrf
 <div class="mb-3">
     <label for="cliente" class="form-label small">Cliente</label>
-    <select name="cliente" id="cliente" class="form-control" required>
+    <select name="cliente" id="cliente" class="form-select" required>
         <option disabled selected label=""></option>
         @foreach($clientes as $cliente)
         <?php $selected = selectable( $cliente->id, old('cliente', $consolidado->cliente_id)) ?>
@@ -37,7 +37,7 @@
 @if( ! is_null($consolidado->status) )
 <div class="mb-3">
     <label for="select-status" class="form-label small">Status</label>
-    <select name="status" id="select-status" class="form-control">
+    <select name="status" id="select-status" class="form-select">
         @foreach( $config_consolidados->status as $status => $props )
         <option value="{{ $status }}" {{ $consolidado->status <> $status ?: 'selected' }}>{{ ucfirst($status) }} - {{ $config_consolidados->status[$status]['descripcion'] }}</option>
         @endforeach
