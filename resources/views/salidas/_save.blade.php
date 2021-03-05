@@ -2,7 +2,7 @@
 <p class="fw-bold">Envio</p> 
 <div class="mb-3">
     <label for="select-transportadora" class="form-label small">Transportadora</label>
-    <select class="form-control" id="select-transportadora" name="transportadora">
+    <select class="form-select" id="select-transportadora" name="transportadora">
         @foreach($transportadoras as $transportadora)
         <option value="{{ $transportadora->id }}" {{ selectable( old('transportadora', $salida->transportadora_id), $transportadora->id) }}>{{ $transportadora->nombre }}</option>
         @endforeach
@@ -65,7 +65,7 @@
 <p class="fw-bold">Proceso</p>
 <div class="mb-3">
     <label for="select-status" class="form-label small">Status</label>
-    <select class="form-control" id="select-status" name="status">
+    <select class="form-select" id="select-status" name="status">
         @foreach($config_status as $status => $props)
         <option value="{{ $status }}" {{ selectable( old('status', $salida->status), $status) }}>{{ ucfirst($status) }}</option>
         @endforeach

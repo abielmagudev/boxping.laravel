@@ -34,4 +34,9 @@
     @endslot
 @endcomponent
 
+@component('partials.section-modifiers', [
+    'concept' => $salida,
+])
+@endcomponent
+
 @endsection
