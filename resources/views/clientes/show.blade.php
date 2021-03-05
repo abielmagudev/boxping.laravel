@@ -3,7 +3,8 @@
 
 @component('components.header', [
     'title' => "{$cliente->nombre} ({$cliente->alias})",
-    'subtitle' => 'Cliente'
+    'subtitle' => 'Cliente',
+    'goback' => route('clientes.index'),
 ])
     @slot('options')
     <a href="{{ route('clientes.edit', $cliente) }}" class="btn btn-sm btn-warning">Editar</a>

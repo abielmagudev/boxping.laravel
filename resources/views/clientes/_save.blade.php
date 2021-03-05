@@ -2,43 +2,43 @@
 <div class="row">
     <div class="col-sm col-sm-9 mb-3">
         <label for="input-nombre" class="form-label small">Nombre</label>
-        <input name="nombre" type="text" class="form-control" id="input-nombre" value="{{ old('nombre', $cliente->nombre) }}">
+        <input name="nombre" type="text" class="form-control" id="input-nombre" value="{{ old('nombre', $cliente->nombre) }}" required>
     </div>
     <div class="col-sm mb-3">
         <label for="input-alias" class="form-label small">Alias</label>
-        <input name="alias" type="text" class="form-control" id="input-alias" value="{{ old('alias', $cliente->alias) }}">
+        <input name="alias" type="text" class="form-control" id="input-alias" value="{{ old('alias', $cliente->alias) }}" required>
     </div>
 </div>
 <div class="mb-3">
     <label for="input-contacto" class="form-label small">Contacto</label>
-    <input name="contacto" type="text" class="form-control" id="input-contacto" value="{{ old('contacto', $cliente->contacto) }}">
+    <input name="contacto" type="text" class="form-control" id="input-contacto" value="{{ old('contacto', $cliente->contacto) }}" required>
 </div>
 <div class="row">
     <div class="col-md mb-3">
         <label for="input-telefono" class="form-label small">Teléfono</label>
-        <input name="telefono" type="text" class="form-control" id="input-telefono" value="{{ old('telefono', $cliente->telefono) }}">
+        <input name="telefono" type="text" class="form-control" id="input-telefono" value="{{ old('telefono', $cliente->telefono) }}" required>
     </div>
     <div class="col-md mb-3">
         <label for="input-corre_electronico" class="form-label small">Correo electrónico</label>
-        <input name="correo_electronico" type="email" class="form-control" id="input-corre_electronico" value="{{ old('correo_electronico', $cliente->correo_electronico) }}">   
+        <input name="correo_electronico" type="email" class="form-control" id="input-corre_electronico" value="{{ old('correo_electronico', $cliente->correo_electronico) }}" required>   
     </div>
 </div>
 <div class="mb-3">
     <label for="input-direccion" class="form-label small">Dirección</label>
-    <input name="direccion" type="text" class="form-control" id="input-direccion" value="{{ old('direccion', $cliente->direccion) }}">   
+    <input name="direccion" type="text" class="form-control" id="input-direccion" value="{{ old('direccion', $cliente->direccion) }}" required>   
 </div>
 <div class="row">
     <div class="col-sm mb-3">
         <label for="input-ciudad" class="form-label small">Ciudad</label>
-        <input name="ciudad" type="text" class="form-control" id="input-ciudad" value="{{ old('ciudad', $cliente->ciudad) }}">   
+        <input name="ciudad" type="text" class="form-control" id="input-ciudad" value="{{ old('ciudad', $cliente->ciudad) }}" required>   
     </div>
     <div class="col-sm mb-3">
         <label for="input-estado" class="form-label small">Estado</label>
-        <input name="estado" type="text" class="form-control" id="input-estado" value="{{ old('estado', $cliente->estado) }}">   
+        <input name="estado" type="text" class="form-control" id="input-estado" value="{{ old('estado', $cliente->estado) }}" required>   
     </div>
     <div class="col-sm mb-3">
         <label for="input-pais" class="form-label small">Pais</label>
-        <input name="pais" type="text" class="form-control" id="input-pais" value="{{ old('pais', $cliente->pais) }}">   
+        <input name="pais" type="text" class="form-control" id="input-pais" value="{{ old('pais', $cliente->pais) }}" required>   
     </div>
 </div>
 <div class="mb-3">
