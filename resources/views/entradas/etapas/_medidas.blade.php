@@ -8,7 +8,7 @@
     </div>
     <div class="col-sm col-sm-3">
         <label for="select-medida_peso" class="form-label small">Medida de peso</label>
-        <select name="medida_peso" id="select-medida_peso" class="form-control">
+        <select name="medida_peso" id="select-medida_peso" class="form-select">
         @if(! $etapa->unica_medida_peso )
             <?php $medida_peso_pivot = $etapa->pivot->medida_peso ?? null ?>
             @foreach($medidas_peso as $m => $medida)
@@ -42,7 +42,7 @@
     </div>
     <div class="col-sm">
         <label for="select-medida_volumen" class="form-label small">Medida de volúmen</label>
-        <select name="medida_volumen" id="select-medida_volumen" class="form-control">
+        <select name="medida_volumen" id="select-medida_volumen" class="form-select">
         @if(! $etapa->unica_medida_volumen )
             <?php $medida_volumen_pivot = $etapa->pivot->medida_peso ?? null ?>
             @foreach($medidas_volumen as $m => $medida)

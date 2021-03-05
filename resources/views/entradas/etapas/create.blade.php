@@ -16,7 +16,7 @@
     <form action="{{ route('entrada.etapas.create', $entrada) }}" method="get">
         <div class="mb-3">
             <label for="select-slug" class="form-label small">Etapas</label>
-            <select name="slug" id="select-slug" class="form-control" onchange="submit()">
+            <select name="slug" id="select-slug" class="form-select" onchange="submit()">
                 <option label="Selecciona..." disabled selected></option>
                 @foreach($etapas as $stage)
                 <option value="{{ $stage->slug }}" {{ selectable($etapa->slug, $stage->slug) }}>{{ $stage->nombre }}</option>

@@ -20,10 +20,11 @@ class EntradaEtapasController extends Controller
             'entrada' => $entrada,
             'etapa' => $etapa,
             'etapas' => Etapa::whereNotIn('id', $etapas_attached)->get(),
-            'alertas' => Alerta::orderBy('nombre', 'desc')->get(),
+            'alertas' => Alerta::orderBy('nombre', 'asc')->get(),
             'alertas_attached' => array(),
             'medidas_peso' => config('system.medidas.peso'),
             'medidas_volumen' => config('system.medidas.volumen'),
+            'config_alertas' => config('system.alertas'),
         ]);
     }
 
@@ -44,10 +45,11 @@ class EntradaEtapasController extends Controller
         return view('entradas.etapas.edit', [
             'entrada' => $entrada,
             'etapa' => $etapa_attached,
-            'alertas' => Alerta::orderBy('nombre', 'desc')->get(),
+            'alertas' => Alerta::orderBy('nombre','asc')->get(),
             'alertas_attached' => json_decode($etapa_attached->pivot->alertas_id) ?? [],
             'medidas_peso' => config('system.medidas.peso'),
             'medidas_volumen' => config('system.medidas.volumen'),
+            'config_alertas' => config('system.alertas'),
         ]);
     }
 

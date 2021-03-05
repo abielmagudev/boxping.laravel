@@ -3,7 +3,7 @@
 </div>
 <div class="mb-3">
     <label for="select-codigo-reempacado" class="form-label small">Código de reempacado</label>
-    <select name="codigo_reempacado" id="select-codigo-reempacado" class="form-control">
+    <select name="codigo_reempacado" id="select-codigo-reempacado" class="form-select">
         <option disabled selected></option>
         @foreach($codigosr as $codigor)
         <option value="{{ $codigor->id }}" {{ selectable($codigor->id, old('codigo_reempacado', $entrada->codigor_id)) }}>{{ $codigor->nombre }} - {{ $codigor->descripcion }}</option>
@@ -12,7 +12,7 @@
 </div>
 <div class="mb-3">
     <label for="select-reempacador" class="form-label small">Reempacador</label>
-    <select name="reempacador" id="select-reempacador" class="form-control">
+    <select name="reempacador" id="select-reempacador" class="form-select">
         <option disabled selected></option>
         @foreach($reempacadores as $reempacador)
         <option value="{{ $reempacador->id }}" {{ selectable($reempacador->id, old('reempacador', $entrada->reempacador_id)) }}>{{ $reempacador->nombre }}</option>

@@ -11,7 +11,7 @@
     <input type="hidden" name="cliente" value="{{ $entrada->cliente->id }}">
 
     @else
-    <select name="cliente" id="select-cliente" class="form-control">
+    <select name="cliente" id="select-cliente" class="form-select">
         @foreach($clientes as $cliente)
         <option value="{{ $cliente->id }}" {{ selectable($cliente->id, old('cliente', $entrada->cliente_id)) }}>{{ $cliente->nombre }} ({{ $cliente->alias }})</option>
         @endforeach

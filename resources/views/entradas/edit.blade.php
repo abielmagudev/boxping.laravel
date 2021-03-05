@@ -32,10 +32,7 @@
 @endcomponent
 
 @component('partials.section-modifiers', [
-    'created_by' => $entrada->creator->name,
-    'created_at' => $entrada->created_at,
-    'updated_by' => $entrada->updater->name,
-    'updated_at' => $entrada->updated_at,
+    'concept' => $entrada,
 ])
 @endcomponent
 

@@ -2,20 +2,20 @@
     <div class="">Entrada <br> {{ $entrada->alias_numero ?? $entrada->numero }}</div>
 </div>
 <div class="mb-3">
-    <label for="select-vehiculo" class="form-label small">Vehiculo</label>
-    <select name="vehiculo" id="select-vehiculo" class="form-control" required>
+    <label for="select-conductor" class="form-label small">Conductor</label>
+    <select name="conductor" id="select-conductor" class="form-select" required>
         <option disabled selected></option>
-        @foreach($vehiculos as $vehiculo)
-        <option value="{{ $vehiculo->id }}" {{ selectable($vehiculo->id, old('vehiculo', $entrada->vehiculo_id)) }}>{{ $vehiculo->alias }}</option>
+        @foreach($conductores as $conductor)
+        <option value="{{ $conductor->id }}" {{ selectable($conductor->id, old('conductor', $entrada->conductor_id)) }}>{{ $conductor->nombre }}</option>
         @endforeach
     </select>
 </div>
 <div class="mb-3">
-    <label for="select-conductor" class="form-label small">Conductor</label>
-    <select name="conductor" id="select-conductor" class="form-control" required>
+    <label for="select-vehiculo" class="form-label small">Vehiculo</label>
+    <select name="vehiculo" id="select-vehiculo" class="form-select" required>
         <option disabled selected></option>
-        @foreach($conductores as $conductor)
-        <option value="{{ $conductor->id }}" {{ selectable($conductor->id, old('conductor', $entrada->conductor_id)) }}>{{ $conductor->nombre }}</option>
+        @foreach($vehiculos as $vehiculo)
+        <option value="{{ $vehiculo->id }}" {{ selectable($vehiculo->id, old('vehiculo', $entrada->vehiculo_id)) }}>{{ $vehiculo->alias }}</option>
         @endforeach
     </select>
 </div>

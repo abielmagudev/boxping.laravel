@@ -4,7 +4,7 @@
 </div>
 <div class="mb-1">
     <label for="select-cliente" class="form-label small">Cliente</label>
-    <select name="cliente" id="select-cliente" class="form-control" required>
+    <select name="cliente" id="select-cliente" class="form-select" required>
         <option disabled selected></option>
         @foreach($clientes as $cliente)
         <option value="{{ $cliente->id }}" {{ selectable( old('cliente', $entrada->cliente_id), $cliente->id ) }}>{{ $cliente->nombre }} ({{ $cliente->alias }})</option>
