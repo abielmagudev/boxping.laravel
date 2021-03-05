@@ -16,7 +16,7 @@ class CodigorSaveRequest extends FormRequest
         $codigor_id = $this->route('codigor')->id ?? 0;
 
         return [
-            'nombre' => ['required', 'unique:codigos_reempacado,nombre,' . $codigor_id],
+            'nombre' => ['required', "unique:codigosr,nombre,{$codigor_id}"],
             'descripcion' => 'nullable',
         ];
     }
