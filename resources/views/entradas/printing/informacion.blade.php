@@ -187,7 +187,7 @@
     <br>
 
     <!-- Etapas -->
-    <div style="page-break-before: always">
+    <div style="page-break-before:always">
         <br>
         <table class="table table-sm table-bordered align-middle">
             <tbody>
@@ -195,7 +195,7 @@
                     <td class="fw-bold text-white px-2" colspan="7">BOXPING | COMPANY NAME</td>
                 </tr>
                 <tr>
-                    <td class="text-muted small px-2" style="width:1%" colspan="6">Entrada</td>
+                    <td class="text-muted small px-2" style="width:1%" colspan="6">Número de entrada</td>
                     <td class="px-2">{{ $entrada->numero }}</td>
                 </tr>
             </tbody>
