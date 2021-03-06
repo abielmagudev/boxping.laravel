@@ -15,7 +15,7 @@ $header = (object) array(
 
 <div class="row align-items-center">
     @if( $header->has_heading )
-    <div class="col-8">
+    <div class="col-7">
         @if( $header->pretitle )
         <small class="d-block small text-muted">{{ $header->pretitle }}</small>
         @endif
@@ -30,7 +30,7 @@ $header = (object) array(
     </div>
     @endif
 
-    <div class="col-4 text-end">
+    <div class="col-5 text-end">
         @if( $header->has_options ) 
         <div class="d-inline-block">{{ $header->options }}</div>
         @endif
