@@ -41,6 +41,7 @@ Route::resources([
 // Entrada > Comentario, Destinario, Remitente
 Route::prefix('entradas')->group( function () {
     Route::post('{entrada}/comentarios', 'ComentarioController@store')->name('comentarios.store');
+    Route::get('{entrada}/imprimir/{hoja}', 'EntradaController@imprimir')->name('entradas.printing');
     Route::get('{entrada}/agregar/remitente', 'EntradaController@agregarRemitente')->name('entradas.agregar.remitente');
     Route::get('{entrada}/agregar/destinatario', 'EntradaController@agregarDestinatario')->name('entradas.agregar.destinatario');
     Route::resource('{entrada}/etapas', 'EntradaEtapasController')

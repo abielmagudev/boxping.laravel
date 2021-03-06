@@ -12,6 +12,7 @@ use App\Ahex\Entrada\Domain\UpdaterFactory;
 use App\Ahex\Entrada\Application\CastSaveForm;
 use App\Ahex\Entrada\Application\RoutingTrait as Routing;
 use App\Ahex\Entrada\Application\TrayectoriaTrait as Trayectoria;
+use App\Ahex\Entrada\Application\PrintingTrait as Printing;
 use App\Http\Requests\EntradaCreateRequest as CreateRequest;
 use App\Http\Requests\EntradaStoreRequest as StoreRequest;
 use App\Http\Requests\EntradaEditRequest as EditRequest;
@@ -20,7 +21,7 @@ use Illuminate\Http\Request;
 
 class EntradaController extends Controller
 {
-    use Routing, Trayectoria;
+    use Routing, Trayectoria, Printing;
 
     public function index()
     {
