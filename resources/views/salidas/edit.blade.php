@@ -4,6 +4,7 @@
 @component('components.header', [
     'title' => $salida->entrada->numero,
     'subtitle' => 'Entrada',
+    'goback' => route('entradas.show', $salida->entrada_id)
 ])
 @endcomponent
 
