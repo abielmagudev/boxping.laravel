@@ -24,7 +24,8 @@ Trait PrintingTrait
     {
         return view('entradas.printing.informacion', [
             'entrada' => $entrada,
-            'salida' => Salida::where('entrada_id', $entrada->id)->first() ?? new Salida,
+            'salida'  => Salida::where('entrada_id', $entrada->id)->first() ?? new Salida,
+            'etapas'  => $entrada->etapas,
         ]);  
     }
     
