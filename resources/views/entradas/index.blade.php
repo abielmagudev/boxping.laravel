@@ -11,7 +11,7 @@
     @endslot
     @slot('body')
     @component('components.table')
-        @slot('thead', ['Número','Consolidado','Cliente',''])
+        @slot('thead', ['Número','Consolidado','Cliente','Destinatario'])
         @slot('tbody')
         @foreach($entradas as $entrada)
         <tr>
@@ -26,6 +26,7 @@
                 @endif
             </td>
             <td>{{ $entrada->cliente->alias }}</td>
+            <td>{{ $entrada->destinatario_id ? 'Si' : 'No' }}</td>
             <td class="text-end">
                 <a href="{{ route('entradas.show', $entrada) }}" class="btn btn-sm btn-primary">
                     {!! $icons->eye !!}
