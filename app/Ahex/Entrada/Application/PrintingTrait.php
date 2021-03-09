@@ -31,6 +31,12 @@ Trait PrintingTrait
     
     private function imprimirEtiqueta($entrada)
     {
-        return view('entradas.printing.etiqueta')->with('entrada',$entrada);
+        $etapa_orden_max = $entrada->etapas->max('orden');
+
+        return view('entradas.printing.etiqueta', [
+            'entrada' => $entrada,
+            'salida'  => Salida::where('entrada_id', $entrada->id)->first() ?? new Salida,
+            'etapa'   => $entrada->etapas->firstWhere('orden', $etapa_orden_max),
+        ]);  
     }
 }
