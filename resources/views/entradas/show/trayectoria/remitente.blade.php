@@ -1,20 +1,30 @@
 <div class="tab-pane fade" id="remitente" role="tabpanel" aria-labelledby="remitente-tab">
 
     @if( is_object($entrada->remitente) )
-    <p>
-        <small class="d-block text-muted">Nombre</small>
-        <span>{{ $entrada->remitente->nombre }}</span>
-    </p>
-    <p>
-        <small class="d-block text-muted">Dirección</small>
-        <span>{{ $entrada->remitente->direccion }}</span>
-        <span class="d-block">C.P. {{ $entrada->remitente->codigo_postal }}</span>
-        <span class="">{{ $entrada->remitente->localidad }}</span>
-    </p>
-    <p>
-        <small class="d-block text-muted">Teléfono</small>
-        <span>{{ $entrada->remitente->telefono }}</span>
-    </p>
+    <table class="table align-middle">
+        <tbody>
+            <tr>
+                <td class="text-muted small">Nombre</td>
+                <td>{{ $entrada->remitente->nombre }}</td>
+            </tr>
+            <tr>
+                <td class="text-muted small">Teléfono</td>
+                <td>{{ $entrada->remitente->telefono }}</td>
+            </tr>
+            <tr>
+                <td class="text-muted small">Dirección</td>
+                <td>{{ $entrada->remitente->direccion }}</td>
+            </tr>
+            <tr>
+                <td class="text-muted small">Postal</td>
+                <td>{{ $entrada->remitente->codigo_postal }}</td>
+            </tr>
+            <tr>
+                <td class="text-muted small">Localidad</td>
+                <td>{{ $entrada->remitente->localidad }}</td>
+            </tr>
+        </tbody>
+    </table>
     <br>
 
     <div class="text-end">

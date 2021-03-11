@@ -1,24 +1,34 @@
 <div class="tab-pane fade" id="destinatario" role="tabpanel" aria-labelledby="destinatario-tab">
 
     @if( is_object($entrada->destinatario) )
-    <p>
-        <small class="d-block text-muted">Nombre</small>
-        <span>{{ $entrada->destinatario->nombre }}</span>
-    </p>
-    <p>
-        <small class="d-block text-muted">Dirección</small>
-        <span class="">{{ $entrada->destinatario->direccion }}</span>,
-        <span class="d-block">C.P. {{ $entrada->destinatario->codigo_postal }}</span>
-        <span class="">{{ $entrada->destinatario->localidad }}</span>
-    </p>
-    <p>
-        <small class="d-block text-muted">Teléfono</small>
-        <span>{{ $entrada->destinatario->telefono }}</span>
-    </p>
-    <p>
-        <small class="d-block text-muted">Referencias</small>
-        <span>{{ $entrada->destinatario->referencias }}</span>
-    </p>
+    <table class="table align-middle">
+        <tbody>
+            <tr>
+                <td class="text-muted small">Nombre</td>
+                <td>{{ $entrada->destinatario->nombre }}</td>
+            </tr>
+            <tr>
+                <td class="text-muted small">Teléfono</td>
+                <td>{{ $entrada->destinatario->telefono }}</td>
+            </tr>
+            <tr>
+                <td class="text-muted small">Dirección</td>
+                <td>{{ $entrada->destinatario->direccion }}</td>
+            </tr>
+            <tr>
+                <td class="text-muted small">Postal</td>
+                <td>{{ $entrada->destinatario->codigo_postal }}</td>
+            </tr>
+            <tr>
+                <td class="text-muted small">Localidad</td>
+                <td>{{ $entrada->destinatario->localidad }}</td>
+            </tr>
+            <tr>
+                <td class="text-muted small">Referencias</td>
+                <td>{{ $entrada->destinatario->referencias }}</td>
+            </tr>
+        </tbody>
+    </table>
     <br>
 
     <div class="text-end">

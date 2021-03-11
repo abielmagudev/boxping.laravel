@@ -1,25 +1,26 @@
 <div class="tab-pane fade" id="reempaque" role="tabpanel" aria-labelledby="reempaque-tab">
     
     @if( is_object($entrada->codigor) )   
-    <p>
-        <small class="d-block text-muted">Código de reempacado</small>
-        <span>{{ $entrada->codigor->nombre }}</span>
-    </p> 
-
-    <p>
-        <small class="d-block text-muted">Descripción</small>
-        <span>{{ $entrada->codigor->descripcion }}</span>
-    </p> 
-
-    <p>
-        <small class="d-block text-muted">Reempacador</small>
-        <span>{{ $entrada->reempacador->nombre }}</span>
-    </p> 
-
-    <p>
-        <small class="d-block text-muted">Horario</small>
-        <span>{{ $entrada->reempacado_horario }}</span>
-    </p> 
+    <table class="table align-middle">
+        <tbody>
+            <tr>
+                <td class="text-muted small">Código</td>
+                <td>{{ $entrada->codigor->nombre }}</td>
+            </tr>
+            <tr>
+                <td class="text-muted small align-top">Descripción</td>
+                <td>{{ $entrada->codigor->descripcion }}</td>
+            </tr>
+            <tr>
+                <td class="text-muted small">Reempacador</td>
+                <td>{{ $entrada->reempacador->nombre }}</td>
+            </tr>
+            <tr>
+                <td class="text-muted small">Horario</td>
+                <td>{{ $entrada->reempacado_horario }}</td>
+            </tr>
+        </tbody>
+    </table>
     <br>
 
     <p class="text-end">

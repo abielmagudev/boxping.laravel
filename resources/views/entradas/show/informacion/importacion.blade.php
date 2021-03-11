@@ -1,24 +1,25 @@
 <div class="tab-pane fade" id="importacion" role="tabpanel" aria-labelledby="importacion-tab">
     @if( is_object($entrada->vehiculo) )
-    <p>
-        <small class="d-block text-muted">Vehículo</small>
-        <span>{{ is_object($entrada->vehiculo) ? $entrada->vehiculo->alias : 'Vehículo desconocido' }}</span>
-    </p>
-
-    <p>
-        <small class="d-block text-muted">Conductor</small>
-        <span>{{ is_object($entrada->conductor) ? $entrada->conductor->nombre : 'Conductor desconocido' }}</span>
-    </p>
-
-    <p>
-        <small class="d-block text-muted">Número de cruce</small>
-        <span>{{ $entrada->numero_cruce }}</span>
-    </p>
-
-    <p>
-        <small class="d-block text-muted">Horario</small>
-        <span>{{ $entrada->importado_horario }}</span>
-    </p>
+    <table class="table align-middle">
+        <tbody>
+            <tr>
+                <td class="text-muted small">Vehículo</td>
+                <td>{{ is_object($entrada->vehiculo) ? $entrada->vehiculo->alias : 'Desconocido' }}</td>
+            </tr>
+            <tr>
+                <td class="text-muted small">Conductor</td>
+                <td>{{ is_object($entrada->conductor) ? $entrada->conductor->nombre : 'Conductor desconocido' }}</td>
+            </tr>
+            <tr>
+                <td class="text-muted small">No. de cruce</td>
+                <td>{{ $entrada->numero_cruce }}</td>
+            </tr>
+            <tr>
+                <td class="text-muted small">Horario</td>
+                <td>{{ $entrada->importado_horario }}</td>      
+            </tr>
+        </tbody>
+    </table>
     <br>
 
     <p class="text-end">

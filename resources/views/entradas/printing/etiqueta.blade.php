@@ -1,6 +1,5 @@
 @extends('printing')
 @section('content')
-
 <br>
 <div class="" style="font-size:9pt">
 
@@ -14,8 +13,8 @@
                 <td class="px-2">{{ $salida->id ? $salida->transportadora->nombre : '?' }}</td>
             </tr>
             <tr>
-                <td class="text-muted small px-2" style="width:1%">Folio</td>
-                <td class="px-2">{{ $salida->folio ? $salida->folio : '?' }}</td>
+                <td class="text-muted small px-2" style="width:1%">Rastreo</td>
+                <td class="px-2">{{ $salida->id ? $salida->rastreo : '?' }}</td>
             </tr>
             <tr>
                 <td class="table-light small px-2" style="width:1%" colspan="2">Destino</td>
@@ -53,10 +52,8 @@
                 <td class="px-2">
                     <p class="m-0 text-uppercase">{{ $salida->id ? $salida->cobertura : '?' }}</p>
                     @if( $salida->id && $salida->cobertura === 'ocurre' )
-                    <ul class="px-3 m-0">
-                        <li>{{ $salida->direccion }}, Postal {{ $salida->postal }}</li>
-                        <li>{{ $salida->ciudad }}, {{ $salida->estado }}, {{ $salida->pais }}</li>
-                    </ul>
+                    <p class="m-0">{{ $salida->direccion }}, Postal {{ $salida->postal }}</p>
+                    <p class="m-0">{{ $salida->ciudad }}, {{ $salida->estado }}, {{ $salida->pais }}</p>
                     @endif
                 </td>
             </tr>
@@ -90,5 +87,4 @@
     <br>
     <p class="lead text-center">Código de barras o QR</p>
 </div>
-
 @endsection
