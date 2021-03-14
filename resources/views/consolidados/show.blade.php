@@ -7,8 +7,20 @@
     @slot('goback', route('consolidados.index'))
 
     @slot('options')
+    <div class="d-inline dropdown">
+        <button class="btn btn-sm btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+            <span class="d-inline-block d-md-none">{!! $icons->printer_fill !!}</span>
+            <span class="d-none d-md-inline-block">Imprimir</span>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+            <li><a class="dropdown-item" href="{{ route('printing.consolidado',[$consolidado,'contenido' => 'entradas']) }}" target="_blank">Entradas</a></li>
+            <li><a class="dropdown-item" href="{{ route('printing.consolidado',[$consolidado,'contenido' => 'etiquetas']) }}" target="_blank">Etiquetas</a></li>
+            <li><a class="dropdown-item" href="{{ route('printing.consolidado',[$consolidado,'contenido' => 'etapas']) }}" target="_blank">Etapas</a></li>
+        </ul>
+    </div>
     <a href="{{ route('consolidados.edit', $consolidado) }}" class="btn btn-sm btn-warning">
-        <span class="">Editar</span>
+        <span class="d-inline-block d-md-none">{!! $icons->pencil !!}</span>
+        <span class="d-none d-md-inline-block">Editar</span>
     </a>
     @endslot
 @endcomponent
@@ -54,19 +66,15 @@
 
 @component('components.card')
     @slot('header_title', 'Entradas')
-    @slot('header_badge', $consolidado->entradas->count())
+    @slot('header_title_badge', $consolidado->entradas->count())
+    
     @slot('header_options')
-
-    <a href="#printing" class="btn btn-sm btn-outline-primary">
-        {!! $icons->printer !!}
-    </a>
-
     @if( $consolidado->status == 'abierto' )
-    <a href="{{ route('entradas.create', ['consolidado' => $consolidado]) }}" class="btn btn-sm btn-outline-primary">
-        {!! $icons->plus !!}
+    <a href="{{ route('entradas.create', ['consolidado' => $consolidado]) }}" class="btn btn-sm btn-primary">
+        <span class="d-inline-block d-md-none me-1">{!! $icons->printer_fill !!}</span>
+        <span class="d-none d-md-inline-block me-1">Agregar</span>
     </a>
     @endif
-
     @endslot
 
     @slot('body')

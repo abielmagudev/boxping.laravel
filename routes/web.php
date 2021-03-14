@@ -55,6 +55,12 @@ Route::prefix('entradas')->group( function () {
     ]);
 });
 
+Route::prefix('imprimir')->group( function () {
+    Route::get('entrada/{entrada}', 'PrintingController@entrada')->name('printing.entrada');
+    Route::get('consolidado/{consolidado}', 'PrintingController@consolidado')->name('printing.consolidado');
+    Route::get('salida/{salida}', 'PrintingController@consolidado')->name('printing.salida');
+});
+
 // Etapa > Zonas
 Route::prefix('etapas')->group( function () {
     Route::resource('{etapa}/zonas', 'ZonaController')

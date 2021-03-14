@@ -37,7 +37,7 @@ $header = (object) array(
 
         @if( $header->goback )
         <a href="{{ $header->goback }}" class="btn btn-sm btn-secondary">
-            {!! $icons->arrow_left_circle !!}
+            <span class="d-inline-block d-md-none">{!! $icons->arrow_left_circle !!}</span>
             <span class="d-none d-md-inline-block ms-1">{{ $header->goback_text }}</span>
         </a>
         @endif
