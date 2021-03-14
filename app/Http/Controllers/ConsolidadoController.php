@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Consolidado;
 use App\Cliente;
 use App\Ahex\Consolidado\Domain\Decoupler;
-use App\Ahex\Consolidado\Application\PrintingTrait as Printing;
 use App\Ahex\Consolidado\Application\RoutingTrait as Routing;
 use App\Ahex\Consolidado\Application\HandlerTrait as Handler;
 use App\Http\Requests\ConsolidadoSaveRequest as SaveRequest;
@@ -13,7 +12,7 @@ use Illuminate\Http\Request;
 
 class ConsolidadoController extends Controller
 {
-    use Printing, Routing, Handler;
+    use Routing, Handler;
 
     public function index()
     {
