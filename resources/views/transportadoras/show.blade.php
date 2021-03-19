@@ -26,7 +26,7 @@
                 <span>{{ $transportadora->telefono }}</span>
             </p>
             <p>
-                <small class="d-block text-muted">notas</small>
+                <small class="d-block text-muted">Notas</small>
                 <span>{{ $transportadora->notas }}</span>
             </p>
             @endslot
