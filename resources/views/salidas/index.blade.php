@@ -11,7 +11,7 @@
 ])
     @slot('body')
     @component('components.table', [
-        'thead' => ['Entrada','Transportadora','Rastreo','Confirmación','Cobertua','Status','',''],
+        'thead' => ['Entrada','Transportadora','Rastreo','Cobertua','Status'],
     ])
         @slot('tbody')
         @foreach($salidas as $salida)
@@ -30,7 +30,6 @@
                 @endif
             </td>
             <td class="text-nowrap">{{ $salida->rastreo ?? '...' }}</td>
-            <td class="text-nowrap">{{ $salida->confirmacion ?? '...' }}</td>
             <td class="text-nowrap">
                 <?php 
                 
@@ -50,7 +49,7 @@
                 ?>
                 <button
                     tabindex="0" 
-                    class="w-100 text-primary bg-transparent border-0" 
+                    class="text-primary bg-transparent border-0" 
                     type="button"
                     title="" 
                     data-bs-toggle="popover" 
@@ -58,8 +57,9 @@
                     data-bs-html="true" 
                     data-bs-placement="top"
                     data-bs-content="<?= $cobertura_content ?>">
-                    {{ ucfirst($salida->cobertura) }}
-                </button> 
+                    {!! $icons->info_circle_fill !!}
+                </button>
+                {{ ucfirst($salida->cobertura) }}
             </td>
             <td class="">
                 <div class="d-flex align-items-center">
@@ -86,9 +86,6 @@
                 </div>
             </td>
             <td class="text-nowrap text-end">
-                <a href="{{ route('salidas.show', $salida) }}" class="btn btn-primary btn-sm">
-                    {!! $icons->eye !!}
-                </a>
                 <a href="{{ route('salidas.edit', $salida) }}" class="btn btn-warning btn-sm">
                     {!! $icons->pencil !!}
                 </a>
