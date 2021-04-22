@@ -36,6 +36,11 @@ class Cliente extends Model
         return $this->hasMany(Entrada::class);
     }
 
+    public function getNombreConAliasAttribute()
+    {
+        return "{$this->nombre} ({$this->alias})";
+    }
+
     public function getLocalidadAttribute()
     {
         $filtered = array_filter([$this->ciudad, $this->estado, $this->pais]);
