@@ -13,9 +13,10 @@
             <span class="d-none d-md-inline-block">Imprimir</span>
         </button>
         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-            <li><a class="dropdown-item" href="{{ route('printing.consolidado',[$consolidado,'contenido' => 'entradas']) }}" target="_blank">Entradas</a></li>
-            <li><a class="dropdown-item" href="{{ route('printing.consolidado',[$consolidado,'contenido' => 'etiquetas']) }}" target="_blank">Etiquetas</a></li>
-            <li><a class="dropdown-item" href="{{ route('printing.consolidado',[$consolidado,'contenido' => 'etapas']) }}" target="_blank">Etapas</a></li>
+            <li><a class="dropdown-item" href="{{ route('printing.consolidado',[$consolidado]) }}" target="_blank">Información</a></li>
+            <li><a class="dropdown-item" href="{{ route('printing.consolidado',[$consolidado,'hoja' => 'entradas']) }}" target="_blank">Entradas</a></li>
+            <li><a class="dropdown-item" href="{{ route('printing.consolidado',[$consolidado,'hoja' => 'etiquetas']) }}" target="_blank">Etiquetas</a></li>
+            <li><a class="dropdown-item" href="{{ route('printing.consolidado',[$consolidado,'hoja' => 'etapas']) }}" target="_blank">Etapas</a></li>
         </ul>
     </div>
     <a href="{{ route('consolidados.edit', $consolidado) }}" class="btn btn-sm btn-warning">
