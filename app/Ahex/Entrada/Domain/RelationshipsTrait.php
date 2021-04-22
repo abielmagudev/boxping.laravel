@@ -84,11 +84,28 @@ Trait RelationshipsTrait
                         'created_by',
                         'updated_by',
                     ])
-                    ->withTimestamps();
+                    ->withTimestamps()
+                    ->orderBy('orden');
     }
 
     public function salida()
     {
         return $this->hasOne(Salida::class);
+    }
+
+    public function salidaForzada()
+    {
+        if(! $this->salida instanceof \App\Salida )
+            return new \App\Salida;
+
+        return $this->salida;
+    }
+
+    public function ultimaEtapa()
+    {
+        return $this->etapas->sortBy('orden')->last();
+
+        // $etapas->max('orden')
+        // $etapas->firstWhere('orden', $max_orden)
     }
 }
