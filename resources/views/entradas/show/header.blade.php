@@ -13,9 +13,15 @@
             <span class="d-none d-md-inline-block me-1">Imprimir</span>
         </button>
         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-            <li><a class="dropdown-item" href="{{ route('entradas.printing',[$entrada,'informacion']) }}" target="_blank">Información</a></li>
-            <li><a class="dropdown-item" href="{{ route('entradas.printing',[$entrada,'etiqueta']) }}" target="_blank">Etiqueta</a></li>
+            <li><a class="dropdown-item" href="{{ route('printing.entrada',[$entrada]) }}" target="_blank">Información</a></li>
+            <li><a class="dropdown-item" href="{{ route('printing.entrada',[$entrada,'hoja' => 'etiqueta']) }}" target="_blank">Etiqueta</a></li>
+            <li><a class="dropdown-item" href="{{ route('printing.entrada',[$entrada,'hoja' => 'etapas']) }}" target="_blank">Etapas</a></li>
         </ul>
     </div>
+
+    <form action="https://www.estafeta.com/Herramientas/Rastreov1" method="post" class="d-none">
+        <input type="hidden" name="wayBill" value="1780584755">
+        <button class="btn btn-sm btn-success">Rastreo</button>
+    </form>
     @endslot
 @endcomponent

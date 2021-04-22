@@ -1,7 +1,7 @@
 @extends('app')
 @section('content')
 
-@include('entradas.show.header-top')
+@include('entradas.show.header')
 
 <div class="row" style="min-height:480px">
     <div class="col-sm mb-3">
