@@ -3,35 +3,30 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Ahex\Printing\Application\RequestSetupFactory;
+use App\Ahex\Printing\Application\RequestSetupInterface;
 
 class PrintingRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize()
+    private $setup;
+
+    protected function prepareForValidation()
     {
-        return true;
+        $this->setup = RequestSetupFactory::get( $this->route()->getName() );
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array
-     */
+    public function authorize()
+    {
+        return $this->setup instanceof RequestSetupInterface;
+    }
+
     public function rules()
     {
-        return [
-            'contenido' => ['in:entradas,etiquetas,etapas'],
-        ];
+        return $this->setup->rules();
     }
 
     public function messages()
     {
-        return [
-            'contenido.in' => __('Selecciona un contenido válido de impresión.'),
-        ];
+        return $this->setup->messages();
     }
 }

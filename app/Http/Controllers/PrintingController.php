@@ -4,54 +4,43 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\PrintingRequest;
 use Illuminate\Http\Request;
-use App\Entrada;
 use App\Consolidado;
-use App\Etapa;
+use App\Entrada;
 use App\Salida;
+use App\Ahex\Printing\Application\EntradaTemplate;
+use App\Ahex\Printing\Application\ConsolidadoTemplate;
 
 class PrintingController extends Controller
 {
-    public function consolidado(Consolidado $consolidado, PrintingRequest $request)
-    {
-        $contenido = $request->input('contenido',null);
-
-        if( $contenido === 'entradas' )
-            return view('printing.consolidado-entradas')->with('entradas', $consolidado->entradas);
-            
-        if( $contenido === 'etiquetas' )
-            return view('printing.consolidado-etiquetas')->with('entradas', $consolidado->entradas);
-        
-        if( $contenido === 'etapas' )
-            return view('printing.consolidado-etapas')->with('entradas', $consolidado->entradas);
-            
-        return view('printing.consolidado')->with('consolidado', $consolidado);
-    }
-
     public function entrada(Entrada $entrada, PrintingRequest $request)
     {
-        $contenido = $request->input('contenido',null);
+        $template = new EntradaTemplate($request->input('hoja', 'informacion'), $entrada);
+        return view('printing.single', $template->content());
+    }
 
-        if( $contenido === 'etiquetas' )
-        {
-            return view('printing.entrada-etiqueta', [
-                'entrada' => $entrada,
-            ]);
-        }
-    
-        if( $contenido === 'etapas' )
-        {
-            return view('printing.entrada-etapas', [
-                'entrada' => $entrada,
-            ]);
-        }
-        
-        return view('printing.entrada')->with('entrada', $entrada);
+    public function entradas(Request $request)
+    {
+        $entradas = Entrada::whereIn('id', $request->get('list'))->get();
+        $collection = [];
+        return view('printing.multiple', [
+            'collection' => $collection,
+            'sheet' => 'Informacion | Etiquetas | Etapas',
+        ]);
     }
 
     public function salida(Salida $salida)
     {
-        return view('printing.salida', [
+        return view('printing.single', [
             'salida' => $salida,
+            'sheet' => 'informacion',
         ]);
+    }
+
+    public function consolidado(Consolidado $consolidado, PrintingRequest $request)
+    {
+        $sheet    = $request->input('hoja', 'informacion');
+        $layout   = $sheet <> 'informacion' ? 'printing.multiple' : 'printing.single';
+        $template = new ConsolidadoTemplate($sheet, $consolidado);
+        return view($layout, $template->content());
     }
 }
