@@ -72,9 +72,9 @@ class EntradaTemplate extends TemplateBase
         ];
     }
 
-    public static function collection($sheet, array $models)
+    public static function collection($sheet, $models)
     {
-        if(! $models instanceof Collection )
+        if(! $models instanceof Collection && is_array($models) )
             $models = Entrada::whereIn('id', $models)->get();
 
         foreach($models as $model)
