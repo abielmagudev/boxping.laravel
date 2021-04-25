@@ -32,28 +32,25 @@ class ConsolidadoTemplate extends TemplateBase
 
     private function entradas()
     {
-        $collection = $this->collectionEntradas('informacion', $this->model->entradas);
         return [
             'consolidado' => $this->model,
-            'collection' => $collection,
+            'collection' => EntradaTemplate::collection('informacion', $this->model->entradas),
         ];
     }
 
     private function etapas()
     {
-        $collection = $this->collectionEntradas('etapas', $this->model->entradas);
         return [
             'consolidado' => $this->model,
-            'collection' => $collection,
+            'collection' => EntradaTemplate::collection('etapas', $this->model->entradas),
         ];
     }
 
     private function etiquetas()
     {
-        $collection = $this->collectionEntradas('etiqueta', $this->model->entradas);
         return [
             'consolidado' => $this->model,
-            'collection' => $collection,
+            'collection' => EntradaTemplate::collection('etiqueta', $this->model->entradas),
         ];
     }
 
