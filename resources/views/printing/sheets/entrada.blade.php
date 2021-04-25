@@ -7,7 +7,7 @@
                 <td class="fw-bold text-white px-2" colspan="9">
                     <div class="d-flex align-items-middle justify-content-between">
                         <div>BOXPING | {{ config('app.name') }}</div>
-                        <div>Entrada</div>
+                        <div>Información</div>
                     </div>
                 </td>
             </tr>
