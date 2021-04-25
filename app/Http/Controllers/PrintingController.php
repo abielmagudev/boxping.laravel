@@ -7,8 +7,8 @@ use Illuminate\Http\Request;
 use App\Consolidado;
 use App\Entrada;
 use App\Salida;
-use App\Ahex\Printing\Application\EntradaTemplate;
-use App\Ahex\Printing\Application\ConsolidadoTemplate;
+use App\Ahex\Printing\Application\Templates\EntradaTemplate;
+use App\Ahex\Printing\Application\Templates\ConsolidadoTemplate;
 
 class PrintingController extends Controller
 {

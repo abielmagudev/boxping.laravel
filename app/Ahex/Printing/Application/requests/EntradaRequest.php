@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Ahex\Printing\Application;
+namespace App\Ahex\Printing\Application\Requests;
 
-class ConsolidadoRequest implements RequestSetupInterface
+class EntradaRequest implements RequestSetupInterface
 {
     public function rules()
     {
         return [
             'hoja' => [
                 'nullable', 
-                'in:entradas,etiquetas,etapas',
+                'in:etiqueta,etapas',
             ],
         ];
     }

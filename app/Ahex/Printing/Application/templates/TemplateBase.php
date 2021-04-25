@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Ahex\Printing\Application;
+namespace App\Ahex\Printing\Application\Templates;
 
 abstract class TemplateBase
 {

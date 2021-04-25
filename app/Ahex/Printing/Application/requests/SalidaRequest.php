@@ -1,15 +1,14 @@
 <?php
 
-namespace App\Ahex\Printing\Application;
+namespace App\Ahex\Printing\Application\Requests;
 
-class EntradaRequest implements RequestSetupInterface
+class SalidaRequest implements RequestSetupInterface
 {
     public function rules()
     {
         return [
             'hoja' => [
                 'nullable', 
-                'in:etiqueta,etapas',
             ],
         ];
     }
@@ -17,7 +16,6 @@ class EntradaRequest implements RequestSetupInterface
     public function messages()
     {
         return [
-            'hoja.in' => __('Selecciona un contenido válido de impresión.'),
         ];
     }
 }

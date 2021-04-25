@@ -3,8 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use App\Ahex\Printing\Application\RequestSetupFactory;
-use App\Ahex\Printing\Application\RequestSetupInterface;
+use App\Ahex\Printing\Application\Requests\RequestSetupFactory;
+use App\Ahex\Printing\Application\Requests\RequestSetupInterface;
 
 class PrintingRequest extends FormRequest
 {

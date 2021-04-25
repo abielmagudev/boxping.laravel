@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Ahex\Printing\Application;
+namespace App\Ahex\Printing\Application\Requests;
 
 interface RequestSetupInterface
 {

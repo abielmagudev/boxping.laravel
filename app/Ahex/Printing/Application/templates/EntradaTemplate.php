@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Ahex\Printing\Application;
+namespace App\Ahex\Printing\Application\Templates;
 
 use Illuminate\Database\Eloquent\Collection;
+use App\Ahex\Printing\Application\SheetsTray;
 use App\Entrada;
 use App\Consolidado;
 use App\Cliente;
