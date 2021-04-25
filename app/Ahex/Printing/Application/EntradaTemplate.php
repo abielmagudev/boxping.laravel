@@ -2,6 +2,8 @@
 
 namespace App\Ahex\Printing\Application;
 
+use Illuminate\Database\Eloquent\Collection;
+use App\Entrada;
 use App\Consolidado;
 use App\Cliente;
 use App\Remitente;
@@ -14,6 +16,8 @@ use App\Salida;
 
 class EntradaTemplate extends TemplateBase
 {
+    public static $collected = [];
+
     public function setContent($sheet)
     {
         switch ($sheet) {
@@ -66,5 +70,22 @@ class EntradaTemplate extends TemplateBase
             'salida'       => $this->model->salida ?? new Salida,
             'sheet'        => SheetsTray::get('entrada'),
         ];
+    }
+
+    public static function collection($sheet, array $models)
+    {
+        if(! $models instanceof Collection )
+            $models = Entrada::whereIn('id', $models)->get();
+
+        foreach($models as $model)
+        {
+            if( $model instanceof Entrada )
+            {
+                $self = new static($sheet, $model);
+                array_push(static::$collected, $self);
+            }
+        }
+
+        return static::$collected;
     }
 }
