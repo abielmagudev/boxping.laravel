@@ -9,6 +9,7 @@ class RequestSetupFactory
     private static $routenames = [
         'printing.consolidado' => ConsolidadoRequest::class,
         'printing.entrada' => EntradaRequest::class,
+        'printing.entradas' => EntradasRequest::class,
         'printing.salida' => SalidaRequest::class,
     ];
 
