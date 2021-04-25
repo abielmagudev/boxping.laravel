@@ -14,17 +14,17 @@ class PrintingController extends Controller
 {
     public function entrada(Entrada $entrada, PrintingRequest $request)
     {
-        $template = new EntradaTemplate($request->input('hoja', 'informacion'), $entrada);
+        $sheet = $request->input('hoja', 'informacion');
+        $template = new EntradaTemplate($sheet, $entrada);
         return view('printing.single', $template->content());
     }
 
-    public function entradas(Request $request)
+    public function entradas(PrintingRequest $request)
     {
-        $entradas = Entrada::whereIn('id', $request->get('list'))->get();
-        $collection = [];
+        $sheet = $request->input('hoja','informacion');
         return view('printing.multiple', [
-            'collection' => $collection,
-            'sheet' => 'Informacion | Etiquetas | Etapas',
+            'collection' => EntradaTemplate::collection($sheet, $request->lista),
+            'sheet' => $sheet,
         ]);
     }
 
