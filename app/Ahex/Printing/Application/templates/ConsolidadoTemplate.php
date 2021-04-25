@@ -64,17 +64,4 @@ class ConsolidadoTemplate extends TemplateBase
             'sheet'       => SheetsTray::get('consolidado'),
         ];
     }
-
-    private function collectionEntradas($sheet, $entradas)
-    {
-        $collection = array();
-
-        foreach($entradas as $entrada)
-        {
-            $content = new EntradaTemplate($sheet, $entrada);
-            array_push($collection, $content);
-        }
-
-        return $collection;
-    }
 }
