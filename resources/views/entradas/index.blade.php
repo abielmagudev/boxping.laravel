@@ -31,7 +31,7 @@
         @foreach($entradas as $entrada)
         <tr>
             <td style="width:1%">
-                <input type="checkbox" name="lista[]" value="{{ $entrada->id }}" id="checkbox-list" class="form-check-input" form="form-print-list">
+                <input type="checkbox" name="lista[]" value="{{ $entrada->id }}" id="checkbox-print-list-{{ $entrada->id }}" class="form-check-input" form="form-print-list">
             </td>
             <td>{{ $entrada->numero }}</td>
             <td>
