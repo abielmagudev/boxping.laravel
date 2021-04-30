@@ -1,4 +1,4 @@
 @extends('printing')
 @section('content')
-    @include($sheet)
+    @include($template)
 @endsection

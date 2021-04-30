@@ -1,15 +1,22 @@
 <?php
 
-namespace App\Ahex\Printing\Application\Requests;
+namespace App\Http\Requests;
 
-class EntradaRequest implements RequestSetupInterface
+use Illuminate\Foundation\Http\FormRequest;
+
+class ConsolidadoPrintingRequest extends FormRequest
 {
+    public function authorize()
+    {
+        return true;
+    }
+
     public function rules()
     {
         return [
             'hoja' => [
                 'nullable', 
-                'in:etiqueta,etapas',
+                'in:entradas,etiquetas,etapas',
             ],
         ];
     }

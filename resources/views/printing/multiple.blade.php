@@ -2,8 +2,8 @@
 @section('content')
 
     @foreach($collection as $item)
-        @php extract($item->content()) @endphp
-        @include($sheet)
+        @php extract($item->content) @endphp
+        @include($template)
     @endforeach
     
 @endsection

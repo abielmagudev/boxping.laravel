@@ -2,45 +2,39 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\PrintingRequest;
-use Illuminate\Http\Request;
 use App\Consolidado;
 use App\Entrada;
 use App\Salida;
-use App\Ahex\Printing\Application\Templates\EntradaTemplate;
-use App\Ahex\Printing\Application\Templates\ConsolidadoTemplate;
+use Illuminate\Http\Request;
+use App\Http\Requests\EntradaPrintingRequest;
+use App\Http\Requests\ConsolidadoPrintingRequest;
+
+use App\Ahex\Printing\Application\EntradaSheet;
+use App\Ahex\Printing\Application\ConsolidadoSheet;
 
 class PrintingController extends Controller
 {
-    public function entrada(Entrada $entrada, PrintingRequest $request)
+    public function entrada(Entrada $entrada, EntradaPrintingRequest $request)
     {
-        $sheet = $request->input('hoja', 'informacion');
-        $template = new EntradaTemplate($sheet, $entrada);
-        return view('printing.single', $template->content());
+        $template = new EntradaSheet($request, $entrada);
+        return view($template->layout, $template->content);
     }
 
-    public function entradas(PrintingRequest $request)
+    public function entradas(EntradasPrintingRequest $request)
     {
-        $sheet = $request->input('hoja','informacion');
-        return view('printing.multiple', [
-            'collection' => EntradaTemplate::collection($sheet, $request->lista),
-            'sheet' => $sheet,
-        ]);
+        $template = new EntradasSheet($request);
+        return view($template->layout, $template->content);
     }
 
-    public function salida(Salida $salida)
+    public function salida(Salida $salida, SalidaPrintingRequest $request)
     {
-        return view('printing.single', [
-            'salida' => $salida,
-            'sheet' => 'informacion',
-        ]);
+        // $template = new SalidaSheet($request, $salida);
+        // return view($template->layout, $template->content);
     }
 
-    public function consolidado(Consolidado $consolidado, PrintingRequest $request)
+    public function consolidado(Consolidado $consolidado, ConsolidadoPrintingRequest $request)
     {
-        $sheet    = $request->input('hoja', 'informacion');
-        $layout   = $sheet <> 'informacion' ? 'printing.multiple' : 'printing.single';
-        $template = new ConsolidadoTemplate($sheet, $consolidado);
-        return view($layout, $template->content());
+        $template = new ConsolidadoSheet($request, $consolidado);
+        return view($template->layout, $template->content);
     }
 }

@@ -1,9 +1,16 @@
 <?php
 
-namespace App\Ahex\Printing\Application\Requests;
+namespace App\Http\Requests;
 
-class EntradasRequest implements RequestSetupInterface
+use Illuminate\Foundation\Http\FormRequest;
+
+class EntradasPrintingRequest extends FormRequest
 {
+    public function authorize()
+    {
+        return true;
+    }
+
     public function rules()
     {
         return [
