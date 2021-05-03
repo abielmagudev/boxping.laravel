@@ -11,55 +11,77 @@ class ConsolidadoSheet extends SheetBase
 {
     public $default_sheet = 'informacion';
 
-    protected $multiple_layout = [
-        'entradas',
-        'etiquetas',
-        'etapas'
-    ];
-
     public function informacion()
     {
         return [
             'consolidado' => $this->model,
             'cliente'     => $this->model->cliente ?? new Cliente,
             'entradas'    => $this->model->entradas,
-            'template'    => 'printing.templates.consolidado',
+            'template'    => TrayManager::template('consolidado'),
         ];
     }
 
+    /**
+     * 
+     * Remueve el input 'hoja' del request, 
+     * Para que EntradaSheet ejecute el método por defualt_sheet
+     * 
+     * Example: $this->request->query->remove( 'field name' )
+     * 
+     */
     public function entradas()
     {
-        $entradas = $this->request->exists('lista') && is_array($this->request->lista) 
-                    ? $this->request->lista
-                    : $this->model->entradas;
+        $entradas = Entrada::whereIn('id', $this->request->lista)->get();
+        $this->request->query->remove('hoja');
 
         return [
             'consolidado' => $this->model,
-            'collection' => EntradaSheet::collection($this->request, $entradas),
+            'collection' => EntradaSheet::collection($entradas, $this->request),
         ];
     }
 
+    /**
+     * 
+     * Reemplaza el valor del input 'hoja' del request, por el valor de 'etiqueta' en singular
+     * Para que ejecute su metodo válido de EntradaSheet
+     * 
+     * Example: $this->request->merge(['field_name' => 'value'])
+     */
     public function etiquetas()
     {
-        $entradas = $this->request->exists('lista') && is_array($this->request->lista) 
-                    ? $this->request->lista
-                    : $this->model->entradas;
+        $entradas = Entrada::whereIn('id', $this->request->lista)->get();
+        $this->request->merge(['hoja' => 'etiqueta']);
 
         return [
             'consolidado' => $this->model,
-            'collection' => EntradaSheet::collection($this->request, $entradas, 'etiqueta'),
+            'collection' => EntradaSheet::collection($entradas, $this->request),
         ];
     }
 
     public function etapas()
     {        
-        $entradas = $this->request->exists('lista') && is_array($this->request->lista) 
-                    ? $this->request->lista
-                    : $this->model->entradas;
+        $entradas = Entrada::whereIn('id', $this->request->lista)->get();
 
         return [
             'consolidado' => $this->model,
-            'collection' => EntradaSheet::collection($this->request, $entradas, 'etapas'),
+            'collection' => EntradaSheet::collection($entradas, $this->request),
         ];
+    }
+
+    /**
+     * 
+     * Se valida si el parametro(sheetname) nombre de la hoja(metodo), para saber 
+     * si retornara una collection o informacion separada como content el metodo a ejecutar
+     * 
+     * @return boolean
+     * 
+     */
+    public static function isCollectionSheet($sheetname)
+    {
+        return in_array($sheetname, [
+            'entradas',
+            'etiquetas',
+            'etapas',
+        ]);
     }
 }
