@@ -2,12 +2,13 @@
 @section('content')
 
 <div class="text-end">
-    <form action="{{ route('printing.entradas') }}" method="get" id="form-print-list" target="_blank"></form>
+    <form action="{{ route('printing.entradas') }}" method="get" id="form-print-list"></form>
     <div class="dropdown">
         <button class="btn btn-outline-primary btn-sm dropdown-toggle" type="button" id="dropdownPrintMenu" data-bs-toggle="dropdown" aria-expanded="false">
-            Imprimir selección
+            <span class="me-1">Imprimir</span>
         </button>
         <ul class="dropdown-menu" aria-labelledby="dropdownPrintMenu">
+            <li><b class="dropdown-header">Hojas disponibles:</b></li>
             <li><button class="dropdown-item" type="submit" form="form-print-list">Informacion</button></li>
             <li><button class="dropdown-item" type="submit" name="hoja" value="etiqueta" form="form-print-list">Etiquetas</button></li>
             <li><button class="dropdown-item" type="submit" name="hoja" value="etapas" form="form-print-list">Etapas</button></li>
@@ -29,11 +30,14 @@
         @slot('thead', ['','Número','Consolidado','Cliente','Destinatario'])
         @slot('tbody')
         @foreach($entradas as $entrada)
+        <?php $checkbox_id = "checkbox-print-list-{$entrada->id}" ?>
         <tr>
             <td style="width:1%">
-                <input type="checkbox" name="lista[]" value="{{ $entrada->id }}" id="checkbox-print-list-{{ $entrada->id }}" class="form-check-input" form="form-print-list">
+                <input type="checkbox" name="lista[]" value="{{ $entrada->id }}" id="{{ $checkbox_id }}" class="form-check-input" form="form-print-list">
             </td>
-            <td>{{ $entrada->numero }}</td>
+            <td>
+                <label for="{{ $checkbox_id }}">{{ $entrada->numero }}</label>
+            </td>
             <td>
                 @if( $entrada->consolidado )
                 <span>{{ $entrada->consolidado->numero }}</span>
