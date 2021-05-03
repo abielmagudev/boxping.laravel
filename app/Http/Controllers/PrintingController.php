@@ -38,13 +38,18 @@ class PrintingController extends Controller
 
     public function consolidado(Consolidado $consolidado, ConsolidadoPrintingRequest $request)
     {
-        $template = new ConsolidadoSheet($request, $consolidado);
-        return view($template->layout, $template->content);
+        $layout = ConsolidadoSheet::isCollectionSheet($request->hoja) 
+                ? TrayManager::layout('multiple')
+                : TrayManager::layout('single');
+
+        $template = new ConsolidadoSheet($consolidado, $request);
+
+        return view($layout, $template->content());
     }
 
     public function salida(Salida $salida, SalidaPrintingRequest $request)
     {
-        // $template = new SalidaSheet($request, $salida);
-        // return view($template->layout, $template->content);
+        // $template = new SalidaSheet($salida, $request);
+        // return view(TrayManager::layout('single'), $template->content());
     }
 }
