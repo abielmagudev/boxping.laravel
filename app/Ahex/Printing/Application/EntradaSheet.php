@@ -3,6 +3,7 @@
 namespace App\Ahex\Printing\Application;
 
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Http\Request;
 use App\Entrada;
 use App\Consolidado;
 use App\Cliente;
@@ -17,7 +18,6 @@ use App\Salida;
 class EntradaSheet extends SheetBase
 {
     protected $default_sheet = 'informacion';
-    protected static $collected = [];
 
     protected function informacion()
     {
@@ -32,7 +32,7 @@ class EntradaSheet extends SheetBase
             'reempacador'  => $this->model->reempacador ?? new Reempacador,
             'codigor'      => $this->model->codigor ?? new Codigor,
             'salida'       => $this->model->salida ?? new Salida,
-            'template'     => 'printing.templates.entrada',
+            'template'     => TrayManager::template('entrada'),
         ];
     }
 
@@ -43,7 +43,7 @@ class EntradaSheet extends SheetBase
             'ultima_etapa' => $this->model->ultimaEtapa(),
             'destinatario' => $this->model->destinatario ?? new Destinatario,
             'salida'       => $this->model->salidaForzada(),
-            'template'     => 'printing.templates.etiqueta',
+            'template'     => TrayManager::template('etiqueta'),
         ];
     }
 
@@ -52,7 +52,7 @@ class EntradaSheet extends SheetBase
         return [
             'entrada'  => $this->model,
             'etapas'   => $this->model->etapas()->get(),
-            'template' => 'printing.templates.etapas',
+            'template' => TrayManager::template('etapas'),
         ];
     }
 
@@ -68,58 +68,39 @@ class EntradaSheet extends SheetBase
      * @return array collection
      * 
      */
-    public static function collection($request, $models, $sheet = null)
+    public static function collection(Collection $list, Request $request)
     {
-        $request    = static::setCollectionSheet($request, $sheet);
-        $collection = static::getCollectionModel($models);
+        $entradas  = static::filterEntradasCollection($list);
+        $collected = array();
             
-        foreach($collection as $item)
+        foreach($entradas as $entrada)
         {
-            if($item instanceof Entrada)
-                array_push(static::$collected, new static($request, $item));
+            array_push($collected, self::build($entrada, $request));
         }
 
-        return static::$collected;
+        return $collected;
     }
 
-    /**
-     * 
-     * Define la hoja solicitada para cada instancia de EntradaSheet
-     * Modificando la peticion inicial para las proximas instancias
-     * 
-     * Ejemplo: ConsolidadoSheet -> request -> hoja=etiquetas: Solicita la impresion de etiqueta de las entradas
-     *          PERO, hoja=etiquetas no existe en EntradaSheet, por eso se especifica en el parametro sheet
-     *          la hoja de "etiqueta" para hacer la instancia con la hoja correspondiente.
-     * 
-     * @return request modified
-     * 
-     */
-    private static function setCollectionSheet($request, $sheet)
-    {
-        if( is_string($sheet) && method_exists(__CLASS__, $sheet) )
-            $request->merge(['hoja' => $sheet]);
-
-        return $request;
-    }
 
     /**
      * 
      * Retorna una collection de los modelos...
      * 
-     * Si ya estan modelados, retorna la collection
-     * Si es una array de ids, busca e instancia los modelos en collecion
-     * Si no, regresa una collection vacia...
+     * 1. Si es una collection, filtra los elementos que son modelo Entrada y retorna collection
+     * 2. Si es una array, busca los ids para retornar una collection de Entradas
+     * 3. Retorna una collection vacia
      * 
-     * @return collection Entradas | Avoid
+     * @return collection Entradas | Empty collection
      * 
      */
-    private static function getCollectionModel($models)
+    public static function filterEntradasCollection($list)
     {
-        if( $models instanceof Collection )
-            return $models;
-
-        if( is_array($models) )
-            return Entrada::whereIn('id', $models)->get();
+        if( $list instanceof Collection )
+        {
+            return $list->filter( function ($item, $index) {
+                return $item instanceof Entrada;
+            });
+        }
 
         return collect([]);
     }
