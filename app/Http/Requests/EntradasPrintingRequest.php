@@ -14,12 +14,16 @@ class EntradasPrintingRequest extends FormRequest
     public function rules()
     {
         return [
-            'lista' => [
-                'required',
-            ],
             'hoja' => [
                 'nullable', 
                 'in:etiqueta,etapas',
+            ],
+            'lista' => [
+                'required',
+                'array',
+            ],
+            'lista.*' => [
+                'exists:entradas,id'
             ],
         ];
     }
@@ -27,8 +31,9 @@ class EntradasPrintingRequest extends FormRequest
     public function messages()
     {
         return [
-            'lista.required' => __('Selecciona una o más entradas para de impresión.'),
-            'hoja.in' => __('Selecciona un contenido válido de impresión.'),
+            'hoja.in' => __('Selecciona una hoja válida de impresión.'),
+            'lista.required' => __('Selecciona una o más entradas para la impresión.'),
+            'lista.*.exists' => __('Selecciona guías de entradas que existan.'),
         ];
     }
 }

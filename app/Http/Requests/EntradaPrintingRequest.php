@@ -16,7 +16,7 @@ class EntradaPrintingRequest extends FormRequest
         return [
             'hoja' => [
                 'nullable', 
-                'in:etiqueta,etapas',
+                'in:informacion,etiqueta,etapas',
             ],
         ];
     }
