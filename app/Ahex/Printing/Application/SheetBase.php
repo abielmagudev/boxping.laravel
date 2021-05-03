@@ -10,101 +10,51 @@ abstract class SheetBase
 {
     /**
      * 
-     * $model: El modelo que se usara para obtener el contenido de la hoja
-     * $request: La solicitud recibida con los parametros necesarios para su contenido
-     * $sheet: El nombre del metodo(sheet) a ejecutar
-     * $content: El contenido obtenido de la ejecucion del metodo(sheet) de la clase hija
-     * $layout: El layout de la hoja, si es single o multiple, (Multiple - Para una Collection)
+     * $model: Modelo para obtener el contenido de la hoja.
+     * $request: Solicitud recibida con reglas(opcionales) para filtrar el contenido.
      * 
      */
     protected $model;
     protected $request;
-    protected $sheet;
-    public $content;
-    public $layout;
+    protected $default_sheet;
 
-    public function __construct(Request $request, Model $model = null)
+    public function __construct(Model $model, Request $request)
     {
         $this->model   = $model;
         $this->request = $request;
-        $this->layout  = $this->getLayout();
-        $this->sheet   = $this->getSheet();
-        $this->content = $this->getContent();
     } 
 
     /**
      * 
-     * Verifica si requiere una hoja(sheet) especifica de la peticion o si esta definida la hoja predeterminada
-     * Si no es posible llamar(ejecutar) el metodo(sheet) por peticion, devuelve la hoja predeterminada(default_sheet)
+     * 1ro: intentara ejecutar la hoja(metodo) de la clase que se recibio por request
+     * 2do: intentara ejecutar la hoja(metodo) predeterminado de la clase
+     * 3ro: Aborta la la ejecucion
      * 
-     * Devuelve el nombre del metodo solicitado(hoja)
-     * 
-     * @return string Nombre del metodo(sheet) a ejecutar
-     * 
+     * @return array Parameters for the sheet
      */
-    private function getSheet()
+    public function content()
     {
-        if( !$this->request->exists('hoja') && !isset($this->default_sheet) )
-            return abort(404);
+        if( method_exists($this, $this->request->hoja) )
+            return call_user_func([$this, $this->request->hoja]);
+            
+        if( method_exists($this, $this->default_sheet) )
+            return call_user_func([$this, $this->default_sheet]);
 
-        if(! is_callable([$this, $this->request->hoja]) )
-            return $this->default_sheet;
-
-        return $this->request->get('hoja');
+        return abort(404);
     }
 
     /**
      * 
-     * Ejecuta el metodo(sheet) de la peticion de la clase hija
+     * Instancia una clase hija(called) a traves de una funcion estatica, para evitar el keyword "new"
+     * Por ejemplo, pasar un nuevo objeto por parametro de una funcion
      * 
-     * @return array El contenido requerido por la hoja solicitada que ha sido ejecutada(call_user_func)
+     * function( new self($model, $request) ) => function( Class::build($model, $request) )
      * 
+     * @return object Class child
      */
-    private function getContent()
+    public static function build(Model $model, Request $request)
     {
-        return call_user_func([$this, $this->sheet]);
-    }
-
-    /**
-     * 
-     * Funcion que busca la propiedad 'multiple_layout' que contiene los metodos(sheets) de la clase,
-     * en la cual estan definidos como tipo layout multiple.
-     * 
-     * Si no esta definida esta propiedad, automaticamente será layout single.
-     * 
-     * Property child: "multiple_layout"
-     * Type: Array
-     * Scope: Protected
-     * 
-     * @return string type layout: single, multiple.
-     */
-    private function getLayout()
-    {
-        if( property_exists($this, 'multiple_layout') )
-        {
-            if( $this->isMultipleLayout($this->request->get('hoja'), $this->multiple_layout) )
-                return 'printing.multiple';
-        }   
-        
-        return 'printing.single';
-    }
-
-    /**
-     * 
-     * Confirma si el metodo(sheet) de la peticion(request) esta dentro 
-     * de la propiedad 'multiple_layout'.
-     * 
-     * Argument one: String nombre de la hoja en la peticion
-     * Argument two: String|Array lista o texto para comparar con la peticion
-     * 
-     * @return boolean 
-     * 
-     */
-    private function isMultipleLayout(string $sheetname = null, $class_sheetnames)
-    {
-        if( is_array($class_sheetnames) )
-            return in_array($sheetname, $class_sheetnames);
-
-        return $sheetname === $class_sheetnames;
+        $called_class = get_called_class();
+        return new $called_class($model, $request);
     }
 }
