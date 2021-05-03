@@ -1,5 +1,4 @@
 <!-- Impresion de etapas - Inicio -->
-@if( $etapas->count() )
 <div class="mt-5" style="font-size:9pt;page-break-before:always">
     <table class="table table-sm table-bordered xtable-striped align-middle m-0">
         <!-- App & Entrada -->
@@ -19,6 +18,8 @@
             <tr>
                 <td class="bg-light fw-bold px-2" colspan="9">Etapas</td>
             </tr>
+
+            @if( $etapas->count() )
             <tr class="text-muted">
                 <td class="px-2">Nombre</td>
                 <td class="px-2">Peso</td>
@@ -30,6 +31,7 @@
                 <td class="px-2">Zona</td>
                 <td class="px-2">Alertas</td>
             </tr>
+
             @foreach($etapas as $etapa)
             <tr>
                 <td class="px-2 text-nowrap">{{ $etapa->nombre }}</td>
@@ -65,8 +67,15 @@
                 </td>
             </tr>
             @endforeach
+
+            @else
+            <tr>
+                <td class="text-center">SIN REGISTRO DE ETAPAS</td>
+            </tr>
+
+            @endif
+
         </tbody>
     </table>
 </div>
-@endif
 <!-- Impresion de etapas - Final -->
