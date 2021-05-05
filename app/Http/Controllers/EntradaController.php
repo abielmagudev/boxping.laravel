@@ -26,7 +26,7 @@ class EntradaController extends Controller
     public function index()
     {
         return view('entradas.index', [
-            'entradas' => Entrada::with(['consolidado','cliente'])->orderBy('id','desc')->paginate(),
+            'entradas' => Entrada::with(['consolidado','cliente','destinatario'])->orderBy('id','desc')->paginate(),
         ]);
     }
 
