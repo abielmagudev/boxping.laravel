@@ -54,53 +54,11 @@
 </div>
 <br>
 
-@component('components.card')
-    @slot('header_title', 'Entradas')
-    @slot('header_title_badge', $consolidado->entradas->count())
-    
-    @slot('header_options')
-    <button id="printing-toggle-select" data-selected="0" type="button" class="btn btn-sm btn-outline-primary">Seleccionar</button>
-    <div class="d-inline dropdown">
-        <button class="btn btn-sm btn-outline-primary dropdown-toggle" type="button" id="dropdownPrintingMenu" data-bs-toggle="dropdown" aria-expanded="false">
-            <span class="d-inline-block d-md-none">{!! $icons->printer_fill !!}</span>
-            <span class="d-none d-md-inline-block">Imprimir</span>
-        </button>
-        <ul class="dropdown-menu" aria-labelledby="dropdownPrintingMenu">
-            <li><button type="submit" name="hoja" value="entradas" form="form-printing-list" class="dropdown-item">Entradas</button></li>
-            <li><button type="submit" name="hoja" value="etiquetas" form="form-printing-list" class="dropdown-item">Etiquetas</button></li>
-            <li><button type="submit" name="hoja" value="etapas" form="form-printing-list" class="dropdown-item">Etapas</button></li>
-        </ul>
-    </div>
-    @if( $consolidado->status == 'abierto' )
-    <a href="{{ route('entradas.create', ['consolidado' => $consolidado]) }}" class="btn btn-sm btn-primary">
-        <span class="d-inline-block d-md-none me-1">{!! $icons->plus !!}</span>
-        <span class="d-none d-md-inline-block me-1">Agregar</span>
-    </a>
-    @endif
-    <form action="{{ route('printing.consolidado', $consolidado) }}" id="form-printing-list"></form>
-    @endslot
-
-    @slot('body')
-    @if( $consolidado->entradas->count() )
-    @component('partials.table-summary-entradas', [
-        'entradas' => $consolidado->entradas->sortByDesc('id'),
-        'printing' => true,
-    ])
-    @endcomponent
-    @endif 
-    @endslot
-
+@component('partials.card-entradas', [
+    'button_nueva_entrada_enable' => $consolidado->status === 'abierto',
+    'consolidado' => $consolidado,
+    'entradas' => $consolidado->entradas->load('cliente'),
+])    
 @endcomponent
 
-<script>
-    let printingButton = document.getElementById('printing-toggle-select')
-    let printingList = document.querySelectorAll('[id^="checkbox-printing-list"]')
-
-    printingButton.addEventListener('click', function (e) {
-        let selected = this.dataset.selected == 0 ? true : false;
-        printingList.forEach( item => item.checked = selected )
-        this.innerHTML = selected ? 'Deseleccionar' : 'Seleccionar';
-        this.dataset.selected = selected ? 1 : 0;
-    })
-    </script>
 @endsection
