@@ -27,7 +27,21 @@ class PrintingController extends Controller
 
     public function entradas(EntradasPrintingRequest $request)
     {
-        $entradas   = Entrada::whereIn('id', $request->lista)->get();
+        $relations = [
+            'consolidado',
+            'cliente',
+            'remitente',
+            'destinatario',
+            'conductor',
+            'vehiculo',
+            'reempacador',
+            'codigor',
+            'salida',
+            'creator',
+            'updater'
+        ];
+
+        $entradas   = Entrada::with($relations)->whereIn('id', $request->lista)->distinct('user_id')->get();
         $collection = EntradaSheet::collection($entradas, $request);
 
         return view(
