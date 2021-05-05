@@ -30,7 +30,7 @@ $card = (object) array_merge($defaults, $validations);
     @slot('header_title_badge', $card->entradas->count())
 
     @slot('header_options')
-        @includeWhen($card->printing_enable, 'partials.card-entradas._printing-buttons-selectall-sheets')
+        @includeWhen($card->printing_enable, 'partials.card-entradas._buttons-printing')
         @if( $card->button_nueva_entrada_enable )
         <a href="{{ $card->route_nueva_entrada }}" class="btn btn-primary btn-sm">Nueva entrada</a>
         @endif
@@ -41,4 +41,4 @@ $card = (object) array_merge($defaults, $validations);
     @endslot
 @endcomponent
 
-@includeWhen($card->printing_enable, 'partials.card-entradas._printing-js-selectall')
+@includeWhen($card->printing_enable, 'partials.card-entradas._js-printing-selectall')
