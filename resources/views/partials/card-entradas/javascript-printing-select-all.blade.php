@@ -1,7 +1,7 @@
 <script>
-    let printingButtonSelect = document.getElementById('<?= $card->button_selectall_id ?>')
-    let printingButtonSheets = document.getElementById('<?= $card->button_dropdown_sheets_id ?>')
-    let printingList = document.querySelectorAll('[id^="<?= $card->checkbox_prefix_id ?>"]')
+    let printingButtonSelect = document.getElementById('<?= $settings->identifiers->button_select_all ?>')
+    let printingButtonSheets = document.getElementById('<?= $settings->identifiers->button_dropdown_sheets ?>')
+    let printingList = document.querySelectorAll('[id^="<?= $settings->identifiers->checkbox_prefix_printing ?>"]')
 
     printingButtonSelect.addEventListener('click', function (e) {
         e.stopPropagation;

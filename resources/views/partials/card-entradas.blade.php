@@ -1,44 +1,44 @@
 <?php
 
-// Defaults
-$defaults = [
-    'button_dropdown_sheets_id' => 'button_dropdown_sheets_id',
-    'button_nueva_entrada_enable' => isset($button_nueva_entrada_enable) && is_bool($button_nueva_entrada_enable) ? $button_nueva_entrada_enable : true,
-    'button_selectall_id'  => 'button_selectall_id',
-    'checkbox_prefix_id'   => 'printing-checkbox-',
-    'has_consolidado'      => isset($consolidado) && is_a($consolidado, 'App\Consolidado'),
-    'has_entradas'         => isset($entradas) && is_a($entradas, 'Illuminate\Database\Eloquent\Collection'),
-    'printing_enable'      => isset($printing_enable) && is_bool($printing_enable) ? $printing_enable : true,
-    'printing_form_id'     => 'printing-form',
-    'printing_sheets'      => array('etiqueta','etapas'),
-    'route_printing'       => route('printing.entradas'),
-];
+$has_entradas = isset($entradas) && is_a($entradas, \Illuminate\Database\Eloquent\Collection::class);
 
-// Validate by models
-$validations = [
-    'route_nueva_entrada' => $defaults['has_consolidado'] ? route('entradas.create', ['consolidado' => $consolidado]) : route('entradas.create'),
-    'consolidado' => $defaults['has_consolidado'] ? $consolidado : false,
-    'entradas' => $defaults['has_entradas'] ? $entradas : collect([]),
+$settings = (object) [
+    'consolidado' => isset($consolidado) && is_a($consolidado, \App\Consolidado::class) ? $consolidado : false,
+    'hojas' => config('system.impresion.hojas'),
+    'entradas' => (object) [
+        'all' => $has_entradas ? $entradas : collect([]),
+        'count' => isset($entradas_count) && is_int($entradas_count) ? $entradas_count : 0,
+    ],
+    'routes' => (object) [
+        'nueva_entrada' => isset($route_nueva_entrada) && is_string($route_nueva_entrada) ? $route_nueva_entrada : false,
+        'filtering' => isset($route_filtrado) && is_string($route_filtrado) ? $route_filtrado : false,
+        'printing' => isset($route_impresion) && is_string($route_impresion) ? $route_impresion : route('printing.entradas'),
+    ],
+    'identifiers' => (object) [
+        'button_dropdown_sheets' => 'button_dropdown_sheets',
+        'button_select_all' => 'button_select_all',
+        'checkbox_prefix_printing' => 'checkbox_prefix_printing',
+        'form_printing' => 'form_printing',
+    ],
 ];
-
-$card = (object) array_merge($defaults, $validations);
 
 ?>
 
 @component('components.card')
     @slot('header_title', 'Entradas')
-    @slot('header_title_badge', $card->entradas->count())
+    @slot('header_title_badge', $settings->entradas->count)
 
     @slot('header_options')
-        @includeWhen($card->printing_enable, 'partials.card-entradas._buttons-printing')
-        @if( $card->button_nueva_entrada_enable )
-        <a href="{{ $card->route_nueva_entrada }}" class="btn btn-primary btn-sm">Nueva entrada</a>
+        @includeWhen($settings->routes->filtering, 'partials.card-entradas.modal-filter-entradas')
+        @includeWhen($settings->routes->printing, 'partials.card-entradas.toolbar-printing')
+        @if( $settings->routes->nueva_entrada )
+        <a href="{{ $settings->routes->nueva_entrada }}" class="btn btn-outline-primary btn-sm">Nueva entrada</a>
         @endif
     @endslot
 
     @slot('body')
-        @include('partials.card-entradas._table-entradas')
+        @include('partials.card-entradas.table-entradas')
     @endslot
 @endcomponent
 
-@includeWhen($card->printing_enable, 'partials.card-entradas._js-printing-selectall')
+@includeWhen($settings->routes->printing, 'partials.card-entradas.javascript-printing-select-all')
