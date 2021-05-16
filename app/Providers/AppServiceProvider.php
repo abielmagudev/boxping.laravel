@@ -26,5 +26,9 @@ class AppServiceProvider extends ServiceProvider
     {
         View::share('symbols', config('resources.symbols'));
         View::share('icons', config('resources.bootstrap-icons'));
+        View::composer('entradas.index', function ($view) {
+            View::share('clientes', \App\Cliente::all());
+            View::share('etapas', \App\Etapa::all());
+        });
     }
 }
