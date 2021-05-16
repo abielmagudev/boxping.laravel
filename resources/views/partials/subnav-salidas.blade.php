@@ -2,7 +2,6 @@
     @component('components.links-group', [
         'links' => [
             'salidas' => route('salidas.index'),
-            'transportadoras' => route('transportadoras.index'),
             'incidentes' => route('incidentes.index'),
         ],
         'rounded_pill' => true,

@@ -18,7 +18,7 @@ $menu = array(
     (object) [
         'title' => 'salidas',
         'route' => route('salidas.index'),
-        'active' => request()->is('salidas*') || request()->is('transportadoras*') || request()->is('incidentes*'),
+        'active' => request()->is('salidas*') || request()->is('incidentes*'),
     ],
     (object) [
         'title' => 'clientes',
@@ -44,6 +44,11 @@ $menu = array(
         'title' => 'trayectoria',
         'route' => route('destinatarios.index'),
         'active' => request()->is('destinatarios*') || request()->is('remitentes*'),
+    ],
+    (object) [
+        'title' => 'transportadoras',
+        'route' => route('transportadoras.index'),
+        'active' => request()->is('transportadoras*'),
     ],
 );
 ?>

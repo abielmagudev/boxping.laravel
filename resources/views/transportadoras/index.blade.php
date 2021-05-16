@@ -1,10 +1,6 @@
 @extends('app')
 @section('content')
 
-@component('partials.subnav-salidas')
-    @slot('active','transportadoras')
-@endcomponent
-
 @component('components.card', [
     'header_title' => 'Transportadoras',
     'header_title_badge' => $transportadoras->count(),
