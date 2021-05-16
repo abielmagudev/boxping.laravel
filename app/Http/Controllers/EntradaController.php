@@ -23,10 +23,15 @@ class EntradaController extends Controller
 {
     use Routing, Trayectoria, Printing;
 
-    public function index()
+    public function index(Request $request)
     {
+        $entradas = Entrada::with(['consolidado','cliente','destinatario'])
+                            ->filterByRequest($request->all())
+                            ->getFiltered($request->muestreo);
+        
         return view('entradas.index', [
-            'entradas' => Entrada::with(['consolidado','cliente','destinatario'])->orderBy('id','desc')->paginate(),
+            'entradas' => $entradas,
+            'has_pagination' => is_a($entradas, \Illuminate\Pagination\LengthAwarePaginator::class),
         ]);
     }
 
