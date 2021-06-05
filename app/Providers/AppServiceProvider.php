@@ -25,6 +25,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         View::share('symbols', config('resources.symbols'));
+        View::share('svg', config('resources.bootstrap-svg'));
         View::share('icons', config('resources.bootstrap-icons'));
         View::composer('entradas.index', function ($view) {
             View::share('clientes', \App\Cliente::all());
