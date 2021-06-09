@@ -32,6 +32,7 @@ class TransportadoraController extends Controller
     {
         return view('transportadoras.show', [
             'transportadora' => $transportadora,
+            'salidas' => \App\Salida::with('entrada')->where('transportadora_id', $transportadora->id)->get(),
         ]);
     }
 

@@ -20,6 +20,11 @@ class Transportadora extends Model
         'updated_by',
     ];
 
+    public function salidas()
+    {
+        return $this->hasMany(Salida::class);
+    }
+
     public static function prepare($validated)
     {
         $prepared = [
