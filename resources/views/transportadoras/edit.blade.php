@@ -1,36 +1,37 @@
 @extends('app')
 @section('content')
-@component('components.card', [
-    'header_title' => 'Editar transportadora',
-])
+
+@component('@.bootstrap.header')
+    @slot('title', 'Editar transportadora')
+@endcomponent
+
+@component('@.bootstrap.card')
     @slot('body')
-    <form action="{{ route('transportadoras.update', $transportadora) }}" method="post" autocomplete="off">
+    <form action="{{ route('transportadoras.update', $transportadora) }}" method="post" autocomplete="off" id="form-transport-update">
         @method('put')
         @include('transportadoras._save')
         <br>
-        <button type="submit" class="btn btn-warning">Actualizar transportadora</button>
+        <button type="submit" class="btn btn-warning mb-3 mb-md-0" form="form-transport-update">Actualizar transportadora</button>
         <a href="{{ route('transportadoras.show', $transportadora) }}" class="btn btn-secondary">Regresar</a>
     </form>
     @endslot
 
     @slot('footer')
-    @component('partials.modal-confirm-delete', [
-        'route' => route('transportadoras.destroy', $transportadora),
-        'trigger_text' => 'Eliminar transportadora',
-        'trigger_align' => 'right'
-    ])
-        @slot('body')
-        <p class="text-muted">
-            <span class="d-block">Se eliminará la transportadora</span>
-            <span class="fw-bold">{{ $transportadora->nombre }}</span>
-        </p>
-        @endslot
-    @endcomponent
+        @component('@.partials.modifiers')
+            @slot('entity', $transportadora)
+        @endcomponent
     @endslot
 @endcomponent
+<br>
 
-@component('partials.section-modifiers', [
-    'concept' => $transportadora
+@component('@.partials.modal-confirm-delete', [
+    'route' => route('transportadoras.destroy', $transportadora),
+    'text' => 'Eliminar transportadora',
 ])
+    @slot('content')
+    <p class="lead">¿Deseas eliminar la transportadora <b>{{ $transportadora->nombre }}</b>?</p>
+    @endslot
 @endcomponent
+<br>
+
 @endsection

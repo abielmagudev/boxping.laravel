@@ -1,37 +1,79 @@
 @extends('app')
 @section('content')
 
-@component('components.header', [
-    'title' => $transportadora->nombre,
-    'subtitle' => 'Transportadora',
-    'goback' => route('transportadoras.index'),
-])
+<?php /*
+@component('components.bs.breadcrums')
+    @slot('breadcrums', [
+        'Transportadoras' => route('transportadoras.index'),
+        $transportadora->nombre => null,
+    ])
+@endcomponent
+
+
+<p class="rounded">
+    <a href="{{ route('transportadoras.index') }}" class="text-decoration-none">Regresar</a>
+</p>
+*/ ?>
+
+@component('@.bootstrap.header')
+    @slot('pretitle', 'Transportadora')
+    @slot('title', $transportadora->nombre)
     @slot('options')
-    <a href="{{ route('transportadoras.edit',$transportadora) }}" class="btn btn-sm btn-warning">Editar</a>
+    <a href="{{ route('transportadoras.edit', $transportadora) }}" class="btn btn-sm btn-warning">{!! $svg->pencil !!}</a>
     @endslot
 @endcomponent
 
 <div class="row">
-    <div class="col-sm">  
-        @component('components.card', [
-            'header_title' => 'Información',
-        ])
+    <!-- Information -->
+    <div class="col-sm">
+        @component('@.bootstrap.card')    
             @slot('body')
-            <p>
-                <small class="d-block text-muted">Sitio web</small>
-                <a href="{{ $transportadora->web }}" target="_blank">{{ $transportadora->web }}</a>
-            </p>
             <p>
                 <small class="d-block text-muted">Teléfono</small>
                 <span>{{ $transportadora->telefono }}</span>
             </p>
             <p>
+                <small class="d-block text-muted">Sitio web</small>
+                <a href="{{ $transportadora->web }}" target="_blank">{{ $transportadora->web }}</a>
+            </p>
+            <p>
                 <small class="d-block text-muted">Notas</small>
                 <span>{{ $transportadora->notas }}</span>
             </p>
+            @endslot 
+        @endcomponent
+    
+    </div>
+
+    <!-- Salidas -->
+    <div class="col-sm col-sm-8">
+        @component('@.bootstrap.card')
+
+            @slot('header')
+            <span>Salidas</span>
+            <span class="badge bg-dark rounded-pill">{{ $salidas->count() }}</span>
             @endslot
+
+            @if( $salidas->count() > 0 )    
+            @slot('body')
+
+                @component('@.bootstrap.table')
+                    @slot('thead', ['Entrada'])
+                    @slot('tbody')
+                        @foreach($salidas as $salida)
+                        <tr>
+                            <td>{{ $salida->entrada->numero }}</td>
+                        </tr>
+                        @endforeach
+                    @endslot
+                @endcomponent
+
+            @endslot
+            @endif
+
         @endcomponent
     </div>
-    <div class="col-sm"></div>
+
 </div>
+
 @endsection
