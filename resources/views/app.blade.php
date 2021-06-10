@@ -9,20 +9,21 @@
     <title>{{ config('app.name') }}</title>
 </head>
 <body>
-    @include('layout.navbar')
+    @include('@.layouts.navbar')
     <br>
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm d-none d-lg-block">
-                @include('layout.menubar')
+                @include('@.layouts.sidebar')
             </div>
             <div class="col-sm col-sm-12 col-lg-10">
-                @include('components.errors')
-                @include('components.notification')
+                @include('@.partials.errors')
+                @include('@.partials.alerts')
                 @yield('content')
+                <br>
             </div>
         </div>
     </div>
-    @include('layout.scripts')
+    @include('@.layouts.scripts')
 </body>
 </html>
