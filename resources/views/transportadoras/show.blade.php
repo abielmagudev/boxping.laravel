@@ -19,7 +19,10 @@
     @slot('pretitle', 'Transportadora')
     @slot('title', $transportadora->nombre)
     @slot('options')
-    <a href="{{ route('transportadoras.edit', $transportadora) }}" class="btn btn-sm btn-warning">{!! $svg->pencil !!}</a>
+    <a href="{{ route('transportadoras.edit', $transportadora) }}" class="btn btn-sm btn-warning">
+        <span class="d-block d-md-none">{!! $svg->pencil_fill !!}</span>
+        <span class="d-none d-md-block">Editar</span>
+    </a>
     @endslot
 @endcomponent
 
