@@ -10,7 +10,7 @@ $settings = (object) [
 ?>
 
 <div class="table-responsive">
-    <table class="table table-hover table-borderless align-middle">
+    <table class="table table-hover align-middle">
         @if( $settings->has_thead )    
         <thead>
             <tr class="">

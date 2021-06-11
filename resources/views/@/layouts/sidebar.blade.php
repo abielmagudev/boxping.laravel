@@ -41,7 +41,7 @@ $menu = array(
         'active' => request()->is('reempacadores*') || request()->is('codigosr*'),
     ],
     (object) [
-        'title' => 'trayectoria',
+        'title' => 'trayectorias',
         'route' => route('destinatarios.index'),
         'active' => request()->is('destinatarios*') || request()->is('remitentes*'),
     ],
