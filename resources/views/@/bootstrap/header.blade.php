@@ -6,6 +6,8 @@ $settings = (object) [
     'subtitle' => isset($subtitle) && is_string($subtitle) ? $subtitle : null,
     'counter' => isset($counter) && is_numeric($counter) ? $counter : null,
     'has_options' => isset($options),
+    'has_goback' => isset($goback) && is_string($goback),
+    'goback' => $goback ?? false,
 ];
 
 ?>
@@ -22,10 +24,17 @@ $settings = (object) [
         <small class="text-muted">{{ $settings->subtitle }}</small>
     </div>
 
-    @if( $settings->has_options )       
     <div class="text-end">
+    @if( $settings->has_options )       
         {!! $options !!}
-    </div>
     @endif
+
+    @if( $settings->has_goback )
+        <a href="{{ $settings->goback }}" class="btn btn-sm btn-secondary">
+            <span class="d-block d-md-none fw-bold">&laquo;</span>
+            <span class="d-none d-md-block">Regresar</span>
+        </a>
+    @endif
+    </div>
 
 </div>
