@@ -1,21 +1,23 @@
 @extends('app')
 @section('content')
-@component('components.header', [
+
+@component('@.bootstrap.header', [
+    'pretitle' => 'Remitente',
     'title' => $remitente->nombre,
-    'subtitle' => 'Remitente',
-    'goback' => route('remitentes.index'),
 ])
     @slot('options')
-    <a href="{{ route('remitentes.edit', $remitente) }}" class="btn btn-sm btn-warning">Editar</a>
+    <a href="{{ route('remitentes.edit', $remitente) }}" class="btn btn-sm btn-warning">
+        <span class="d-block d-md-none">{!! $svg->pencil_fill !!}</span>
+        <span class="d-none d-md-block">Editar</span>
+    </a>
     @endslot
 @endcomponent
 
 <div class="row">
     <!-- Column informacion -->
     <div class="col-sm">
-        @component('components.card', [
-            'classes' => 'h-100',
-            'header_title' => 'Información',
+        @component('@.bootstrap.card', [
+            'header' => 'Información',
         ])
             @slot('body')
             <p>
@@ -37,19 +39,20 @@
             @endslot
         @endcomponent
     </div>
+
     <!-- Column ultimas entradas -->
     <div class="col-sm col-sm-8">
-        @component('components.card', [
-            'classes' => 'h-100',
-            'header_title' => 'Últimas entradas',
+        @component('@.bootstrap.card', [
+            'header' => 'Recientes entradas',
         ])
             @slot('body')
             @if( count($entradas) )
-            @component('partials.table-summary-entradas', [
-                'entradas' => $entradas,
-            ])
-            @endcomponent
+                @component('@.partials.table-entradas', [
+                    'entradas' => $entradas,
+                ])
+                @endcomponent
             @endif
+
             @endslot
         @endcomponent
     </div>
