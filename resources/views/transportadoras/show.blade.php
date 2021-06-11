@@ -26,7 +26,8 @@
 <div class="row">
     <!-- Information -->
     <div class="col-sm">
-        @component('@.bootstrap.card')    
+        @component('@.bootstrap.card')  
+            @slot('header', 'Información')  
             @slot('body')
             <p>
                 <small class="d-block text-muted">Teléfono</small>
@@ -48,11 +49,7 @@
     <!-- Salidas -->
     <div class="col-sm col-sm-8">
         @component('@.bootstrap.card')
-
-            @slot('header')
-            <span>Salidas</span>
-            <span class="badge bg-dark rounded-pill">{{ $salidas->count() }}</span>
-            @endslot
+            @slot('header', 'Salidas recientes')
 
             @if( $salidas->count() > 0 )    
             @slot('body')
