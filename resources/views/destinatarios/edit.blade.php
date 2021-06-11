@@ -1,33 +1,34 @@
 @extends('app')
 @section('content')
 
-@component('components.card', [
-    'header_title' => 'Editar destinataio'
-])
+@component('@.bootstrap.header', [
+    'title' => 'Editar destinatario'
+])    
+@endcomponent
+@component('@.bootstrap.card')
     @slot('body')
     <form action="{{ route('destinatarios.update', $destinatario) }}" method="post" autocomplete="off">
         @method('patch')
         @include('destinatarios._save')
         <button type="submit" class="btn btn-warning">Actualizar destinatario</button>
-        <a href="{{ $goback }}" class="btn btn-secondary">Regresar</a>
+        <a href="{{ route('destinatarios.show', $destinatario) }}" class="btn btn-secondary">Regresar</a>
     </form>
     @endslot
 
     @slot('footer')
-        @component('partials.modal-confirm-delete', [
-            'route' => route('destinatarios.destroy', $destinatario),
-            'trigger_text' => 'Eliminar destinatario',
-            'trigger_align' => 'right',
-            'body' => "Se eliminará el destinatario <span class='fw-bold'>{$destinatario->nombre}</span>"
-        ])
-        @endcomponent
+    @component('@.partials.modifiers')
+        @slot('entity', $destinatario)
+    @endcomponent
     @endslot
 @endcomponent
-
-@component('partials.section-modifiers', [
-    'concept' => $destinatario,
-])
-@endcomponent
 <br>
+
+@component('@.partials.modal-confirm-delete')
+    @slot('route', route('destinatarios.destroy', $destinatario))
+    @slot('text', 'Eliminar destinatario')
+    @slot('content')
+    <p class="lead">¿Deseas eliminar destinatario <b>{{ $destinatario->nombre }}</b>?</p>
+    @endslot
+@endcomponent
 
 @endsection

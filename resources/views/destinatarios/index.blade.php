@@ -5,18 +5,21 @@
     @slot('active','destinatarios')
 @endcomponent
 
-@component('components.card', [
-    'header_title' => 'Destinatarios',
-    'header_title_badge' => $destinatarios->total(),
-])
-    @slot('header_options')
-    <a href="{{ route('destinatarios.create') }}" class="btn btn-sm btn-outline-primary">Nuevo destinatario</a>
+@component('@.bootstrap.header')
+    @slot('title', 'Destinatarios')
+    @slot('counter', $destinatarios->count())
+    @slot('options')
+    <a href="{{ route('destinatarios.create') }}" class="btn btn-sm btn-primary">
+        <span class="d-block d-md-none fw-bold">+</span>
+        <span class="d-none d-md-block">Nuevo destinatario</span>
+    </a>
     @endslot
+@endcomponent
 
+@component('@.bootstrap.card')
     @slot('body')
-    @component('components.table', [
-        'thead' => ['Nombre','Dirección','Postal','Localidad']
-    ])
+    @component('@.bootstrap.table')
+        @slot('thead', ['Nombre','Dirección','Postal','Localidad'])
         @slot('tbody')
         @foreach($destinatarios as $destinatario)
         <tr>
@@ -25,8 +28,8 @@
             <td class="text-nowrap">{{ $destinatario->codigo_postal }}</td>
             <td class="text-nowrap">{{ $destinatario->localidad }}</td>
             <td class="text-nowrap text-end">
-                <a href="{{ route('destinatarios.show', $destinatario) }}" class="btn btn-sm btn-primary">
-                    {!! $icons->eye !!}
+                <a href="{{ route('destinatarios.show', $destinatario) }}" class="btn btn-sm btn-outline-primary">
+                    {!! $svg->eye !!}
                 </a>
             </td>
         </tr>
@@ -37,7 +40,7 @@
 @endcomponent
 <br>
 
-@component('components.pagination-simple')
+@component('@.partials.pagination-simple')
     @slot('collection', $destinatarios)
 @endcomponent
 <br>
