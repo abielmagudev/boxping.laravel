@@ -42,7 +42,7 @@ $menu = array(
     ],
     (object) [
         'title' => 'trayectorias',
-        'route' => route('destinatarios.index'),
+        'route' => route('remitentes.index'),
         'active' => request()->is('destinatarios*') || request()->is('remitentes*'),
     ],
     (object) [
