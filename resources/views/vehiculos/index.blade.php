@@ -1,8 +1,8 @@
 @extends('app')
 @section('content')
 
-@component('partials.subnav-importacion')
-    @slot('active', 'vehículos')
+@component('@.subnavs.importacion')
+    @slot('active', 2)
 @endcomponent
 
 @component('components.card')

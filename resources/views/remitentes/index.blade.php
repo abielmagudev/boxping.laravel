@@ -1,19 +1,25 @@
 @extends('app')
 @section('content')
 
-@component('partials.subnav-trayectoria')
-    @slot('active','remitentes')
+@component('@.subnavs.trayectorias')
+    @slot('active', 1)
 @endcomponent
 
-@component('components.card', [
-    'header_title' => 'Remitentes',
-    'header_title_badge' => $remitentes->total(),
+@component('@.bootstrap.header', [
+    'title' => 'Remitentes',
+    'counter' => $remitentes->count(),
 ])
-    @slot('header_options')
-    <a href="{{ route('remitentes.create') }}" class="btn btn-sm btn-outline-primary">Nuevo remitente</a>
+    @slot('options')
+    <a href="{{ route('remitentes.create') }}" class="btn btn-sm btn-primary">
+        <span class="d-block d-md-none fw-bold">+</span>
+        <span class="d-none d-md-block">Nuevo remitente</span>
+    </a>
     @endslot
+@endcomponent
 
+@component('@.bootstrap.card')
     @slot('body')
+
     @component('components.table', [
         'thead' => ['Nombre','Dirección','Postal','Localidad'],
     ])
@@ -25,17 +31,18 @@
             <td class="text-nowrap">{{ $remitente->codigo_postal }}</td>
             <td class="text-nowrap">{{ $remitente->localidad }}</td>
             <td class="text-nowrap text-end">
-                <a href="{{ route('remitentes.show', $remitente) }}" class="btn btn-sm btn-primary">{!! $icons->eye !!}</a>
+                <a href="{{ route('remitentes.show', $remitente) }}" class="btn btn-sm btn-outline-primary">{!! $svg->eye !!}</a>
             </td>
         </tr>
         @endforeach
         @endslot
     @endcomponent
+
     @endslot
 @endcomponent
 <br>
 
-@component('components.pagination-simple')
+@component('@.partials.pagination-simple')
     @slot('collection', $remitentes)
 @endcomponent
 <br>

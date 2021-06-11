@@ -1,8 +1,8 @@
 @extends('app')
 @section('content')
 
-@component('partials.subnav-reempaque')
-    @slot('active', 'reempacadores')
+@component('@.subnavs.reempaque')
+    @slot('active', 1)
 @endcomponent
 
 @component('components.card', [

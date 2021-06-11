@@ -1,8 +1,8 @@
 @extends('app')
 @section('content')
 
-@component('partials.subnav-etapas')
-    @slot('active','alertas')
+@component('@.subnavs.etapas')
+    @slot('active', 2)
 @endcomponent
 
 @component('components.card', [

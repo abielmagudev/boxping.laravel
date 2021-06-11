@@ -1,13 +1,14 @@
 @extends('app')
 @section('content')
 
-@component('partials.subnav-trayectoria')
-    @slot('active','destinatarios')
+@component('@.subnavs.trayectorias')
+    @slot('active', 2)
 @endcomponent
 
-@component('@.bootstrap.header')
-    @slot('title', 'Destinatarios')
-    @slot('counter', $destinatarios->count())
+@component('@.bootstrap.header', [
+    'title' => 'Destinatarios',
+    'counter' => $destinatarios->count(),
+])
     @slot('options')
     <a href="{{ route('destinatarios.create') }}" class="btn btn-sm btn-primary">
         <span class="d-block d-md-none fw-bold">+</span>
