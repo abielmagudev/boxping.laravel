@@ -43,7 +43,7 @@
     <!-- Column ultimas entradas -->
     <div class="col-sm col-sm-8">
         @component('@.bootstrap.card', [
-            'header' => 'Recientes entradas',
+            'header' => 'Entradas recientes',
         ])
             @slot('body')
             @if( count($entradas) )
