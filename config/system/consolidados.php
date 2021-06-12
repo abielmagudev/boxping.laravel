@@ -7,7 +7,7 @@ return array(
             'descripcion' => 'Es posible agregar entradas al consolidado',
         ],
         'cerrado' => [
-            'color' => '#333333', // Darkgray: #333333
+            'color' => '#6D757D', // Darkgray: #333333
             'descripcion' => 'No es posible agregar entradas al consolidado',
         ],
     ],
