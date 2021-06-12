@@ -17,8 +17,8 @@
                 @include('@.layouts.sidebar')
             </div>
             <div class="col-sm col-sm-12 col-lg-10">
-                @include('@.partials.errors')
-                @include('@.partials.alerts')
+                @include('@.layouts.alerts')
+                @include('@.layouts.errors')
                 @yield('content')
                 <br>
             </div>
