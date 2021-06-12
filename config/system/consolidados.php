@@ -3,7 +3,7 @@
 return array(
     'status' => [
         'abierto' => [
-            'color' => '#FF7807', // Orange: #FF8006
+            'color' => '#FFC108', // Orange: #FF8006
             'descripcion' => 'Es posible agregar entradas al consolidado',
         ],
         'cerrado' => [
