@@ -13,7 +13,7 @@ $settings = (object) [
 
 <div class="card">
     @if( $settings->has_header )
-    <div class="card-header bg-transparent">
+    <div class="card-header">
         {!! $settings->header !!}
     </div>
     @endif
