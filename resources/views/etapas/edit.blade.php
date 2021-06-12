@@ -1,8 +1,12 @@
 @extends('app')
 @section('content')
-@component('components.card', [
-    'header_title' => 'Editar etapa',
+
+@component('@.bootstrap.header', [
+    'title' => 'Editar etapa'
 ])
+@endcomponent
+
+@component('@.bootstrap.card')
     @slot('body')
     <form action="{{ route('etapas.update', $etapa) }}" method="post" autocomplete="off">
         @method('patch')
@@ -13,25 +17,22 @@
     @endslot
 
     @slot('footer')
-    @component('partials.modal-confirm-delete', [
-        'route' => route('etapas.destroy', $etapa),
-        'trigger_align' => 'right',
-        'trigger_text' => 'Eliminar etapa',
+    @component('@.partials.modifiers', [
+        'model' => $etapa
     ])
-        @slot('body')
-        <p class="text-center">
-            <span>Se eliminará etapa</span>
-            <br>
-            <span class="lead fw-bold">{{ $etapa->nombre }}</span>
-        </p>
-        @endslot
     @endcomponent
     @endslot
 @endcomponent
+<br>
 
-@component('partials.section-modifiers', [
-    'concept' => $etapa,
+@component('@.partials.modal-confirm-delete', [
+    'route' => route('etapas.destroy', $etapa),
+    'text' => 'Eliminar etapa',
 ])
+    @slot('content')
+    <p class="lead">¿Deseas eliminar etapa <b>{{ $etapa->nombre }}</b>?</p>
+    @endslot
 @endcomponent
+<br>
 
 @endsection

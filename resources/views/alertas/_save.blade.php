@@ -1,20 +1,22 @@
 @csrf
 <div class="mb-3">
     <label for="select-nivel" class="form-label small">Nivel</label>
-    @foreach($config as $level => $prop)
-    <!-- {{ $level }} -->
-    <div class="row mb-3 mb-md-0">
-        <div class="col-sm col-sm-1">
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="nivel" value="{{ $level }}" id="radio-nivel-{{ $level }}" style="border: 2px solid {{ $prop['color'] }}" {{ $loop->first ? 'checked' : '' }} {{ checkable($level, $alerta->nivel) }}>
-                <label class="form-check-label" for="radio-nivel-{{ $level }}">{{ ucfirst($level) }}</label>
-            </div>             
+    <div class="border rounded p-3"> 
+        @foreach($config as $level => $prop)
+        <!-- {{ $level }} -->
+        <div class="row mb-3 mb-md-0">
+            <div class="col-sm col-sm-1">
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="nivel" value="{{ $level }}" id="radio-nivel-{{ $level }}" style="border: 2px solid {{ $prop['color'] }}" {{ $loop->first ? 'checked' : '' }} {{ checkable($level, $alerta->nivel) }}>
+                    <label class="form-check-label" for="radio-nivel-{{ $level }}">{{ ucfirst($level) }}</label>
+                </div>             
+            </div>
+            <div class="col-sm">
+                <small class="">{{ $prop['descripcion'] }}</small>
+            </div>
         </div>
-        <div class="col-sm">
-            <small class="text-muted">{{ $prop['descripcion'] }}</small>
-        </div>
+        @endforeach
     </div>
-    @endforeach
 </div>
 
 <div class="mb-3">

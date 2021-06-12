@@ -1,8 +1,13 @@
 @extends('app')
 @section('content')
-@component('components.card', [
-    'header_title' => 'Editar zona',
+
+@component('@.bootstrap.header', [
+    'pretitle' => "Etapa {$etapa->nombre}",
+    'title' => 'Editar zona'
 ])
+@endcomponent
+
+@component('@.bootstrap.card')
     @slot('body')
     <form action="{{ route('zonas.update', [$etapa, $zona]) }}" method="post" autocomplete="off">
         @method('patch')
@@ -14,21 +19,21 @@
     @endslot
 
     @slot('footer')
-    @component('partials.modal-confirm-delete', [
-        'route' => route('zonas.destroy', [$etapa, $zona]),
-        'trigger_text' => 'Eliminar zona',
-        'trigger_align' => 'right',
-    ])
-        @slot('body')
-        <p class="text-muted">Se eliminará la zona <span class="fw-bold">{{ $zona->nombre }}</span> <br> de la etapa {{ $etapa->nombre }}</p>
-        @endslot
+    @component('@.partials.modifiers')
     @endcomponent
     @endslot
 
 @endcomponent
+<br>
 
-@component('partials.section-modifiers', [
-    'concept' => $zona
+@component('@.partials.modal-confirm-delete', [
+    'route' => route('zonas.destroy', [$etapa, $zona]),
+    'text' => 'Eliminar zona',
 ])
+    @slot('content')
+    <p class="lead">¿Deseas eliminar zona <b>{{ $zona->nombre }}</b>?</p>
+    @endslot
 @endcomponent
+<br>
+
 @endsection

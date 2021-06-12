@@ -1,8 +1,12 @@
 @extends('app')
 @section('content')
-@component('components.card', [
-    'header_title' => 'Editar alerta',
+
+@component('@.bootstrap.header', [
+    'title' => 'Editar alerta'
 ])
+@endcomponent
+
+@component('@.bootstrap.card')
     @slot('body')
     <form action="{{ route('alertas.update', $alerta) }}" method="post" autocomplete="off">
         @method('put')
@@ -14,20 +18,22 @@
     @endslot
 
     @slot('footer')
-    @component('partials.modal-confirm-delete', [
-        'route' => route('alertas.destroy',$alerta),
-        'trigger_text' => 'Eliminar alerta',
-        'trigger_align' => 'right',
+    @component('@.partials.modifiers', [
+        'model' => $alerta
     ])
-        @slot('body')
-        <p class="text-muted">Se eliminará la alerta <span class="fw-bold">{{ $alerta->nombre }}</span></p>
-        @endslot
     @endcomponent
     @endslot
 @endcomponent
+<br>
 
-@component('partials.section-modifiers', [
-    'concept' => $alerta,
+@component('@.partials.modal-confirm-delete', [
+    'route' => route('alertas.destroy', $alerta),
+    'text' => 'Eliminar alerta',
 ])
+    @slot('content')
+    <p class="lead">¿Deseas eliminar alerta <b>{{ $alerta->nombre }}</b>?</p>
+    @endslot
 @endcomponent
+<br>
+
 @endsection

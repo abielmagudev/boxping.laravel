@@ -25,7 +25,7 @@
 <div class="row">
     <div class="col-sm">
         <div class="mb-3">
-            <label for="select-medida_peso" class="form-label small">Única medida de peso</label>
+            <label for="select-medida_peso" class="form-label small">Medida de peso</label>
             <select name="unica_medida_peso" id="select-medida_peso" class="form-select">
                 <option label="Opcional" selected></option>
                 @foreach($medidas_peso as $abbr => $value)
@@ -36,7 +36,7 @@
     </div>
     <div class="col-sm">
         <div class="mb-3">
-            <label for="select-medida_volumen" class="form-label small">Única medida de volúmen</label>
+            <label for="select-medida_volumen" class="form-label small">Medida de volúmen</label>
             <select name="unica_medida_volumen" id="select-medida_volumen" class="form-select">
                 <option label="Opcional" selected></option>
                 @foreach($medidas_volumen as $abbr => $value)

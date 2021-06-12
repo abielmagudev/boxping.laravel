@@ -5,17 +5,22 @@
     @slot('active', 1)
 @endcomponent
 
-@component('components.card', [
-    'header_title' => 'Etapas',
-    'header_title_badge' => $etapas->count(),
-])
-    @slot('header_options')
-    <a href="{{ route('etapas.create') }}" class="btn btn-sm btn-outline-primary">Nueva etapa</a>
+@component('@.bootstrap.header', [
+    'title' => 'Etapas',
+    'counter' => $etapas->count()
+])   
+    @slot('options')
+    <a href="{{ route('etapas.create') }}" class="btn btn-sm btn-primary">
+        <span class="d-block d-md-none fw-bold">+</span>
+        <span class="d-none d-md-block">Nueva etapa</span>
+    </a>
     @endslot
+@endcomponent
 
+@component('@.bootstrap.card')
     @slot('body')
-    @component('components.table', [
-        'thead' => ['Orden','Nombre','Medición','Medida de peso (Única)','Medida de volúmen (Única)',''],
+    @component('@.bootstrap.table', [
+        'thead' => ['Orden','Nombre','Medición','Medida de peso','Medida de volúmen'],
     ])
         @slot('tbody')
         @foreach($etapas as $etapa)
@@ -26,8 +31,8 @@
             <td class="text-capitalize {{ $etapa->unica_medida_peso ? '' : 'text-muted' }}">{{ $etapa->unica_medida_peso ?? 'opcional' }}</td>
             <td class="text-capitalize {{ $etapa->unica_medida_volumen ? '' : 'text-muted' }}">{{ $etapa->unica_medida_volumen ?? 'opcional' }}</td>
             <td class="text-end">
-                <a href="{{ route('etapas.show', $etapa) }}" class="btn btn-sm btn-primary">
-                    {!! $icons->eye !!}
+                <a href="{{ route('etapas.show', $etapa) }}" class="btn btn-sm btn-outline-primary">
+                    {!! $svg->eye !!}
                 </a>
             </td>
         </tr>
