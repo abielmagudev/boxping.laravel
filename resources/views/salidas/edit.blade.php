@@ -1,16 +1,14 @@
 @extends('app')
 @section('content')
 
-@component('components.header', [
-    'title' => $salida->entrada->numero,
-    'subtitle' => 'Entrada',
+@component('@.bootstrap.header', [
+    'title' => 'Editar salida',
+    'pretitle' => "Entrada {$salida->entrada->numero}",
     'goback' => route('entradas.show', $salida->entrada_id)
 ])
 @endcomponent
 
-@component('components.card', [
-    'header_title' => 'Editar salida'
-])
+@component('@.bootstrap.card')
     @slot('body')
     <form action="{{ route('salidas.update', $salida) }}" method="post" autocomplete="off">
         @method('put')
@@ -23,21 +21,39 @@
     @endslot
 
     @slot('footer')
-    @component('partials.modal-confirm-delete', [
-        'route' => route('salidas.destroy', $salida),
-        'trigger_text' => 'Eliminar salida',
-        'trigger_align' => 'right',
-    ])
-        @slot('body')
-        <p>Se eliminará la <span class="fw-bold">salida</span> de la entrada <br><b>{{ $salida->entrada->numero }}</b></p>
-        @endslot
+    @component('@.partials.modifiers')
+        @slot('model', $salida)
     @endcomponent
     @endslot
 @endcomponent
+<br>
 
-@component('partials.section-modifiers', [
-    'concept' => $salida,
+@component('@.partials.modal-confirm-delete', [
+    'route' => route('salidas.destroy', $salida),
+    'text' => 'Eliminar salida',
 ])
+    @slot('content')
+    <p class="lead">¿Deseas eliminar salida de la entrada <br><b>{{ $salida->entrada->numero }}</b>?</p>
+    <div class="border rounded mx-4 py-1">
+        <table class="table table-sm table-borderless small m-0">
+            <tbody>
+                <tr>
+                    <td class="text-muted text-end">Transportadora</td>
+                    <td class="text-start">{{ $salida->transportadora->nombre }}</td>
+                </tr>
+                <tr>
+                    <td class="text-muted text-end">Confirmación</td>
+                    <td class="text-start">{{ $salida->confirmacion }}</td>
+                </tr>
+                <tr>
+                    <td class="text-muted text-end">Rastreo</td>
+                    <td class="text-start">{{ $salida->rastreo }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    @endslot
 @endcomponent
+<br>
 
 @endsection

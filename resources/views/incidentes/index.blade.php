@@ -5,16 +5,21 @@
     @slot('active', 2)
 @endcomponent
 
-@component('components.card', [
-    'header_title' => 'Incidentes',
-    'header_title_badge' => $incidentes->count(),
+@component('@.bootstrap.header', [
+    'title' => 'Incidentes',
+    'counter' => $incidentes->count()
 ])
-    @slot('header_options')
-    <a href="{{ route('incidentes.create') }}" class="btn btn-sm btn-outline-primary">Nuevo incidente</a>
+    @slot('options')
+    <a href="{{ route('incidentes.create') }}" class="btn btn-sm btn-primary">
+        <span class="d-block d-md-none fw-bold">+</span>
+        <span class="d-none d-md-block">Nuevo incidente</span>
+    </a>
     @endslot
+@endcomponent
 
+@component('@.bootstrap.card')
     @slot('body')
-    @component('components.table', [
+    @component('@.bootstrap.table', [
         'thead' => ['Título','Descripción'],
     ])
         @slot('tbody')
@@ -23,8 +28,8 @@
             <td class="text-nowrap">{{ $incidente->titulo }}</td>
             <td class="text-nowrap">{{ $incidente->descripcion }}</td>
             <td class="text-nowrap text-end">
-                <a href="{{ route('incidentes.edit', $incidente) }}" class="btn btn-warning btn-sm">
-                    {!! $icons->pencil !!}
+                <a href="{{ route('incidentes.edit', $incidente) }}" class="btn btn-sm btn-outline-warning">
+                    {!! $svg->pencil !!}
                 </a>
             </td>
         </tr>

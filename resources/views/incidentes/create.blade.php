@@ -1,8 +1,12 @@
 @extends('app')
 @section('content')
-@component('components.card', [
-    'header_title' => 'Nuevo incidente',
+
+@component('@.bootstrap.header', [
+    'title' => 'Nuevo incidente',
 ])
+@endcomponent
+
+@component('@.bootstrap.card')
     @slot('body')
     <form action="{{ route('incidentes.store') }}" method="post" autocomplete="off">
         @include('incidentes._save')
@@ -12,4 +16,5 @@
     </form>
     @endslot
 @endcomponent
+
 @endsection
