@@ -1,16 +1,21 @@
 @extends('app')
 @section('content')
 
-@component('components.card', [
-    'header_title' => 'Clientes',
-    'header_title_badge' => $clientes->count(),
+@component('@.bootstrap.header', [
+    'title' => 'Clientes',
+    'counter' => $clientes->count(),
 ])
-    @slot('header_options')
-    <a href="{{ route('clientes.create') }}" class="btn btn-sm btn-outline-primary">Nuevo cliente</a>
+    @slot('options')
+    <a href="{{ route('clientes.create') }}" class="btn btn-sm btn-primary">
+        <span class="d-block d-md-none fw-bold">+</span>
+        <span class="d-none d-md-block">Nuevo cliente</span>
+    </a>
     @endslot
+@endcomponent
 
+@component('@.bootstrap.card')
     @slot('body')
-    @component('components.table', [
+    @component('@.bootstrap.table', [
         'thead' => ['Nombre','Alias','Contacto','Correo electrónico','Teléfono',''],
     ])
         @slot('tbody')
@@ -22,8 +27,8 @@
             <td class="text-nowrap">{{ $cliente->correo_electronico }}</td>
             <td class="text-nowrap">{{ $cliente->telefono }}</td>
             <td class="text-end">
-                <a href="{{ route('clientes.show', $cliente) }}" class="btn btn-sm btn-primary">
-                    {!! $icons->eye !!}
+                <a href="{{ route('clientes.show', $cliente) }}" class="btn btn-sm btn-outline-primary">
+                    {!! $svg->eye !!}
                 </a>
             </td>
         </tr>

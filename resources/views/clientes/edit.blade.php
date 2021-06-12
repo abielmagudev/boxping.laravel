@@ -1,9 +1,12 @@
 @extends('app')
 @section('content')
 
-@component('components.card', [
-    'header_title' => 'Editar cliente'
+@component('@.bootstrap.header', [
+    'title' => 'Editar cliente',
 ])
+@endcomponent
+
+@component('@.bootstrap.card')
     @slot('body')
     <form action="{{ route('clientes.update', $cliente) }}" method="post" autocomplete="off">
         @method('put')
@@ -15,21 +18,21 @@
     @endslot
 
     @slot('footer')
-    @component('partials.modal-confirm-delete', [
-        'route' => route('clientes.destroy', $cliente),
-        'trigger_text' => 'Eliminar cliente',
-        'trigger_align' => 'right',
-    ])
-        @slot('body')
-        <p>Se eliminará el cliente <span class="fw-bold">{{ $cliente->nombre }}</span></p>
-        @endslot
+    @component('@.partials.modifiers')
+        @slot('model', $cliente)
     @endcomponent
     @endslot
 @endcomponent
+<br>
 
-@component('partials.section-modifiers', [
-    'concept' => $cliente,
+@component('@.partials.modal-confirm-delete', [
+    'route' => route('clientes.destroy', $cliente),
+    'text' => 'Eliminar cliente'
 ])
+    @slot('content')
+    <p class="lead">¿Deseas eliminar cliente <b>{{ $cliente->nombre }}</b>?</p>
+    @endslot
 @endcomponent
+<br>
 
 @endsection

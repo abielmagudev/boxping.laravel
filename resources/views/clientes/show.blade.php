@@ -1,24 +1,24 @@
 @extends('app')
 @section('content')
 
-@component('components.header', [
+@component('@.bootstrap.header', [
     'title' => "{$cliente->nombre} ({$cliente->alias})",
-    'subtitle' => 'Cliente',
+    'pretitle' => 'Cliente',
     'goback' => route('clientes.index'),
 ])
     @slot('options')
-    <a href="{{ route('clientes.edit', $cliente) }}" class="btn btn-sm btn-warning">Editar</a>
+    <a href="{{ route('clientes.edit', $cliente) }}" class="btn btn-sm btn-warning">
+        <span class="d-block d-md-none">{!! $svg->pencil_fill !!}</span>
+        <span class="d-none d-md-block">Editar</span>
+    </a>
     @endslot
 @endcomponent
 
 <div class="row">
-
-    <!-- Column left -->
-    <div class="col-sm d-sm-flex flex-column">
-    @component('components.card', [
-        'classes' => 'flex-grow-1',
-        'header_title' => 'Información',
-    ])
+    <!-- Column informacion -->
+    <div class="col-sm">
+    @component('@.bootstrap.card')
+        @slot('header', 'Información')
         @slot('body')
         <p>
             <small class="d-block text-muted">Contacto</small>
@@ -37,16 +37,18 @@
             <span class="d-block">{{ $cliente->direccion }}</span>
             <span class="">{{ $cliente->localidad }}</span>
         </p>
+        <p>
+            <small class="d-block text-muted">Notas</small>
+            <span>{{ $cliente->notas }}</span>
+        </p>
         @endslot
     @endcomponent
     </div>
 
-    <!-- Column right -->
-    <div class="col-sm d-sm-flex flex-column">
-        @component('components.card', [
-            'classes' => 'flex-grow-1',
-            'header_title' => 'Resúmen',
-        ])
+    <!-- Column graficas -->
+    <div class="col-sm">
+        @component('@.bootstrap.card')
+            @slot('header', 'Contadores')
             @slot('body')
             <div class="row align-items-center text-center">
                 <div class="col">
@@ -60,25 +62,14 @@
             </div>
             @endslot
         @endcomponent
-        @component('components.card', [
-            'classes' => 'flex-grow-1',
-            'header_title' => 'Notas',
-            'body_classes' => '',
-        ])
-            @slot('body')
-            <p>{{ $cliente->notas }}</p>
-            @endslot
-        @endcomponent
     </div>
-
 </div>
+<br>
 
-@component('components.card', [
-    'header_title' => 'Últimas entradas',
-    'header_title_badge' => $entradas->count(),
-])
+@component('@.bootstrap.card')
+    @slot('header', 'Entradas recientes')
     @slot('body')
-    @component('partials.table-summary-entradas', [
+    @component('@.partials.table-entradas', [
         'entradas' => $entradas,
     ])
     @endcomponent
