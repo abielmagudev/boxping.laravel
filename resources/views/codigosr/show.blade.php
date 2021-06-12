@@ -1,49 +1,36 @@
 @extends('app')
 @section('content')
 
-@component('components.header', [
+@component('@.bootstrap.header', [
     'title' => $codigor->nombre,
-    'subtitle' => 'Código de reempacado',
+    'pretitle' => 'Código de reempacado',
     'goback' => route('codigosr.index'),
 ])
 @endcomponent
 
+<p class="border rounded p-3">
+    <span class="me-2">{!! $svg->info_circle_fill !!}</span>
+    <span class="align-middle">{{ $codigor->descripcion }}</span>
+</p>
+
 <div class="row">
-    <!-- Column descripcion -->
+
+    <!-- Column reempacados -->
     <div class="col-sm">
-        @component('components.card', [
-            'classes' => 'h-100',
-            'header_title' => 'Descripción',
+        @component('@.bootstrap.card-headers', [
+            'header_left' => 'Reempacados',
         ])
-            @slot('body')
-            <p>{{ $codigor->descripcion }}</p>
+            @slot('header_right')
+            <span class="align-middle me-1">Total</span>
+            <a href="#!" class="">
+                <span class="badge bg-primary text-white">{{ $entradas->count() }}</span>
+            </a>
             @endslot
-        @endcomponent
-    </div>
-    <!-- Column entradas -->
-    <div class="col-sm">
-        @component('components.card', [
-            'classes' => 'h-100 d-flex flex-column',
-            'body_centered' => true
-        ])
+
             @slot('body')
-            <div class="text-center">
-                <p class="mb-1">Entradas</p>
-                <a href="#!" class="display-4 text-decoration-none">{{ $entradas->count() }}</a>
-            </div>
-            @endslot
-        @endcomponent
-    </div>
-    <!-- Column resumen -->
-    <div class="col-sm">
-        @component('components.card', [
-            'classes' => 'h-100',
-            'header_title' => 'Resúmen',
-        ])
-            @slot('body')
-            @component('components.table', [
-                'hover' => false,
+            @component('@.bootstrap.table', [
                 'thead' => ['Reempacador','Entradas'],
+                'borderless' => true,
             ])
                 @slot('tbody')
                 @foreach($reempacadores as $id => $reempacador)
@@ -57,17 +44,21 @@
             @endslot
         @endcomponent
     </div>
+
+    <!-- Column entradas -->
+    <div class="col-sm col-sm-8">
+        @component('@.bootstrap.card', [
+            'header' => 'Entradas recientes'
+        ])
+            @slot('body')
+            @component('@.partials.table-entradas', [
+                'entradas' => $entradas
+            ])
+            @endcomponent
+            @endslot
+        @endcomponent
+    </div>
 </div>
 <br>
 
-@component('components.card', [
-    'header_title' => 'Últimas entradas'
-])
-    @slot('body')
-    @component('partials.table-summary-entradas', [
-        'entradas' => $entradas
-    ])
-    @endcomponent
-    @endslot
-@endcomponent
 @endsection

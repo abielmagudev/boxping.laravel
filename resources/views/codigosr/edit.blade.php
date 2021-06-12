@@ -1,8 +1,12 @@
 @extends('app')
 @section('content')
-@component('components.card', [
-    'header_title' => 'Editar código',
+
+@component('@.bootstrap.header', [
+    'title' => 'Editar código de reempacado',
 ])
+@endcomponent
+
+@component('@.bootstrap.card')
     @slot('body')
     <form action="{{ route('codigosr.update', $codigor) }}" method="post" autocomplete="off">
         @method('patch')
@@ -14,25 +18,22 @@
     @endslot
 
     @slot('footer')
-    @component('partials.modal-confirm-delete', [
-        'route' => route('codigosr.destroy', $codigor),
-        'trigger_text' => 'Eliminar código',
-        'trigger_align' => 'right',
+    @component('@.partials.modifiers', [
+        'model' => $codigor
     ])
-        @slot('body')
-        <p class="text-muted">
-            <span class="">Se eliminará el código</span>
-            <span class="fw-bold">{{ $codigor->nombre }}</span>
-        </p>
-        <p class="small">{{ $codigor->descripcion }}</p>
-        @endslot
     @endcomponent
     @endslot
 @endcomponent
+<br>
 
-@component('partials.section-modifiers', [
-    'concept' => $codigor,
+@component('@.partials.modal-confirm-delete', [
+    'route' => route('codigosr.destroy', $codigor),
+    'text' => 'Eliminar código de reempacado'
 ])
+    @slot('content')
+    <p class="lead">¿Deseas eliminar código de reempacado <b>{{ $codigor->nombre }}</b>?</p>
+    @endslot
 @endcomponent 
+<br>
 
 @endsection

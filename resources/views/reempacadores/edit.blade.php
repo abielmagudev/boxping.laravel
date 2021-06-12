@@ -1,8 +1,12 @@
 @extends('app')
 @section('content')
-@component('components.card', [
-    'header_title' => 'Editar reempacador',
+
+@component('@.bootstrap.header', [
+    'title' => 'Editar reempacador',
 ])
+@endcomponent
+
+@component('@.bootstrap.card')
     @slot('body')
     <form action="{{ route('reempacadores.update', $reempacador) }}" method="post" autocomplete="off">
         @method('patch')
@@ -14,24 +18,22 @@
     @endslot
 
     @slot('footer')
-    @component('partials.modal-confirm-delete', [
-        'route' => route('reempacadores.destroy', $reempacador),
-        'trigger_align' => 'right',
-        'trigger_text' => 'Eliminar reempacador'
+    @component('@.partials.modifiers', [
+        'model' => $reempacador
     ])
-        @slot('body')
-        <p>
-            <span class="d-block">Se eliminará el reempacador</span>
-            <span class="fw-bold">{{ $reempacador->nombre }}</span>
-        </p>
-        @endslot
     @endcomponent
     @endslot
 @endcomponent
+<br>
 
-@component('partials.section-modifiers', [
-    'concept' => $reempacador,
+@component('@.partials.modal-confirm-delete', [
+    'route' => route('reempacadores.destroy', $reempacador),
+    'text' => 'Eliminar reempacador'
 ])
+    @slot('content')
+    <p class="lead">¿Deseas eliminar reempacador <b>{{ $reempacador->nombre }}</b>?</p>
+    @endslot
 @endcomponent
+<br>
 
 @endsection
