@@ -18,7 +18,7 @@
 
     @slot('footer')
         @component('@.partials.modifiers')
-            @slot('entity', $transportadora)
+            @slot('model', $transportadora)
         @endcomponent
     @endslot
 @endcomponent

@@ -18,7 +18,7 @@
 
     @slot('footer')
         @component('@.partials.modifiers', [
-            'entity' => $remitente
+            'model' => $remitente
         ])
         @endcomponent
     @endslot
