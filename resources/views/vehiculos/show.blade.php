@@ -1,37 +1,29 @@
 @extends('app')
 @section('content')
 
-@component('components.header', [
+@component('@.bootstrap.header', [
     'title' => $vehiculo->alias,
-    'subtitle' => 'Vehículo',
+    'pretitle' => 'Vehículo',
     'goback' => route('vehiculos.index'),
 ])
 @endcomponent
 
 <div class="row">
-    <div class="col-sm">
-        @component('components.card')
-            @slot('classes', 'h-100')
-            @slot('body_classes', 'd-flex align-items-center justify-content-center')
-            @slot('body')
-            <div class="text-center">
-                <p class="m-0">ENTRADAS</p>
-                <a class="display-4 text-decoration-none m-0" href="#!">{{ $entradas->count() }}</a>
-            </div>
-            @endslot
-        @endcomponent
-    </div>
 
+    <!-- Column importaciones -->
     <div class="col-sm">
-        @component('components.card')
-            @slot('classes', 'h-100')
+        @component('@.bootstrap.card-headers')
+            @slot('header_left', 'Importados')
+            @slot('header_right')
+            <a href="#!">
+                <span class="badge bg-primary text-white">{{ $entradas->count() }}</span>
+            </a>
+            @endslot
+
             @slot('body')
-                @component('components.table', [
-                        'border' => 'less',
-                        'hover' => false,
-                        'size'   => 'small',
-                        'classes' => 'm-0'
-                    ])
+                @component('@.bootstrap.table', [
+                    'borderless' => true
+                ])
                     @slot('thead', ['Conductores', 'Entradas'])
                     @slot('tbody')
                     @foreach($conductores as $id => $conductor)
@@ -45,16 +37,20 @@
             @endslot
         @endcomponent
     </div>
+
+    <!-- Column entradas -->
+    <div class="col-sm col-sm-8">
+        @component('@.bootstrap.card')
+            @slot('header', 'Entradas recientes')
+            @slot('body')
+                @component('@.partials.table-entradas', [
+                    'entradas' => $entradas
+                ])
+                @endcomponent  
+            @endslot
+        @endcomponent
+    </div>
 </div>
 <br>
-
-@component('components.card', [
-    'header_title' => 'Últimas entradas',
-])
-    @slot('body')
-        @component('partials.table-summary-entradas', ['entradas' => $entradas])
-        @endcomponent  
-    @endslot
-@endcomponent
 
 @endsection

@@ -1,7 +1,12 @@
 @extends('app')
 @section('content')
-@component('components.card')
-    @slot('header_title', 'Editar vehículo')
+
+@component('@.bootstrap.header', [
+    'title' => 'Editar vehículo',
+])
+@endcomponent
+
+@component('@.bootstrap.card')
     @slot('body')
     <form action="{{ route('vehiculos.update', $vehiculo) }}" method="post" autocomplete="off">
         @method('put')
@@ -12,19 +17,22 @@
     </form>
     @endslot
     @slot('footer')
-        @component('partials.modal-confirm-delete', [
-            'body'          => "Se eliminará el vehículo <span class='d-block fw-bold'>{$vehiculo->alias}</span>",
-            'route'         => route('vehiculos.destroy', $vehiculo),
-            'trigger_align' => 'right',
-            'trigger_text'  => 'Eliminar vehículo',
+        @component('@.partials.modifiers', [
+            'model' => $vehiculo,
         ])
         @endcomponent
     @endslot
 @endcomponent
+<br>
 
-@component('partials.section-modifiers', [
-    'concept' => $vehiculo
+@component('@.partials.modal-confirm-delete', [
+    'route' => route('vehiculos.destroy', $vehiculo),
+    'text' => 'Eliminar vehículo'
 ])
+    @slot('content')
+    <p class="lead">¿Deseas eliminar vehículo <b>{{ $vehiculo->alias }}</b>?</p>
+    @endslot
 @endcomponent
+<br>
 
 @endsection

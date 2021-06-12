@@ -1,35 +1,33 @@
 @extends('app')
 @section('content')
 
-@component('components.header', [
+@component('@.bootstrap.header', [
     'title' => $conductor->nombre,
-    'subtitle' => 'Conductor',
+    'pretitle' => 'Conductor',
     'goback' => route('conductores.index'),
 ])
 @endcomponent
 
-@component('components.card', [
-    'header_title' => 'Entradas'
-])
-    @slot('header_options')
-    <form action="{{ route('conductores.show', $conductor) }}" method="get" class="d-flex align-items-center">
-        <div>
-            <label for="select-ultimas-entradas" class="small text-muted d-none d-md-block me-md-2">Ultimas entradas</label>
-        </div>
-        <div>
-            <select name="ultimas" id="select-ultimas-entradas" class="form-control form-control-sm" onchange="submit()" required>
-                @foreach([5,10,25,50,75,100] as $number)
-                <option value="{{ $number }}" {{ $ultimas_entradas <> $number ?: 'selected' }}>{{ $number }}</option>
-                @endforeach
-                <option value="todas" {{ $ultimas_entradas <> 'todas' ?: 'selected' }}>Todas</option>
-            </select>
-        </div>
-    </form>
-    @endslot
-
-    @slot('body')
-        @component('partials.table-summary-entradas', ['entradas' => $entradas])
+<div class="row">
+    <!-- Column importados -->
+    <div class="col-sm">
+        @component('@.bootstrap.card')
+            @slot('header', 'Importados')
         @endcomponent
-    @endslot
-@endcomponent
+    </div>
+
+    <!-- Column entradas -->
+    <div class="col-sm col-sm-8">
+        @component('@.bootstrap.card')
+            @slot('header', 'Entradas recientes')
+            @slot('body')
+                @component('@.partials.table-entradas', [
+                    'entradas' => $entradas
+                ])
+                @endcomponent
+            @endslot
+        @endcomponent
+    </div>
+</div>
+
 @endsection

@@ -5,31 +5,33 @@
     @slot('active', 2)
 @endcomponent
 
-@component('components.card')
-    @slot('header_title')
-    <span>Vehículos</span>
-    <span class="badge bg-secondary rounded-pill">{{ $vehiculos->count() }}</span>
+@component('@.bootstrap.header', [
+    'title' => 'Vehículos',
+    'counter' => $vehiculos->count(),
+])
+    @slot('options')
+    <a href="{{ route('vehiculos.create') }}" class="btn btn-sm btn-primary">
+        <span class="d-block d-md-none fw-bold">+</span>
+        <span class="d-none d-md-block">Nuevo vehículo</span>
+    </a>
     @endslot
-    @slot('header_options')
-    <a href="{{ route('vehiculos.create') }}" class="btn btn-sm btn-outline-primary">Nuevo vehículo</a>
-    @endslot
+@endcomponent
+
+@component('@.bootstrap.card')
     @slot('body')
-    @component('components.table')
-        @slot('hover', true)
-        @slot('thead', ['Alias','Descripción',''])
+    @component('@.bootstrap.table')
+        @slot('thead', ['Alias','Descripción'])
         @slot('tbody')
             @foreach($vehiculos as $vehiculo)
             <tr>
-                <td style="min-width:288px">{{ $vehiculo->alias }}</td>
-                <td style="min-width:288px">{{ $vehiculo->descripcion }}</td>
+                <td>{{ $vehiculo->alias }}</td>
+                <td>{{ $vehiculo->descripcion }}</td>
                 <td class="text-nowrap">
-                    <a href="{{ route('vehiculos.show', $vehiculo) }}" class="btn btn-sm btn-primary">
-                        @component('components.icon', ['icon' => 'eye'])
-                        @endcomponent
+                    <a href="{{ route('vehiculos.show', $vehiculo) }}" class="btn btn-sm btn-outline-primary">
+                        {!! $svg->eye !!}
                     </a>
-                    <a href="{{ route('vehiculos.edit', $vehiculo) }}" class="btn btn-sm btn-warning">
-                        @component('components.icon', ['icon' => 'pencil'])
-                        @endcomponent
+                    <a href="{{ route('vehiculos.edit', $vehiculo) }}" class="btn btn-sm btn-outline-warning">
+                        {!! $svg->pencil !!}
                     </a>
                 </td>
             </tr>

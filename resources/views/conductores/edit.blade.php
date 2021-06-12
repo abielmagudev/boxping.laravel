@@ -1,7 +1,12 @@
 @extends('app')
 @section('content')
-@component('components.card')
-    @slot('header_title', 'Editar conductor')
+
+@component('@.bootstrap.header', [
+    'title' => 'Editar conductor'
+])
+@endcomponent
+
+@component('@.bootstrap.card')
     @slot('body')
         <form action="{{ route('conductores.update', $conductor) }}" method="post" autocomplete="off">
             @method('put')
@@ -12,19 +17,22 @@
         </form>
     @endslot
     @slot('footer')
-        @component('partials.modal-confirm-delete', [
-            'body'          => "Se eliminará el conductor <span class='d-block fw-bold'>{$conductor->nombre}</span>",
-            'route'         => route('conductores.destroy', $conductor),
-            'trigger_align' => 'right',
-            'trigger_text'  => 'Eliminar conductor',
+        @component('@.partials.modifiers', [
+            'model' => $conductor
         ])
         @endcomponent
     @endslot
 @endcomponent
+<br>
 
-@component('partials.section-modifiers', [
-    'concept' => $conductor,
+@component('@.partials.modal-confirm-delete', [
+    'route' => route('conductores.destroy', $conductor),
+    'text' => 'Eliminar conductor',
 ])
+    @slot('content')
+    <p class="lead">¿Deseas eliminar conductor <b>{{ $conductor->nombre }}</b>?</p>
+    @endslot
 @endcomponent
+<br>
 
 @endsection
