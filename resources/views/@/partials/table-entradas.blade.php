@@ -11,15 +11,15 @@ $settings = (object) array(
 @if( $settings->has_entradas )
 
     @component('@.bootstrap.table')
-        @slot('thead', ['','Número','Destinatario',''])
+        @slot('thead', ['Número','Destinatario'])
         @slot('tbody')
         @foreach($settings->entradas as $entrada)
         <tr>
+            @if( $settings->has_printing )
             <td style="width:1%">
-                @if( $settings->has_printing )
                 <input type="checkbox" name="lista[]" value="{{ $entrada->id }}" id="checkbox-printing-list-{{ $entrada->id }}" class="form-check-input" form="form-printing-list">
-                @endif
             </td>
+            @endif
             <td>{{ $entrada->numero }}</td>
             <td>
                 @if( $entrada->destinatario )
