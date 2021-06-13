@@ -14,7 +14,7 @@ $settings = (object) [
 
 <div class="card">
     @if( $settings->has_headers )
-    <div class="card-header bg-transparent">
+    <div class="card-header">
         <div class="d-flex align-items-center justify-content-between"> 
             <div class="card-header-left">
                 {!! $settings->header_left !!}
