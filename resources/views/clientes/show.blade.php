@@ -71,6 +71,7 @@
     @slot('body')
     @component('@.partials.table-entradas', [
         'entradas' => $entradas,
+        'except' => ['cliente'],
     ])
     @endcomponent
     @endslot
