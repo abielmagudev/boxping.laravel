@@ -2,6 +2,7 @@
 
 return [
     'hojas' => [
+        'informacion',
         'etiqueta',
         'etapas',
     ],
