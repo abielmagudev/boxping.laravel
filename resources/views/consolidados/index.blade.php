@@ -13,18 +13,20 @@
     @endslot
 @endcomponent
 
-<p class="small">
-    <span class="badge rounded-pill" style="background-color:{{ $config_consolidados->status['abierto']['color'] }}">
-        {{ $consolidados->where('status', 'abierto')->count() }}
-    </span>
-    <span class="me-3 align-middle">Abierto</span>
-    <span class="badge rounded-pill" style="background-color:{{ $config_consolidados->status['cerrado']['color'] }}">
-        {{ $consolidados->where('status', 'cerrado')->count() }}
-    </span>
-    <span class="align-middle">Cerrado</span>   
-</p>
-
 @component('@.bootstrap.card')
+    @slot('header')
+    <p class="text-center small m-0">
+        <span class="badge rounded-pill" style="background-color:{{ $config_consolidados->status['abierto']['color'] }}">
+            {{ $consolidados->where('status', 'abierto')->count() }}
+        </span>
+        <span class="me-3 align-middle">Abierto</span>
+        <span class="badge rounded-pill" style="background-color:{{ $config_consolidados->status['cerrado']['color'] }}">
+            {{ $consolidados->where('status', 'cerrado')->count() }}
+        </span>
+        <span class="align-middle">Cerrado</span>   
+    </p>
+    @endslot
+
     @slot('body')
     @component('@.bootstrap.table')
         @slot('thead', ['Status','Número','Cliente','Tarimas','Entradas',''])
