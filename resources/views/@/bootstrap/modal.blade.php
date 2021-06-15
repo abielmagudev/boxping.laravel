@@ -8,7 +8,7 @@ $sizes = [
 
 $settings = (object) [
     'has_footer_close' => isset($footer_close) && is_bool($footer_close),
-    'has_footer' => isset($footer) && is_string($footer),
+    'has_footer' => isset($footer),
     'has_header_close' => isset($header_close) && is_bool($header_close),
     'has_id' => isset($id) && is_string($id),
     'has_title' => isset($title) && is_string($title),
