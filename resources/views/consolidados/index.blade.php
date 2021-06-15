@@ -1,28 +1,32 @@
 @extends('app')
 @section('content')
 
-@component('components.card')
-    @slot('header_title', 'Consolidados')
-    @slot('header_title_badge', $consolidados->count())
-    @slot('header_options')
-    <a href="{{ route('consolidados.create') }}" class="btn btn-sm btn-outline-primary">Nuevo consolidado</a>
+@component('@.bootstrap.header', [
+    'title' => 'Consoliddos',
+    'counter' => $consolidados->count(),
+])
+    @slot('options')
+    <a href="{{ route('consolidados.create') }}" class="btn btn-sm btn-primary">
+        <span class="d-block d-md-none fw-bold">+</span>
+        <span class="d-none d-md-block">Nuevo consolidado</span>
+    </a>
     @endslot
-    @slot('body')
-    
-    <p class="text-center small">
-        <span class="badge rounded-pill" style="background-color:{{ $config_consolidados->status['abierto']['color'] }}">
-            {{ $consolidados->where('status', 'abierto')->count() }}
-        </span>
-        <span class="me-3 align-middle">Abierto</span>
-        <span class="badge rounded-pill" style="background-color:{{ $config_consolidados->status['cerrado']['color'] }}">
-            {{ $consolidados->where('status', 'cerrado')->count() }}
-        </span>
-        <span class="align-middle">Cerrado</span>   
-    </p>
-    <br>
+@endcomponent
 
-    @component('components.table')
-        @slot('size', 'small')
+<p class="small">
+    <span class="badge rounded-pill" style="background-color:{{ $config_consolidados->status['abierto']['color'] }}">
+        {{ $consolidados->where('status', 'abierto')->count() }}
+    </span>
+    <span class="me-3 align-middle">Abierto</span>
+    <span class="badge rounded-pill" style="background-color:{{ $config_consolidados->status['cerrado']['color'] }}">
+        {{ $consolidados->where('status', 'cerrado')->count() }}
+    </span>
+    <span class="align-middle">Cerrado</span>   
+</p>
+
+@component('@.bootstrap.card')
+    @slot('body')
+    @component('@.bootstrap.table')
         @slot('thead', ['Status','Número','Cliente','Tarimas','Entradas',''])
         @slot('tbody')
         @foreach($consolidados as $consolidado)
@@ -38,7 +42,7 @@
             <td>{{ $consolidado->tarimas }}</td>
             <td>{{ $consolidado->entradas->count() }}</td>
             <td class="text-nowrap text-end">
-                <a href="{{ route('consolidados.show', $consolidado) }}" class="btn btn-sm btn-primary">{!! $icons->eye !!}</a>
+                <a href="{{ route('consolidados.show', $consolidado) }}" class="btn btn-sm btn-outline-primary">{!! $svg->eye !!}</a>
             </td>
         </tr>
         @endforeach
@@ -46,10 +50,12 @@
     @endcomponent
     @endslot
 @endcomponent
+<br>
 
-@component('components.pagination-simple', [
+@component('@.partials.pagination-simple', [
     'collection' => $consolidados
 ])
 @endcomponent
 <br>
+
 @endsection

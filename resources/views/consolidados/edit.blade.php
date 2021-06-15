@@ -1,7 +1,12 @@
 @extends('app')
 @section('content')
-@component('components.card')
-    @slot('header_title', 'Editar consolidado')
+
+@component('@.bootstrap.header', [
+    'title' => 'Editar consolidado',
+])
+@endcomponent
+
+@component('@.bootstrap.card')
     @slot('body')
     <form action="{{ route('consolidados.update', $consolidado) }}" method="post" autocomplete="off">
         @method('patch')
@@ -11,26 +16,25 @@
     </form>
     @endslot
     @slot('footer')
-        @component('partials.modal-confirm-delete', [
-            'route' => route('consolidados.destroy', $consolidado),
-            'trigger_align' => 'right',
-            'trigger_text' => 'Eliminar consolidado',
-        ])
-            @slot('body')
-            <p class="text-center">
-                <span>Se eliminará consolidado</span>
-                <br>
-                <span class="lead fw-bold">{{ $consolidado->numero }}</span>
-                <br>
-                <span class="small">{{ $consolidado->entradas->count() }} entradas</span>
-            </p>
-            @endslot
-        @endcomponent
+    @component('@.partials.modifiers')
+        @slot('model', $consolidado)
+    @endcomponent
     @endslot
 @endcomponent
+<br>
 
-@component('partials.section-modifiers', [
-    'concept' => $consolidado,
+@component('@.partials.modal-confirm-delete', [
+    'route' => route('consolidados.destroy', $consolidado),
+    'text' => 'Eliminar consolidado',
 ])
+    @slot('content')
+    <p class="lead">¿Deseas eliminar consolidado <b>{{ $consolidado->numero }}</b>?</p>
+    <div class="border py-3 mx-4">
+        <span class="small text-muted">Total de entradas</span>
+        <b class="small">{{ $consolidado->entradas->count() }}</b>
+    </div>
+    @endslot
 @endcomponent
+<br>
+
 @endsection

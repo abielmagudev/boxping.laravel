@@ -1,8 +1,12 @@
 @extends('app')
 @section('content')
 
-@component('components.card')
-    @slot('header_title', 'Nuevo consolidado')
+@component('@.bootstrap.header', [
+    'title' => 'Nuevo consolidado',
+])
+@endcomponent
+
+@component('@.bootstrap.card')
     @slot('body')
     <form action="{{ route('consolidados.store') }}" method="post" autocomplete="off">
         @include('consolidados._save')
@@ -28,7 +32,7 @@
             </ul>
         </div>
 
-        <a href="{{ route('consolidados.index') }}" class="btn btn-outline-secondary d-inline-block">Cancelar</a>
+        <a href="{{ route('consolidados.index') }}" class="btn btn-secondary d-inline-block">Cancelar</a>
     </form>
     @endslot
 @endcomponent
