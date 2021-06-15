@@ -80,6 +80,7 @@ $checker_id = 'checker-entradas';
     @component('@.partials.modal-filter-entradas', [
         'route_results' => route('consolidados.show', [$consolidado]),
         'except' => ['ambito', 'cliente','muestreo'],
+        'header' => 'Filtros para entradas del consolidado',
     ])
     @endcomponent
 
