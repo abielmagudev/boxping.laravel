@@ -17,7 +17,7 @@
     </form>
     @endslot
     @slot('footer')
-        @component('@.partials.modifiers', [
+        @component('@.partials.block-modifiers', [
             'model' => $vehiculo,
         ])
         @endcomponent

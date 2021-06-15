@@ -21,7 +21,7 @@
     @endslot
 
     @slot('footer')
-    @component('@.partials.modifiers')
+    @component('@.partials.block-modifiers')
         @slot('model', $salida)
     @endcomponent
     @endslot

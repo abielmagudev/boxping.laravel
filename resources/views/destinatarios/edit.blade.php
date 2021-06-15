@@ -16,7 +16,7 @@
     @endslot
 
     @slot('footer')
-    @component('@.partials.modifiers')
+    @component('@.partials.block-modifiers')
         @slot('model', $destinatario)
     @endcomponent
     @endslot

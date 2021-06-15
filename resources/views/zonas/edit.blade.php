@@ -19,7 +19,7 @@
     @endslot
 
     @slot('footer')
-    @component('@.partials.modifiers')
+    @component('@.partials.block-modifiers')
     @endcomponent
     @endslot
 
