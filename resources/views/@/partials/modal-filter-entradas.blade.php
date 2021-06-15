@@ -141,5 +141,10 @@ $etapas = \App\Etapa::all();
 
         <!-- Fin del formulario para el filtrado -->
         @endslot
+
+        @slot('footer')
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="submit" class="btn btn-success" form="form-filtros-entradas" name="filter" value="{{ sha1( time() ) }}">Filtrar entradas</button>
+        @endslot
     @endcomponent
 @endif
