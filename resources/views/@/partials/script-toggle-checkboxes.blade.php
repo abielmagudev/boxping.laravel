@@ -9,8 +9,9 @@ $settings = (object) [
 
 <script>
 
+let checker_id = "<?= $settings->checker_id ?>";
 const Checker = {
-    trigger: document.getElementById("<?= $settings->checker_id ?>"),
+    trigger: document.getElementById(checker_id),
     isActive: function () {
         return this.trigger.classList.contains('active');
     },
@@ -28,6 +29,7 @@ const Checker = {
 
         this.trigger.addEventListener('click', function (e) {
             e.stopPropagation;
+            
             self.toggle();
 
             if( self.isActive() )
@@ -38,8 +40,10 @@ const Checker = {
     }
 }
 
+
+let checkboxes_query = '[id^="<?= $settings->checkbox_prefix ?>"]';
 const Checkboxes = {
-    all: document.querySelectorAll('[id^="<?= $settings->checkbox_prefix ?>"]'),
+    all: document.querySelectorAll(checkboxes_query),
     allChecked: function () {
         return this.all.forEach(item => item.checked = true);
     },
