@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Consolidado;
+use App\Entrada;
 use App\Cliente;
 use App\Ahex\Consolidado\Domain\Decoupler;
 use App\Ahex\Consolidado\Application\RoutingTrait as Routing;
@@ -43,12 +44,14 @@ class ConsolidadoController extends Controller
         return redirect($route)->with('success', "Consolidado {$consolidado->numero} guardado");
     }
 
-    public function show($id)
+    public function show($id, Request $request)
     {
         $consolidado = Consolidado::with(['entradas.destinatario'])->findOrFail($id);
+        $entradas = Entrada::where('consolidado_id', $id)->filterByRequest($request->all())->get();
 
         return view('consolidados.show', [
             'consolidado' => $consolidado,
+            'entradas' => $entradas->load('cliente'),
             'config_consolidados' => (object) config('system.consolidados'),
         ]);
     }
