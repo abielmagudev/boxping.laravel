@@ -1,10 +1,12 @@
 <?php
 
 $settings = (object) [
-    'has_route_results' => isset($route_results) && is_string($route_results),
-    'route_results' => $route_results ?? null,
-    'modal_id' => 'modalFilterEntradas',
     'except' => isset($except) && is_array($except) && count($except) ? $except : [],
+    'has_header' => isset($header) && is_string($header),
+    'has_route_results' => isset($route_results) && is_string($route_results),
+    'header' => $header ?? null,
+    'modal_id' => 'modalFilterEntradas',
+    'route_results' => $route_results ?? null,
 ];
 
 $options = (object) [
@@ -42,7 +44,7 @@ $fieldset = (object) [
 
     @component('@.bootstrap.modal', [
         'id' => $settings->modal_id,
-        'title' => 'Filtrar entradas del consolidado'
+        'title' => $settings->header
     ])
         @slot('body')
         <!-- Inicio del formulario para el filtrado -->
