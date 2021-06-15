@@ -29,10 +29,6 @@ $fieldset = (object) [
     'disabled' => request('fecha_hora', 'cualquier') <> 'cualquier' ?: 'disabled',
 ];
 
-
-$clientes = \App\Cliente::all();
-$etapas = \App\Etapa::all();
-
 ?>
 
 @if( $settings->has_route_results )
@@ -46,6 +42,7 @@ $etapas = \App\Etapa::all();
 
     @component('@.bootstrap.modal', [
         'id' => $settings->modal_id,
+        'title' => 'Filtrar entradas del consolidado'
     ])
         @slot('body')
         <!-- Inicio del formulario para el filtrado -->
@@ -63,7 +60,8 @@ $etapas = \App\Etapa::all();
             </div>
             @endif
 
-            @if(! in_array('cliente', $settings->except) )   
+            @if(! in_array('cliente', $settings->except) )
+            <?php $clientes = \App\Cliente::all() ?>
             <div class="mb-3">
                 <label for="select-filtro-cliente" class="form-label small">Cliente</label>
                 <select name="cliente" id="select-filtro-cliente" class="form-control">
@@ -75,7 +73,8 @@ $etapas = \App\Etapa::all();
             </div>
             @endif
 
-            @if(! in_array('etapa', $settings->except) )   
+            @if(! in_array('etapa', $settings->except) ) 
+            <?php $etapas = \App\Etapa::all() ?>  
             <div class="mb-3">
                 <label for="select-filtro-etapa" class="form-label small">Etapa</label>
                 <select name="etapa" id="select-filtro-etapa" class="form-control">
@@ -96,7 +95,7 @@ $etapas = \App\Etapa::all();
                     <option value="{{ $value }}" {{ selectable(request('fecha_hora'), $value) }}>{{ $label }}</option>
                     @endforeach
                 </select>
-                <fieldset class="{{ $fieldset->display }} mt-3 p-3 bg-light" id="fieldset-fechas-horas" {{ $fieldset->disabled }}>
+                <fieldset class="mt-3 p-3 bg-light {{ $fieldset->display }}" id="fieldset-fechas-horas" {{ $fieldset->disabled }}>
                     <div class="mb-3">
                         <label for="input-filtro-desde-fecha" class="form-label small">Desde</label>
                         <div class="row g-2">
@@ -135,6 +134,10 @@ $etapas = \App\Etapa::all();
                     </label>
                 </div>
             </div>
+
+            @else
+            <input class="d-none" type="checkbox" name="muestreo" value="completo" id="radio-filtro-muestreo-completo" checked>
+
             @endif
 
         </form>
@@ -147,4 +150,66 @@ $etapas = \App\Etapa::all();
         <button type="submit" class="btn btn-success" form="form-filtros-entradas" name="filter" value="{{ sha1( time() ) }}">Filtrar entradas</button>
         @endslot
     @endcomponent
+
+    <script>
+
+        const DatetimeSelectFilter = {
+            element: document.getElementById('select-filtro-fecha-hora'),
+            selectedValue: function () {
+                return this.element.value
+            },
+            allOptions: function () {
+                // *.options[i].value ...
+                return this.element.options
+            },
+            selectedOption: function () {
+                return this.element.selectedIndex
+            },
+            hasSelectedOption: function (index) {
+                return this.selectedOption() === index
+            },
+            listenChange: function () {
+                let self = this
+
+                this.element.addEventListener('change', function (e) {
+                    DatetimeFieldsetFilter.switcher( self.hasSelectedOption(0) )
+                })
+            }
+        }
+
+        const DatetimeFieldsetFilter = {
+            element: document.getElementById('fieldset-fechas-horas'),
+            show: function () {
+                this.element.classList.remove('d-none')
+                return this
+            },
+            hide: function () {
+                this.element.classList.add('d-none')
+                return this
+            },
+            enable: function () {
+                this.element.disabled = false
+                return this
+            },
+            disable: function () {
+                this.element.disabled = true
+                return this
+            },
+            turnOn: function () {
+                this.enable().show()
+            },
+            turnOff: function () {
+                this.hide().disable()
+            },
+            switcher: function ( off ) {
+                if( off )
+                    return this.turnOff()
+
+                this.turnOn()
+            }
+        }
+
+        DatetimeSelectFilter.listenChange()
+    </script>
+
 @endif
