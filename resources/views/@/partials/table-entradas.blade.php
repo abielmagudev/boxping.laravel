@@ -52,7 +52,7 @@ if( $settings->has_checkbox_prefix )
                 </small>
                     
                 @else
-                <small class="d-block text-muted">{{ $settings->numero_consolidado ?? 'SIN CONSOLIDAR' }}</small>
+                <small class="d-block text-muted">{{ $settings->numero_consolidado ?? 'Sin consolidar' }}</small>
 
                 @endif
             </td>
