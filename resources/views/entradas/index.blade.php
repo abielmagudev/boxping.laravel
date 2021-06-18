@@ -43,8 +43,9 @@
 <br>
 
 @if( $has_pagination )
-    @component('components.pagination-simple', [
-        'collection' => $entradas,
+    @component('@.bootstrap.pagination-simple', [
+        'prev' => $entradas->previousPageUrl() ?? null,
+        'next' => $entradas->nextPageUrl() ?? null,
     ])
     @endcomponent
 @endif
