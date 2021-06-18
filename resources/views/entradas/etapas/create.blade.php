@@ -1,15 +1,13 @@
 @extends('app')
 @section('content')
 
-@component('components.header', [
-    'title' => $entrada->numero,
-    'subtitle' => 'Entrada',
+@component('@.bootstrap.header', [
+    'pretitle' => "Entrada {$entrada->numero}",
+    'title' => 'Agregar etapa',
 ])
 @endcomponent
 
-@component('components.card', [
-    'header_title' => 'Agregar etapa'
-])
+@component('@.bootstrap.card')
     @slot('body')
 
     <!-- Etapa -->
@@ -34,7 +32,7 @@
         @include('entradas.etapas._alertas')
         <br>
         <button class="btn btn-success" type="submit" name="etapa" value="{{ $etapa->id }}">Guardar etapa</button>
-        <a href="{{ route('entradas.show', $entrada) }}" class="btn btn-outline-secondary">Cancelar</a>
+        <a href="{{ route('entradas.show', $entrada) }}" class="btn btn-secondary">Cancelar</a>
     </form>
     @endif
 

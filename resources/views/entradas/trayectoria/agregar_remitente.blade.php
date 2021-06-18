@@ -1,28 +1,31 @@
 @extends('app')
 @section('content')
 
-<p class="text-end">
-   <a href="{{ route('entradas.show', $entrada) }}" class="btn btn-sm btn-secondary">Regresar</a>
-</p>
-
-@component('components.card', [
-   'header_title' => 'Remitentes encontrados',
-   'header_title_badge' => $remitentes->count(),
+@component('@.bootstrap.header', [
+   'title' => 'Buscar remitentes',
+   'goback' => route('entradas.show', $entrada)
 ])
-   @slot('header_options')
+@endcomponent
+
+@component('@.bootstrap.card-headers')
+   @slot('header_left')
+   <p class="m-0">Encontrados <span class="badge bg-dark text-white">{{ $remitentes->count() }}</span></p>
+   @endslot
+
+   @slot('header_right')
    <button data-bs-toggle="modal" data-bs-target="#modal-search-remitentes" type="button" class="btn btn-primary btn-sm">
-      {!! $icons->search !!}
+      {!! $svg->search !!}
    </button>
    <a href="{{ route('remitentes.create', ['entrada' => $entrada->id]) }}" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="left" title="Nuevo remitente">
-      <span>{!! $icons->plus !!}</span>
+      <span>{!! $svg->plus !!}</span>
    </a>
    @endslot
 
    @slot('body')
    @if( $remitentes->count() )
 
-   @component('components.table', [
-      'thead' => ['Nombre', 'Dirección','Postal', 'Localidad', 'Teléfono',''],
+   @component('@.bootstrap.table', [
+      'thead' => ['Nombre', 'Dirección','Postal', 'Localidad', 'Teléfono'],
    ])
       @slot('tbody')
          @foreach($remitentes as $remitente)

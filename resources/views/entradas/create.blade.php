@@ -1,8 +1,12 @@
 @extends('app')
 @section('content')
 
-@component('components.card')
-    @slot('header_title', 'Nueva entrada')
+@component('@.bootstrap.header', [
+    'title' => 'Nueva entrada'
+])
+@endcomponent
+
+@component('@.bootstrap.card')
     @slot('body')
     <form action="{{ route('entradas.store') }}" method="post" autocomplete="off">
         @csrf
@@ -26,9 +30,10 @@
             </ul>
         </div>
 
-        <a href="{{ $goback }}" class="btn btn-outline-secondary">Cancelar</a>
+        <a href="{{ $goback }}" class="btn btn-secondary">Cancelar</a>
     </form>
     @endslot
 @endcomponent
+<br>
 
 @endsection

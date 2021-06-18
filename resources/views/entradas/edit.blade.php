@@ -1,8 +1,12 @@
 @extends('app')
 @section('content')
 
-@component('components.card')
-    @slot('header_title',"Editar {$template}")
+@component('@.bootstrap.header', [
+    'title' => "Editar {$template}"
+])
+@endcomponent
+
+@component('@.bootstrap.card')
     @slot('body')
     <form action="{{ route('entradas.update', $entrada) }}" method="post" autocomplete="off">
         @method('patch')
@@ -14,26 +18,37 @@
     </form>
     @endslot
 
-    @if($template === 'entrada')
     @slot('footer')
+    @component('@.partials.block-modifiers', [
+        'model' => $entrada,
+    ])
+    @endcomponent
+    @endslot
+@endcomponent
+<br>
 
-    @component('partials.modal-confirm-delete')
-        @slot('route', route('entradas.destroy', $entrada))
-        @slot('trigger_text', 'Eliminar entrada')
-        @slot('trigger_align', 'right')
-        @slot('body')
-        <p class="m-0">Se eliminará entrada</p>
-        <p class="lead fw-bold">{{ $entrada->numero }}</p>
+@if($template === 'entrada')
+<div class="text-end">
+    @component('@.partials.modal-confirm-delete', [
+        'route' => route('entradas.destroy', $entrada),
+        'text' => 'Eliminar entrada',
+    ])
+        @slot('content')
+        <p class="lead">¿Deseas eliminar entrada <br> <b>{{ $entrada->numero }}</b>?</p>
+
+        <p class="text-muted">
+        @if( ! is_null($entrada->consolidado_id) )
+        Consolidado {{ $entrada->consolidado->numero }}
+
+        @else
+        Sin consolidar
+
+        @endif
+        </p>
+
         @endslot
     @endcomponent
-
-    @endslot
-    @endif
-@endcomponent
-
-@component('partials.section-modifiers', [
-    'concept' => $entrada,
-])
-@endcomponent
-
+</div>
+@endif
+<br>
 @endsection

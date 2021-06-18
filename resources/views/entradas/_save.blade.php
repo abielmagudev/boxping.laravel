@@ -8,7 +8,7 @@ if( ! is_null($entrada->id) )
 ?>
 <div class="form-check mb-3">
     <input name="cliente_alias_numero" value="1" id="checkbox-cliente-alias-numero" type="checkbox" class="form-check-input" {{ checkable(1, $old) }}>
-    <label for="checkbox-cliente-alias-numero" class="form-check-label text-primary small">Alias del cliente al comienzo del número de entrada.</label>
+    <label for="checkbox-cliente-alias-numero" class="form-check-label small">Alias del cliente al comienzo del número de entrada.</label>
 </div>
 <div class="mb-3">
     <label for="input-numero" class="form-label small">Número</label>

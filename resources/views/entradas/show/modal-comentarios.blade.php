@@ -1,12 +1,11 @@
 <!-- Modal comentarios -->
-@component('components.modal', [
+@component('@.bootstrap.modal', [
   'id' => 'modal-comentarios',
-  'header_title' => $entrada->numero,
-  'header_subtitle' => '',
   'header_close' => true,
 ])
 
   @slot('body')
+  <br>
   <ul class="nav nav-pills nav-fill">
     <li class="nav-item">
       <a class="nav-link {{ $comentarios->count() > 0 ? 'active' : 'disabled' }}" id="comentarios-tab" data-bs-toggle="tab" href="#content-comentarios" role="tab" aria-controls="content-comentarios" aria-selected="true">Comentarios</a>

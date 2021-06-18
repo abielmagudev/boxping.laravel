@@ -1,15 +1,13 @@
 @extends('app')
 @section('content')
 
-@component('components.header', [
-    'title' => $entrada->numero,
-    'subtitle' => 'Entrada',
+@component('@.bootstrap.header', [
+    'pretitle' => "Entrada {$entrada->numero}",
+    'title' => 'Editar etapa',
 ])
 @endcomponent
 
-@component('components.card', [
-    'header_title' => 'Editar etapa'
-])
+@component('@.bootstrap.card')
     @slot('body')
     <div class="mb-3">
         <label class="form-label small">Etapa</label>
@@ -29,17 +27,23 @@
     @endslot
 
     @slot('footer')
-    @component('partials.modal-confirm-delete', [
-        'route' => route('entrada.etapas.destroy', [$entrada, $etapa]),
-        'trigger_align' => 'right',
-        'trigger_text' => 'Eliminar etapa',
+    @component('@.partials.block-modifiers', [
+        'model' => $etapa
     ])
-        @slot('body')
-        <p>Se eliminará la etapa <span class="fw-bold">{{ $etapa->nombre }}</span> <br> de la entrada <span class="fw-bold">{{ $entrada->numero }}</span></p>
-        @endslot
     @endcomponent
     @endslot
     
+@endcomponent
+<br>
+
+@component('@.partials.modal-confirm-delete', [
+    'route' => route('entrada.etapas.destroy', [$entrada, $etapa]),
+    'text' => 'Eliminar etapa',
+])
+    @slot('content')    
+    <p class="lead m-0">¿Deseas eliminar la etapa <b>{{ $etapa->nombre }}</b>?</p>
+    <p class="small">De la entrada {{ $entrada->numero }}</p>
+    @endslot
 @endcomponent
 <br>
 
