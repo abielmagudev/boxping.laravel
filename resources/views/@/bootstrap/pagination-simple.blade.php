@@ -1,6 +1,7 @@
 <?php
 
 use \Illuminate\Support\Facades\Route;
+// Route::has($prev)
 
 $sizes = array(
     'sm' => 'pagination-sm',
@@ -15,8 +16,8 @@ $aligns = array(
 $settings = (object) array(
     'size'  => isset($size) && array_key_exists($size, $sizes) ? $sizes[$size] : '',
     'align' => isset($align) && array_key_exists($align, $aligns) ? $aligns[$align] : '',
-    'has_prev' => isset($prev) && Route::has($prev),
-    'has_next' => isset($next) && Route::has($next),
+    'has_prev' => isset($prev) && is_string($prev),
+    'has_next' => isset($next) && is_string($next),
     'route_prev' => $prev ?? false,
     'route_next' => $next ?? false,
     'text_prev' => isset($next_text) && is_string($next_text) ? $next_text : 'Siguiente',
