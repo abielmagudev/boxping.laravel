@@ -1,30 +1,38 @@
 <?php
 
+use Illuminate\Database\Eloquent\Collection;
+// is_a($entradas, Collection::class);
+// $entradas instanceof Collection;
+
 $settings = (object) array(
-    'checkbox_form' => isset($checkbox_form) && is_string($checkbox_form) ? $checkbox_form : null,
-    'checkbox_prefix' => $checkbox_prefix ?? '',
-    'entradas' => $entradas ?? null,
-    'has_checkbox_prefix' => isset($checkbox_prefix) && is_string($checkbox_prefix),
-    'has_entradas' => isset($entradas) && $entradas instanceof \Illuminate\Database\Eloquent\Collection && $entradas->count(), // is_a($entradas, \Illuminate\Database\Eloquent\Collection::class);
-    'except' => isset($except) && is_array($except) && count($except) ? $except : [],
+    'has_checkboxes_form' => isset($checkboxes_form) && is_string($checkboxes_form),
+    'has_entradas' => isset($entradas) && is_a($entradas, Collection::class) && $entradas->count(),
     'has_numero_consolidado' => isset($numero_consolidado) && is_string($numero_consolidado),
+    'checkboxes_form' => $checkbox_form ?? null,
+    'entradas' => $entradas ?? null,
+    'except' => isset($except) && is_array($except) && count($except) ? $except : [],
     'numero_consolidado' => $numero_consolidado ?? null,
+    'all_theads' => [
+        'checkbox' => '',
+        'entrada' => 'Número <small class="d-block fw-normal">Consolidado</small>',
+        'direccion' => 'Dirección <small class="d-block fw-normal">Localidad</small>',
+        'cliente' =>'Alias <small class="d-block fw-normal">Cliente</small>',
+        'options' => '',
+    ],
 );
 
-$all_theads = [
-    'entrada' => 'Número <small class="d-block fw-normal">Consolidado</small>',
-    'direccion' => 'Dirección <small class="d-block fw-normal">Localidad</small>',
-    'cliente' =>'Alias <small class="d-block fw-normal">Cliente</small>',
-];
+// Al no estar definido checkboxes_form, se elimina thead de checkbox
+if(! $settings->has_checkboxes_form )
+    array_shift($settings->all_theads);
 
-// Elimina theads que estan en except de settings
-$theads = array_filter($all_theads, function ($key) use ($settings) {
-    return ! in_array($key, $settings->except);
-}, ARRAY_FILTER_USE_KEY);
+// Obtiene theads del calculo de all_theads contra except(Flip: para convertir values en keys)
+$theads = array_diff_key($settings->all_theads, array_flip($settings->except));
 
-// Agrega item-vacio a thead para la columna de checkbox
-if( $settings->has_checkbox_prefix )
-    array_unshift($theads, '');
+// Valida la impresion de la columna de la tabla
+function allowColumn($column, $except)
+{
+    return (bool) ! in_array($column, $except);
+}
 
 ?>
 
@@ -35,29 +43,32 @@ if( $settings->has_checkbox_prefix )
 
         @slot('tbody')
         @foreach($settings->entradas as $entrada)
-        <?php $checkbox_id = $settings->checkbox_prefix . $entrada->id ?>
+        <?php $checkbox_id = "checkboxEntrada{$entrada->id}" ?>
         <tr>
-            @if( $settings->has_checkbox_prefix )
+            @if( $settings->has_checkboxes_form )
             <td class="align-top" style="width:1%">
-                <input type="checkbox" name="entradas[]" value="{{ $entrada->id }}" id="{{ $checkbox_id }}" class="form-check-input" form="{{ $settings->checkbox_form }}">
+                <input type="checkbox" class="form-check-input" name="entradas[]" value="{{ $entrada->id }}" id="{{ $checkbox_id }}" form="{{ $settings->checkboxes_form }}">
             </td>
             @endif
 
             <td class="align-top">
                 <label for="{{ $checkbox_id }}">{{ $entrada->numero }}</label>
 
-                @if(! $settings->has_numero_consolidado && !is_null($entrada->consolidado_id) )
-                <small class="d-block">
-                    <a href="#">{{ $entrada->consolidado->numero }}</a>
-                </small>
+                @if( $settings->has_numero_consolidado )
+                <p class="text-muted small">{{ $settings->numero_consolidado }}</p>
                     
+                @elseif( $entrada->hasConsolidado() )
+                <p class="small">
+                    <a href="#">{{ $entrada->consolidado->numero }}</a>
+                </p>
+
                 @else
-                <small class="d-block text-muted">{{ $settings->numero_consolidado ?? 'Sin consolidar' }}</small>
+                <p class="text-muted small">Sin consolidar</p>
 
                 @endif
             </td>
 
-            @if(! in_array('direccion', $settings->except) )
+            @if( allowColumn('direccion', $settings->except) )
             <td class="align-top">
                 @if( $entrada->destinatario )
                 <span class="d-block">{{ $entrada->destinatario->direccion ?? '' }}</span>
@@ -70,11 +81,11 @@ if( $settings->has_checkbox_prefix )
             </td>
             @endif
 
-            @if(! in_array('cliente', $settings->except) )
+            @if( allowColumn('cliente', $settings->except) )
             <td class="align-top">{{ $entrada->cliente->alias }}</td>
             @endif
 
-            @if(! in_array('options', $settings->except) )
+            @if( allowColumn('options', $settings->except) )
             <td class='text-end'>
                 <a href="{{ route('entradas.show', $entrada) }}" class="btn btn-sm btn-outline-primary">{!! $svg->eye !!}</a>
             </td>
