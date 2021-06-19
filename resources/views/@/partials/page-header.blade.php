@@ -24,13 +24,13 @@ $settings = (object) [
         @endif
 
         @if( $settings->has_title )    
-        <h5 class="m-0">
+        <h4 class="m-0">
             <span>{{ $settings->title }}</span>
 
             @if( $settings->has_counter )
             <span class="badge bg-dark rounded-pill">{{ $settings->counter }}</span>
             @endif
-        </h5>
+        </h4>
         @endif
 
         @if( $settings->has_subtitle )
