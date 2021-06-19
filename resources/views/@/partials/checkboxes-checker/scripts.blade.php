@@ -1,47 +1,6 @@
-<?php
-
-$settings = (object) [
-    'checkbox_prefix' => isset($checkbox_prefix) && is_string($checkbox_prefix) ? $checkbox_prefix : 'checkbox-noid-',
-    'checker_id' => isset($checker_id) && is_string($checker_id) ? $checker_id : 'trigger-noid',
-];
-
-?>
-
 <script>
 
-let checker_id = "<?= $settings->checker_id ?>";
-const Checker = {
-    trigger: document.getElementById(checker_id),
-    isActive: function () {
-        return this.trigger.classList.contains('active');
-    },
-    activate: function () {
-        return this.trigger.classList.add('active');
-    },
-    desactivate: function () {
-        return this.trigger.classList.remove('active');
-    },
-    toggle: function () {
-        return this.trigger.classList.toggle('active');
-    },
-    listenClick: function () {
-        let self = this;
-
-        this.trigger.addEventListener('click', function (e) {
-            e.stopPropagation;
-            
-            self.toggle();
-
-            if( self.isActive() )
-                return Checkboxes.allChecked();
-
-            return Checkboxes.allUnchecked();
-        })
-    }
-}
-
-
-let checkboxes_query = '[id^="<?= $settings->checkbox_prefix ?>"]';
+let checkboxes_query = '[id^="<?= $checkbox_prefix ?>"]';
 const Checkboxes = {
     all: document.querySelectorAll(checkboxes_query),
     allChecked: function () {
@@ -81,8 +40,38 @@ const Checkboxes = {
     }
 }
 
-Checker.listenClick();
+const Checker = {
+    trigger: document.getElementById('checkerTrigger'),
+    isActive: function () {
+        return this.trigger.classList.contains('active');
+    },
+    activate: function () {
+        return this.trigger.classList.add('active');
+    },
+    desactivate: function () {
+        return this.trigger.classList.remove('active');
+    },
+    toggle: function () {
+        return this.trigger.classList.toggle('active');
+    },
+    listenClick: function () {
+        let self = this;
+
+        this.trigger.addEventListener('click', function (e) {
+            e.stopPropagation;
+            
+            self.toggle();
+
+            if( self.isActive() )
+                return Checkboxes.allChecked();
+
+            return Checkboxes.allUnchecked();
+        })
+    }
+}
+
 Checkboxes.listenChange();
+Checker.listenClick();
 
 // element.dataset.selected 
 // element.classList.toggle
