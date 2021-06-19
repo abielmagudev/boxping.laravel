@@ -13,28 +13,19 @@
     @endslot
 @endcomponent
 
-@component('@.bootstrap.card-headers')
-
-    @slot('header_right')
-    @component('@.partials.modal-filter-entradas', [
-        'route_results' => route('entradas.index'),
-        'header' => 'Filtros de entradas'
-    ])
-    @endcomponent
-
-    <button class="btn btn-sm btn-primary" type="button" id="checker-entradas">
-        {!! $svg->card_list !!}
-    </button>
-
-    @component('@.partials.dropdown-sheets-printing')
-    @endcomponent
-
+@component('@.bootstrap.card')
+    @slot('header')
+    <div class="text-end">
+        @include('@.partials.entradas-filter.trigger')
+        @include('@.partials.checkboxes-checker.trigger')
+        @include('@.partials.sheets-printing-dropdown')
+    </div>
     @endslot
 
     @slot('body')
-    @component('@.partials.table-entradas', [
+    @component('@.partials.entradas-table', [
         'entradas' => $has_pagination ? $entradas->getCollection() : $entradas,
-        'checkbox_prefix' => 'checkbox-entrada-'
+        'checkbox_prefix' => 'checkboxEntrada'
     ]) 
     @endcomponent
     @endslot
@@ -50,12 +41,8 @@
     @endcomponent
 @endif
 
-@component('@.partials.script-toggle-checkboxes', [
-    'checkbox_prefix' => 'checkbox-entrada-',
-    'checker_id' => 'checker-entradas',
-])
-
-@endcomponent
+@include('@.partials.entradas-filter.modal', ['results_route' => route('entradas.index')])
+@include('@.partials.checkboxes-checker.scripts', ['checkbox_prefix' => 'checkboxEntrada'])
 
 <?php /*
 @component('partials.card-entradas', [
