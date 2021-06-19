@@ -1,7 +1,7 @@
 @extends('app')
 @section('content')
 
-@component('@.bootstrap.header', [
+@component('@.partials.page-header', [
     'title' => 'Entradas',
     'counter' => $entradas->count(),
 ])
@@ -25,7 +25,7 @@
     @slot('body')
     @component('@.partials.entradas-table', [
         'entradas' => $has_pagination ? $entradas->getCollection() : $entradas,
-        'checkbox_prefix' => 'checkboxEntrada'
+        'checkboxes_form' => 'formEntradasPrinting',
     ]) 
     @endcomponent
     @endslot
@@ -44,14 +44,7 @@
 @include('@.partials.entradas-filter.modal', ['results_route' => route('entradas.index')])
 @include('@.partials.checkboxes-checker.scripts', ['checkbox_prefix' => 'checkboxEntrada'])
 
-<?php /*
-@component('partials.card-entradas', [
-    'entradas' => $has_pagination ? $entradas->getCollection() : $entradas,
-    'entradas_count' => $has_pagination ? $entradas->total() : $entradas->count(),
-    'route_nueva_entrada' => route('entradas.create'),
-    'route_filtrado' => route('entradas.index'),
-])    
-@endcomponent
-*/ ?>
+{{-- $has_pagination ? $entradas->getCollection() : $entradas --}}
+{{-- $has_pagination ? $entradas->total() : $entradas->count() --}}
 
 @endsection
