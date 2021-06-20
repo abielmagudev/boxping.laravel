@@ -7,6 +7,7 @@ $settings = (object) [
     'has_body' => isset($body),
     'has_footer' => isset($footer),
     'has_header' => isset($header),
+    'body_padding' => isset($body_padding) && $body_padding === false ? 'p-0' : '',
 ];
 
 ?>
@@ -19,7 +20,7 @@ $settings = (object) [
     @endif
 
     @if( $settings->has_body )    
-    <div class="card-body">
+    <div class="card-body {{ $settings->body_padding }}">
         {!! $settings->body !!}
     </div>
     @endif

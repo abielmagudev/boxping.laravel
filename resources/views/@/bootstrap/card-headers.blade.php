@@ -8,6 +8,7 @@ $settings = (object) [
     'has_body' => isset($body),
     'has_footer' => isset($footer),
     'has_headers' => isset($header_left) || isset($header_right),
+    'body_padding' => isset($body_padding) && $body_padding === false ? 'p-0' : '',
 ];
 
 ?>
@@ -26,9 +27,11 @@ $settings = (object) [
     </div>
     @endif
 
-    <div class="card-body">
+    @if( $settings->has_body )   
+    <div class="card-body {{ $settings->body_padding }}">
         {!! $settings->body !!}
     </div>
+    @endif
 
     @if( $settings->has_footer )
     <div class="card-footer">
