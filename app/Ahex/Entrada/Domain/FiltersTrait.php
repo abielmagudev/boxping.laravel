@@ -31,9 +31,9 @@ trait FiltersTrait
     public function scopeGetFiltered($query, $sampling)
     {
         if( is_int($sampling) || is_numeric($sampling) )
-            return $query->paginate($sampling);
+            return $query->orderByDesc('id')->paginate($sampling);
         
-        return $query->get();
+        return $query->orderByDesc('id')->get();
     }
 
     public function scopeFilterAmbit($query, $ambit)
