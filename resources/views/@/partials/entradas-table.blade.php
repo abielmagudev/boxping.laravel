@@ -55,15 +55,15 @@ function allowColumn($column, $except)
                 <label for="{{ $checkbox_id }}">{{ $entrada->numero }}</label>
 
                 @if( $settings->has_numero_consolidado )
-                <p class="text-muted small">{{ $settings->numero_consolidado }}</p>
+                <p class="text-muted small m-0">{{ $settings->numero_consolidado }}</p>
                     
                 @elseif( $entrada->hasConsolidado() )
-                <p class="small">
+                <p class="small m-0">
                     <a href="#">{{ $entrada->consolidado->numero }}</a>
                 </p>
 
                 @else
-                <p class="text-muted small">Sin consolidar</p>
+                <p class="text-muted small m-0">Sin consolidar</p>
 
                 @endif
             </td>
@@ -82,7 +82,7 @@ function allowColumn($column, $except)
             @endif
 
             @if( allowColumn('cliente', $settings->except) )
-            <td class="align-top">{{ $entrada->cliente->alias }}</td>
+            <td class="">{{ $entrada->cliente->alias }}</td>
             @endif
 
             @if( allowColumn('options', $settings->except) )
