@@ -3,12 +3,26 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Consolidado;
 
 class EntradaCreateRequest extends FormRequest
 {
+    /**
+     * 
+     * Si existe el consolidado-id obtenido del request,
+     * modifica la redireccion(redirect) para el momento de falla de las validaciones,
+     * significa que se intenta crear una entrada consolidada.
+     * 
+     * Si no existe el consolidado-id en el request, 
+     * mantiene la redireccion para su validacion,
+     * significa que se intenta crear una entrada sin consolidar.
+     * 
+     * @change redirect
+     * 
+     */
     public function prepareForValidation()
     {
-        if( $this->filled('consolidado') && is_numeric($this->consolidado) ) 
+        if( Consolidado::where('id', $this->consolidado)->exists() ) 
             $this->redirect = route('consolidados.show', $this->consolidado);
     }
 
