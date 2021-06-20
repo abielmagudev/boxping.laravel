@@ -5,3 +5,4 @@
 require __DIR__ . '/text.php';
 require __DIR__ . '/logic.php';
 require __DIR__ . '/html.php';
+require __DIR__ . '/validation.php';
