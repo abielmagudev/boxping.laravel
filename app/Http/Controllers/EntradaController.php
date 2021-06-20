@@ -20,6 +20,8 @@ use App\Http\Requests\EntradaEditRequest as EditRequest;
 use App\Http\Requests\EntradaUpdateRequest as UpdateRequest;
 use Illuminate\Http\Request;
 
+use App\Ahex\Entrada\Application\AfterStore\RedirectAfterStore;
+
 class EntradaController extends Controller
 {
     use Routing, Trayectoria, Printing;
@@ -56,13 +58,12 @@ class EntradaController extends Controller
 
     public function store(StoreRequest $request)
     {
-        $prepared = Entrada::prepare($request->validated());
+        $prepared = Entrada::prepare( $request->validated() );
 
-        if(! $entrada = Entrada::create($prepared) )
+        if( ! $entrada = Entrada::create($prepared) )
             return back()->with('failure', 'Error al guardar entrada');
-        
-        $route = $this->routeAfterStore($entrada->consolidado_id);
-        return redirect($route)->withInput( $request->only('cliente') )->with('success', "{$entrada->numero} guardada");
+            
+        return RedirectAfterStore::route($request->siguiente, $entrada)->with('success', "{$entrada->numero} guardada");
     }
 
     public function show(Entrada $entrada)
