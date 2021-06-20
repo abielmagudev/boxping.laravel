@@ -3,7 +3,7 @@
 
 @include('@.partials.page-header', [
     'subtitle' => "Consolidado {$consolidado->numero}",
-    'title' => 'Agregar nueva entrada',
+    'title' => 'Nueva entrada',
 ])
 
 @component('@.bootstrap.card')
