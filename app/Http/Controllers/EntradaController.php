@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Entrada;
 use App\Cliente;
 use App\Comentario;
+use App\Consolidado;
+use App\Entrada;
 use App\EntradaEtapa;
 use App\EntradaEtapaPivot;
 
@@ -41,8 +42,16 @@ class EntradaController extends Controller
 
     public function create(CreateRequest $request)
     {   
-        $cast = CastSaveForm::create( $request->input('consolidado', false) );
-        return view('entradas.create', $cast);
+        if( $consolidado = Consolidado::find($request->consolidado) )
+            return view('entradas.create.consolidado', [
+                'consolidado' => $consolidado,
+                'entrada' => new Entrada,
+            ]);
+
+        return view('entradas.create.sin-consolidado', [
+            'clientes' => Cliente::all(),
+            'entrada' => new Entrada,
+        ]);
     }
 
     public function store(StoreRequest $request)
