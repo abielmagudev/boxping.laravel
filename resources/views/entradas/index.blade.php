@@ -3,7 +3,7 @@
 
 @component('@.partials.page-header', [
     'title' => 'Entradas',
-    'counter' => $entradas->count(),
+    'counter' => $counter,
 ])
     @slot('options')
     <a href="{{ route('entradas.create') }}" class="btn btn-sm btn-primary">
@@ -23,28 +23,22 @@
     @endslot
 
     @slot('body')
-    @component('@.partials.entradas-table', [
-        'entradas' => $has_pagination ? $entradas->getCollection() : $entradas,
+    @include('@.partials.entradas-table', [
+        'entradas' => $entradas,
         'checkboxes_form' => 'formEntradasPrinting',
     ]) 
-    @endcomponent
     @endslot
-
 @endcomponent
 <br>
 
 @if( $has_pagination )
-    @component('@.bootstrap.pagination-simple', [
-        'prev' => $entradas->previousPageUrl() ?? null,
-        'next' => $entradas->nextPageUrl() ?? null,
-    ])
-    @endcomponent
+@include('@.bootstrap.pagination-simple', [
+    'prev' => $collection->previousPageUrl(),
+    'next' => $collection->nextPageUrl(),
+])
 @endif
 
 @include('@.partials.entradas-filter.modal', ['results_route' => route('entradas.index')])
 @include('@.partials.checkboxes-checker.scripts', ['checkbox_prefix' => 'checkboxEntrada'])
-
-{{-- $has_pagination ? $entradas->getCollection() : $entradas --}}
-{{-- $has_pagination ? $entradas->total() : $entradas->count() --}}
 
 @endsection
