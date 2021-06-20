@@ -26,12 +26,16 @@ class EntradaController extends Controller
     public function index(Request $request)
     {
         $entradas = Entrada::with(['consolidado','cliente','destinatario'])
-                            ->filterByRequest($request->all())
-                            ->getFiltered($request->muestreo);
-        
+                    ->filterByRequest( $request->all() )
+                    ->getFiltered( $request->input('muestreo', 25) );
+
+        $has_pagination = hasPagination($entradas);
+
         return view('entradas.index', [
-            'entradas' => $entradas,
-            'has_pagination' => is_a($entradas, \Illuminate\Pagination\LengthAwarePaginator::class),
+            'collection' => $entradas,
+            'counter' => $has_pagination ? $entradas->total() : $entradas->count(),
+            'entradas' => $has_pagination ? $entradas->getCollection() : $entradas,
+            'has_pagination' => $has_pagination,
         ]);
     }
 

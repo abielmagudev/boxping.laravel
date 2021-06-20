@@ -30,15 +30,15 @@ trait FiltersTrait
 
     public function scopeGetFiltered($query, $sampling)
     {
-        if( $sampling <> 'completo' )
-            return $query->paginate(20);
-
+        if( is_int($sampling) || is_numeric($sampling) )
+            return $query->paginate($sampling);
+        
         return $query->get();
     }
 
     public function scopeFilterAmbit($query, $ambit)
     {
-        if(! in_array($ambit, ['consolidadas', 'sin-consolidar']) )
+        if( ! in_array($ambit, ['consolidadas', 'sin-consolidar']) )
             return $query;
 
         if( $ambit == 'consolidadas' )
@@ -49,7 +49,7 @@ trait FiltersTrait
 
     public function scopeFilterClient($query, $cliente)
     {
-        if(! ctype_digit($cliente) )
+        if( ! ctype_digit($cliente) )
             return $query;
 
         return $query->where('cliente_id', $cliente);
@@ -57,7 +57,7 @@ trait FiltersTrait
 
     public function scopeFilterStage($query, $etapa)
     {
-        if(! ctype_digit($etapa) )
+        if( ! ctype_digit($etapa) )
             return $query;
 
         return $query->whereHas('etapas', function ($subquery) use ($etapa) {
@@ -71,7 +71,7 @@ trait FiltersTrait
 
     public function scopeFilterOrder($query, $orden)
     {
-        if(! in_array($orden, ['asc', 'desc']) )
+        if( ! in_array($orden, ['asc', 'desc']) )
             return $query->orderBy('id', 'desc');
 
         return $query->orderBy('id', $orden);
