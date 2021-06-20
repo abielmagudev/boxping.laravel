@@ -10,16 +10,11 @@
     @slot('body')
     <form action="{{ route('entradas.store') }}" method="post" autocomplete="off">
         @csrf
-        <div class="mb-1">
-            <label for="selectCliente" class="form-label small">Cliente</label>
-            <select name="cliente" id="selectCliente" class="form-select" required>
-                <option disabled selected></option>
-                @foreach($clientes as $cliente)
-                <option value="{{ $cliente->id }}" {{ toggleSelected($cliente->id, old('cliente', $entrada->cliente_id)) }}>{{ $cliente->nombre }} ({{ $cliente->alias }})</option>
-                @endforeach
-            </select>
-        </div>
-        @include('entradas._save.bundle')
+        
+        @include('entradas._save.input-numero')
+        @include('entradas._save.select-cliente')
+        @include('entradas._save.checkbox-cliente-alias')
+        @include('entradas._save.textarea-contenido')
         <br>
         
         <div class="">
@@ -32,13 +27,13 @@
                         <span class="dropdown-header">Posteriormente</span>
                     </li>
                     <li>
-                        <button type="submit" class="dropdown-item" name="siguiente" value="crear">Agregar nueva entrada</button>
+                        <button type="submit" class="dropdown-item" name="siguiente" value="agregar">Agregar entrada</button>
                     </li>
                     <li>
-                        <button type="submit" class="dropdown-item" name="siguiente" value="crear">Crear nueva entrada</button>
+                        <button type="submit" class="dropdown-item" name="siguiente" value="crear">Crear entrada</button>
                     </li>
                     <li>
-                        <button type="submit" class="dropdown-item" name="siguiente" value="terminar">Finalizar</button>
+                        <button type="submit" class="dropdown-item" name="siguiente" value="finalizar">Finalizar</button>
                     </li>
                 </ul>
             </div>

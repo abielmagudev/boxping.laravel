@@ -11,11 +11,11 @@
     <form action="{{ route('entradas.store') }}" method="post" autocomplete="off">
         @csrf
         <input name="consolidado" value="{{ $consolidado->id }}" type="hidden">
-        <div class="mb-1">
-            <label for="read-cliente" class="form-label small">Cliente</label>
-            <div class="form-control bg-light">{{ $consolidado->cliente->nombre }} ({{ $consolidado->cliente->alias }})</div>
-        </div>
-        @include('entradas._save.bundle')
+
+        @include('entradas._save.input-numero')
+        @include('entradas._save.read-consolidado-cliente')
+        @include('entradas._save.checkbox-cliente-alias')
+        @include('entradas._save.textarea-contenido')
         <br>
         
         <div class="">
@@ -28,10 +28,10 @@
                         <span class="dropdown-header">Posteriormente</span>
                     </li>
                     <li>
-                        <button type="submit" class="dropdown-item" name="siguiente" value="crear">Agregar nueva entrada</button>
+                        <button type="submit" class="dropdown-item" name="siguiente" value="agregar">Agregar nueva entrada</button>
                     </li>
                     <li>
-                        <button type="submit" class="dropdown-item" name="siguiente" value="terminar">Finalizar</button>
+                        <button type="submit" class="dropdown-item" name="siguiente" value="finalizar">Finalizar</button>
                     </li>
                 </ul>
             </div>
