@@ -20,7 +20,7 @@ $fieldset_fechas_horas = (object) [
     <label for="selectFilterFechaHora" class="form-label small">Fecha y hora</label>
     <select name="fecha_hora" id="selectFilterFechaHora" class="form-control">
         @foreach($options_fechas_horas as $value => $label)
-        <option value="{{ $value }}" {{ selectable(request('fecha_hora'), $value) }}>{{ $label }}</option>
+        <option value="{{ $value }}" {{ toggleSelected($value, request('fecha_hora')) }}>{{ $label }}</option>
         @endforeach
     </select>
     <fieldset id="fieldsetFechasHoras" class="mt-3 p-3 bg-light {{ $fieldset_fechas_horas->display }}" {{ $fieldset_fechas_horas->disabled }}>

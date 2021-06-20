@@ -4,7 +4,7 @@
     <select name="cliente" id="selectFilterCliente" class="form-control">
         <option value="cualquier" selected>- Cualquier cliente -</option>
         @foreach ($clientes as $cliente)
-        <option value="{{ $cliente->id }}" {{ selectable(request('cliente'), $cliente->id) }}>{{ $cliente->nombre }}</option>
+        <option value="{{ $cliente->id }}" {{ toggleSelected($cliente->id, request('cliente')) }}>{{ $cliente->nombre }}</option>
         @endforeach
     </select>
 </div>
