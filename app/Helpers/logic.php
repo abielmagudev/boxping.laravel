@@ -5,8 +5,7 @@
  * 
  * @return bool
  */
-
-if(! function_exists('equals') )
+if( ! function_exists('equals') )
 {
     function equals($a, $b, bool $strict = false)
     {

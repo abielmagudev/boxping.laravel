@@ -5,11 +5,11 @@
  * 
  * @return string "selected" or empty
  */
-if(! function_exists('selectable') )
+if( ! function_exists('toggleSelected') )
 {
-    function selectable($constant, $variable, bool $strict = false)
+    function toggleSelected($value_a, $value_b, bool $strict = false)
     {
-        return equals($constant, $variable, $strict) ? 'selected' : '';
+        return equals($value_a, $value_b, $strict) ? 'selected' : '';
     }
 }
 
@@ -18,10 +18,10 @@ if(! function_exists('selectable') )
  * 
  * @return string "checked" or empty
  */
-if(! function_exists('checkable') )
+if( ! function_exists('toggleChecked') )
 {
-    function checkable($constant, $variable, bool $strict = false)
+    function toggleChecked($value_a, $value_b, bool $strict = false)
     {
-        return equals($constant, $variable, $strict) ? 'checked' : '';
+        return equals($value_a, $value_b, $strict) ? 'checked' : '';
     }
 }
