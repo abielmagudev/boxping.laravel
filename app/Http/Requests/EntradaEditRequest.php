@@ -6,13 +6,6 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class EntradaEditRequest extends FormRequest
 {
-    private $forms;
-
-    public function prepareForValidation()
-    {
-        $this->forms = implode(',', ['entrada','reempaque','importacion']);
-    }
-
     public function authorize()
     {
         return true;
@@ -21,7 +14,7 @@ class EntradaEditRequest extends FormRequest
     public function rules()
     {
         return [
-            'formulario' => ['required','in:' . $this->forms]
+            'formulario' => ['required','in:guia,reempaque,importacion']
         ];
     }
 
@@ -29,7 +22,7 @@ class EntradaEditRequest extends FormRequest
     {
         return array(
             'formulario.required' => __('Se requiere una editor de información'),
-            'formulario.in' => __('Selecciona un editor valido de información'),
+            'formulario.in' => __('Selecciona un editor válido de información'),
         );
     }
 }

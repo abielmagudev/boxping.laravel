@@ -1,13 +1,5 @@
-<?php
-
-$old = 1;
-
-if( ! is_null($entrada->id) )
-    $old = old('cliente_alias_numero', $entrada->cliente_alias_numero);
-
-?>
 <div class="form-check mb-3">
-    <input name="cliente_alias_numero" value="1" id="checkbox-cliente-alias-numero" type="checkbox" class="form-check-input" {{ checkable(1, $old) }}>
+    <input name="cliente_alias_numero" value="1" id="checkbox-cliente-alias-numero" type="checkbox" class="form-check-input" {{ toggleChecked(1, $entrada->cliente_alias_numero) }}>
     <label for="checkbox-cliente-alias-numero" class="form-check-label small">Alias del cliente al comienzo del número de entrada.</label>
 </div>
 <div class="mb-3">

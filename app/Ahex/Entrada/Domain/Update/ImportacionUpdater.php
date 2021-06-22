@@ -1,10 +1,8 @@
 <?php
 
-namespace App\Ahex\Entrada\Domain\Updaters;
+namespace App\Ahex\Entrada\Domain\Update;
 
-use App\Ahex\Fake\Domain\Fakeuser;
-
-Class ImportacionUpdater extends Updater
+class ImportacionUpdater extends Updater
 {
     public function rules()
     {
@@ -33,23 +31,36 @@ Class ImportacionUpdater extends Updater
         ];
     }
 
-    public function prepare($validated)
+    public function prepare($data)
     {
         return [
-            'vehiculo_id'     => $validated['vehiculo'],
-            'conductor_id'    => $validated['conductor'],
-            'numero_cruce'    => $validated['numero_cruce'],
-            'importado_fecha' => $validated['importado_fecha'],
-            'importado_hora'  => $validated['importado_hora'],
-            'updated_by'      => Fakeuser::live(),
+            'vehiculo_id'     => $data['vehiculo'],
+            'conductor_id'    => $data['conductor'],
+            'numero_cruce'    => $data['numero_cruce'],
+            'importado_fecha' => $data['importado_fecha'],
+            'importado_hora'  => $data['importado_hora'],
+            'updated_by'      => rand(1,5),
         ];
     }
 
-    public function notification(bool $saved = true)
+    public function save($data)
     {
-        if(! $saved )
-            return 'Error al actualizar importación';
+        $prepared = $this->prepare($data);
+        return $this->entrada->fill( $prepared )->save();
+    }
 
-        return 'Importación de la entrada actualizada';
+    public function redirect()
+    {
+        return redirect()->route('entradas.edit', [$this->entrada, 'formulario' => 'importacion']);
+    }
+
+    public function failure()
+    {
+        return $this->redirect()->with('failure', 'Error al actualizar la importación');
+    }
+
+    public function success()
+    {
+        return $this->redirect()->with('success', 'Importación actualizada');
     }
 }

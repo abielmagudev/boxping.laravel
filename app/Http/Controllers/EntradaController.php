@@ -3,24 +3,26 @@
 namespace App\Http\Controllers;
 
 use App\Cliente;
+use App\Codigor;
 use App\Comentario;
+use App\Conductor;
 use App\Consolidado;
 use App\Entrada;
 use App\EntradaEtapa;
 use App\EntradaEtapaPivot;
-
-use App\Ahex\Entrada\Domain\UpdaterFactory;
-use App\Ahex\Entrada\Application\CastSaveForm;
-use App\Ahex\Entrada\Application\RoutingTrait as Routing;
-use App\Ahex\Entrada\Application\TrayectoriaTrait as Trayectoria;
-use App\Ahex\Entrada\Application\PrintingTrait as Printing;
-use App\Http\Requests\EntradaCreateRequest as CreateRequest;
-use App\Http\Requests\EntradaStoreRequest as StoreRequest;
-use App\Http\Requests\EntradaEditRequest as EditRequest;
-use App\Http\Requests\EntradaUpdateRequest as UpdateRequest;
-use Illuminate\Http\Request;
+use App\Reempacador;
+use App\Vehiculo;
 
 use App\Ahex\Entrada\Application\AfterStore\RedirectAfterStore;
+use App\Ahex\Entrada\Application\PrintingTrait as Printing;
+use App\Ahex\Entrada\Application\RoutingTrait as Routing;
+use App\Ahex\Entrada\Application\TrayectoriaTrait as Trayectoria;
+use App\Ahex\Entrada\Domain\Update\UpdaterFactory;
+use App\Http\Requests\EntradaCreateRequest as CreateRequest;
+use App\Http\Requests\EntradaEditRequest as EditRequest;
+use App\Http\Requests\EntradaStoreRequest as StoreRequest;
+use App\Http\Requests\EntradaUpdateRequest as UpdateRequest;
+use Illuminate\Http\Request;
 
 class EntradaController extends Controller
 {
@@ -62,47 +64,63 @@ class EntradaController extends Controller
 
         if( ! $entrada = Entrada::create($prepared) )
             return back()->with('failure', 'Error al guardar entrada');
-            
+
         return RedirectAfterStore::route($request->siguiente, $entrada)->with('success', "{$entrada->numero} guardada");
     }
 
     public function show(Entrada $entrada)
     {
         return view('entradas.show', [
-            'entrada' => $entrada,
             'comentarios' => Comentario::where('entrada_id', $entrada->id)->orderBy('id', 'desc')->get(),
             'config_alertas' => config('system.alertas'),
+            'entrada' => $entrada,
         ]);
     }
 
     public function edit(EditRequest $request, Entrada $entrada)
     {
-        $cast = CastSaveForm::edit($request->formulario, $entrada);
-        return view('entradas.edit', $cast);
+        if( $request->formulario == 'importacion' )
+            return view('entradas.edit.importacion', [
+                'conductores' => Conductor::all(),
+                'vehiculos' => Vehiculo::all(),
+                'entrada' => $entrada,
+            ]);
+
+        if( $request->formulario == 'reempaque' )
+            return view('entradas.edit.reempaque', [
+                'reempacadores' => Reempacador::all(),
+                'codigosr' => Codigor::all(),
+                'entrada' => $entrada,
+            ]);
+
+        return view('entradas.edit.guia', [
+            'clientes' => Cliente::all(['id','nombre','alias']),
+            'consolidado' => $entrada->consolidado,
+            'entrada' => $entrada,
+        ]);
     }
 
     public function update(UpdateRequest $request, Entrada $entrada)
     {
-        $updater = UpdaterFactory::make($request->actualizar, $entrada);
-        $validated = $request->validate($updater->rules(), $updater->messages());
-        $prepared = $updater->prepare($validated);
+        $updater = UpdaterFactory::get($request, $entrada);
         
-        if(! $entrada->fill($prepared)->save() )
-            return back()->with('failure', $updater->notification(false));
+        $validated = $updater->validate();
         
-        if(! $updater->redirect )
-            return back()->with('success', $updater->notification());
+        if( ! $updater->save($validated) )
+            return $updater->failure();
 
-        return redirect( $updater->redirect )->with('success', $updater->notification());
+        return $updater->success();
     }
 
     public function destroy(Entrada $entrada)
     {
-        $route = $this->routeAfterDestroy($entrada->consolidado_id);
-
-        if(! $entrada->delete() )
+        if( ! $entrada->delete() )
             return back()->with('failure', 'Error al eliminar entrada');
         
+        $route = Consolidado::where('id', $entrada->consolidado_id)->exists()
+                ? route('consolidados.show', $entrada->consolidado_id)
+                : route('entradas.index');
+
         return redirect($route)->with('success', "{$entrada->numero} eliminada");
     }
 }

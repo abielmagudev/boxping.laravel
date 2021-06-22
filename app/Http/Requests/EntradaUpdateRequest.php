@@ -4,7 +4,8 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
-use App\Ahex\Entrada\Domain\UpdaterFactory;
+// use App\Ahex\Entrada\Domain\UpdaterFactory;
+use App\Ahex\Entrada\Domain\Update\UpdaterFactory;
 
 class EntradaUpdateRequest extends FormRequest
 {
@@ -12,26 +13,16 @@ class EntradaUpdateRequest extends FormRequest
 
     public function authorize()
     {
-        return true;
-    }
-
-    protected function prepareForValidation()
-    {
-        $this->updaters_name = implode(',', UpdaterFactory::names());
+        return UpdaterFactory::exists( $this->actualizar );
     }
 
     public function rules()
     {
-        return [
-            'actualizar' => ['required', 'in:' . $this->updaters_name],
-        ];
+        return [];
     }
 
     public function messages()
     {
-        return [
-            'actualizar.required' => __('Actualización de entrada requerida'),
-            'actualizar.in' => __('Actualización de entrada no válida'),
-        ];
+        return [];
     }
 }

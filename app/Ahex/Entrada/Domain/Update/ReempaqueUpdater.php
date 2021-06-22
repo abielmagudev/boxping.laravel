@@ -1,10 +1,8 @@
 <?php
 
-namespace App\Ahex\Entrada\Domain\Updaters;
+namespace App\Ahex\Entrada\Domain\Update;
 
-use App\Ahex\Fake\Domain\Fakeuser;
-
-Class ReempaqueUpdater extends Updater
+class ReempaqueUpdater extends Updater
 {
     public function rules()
     {
@@ -21,8 +19,10 @@ Class ReempaqueUpdater extends Updater
         return [
             'codigo_reempacado.required' => __('Selecciona el código de reempacado'),
             'codigo_reempacado.integer' => __('Selecciona el código de reempacado válido'),
+            'codigo_reempacado.exists' => __('Selecciona el código de reempacado existente'),
             'reempacador.required' => __('Selecciona el reempacador'),
             'reempacador.integer' => __('Selecciona el reempacador válido'),
+            'reempacador.exists' => __('Selecciona el reempacador existente'),
             'reempacado_fecha.required' => __('Selecciona la fecha de reempacado'),
             'reempacado_fecha.integer' => __('Selecciona la fecha de reempacado válido'),
             'reempacado_hora.required' => __('Selecciona la hora de reempacado'),
@@ -30,22 +30,35 @@ Class ReempaqueUpdater extends Updater
         ];
     }
 
-    public function prepare($validate)
+    public function prepare($data)
     {
         return [
-            'codigor_id' => $validate['codigo_reempacado'],
-            'reempacador_id' => $validate['reempacador'],
-            'reempacado_fecha' => $validate['reempacado_fecha'],
-            'reempacado_hora' => $validate['reempacado_hora'],
-            'updated_by' => Fakeuser::live(),
+            'codigor_id' => $data['codigo_reempacado'],
+            'reempacado_fecha' => $data['reempacado_fecha'],
+            'reempacado_hora' => $data['reempacado_hora'],
+            'reempacador_id' => $data['reempacador'],
+            'updated_by' => rand(1,5),
         ];
     }
 
-    public function notification(bool $saved = true)
+    public function save($data)
     {
-        if(! $saved )
-            return 'Error al actualizar reempaque';
+        $prepared = $this->prepare($data);
+        return $this->entrada->fill( $prepared )->save();
+    }
 
-        return 'Reempaque de la entrada actualizada';
+    public function redirect()
+    {
+        return redirect()->route('entradas.edit', [$this->entrada, 'formulario' => 'reempaque']);
+    }
+
+    public function failure()
+    {
+        return $this->redirect()->with('failure', 'Error al actualizar el reempaque');
+    }
+
+    public function success()
+    {
+        return $this->redirect()->with('success', 'Reempaque actualizado');
     }
 }
