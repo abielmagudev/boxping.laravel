@@ -24,7 +24,7 @@
                 <td>{{ $entrada->destinatario->localidad }}</td>
             </tr>
             <tr>
-                <td class="text-muted small">Referencias</td>
+                <td class="text-muted small align-top">Referencias</td>
                 <td>{{ $entrada->destinatario->referencias }}</td>
             </tr>
         </tbody>

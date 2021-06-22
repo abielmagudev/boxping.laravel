@@ -32,8 +32,8 @@
     <br>
     
     <p class="text-end">
-        <a href="{{ route('entradas.edit', [$entrada, 'formulario' => 'entrada']) }}" class="btn btn-warning btn-sm">
-            <span>Editar entrada</span>
+        <a href="{{ route('entradas.edit', [$entrada, 'formulario' => 'guia']) }}" class="btn btn-warning btn-sm">
+            <span>Editar guía</span>
         </a>
     </p>
 </div>

@@ -1,8 +1,8 @@
 @extends('app')
 @section('content')
 
-@component('@.bootstrap.header', [
-    'pretitle' => 'Entrada',
+@component('@.partials.page-header', [
+    'pretitle' => 'Número de entrada',
     'title' => $entrada->numero,
 ])
     @slot('options')
@@ -30,7 +30,7 @@
     @endslot
 @endcomponent
 
-<div class="row" style="min-height:480px">
+<div class="row">
     <div class="col-sm mb-3">
         @include('entradas.show.informacion')
     </div>
