@@ -46,7 +46,7 @@ function allowColumn($column, $except)
         <?php $checkbox_id = "checkboxEntrada{$entrada->id}" ?>
         <tr>
             @if( $settings->has_checkboxes_form )
-            <td class="align-top" style="width:1%">
+            <td class="align-top" style="width:2.5%">
                 <input type="checkbox" class="form-check-input" name="entradas[]" value="{{ $entrada->id }}" id="{{ $checkbox_id }}" form="{{ $settings->checkboxes_form }}">
             </td>
             @endif
