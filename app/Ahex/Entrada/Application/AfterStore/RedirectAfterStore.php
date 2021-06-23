@@ -2,28 +2,24 @@
 
 namespace App\Ahex\Entrada\Application\AfterStore;
 
+use App\Http\Requests\EntradaStoreRequest as StoreRequest;
 use App\Entrada;
 
-abstract class RedirectAfterStore
+class RedirectAfterStore
 { 
-    private static $redirect;
+    public $all_redirects;
+    public $stored;
 
-    public static function route($next, Entrada $entrada)
+    public function __construct(Entrada $entrada)
     {
-        self::setRedirect($entrada);
-        return self::redirect($next);
+        $this->stored = $entrada->hasConsolidado()
+                      ? new EntradaConsolidadoStored($entrada)
+                      : new EntradaStored($entrada);
     }
 
-    private static function setRedirect(Entrada $entrada)
-    {
-        self::$redirect = $entrada->hasConsolidado() 
-                        ? new EntradaConsolidadoStored($entrada) 
-                        : new EntradaStored($entrada);
-    }
-
-    private static function redirect($next)
+    public function redirect($next)
     {   
-        return call_user_func([self::$redirect, $next]) ?: self::back();
+        return call_user_func([$this->stored, $next]) ?: $this->back();
     }
 
     /**
@@ -31,13 +27,12 @@ abstract class RedirectAfterStore
      * Retornar con helper redirect(), para posteriormente 
      * conectar metodo with() para flash-messages
      * 
-     * Helper back() son para obtener la direccion previa y redireccionar a ella.
-     * 
      * @return object
      * 
-     * @return string url()->previous()
+     * @return string url()->previous(): string | back(): object
+     * 
      */
-    private static function back()
+    public function back()
     {
         return redirect()->back();
     }

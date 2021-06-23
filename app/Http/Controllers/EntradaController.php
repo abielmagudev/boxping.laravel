@@ -15,7 +15,6 @@ use App\Vehiculo;
 
 use App\Ahex\Entrada\Application\AfterStore\RedirectAfterStore;
 use App\Ahex\Entrada\Application\PrintingTrait as Printing;
-use App\Ahex\Entrada\Application\RoutingTrait as Routing;
 use App\Ahex\Entrada\Application\TrayectoriaTrait as Trayectoria;
 use App\Ahex\Entrada\Domain\Update\UpdaterFactory;
 use App\Http\Requests\EntradaCreateRequest as CreateRequest;
@@ -26,7 +25,7 @@ use Illuminate\Http\Request;
 
 class EntradaController extends Controller
 {
-    use Routing, Trayectoria, Printing;
+    use Trayectoria, Printing;
 
     public function index(Request $request)
     {
@@ -65,7 +64,8 @@ class EntradaController extends Controller
         if( ! $entrada = Entrada::create($prepared) )
             return back()->with('failure', 'Error al guardar entrada');
 
-        return RedirectAfterStore::route($request->siguiente, $entrada)->with('success', "{$entrada->numero} guardada");
+        $following = new RedirectAfterStore($entrada);
+        return $following->redirect($request->siguiente)->with('success', "{$entrada->numero} guardada");
     }
 
     public function show(Entrada $entrada)

@@ -2,9 +2,9 @@
 
 namespace App\Ahex\Entrada\Application\AfterStore;
 
-class EntradaStored extends Steps
+class EntradaStored extends Stored
 {
-    protected $steps = [
+    public $redirects = [
         'agregar' => 'toAdd',
         'crear' => 'toCreate',
         'finalizar' => 'toFinish',
@@ -17,7 +17,7 @@ class EntradaStored extends Steps
             'contenido',
         ]);
 
-        return redirect()->route('entradas.create')->withInput( $inputs );
+        return redirect()->route('entradas.create')->withInput($inputs);
     }
 
     public function toCreate()
