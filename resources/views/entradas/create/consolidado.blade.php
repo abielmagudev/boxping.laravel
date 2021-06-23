@@ -28,7 +28,7 @@
                         <span class="dropdown-header">Posteriormente</span>
                     </li>
                     <li>
-                        <button type="submit" class="dropdown-item" name="siguiente" value="agregar">Agregar nueva entrada</button>
+                        <button type="submit" class="dropdown-item" name="siguiente" value="agregar">Agregar entrada</button>
                     </li>
                     <li>
                         <button type="submit" class="dropdown-item" name="siguiente" value="finalizar">Finalizar</button>
