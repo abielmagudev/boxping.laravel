@@ -7,7 +7,7 @@ use App\Entrada;
 
 abstract class UpdaterFactory
 {
-    public static function get(UpdateRequest $request, Entrada $entrada)
+    public static function make(UpdateRequest $request, Entrada $entrada)
     {
         $classname = self::classname($request->actualizar);
         return new $classname($request, $entrada);

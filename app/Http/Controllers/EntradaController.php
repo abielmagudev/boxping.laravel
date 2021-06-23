@@ -102,7 +102,7 @@ class EntradaController extends Controller
 
     public function update(UpdateRequest $request, Entrada $entrada)
     {
-        $updater = UpdaterFactory::get($request, $entrada);
+        $updater = UpdaterFactory::make($request, $entrada);
         
         $validated = $updater->validate();
         
