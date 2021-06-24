@@ -7,25 +7,25 @@ $sizes = [
 ];
 
 $settings = (object) [
+    'backdrop' => isset($backdrop) && $backdrop === true ? 'data-bs-backdrop="static" data-bs-keyboard="false"' : null,
+    'body_classes' => isset($body_classes) && is_string($body_classes) ? $body_classes : '',
+    'body' => $body ?? null,
+    'centered' => isset($centered) && $centered === true ? 'modal-dialog-centered' : null,
+    'classes' => isset($classes) && is_string($classes) ? $classes : null,
+    'footer_classes' => isset($footer_classes) && is_string($footer_classes) ? $footer_classes : '',
+    'footer' => $footer ?? null,
+    'fullscreen' => isset($fullscreen) && $fullscreen === true ? 'modal-fullscreen' : null,
     'has_footer_close' => isset($footer_close) && is_bool($footer_close),
     'has_footer' => isset($footer),
     'has_header_close' => isset($header_close) && is_bool($header_close),
     'has_id' => isset($id) && is_string($id),
     'has_title' => isset($title) && is_string($title),
-    'backdrop' => isset($backdrop) && $backdrop === true ? 'data-bs-backdrop="static" data-bs-keyboard="false"' : null,
-    'body' => $body ?? null,
-    'centered' => isset($centered) && $centered === true ? 'modal-dialog-centered' : null,
-    'classes' => isset($classes) && is_string($classes) ? $classes : null,
-    'footer' => $footer ?? null,
-    'fullscreen' => isset($fullscreen) && $fullscreen === true ? 'modal-fullscreen' : null,
+    'header_classes' => isset($header_classes) && is_string($header_classes) ? $header_classes : '',
     'id_label' => "{$id}Label" ?? 'Label',
     'id' => $id ?? false,
     'scrollable' => isset($scrollable) && $scrollable === true ? 'modal-dialog-scrollable' : null,
     'size' => isset($size, $sizes[$size]) ? $sizes[$size] : null,
     'title' => $title ?? null,
-    'header_classes' => isset($header_classes) && is_string($header_classes) ? $header_classes : '',
-    'body_classes' => isset($body_classes) && is_string($body_classes) ? $body_classes : '',
-    'footer_classes' => isset($footer_classes) && is_string($footer_classes) ? $footer_classes : '',
 ];
 
 ?>
