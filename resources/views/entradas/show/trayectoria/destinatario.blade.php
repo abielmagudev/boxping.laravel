@@ -1,34 +1,34 @@
 <div class="tab-pane fade" id="destinatario" role="tabpanel" aria-labelledby="destinatario-tab">
 
     @if( is_object($entrada->destinatario) )
-    <table class="table align-middle">
-        <tbody>
-            <tr>
-                <td class="text-muted small">Nombre</td>
-                <td>{{ $entrada->destinatario->nombre }}</td>
-            </tr>
-            <tr>
-                <td class="text-muted small">Teléfono</td>
-                <td>{{ $entrada->destinatario->telefono }}</td>
-            </tr>
-            <tr>
-                <td class="text-muted small">Dirección</td>
-                <td>{{ $entrada->destinatario->direccion }}</td>
-            </tr>
-            <tr>
-                <td class="text-muted small">Postal</td>
-                <td>{{ $entrada->destinatario->codigo_postal }}</td>
-            </tr>
-            <tr>
-                <td class="text-muted small">Localidad</td>
-                <td>{{ $entrada->destinatario->localidad }}</td>
-            </tr>
-            <tr>
-                <td class="text-muted small align-top">Referencias</td>
-                <td>{{ $entrada->destinatario->referencias }}</td>
-            </tr>
-        </tbody>
-    </table>
+    @component('@.bootstrap.table')
+        @slot('tbody')
+        <tr>
+            <td class="text-muted small">Nombre</td>
+            <td>{{ $entrada->destinatario->nombre }}</td>
+        </tr>
+        <tr>
+            <td class="text-muted small">Teléfono</td>
+            <td>{{ $entrada->destinatario->telefono }}</td>
+        </tr>
+        <tr>
+            <td class="text-muted small">Dirección</td>
+            <td>{{ $entrada->destinatario->direccion }}</td>
+        </tr>
+        <tr>
+            <td class="text-muted small">Postal</td>
+            <td>{{ $entrada->destinatario->codigo_postal }}</td>
+        </tr>
+        <tr>
+            <td class="text-muted small">Localidad</td>
+            <td>{{ $entrada->destinatario->localidad }}</td>
+        </tr>
+        <tr>
+            <td class="text-muted small align-top border-0">Referencias</td>
+            <td class="border-0">{{ $entrada->destinatario->referencias }}</td>
+        </tr>
+        @endslot
+    @endcomponent
     <br>
 
     <div class="text-end">

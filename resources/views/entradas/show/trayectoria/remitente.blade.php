@@ -1,30 +1,30 @@
 <div class="tab-pane fade" id="remitente" role="tabpanel" aria-labelledby="remitente-tab">
 
     @if( is_object($entrada->remitente) )
-    <table class="table align-middle">
-        <tbody>
-            <tr>
-                <td class="text-muted small">Nombre</td>
-                <td>{{ $entrada->remitente->nombre }}</td>
-            </tr>
-            <tr>
-                <td class="text-muted small">Teléfono</td>
-                <td>{{ $entrada->remitente->telefono }}</td>
-            </tr>
-            <tr>
-                <td class="text-muted small">Dirección</td>
-                <td>{{ $entrada->remitente->direccion }}</td>
-            </tr>
-            <tr>
-                <td class="text-muted small">Postal</td>
-                <td>{{ $entrada->remitente->codigo_postal }}</td>
-            </tr>
-            <tr>
-                <td class="text-muted small">Localidad</td>
-                <td>{{ $entrada->remitente->localidad }}</td>
-            </tr>
-        </tbody>
-    </table>
+    @component('@.bootstrap.table')
+        @slot('tbody')
+        <tr>
+            <td class="text-muted small">Nombre</td>
+            <td>{{ $entrada->remitente->nombre }}</td>
+        </tr>
+        <tr>
+            <td class="text-muted small">Teléfono</td>
+            <td>{{ $entrada->remitente->telefono }}</td>
+        </tr>
+        <tr>
+            <td class="text-muted small">Dirección</td>
+            <td>{{ $entrada->remitente->direccion }}</td>
+        </tr>
+        <tr>
+            <td class="text-muted small">Postal</td>
+            <td>{{ $entrada->remitente->codigo_postal }}</td>
+        </tr>
+        <tr>
+            <td class="text-muted small border-0">Localidad</td>
+            <td class="border-0">{{ $entrada->remitente->localidad }}</td>
+        </tr>
+        @endslot
+    @endcomponent
     <br>
 
     <div class="text-end">
