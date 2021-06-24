@@ -23,6 +23,9 @@ $settings = (object) [
     'scrollable' => isset($scrollable) && $scrollable === true ? 'modal-dialog-scrollable' : null,
     'size' => isset($size, $sizes[$size]) ? $sizes[$size] : null,
     'title' => $title ?? null,
+    'header_classes' => isset($header_classes) && is_string($header_classes) ? $header_classes : '',
+    'body_classes' => isset($body_classes) && is_string($body_classes) ? $body_classes : '',
+    'footer_classes' => isset($footer_classes) && is_string($footer_classes) ? $footer_classes : '',
 ];
 
 ?>
@@ -33,7 +36,7 @@ $settings = (object) [
         <div class="modal-content">
 
             @if( $settings->has_title || $settings->has_header_close )             
-            <div class="modal-header">
+            <div class="modal-header {{ $settings->header_classes }}">
                 @if( $settings->has_title )
                 <h5 class="modal-title" id="{{ $settings->id_label }}">{{ $settings->title }}</h5>
                 @endif
@@ -44,12 +47,12 @@ $settings = (object) [
             </div>
             @endif
 
-            <div class="modal-body">
+            <div class="modal-body {{ $settings->body_classes }}">
                 {!! $settings->body !!}
             </div>
             
             @if( $settings->has_footer || $settings->has_footer_close )
-            <div class="modal-footer">
+            <div class="modal-footer {{ $settings->footer_classes }}">
                 @if( $settings->has_footer )
                 {!! $settings->footer !!}
                 @endif

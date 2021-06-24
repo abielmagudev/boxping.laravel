@@ -17,7 +17,7 @@ $settings = (object) [
     'dataset' => isset($data) && is_array($data) ? getDataAttributes($data) : '',
     'is_link' => isset($is_link) && is_bool($is_link) ? $is_link : false,
     'modal_id' => isset($modal_id) && is_string($modal_id) ? "#{$modal_id}" : '#modalIdless',
-    'text' => isset($text) && is_string($text) ? $text : 'Modal trigger',
+    'text' => isset($text) ? $text : 'Modal trigger',
 ];
 
 ?>
