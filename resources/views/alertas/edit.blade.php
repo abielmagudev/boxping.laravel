@@ -1,7 +1,7 @@
 @extends('app')
 @section('content')
 
-@component('@.bootstrap.header', [
+@component('@.bootstrap.page-header', [
     'title' => 'Editar alerta'
 ])
 @endcomponent
@@ -18,22 +18,23 @@
     @endslot
 
     @slot('footer')
-    @component('@.partials.block-modifiers', [
-        'model' => $alerta
-    ])
-    @endcomponent
+        @include('@.partials.modifiers-block', [
+            'model' => $alerta
+        ])
     @endslot
 @endcomponent
 <br>
 
-@component('@.partials.modal-confirm-delete', [
-    'route' => route('alertas.destroy', $alerta),
-    'text' => 'Eliminar alerta',
-])
-    @slot('content')
-    <p class="lead">¿Deseas eliminar alerta <b>{{ $alerta->nombre }}</b>?</p>
-    @endslot
-@endcomponent
+<div class="text-end">
+    @component('@.partials.confirm-delete.bundle', [
+        'route' => route('alertas.destroy', $alerta),
+        'text' => 'Eliminar alerta',
+    ])
+        @slot('content')
+        <p class="lead">¿Deseas eliminar alerta <b>{{ $alerta->nombre }}</b>?</p>
+        @endslot
+    @endcomponent
+</div>
 <br>
 
 @endsection

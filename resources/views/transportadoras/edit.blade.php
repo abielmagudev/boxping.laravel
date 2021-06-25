@@ -1,7 +1,7 @@
 @extends('app')
 @section('content')
 
-@component('@.bootstrap.header')
+@component('@.bootstrap.page-header')
     @slot('title', 'Editar transportadora')
 @endcomponent
 
@@ -17,21 +17,23 @@
     @endslot
 
     @slot('footer')
-        @component('@.partials.block-modifiers')
-            @slot('model', $transportadora)
-        @endcomponent
+        @include('@.partials.modifiers-block', [
+            'model' => $transportadora
+        ])
     @endslot
 @endcomponent
 <br>
 
-@component('@.partials.modal-confirm-delete', [
-    'route' => route('transportadoras.destroy', $transportadora),
-    'text' => 'Eliminar transportadora',
-])
-    @slot('content')
-    <p class="lead">¿Deseas eliminar la transportadora <b>{{ $transportadora->nombre }}</b>?</p>
-    @endslot
-@endcomponent
+<div class="text-end">
+    @component('@.partials.confirm-delete.bundle', [
+        'route' => route('transportadoras.destroy', $transportadora),
+        'text' => 'Eliminar transportadora',
+    ])
+        @slot('content')
+        <p class="lead">¿Deseas eliminar la transportadora <b>{{ $transportadora->nombre }}</b>?</p>
+        @endslot
+    @endcomponent
+</div>
 <br>
 
 @endsection

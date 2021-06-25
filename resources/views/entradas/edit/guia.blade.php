@@ -1,7 +1,7 @@
 @extends('app')
 @section('content')
 
-@include('@.partials.page-header', [
+@include('@.bootstrap.page-header', [
     'pretitle' => "Entrada {$entrada->numero}",
     'title' => 'Editar guía',
 ])
@@ -52,9 +52,9 @@
     @endslot
 
     @slot('footer')
-    @include('@.partials.modifiers-block', [
-        'model' => $entrada,
-    ])
+        @include('@.partials.modifiers-block', [
+            'model' => $entrada,
+        ])
     @endslot
 @endcomponent
 <br>

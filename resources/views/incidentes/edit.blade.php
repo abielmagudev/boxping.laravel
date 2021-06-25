@@ -1,7 +1,7 @@
 @extends('app')
 @section('content')
 
-@component('@.bootstrap.header', [
+@component('@.bootstrap.page-header', [
     'title' => 'Editar incidente',
 ])
 @endcomponent
@@ -18,21 +18,23 @@
     @endslot
 
     @slot('footer')
-    @component('@.partials.block-modifiers')
-        @slot('model', $incidente)
-    @endcomponent
+        @include('@.partials.modifiers-block', [
+            'model' => $incidente,
+        ])
     @endslot
 @endcomponent
 <br>
 
-@component('@.partials.modal-confirm-delete', [
-        'route' => route('incidentes.destroy', $incidente),
-        'text' => 'Eliminar incidente',
-    ])
-    @slot('content')
-    <p class="lead">¿Deseas eliminar incidente <b>{{ $incidente->titulo }}</b>?</p>
-    @endslot
-@endcomponent
+<div class="text-end">
+    @component('@.partials.confirm-delete.bundle', [
+            'route' => route('incidentes.destroy', $incidente),
+            'text' => 'Eliminar incidente',
+        ])
+        @slot('content')
+        <p class="lead">¿Deseas eliminar incidente <b>{{ $incidente->titulo }}</b>?</p>
+        @endslot
+    @endcomponent
+</div>
 <br>
 
 @endsection

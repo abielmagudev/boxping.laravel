@@ -5,7 +5,7 @@
     @slot('active', 2)
 @endcomponent
 
-@component('@.bootstrap.header', [
+@component('@.bootstrap.page-header', [
     'title' => 'Destinatarios',
     'counter' => $destinatarios->count(),
 ])
@@ -41,7 +41,7 @@
 @endcomponent
 <br>
 
-@component('@.partials.pagination-simple')
+@component('@.bootstrap.pagination-simple')
     @slot('collection', $destinatarios)
 @endcomponent
 <br>

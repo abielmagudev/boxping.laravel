@@ -1,7 +1,7 @@
 <?php
 
-$checkbox_prefix = 'checkbox-entrada-';
 $checkbox_form = '';
+$checkbox_prefix = 'checkbox-entrada-';
 $checker_id = 'checker-entradas';
 
 ?>
@@ -9,7 +9,7 @@ $checker_id = 'checker-entradas';
 @extends('app')
 @section('content')
 
-@component('@.bootstrap.header')
+@component('@.bootstrap.page-header')
     @slot('title', $consolidado->numero)
     @slot('pretitle', 'Consolidado')
     @slot('options')
@@ -30,28 +30,26 @@ $checker_id = 'checker-entradas';
         @component('@.bootstrap.card')
             @slot('header', 'Información')
             @slot('body')
-            @component('@.bootstrap.table', [
-                'borderless' => true
-            ])
-                @slot('tbody')
-                <tr class="text-capitalize">
-                    <td class="text-muted small" style="width:1%">Status</td>
-                    <td class="fw-bold" style="color:{{ $config_consolidados->status[$consolidado->status]['color'] }}">{{ ucfirst($consolidado->status) }}</td>
-                </tr>
-                <tr>
-                    <td class="text-muted small">Cliente</td>
-                    <td>{{ $consolidado->cliente_id ? "{$consolidado->cliente->nombre} ({$consolidado->cliente->alias})" : 'Ninguno' }}</td>
-                </tr>
-                <tr class="">
-                    <td class="text-muted small">Tarimas</td>
-                    <td>{{ $consolidado->tarimas }}</td>
-                </tr>
-                <tr class="">
-                    <td class="text-muted small border-0">Notas</td>
-                    <td class="border-0">{{ $consolidado->notas }}</td>
-                </tr>
-                @endslot
-            @endcomponent
+                @component('@.bootstrap.table')
+                    @slot('tbody')
+                    <tr class="text-capitalize">
+                        <td class="text-muted small" style="width:1%">Status</td>
+                        <td class="fw-bold" style="color:{{ $config_consolidados->status[$consolidado->status]['color'] }}">{{ ucfirst($consolidado->status) }}</td>
+                    </tr>
+                    <tr>
+                        <td class="text-muted small">Cliente</td>
+                        <td>{{ $consolidado->cliente_id ? "{$consolidado->cliente->nombre} ({$consolidado->cliente->alias})" : 'Ninguno' }}</td>
+                    </tr>
+                    <tr class="">
+                        <td class="text-muted small">Tarimas</td>
+                        <td>{{ $consolidado->tarimas }}</td>
+                    </tr>
+                    <tr class="border-0">
+                        <td class="text-muted small border-0">Notas</td>
+                        <td class="border-0">{{ $consolidado->notas }}</td>
+                    </tr>
+                    @endslot
+                @endcomponent
             @endslot
         @endcomponent
     </div>
@@ -77,49 +75,44 @@ $checker_id = 'checker-entradas';
 
     @slot('header_right')
 
-    @component('@.partials.modal-filter-entradas', [
-        'route_results' => route('consolidados.show', [$consolidado]),
-        'except' => ['ambito', 'cliente','muestreo'],
-        'header' => 'Filtros para entradas del consolidado',
-    ])
-    @endcomponent
+        @include('@.partials.entradas-filter.trigger')
 
-    <button class="btn btn-sm btn-primary" id="{{ $checker_id }}" type="button">
-        <b>{!! $svg->list_checked !!}</b>
-    </button>
+        @include('@.partials.checkboxes-checker.trigger')
 
-    @component('@.partials.dropdown-sheets-printing')
-    @endcomponent
+        @include('@.partials.sheets-printing-dropdown')
 
-    @if( $consolidado->status === 'abierto' ) 
-    <a href="{{ route('entradas.create', ['consolidado' => $consolidado->id]) }}" class="btn btn-sm btn-primary">
-        <span class="d-block d-md-none fw-bold">+</span>
-        <span class="d-none d-md-block">Nueva entrada</span>
-    </a>
-    @endif
+        @if( $consolidado->status === 'abierto' ) 
+        <a href="{{ route('entradas.create', ['consolidado' => $consolidado->id]) }}" class="btn btn-sm btn-primary">
+            <span class="d-block d-md-none fw-bold">+</span>
+            <span class="d-none d-md-block">Nueva entrada</span>
+        </a>
+        @endif
 
     @endslot
     <!-- Endslot headers  -->
     
     <!-- Slot body  -->
     @slot('body')
-    @component('@.partials.table-entradas', [   
-        'entradas' => $entradas,
-        'checkbox_prefix' => $checkbox_prefix,
-        'checkbox_form' => 'form-entradas-printing',
-        'numero_consolidado' => $consolidado->numero,
-    ])
-    @endcomponent
+        @include('@.partials.entradas-table', [   
+            'entradas' => $entradas,
+            'checkboxes_form' => 'form-entradas-printing',
+            'numero_consolidado' => $consolidado->numero,
+        ])
     @endslot
     <!-- Endslot body  -->
 
 @endcomponent
 <br>
 
-@component('@.partials.script-toggle-checkboxes', [
+@include('@.partials.checkboxes-checker.scripts', [
     'checkbox_prefix' => $checkbox_prefix,
     'checker_id' => $checker_id,
 ])
-@endcomponent
+
+@include('@.partials.entradas-filter.modal', [
+    'except' => ['ambitos', 'clientes','muestreos'],
+    'header' => 'Filtros para entradas del consolidado',
+    'results_route' => route('consolidados.show', [$consolidado]),
+])
 
 @endsection

@@ -1,7 +1,7 @@
 @extends('app')
 @section('content')
 
-@component('@.bootstrap.header')
+@component('@.bootstrap.page-header')
     @slot('title', 'Nueva transportadora')
 @endcomponent
 @component('@.bootstrap.card')

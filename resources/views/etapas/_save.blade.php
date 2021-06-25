@@ -16,7 +16,7 @@
         </div>
         <div class="mb-3 mb-md-1"></div>
         <div class="form-check">
-            <?php $checked_no = checkable(0, old('realiza_medicion', $etapa->realiza_medicion)) ?>
+            <?php $checked_no = toggleChecked(0, old('realiza_medicion', $etapa->realiza_medicion)) ?>
             <input class="form-check-input" type="radio" id="radio-medicion_no" name="realiza_medicion" value="0" {{ $checked_no }}>
             <label class="form-check-label" for="radio-medicion_no">No, solamente registra la entrada.</label>
         </div>
@@ -29,7 +29,7 @@
             <select name="unica_medida_peso" id="select-medida_peso" class="form-select">
                 <option label="Opcional" selected></option>
                 @foreach($medidas_peso as $abbr => $value)
-                <option value="{{ $value }}" {{ selectable($value, old('medida_peso', $etapa->unica_medida_peso)) }}>{{ ucfirst($value) }}</option>
+                <option value="{{ $value }}" {{ toggleSelected($value, old('medida_peso', $etapa->unica_medida_peso)) }}>{{ ucfirst($value) }}</option>
                 @endforeach
             </select>
         </div>
@@ -40,7 +40,7 @@
             <select name="unica_medida_volumen" id="select-medida_volumen" class="form-select">
                 <option label="Opcional" selected></option>
                 @foreach($medidas_volumen as $abbr => $value)
-                <option value="{{ $value }}" {{ selectable($value, old('medida_volumen', $etapa->unica_medida_volumen)) }}>{{ ucfirst($value) }}</option>
+                <option value="{{ $value }}" {{ toggleSelected($value, old('medida_volumen', $etapa->unica_medida_volumen)) }}>{{ ucfirst($value) }}</option>
                 @endforeach
             </select>
         </div>

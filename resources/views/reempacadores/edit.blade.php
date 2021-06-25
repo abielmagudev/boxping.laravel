@@ -1,7 +1,7 @@
 @extends('app')
 @section('content')
 
-@component('@.bootstrap.header', [
+@component('@.bootstrap.page-header', [
     'title' => 'Editar reempacador',
 ])
 @endcomponent
@@ -18,22 +18,23 @@
     @endslot
 
     @slot('footer')
-    @component('@.partials.block-modifiers', [
-        'model' => $reempacador
-    ])
-    @endcomponent
+        @include('@.partials.modifiers-block', [
+            'model' => $reempacador
+        ])
     @endslot
 @endcomponent
 <br>
 
-@component('@.partials.modal-confirm-delete', [
-    'route' => route('reempacadores.destroy', $reempacador),
-    'text' => 'Eliminar reempacador'
-])
-    @slot('content')
-    <p class="lead">¿Deseas eliminar reempacador <b>{{ $reempacador->nombre }}</b>?</p>
-    @endslot
-@endcomponent
+<div class="text-end">
+    @component('@.partials.confirm-delete.bundle', [
+        'route' => route('reempacadores.destroy', $reempacador),
+        'text' => 'Eliminar reempacador'
+    ])
+        @slot('content')
+        <p class="lead">¿Deseas eliminar reempacador <b>{{ $reempacador->nombre }}</b>?</p>
+        @endslot
+    @endcomponent
+</div>
 <br>
 
 @endsection

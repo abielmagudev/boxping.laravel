@@ -1,7 +1,7 @@
 @extends('app')
 @section('content')
 
-@component('@.bootstrap.header', [
+@component('@.bootstrap.page-header', [
     'title' => 'Editar destinatario'
 ])    
 @endcomponent
@@ -16,19 +16,22 @@
     @endslot
 
     @slot('footer')
-    @component('@.partials.block-modifiers')
-        @slot('model', $destinatario)
-    @endcomponent
+        @include('@.partials.modifiers-block', [
+            'model' => $destinatario,
+        ])
     @endslot
 @endcomponent
 <br>
 
-@component('@.partials.modal-confirm-delete')
-    @slot('route', route('destinatarios.destroy', $destinatario))
-    @slot('text', 'Eliminar destinatario')
-    @slot('content')
-    <p class="lead">¿Deseas eliminar destinatario <b>{{ $destinatario->nombre }}</b>?</p>
-    @endslot
-@endcomponent
+<div class="text-end">
+    @component('@.partials.confirm-delete.bundle')
+        @slot('route', route('destinatarios.destroy', $destinatario))
+        @slot('text', 'Eliminar destinatario')
+        @slot('content')
+        <p class="lead">¿Deseas eliminar destinatario <b>{{ $destinatario->nombre }}</b>?</p>
+        @endslot
+    @endcomponent
+</div>
+<br>
 
 @endsection

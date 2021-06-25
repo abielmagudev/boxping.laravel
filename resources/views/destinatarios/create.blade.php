@@ -1,7 +1,7 @@
 @extends('app')
 @section('content')
 
-@component('@.bootstrap.header')
+@component('@.bootstrap.page-header')
     @slot('title', 'Nuevo destinatario')
 @endcomponent
 
@@ -15,5 +15,6 @@
     </form>
     @endslot
 @endcomponent
+<br>
 
 @endsection

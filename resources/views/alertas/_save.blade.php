@@ -7,7 +7,7 @@
         <div class="row mb-3 mb-md-0">
             <div class="col-sm col-sm-1">
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="nivel" value="{{ $level }}" id="radio-nivel-{{ $level }}" style="border: 2px solid {{ $prop['color'] }}" {{ $loop->first ? 'checked' : '' }} {{ checkable($level, $alerta->nivel) }}>
+                    <input class="form-check-input" type="radio" name="nivel" value="{{ $level }}" id="radio-nivel-{{ $level }}" style="border: 2px solid {{ $prop['color'] }}" {{ $loop->first ? 'checked' : '' }} {{ toggleChecked($level, $alerta->nivel) }}>
                     <label class="form-check-label" for="radio-nivel-{{ $level }}">{{ ucfirst($level) }}</label>
                 </div>             
             </div>

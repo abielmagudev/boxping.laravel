@@ -5,7 +5,7 @@
     @slot('active', 2)
 @endcomponent
 
-@component('@.bootstrap.header', [
+@component('@.bootstrap.page-header', [
     'title' => 'Alertas',
     'counter' => $alertas->count()
 ])
@@ -17,36 +17,39 @@
     @endslot
 @endcomponent
 
-    <p class="small">
-        <span class="badge rounded-pill" style="background-color:{{ $config['alto']['color'] }}">{{ $alertas->where('nivel', 'alto')->count() }}</span>
-        <span class="align-middle me-2">Alto</span>
-        <span class="badge rounded-pill" style="background-color:{{ $config['medio']['color'] }}">{{ $alertas->where('nivel', 'medio')->count() }}</span>
-        <span class="align-middle me-2">Medio</span>
-        <span class="badge rounded-pill" style="background-color:{{ $config['bajo']['color'] }}">{{ $alertas->where('nivel', 'bajo')->count() }}</span>
-        <span class="align-middle me-2">Bajo</span>
-    </p>
+<p class="small">
+    <span class="badge rounded-pill" style="background-color:{{ $config['alto']['color'] }}">{{ $alertas->where('nivel', 'alto')->count() }}</span>
+    <span class="align-middle me-2">Alto</span>
+    <span class="badge rounded-pill" style="background-color:{{ $config['medio']['color'] }}">{{ $alertas->where('nivel', 'medio')->count() }}</span>
+    <span class="align-middle me-2">Medio</span>
+    <span class="badge rounded-pill" style="background-color:{{ $config['bajo']['color'] }}">{{ $alertas->where('nivel', 'bajo')->count() }}</span>
+    <span class="align-middle me-2">Bajo</span>
+</p>
+
 @component('@.bootstrap.card')
     @slot('body')
-    @component('@.bootstrap.table', [
-        'thead' => ['Nivel','Nombre','Descripción']
-    ])
-    @slot('tbody')
-        @foreach($alertas as $alerta)
-        <tr>
-            <td class="text-center" style="width:1%">
-                <span style="color:{{ $config[$alerta->nivel]['color']}}">{!! $symbols->circle !!}</span>
-            </td>
-            <td class="text-nowrap">{{ $alerta->nombre }}</td>
-            <td>{{ $alerta->descripcion }}</td>
-            <td class="text-end">
-                <a href="{{ route('alertas.edit', $alerta) }}" class="btn btn-sm btn-outline-warning">
-                    {!! $svg->pencil !!}
-                </a>
-            </td>
-        </tr>
-        @endforeach
-    @endslot
-    @endcomponent
+        @component('@.bootstrap.table', [
+            'thead' => ['Nivel','Nombre','Descripción']
+        ])
+            @slot('tbody')
+            @foreach($alertas as $alerta)
+            <tr>
+                <td class="text-center" style="width:1%">
+                    <span style="color:{{ $config[$alerta->nivel]['color']}}">{!! $symbols->circle !!}</span>
+                </td>
+                <td class="text-nowrap">{{ $alerta->nombre }}</td>
+                <td>{{ $alerta->descripcion }}</td>
+                <td class="text-end">
+                    <a href="{{ route('alertas.edit', $alerta) }}" class="btn btn-sm btn-outline-warning">
+                        {!! $svg->pencil !!}
+                    </a>
+                </td>
+            </tr>
+            @endforeach
+            @endslot
+        @endcomponent
     @endslot
 @endcomponent
+<br>
+
 @endsection

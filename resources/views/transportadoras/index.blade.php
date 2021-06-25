@@ -1,7 +1,7 @@
 @extends('app')
 @section('content')
 
-@component('@.bootstrap.header')
+@component('@.bootstrap.page-header')
     @slot('title', 'Transportadoras')
     @slot('counter', $transportadoras->count())
     @slot('options')

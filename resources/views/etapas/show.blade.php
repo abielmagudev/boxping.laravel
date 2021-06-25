@@ -1,10 +1,10 @@
 @extends('app')
 @section('content')
 
-@component('@.bootstrap.header', [
-    'title' => $etapa->nombre,
+@component('@.bootstrap.page-header', [
+    'goback' => route('etapas.index'),
     'pretitle' => 'Etapa',
-    'goback' => route('etapas.index')
+    'title' => $etapa->nombre,
 ])
 @endcomponent
 
@@ -51,7 +51,7 @@
             
             @if( $etapa->zonas->count() )
             @component('@.bootstrap.table', [
-                'thead' => ['Nombre','Descripción',''],
+                'thead' => ['Nombre','Descripción'],
             ])
                 @slot('tbody')
                 @foreach($etapa->zonas->sortByDesc('id') as $zona)
@@ -73,5 +73,6 @@
         @endcomponent     
     </div>
 </div>
+<br>
 
 @endsection

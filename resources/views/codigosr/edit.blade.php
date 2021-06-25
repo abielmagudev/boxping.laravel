@@ -1,7 +1,7 @@
 @extends('app')
 @section('content')
 
-@component('@.bootstrap.header', [
+@component('@.bootstrap.page-header', [
     'title' => 'Editar código de reempacado',
 ])
 @endcomponent
@@ -18,22 +18,23 @@
     @endslot
 
     @slot('footer')
-    @component('@.partials.block-modifiers', [
-        'model' => $codigor
-    ])
-    @endcomponent
+        @include('@.partials.modifiers-block', [
+            'model' => $codigor
+        ])
     @endslot
 @endcomponent
 <br>
 
-@component('@.partials.modal-confirm-delete', [
-    'route' => route('codigosr.destroy', $codigor),
-    'text' => 'Eliminar código de reempacado'
-])
-    @slot('content')
-    <p class="lead">¿Deseas eliminar código de reempacado <b>{{ $codigor->nombre }}</b>?</p>
-    @endslot
-@endcomponent 
+<div class="text-end">
+    @component('@.partials.confirm-delete.bundle', [
+        'route' => route('codigosr.destroy', $codigor),
+        'text' => 'Eliminar código de reempacado'
+    ])
+        @slot('content')
+        <p class="lead">¿Deseas eliminar código de reempacado <b>{{ $codigor->nombre }}</b>?</p>
+        @endslot
+    @endcomponent 
+</div>
 <br>
 
 @endsection

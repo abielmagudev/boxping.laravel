@@ -5,7 +5,7 @@
     @slot('active', 1)
 @endcomponent
 
-@component('@.bootstrap.header', [
+@component('@.bootstrap.page-header', [
     'title' => 'Salidas',
     'counter' => $salidas->count()
 ])
@@ -95,5 +95,6 @@
         @endcomponent
     @endslot
 @endcomponent
+<br>
 
 @endsection

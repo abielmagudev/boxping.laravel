@@ -1,7 +1,7 @@
 @extends('app')
 @section('content')
 
-@include('@.partials.page-header', [
+@include('@.bootstrap.page-header', [
     'subtitle' => "Consolidado {$consolidado->numero}",
     'title' => 'Nueva entrada',
 ])

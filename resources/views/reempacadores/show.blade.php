@@ -1,7 +1,7 @@
 @extends('app')
 @section('content')
 
-@component('@.bootstrap.header', [
+@component('@.bootstrap.page-header', [
     'title' => $reempacador->nombre,
     'pretitle' => 'Reempacador',
     'goback' => route('reempacadores.index'),
@@ -44,7 +44,7 @@
             'header' => 'Entradas recientes'
         ])
             @slot('body')
-            @component('@.partials.table-entradas', [
+            @component('@.partials.entradas-table', [
                 'entradas' => $entradas
             ])
             @endcomponent
@@ -53,6 +53,6 @@
         @endcomponent
     </div>
 </div>
-
+<br>
 
 @endsection

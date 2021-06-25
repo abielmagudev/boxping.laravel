@@ -5,7 +5,7 @@
     @slot('active', 1)
 @endcomponent
 
-@component('@.bootstrap.header', [
+@component('@.bootstrap.page-header', [
     'title' => 'Remitentes',
     'counter' => $remitentes->count(),
 ])
@@ -20,7 +20,7 @@
 @component('@.bootstrap.card')
     @slot('body')
 
-    @component('components.table', [
+    @component('@.bootstrap.table', [
         'thead' => ['Nombre','Dirección','Postal','Localidad'],
     ])
         @slot('tbody')
@@ -42,7 +42,7 @@
 @endcomponent
 <br>
 
-@component('@.partials.pagination-simple')
+@component('@.bootstrap.pagination-simple')
     @slot('collection', $remitentes)
 @endcomponent
 <br>

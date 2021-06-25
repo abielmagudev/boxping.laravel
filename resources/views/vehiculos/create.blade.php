@@ -1,7 +1,7 @@
 @extends('app')
 @section('content')
 
-@component('@.bootstrap.header', [
+@component('@.bootstrap.page-header', [
     'title' => 'Nuevo vehículo',
 ])
 @endcomponent
@@ -16,4 +16,6 @@
     </form>
     @endslot
 @endcomponent
+<br>
+
 @endsection

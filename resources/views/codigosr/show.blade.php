@@ -1,17 +1,13 @@
 @extends('app')
 @section('content')
 
-@component('@.bootstrap.header', [
-    'title' => $codigor->nombre,
+@component('@.bootstrap.page-header', [
     'pretitle' => 'Código de reempacado',
+    'subtitle' => $codigor->descripcion,
+    'title' => $codigor->nombre,
     'goback' => route('codigosr.index'),
 ])
 @endcomponent
-
-<p class="border rounded p-3">
-    <span class="me-2">{!! $svg->info_circle_fill !!}</span>
-    <span class="align-middle">{{ $codigor->descripcion }}</span>
-</p>
 
 <div class="row">
 
@@ -51,7 +47,7 @@
             'header' => 'Entradas recientes'
         ])
             @slot('body')
-            @component('@.partials.table-entradas', [
+            @component('@.partials.entradas-table', [
                 'entradas' => $entradas
             ])
             @endcomponent

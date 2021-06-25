@@ -5,7 +5,7 @@
 </div>
 <div class="mb-3">
     <label for="input-web" class="form-label small">Sitio web</label>
-    <input name="web" value="{{ old('web', $transportadora->web) }}" id="input-web" type="text" class="form-control" placeholder="Ejemplo: https://dominio.com">
+    <input name="web" value="{{ old('web', $transportadora->web) }}" id="input-web" type="text" class="form-control" placeholder="Ej. https://dominio.com">
 </div>
 <div class="mb-3">
     <label for="input-telefono" class="form-label small">Teléfono</label>

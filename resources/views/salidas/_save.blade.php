@@ -4,7 +4,7 @@
     <label for="select-transportadora" class="form-label small">Transportadora</label>
     <select class="form-select" id="select-transportadora" name="transportadora">
         @foreach($transportadoras as $transportadora)
-        <option value="{{ $transportadora->id }}" {{ selectable( old('transportadora', $salida->transportadora_id), $transportadora->id) }}>{{ $transportadora->nombre }}</option>
+        <option value="{{ $transportadora->id }}" {{ toggleSelected($transportadora->id, old('transportadora', $salida->transportadora_id)) }}>{{ $transportadora->nombre }}</option>
         @endforeach
     </select>
 </div>
@@ -67,7 +67,7 @@
     <label for="select-status" class="form-label small">Status</label>
     <select class="form-select" id="select-status" name="status">
         @foreach($config_status as $status => $props)
-        <option value="{{ $status }}" {{ selectable( old('status', $salida->status), $status) }}>{{ ucfirst($status) }}</option>
+        <option value="{{ $status }}" {{ toggleSelected($status, old('status', $salida->status)) }}>{{ ucfirst($status) }}</option>
         @endforeach
     </select>
 </div>
@@ -90,6 +90,7 @@
     </div>
 </div>
 @endif
+
 <div class="mb-3">
     <label for="textarea-notas" class="form-label small">Notas</label>
     <textarea cols="30" rows="5" class="form-control" id="textarea-notas" name="notas">{{ old('notas', $salida->notas) }}</textarea>

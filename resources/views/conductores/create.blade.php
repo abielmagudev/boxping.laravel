@@ -1,8 +1,8 @@
 @extends('app')
 @section('content')
 
-@component('@.bootstrap.header', [
-    'title' => 'Nuevo conductor'
+@component('@.bootstrap.page-header', [
+    'title' => 'Nuevo conductor',
 ])
 @endcomponent
 
@@ -16,4 +16,6 @@
     </form>
     @endslot
 @endcomponent
+<br>
+
 @endsection

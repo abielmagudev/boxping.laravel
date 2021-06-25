@@ -1,7 +1,7 @@
 @extends('app')
 @section('content')
 
-@component('@.bootstrap.header', [
+@component('@.bootstrap.page-header', [
     'title' => 'Editar etapa'
 ])
 @endcomponent
@@ -17,22 +17,23 @@
     @endslot
 
     @slot('footer')
-    @component('@.partials.block-modifiers', [
-        'model' => $etapa
-    ])
-    @endcomponent
+        @include('@.partials.modifiers-block', [
+            'model' => $etapa
+        ])
     @endslot
 @endcomponent
 <br>
 
-@component('@.partials.modal-confirm-delete', [
-    'route' => route('etapas.destroy', $etapa),
-    'text' => 'Eliminar etapa',
-])
-    @slot('content')
-    <p class="lead">¿Deseas eliminar etapa <b>{{ $etapa->nombre }}</b>?</p>
-    @endslot
-@endcomponent
+<div class="text-end">
+    @component('@.partials.confirm-delete.bundle', [
+        'route' => route('etapas.destroy', $etapa),
+        'text' => 'Eliminar etapa',
+    ])
+        @slot('content')
+        <p class="lead">¿Deseas eliminar etapa <b>{{ $etapa->nombre }}</b>?</p>
+        @endslot
+    @endcomponent
+</div>
 <br>
 
 @endsection

@@ -1,7 +1,7 @@
 @extends('app')
 @section('content')
 
-@component('@.bootstrap.header', [
+@component('@.bootstrap.page-header', [
     'pretitle' => "Etapa {$etapa->nombre}",
     'title' => 'Nueva zona'
 ])
@@ -17,5 +17,6 @@
     </form>
     @endslot
 @endcomponent
+<br>
 
 @endsection

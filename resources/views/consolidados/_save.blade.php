@@ -4,7 +4,7 @@
     <select name="cliente" id="cliente" class="form-select" required>
         <option disabled selected label=""></option>
         @foreach($clientes as $cliente)
-        <?php $selected = selectable( $cliente->id, old('cliente', $consolidado->cliente_id)) ?>
+        <?php $selected = toggleSelected($cliente->id, old('cliente', $consolidado->cliente_id)) ?>
         <option value="{{ $cliente->id }}" {{ $selected }}>{{ $cliente->nombre }} ({{ $cliente->alias }})</option>
         @endforeach
     </select>

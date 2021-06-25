@@ -1,7 +1,7 @@
 @extends('app')
 @section('content')
 
-@component('@.bootstrap.header', [
+@component('@.bootstrap.page-header', [
     'title' => 'Editar remitente'
 ])
 @endcomponent
@@ -17,22 +17,23 @@
     @endslot
 
     @slot('footer')
-        @component('@.partials.block-modifiers', [
+        @include('@.partials.modifiers-block', [
             'model' => $remitente
         ])
-        @endcomponent
     @endslot
 @endcomponent
 <br>
 
-@component('@.partials.modal-confirm-delete', [
-    'route' => route('remitentes.destroy', $remitente),
-    'text' => 'Eliminar remitente'
-])
-    @slot('content')
-    <p class="lead">¿Deseas eliminar remitente <b>{{ $remitente->nombre }}</b>?</p>
-    @endslot
-@endcomponent
+<div class="text-end">
+    @component('@.partials.confirm-delete.bundle', [
+        'route' => route('remitentes.destroy', $remitente),
+        'text' => 'Eliminar remitente'
+    ])
+        @slot('content')
+        <p class="lead">¿Deseas eliminar remitente <b>{{ $remitente->nombre }}</b>?</p>
+        @endslot
+    @endcomponent
+</div>
 <br>
 
 @endsection

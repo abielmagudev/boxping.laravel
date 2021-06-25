@@ -2,7 +2,7 @@
 @section('content')
 
 <!-- Cabecera -->
-@component('@.partials.page-header', [
+@component('@.bootstrap.page-header', [
     'pretitle' => 'Número de entrada',
     'title' => $entrada->numero,
 ])

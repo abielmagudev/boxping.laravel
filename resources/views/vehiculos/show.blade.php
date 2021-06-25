@@ -1,7 +1,7 @@
 @extends('app')
 @section('content')
 
-@component('@.bootstrap.header', [
+@component('@.bootstrap.page-header', [
     'title' => $vehiculo->alias,
     'pretitle' => 'Vehículo',
     'goback' => route('vehiculos.index'),
@@ -43,7 +43,7 @@
         @component('@.bootstrap.card')
             @slot('header', 'Entradas recientes')
             @slot('body')
-                @component('@.partials.table-entradas', [
+                @component('@.partials.entradas-table', [
                     'entradas' => $entradas
                 ])
                 @endcomponent  

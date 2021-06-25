@@ -1,7 +1,7 @@
 @extends('app')
 @section('content')
 
-@component('@.bootstrap.header', [
+@component('@.bootstrap.page-header', [
     'title' => 'Editar consolidado',
 ])
 @endcomponent
@@ -16,25 +16,24 @@
     </form>
     @endslot
     @slot('footer')
-    @component('@.partials.block-modifiers')
-        @slot('model', $consolidado)
-    @endcomponent
+        @include('@.partials.modifiers-block', [
+            'model' => $consolidado,
+        ])
     @endslot
 @endcomponent
 <br>
 
-@component('@.partials.modal-confirm-delete', [
-    'route' => route('consolidados.destroy', $consolidado),
-    'text' => 'Eliminar consolidado',
-])
-    @slot('content')
-    <p class="lead">¿Deseas eliminar consolidado <b>{{ $consolidado->numero }}</b>?</p>
-    <div class="border py-3 mx-4">
-        <span class="small text-muted">Total de entradas</span>
-        <b class="small">{{ $consolidado->entradas->count() }}</b>
-    </div>
-    @endslot
-@endcomponent
+<div class="text-end">
+    @component('@.partials.confirm-delete.bundle', [
+        'route' => route('consolidados.destroy', $consolidado),
+        'text' => 'Eliminar consolidado',
+    ])
+        @slot('content')
+        <p class="lead">¿Deseas eliminar consolidado <b>{{ $consolidado->numero }}</b>?</p>
+        <p class="text-muted small">Contiene {{ $consolidado->entradas->count() }} entradas</p>
+        @endslot
+    @endcomponent
+</div>
 <br>
 
 @endsection

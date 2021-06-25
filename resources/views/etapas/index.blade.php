@@ -5,7 +5,7 @@
     @slot('active', 1)
 @endcomponent
 
-@component('@.bootstrap.header', [
+@component('@.bootstrap.page-header', [
     'title' => 'Etapas',
     'counter' => $etapas->count()
 ])   
@@ -41,5 +41,6 @@
     @endcomponent
     @endslot
 @endcomponent
+<br>
 
 @endsection

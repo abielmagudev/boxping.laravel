@@ -15,7 +15,7 @@
 </p>
 */ ?>
 
-@component('@.bootstrap.header')
+@component('@.bootstrap.page-header')
     @slot('pretitle', 'Transportadora')
     @slot('title', $transportadora->nombre)
     @slot('options')

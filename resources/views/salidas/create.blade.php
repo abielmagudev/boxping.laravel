@@ -1,7 +1,7 @@
 @extends('app')
 @section('content')
 
-@component('@.bootstrap.header', [
+@component('@.bootstrap.page-header', [
     'title' => 'Nueva salida',
     'pretitle' => "Entrada {$entrada->numero}",
 ])
@@ -19,5 +19,6 @@
     </form>
     @endslot
 @endcomponent
+<br>
 
 @endsection

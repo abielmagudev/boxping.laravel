@@ -1,7 +1,7 @@
 @extends('app')
 @section('content')
 
-@include('@.partials.page-header', [
+@include('@.bootstrap.page-header', [
     'pretitle' => "Entrada {$entrada->numero}",
     'title' => 'Editar importación',
 ])

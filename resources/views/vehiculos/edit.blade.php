@@ -1,7 +1,7 @@
 @extends('app')
 @section('content')
 
-@component('@.bootstrap.header', [
+@component('@.bootstrap.page-header', [
     'title' => 'Editar vehículo',
 ])
 @endcomponent
@@ -17,22 +17,23 @@
     </form>
     @endslot
     @slot('footer')
-        @component('@.partials.block-modifiers', [
+        @include('@.partials.modifiers-block', [
             'model' => $vehiculo,
         ])
-        @endcomponent
     @endslot
 @endcomponent
 <br>
 
-@component('@.partials.modal-confirm-delete', [
-    'route' => route('vehiculos.destroy', $vehiculo),
-    'text' => 'Eliminar vehículo'
-])
-    @slot('content')
-    <p class="lead">¿Deseas eliminar vehículo <b>{{ $vehiculo->alias }}</b>?</p>
-    @endslot
-@endcomponent
+<div class="text-end">
+    @component('@.partials.confirm-delete.bundle', [
+        'route' => route('vehiculos.destroy', $vehiculo),
+        'text' => 'Eliminar vehículo',
+    ])
+        @slot('content')
+        <p class="lead">¿Deseas eliminar vehículo <b>{{ $vehiculo->alias }}</b>?</p>
+        @endslot
+    @endcomponent
+</div>
 <br>
 
 @endsection

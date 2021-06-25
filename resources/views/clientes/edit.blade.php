@@ -1,7 +1,7 @@
 @extends('app')
 @section('content')
 
-@component('@.bootstrap.header', [
+@component('@.bootstrap.page-header', [
     'title' => 'Editar cliente',
 ])
 @endcomponent
@@ -18,21 +18,23 @@
     @endslot
 
     @slot('footer')
-    @component('@.partials.block-modifiers')
-        @slot('model', $cliente)
-    @endcomponent
+        @include('@.partials.modifiers-block', [
+            'model' => $cliente,
+        ])
     @endslot
 @endcomponent
 <br>
 
-@component('@.partials.modal-confirm-delete', [
-    'route' => route('clientes.destroy', $cliente),
-    'text' => 'Eliminar cliente'
-])
-    @slot('content')
-    <p class="lead">¿Deseas eliminar cliente <b>{{ $cliente->nombre }}</b>?</p>
-    @endslot
-@endcomponent
+<div class="text-end">
+    @component('@.partials.confirm-delete.bundle', [
+        'route' => route('clientes.destroy', $cliente),
+        'text' => 'Eliminar cliente'
+    ])
+        @slot('content')
+        <p class="lead">¿Deseas eliminar cliente <b>{{ $cliente->nombre }}</b>?</p>
+        @endslot
+    @endcomponent
+</div>
 <br>
 
 @endsection

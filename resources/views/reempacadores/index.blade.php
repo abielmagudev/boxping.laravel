@@ -5,7 +5,7 @@
     @slot('active', 1)
 @endcomponent
 
-@component('@.bootstrap.header', [
+@component('@.bootstrap.page-header', [
     'title' => 'Reempacadores',
     'counter' => $reempacadores->count(),
 ])
@@ -39,5 +39,6 @@
     @endcomponent
     @endslot
 @endcomponent
+<br>
 
 @endsection

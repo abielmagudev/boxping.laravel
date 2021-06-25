@@ -5,7 +5,7 @@
     @slot('active', 2)
 @endcomponent
 
-@component('@.bootstrap.header', [
+@component('@.bootstrap.page-header', [
     'title' => 'Códigos de reempacado',
     'counter' => $codigosr->count(),
 ])
@@ -20,7 +20,7 @@
 @component('@.bootstrap.card')
     @slot('body')
     @component('@.bootstrap.table', [
-        'thead' => ['Nombre','Descripción',''],
+        'thead' => ['Nombre','Descripción'],
     ])
         @slot('tbody')
         @foreach($codigosr as $codigor)
@@ -42,5 +42,6 @@
 
     @endslot
 @endcomponent
+<br>
 
 @endsection

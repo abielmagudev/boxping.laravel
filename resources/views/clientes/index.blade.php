@@ -1,7 +1,7 @@
 @extends('app')
 @section('content')
 
-@component('@.bootstrap.header', [
+@component('@.bootstrap.page-header', [
     'title' => 'Clientes',
     'counter' => $clientes->count(),
 ])
@@ -16,7 +16,7 @@
 @component('@.bootstrap.card')
     @slot('body')
     @component('@.bootstrap.table', [
-        'thead' => ['Nombre','Alias','Contacto','Correo electrónico','Teléfono',''],
+        'thead' => ['Nombre','Alias','Contacto','Correo electrónico','Teléfono'],
     ])
         @slot('tbody')
         @foreach($clientes as $cliente)
@@ -37,5 +37,6 @@
     @endcomponent
     @endslot
 @endcomponent
+<br>
 
 @endsection

@@ -1,7 +1,7 @@
 @extends('app')
 @section('content')
 
-@component('@.partials.page-header', [
+@component('@.bootstrap.page-header', [
    'title' => 'Buscar destinatarios',
    'goback' => route('entradas.show', $entrada),
 ])

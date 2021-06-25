@@ -1,7 +1,7 @@
 @extends('app')
 @section('content')
 
-@component('@.bootstrap.header', [
+@component('@.bootstrap.page-header', [
     'title' => 'Consoliddos',
     'counter' => $consolidados->count(),
 ])
@@ -29,7 +29,7 @@
 
     @slot('body')
     @component('@.bootstrap.table')
-        @slot('thead', ['Status','Número','Cliente','Tarimas','Entradas',''])
+        @slot('thead', ['Status','Número','Cliente','Tarimas','Entradas'])
         @slot('tbody')
         @foreach($consolidados as $consolidado)
         <tr>
@@ -54,10 +54,9 @@
 @endcomponent
 <br>
 
-@component('@.partials.pagination-simple', [
+@include('@.bootstrap.pagination-simple', [
     'collection' => $consolidados
 ])
-@endcomponent
 <br>
 
 @endsection

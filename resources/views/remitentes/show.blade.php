@@ -1,7 +1,7 @@
 @extends('app')
 @section('content')
 
-@component('@.bootstrap.header', [
+@component('@.bootstrap.page-header', [
     'pretitle' => 'Remitente',
     'title' => $remitente->nombre,
 ])
@@ -47,7 +47,7 @@
         ])
             @slot('body')
             @if( count($entradas) )
-                @component('@.partials.table-entradas', [
+                @component('@.partials.entradas-table', [
                     'entradas' => $entradas,
                 ])
                 @endcomponent

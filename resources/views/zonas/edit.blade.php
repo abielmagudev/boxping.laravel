@@ -1,9 +1,9 @@
 @extends('app')
 @section('content')
 
-@component('@.bootstrap.header', [
+@component('@.bootstrap.page-header', [
     'pretitle' => "Etapa {$etapa->nombre}",
-    'title' => 'Editar zona'
+    'title' => 'Editar zona',
 ])
 @endcomponent
 
@@ -19,21 +19,22 @@
     @endslot
 
     @slot('footer')
-    @component('@.partials.block-modifiers')
-    @endcomponent
+        @include('@.partials.modifiers-block')
     @endslot
 
 @endcomponent
 <br>
 
-@component('@.partials.modal-confirm-delete', [
-    'route' => route('zonas.destroy', [$etapa, $zona]),
-    'text' => 'Eliminar zona',
-])
-    @slot('content')
-    <p class="lead">¿Deseas eliminar zona <b>{{ $zona->nombre }}</b>?</p>
-    @endslot
-@endcomponent
+<div class="text-end">
+    @component('@.partials.confirm-delete.bundle', [
+        'route' => route('zonas.destroy', [$etapa, $zona]),
+        'text' => 'Eliminar zona',
+    ])
+        @slot('content')
+        <p class="lead">¿Deseas eliminar zona <b>{{ $zona->nombre }}</b>?</p>
+        @endslot
+    @endcomponent
+</div>
 <br>
 
 @endsection
