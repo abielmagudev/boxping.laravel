@@ -3,7 +3,7 @@
   'header_classes' => 'border-0',
   'header_close' => true,
   'id' => 'modalSearchRemitentes',
-  'title' => 'Remitentes',
+  'title' => 'Buscar remitentes',
 ])
   @slot('body')
   <form action="{{ $results_route }}" method="get" autocomplete="off">
