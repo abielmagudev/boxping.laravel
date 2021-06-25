@@ -89,15 +89,14 @@
             ])
         </div>
 
-        @include('entradas.show.modal-confirmacion')
+        @include('entradas.edit.confirmacion-modal')
 
         @endif
 
     <?php // Si la entrada no tiene destinatario ?>
     @else
     <p class="text-center lead mt-5">
-        <span class="d-block">Se requiere agregar</span>
-        <span class="fw-bold">un destinatario para crear la guía de salida</span>
+        <span>Se requiere agregar un destinatario para <br> habilitar la opción de generar salida.</span>
     </p>
 
     @endif

@@ -59,5 +59,6 @@
    @endslot
 @endcomponent
 
-@include('entradas.trayectoria.modal-search-remitentes')
+@include('remitentes.modal-search', ['results_route' => route('entradas.agregar.remitente', $entrada)])
+
 @endsection

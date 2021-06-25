@@ -12,7 +12,7 @@ trait TrayectoriaTrait
 {
     public function agregarRemitente(Request $request, Entrada $entrada)
     {
-        return view('entradas.trayectoria.agregar_remitente',[
+        return view('entradas.edit.remitente',[
             'entrada' => $entrada,
             'remitentes' => $request->filled('search') ? Remitente::search( $request->search ) : null,
             'searched' => $request->input('search', '...'),
@@ -21,7 +21,7 @@ trait TrayectoriaTrait
 
     public function agregarDestinatario(Request $request, Entrada $entrada)
     {        
-        return view('entradas.trayectoria.agregar_destinatario',[
+        return view('entradas.edit.destinatario',[
             'entrada' => $entrada,
             'destinatarios' => $request->filled('search') ? Destinatario::search( $request->search ) : null,
             'searched' => $request->input('search', '...'),

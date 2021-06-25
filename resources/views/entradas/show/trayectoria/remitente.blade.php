@@ -28,18 +28,24 @@
     <br>
 
     <div class="text-end">
-        <button data-bs-toggle="modal" data-bs-target="#modal-search-remitentes" type="button" class="btn btn-outline-primary btn-sm">
-            <span>Cambiar remitente</span>
-        </button>
+        @include('@.bootstrap.modal-trigger', [
+            'classes' => 'btn btn-primary btn-sm',
+            'modal_id' => 'modalSearchRemitentes',
+            'text' => 'Cambiar remitente',
+        ])
         <a href="{{ route('remitentes.edit', ['remitente' => $entrada->remitente->id, 'entrada' => $entrada->id]) }}" class="btn btn-warning btn-sm" data-toggle="tooltip" data-placement="left" title="Editar remitente">
             <span>Editar remitente</span>
         </a>
     </div>
 
     @else
-    <p class="text-center mt-5">
-        <button type="button" data-bs-toggle="modal" data-bs-target="#modal-search-remitentes" class="btn btn-primary btn-lg">Agregar remitente</button>
-    </p>
+    <div class="text-center mt-5">
+        @include('@.bootstrap.modal-trigger', [
+            'classes' => 'btn btn-primary',
+            'modal_id' => 'modalSearchRemitentes',
+            'text' => 'Agregar remitente',
+        ])
+    </div>
 
     @endif
 </div>

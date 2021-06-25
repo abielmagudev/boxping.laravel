@@ -59,5 +59,6 @@
    @endslot
 @endcomponent
 
-@include('entradas.trayectoria.modal-search-destinatarios')
+@include('destinatarios.modal-search', ['results_route' => route('entradas.agregar.destinatario', $entrada)])
+
 @endsection

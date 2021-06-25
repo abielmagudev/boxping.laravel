@@ -1,6 +1,6 @@
 <div class="tab-pane fade" id="importacion" role="tabpanel" aria-labelledby="importacion-tab">
  
-    @if( is_object($entrada->vehiculo) )
+    @if( is_object($entrada->conductor) )
     @component('@.bootstrap.table')
         @slot('tbody')
         <tr>
@@ -31,7 +31,7 @@
 
     @else
     <p class="text-center mt-5">
-        <a href="{{ route('entradas.edit', [$entrada, 'formulario' => 'importacion']) }}" class="btn btn-primary btn-lg">Agregar importación</a>
+        <a href="{{ route('entradas.edit', [$entrada, 'formulario' => 'importacion']) }}" class="btn btn-primary">Agregar importación</a>
     </p>
 
     @endif

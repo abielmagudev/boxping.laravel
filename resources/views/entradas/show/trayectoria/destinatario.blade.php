@@ -32,18 +32,24 @@
     <br>
 
     <div class="text-end">
-        <button data-bs-toggle="modal" data-bs-target="#modal-search-destinatarios" type="button" class="btn btn-outline-primary btn-sm">
-            <span>Cambiar destinatario</span>
-        </button>
+        @include('@.bootstrap.modal-trigger', [
+            'classes' => 'btn btn-primary btn-sm',
+            'modal_id' => 'modalSearchDestinatarios',
+            'text' => 'Cambiar destinatario',
+        ])
         <a href="{{ route('destinatarios.edit', ['destinatario' => $entrada->destinatario_id, 'entrada' => $entrada->id]) }}" class="btn btn-warning btn-sm" data-toggle="tooltip" data-placement="left" title="Editar destinatario">
             <span>Editar destinatario</span>
         </a>
     </div>
 
     @else
-    <p class="text-center mt-5">
-        <button type="button" data-bs-toggle="modal" data-bs-target="#modal-search-destinatarios" class="btn btn-primary btn-lg">Agregar destinatario</button>
-    </p>
+    <div class="text-center mt-5">
+        @include('@.bootstrap.modal-trigger', [
+            'classes' => 'btn btn-primary',
+            'modal_id' => 'modalSearchDestinatarios',
+            'text' => 'Agregar destinatario',
+        ])
+    </div>
 
     @endif
 </div>

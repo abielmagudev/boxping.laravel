@@ -1,6 +1,6 @@
 <div class="tab-pane fade" id="reempaque" role="tabpanel" aria-labelledby="reempaque-tab">
     
-    @if( is_object($entrada->codigor) )   
+    @if( is_object($entrada->reepmacador) )   
     @component('@.bootstrap.table')
         @slot('tbody')
         <tr>
@@ -31,7 +31,7 @@
 
     @else
     <p class="text-center mt-5">
-        <a href="{{ route('entradas.edit', [$entrada, 'formulario' => 'reempaque']) }}" class="btn btn-primary btn-lg">Agregar reempaque</a>
+        <a href="{{ route('entradas.edit', [$entrada, 'formulario' => 'reempaque']) }}" class="btn btn-primary">Agregar reempaque</a>
     </p>
 
     @endif
