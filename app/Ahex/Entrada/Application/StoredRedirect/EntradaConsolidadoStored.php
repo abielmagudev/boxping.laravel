@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Ahex\Entrada\Application\AfterStore;
+namespace App\Ahex\Entrada\Application\StoredRedirect;
 
 class EntradaConsolidadoStored extends Stored
 {

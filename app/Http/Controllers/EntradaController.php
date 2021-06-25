@@ -13,7 +13,7 @@ use App\EntradaEtapaPivot;
 use App\Reempacador;
 use App\Vehiculo;
 
-use App\Ahex\Entrada\Application\AfterStore\RedirectAfterStore;
+use App\Ahex\Entrada\Application\StoredRedirect\StoredRedirect;
 use App\Ahex\Entrada\Application\PrintingTrait as Printing;
 use App\Ahex\Entrada\Application\TrayectoriaTrait as Trayectoria;
 use App\Ahex\Entrada\Domain\Update\UpdaterFactory;
@@ -64,7 +64,7 @@ class EntradaController extends Controller
         if( ! $entrada = Entrada::create($prepared) )
             return back()->with('failure', 'Error al guardar entrada');
 
-        $following = new RedirectAfterStore($entrada);
+        $following = new StoredRedirect($entrada);
         return $following->redirect($request->siguiente)->with('success', "{$entrada->numero} guardada");
     }
 

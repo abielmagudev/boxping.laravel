@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Ahex\Entrada\Application\AfterStore;
+namespace App\Ahex\Entrada\Application\StoredRedirect;
 
 use App\Http\Requests\EntradaStoreRequest as StoreRequest;
 use App\Entrada;
 
-class RedirectAfterStore
+class StoredRedirect
 { 
     public $all_redirects;
     public $stored;
