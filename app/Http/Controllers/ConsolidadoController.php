@@ -47,7 +47,7 @@ class ConsolidadoController extends Controller
     public function show($id, Request $request)
     {
         $consolidado = Consolidado::with(['entradas.destinatario'])->findOrFail($id);
-        $entradas = Entrada::where('consolidado_id', $id)->filterByRequest($request->all())->get();
+        $entradas = Entrada::where('consolidado_id', $id)->filterByRequest($request->all())->orderByDesc('id')->get();
 
         return view('consolidados.show', [
             'consolidado' => $consolidado,
