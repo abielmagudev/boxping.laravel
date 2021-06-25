@@ -20,7 +20,7 @@ $settings = (object) [
 <div class="d-flex align-items-center justify-content-between">
     <div class="text-start">
         @if( $settings->has_pretitle )
-        <p class="text-muted small m-0">{{ $settings->pretitle }}</p>
+        <p class="text-muted small mb-1">{{ $settings->pretitle }}</p>
         @endif
 
         @if( $settings->has_title )    
