@@ -8,7 +8,7 @@ $settings = (object) array(
     'has_checkboxes_form' => isset($checkboxes_form) && is_string($checkboxes_form),
     'has_entradas' => isset($entradas) && is_a($entradas, Collection::class) && $entradas->count(),
     'has_numero_consolidado' => isset($numero_consolidado) && is_string($numero_consolidado),
-    'checkboxes_form' => $checkbox_form ?? null,
+    'checkboxes_form' => $checkboxes_form ?? null,
     'entradas' => $entradas ?? null,
     'except' => isset($except) && is_array($except) && count($except) ? $except : [],
     'numero_consolidado' => $numero_consolidado ?? null,
@@ -43,7 +43,7 @@ function allowColumn($column, $except)
 
         @slot('tbody')
         @foreach($settings->entradas as $entrada)
-        <?php $checkbox_id = "checkboxEntrada{$entrada->id}" ?>
+        <?php $checkbox_id = "checkbox-entrada-{$entrada->id}" ?>
         <tr>
             @if( $settings->has_checkboxes_form )
             <td class="align-top" style="width:2.5%">
