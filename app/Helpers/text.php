@@ -36,3 +36,27 @@ if( ! function_exists('replaceSpecialChars') )
         return  preg_replace( array_keys($utf8), array_values($utf8), $string);
     }
 }
+
+if( ! function_exists('highlightText') )
+{
+    function highlightText($search, $string, $classes = '')
+    {
+        return str_replace($search, "<mark class=\"p-0 {$classes}\">{$search}</mark>", $string);
+    }
+}
+
+if( ! function_exists('hasSearchText') )
+{
+    function hasSearchText($search, $string)
+    {
+        return stripos($string, $search) !== false;
+    }
+}
+
+if( ! function_exists('notHasSearchText') )
+{
+    function notHasSearchText($search, $string)
+    {
+        return stripos($string, $search) === false;
+    }
+}
