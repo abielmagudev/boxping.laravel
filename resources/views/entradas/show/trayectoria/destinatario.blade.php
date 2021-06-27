@@ -34,7 +34,7 @@
     <div class="text-end">
         @include('@.bootstrap.modal-trigger', [
             'classes' => 'btn btn-primary btn-sm',
-            'modal_id' => 'modalSearchDestinatarios',
+            'modal_id' => 'modalSearchToChangeDestinatario',
             'text' => 'Cambiar destinatario',
         ])
         <a href="{{ route('destinatarios.edit', ['destinatario' => $entrada->destinatario_id, 'entrada' => $entrada->id]) }}" class="btn btn-warning btn-sm" data-toggle="tooltip" data-placement="left" title="Editar destinatario">
@@ -46,10 +46,12 @@
     <div class="text-center mt-5">
         @include('@.bootstrap.modal-trigger', [
             'classes' => 'btn btn-primary',
-            'modal_id' => 'modalSearchDestinatarios',
+            'modal_id' => 'modalSearchToChangeDestinatario',
             'text' => 'Agregar destinatario',
         ])
     </div>
 
     @endif
+
+    @include('entradas.show.trayectoria.modal-change-destinatario')
 </div>

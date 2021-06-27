@@ -24,14 +24,14 @@
     <br>
 
     <div class="text-end">
-        <a href="{{ route('entradas.edit', [$entrada, 'formulario' => 'importacion']) }}" class="btn btn-warning btn-sm" data-toggle="tooltip" data-placement="left" title="Editar importación">
+        <a href="{{ route('entradas.edit', [$entrada, 'editor' => 'importacion']) }}" class="btn btn-warning btn-sm" data-toggle="tooltip" data-placement="left" title="Editar importación">
             <span>Editar importación</span>
         </a>
     </div>
 
     @else
     <p class="text-center mt-5">
-        <a href="{{ route('entradas.edit', [$entrada, 'formulario' => 'importacion']) }}" class="btn btn-primary">Agregar importación</a>
+        <a href="{{ route('entradas.edit', [$entrada, 'editor' => 'importacion']) }}" class="btn btn-primary">Agregar importación</a>
     </p>
 
     @endif

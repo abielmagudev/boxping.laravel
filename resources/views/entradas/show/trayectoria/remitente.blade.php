@@ -30,7 +30,7 @@
     <div class="text-end">
         @include('@.bootstrap.modal-trigger', [
             'classes' => 'btn btn-primary btn-sm',
-            'modal_id' => 'modalSearchRemitentes',
+            'modal_id' => 'modalSearchToChangeRemitente',
             'text' => 'Cambiar remitente',
         ])
         <a href="{{ route('remitentes.edit', ['remitente' => $entrada->remitente->id, 'entrada' => $entrada->id]) }}" class="btn btn-warning btn-sm" data-toggle="tooltip" data-placement="left" title="Editar remitente">
@@ -42,10 +42,13 @@
     <div class="text-center mt-5">
         @include('@.bootstrap.modal-trigger', [
             'classes' => 'btn btn-primary',
-            'modal_id' => 'modalSearchRemitentes',
+            'modal_id' => 'modalSearchToChangeRemitente',
             'text' => 'Agregar remitente',
         ])
     </div>
 
     @endif
+
+    @include('entradas.show.trayectoria.modal-change-remitente')
+    
 </div>

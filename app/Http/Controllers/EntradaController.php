@@ -13,9 +13,9 @@ use App\EntradaEtapaPivot;
 use App\Reempacador;
 use App\Vehiculo;
 
-use App\Ahex\Entrada\Application\StoredRedirect\StoredRedirect;
+use App\Ahex\Entrada\Application\Edit\Editors\EditorsContainer;
 use App\Ahex\Entrada\Application\PrintingTrait as Printing;
-use App\Ahex\Entrada\Application\TrayectoriaTrait as Trayectoria;
+use App\Ahex\Entrada\Application\StoredRedirect\StoredRedirect;
 use App\Ahex\Entrada\Domain\Update\UpdaterFactory;
 use App\Http\Requests\EntradaCreateRequest as CreateRequest;
 use App\Http\Requests\EntradaEditRequest as EditRequest;
@@ -23,9 +23,11 @@ use App\Http\Requests\EntradaStoreRequest as StoreRequest;
 use App\Http\Requests\EntradaUpdateRequest as UpdateRequest;
 use Illuminate\Http\Request;
 
+
+
 class EntradaController extends Controller
 {
-    use Trayectoria, Printing;
+    use Printing;
 
     public function index(Request $request)
     {
@@ -79,25 +81,8 @@ class EntradaController extends Controller
 
     public function edit(EditRequest $request, Entrada $entrada)
     {
-        if( $request->formulario == 'importacion' )
-            return view('entradas.edit.importacion', [
-                'conductores' => Conductor::all(),
-                'vehiculos' => Vehiculo::all(),
-                'entrada' => $entrada,
-            ]);
-
-        if( $request->formulario == 'reempaque' )
-            return view('entradas.edit.reempaque', [
-                'reempacadores' => Reempacador::all(),
-                'codigosr' => Codigor::all(),
-                'entrada' => $entrada,
-            ]);
-
-        return view('entradas.edit.guia', [
-            'clientes' => Cliente::all(['id','nombre','alias']),
-            'consolidado' => $entrada->consolidado,
-            'entrada' => $entrada,
-        ]);
+        $editor = EditorsContainer::get($request->editor, $entrada);
+        return view($editor->template(), $editor->data());
     }
 
     public function update(UpdateRequest $request, Entrada $entrada)

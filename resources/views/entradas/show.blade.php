@@ -110,7 +110,5 @@
 <br>
 
 @include('entradas.show.modal-comentarios')
-@include('destinatarios.modal-search', ['results_route' => route('entradas.agregar.destinatario', $entrada)])
-@include('remitentes.modal-search', ['results_route' => route('entradas.agregar.remitente', $entrada)])
 
 @endsection

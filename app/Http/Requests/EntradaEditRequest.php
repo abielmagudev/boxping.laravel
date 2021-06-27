@@ -3,9 +3,17 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Ahex\Entrada\Application\Edit\Editors\EditorsContainer;
 
 class EntradaEditRequest extends FormRequest
 {
+    private $editors;
+
+    public function prepareForValidation()
+    {
+        $this->editors = EditorsContainer::names();
+    }
+
     public function authorize()
     {
         return true;
@@ -14,15 +22,15 @@ class EntradaEditRequest extends FormRequest
     public function rules()
     {
         return [
-            'formulario' => ['required','in:guia,reempaque,importacion']
+            'editor' => ['required','in:' . implode(',', $this->editors)]
         ];
     }
 
     public function messages()
     {
         return array(
-            'formulario.required' => __('Se requiere una editor de información'),
-            'formulario.in' => __('Selecciona un editor válido de información'),
+            'editor.required' => __('Se requiere una editor válidp'),
+            'editor.in' => __('Selecciona un editor válido'),
         );
     }
 }
