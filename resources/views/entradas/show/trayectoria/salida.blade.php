@@ -35,7 +35,7 @@
             <td class="text-muted small align-top">Incidentes</td>
             <td>
                 @if( $entrada->salida->incidentes->count() )
-                <div class="d-flex justify-content-around">
+                <div class="">
                     @foreach($entrada->salida->incidentes as $incidente)
                     <span class="badge text-dark small" style="background-color:#ddd">{{ $incidente->titulo }}</span>
                     @endforeach
@@ -69,10 +69,9 @@
 
         <?php // Si tiene confirmacion del destinatario ?>
         @if( $entrada->confirmado )
-        <br>
-        <p class="text-center">
-            <a href="{{ route('salidas.create', ['entrada' => $entrada->id]) }}" class="btn btn-primary btn-lg">Crear guía de salida</a>
-        </p>
+        <div class="text-center">
+            <a href="{{ route('salidas.create', ['entrada' => $entrada->id]) }}" class="btn btn-primary">Crear guía de salida</a>
+        </div>
 
         <?php // Si no tiene confirmacion del destinatario, actualizar confirmacion ?>
         @else
