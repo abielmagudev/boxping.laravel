@@ -81,6 +81,7 @@ class EntradaController extends Controller
     public function edit(EditRequest $request, Entrada $entrada)
     {
         $editor = EditorsContainer::get($request->editor, $entrada);
+        
         return view($editor->template(), $editor->data());
     }
 
@@ -88,12 +89,10 @@ class EntradaController extends Controller
     {
         $updater = UpdatersContainer::get($request, $entrada);
         
-        $validated = $updater->validate();
-        
-        if( ! $updater->save($validated) )
-            return $updater->failure();
+        if( ! $updater->save() )
+            return $updater->redirect()->failure();
 
-        return $updater->success();
+        return $updater->redirect()->success();
     }
 
     public function destroy(Entrada $entrada)

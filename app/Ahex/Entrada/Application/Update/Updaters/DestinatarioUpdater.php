@@ -19,34 +19,29 @@ class DestinatarioUpdater extends Updater
         ];
     }
 
-    public function prepare($data)
+    public function prepare()
     {
         return [
-            'destinatario_id' => $data['destinatario'],
+            'destinatario_id' => $this->validated['destinatario'],
             'verificado_by' => null,
             'verificado_at' => null,
             'updated_by' => rand(1,5),
         ];
     }
 
-    public function save($data)
-    {
-        $prepared = $this->prepare($data);
-        return $this->entrada->fill( $prepared )->save();
-    }
-
     public function redirect()
     {
-        return redirect()->route('entradas.show', $this->entrada);
+        $this->redirect = redirect()->route('entradas.show', $this->entrada);
+        return $this;
     }
 
     public function failure()
     {
-        return $this->redirect()->with('failure', 'Error al actualizar el destinatario');
+        return $this->redirect->with('failure', 'Error al actualizar el destinatario');
     }
 
     public function success()
     {
-        return $this->redirect()->with('success', 'Destinatario actualizado');
+        return $this->redirect->with('success', 'Destinatario actualizado');
     }
 }

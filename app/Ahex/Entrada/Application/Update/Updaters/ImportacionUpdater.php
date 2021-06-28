@@ -31,36 +31,31 @@ class ImportacionUpdater extends Updater
         ];
     }
 
-    public function prepare($data)
+    public function prepare()
     {
         return [
-            'vehiculo_id'     => $data['vehiculo'],
-            'conductor_id'    => $data['conductor'],
-            'numero_cruce'    => $data['numero_cruce'],
-            'importado_fecha' => $data['importado_fecha'],
-            'importado_hora'  => $data['importado_hora'],
+            'vehiculo_id'     => $this->validated['vehiculo'],
+            'conductor_id'    => $this->validated['conductor'],
+            'numero_cruce'    => $this->validated['numero_cruce'],
+            'importado_fecha' => $this->validated['importado_fecha'],
+            'importado_hora'  => $this->validated['importado_hora'],
             'updated_by'      => rand(1,5),
         ];
     }
 
-    public function save($data)
-    {
-        $prepared = $this->prepare($data);
-        return $this->entrada->fill( $prepared )->save();
-    }
-
     public function redirect()
     {
-        return redirect()->route('entradas.edit', [$this->entrada, 'editor' => 'importacion']);
+        $this->redirect = redirect()->route('entradas.edit', [$this->entrada, 'editor' => 'importacion']);
+        return $this;
     }
 
     public function failure()
     {
-        return $this->redirect()->with('failure', 'Error al actualizar la importación');
+        return $this->redirect->with('failure', 'Error al actualizar la importación');
     }
 
     public function success()
     {
-        return $this->redirect()->with('success', 'Importación actualizada');
+        return $this->redirect->with('success', 'Importación actualizada');
     }
 }

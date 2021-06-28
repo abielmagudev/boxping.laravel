@@ -19,32 +19,27 @@ class RemitenteUpdater extends Updater
         ];
     }
 
-    public function prepare($data)
+    public function prepare()
     {
         return [
-            'remitente_id' => $data['remitente'],
+            'remitente_id' => $this->validated['remitente'],
             'updated_by' => rand(1,10),
         ];
     }
 
-    public function save($data)
-    {
-        $prepared = $this->prepare($data);
-        return $this->entrada->fill( $prepared )->save();
-    }
-
     public function redirect()
     {
-        return redirect()->route('entradas.show', $this->entrada);
+        $this->redirect = redirect()->route('entradas.show', $this->entrada);
+        return $this;
     }
 
     public function failure()
     {
-        return $this->redirect()->with('failure', 'Error al actualizar el remitente');
+        return $this->redirect->with('failure', 'Error al actualizar el remitente');
     }
 
     public function success()
     {
-        return $this->redirect()->with('success', 'Remitente actualizado');
+        return $this->redirect->with('success', 'Remitente actualizado');
     }
 }

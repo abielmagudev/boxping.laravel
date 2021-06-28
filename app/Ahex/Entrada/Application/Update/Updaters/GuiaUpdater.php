@@ -3,6 +3,7 @@
 namespace App\Ahex\Entrada\Application\Update\Updaters;
 
 use Illuminate\Validation\Rule;
+use App\Entrada;
 
 class GuiaUpdater extends Updater
 {
@@ -32,29 +33,24 @@ class GuiaUpdater extends Updater
         ];
     }
 
-    public function prepare($data)
+    public function prepare()
     {
-        return \App\Entrada::prepare($data);
-    }
-
-    public function save($data)
-    {
-        $prepared = $this->prepare($data);
-        return $this->entrada->fill( $prepared )->save();
+        return Entrada::prepare($this->validated);
     }
 
     public function redirect()
     {
-        return redirect()->route('entradas.edit', [$this->entrada, 'editor' => 'guia']);
+        $this->redirect = redirect()->route('entradas.edit', [$this->entrada, 'editor' => 'guia']);
+        return $this;
     }
 
     public function failure()
     {
-        return $this->redirect()->with('failure', 'Error al actualizar la guía');
+        return $this->redirect->with('failure', 'Error al actualizar la guía');
     }
 
     public function success()
     {
-        return $this->redirect()->with('success', 'Guía actualizada');
+        return $this->redirect->with('success', 'Guía actualizada');
     }
 }

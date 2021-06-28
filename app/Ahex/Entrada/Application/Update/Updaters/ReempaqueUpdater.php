@@ -30,35 +30,30 @@ class ReempaqueUpdater extends Updater
         ];
     }
 
-    public function prepare($data)
+    public function prepare()
     {
         return [
-            'codigor_id' => $data['codigo_reempacado'],
-            'reempacado_fecha' => $data['reempacado_fecha'],
-            'reempacado_hora' => $data['reempacado_hora'],
-            'reempacador_id' => $data['reempacador'],
+            'codigor_id' => $this->validated['codigo_reempacado'],
+            'reempacado_fecha' => $this->validated['reempacado_fecha'],
+            'reempacado_hora' => $this->validated['reempacado_hora'],
+            'reempacador_id' => $this->validated['reempacador'],
             'updated_by' => rand(1,5),
         ];
     }
 
-    public function save($data)
-    {
-        $prepared = $this->prepare($data);
-        return $this->entrada->fill( $prepared )->save();
-    }
-
     public function redirect()
     {
-        return redirect()->route('entradas.edit', [$this->entrada, 'editor' => 'reempaque']);
+        $this->redirect = redirect()->route('entradas.edit', [$this->entrada, 'editor' => 'reempaque']);
+        return $this;
     }
 
     public function failure()
     {
-        return $this->redirect()->with('failure', 'Error al actualizar el reempaque');
+        return $this->redirect->with('failure', 'Error al actualizar el reempaque');
     }
 
     public function success()
     {
-        return $this->redirect()->with('success', 'Reempaque actualizado');
+        return $this->redirect->with('success', 'Reempaque actualizado');
     }
 }

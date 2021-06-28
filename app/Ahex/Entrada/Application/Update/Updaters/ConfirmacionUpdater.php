@@ -19,7 +19,7 @@ class ConfirmacionUpdater extends Updater
         ];
     }
 
-    public function prepare($data)
+    public function prepare()
     {
         return [
             'confirmado_by' => rand(1,5),
@@ -28,24 +28,19 @@ class ConfirmacionUpdater extends Updater
         ];
     }
 
-    public function save($data)
-    {
-        $prepared = $this->prepare($data);
-        return $this->entrada->fill( $prepared )->save();
-    }
-
     public function redirect()
     {
-        return redirect()->route('entradas.show', $this->entrada);
+        $this->redirect = redirect()->route('entradas.show', $this->entrada);
+        return $this;
     }
 
     public function failure()
     {
-        return $this->redirect()->with('failure', 'Error al actualizar la confirmación');
+        return $this->redirect->with('failure', 'Error al actualizar la confirmación');
     }
 
     public function success()
     {
-        return $this->redirect()->with('success', 'Confirmación actualizada');
+        return $this->redirect->with('success', 'Confirmación actualizada');
     }
 }
