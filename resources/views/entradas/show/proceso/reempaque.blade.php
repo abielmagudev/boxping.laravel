@@ -1,6 +1,6 @@
 <div class="tab-pane fade" id="reempaque" role="tabpanel" aria-labelledby="reempaque-tab">
     
-    @if( is_object($entrada->reepmacador) )   
+    @if( is_object($entrada->reempacador) )   
     @component('@.bootstrap.table')
         @slot('tbody')
         <tr>
