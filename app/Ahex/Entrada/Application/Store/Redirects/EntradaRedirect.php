@@ -1,16 +1,10 @@
 <?php
 
-namespace App\Ahex\Entrada\Application\StoredRedirect;
+namespace App\Ahex\Entrada\Application\Store\Redirects;
 
-class EntradaStored extends Stored
+class EntradaRedirect
 {
-    public $redirects = [
-        'agregar' => 'toAdd',
-        'crear' => 'toCreate',
-        'finalizar' => 'toFinish',
-    ];
-
-    public function toAdd()
+    public function agregar()
     {
         $inputs = request()->except([
             'numero',
@@ -20,12 +14,12 @@ class EntradaStored extends Stored
         return redirect()->route('entradas.create')->withInput($inputs);
     }
 
-    public function toCreate()
+    public function crear()
     {
         return redirect()->route('entradas.create');
     }
 
-    public function toFinish()
+    public function finalizar()
     {
         return redirect()->route('entradas.index');
     }

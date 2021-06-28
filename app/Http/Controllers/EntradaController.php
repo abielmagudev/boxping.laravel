@@ -14,16 +14,14 @@ use App\Reempacador;
 use App\Vehiculo;
 
 use App\Ahex\Entrada\Application\Edit\Editors\EditorsContainer;
+use App\Ahex\Entrada\Application\Store\Redirects\StoredRedirect;
 use App\Ahex\Entrada\Application\PrintingTrait as Printing;
-use App\Ahex\Entrada\Application\StoredRedirect\StoredRedirect;
 use App\Ahex\Entrada\Domain\Update\UpdaterFactory;
 use App\Http\Requests\EntradaCreateRequest as CreateRequest;
 use App\Http\Requests\EntradaEditRequest as EditRequest;
 use App\Http\Requests\EntradaStoreRequest as StoreRequest;
 use App\Http\Requests\EntradaUpdateRequest as UpdateRequest;
 use Illuminate\Http\Request;
-
-
 
 class EntradaController extends Controller
 {
@@ -66,8 +64,9 @@ class EntradaController extends Controller
         if( ! $entrada = Entrada::create($prepared) )
             return back()->with('failure', 'Error al guardar entrada');
 
-        $following = new StoredRedirect($entrada);
-        return $following->redirect($request->siguiente)->with('success', "{$entrada->numero} guardada");
+        return StoredRedirect::hasConsolidado($entrada->consolidado_id)
+                             ->redirect($request->siguiente)
+                             ->with('success', "{$entrada->numero} guardada");
     }
 
     public function show(Entrada $entrada)
