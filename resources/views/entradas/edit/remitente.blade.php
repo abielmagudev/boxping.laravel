@@ -57,10 +57,10 @@
    </form>
    
    @else
-   <di class="text-center lead">
+   <div class="text-center lead">
       <span class="text-muted">Sin resultados de</span>
       <b class="">{{ $searched }}</b>
-   </di>
+   </div>
 
    @endif
    @endslot
