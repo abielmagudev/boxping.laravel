@@ -23,7 +23,7 @@ class RemitenteUpdater extends Updater
     {
         return [
             'remitente_id' => $data['remitente'],
-            'updated_by' => Fakeuser::live(),
+            'updated_by' => rand(1,10),
         ];
     }
 
