@@ -15,8 +15,8 @@ use App\Vehiculo;
 
 use App\Ahex\Entrada\Application\Edit\Editors\EditorsContainer;
 use App\Ahex\Entrada\Application\Store\Redirects\StoredRedirect;
+use App\Ahex\Entrada\Application\Update\Updaters\UpdatersContainer;
 use App\Ahex\Entrada\Application\PrintingTrait as Printing;
-use App\Ahex\Entrada\Domain\Update\UpdaterFactory;
 use App\Http\Requests\EntradaCreateRequest as CreateRequest;
 use App\Http\Requests\EntradaEditRequest as EditRequest;
 use App\Http\Requests\EntradaStoreRequest as StoreRequest;
@@ -86,7 +86,7 @@ class EntradaController extends Controller
 
     public function update(UpdateRequest $request, Entrada $entrada)
     {
-        $updater = UpdaterFactory::make($request, $entrada);
+        $updater = UpdatersContainer::get($request, $entrada);
         
         $validated = $updater->validate();
         

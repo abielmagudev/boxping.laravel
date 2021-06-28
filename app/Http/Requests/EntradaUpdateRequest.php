@@ -4,8 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
-// use App\Ahex\Entrada\Domain\UpdaterFactory;
-use App\Ahex\Entrada\Domain\Update\UpdaterFactory;
+use App\Ahex\Entrada\Application\Update\Updaters\UpdatersContainer;
 
 class EntradaUpdateRequest extends FormRequest
 {
@@ -13,7 +12,7 @@ class EntradaUpdateRequest extends FormRequest
 
     public function authorize()
     {
-        return UpdaterFactory::exists( $this->actualizar );
+        return UpdatersContainer::exists( $this->actualizar );
     }
 
     public function rules()

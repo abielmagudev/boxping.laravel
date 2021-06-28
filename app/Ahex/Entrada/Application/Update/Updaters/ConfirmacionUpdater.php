@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Ahex\Entrada\Domain\Update;
+namespace App\Ahex\Entrada\Application\Update\Updaters;
 
 class ConfirmacionUpdater extends Updater
 {

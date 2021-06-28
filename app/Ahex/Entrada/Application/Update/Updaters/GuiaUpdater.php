@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Ahex\Entrada\Domain\Update;
+namespace App\Ahex\Entrada\Application\Update\Updaters;
 
 use Illuminate\Validation\Rule;
 
@@ -45,7 +45,7 @@ class GuiaUpdater extends Updater
 
     public function redirect()
     {
-        return redirect()->route('entradas.edit', [$this->entrada, 'formulario' => 'guia']);
+        return redirect()->route('entradas.edit', [$this->entrada, 'editor' => 'guia']);
     }
 
     public function failure()

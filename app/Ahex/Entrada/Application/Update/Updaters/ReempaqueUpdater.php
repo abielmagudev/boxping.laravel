@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Ahex\Entrada\Domain\Update;
+namespace App\Ahex\Entrada\Application\Update\Updaters;
 
 class ReempaqueUpdater extends Updater
 {
@@ -49,7 +49,7 @@ class ReempaqueUpdater extends Updater
 
     public function redirect()
     {
-        return redirect()->route('entradas.edit', [$this->entrada, 'formulario' => 'reempaque']);
+        return redirect()->route('entradas.edit', [$this->entrada, 'editor' => 'reempaque']);
     }
 
     public function failure()

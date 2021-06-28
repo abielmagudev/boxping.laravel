@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Ahex\Entrada\Domain\Update;
+namespace App\Ahex\Entrada\Application\Update\Updaters;
 
 use App\Http\Requests\EntradaUpdateRequest as UpdateRequest;
 use App\Entrada;

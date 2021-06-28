@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Ahex\Entrada\Domain\Update;
+namespace App\Ahex\Entrada\Application\Update\Updaters;
 
 use App\Http\Requests\EntradaUpdateRequest as UpdateRequest;
 use App\Entrada;
 
-abstract class UpdaterFactory
+abstract class UpdatersContainer
 {
-    public static function make(UpdateRequest $request, Entrada $entrada)
+    public static function get(UpdateRequest $request, Entrada $entrada)
     {
         $classname = self::classname($request->actualizar);
         return new $classname($request, $entrada);

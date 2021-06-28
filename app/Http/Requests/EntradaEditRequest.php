@@ -29,7 +29,7 @@ class EntradaEditRequest extends FormRequest
     public function messages()
     {
         return array(
-            'editor.required' => __('Se requiere una editor válidp'),
+            'editor.required' => __('Se requiere una editor válido'),
             'editor.in' => __('Selecciona un editor válido'),
         );
     }
