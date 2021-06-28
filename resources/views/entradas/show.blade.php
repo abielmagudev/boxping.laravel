@@ -3,7 +3,7 @@
 
 <!-- Cabecera -->
 @component('@.bootstrap.page-header', [
-    'pretitle' => 'Número de entrada',
+    'pretitle' => 'Entrada',
     'title' => $entrada->numero,
 ])
     @slot('options')
