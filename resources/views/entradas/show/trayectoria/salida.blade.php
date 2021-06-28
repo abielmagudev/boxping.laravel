@@ -69,8 +69,8 @@
 
         <?php // Si tiene confirmacion del destinatario ?>
         @if( $entrada->confirmado )
-        <div class="text-center">
-            <a href="{{ route('salidas.create', ['entrada' => $entrada->id]) }}" class="btn btn-primary">Crear guía de salida</a>
+        <div class="text-center mt-5">
+            <a href="{{ route('salidas.create', ['entrada' => $entrada->id]) }}" class="btn btn-primary">Crear salida</a>
         </div>
 
         <?php // Si no tiene confirmacion del destinatario, actualizar confirmacion ?>
