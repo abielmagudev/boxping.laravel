@@ -3,20 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Cliente;
-use App\Codigor;
 use App\Comentario;
-use App\Conductor;
 use App\Consolidado;
 use App\Entrada;
 use App\EntradaEtapa;
 use App\EntradaEtapaPivot;
-use App\Reempacador;
-use App\Vehiculo;
 
+use App\Ahex\Entrada\Application\PrintingTrait as Printing;
 use App\Ahex\Entrada\Application\Edit\Editors\EditorsContainer;
 use App\Ahex\Entrada\Application\Store\Redirects\StoredRedirect;
 use App\Ahex\Entrada\Application\Update\Updaters\UpdatersContainer;
-use App\Ahex\Entrada\Application\PrintingTrait as Printing;
 use App\Http\Requests\EntradaCreateRequest as CreateRequest;
 use App\Http\Requests\EntradaEditRequest as EditRequest;
 use App\Http\Requests\EntradaStoreRequest as StoreRequest;
@@ -81,7 +77,7 @@ class EntradaController extends Controller
     public function edit(EditRequest $request, Entrada $entrada)
     {
         $editor = EditorsContainer::get($request->editor, $entrada);
-        
+
         return view($editor->template(), $editor->data());
     }
 
