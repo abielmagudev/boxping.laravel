@@ -11,10 +11,10 @@
 |
 */
 
-Route::get('/', function () {
-    return view('app');
-})->name('escritorio');
+// Escritorio
+Route::get('/', fn() => view('app'))->name('escritorio');
 
+// CRUDs
 Route::resources([
     'alertas' => AlertaController::class,
     'clientes' => ClienteController::class,
@@ -38,6 +38,7 @@ Route::resources([
     ],
 ]);
 
+// Entrada
 Route::prefix('entradas')->group( function () {
     Route::get('{entrada}/print/{hoja}', 'EntradaController@printing')->name('entradas.printing');
     Route::get('print/{hoja?}', 'EntradaController@printingMultiple')->name('entradas.printing.multiple');
@@ -53,10 +54,11 @@ Route::prefix('entradas')->group( function () {
     ]);
 });
 
-Route::get('consolidados/{consolidado}/print', 'ConsolidadoController@printing')->name('consolidados.printing');
-
 // Etapa > Zonas
 Route::prefix('etapas')->group( function () {
     Route::resource('{etapa}/zonas', 'ZonaController')
          ->except(['index', 'show']);
 });
+
+// Consolidado
+Route::get('consolidados/{consolidado}/print', 'ConsolidadoController@printing')->name('consolidados.printing');
