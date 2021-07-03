@@ -9,7 +9,7 @@ use App\Entrada;
 use App\EntradaEtapa;
 use App\EntradaEtapaPivot;
 
-use App\Ahex\Entrada\Application\PrintingTrait as Printing;
+use App\Ahex\Entrada\Application\Printing\PrintingContainer;
 use App\Ahex\Entrada\Application\Edit\Editors\EditorsContainer;
 use App\Ahex\Entrada\Application\Store\Redirects\StoredRedirect;
 use App\Ahex\Entrada\Application\Update\Updaters\UpdatersContainer;
@@ -17,12 +17,11 @@ use App\Http\Requests\EntradaCreateRequest as CreateRequest;
 use App\Http\Requests\EntradaEditRequest as EditRequest;
 use App\Http\Requests\EntradaStoreRequest as StoreRequest;
 use App\Http\Requests\EntradaUpdateRequest as UpdateRequest;
+use App\Http\Requests\EntradaPrintingRequest as PrintingRequest;
 use Illuminate\Http\Request;
 
 class EntradaController extends Controller
 {
-    use Printing;
-
     public function index(Request $request)
     {
         $entradas = Entrada::with(['consolidado','cliente','destinatario'])
@@ -101,5 +100,24 @@ class EntradaController extends Controller
                 : route('entradas.index');
 
         return redirect($route)->with('success', "{$entrada->numero} eliminada");
+    }
+
+    public function printing(Entrada $entrada, PrintingRequest $request)
+    {
+        $printing = PrintingContainer::get($request->hoja);
+
+        return view('entradas.printing.single', $printing->content($entrada))->with('sheet', $printing->sheet());
+    }
+
+    public function printingMultiple(PrintingRequest $request)
+    {
+        $printing = PrintingContainer::get($request->hoja);
+        $entradas = Entrada::with(['consolidado','cliente','destinatario','remitente','conductor','vehiculo','codigor','reempacador','creator','updater','salida','salida.incidentes','salida.transportadora'])
+                            ->whereIn('id', $request->input('entradas', []))->get();
+
+        return view('entradas.printing.multiple', [
+            'entradas' => $entradas,
+            'printing' => $printing,
+        ]);
     }
 }

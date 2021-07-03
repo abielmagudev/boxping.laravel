@@ -20,14 +20,14 @@
     @endcomponent
 
     <div class="d-inline dropdown">
-        <button class="btn btn-sm btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+        <button class="btn btn-sm btn-primary dropdown-toggle" type="button" id="dropdownMenuPrint" data-bs-toggle="dropdown" aria-expanded="false">
             <span class="d-inline-block d-md-none me-1">{!! $svg->printer_fill !!}</span>
             <span class="d-none d-md-inline-block me-1">Imprimir</span>
         </button>
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-            <li><a class="dropdown-item" href="{{ route('printing.entrada',[$entrada]) }}" target="_blank">Información</a></li>
-            <li><a class="dropdown-item" href="{{ route('printing.entrada',[$entrada,'hoja' => 'etiqueta']) }}" target="_blank">Etiqueta</a></li>
-            <li><a class="dropdown-item" href="{{ route('printing.entrada',[$entrada,'hoja' => 'etapas']) }}" target="_blank">Etapas</a></li>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuPrint">
+            <li><a class="dropdown-item" href="{{ route('entradas.printing',[$entrada,'hoja' => 'informacion']) }}">Información</a></li>
+            <li><a class="dropdown-item" href="{{ route('entradas.printing',[$entrada,'hoja' => 'etiqueta']) }}">Etiqueta</a></li>
+            <li><a class="dropdown-item" href="{{ route('entradas.printing',[$entrada,'hoja' => 'etapas']) }}">Etapas</a></li>
         </ul>
     </div>
 

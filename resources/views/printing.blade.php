@@ -7,6 +7,8 @@
     <title>{{ config('app.name') }}</title>
 </head>
 <body onload="print()">
+    @yield('header')
+    
     <div class="container">
     @yield('content')
     </div>
