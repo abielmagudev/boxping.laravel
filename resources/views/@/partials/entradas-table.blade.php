@@ -43,7 +43,7 @@ function allowColumn($column, $except)
 
         @slot('tbody')
         @foreach($settings->entradas as $entrada)
-        <?php $checkbox_id = "checkbox-entrada-{$entrada->id}" ?>
+        <?php $checkbox_id = "checkboxEntrada{$entrada->id}" ?>
         <tr>
             @if( $settings->has_checkboxes_form )
             <td class="align-top" style="width:2.5%">
