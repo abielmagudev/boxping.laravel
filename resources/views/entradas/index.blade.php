@@ -31,12 +31,10 @@
 @endcomponent
 <br>
 
-@if( $has_pagination )
-@include('@.bootstrap.pagination-simple', [
+@includeWhen($has_pagination, '@.bootstrap.pagination-simple', [
     'prev' => $collection->previousPageUrl(),
     'next' => $collection->nextPageUrl(),
 ])
-@endif
 
 @include('@.partials.entradas-filter.modal', ['results_route' => route('entradas.index')])
 @include('@.partials.checkboxes-checker.scripts', ['checkbox_prefix' => 'checkboxEntrada'])
