@@ -1,8 +1,6 @@
 <?php
 
 use Illuminate\Database\Eloquent\Collection;
-// is_a($entradas, Collection::class);
-// $entradas instanceof Collection;
 
 $settings = (object) array(
     'has_checkboxes_form' => isset($checkboxes_form) && is_string($checkboxes_form),
@@ -22,17 +20,12 @@ $settings = (object) array(
 );
 
 // Al no estar definido checkboxes_form, se elimina thead de checkbox
-if(! $settings->has_checkboxes_form )
+if( ! $settings->has_checkboxes_form )
     array_shift($settings->all_theads);
 
-// Obtiene theads del calculo de all_theads contra except(Flip: para convertir values en keys)
-$theads = array_diff_key($settings->all_theads, array_flip($settings->except));
-
-// Valida la impresion de la columna de la tabla
-function allowColumn($column, $except)
-{
-    return (bool) ! in_array($column, $except);
-}
+// Obtiene theads del calculo de all_theads contra except(array_flip: para convertir values en keys)
+$except_keys = array_flip($settings->except);
+$theads = array_diff_key($settings->all_theads, $except_keys);
 
 ?>
 
@@ -68,7 +61,7 @@ function allowColumn($column, $except)
                 @endif
             </td>
 
-            @if( allowColumn('direccion', $settings->except) )
+            @if( ! in_array('direccion', $settings->except) )
             <td class="align-top">
                 @if( $entrada->destinatario )
                 <span class="d-block">{{ $entrada->destinatario->direccion ?? '' }}</span>
@@ -81,11 +74,11 @@ function allowColumn($column, $except)
             </td>
             @endif
 
-            @if( allowColumn('cliente', $settings->except) )
+            @if( ! in_array('cliente', $settings->except) )
             <td class="">{{ $entrada->cliente->alias }}</td>
             @endif
 
-            @if( allowColumn('options', $settings->except) )
+            @if( ! in_array('options', $settings->except) )
             <td class='text-end'>
                 <a href="{{ route('entradas.show', $entrada) }}" class="btn btn-sm btn-outline-primary">{!! $svg->eye !!}</a>
             </td>
