@@ -30,7 +30,7 @@ Route::resources([
     'salidas' => SalidaController::class,
     'transportadoras' => TransportadoraController::class,
     'vehiculos' => VehiculoController::class,
-],[
+], [
     'parameters' => [
         'codigosr'      => 'codigor',
         'conductores'   => 'conductor',
@@ -38,7 +38,6 @@ Route::resources([
     ],
 ]);
 
-// Entrada > Comentario, Impresion
 Route::prefix('entradas')->group( function () {
     Route::get('{entrada}/print/{hoja}', 'EntradaController@printing')->name('entradas.printing');
     Route::get('print/{hoja?}', 'EntradaController@printingMultiple')->name('entradas.printing.multiple');
@@ -54,12 +53,7 @@ Route::prefix('entradas')->group( function () {
     ]);
 });
 
-// Route::prefix('imprimir')->group( function () {
-//     Route::get('consolidado/{consolidado}', 'PrintingController@consolidado')->name('printing.consolidado');
-//     Route::get('entrada/{entrada}', 'PrintingController@entrada')->name('printing.entrada');
-//     Route::get('salida/{salida}', 'PrintingController@consolidado')->name('printing.salida');
-//     Route::get('entradas', 'PrintingController@entradas')->name('printing.entradas');
-// });
+Route::get('consolidados/{consolidado}/print', 'ConsolidadoController@printing')->name('consolidados.printing');
 
 // Etapa > Zonas
 Route::prefix('etapas')->group( function () {

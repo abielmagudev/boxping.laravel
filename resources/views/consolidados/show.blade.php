@@ -1,7 +1,7 @@
 <?php
 
 $checkbox_form = '';
-$checkbox_prefix = 'checkbox-entrada-';
+$checkbox_prefix = 'checkboxEntrada';
 $checker_id = 'checker-entradas';
 
 ?>
@@ -17,7 +17,7 @@ $checker_id = 'checker-entradas';
         <span class="d-inline-block d-md-none">{!! $icons->pencil !!}</span>
         <span class="d-none d-md-inline-block">Editar</span>
     </a>
-    <a href="{{ route('printing.consolidado', $consolidado) }}" class="btn btn-sm btn-primary">
+    <a href="{{ route('consolidados.printing', $consolidado) }}" class="btn btn-sm btn-primary">
         <span class="d-block d-md-none">{!! $svg->printer !!}</span>
         <span class="d-none d-md-block">Imprimir</span>
     </a>
@@ -95,7 +95,7 @@ $checker_id = 'checker-entradas';
     @slot('body')
         @include('@.partials.entradas-table', [   
             'entradas' => $entradas,
-            'checkboxes_form' => 'form-entradas-printing',
+            'checkboxes_form' => 'formEntradasPrinting',
             'numero_consolidado' => $consolidado->numero,
         ])
     @endslot

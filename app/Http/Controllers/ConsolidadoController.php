@@ -87,4 +87,22 @@ class ConsolidadoController extends Controller
 
         return redirect()->route('consolidados.index')->with('success', "{$consolidado->numero} eliminado");
     }
+
+    public function printing(Consolidado $consolidado)
+    {
+        $entradas_salidas = $consolidado->entradas()->with('salida')->has('salida')->get();
+
+        $counters = (object) [
+            'pendientes' => $consolidado->entradas->whereNull('importado_fecha')->count(),
+            'registradas' => $consolidado->entradas->whereNotNull('importado_fecha')->count(),
+            'entregadas' => $entradas_salidas->where('salida.status', 'entregado')->count(),
+            'total' => $consolidado->entradas->count(),
+        ];
+
+        return view('consolidados.print', [
+            'cliente' => $consolidado->cliente ?? new Cliente,
+            'consolidado' => $consolidado,
+            'entradas' => $counters,
+        ]);
+    }
 }
