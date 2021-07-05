@@ -5,6 +5,8 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
 
+use App\Ahex\Entrada\Application\Printing\PrintingContainer;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -27,9 +29,14 @@ class AppServiceProvider extends ServiceProvider
         View::share('symbols', config('resources.symbols'));
         View::share('svg', config('resources.bootstrap-svg'));
         View::share('icons', config('resources.bootstrap-icons'));
+
         View::composer('entradas.index', function ($view) {
             View::share('clientes', \App\Cliente::all());
             View::share('etapas', \App\Etapa::all());
+        });
+
+        View::composer(['entradas.index','entradas.show','consolidados.show'], function ($view) {
+            View::share('printing_sheets', PrintingContainer::sheets());
         });
     }
 }
