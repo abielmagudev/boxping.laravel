@@ -35,7 +35,6 @@ class EntradaController extends Controller
             'counter' => $has_pagination ? $entradas->total() : $entradas->count(),
             'entradas' => $has_pagination ? $entradas->getCollection() : $entradas,
             'has_pagination' => $has_pagination,
-            'printing_sheets' => PrintingContainer::sheets(),
         ]);
     }
 

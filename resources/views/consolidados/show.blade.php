@@ -79,7 +79,7 @@ $checker_id = 'checker-entradas';
 
         @include('@.partials.checkboxes-checker.trigger')
 
-        @include('@.partials.sheets-printing-dropdown')
+        @include('@.partials.entradas-printing.multiple-sheets-dropdown')
 
         @if( $consolidado->status === 'abierto' ) 
         <a href="{{ route('entradas.create', ['consolidado' => $consolidado->id]) }}" class="btn btn-sm btn-primary">
@@ -108,6 +108,8 @@ $checker_id = 'checker-entradas';
     'checkbox_prefix' => $checkbox_prefix,
     'checker_id' => $checker_id,
 ])
+
+@include('@.partials.entradas-printing.multiple-sheets-script')
 
 @include('@.partials.entradas-filter.modal', [
     'except' => ['ambitos', 'clientes','muestreos'],

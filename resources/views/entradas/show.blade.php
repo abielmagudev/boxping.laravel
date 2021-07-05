@@ -19,22 +19,8 @@
         @endslot
     @endcomponent
 
-    <div class="d-inline dropdown">
-        <button class="btn btn-sm btn-primary dropdown-toggle" type="button" id="dropdownMenuPrint" data-bs-toggle="dropdown" aria-expanded="false">
-            <span class="d-inline-block d-md-none me-1">{!! $svg->printer_fill !!}</span>
-            <span class="d-none d-md-inline-block me-1">Imprimir</span>
-        </button>
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenuPrint">
-            <li><a class="dropdown-item" href="{{ route('entradas.printing',[$entrada,'hoja' => 'informacion']) }}">Información</a></li>
-            <li><a class="dropdown-item" href="{{ route('entradas.printing',[$entrada,'hoja' => 'etiqueta']) }}">Etiqueta</a></li>
-            <li><a class="dropdown-item" href="{{ route('entradas.printing',[$entrada,'hoja' => 'etapas']) }}">Etapas</a></li>
-        </ul>
-    </div>
+    @include('@.partials.entradas-printing.single-sheets-dropdown')
 
-    <form action="https://www.estafeta.com/Herramientas/Rastreov1" method="post" class="d-none">
-        <input type="hidden" name="wayBill" value="1780584755">
-        <button class="btn btn-sm btn-success">Rastreo</button>
-    </form>
     @endslot
 @endcomponent
 

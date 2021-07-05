@@ -18,7 +18,7 @@
     <div class="text-end">
         @include('@.partials.entradas-filter.trigger')
         @include('@.partials.checkboxes-checker.trigger')
-        @include('@.partials.sheets-printing-dropdown')
+        @include('@.partials.entradas-printing.multiple-sheets-dropdown')
     </div>
     @endslot
 
@@ -37,6 +37,7 @@
 ])
 
 @include('@.partials.entradas-filter.modal', ['results_route' => route('entradas.index')])
+@include('@.partials.entradas-printing.multiple-sheets-script')
 @include('@.partials.checkboxes-checker.scripts', ['checkbox_prefix' => 'checkboxEntrada'])
 
 @endsection
