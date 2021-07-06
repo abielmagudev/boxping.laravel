@@ -1,5 +1,10 @@
 @extends('printing')
-@section('content')
+    @section('header')
+    <div class="sticky-top text-center d-print-none py-3 bg-secondary mw-100">
+        <a href="{{ route('consolidados.show',$consolidado) }}" class="btn btn-secondary">Regresar</a>
+    </div>
+    @endsection
+    @section('content')
     <!-- Impresion de consolidado - Inicio -->
     <div class="mt-3" style="font-size:9pt;page-break-before:always">
         <table class="table table-sm table-bordered m-0 align-middle">
