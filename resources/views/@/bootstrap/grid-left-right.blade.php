@@ -11,7 +11,7 @@ $settings = (object) [
 
 <div class="d-flex justify-content-between align-items-center">
     @if( $settings->has_left )
-    <div class="text-start">{!! $settings->left !!</div>
+    <div class="text-start">{!! $settings->left !!}</div>
     @endif
 
     @if( $settings->has_right )
