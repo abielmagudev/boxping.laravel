@@ -17,16 +17,17 @@
     @endslot
 @endcomponent
 
-<p class="small">
-    <span class="badge rounded-pill" style="background-color:{{ $config['alto']['color'] }}">{{ $alertas->where('nivel', 'alto')->count() }}</span>
-    <span class="align-middle me-2">Alto</span>
-    <span class="badge rounded-pill" style="background-color:{{ $config['medio']['color'] }}">{{ $alertas->where('nivel', 'medio')->count() }}</span>
-    <span class="align-middle me-2">Medio</span>
-    <span class="badge rounded-pill" style="background-color:{{ $config['bajo']['color'] }}">{{ $alertas->where('nivel', 'bajo')->count() }}</span>
-    <span class="align-middle me-2">Bajo</span>
-</p>
-
 @component('@.bootstrap.card')
+    @slot('header')
+    <div class="text-center small">
+        <span class="badge rounded-pill" style="background-color:{{ $config['alto']['color'] }}">{{ $alertas->where('nivel', 'alto')->count() }}</span>
+        <span class="align-middle me-2">Alto</span>
+        <span class="badge rounded-pill" style="background-color:{{ $config['medio']['color'] }}">{{ $alertas->where('nivel', 'medio')->count() }}</span>
+        <span class="align-middle me-2">Medio</span>
+        <span class="badge rounded-pill" style="background-color:{{ $config['bajo']['color'] }}">{{ $alertas->where('nivel', 'bajo')->count() }}</span>
+        <span class="align-middle me-2">Bajo</span>
+    </div>
+    @endslot
     @slot('body')
         @component('@.bootstrap.table', [
             'thead' => ['Nivel','Nombre','Descripción']
