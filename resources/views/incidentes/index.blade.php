@@ -1,7 +1,7 @@
 @extends('app')
 @section('content')
 
-@component('@.subnavs.salidas')
+@component('@.subnavs.transportadoras-incidentes')
     @slot('active', 2)
 @endcomponent
 

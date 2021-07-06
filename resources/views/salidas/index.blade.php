@@ -1,10 +1,6 @@
 @extends('app')
 @section('content')
 
-@component('@.subnavs.salidas')
-    @slot('active', 1)
-@endcomponent
-
 @component('@.bootstrap.page-header', [
     'title' => 'Salidas',
     'counter' => $salidas->count()

@@ -1,7 +1,7 @@
 @extends('app')
 @section('content')
 
-@component('@.subnavs.importacion')
+@component('@.subnavs.conductores-vehiculos')
     @slot('active', 1)
 @endcomponent
 

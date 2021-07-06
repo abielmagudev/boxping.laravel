@@ -1,7 +1,7 @@
 @extends('app')
 @section('content')
 
-@component('@.subnavs.trayectorias')
+@component('@.subnavs.remitentes-destinatarios')
     @slot('active', 1)
 @endcomponent
 

@@ -1,6 +1,10 @@
 @extends('app')
 @section('content')
 
+@component('@.subnavs.transportadoras-incidentes')
+    @slot('active', 1)
+@endcomponent
+
 @component('@.bootstrap.page-header')
     @slot('title', 'Transportadoras')
     @slot('counter', $transportadoras->count())

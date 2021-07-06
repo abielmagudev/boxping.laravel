@@ -1,7 +1,7 @@
 @extends('app')
 @section('content')
 
-@component('@.subnavs.etapas')
+@component('@.subnavs.etapas-alertas')
     @slot('active', 1)
 @endcomponent
 

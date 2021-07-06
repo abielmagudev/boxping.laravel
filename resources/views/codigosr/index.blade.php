@@ -1,7 +1,7 @@
 @extends('app')
 @section('content')
 
-@component('@.subnavs.reempaque')
+@component('@.subnavs.reempacadores-codigosr')
     @slot('active', 2)
 @endcomponent
 
