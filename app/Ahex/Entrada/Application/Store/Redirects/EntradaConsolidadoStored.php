@@ -2,7 +2,7 @@
 
 namespace App\Ahex\Entrada\Application\Store\Redirects;
 
-class EntradaConsolidadoRedirect
+class EntradaConsolidadoStored
 {
     private $consolidado_id;
 

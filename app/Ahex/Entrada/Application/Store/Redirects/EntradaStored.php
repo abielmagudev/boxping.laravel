@@ -2,7 +2,7 @@
 
 namespace App\Ahex\Entrada\Application\Store\Redirects;
 
-class EntradaRedirect
+class EntradaStored
 {
     public function agregar()
     {
