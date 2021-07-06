@@ -12,7 +12,18 @@
     <!-- Column importados -->
     <div class="col-sm">
         @component('@.bootstrap.card')
-            @slot('header', 'Importados')
+            @slot('header')
+            @component('@.bootstrap.grid-left-right')
+                @slot('left')
+                <span>Importados</span>
+                @endslot
+                @slot('right')
+                <a href="#!" class="">
+                    <span class="badge bg-primary text-white">{{ $entradas->count() }}</span>
+                </a>
+                @endslot
+            @endcomponent
+            @endslot
         @endcomponent
     </div>
 

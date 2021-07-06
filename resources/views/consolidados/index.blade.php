@@ -15,7 +15,7 @@
 
 @component('@.bootstrap.card')
     @slot('header')
-    <p class="text-center small m-0">
+    <div class="text-center small">
         <span class="badge rounded-pill" style="background-color:{{ $config_consolidados->status['abierto']['color'] }}">
             {{ $consolidados->where('status', 'abierto')->count() }}
         </span>
@@ -24,7 +24,7 @@
             {{ $consolidados->where('status', 'cerrado')->count() }}
         </span>
         <span class="align-middle">Cerrado</span>   
-    </p>
+    </div>
     @endslot
 
     @slot('body')

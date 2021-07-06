@@ -8,23 +8,27 @@
 ])
 @endcomponent
 
-@component('@.bootstrap.card-headers')
-   @slot('header_left')
-   <div>
-      <span class="badge bg-dark text-white">{{ $remitentes->count() }}</span>
-      <span class="align-middle">Remitentes</span>
-   </div>
-   @endslot
+@component('@.bootstrap.card')
+   @slot('header')
+   @component('@.bootstrap.grid-left-right')
+         @slot('left')
+         <div>
+            <span class="badge bg-dark text-white">{{ $remitentes->count() }}</span>
+            <span class="align-middle">Remitentes</span>
+         </div>
+         @endslot
 
-   @slot('header_right')
-   @include('@.bootstrap.modal-trigger', [
-      'classes' => 'btn btn-primary btn-sm',
-      'modal_id' => 'modalSearchToChangeRemitente',
-      'text' => $svg->search,
-   ])
-   <a href="{{ route('remitentes.create', ['entrada' => $entrada->id]) }}" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="left" title="Nuevo remitente">
-      <span>{!! $svg->plus !!}</span>
-   </a>
+         @slot('right')
+         @include('@.bootstrap.modal-trigger', [
+            'classes' => 'btn btn-primary btn-sm',
+            'modal_id' => 'modalSearchToChangeRemitente',
+            'text' => $svg->search,
+         ])
+         <a href="{{ route('remitentes.create', ['entrada' => $entrada->id]) }}" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="left" title="Nuevo remitente">
+            <span>{!! $svg->plus !!}</span>
+         </a>
+         @endslot
+   @endcomponent
    @endslot
 
    @slot('body')

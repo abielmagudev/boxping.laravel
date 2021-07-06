@@ -66,30 +66,29 @@ $checker_id = 'checker-entradas';
 </div>
 <br>
 
-@component('@.bootstrap.card-headers')
-    <!-- Slot headers  -->
-    @slot('header_left')
-    <span>Entradas</span>
-    <span class="badge bg-dark text-white">{{ $consolidado->entradas->count() }}</span>
-    @endslot
+@component('@.bootstrap.card')
+    <!-- Slot header  -->
+    @slot('header')
+    @component('@.bootstrap.grid-left-right')
+        @slot('left')
+        <span>Entradas</span>
+        <span class="badge bg-dark text-white">{{ $consolidado->entradas->count() }}</span>
+        @endslot
 
-    @slot('header_right')
-
+        @slot('right')
         @include('@.partials.entradas-filter.trigger')
-
         @include('@.partials.checkboxes-checker.trigger')
-
         @include('@.partials.entradas-printing.multiple-sheets-dropdown')
-
         @if( $consolidado->status === 'abierto' ) 
         <a href="{{ route('entradas.create', ['consolidado' => $consolidado->id]) }}" class="btn btn-sm btn-primary">
             <span class="d-block d-md-none fw-bold">+</span>
             <span class="d-none d-md-block">Nueva entrada</span>
         </a>
         @endif
-
+        @endslot
+    @endcomponent
     @endslot
-    <!-- Endslot headers  -->
+    <!-- Endslot header  -->
     
     <!-- Slot body  -->
     @slot('body')
@@ -109,12 +108,12 @@ $checker_id = 'checker-entradas';
     'checker_id' => $checker_id,
 ])
 
-@include('@.partials.entradas-printing.multiple-sheets-script')
-
 @include('@.partials.entradas-filter.modal', [
     'except' => ['ambitos', 'clientes','muestreos'],
     'header' => 'Filtros para entradas del consolidado',
     'results_route' => route('consolidados.show', [$consolidado]),
 ])
+
+@include('@.partials.entradas-printing.multiple-sheets-script')
 
 @endsection

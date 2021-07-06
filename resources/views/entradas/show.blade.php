@@ -69,20 +69,24 @@
 <br>
 
 <!-- Etapas de la guia -->
-@component('@.bootstrap.card-headers')
-    @slot('header_left')
-    <p class="m-0">Etapas <span class="badge bg-secondary text-white">{{ $entrada->etapas->count() }}</span></p>
-    @endslot
+@component('@.bootstrap.card')
+    @slot('header')
+    @component('@.bootstrap.grid-left-right')
+        @slot('left')
+        <span>Etapas</span> 
+        <span class="badge bg-secondary text-white">{{ $entrada->etapas->count() }}</span>
+        @endslot
 
-    @slot('header_right')
-    <a href="{{ route('entrada.etapas.create', $entrada) }}" class="btn btn-sm btn-primary">
-        <span class="d-block d-md-none fw-bold">+</span>
-        <span class="d-none d-md-block">Agregar</span>
-    </a>
+        @slot('right')
+        <a href="{{ route('entrada.etapas.create', $entrada) }}" class="btn btn-sm btn-primary">
+            <span class="d-block d-md-none fw-bold">+</span>
+            <span class="d-none d-md-block">Agregar etapa</span>
+        </a>
+        @endslot
+    @endcomponent
     @endslot
-
+    
     @slot('body')
-
     @if( $entrada->etapas->count() )
     @include('entradas.show.etapas.table')
 
@@ -90,7 +94,6 @@
     <p class="text-center text-muted m-0">Sin etapas</p>
 
     @endif
-
     @endslot
 @endcomponent
 <br>

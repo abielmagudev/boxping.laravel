@@ -12,12 +12,18 @@
 
     <!-- Column importaciones -->
     <div class="col-sm">
-        @component('@.bootstrap.card-headers')
-            @slot('header_left', 'Importados')
-            @slot('header_right')
-            <a href="#!">
-                <span class="badge bg-primary text-white">{{ $entradas->count() }}</span>
-            </a>
+        @component('@.bootstrap.card')
+            @slot('header')
+            @component('@.bootstrap.grid-left-right')
+                @slot('left')
+                <span>Importados</span>
+                @endslot
+                @slot('right')
+                <a href="#!" class="">
+                    <span class="badge bg-primary text-white">{{ $entradas->count() }}</span>
+                </a>
+                @endslot
+            @endcomponent
             @endslot
 
             @slot('body')

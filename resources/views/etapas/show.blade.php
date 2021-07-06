@@ -6,19 +6,19 @@
     'pretitle' => 'Etapa',
     'title' => $etapa->nombre,
 ])
+    @slot('options')
+    <a href="{{ route('etapas.edit', $etapa) }}" class="btn btn-sm btn-warning">
+        <span class="d-block d-md-none fw-bold">{!! $svg->pencil !!}</span>
+        <span class="d-none d-md-block">Editar</span>
+    </a>
+    @endslot
 @endcomponent
 
 <div class="row">
     <!-- Column informacion -->
     <div class="col-sm mb-3 mb-md-0">
-        @component('@.bootstrap.card-headers')
-            @slot('header_left', 'Información')
-            @slot('header_right')
-            <a href="{{ route('etapas.edit', $etapa) }}" class="btn btn-sm btn-warning">
-                <span class="d-block d-md-none fw-bold">{!! $svg->pencil !!}</span>
-                <span class="d-none d-md-block">Editar</span>
-            </a>
-            @endslot
+        @component('@.bootstrap.card')
+            @slot('header', 'Información')
             @slot('body')
             <p>
                 <small class="d-block text-muted small">Realiza medición</small>
@@ -38,17 +38,24 @@
 
     <!-- Column zonas -->
     <div class="col-sm col-sm-8">
-        @component('@.bootstrap.card-headers')
-            @slot('header_left', 'Zonas')
-            @slot('header_right')
-            <a href="{{ route('zonas.create', $etapa) }}" class="btn btn-sm btn-primary">
-                <span class="d-block d-md-none fw-bold">+</span>
-                <span class="d-none d-md-block">Nueva zona</span>
-            </a>
+        @component('@.bootstrap.card')
+            @slot('header')
+            @component('@.bootstrap.grid-left-right')
+                @slot('left')
+                <span>Zonas</span>
+                @endslot
+
+                @slot('right')
+                <a href="{{ route('zonas.create', $etapa) }}" class="btn btn-sm btn-primary">
+                    <span class="d-block d-md-none fw-bold">+</span>
+                    <span class="d-none d-md-block">Nueva zona</span>
+                </a>
+                @endslot
+            @endcomponent
             @endslot
 
             @slot('body')
-            
+
             @if( $etapa->zonas->count() )
             @component('@.bootstrap.table', [
                 'thead' => ['Nombre','Descripción'],

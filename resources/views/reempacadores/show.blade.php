@@ -11,14 +11,19 @@
 <div class="row">
     <!-- Column reempacados -->
     <div class="col-sm">
-        @component('@.bootstrap.card-headers', [
-            'header_left' => 'Reempacados',
-        ])
-            @slot('header_right')
-            <span class="align-middle me-1">Total</span>
-            <a href="#!" class="">
-                <span class="badge bg-primary text-white">{{ $entradas->count() }}</span>
-            </a>
+        @component('@.bootstrap.card')
+            @slot('header')
+            @component('@.bootstrap.grid-left-right')
+                @slot('left')
+                <span>Reempacados</span>
+                @endslot
+                
+                @slot('right')
+                <a href="#!" class="">
+                    <span class="badge bg-primary text-white">{{ $entradas->count() }}</span>
+                </a>
+                @endslot
+            @endcomponent
             @endslot
 
             @slot('body')
