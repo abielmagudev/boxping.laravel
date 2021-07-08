@@ -8,5 +8,6 @@
         'Guía' => '#guia',
         'Reempaque' => '#reempaque',
         'Importación' => '#importacion',
+        'Actualizaciones' => '#actualizaciones',
     ],
 ])

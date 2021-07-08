@@ -26,6 +26,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        \App\Entrada::observe(\App\Observers\EntradaObserver::class);
+
         View::share('symbols', config('resources.symbols'));
         View::share('svg', config('resources.bootstrap-svg'));
         View::share('icons', config('resources.bootstrap-icons'));

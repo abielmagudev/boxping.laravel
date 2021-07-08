@@ -41,6 +41,7 @@
                 @include('entradas.show.proceso.guia')
                 @include('entradas.show.proceso.reempaque')
                 @include('entradas.show.proceso.importacion')
+                @include('entradas.show.proceso.actualizaciones')
             </div>
 
             @endslot
