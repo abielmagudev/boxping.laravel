@@ -11,6 +11,8 @@ class Consolidado extends Model implements Search
 {
     use Modifiers;
 
+    public const CONSOLIDADO_NOT_EXISTS = false;
+
     protected $fillable = array(
         'numero',
         'tarimas',
@@ -39,6 +41,14 @@ class Consolidado extends Model implements Search
     public function scopeSearch($query, $value, $order = 'desc')
     {
         return $query->where('numero', 'like', "%{$value}%")->orderBy('id',$order);
+    }
+
+    public static function searchForceToUpdateEntrada($needle)
+    {
+        if( ! self::where('numero', $needle)->orWhere('id', $needle)->exists() )
+            return new self;
+        
+        return self::where('numero', $needle)->orWhere('id', $needle)->first();
     }
 
     public static function prepare($validated)

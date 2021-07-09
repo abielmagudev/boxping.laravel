@@ -53,7 +53,8 @@ class Entrada extends Model
 
     public static function prepare($validated)
     {
-        $consolidado = self::findConsolidado($validated);
+        $consolidado_number_id = $validated['consolidado_numero'] ?? $validated['consolidado'] ?? 0;
+        $consolidado = Consolidado::searchForceToUpdateEntrada( $consolidado_number_id );
 
         $prepared = [
             'numero' => $validated['numero'],
@@ -68,16 +69,5 @@ class Entrada extends Model
             $prepared['created_by'] = Fakeuser::live();
 
         return $prepared;
-    }
-
-    private static function findConsolidado($validated)
-    {
-        if( isset($validated['consolidado_numero']) )
-            return Consolidado::where('numero', $validated['consolidado_numero'])->first();
-
-        if( isset($validated['consolidado']) )
-            return Consolidado::find($validated['consolidado']);  
-        
-        return self::SIN_CONSOLIDADO;
     }
 }
