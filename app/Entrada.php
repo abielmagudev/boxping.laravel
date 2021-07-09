@@ -15,8 +15,6 @@ class Entrada extends Model
 {
     use Relationships, Attributes, Scopes, Filters, Conditions, Modifiers;
     
-    const SIN_CONSOLIDADO = null;
-
     protected $fillable = array(
         // Entrada
         'numero',

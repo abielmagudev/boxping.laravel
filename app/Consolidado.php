@@ -11,8 +11,6 @@ class Consolidado extends Model implements Search
 {
     use Modifiers;
 
-    public const CONSOLIDADO_NOT_EXISTS = false;
-
     protected $fillable = array(
         'numero',
         'tarimas',
