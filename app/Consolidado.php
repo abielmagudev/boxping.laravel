@@ -41,10 +41,21 @@ class Consolidado extends Model implements Search
         return $query->where('numero', 'like', "%{$value}%")->orderBy('id',$order);
     }
 
-    public static function searchForceToUpdateEntrada($needle)
+    /**
+     * 
+     * En caso de no encontrar un consolidado existente, 
+     * retornará un objeto vacio de Consolidado
+     * para crear o actualiza una Entrada.
+     * 
+     * De manera forzada, siempre retornará un objeto de Consolidado
+     * 
+     * @return new Consolidado || Consolidado existente
+     * 
+     */
+    public static function searchForceToEntrada($needle)
     {
         if( ! self::where('numero', $needle)->orWhere('id', $needle)->exists() )
-            return new self;
+            return new self; 
         
         return self::where('numero', $needle)->orWhere('id', $needle)->first();
     }

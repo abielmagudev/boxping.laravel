@@ -52,7 +52,7 @@ class Entrada extends Model
     public static function prepare($validated)
     {
         $consolidado_number_id = $validated['consolidado_numero'] ?? $validated['consolidado'] ?? 0;
-        $consolidado = Consolidado::searchForceToUpdateEntrada( $consolidado_number_id );
+        $consolidado = Consolidado::searchForceToEntrada( $consolidado_number_id );
 
         $prepared = [
             'numero' => $validated['numero'],
