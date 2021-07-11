@@ -6,6 +6,7 @@ $settings = (object) [
     'borderless' => isset($borderless) && $borderless === true ? 'table-borderless' : '',
     'caption_top' => isset($caption_top) && $caption_top === true ? 'caption-top' : '',
     'caption' => $caption ?? null,
+    'classes' => $classes ?? '',
     'color' => isset($color) && is_string($color) ? "table-{$color}" : '',
     'has_caption' => isset($caption) && is_string($caption),
     'has_tbody' => isset($tbody),
@@ -15,18 +16,18 @@ $settings = (object) [
     'small' => isset($small) && $small === true ? 'table-sm' : '',
     'striped' => isset($striped) && $striped === true ? 'table-striped' : '',
     'tbody' => $tbody ?? null,
-    'tfoot_color' => isset($tfoot_color) && is_string($tfoot_color) ? "table-{$tfoot_color}" : '',
+    'tfoot_classes' => isset($tfoot_classes) && is_string($tfoot_classes) ? "table-{$tfoot_classes}" : '',
     'tfoot' => $tfoot ?? false,
-    'thead_color' => isset($thead_color) && is_string($thead_color) ? "table-{$thead_color}" : '',
+    'thead_classes' => isset($thead_classes) && is_string($thead_classes) ? "table-{$thead_classes}" : '',
     'thead' => $thead ?? false,
 ];
 
 ?>
 
 <div class="table-responsive">
-    <table class="table {{ $settings->bordered }} {{ $settings->border_color }} {{ $settings->borderless }} {{ $settings->color }} {{ $settings->hover }} {{ $settings->small }} {{ $settings->striped }} {{ $settings->caption_top }} align-middle">
+    <table class="table {{ $settings->bordered }} {{ $settings->border_color }} {{ $settings->borderless }} {{ $settings->color }} {{ $settings->hover }} {{ $settings->small }} {{ $settings->striped }} {{ $settings->caption_top }} {{ $settings->classes }} align-middle">
         @if( $settings->has_thead )    
-        <thead class="{{ $settings->thead_color }}">
+        <thead class="{{ $settings->thead_classes }}">
             <tr class="">
                 @foreach ($settings->thead as $thead)
                 <th class="border-0 small">{!! $thead !!}</th>
@@ -42,7 +43,7 @@ $settings = (object) [
         @endif
         
         @if( $settings->has_tfoot )          
-        <tfoot class="{{ $settings->tfoot_color }} border-0">
+        <tfoot class="{{ $settings->tfoot_classes }} border-0">
             @foreach ($settings->tfoot as $tfoot)
             <td class="border-0 small fw-bold">{!! $tfoot !!}</td>
             @endforeach
