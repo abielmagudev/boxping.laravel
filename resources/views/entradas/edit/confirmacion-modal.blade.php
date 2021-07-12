@@ -6,12 +6,12 @@
   'id' => 'modalConfirmacion',
 ])
     @slot('body')
-    <p class="h4 text-nowrap">¿Se ha realizado los siguientes pasos?</p>
+    <p class="h4 text-center">¿Se han realizado los siguientes pasos de confirmación?</p>
     <br>
     <ol class="lead">
         <li>Contactar al destinatario.</li>
         <li>Verificar la información de destino.</li>
-        <li>Confirmar el envio del paquete con éxito.</li>
+        <li>Confirmar el envio del paquete.</li>
     </ol>
     <br>
     <form action="{{ route('entradas.update', $entrada) }}" method="post" autocomplete="off">
