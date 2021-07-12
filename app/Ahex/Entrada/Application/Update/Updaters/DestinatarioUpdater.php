@@ -23,8 +23,8 @@ class DestinatarioUpdater extends Updater
     {
         return [
             'destinatario_id' => $this->validated['destinatario'],
-            'verificado_by' => null,
-            'verificado_at' => null,
+            'confirmado_by' => null,
+            'confirmado_at' => null,
             'updated_by' => rand(1,5),
         ];
     }
