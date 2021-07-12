@@ -76,15 +76,13 @@
         <?php // Si no tiene confirmacion del destinatario, actualizar confirmacion ?>
         @else
         <p class="text-center">
-            <span class="fw-bold text-danger lead">Importante</span><br> 
-            <span class="lead">Para habilitar la opción de crear salida, es necesario contactar, verificar y confirmar envio del paquete con el destinatario.</span>
+            <span class="lead">Para habilitar la opción de crear salida, <br> es necesario <b>confirmar el destinatario</b>.</span>
         </p>
-        <br>
         <div class="text-center">
             @include('@.bootstrap.modal-trigger', [
-                'classes' => 'btn btn-success',
+                'classes' => 'btn btn-primary',
                 'modal_id' => 'modalConfirmacion',
-                'text' => 'Habilitar opción de crear salida',
+                'text' => 'Confirmar destinatario',
             ])
         </div>
 
