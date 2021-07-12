@@ -9,11 +9,18 @@ use App\Ahex\Entrada\Domain\AttributesTrait as Attributes;
 use App\Ahex\Entrada\Domain\ScopesTrait as Scopes;
 use App\Ahex\Entrada\Domain\FiltersTrait as Filters;
 use App\Ahex\Entrada\Domain\ConditionsTrait as Conditions;
+use App\Ahex\Entrada\Domain\UpdatesDescriptionsTrait as UpdatesDescriptions;
 use App\Ahex\Zkeleton\Domain\ModifiersTrait as Modifiers;
 
 class Entrada extends Model
 {
-    use Relationships, Attributes, Scopes, Filters, Conditions, Modifiers;
+    use Attributes,
+        Conditions,
+        Filters,
+        Modifiers,
+        Relationships,
+        Scopes,
+        UpdatesDescriptions;
     
     protected $fillable = array(
         // Entrada
