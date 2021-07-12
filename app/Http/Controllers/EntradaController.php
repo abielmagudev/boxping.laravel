@@ -66,7 +66,7 @@ class EntradaController extends Controller
     }
 
     public function show(Entrada $entrada)
-    {
+    {        
         return view('entradas.show', [
             'actualizaciones' => EntradaActualizaciones::with('updater')->where('entrada_id', $entrada->id)->orderByDesc('id')->get(),
             'comentarios' => Comentario::where('entrada_id', $entrada->id)->orderBy('id', 'desc')->get(),

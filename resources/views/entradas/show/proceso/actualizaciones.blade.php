@@ -1,23 +1,22 @@
-<?php
-
-$counter = $actualizaciones->count();
-
-?>
+<?php $updates_counter = $actualizaciones->count() ?>
 <div class="tab-pane fade" style="max-height:380px;" id="actualizaciones" role="tabpanel" aria-labelledby="actualizaciones-tab">
-        @component('@.bootstrap.table', [
-            'striped' => true,
-            'small' => true,
-            'classes' => 'small',
-            'thead' => ['No.','Descripción', 'Fecha'],
-        ])
-            @slot('tbody')
-            @foreach($actualizaciones as $actualizacion)
-            <tr class="align-top">
-                <td class="text-muted">{{ $counter-- }}</td>
-                <td class="fst-italic">{{ $actualizacion->updater->name ?? 'Guest' }} {{ $actualizacion->descripcion }}</td>
-                <td class="">{{ $actualizacion->created_at }}</td>
-            </tr>
-            @endforeach
-            @endslot
-        @endcomponent
+@if( $actualizaciones->count() )
+    @component('@.bootstrap.table', [
+        'striped' => true,
+        'small' => true,
+        'classes' => 'small',
+        'thead' => ['#', 'Usuario', 'Descripción', 'Fecha'],
+    ])
+        @slot('tbody')
+        @foreach($actualizaciones as $actualizacion)
+        <tr class="align-top">
+            <td class=""><small>{{ $updates_counter-- }}</small></td>
+            <td class="">{{ $actualizacion->updater->name ?? 'Desconocido' }}</td>
+            <td class="" style="max-width:320px">{{ ucfirst($actualizacion->descripcion) }}</td>
+            <td class="">{{ $actualizacion->created_at }}</td>
+        </tr>
+        @endforeach
+        @endslot
+    @endcomponent
+@endif
 </div>

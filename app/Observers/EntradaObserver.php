@@ -26,21 +26,17 @@ class EntradaObserver
      */
     public function updated(Entrada $entrada)
     {
-        foreach($entrada->getChanges() as $prop => $value)
+        foreach($entrada->getChanges() as $updated => $value)
         {
-            if( EntradaActualizaciones::hasChangeDescription($prop) )
-            {
-                $description = EntradaActualizaciones::changeDescription($prop, $entrada);
+            if( ! $entrada->hasUpdateDescription($updated) )
+                continue;
 
-                EntradaActualizaciones::create([
-                    'descripcion' => $description,
-                    'entrada_id' => $entrada->id,
-                    'user_id' => $entrada->updated_by,
-                ]);
-            }
+            EntradaActualizaciones::create([
+                'descripcion' => $entrada->getUpdateDescription($updated),
+                'entrada_id' => $entrada->id,
+                'user_id' => $entrada->updated_by,
+            ]);       
         }
-
-        return true;
     }
 
     /**
