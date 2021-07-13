@@ -69,7 +69,7 @@ Trait RelationshipsTrait
 
     public function etapas()
     {
-        return $this->belongsToMany(Etapa::class, 'entradas_etapas')
+        return $this->belongsToMany(Etapa::class, 'entrada_etapa')
                     ->withTrashed()
                     ->using(EntradaEtapa::class)
                     ->withPivot([

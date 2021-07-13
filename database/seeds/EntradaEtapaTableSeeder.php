@@ -6,7 +6,7 @@ use Faker\Generator as Faker;
 use App\Entrada;
 use App\Etapa;
 
-class EntradasEtapasTableSeeder extends Seeder
+class EntradaEtapaTableSeeder extends Seeder
 {
     public function run(Faker $faker)
     {
