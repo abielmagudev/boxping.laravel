@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateEntradasEtapasTable extends Migration
+class CreateEntradaEtapaTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,8 @@ class CreateEntradasEtapasTable extends Migration
      */
     public function up()
     {
-        Schema::create('entradas_etapas', function (Blueprint $table) {
+        Schema::create('entrada_etapa', function (Blueprint $table) {
+            $table->bigIncrements('id');
             $table->unsignedBigInteger('entrada_id')->index();
             $table->unsignedInteger('etapa_id')->index();
             $table->decimal('peso',6,2)->nullable();
@@ -41,6 +42,6 @@ class CreateEntradasEtapasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('entrada_etapas');
+        Schema::dropIfExists('entrada_etapa');
     }
 }
