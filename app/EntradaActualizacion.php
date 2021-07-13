@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class EntradaActualizaciones extends Model
+class EntradaActualizacion extends Model
 {
     protected $table = 'entrada_actualizaciones';
     
