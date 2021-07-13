@@ -16,11 +16,14 @@ class CreateEntradaActualizacionesTable extends Migration
         Schema::create('entrada_actualizaciones', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('descripcion', 128);
-            $table->unsignedBigInteger('entrada_id')
-                  ->references('id')->on('entradas')
-                  ->onDelete('cascade');
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('entrada_id')->index();
+            $table->unsignedInteger('user_id')->index();
             $table->timestamps();
+
+            $table->foreign('entrada_id')
+                  ->references('id')
+                  ->on('entradas')
+                  ->onDelete('cascade');
         });
     }
 
