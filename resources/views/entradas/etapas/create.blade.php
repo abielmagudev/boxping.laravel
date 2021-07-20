@@ -1,8 +1,8 @@
 @extends('app')
 @section('content')
 
-@component('@.bootstrap.header', [
-    'pretitle' => "Entrada {$entrada->numero}",
+@component('@.bootstrap.page-header', [
+    'pretitle' => $entrada->numero,
     'title' => 'Agregar etapa',
 ])
 @endcomponent
@@ -17,7 +17,7 @@
             <select name="slug" id="select-slug" class="form-select" onchange="submit()">
                 <option label="Selecciona..." disabled selected></option>
                 @foreach($etapas as $stage)
-                <option value="{{ $stage->slug }}" {{ selectable($etapa->slug, $stage->slug) }}>{{ $stage->nombre }}</option>
+                <option value="{{ $stage->slug }}" {{ toggleSelected($etapa->slug, $stage->slug) }}>{{ $stage->nombre }}</option>
                 @endforeach
             </select>
         </div>

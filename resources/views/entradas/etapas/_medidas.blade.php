@@ -9,16 +9,9 @@
     <div class="col-sm col-sm-3">
         <label for="select-medida_peso" class="form-label small">Medida de peso</label>
         <select name="medida_peso" id="select-medida_peso" class="form-select">
-        @if(! $etapa->unica_medida_peso )
-            <?php $medida_peso_pivot = $etapa->pivot->medida_peso ?? null ?>
-            @foreach($medidas_peso as $m => $medida)
-            <option value="{{ $medida }}" {{ selectable(old('medida_peso', $medida_peso_pivot), $medida) }}>{{ ucfirst($medida) }}</option>
+            @foreach($etapa->medidas_peso as $abbr => $medida)
+            <option value="{{ $medida }}" {{ toggleSelected($medida, old('medida_peso', $medida)) }}>{{ ucfirst($medida) }}</option>
             @endforeach
-
-        @else
-            <option value="{{ $etapa->unica_medida_peso }}">{{ ucfirst($etapa->unica_medida_peso) }}</option>
-
-        @endif
         </select>
     </div>
 </div>
@@ -43,16 +36,9 @@
     <div class="col-sm">
         <label for="select-medida_volumen" class="form-label small">Medida de volúmen</label>
         <select name="medida_volumen" id="select-medida_volumen" class="form-select">
-        @if(! $etapa->unica_medida_volumen )
-            <?php $medida_volumen_pivot = $etapa->pivot->medida_peso ?? null ?>
-            @foreach($medidas_volumen as $m => $medida)
-            <option value="{{ $medida }}" {{ selectable(old('medida_volumen', $medida_volumen_pivot), $medida) }}>{{ ucfirst($medida) }}</option>
+            @foreach($etapa->medidas_volumen as $abbr => $medida )
+            <option value="{{ $medida }}" {{ toggleSelected($medida, old('medida_volumen', $medida)) }}>{{ ucfirst($medida) }}</option>
             @endforeach
-        
-        @else
-            <option value="{{ $etapa->unica_medida_volumen }}">{{ ucfirst($etapa->unica_medida_volumen) }}</option>
-
-        @endif
         </select>
     </div>
 </div>

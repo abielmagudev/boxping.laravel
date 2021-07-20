@@ -17,8 +17,8 @@ class CreateEtapasTable extends Migration
             $table->string('slug')->unique()->index();
             $table->unsignedTinyInteger('orden')->default(1);
             $table->boolean('realiza_medicion')->default(1);
-            $table->enum('unica_medida_peso', $medidas_peso)->nullable();
-            $table->enum('unica_medida_volumen', $medidas_volumen)->nullable();
+            $table->enum('medida_peso', $medidas_peso)->nullable();
+            $table->enum('medida_volumen', $medidas_volumen)->nullable();
             $table->unsignedInteger('created_by');
             $table->unsignedInteger('updated_by');
             $table->timestamps();

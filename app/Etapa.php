@@ -33,6 +33,22 @@ class Etapa extends Model
         return $query->where('slug', $slug)->first();
     }
 
+    public function getMedidasPesoAttribute()
+    {
+        if( ! is_null($this->medida_peso) )
+            return array($this->medida_peso);
+
+        return config('system.medidas.peso');
+    }
+
+    public function getMedidasVolumenAttribute()
+    {
+        if( ! is_null($this->medida_volumen) )
+            return array($this->medida_volumen);
+
+        return config('system.medidas.volumen');
+    }
+
     public static function prepare($validated)
     {
         $slugger = new Slugger;
