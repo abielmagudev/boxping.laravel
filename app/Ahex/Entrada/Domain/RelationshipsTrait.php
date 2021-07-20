@@ -70,9 +70,10 @@ Trait RelationshipsTrait
     public function etapas()
     {
         return $this->belongsToMany(Etapa::class, 'entrada_etapa')
-                    ->withTrashed()
                     ->using(EntradaEtapa::class)
+                    ->as('entrada_etapa')
                     ->withPivot([
+                        'id',
                         'peso',
                         'medida_peso',
                         'ancho',
@@ -85,6 +86,7 @@ Trait RelationshipsTrait
                         'updated_by',
                     ])
                     ->withTimestamps()
+                    ->withTrashed()
                     ->orderBy('orden');
     }
 
