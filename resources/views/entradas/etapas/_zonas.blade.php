@@ -5,7 +5,7 @@
         <option disabled selected></option>
         <?php $zona_pivot = $etapa->pivot->zona_id ?? null ?>
         @foreach($etapa->zonas as $zona)
-        <option value="{{ $zona->id }}" {{ selectable( old('zona', $zona_pivot), $zona->id ) }}>{{ $zona->nombre }}</option>
+        <option value="{{ $zona->id }}" {{ toggleSelected( old('zona', $zona_pivot), $zona->id ) }}>{{ $zona->nombre }}</option>
         @endforeach
     </select>
 </div>
