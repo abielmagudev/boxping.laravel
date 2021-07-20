@@ -10,6 +10,8 @@ class EntradaEtapa extends Pivot
 {
     use Modifiers;
 
+    public $incrementing = true;
+
     public function zona()
     {
         return $this->belongsTo(Zona::class, 'zona_id');
@@ -17,8 +19,8 @@ class EntradaEtapa extends Pivot
 
     public function scopeAlertas()
     {
-        if( ! $this->alertas_id )
-            return;
+        if( is_null($this->alertas_id) )
+            return collect([]);
 
         return Alerta::whereIn('id', json_decode($this->alertas_id))->get();
     }
