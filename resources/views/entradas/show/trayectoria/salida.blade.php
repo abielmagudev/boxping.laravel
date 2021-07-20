@@ -93,7 +93,7 @@
     <?php // Si la entrada no tiene destinatario ?>
     @else
     <p class="text-center lead mt-5">
-        <span>Se requiere agregar un destinatario para <br> habilitar la opción de generar salida.</span>
+        <span>Se requiere agregar un destinatario para <br> habilitar la opción de crear salida.</span>
     </p>
 
     @endif
