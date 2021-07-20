@@ -18,5 +18,9 @@
         @endforeach
         @endslot
     @endcomponent
+
+@else
+<p class="text-muted text-center">Sin actualizaciones hasta el momento.</p>
+
 @endif
 </div>
