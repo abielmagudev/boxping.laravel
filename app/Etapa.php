@@ -28,7 +28,7 @@ class Etapa extends Model
         return $this->hasMany(Zona::class);
     }
 
-    public function scopeSlug($query, $slug)
+    public function scopeFindBySlug($query, $slug)
     {
         return $query->where('slug', $slug)->first();
     }
