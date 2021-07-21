@@ -58,8 +58,8 @@ class Etapa extends Model
             'slug' => $slugger->kebab($validated['nombre']),
             'orden' => $validated['orden'],
             'realiza_medicion' => $validated['realiza_medicion'] ? 1 : 0,
-            'unica_medida_peso' => isset($validated['unica_medida_peso']) ? $validated['unica_medida_peso'] : null,
-            'unica_medida_volumen' => isset($validated['unica_medida_volumen']) ? $validated['unica_medida_volumen'] : null,
+            'medida_peso' => isset($validated['unica_medida_peso']) ? $validated['unica_medida_peso'] : null,
+            'medida_volumen' => isset($validated['unica_medida_volumen']) ? $validated['unica_medida_volumen'] : null,
             'updated_by' => Fakeuser::live(),
         ];
 
