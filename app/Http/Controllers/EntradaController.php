@@ -70,7 +70,6 @@ class EntradaController extends Controller
         return view('entradas.show', [
             'actualizaciones' => EntradaActualizacion::with('updater')->where('entrada_id', $entrada->id)->orderByDesc('id')->get(),
             'comentarios' => Comentario::where('entrada_id', $entrada->id)->orderBy('id', 'desc')->get(),
-            'config_alertas' => config('system.alertas'),
             'entrada' => $entrada,
         ]);
     }
