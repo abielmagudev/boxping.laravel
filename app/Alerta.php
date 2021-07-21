@@ -18,6 +18,16 @@ class Alerta extends Model
         'updated_by',
     ];
 
+    public function getColorAttribute()
+    {
+        return config("system.alertas.{$this->nivel}.color");
+    }
+
+    public function getDescripcionAttribute()
+    {
+        return config("system.alertas.{$this->nivel}.descripcion");
+    }
+
     public static function prepare($validated)
     {
         $prepared = [
