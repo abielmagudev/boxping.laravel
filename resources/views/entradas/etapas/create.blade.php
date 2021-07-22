@@ -2,7 +2,7 @@
 @section('content')
 
 @component('@.bootstrap.page-header', [
-    'pretitle' => $entrada->numero,
+    'pretitle' => 'Entrada ' . $entrada->numero,
     'title' => 'Agregar etapa',
 ])
 @endcomponent
@@ -11,7 +11,7 @@
     @slot('body')
 
     <!-- Etapa -->
-    <form action="{{ route('entrada.etapas.create', $entrada) }}" method="get">
+    <form action="{{ route('entradas.etapas.create', $entrada) }}" method="get">
         <div class="mb-3">
             <label for="select-slug" class="form-label small">Etapas</label>
             <select name="slug" id="select-slug" class="form-select" onchange="submit()">
@@ -24,8 +24,8 @@
     </form> 
 
     <!-- Opciones de etapa -->
-    @if( $etapa->id )
-    <form action="{{ route('entrada.etapas.store', $entrada) }}" method="post" autocomplete="off">
+    @if( ! is_null($etapa->id) )
+    <form action="{{ route('entradas.etapas.store', $entrada) }}" method="post" autocomplete="off">
         @csrf    
         @include('entradas.etapas._medidas')
         @include('entradas.etapas._zonas')

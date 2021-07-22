@@ -14,7 +14,7 @@
         <div class="form-control bg-light">{{ $etapa->nombre }}</div>
     </div>
 
-    <form action="{{ route('entrada.etapas.update', [$entrada, $etapa]) }}" method="post" autocomplete="off">
+    <form action="{{ route('entradas.etapas.update', [$entrada, $etapa]) }}" method="post" autocomplete="off">
         @method('patch')
         @csrf
         @include('entradas.etapas._medidas')
@@ -38,7 +38,7 @@
 
 <div class="text-end">
     @component('@.partials.confirm-delete.bundle', [
-        'route' => route('entrada.etapas.destroy', [$entrada, $etapa]),
+        'route' => route('entradas.etapas.destroy', [$entrada, $etapa]),
         'text' => 'Eliminar etapa',
     ])
         @slot('content')    
