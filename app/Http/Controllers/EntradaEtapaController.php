@@ -30,8 +30,9 @@ class EntradaEtapaController extends Controller
 
         if( ! is_null( $entrada->etapas()->attach($request->etapa, $prepared) ) )
             return back()->withInput()->with('failure', 'Error al agregar etapa');
-         
-        return redirect()->route('entradas.show', $entrada)->with('success', 'Etapa agregada');
+        
+        $etapa = $entrada->etapas()->find($request->etapa);
+        return redirect()->route('entradas.show', $entrada)->with('success', "Etapa {$etapa->nombre} agregada");
     }
 
     public function edit(Entrada $entrada, $etapa)
@@ -61,6 +62,6 @@ class EntradaEtapaController extends Controller
         if(! $entrada->etapas()->detach($etapa) )
             return back()->with('failure', 'Error al eliminar etapa');
 
-        return redirect()->route('entradas.show', $entrada)->with('success', "{$etapa->nombre} eliminada");
+        return redirect()->route('entradas.show', $entrada)->with('success', "Etapa {$etapa->nombre} eliminada");
     }
 }
