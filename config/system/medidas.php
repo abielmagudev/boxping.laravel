@@ -4,13 +4,13 @@ return array(
     'peso' => [
         'g'  => 'gramos',
         'kg' => 'kilogramos',
-        'oz' => 'onzas',
         'lb' => 'libras',
+        'oz' => 'onzas',
     ],
     'volumen' => [
         'cm' => 'centimetros',
-        'm'  => 'metros',
-        'in' => 'pulgadas',
         'ft' => 'pies',
+        'in' => 'pulgadas',
+        'm'  => 'metros',
     ]
 );
