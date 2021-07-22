@@ -12,14 +12,24 @@ class EntradaEtapa extends Pivot
 
     public $incrementing = true;
 
-    public function zona()
+    public function hasZona()
     {
-        return $this->belongsTo(Zona::class, 'zona_id');
+        return (bool) is_numeric($this->zona_id);
     }
 
-    public function scopeAlertas()
+    public function zona()
     {
-        if( is_null($this->alertas_id) )
+        return $this->belongsTo(Zona::class);
+    }
+
+    public function hasAlertas()
+    {
+        return (bool) is_string($this->alertas_id);
+    }
+
+    public function alertas()
+    {
+        if( ! $this->hasAlertas() )
             return collect([]);
 
         return Alerta::whereIn('id', json_decode($this->alertas_id))->get();
