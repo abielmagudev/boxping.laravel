@@ -14,51 +14,63 @@
 // Escritorio
 Route::get('/', fn() => view('app'))->name('escritorio');
 
-// CRUDs
+// Resources
 Route::resources([
     'alertas' => AlertaController::class,
     'clientes' => ClienteController::class,
-    'codigosr' => CodigorController::class,
-    'conductores' => ConductorController::class,
-    'consolidados' => ConsolidadoController::class,
     'destinatarios' => DestinatarioController::class,
-    'entradas' => EntradaController::class,
-    'etapas' => EtapaController::class,
     'incidentes' => IncidenteController::class,
-    'reempacadores' => ReempacadorController::class,
     'remitentes' => RemitenteController::class,
     'salidas' => SalidaController::class,
     'transportadoras' => TransportadoraController::class,
     'vehiculos' => VehiculoController::class,
-], [
+]);
+
+// Codigos de reempacado
+Route::resource('codigosr', CodigorController::class, [
     'parameters' => [
-        'codigosr'      => 'codigor',
-        'conductores'   => 'conductor',
-        'reempacadores' => 'reempacador',
+        'codigosr' => 'codigor',
     ],
 ]);
 
-// Entrada
+// Conductores
+Route::resource('conductores', ConductorController::class, [
+    'parameters' => [
+        'conductores' => 'conductor',
+    ],
+]);
+
+// Consolidados
+Route::resource('consolidados', ConsolidadoController::class);
+Route::get('consolidados/{consolidado}/print', 'ConsolidadoController@printing')->name('consolidados.printing');
+
+// Entradas
+Route::resource('entradas', EntradaController::class);
 Route::prefix('entradas')->group( function () {
+    // Comentarios
+    Route::post('{entrada}/comentarios', 'ComentarioController@store')->name('comentarios.store');
+
+    // Printing
     Route::get('{entrada}/print/{hoja}', 'EntradaController@printing')->name('entradas.printing');
     Route::get('print/{hoja?}', 'EntradaController@printingMultiple')->name('entradas.printing.multiple');
-    Route::post('{entrada}/comentarios', 'ComentarioController@store')->name('comentarios.store');
-    Route::resource('{entrada}/etapas', 'EntradaEtapasController')
-         ->except(['index', 'show'])
-         ->names([
-            'create'  => 'entrada.etapas.create',
-            'store'   => 'entrada.etapas.store',
-            'edit'    => 'entrada.etapas.edit',
-            'update'  => 'entrada.etapas.update',
-            'destroy' => 'entrada.etapas.destroy',
-    ]);
+
+    // EntradaEtapa
+    Route::get('{entrada}/etapas/create', 'EntradaEtapaController@create')->name('entradas.etapas.create');
+    Route::get('{entrada}/etapas/{etapa}/edit', 'EntradaEtapaController@edit')->name('entradas.etapas.edit');
+    Route::post('{entrada}/etapas', 'EntradaEtapaController@store')->name('entradas.etapas.store');
+    Route::match(['put','patch'],'{entrada}/etapas/{etapa}', 'EntradaEtapaController@update')->name('entradas.etapas.update');
+    Route::delete('{entrada}/etapas/{etapa}', 'EntradaEtapaController@destroy')->name('entradas.etapas.destroy');
 });
 
-// Etapa > Zonas
+// Etapas
+Route::resource('etapas', EtapaController::class);
 Route::prefix('etapas')->group( function () {
-    Route::resource('{etapa}/zonas', 'ZonaController')
-         ->except(['index', 'show']);
+    Route::resource('{etapa}/zonas', 'ZonaController')->except(['index', 'show']);
 });
 
-// Consolidado
-Route::get('consolidados/{consolidado}/print', 'ConsolidadoController@printing')->name('consolidados.printing');
+// Reempacadores
+Route::resource('reempacadores', ReempacadorController::class, [
+    'parameters' => [
+        'reempacadores' => 'reempacador',
+    ],
+]);
