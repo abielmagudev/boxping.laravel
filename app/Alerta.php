@@ -23,7 +23,7 @@ class Alerta extends Model
         return config("system.alertas.{$this->nivel}.color");
     }
 
-    public function getDescripcionAttribute()
+    public function getDescripcionNivelAttribute()
     {
         return config("system.alertas.{$this->nivel}.descripcion");
     }
