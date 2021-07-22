@@ -8,6 +8,7 @@ use App\Comentario;
 use App\Conductor;
 use App\Consolidado;
 use App\Destinatario;
+use App\EntradaActualizacion;
 use App\EntradaEtapa;
 use App\Etapa;
 use App\Reempacador;
@@ -17,9 +18,14 @@ use App\Vehiculo;
 
 Trait RelationshipsTrait
 {
+    public function actualizaciones()
+    {
+        return $this->hasMany(EntradaActualizacion::class)->with('updater')->orderByDesc('id');
+    }
+
     public function comentarios()
     {
-        return $this->hasMany(Comentario::class);
+        return $this->hasMany(Comentario::class)->with('updater')->orderBy('id', 'desc');
     }
     
     public function verificador()
