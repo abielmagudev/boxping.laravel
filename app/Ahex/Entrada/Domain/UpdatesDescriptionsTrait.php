@@ -23,22 +23,6 @@ trait UpdatesDescriptionsTrait
         'vehiculo_id' => 'vehiculoUpdateDescription',
     ];
 
-    public function hasUpdateDescription($updated)
-    {
-        return (bool) array_key_exists($updated, $this->descriptions);
-    }
-
-    public function getUpdateDescription($updated)
-    {
-        return call_user_func([$this, $this->descriptions[$updated]]);
-    }
-
-
-
-    // ************************************************************************************************ //
-    
-    
-
     private function numeroUpdateDescription()
     {
         return "actualizó número {$this->getOriginal('numero')} a {$this->numero}";
