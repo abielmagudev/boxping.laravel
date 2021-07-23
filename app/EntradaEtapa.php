@@ -35,6 +35,16 @@ class EntradaEtapa extends Pivot
         return Alerta::whereIn('id', json_decode($this->alertas_id))->get();
     }
 
+    public function entrada()
+    {
+        return $this->belongsTo(Entrada::class);
+    }
+
+    public function etapa()
+    {
+        return $this->belongsTo(Etapa::class);
+    }
+
     public static function prepare($validated)
     {
         $prepared = [
