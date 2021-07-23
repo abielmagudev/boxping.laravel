@@ -11,11 +11,11 @@ use Illuminate\Http\Request;
 
 class EntradaEtapaController extends Controller
 {
-    public function create(Entrada $entrada, Request $request)
+    public function add(Entrada $entrada, Request $request)
     {
         $attached_etapas = $entrada->etapas->pluck('id');
 
-        return view('entradas.etapas.create', [
+        return view('entradas.etapas.add', [
             'alertas' => Alerta::orderBy('nombre', 'asc')->get(),
             'attached_alertas' => [],
             'entrada' => $entrada,

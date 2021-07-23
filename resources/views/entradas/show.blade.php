@@ -79,7 +79,7 @@
         @endslot
 
         @slot('right')
-        <a href="{{ route('entradas.etapas.create', $entrada) }}" class="btn btn-sm btn-primary">
+        <a href="{{ route('entradas.etapas.add', $entrada) }}" class="btn btn-sm btn-primary">
             <span class="d-block d-md-none fw-bold">+</span>
             <span class="d-none d-md-block">Agregar etapa</span>
         </a>

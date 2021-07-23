@@ -11,7 +11,7 @@
     @slot('body')
 
     <!-- Etapa -->
-    <form action="{{ route('entradas.etapas.create', $entrada) }}" method="get">
+    <form action="{{ route('entradas.etapas.add', $entrada) }}" method="get">
         <div class="mb-3">
             <label for="select-slug" class="form-label small">Etapas</label>
             <select name="slug" id="select-slug" class="form-select" onchange="submit()">

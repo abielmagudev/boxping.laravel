@@ -55,7 +55,7 @@ Route::prefix('entradas')->group( function () {
     Route::get('print/{hoja?}', 'EntradaController@printingMultiple')->name('entradas.printing.multiple');
 
     // EntradaEtapa
-    Route::get('{entrada}/etapas/create', 'EntradaEtapaController@create')->name('entradas.etapas.create');
+    Route::get('{entrada}/etapas/add', 'EntradaEtapaController@add')->name('entradas.etapas.add');
     Route::get('{entrada}/etapas/{etapa}/edit', 'EntradaEtapaController@edit')->name('entradas.etapas.edit');
     Route::post('{entrada}/etapas', 'EntradaEtapaController@store')->name('entradas.etapas.store');
     Route::match(['put','patch'],'{entrada}/etapas/{etapa}', 'EntradaEtapaController@update')->name('entradas.etapas.update');
