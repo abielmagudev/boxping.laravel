@@ -4,14 +4,6 @@ namespace App\Ahex\Entrada\Domain;
 
 Trait AttributesTrait
 {
-    public function getAliasNumeroAttribute()
-    {
-        if( $this->cliente_alias_numero )
-            return $this->cliente->alias . $this->numero;
-        
-        return;
-    }
-
     public function getImportadoHorarioAttribute()
     {
         if( is_null($this->importado_fecha) && is_null($this->importado_hora) )

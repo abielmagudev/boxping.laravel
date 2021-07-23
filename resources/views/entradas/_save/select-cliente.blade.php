@@ -1,4 +1,4 @@
-<div class="mb-1">
+<div class="mb-3">
     <label for="selectCliente" class="form-label small">Cliente</label>
     <select name="cliente" id="selectCliente" class="form-select" required>
         <option disabled selected></option>

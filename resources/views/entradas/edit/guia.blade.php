@@ -19,7 +19,7 @@
             <label for="input-consolidado" class="form-label small">Número de consolidado</label>
             <input name="consolidado_numero" value="{{ $consolidado->numero ?? '' }}" placeholder="Sin consolidar" type="text" id="input-consolidado" class="form-control">
         </div>
-        <div class="mb-1">
+        <div class="mb-3">
             <label for="select-cliente" class="form-label small">Cliente</label>
             @if( $consolidado )
             <div class="form-control bg-light">
@@ -35,10 +35,6 @@
             </select>
 
             @endif
-        </div>
-        <div class="form-check mb-3">
-            <input name="cliente_alias_numero" value="1" id="checkbox-cliente-alias-numero" type="checkbox" class="form-check-input" {{ toggleChecked(1, $entrada->cliente_alias_numero) }}>
-            <label for="checkbox-cliente-alias-numero" class="form-check-label small">Alias del cliente al comienzo del número de entrada.</label>
         </div>
         <div class="mb-3">
             <label for="textarea-contenido" class="form-label small">Contenido</label>

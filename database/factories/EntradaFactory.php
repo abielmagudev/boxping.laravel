@@ -16,7 +16,6 @@ $factory->define(Entrada::class, function (Faker $faker) {
         // Entrada
         'numero' => $faker->unique()->uuid,
         'consolidado_id' => $faker->boolean ? $faker->numberBetween(1,10) : null,
-        'cliente_alias_numero' => $faker->boolean ? 1 : 0,
         'cliente_id' => $faker->numberBetween(1,10),
         'contenido' => $faker->boolean ? $faker->sentence() : null,
 
