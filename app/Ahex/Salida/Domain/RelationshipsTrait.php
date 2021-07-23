@@ -15,6 +15,6 @@ trait RelationshipsTrait{
 
     public function incidentes()
     {
-        return $this->belongsToMany(\App\Incidente::class,'salida_incidente');
+        return $this->belongsToMany(\App\Incidente::class,'salida_incidente')->using(\App\SalidaIncidente::class);
     }
 }

@@ -7,12 +7,18 @@ use App\Ahex\Salida\Domain\AttributesTrait as Attributes;
 use App\Ahex\Salida\Domain\RelationshipsTrait as Relationships;
 use App\Ahex\Salida\Domain\ScopesTrait as Scopes;
 use App\Ahex\Salida\Domain\UpdatesDescriptionsTrait as UpdatesDescriptions;
+use App\Ahex\Zkeleton\Domain\UpdateDescriptionCallableTrait as UpdateDescriptionCallable;
 use App\Ahex\Zkeleton\Domain\ModifiersTrait as Modifiers;
 use Illuminate\Database\Eloquent\Model;
 
 class Salida extends Model
 {
-    use Attributes, Relationships, Scopes, UpdatesDescriptions, Modifiers;
+    use Attributes, 
+        Relationships, 
+        Scopes, 
+        UpdateDescriptionCallable, 
+        UpdatesDescriptions, 
+        Modifiers;
     
     protected $fillable = [
         'rastreo',
