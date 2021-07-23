@@ -3,12 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Cliente;
-use App\Comentario;
 use App\Consolidado;
 use App\Entrada;
-use App\EntradaActualizacion;
-use App\EntradaEtapa;
-use App\EntradaEtapaPivot;
 
 use App\Ahex\Entrada\Application\Printing\PrintingContainer;
 use App\Ahex\Entrada\Application\Edit\Editors\EditorsContainer;
@@ -68,8 +64,8 @@ class EntradaController extends Controller
     public function show(Entrada $entrada)
     {        
         return view('entradas.show', [
-            'actualizaciones' => EntradaActualizacion::with('updater')->where('entrada_id', $entrada->id)->orderByDesc('id')->get(),
-            'comentarios' => Comentario::where('entrada_id', $entrada->id)->orderBy('id', 'desc')->get(),
+            'actualizaciones' => $entrada->actualizaciones,
+            'comentarios' => $entrada->comentarios,
             'entrada' => $entrada,
         ]);
     }
