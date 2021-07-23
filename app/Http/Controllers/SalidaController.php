@@ -69,8 +69,7 @@ class SalidaController extends Controller
         if( ! $salida->fill($prepared)->save() )
             return back()->with('failure', 'Error al actualizar salida');
 
-        if( $request->has('incidentes') )
-            $salida->incidentes()->sync( $request->incidentes );
+        $salida->incidentes()->sync( $request->input('incidentes', []) );
         
         return back()->with('success', 'Salida actualizada');
     }
