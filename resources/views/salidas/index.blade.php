@@ -80,7 +80,7 @@
                         @endif     
                     </div>
                 </td>
-                <td class="text-end d-none">
+                <td class="text-end">
                     <a href="{{ route('salidas.edit', $salida) }}" class="btn btn-sm btn-outline-warning">
                         {!! $svg->pencil !!}
                     </a>

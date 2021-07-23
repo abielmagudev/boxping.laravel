@@ -2,7 +2,6 @@
 @section('content')
 
 @component('@.bootstrap.page-header', [
-    'goback' => route('entradas.show', $salida->entrada_id),
     'pretitle' => "Entrada {$salida->entrada->numero}",
     'title' => 'Editar salida',
 ])
