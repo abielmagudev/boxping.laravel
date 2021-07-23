@@ -3,12 +3,16 @@
 namespace App;
 
 use App\Ahex\Fake\Domain\Fakeuser;
-use Illuminate\Database\Eloquent\Model;
+use App\Ahex\Salida\Domain\AttributesTrait as Attributes;
+use App\Ahex\Salida\Domain\RelationshipsTrait as Relationships;
+use App\Ahex\Salida\Domain\ScopesTrait as Scopes;
+use App\Ahex\Salida\Domain\UpdatesDescriptionsTrait as UpdatesDescriptions;
 use App\Ahex\Zkeleton\Domain\ModifiersTrait as Modifiers;
+use Illuminate\Database\Eloquent\Model;
 
 class Salida extends Model
 {
-    use Modifiers;
+    use Attributes, Relationships, Scopes, UpdatesDescriptions, Modifiers;
     
     protected $fillable = [
         'rastreo',
@@ -26,47 +30,6 @@ class Salida extends Model
         'created_by',
         'updated_by',
     ];
-
-    public function entrada()
-    {
-        return $this->belongsTo(Entrada::class);
-    }
-    
-    public function transportadora()
-    {
-        return $this->belongsTo(Transportadora::class)->withTrashed();
-    }
-
-    public function incidentes()
-    {
-        return $this->belongsToMany(Incidente::class,'salida_incidente');
-    }
-
-    public function getIncidentesHtmlAttribute()
-    {
-        return $this->incidentes->implode('titulo', '<br>');
-    }
-
-    public function getMostrarStatusAttribute()
-    {
-        return ucfirst($this->status);
-    }
-
-    public function getMostrarCoberturaAttribute()
-    {
-        return ucfirst($this->cobertura);
-    }
-
-    public function getLocalidadAttribute()
-    {
-        $filtered = array_filter([$this->ciudad, $this->estado, $this->pais]);
-        return implode(', ', $filtered);
-    }
-
-    public function scopeExistsWithEntrada($query, $entrada_id)
-    {
-        return $query->where('entrada_id', $entrada_id)->exists();
-    }
 
     public static function prepare($validated)
     {
