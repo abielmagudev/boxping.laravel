@@ -36,13 +36,13 @@
             <tr>
                 <td class="px-2 text-nowrap">{{ $etapa->nombre }}</td>
 
-                @if( $etapa->realiza_medicion && $etapa->pivot->peso )
-                <td class="px-2">{{ $etapa->pivot->peso }}</td>
-                <td class="px-2 text-capitalize">{{ $etapa->pivot->medida_peso }}</td>
-                <td class="px-2">{{ $etapa->pivot->ancho }}</td>
-                <td class="px-2">{{ $etapa->pivot->altura }}</td>
-                <td class="px-2">{{ $etapa->pivot->largo }}</td>
-                <td class="px-2 text-capitalize">{{ $etapa->pivot->medida_volumen }}</td>
+                @if( $etapa->realiza_medicion )
+                <td class="px-2">{{ $etapa->entrada_etapa->peso }}</td>
+                <td class="px-2 text-capitalize">{{ $etapa->entrada_etapa->medida_peso }}</td>
+                <td class="px-2">{{ $etapa->entrada_etapa->ancho }}</td>
+                <td class="px-2">{{ $etapa->entrada_etapa->altura }}</td>
+                <td class="px-2">{{ $etapa->entrada_etapa->largo }}</td>
+                <td class="px-2 text-capitalize">{{ $etapa->entrada_etapa->medida_volumen }}</td>
 
                 @else
                 <td class="px-2 text-center" colspan="6">REGISTRADO</td>
@@ -50,12 +50,12 @@
                 @endif
 
                 <td class="px-2">
-                    @if( $etapa->pivot->zona )
-                    {{ $etapa->pivot->zona->nombre }}
+                    @if( $etapa->entrada_etapa->hasZona() )
+                    {{ $etapa->entrada_etapa->zona->nombre }}
                     @endif
                 </td>
                 <td class="px-2 text-nowrap">
-                    {{ $etapa->pivot->alertas()->count() }}
+                    {{ $etapa->entrada_etapa->alertas()->count() }}
                     <?php /*
                     @if( $etapa_alertas = $etapa->pivot->alertas() )
                     <ul class="px-3 m-0">               
