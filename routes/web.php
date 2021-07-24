@@ -23,6 +23,7 @@ Route::resources([
     'remitentes' => RemitenteController::class,
     'salidas' => SalidaController::class,
     'transportadoras' => TransportadoraController::class,
+    'usuarios' => UserController::class,
     'vehiculos' => VehiculoController::class,
 ]);
 

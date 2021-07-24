@@ -50,6 +50,11 @@ $menu = array(
         'route' => route('transportadoras.index'),
         'active' => request()->is('transportadoras*'),
     ],
+    (object) [
+        'title' => 'Usuarios',
+        'route' => route('usuarios.index'),
+        'active' => request()->is('usuarios*'),
+    ],
 );
 ?>
 
