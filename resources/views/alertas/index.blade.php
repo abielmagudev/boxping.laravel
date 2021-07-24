@@ -36,7 +36,7 @@
             @foreach($alertas as $alerta)
             <tr>
                 <td class="text-center" style="width:1%">
-                    <span style="color:{{ $config[$alerta->nivel]['color']}}">{!! $symbols->circle !!}</span>
+                    <span style="color:{{ $alerta->color }}">{!! $symbols->circle !!}</span>
                 </td>
                 <td class="text-nowrap">{{ $alerta->nombre }}</td>
                 <td>{{ $alerta->descripcion }}</td>
