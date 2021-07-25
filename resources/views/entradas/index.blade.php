@@ -31,10 +31,12 @@
 @endcomponent
 <br>
 
-@includeWhen($has_pagination, '@.bootstrap.pagination-simple', [
-    'prev' => $collection->previousPageUrl(),
-    'next' => $collection->nextPageUrl(),
-])
+@if( $has_pagination  ) 
+    @include('@.bootstrap.pagination-simple', [
+        'prev' => $collection->previousPageUrl(),
+        'next' => $collection->nextPageUrl(),
+    ])
+@endif
 
 @include('@.partials.entradas-filter.modal', ['results_route' => route('entradas.index')])
 @include('@.partials.entradas-printing.multiple-sheets-script')
