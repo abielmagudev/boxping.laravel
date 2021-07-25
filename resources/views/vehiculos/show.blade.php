@@ -35,7 +35,7 @@
                     @slot('thead', ['Conductores', 'Entradas'])
                     @slot('tbody')
                     @foreach($conductores_counter as $conductor_id => $conductor)
-                    <?php $params = ['conductor' => $conductor_id, 'filter' => csrf_token()] ?>
+                    <?php $params = ['vehiculo' => $vehiculo->id, 'conductor' => $conductor_id, 'filter' => csrf_token()] ?>
 
                     <tr>
                         <td>{{ $conductor->nombre }}</td>
