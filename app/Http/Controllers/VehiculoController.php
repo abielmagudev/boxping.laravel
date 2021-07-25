@@ -2,16 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Vehiculo;
 use App\Entrada;
-use App\Ahex\Vehiculo\Application\ConductoresTrait as Conductores;
+use App\Vehiculo;
+use App\Ahex\Entrada\Application\Counter as EntradaCounter;
 use App\Http\Requests\VehiculoSaveRequest as SaveRequest;
 use Illuminate\Http\Request;
 
 class VehiculoController extends Controller
-{
-    use Conductores;
-    
+{    
     public function index()
     {
         return view('vehiculos.index')->with('vehiculos', Vehiculo::all()->sortByDesc('id'));
@@ -34,18 +32,16 @@ class VehiculoController extends Controller
 
     public function show(Vehiculo $vehiculo)
     {
-        $entradas = Entrada::with(['destinatario','conductor'])
+        $entradas = Entrada::with(['consolidado','cliente','destinatario','conductor'])
                             ->where('vehiculo_id', $vehiculo->id)
                             ->orderBy('id', 'desc')
                             ->get();
-        
-        $conductores = $this->conductoresDelVehiculo($entradas);
 
         return view('vehiculos.show', [
-            'vehiculo' => $vehiculo,
-            'entradas' => $entradas,
+            'conductores_counter' => EntradaCounter::byConductor($entradas),
             'entradas_take' => 10,
-            'conductores' => $conductores,
+            'entradas' => $entradas,
+            'vehiculo' => $vehiculo,
         ]);
     }
 

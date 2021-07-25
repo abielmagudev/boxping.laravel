@@ -18,9 +18,11 @@
                 @slot('left')
                 <span>Importados</span>
                 @endslot
+
                 @slot('right')
-                <a href="#!" class="">
-                    <span class="badge bg-primary text-white">{{ $entradas->count() }}</span>
+                <?php $params = ['vehiculo' => $vehiculo->id, 'filter' => csrf_token()] ?>
+                <a href="{{ route('entradas.index', $params) }}" class="badge bg-primary ">
+                    <span class="text-white">{{ $entradas->count() }}</span>
                 </a>
                 @endslot
             @endcomponent
@@ -32,10 +34,14 @@
                 ])
                     @slot('thead', ['Conductores', 'Entradas'])
                     @slot('tbody')
-                    @foreach($conductores as $id => $conductor)
+                    @foreach($conductores_counter as $conductor_id => $conductor)
+                    <?php $params = ['conductor' => $conductor_id, 'filter' => csrf_token()] ?>
+
                     <tr>
-                        <td>{{ $conductor['nombre'] }}</td>
-                        <td>{{ $conductor['cruces'] }}</td>
+                        <td>{{ $conductor->nombre }}</td>
+                        <td>
+                            <a href="{{ route('entradas.index', $params) }}">{{ $conductor->entradas->count() }}</a>
+                        </td>
                     </tr>
                     @endforeach
                     @endslot
