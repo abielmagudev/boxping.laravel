@@ -11,9 +11,11 @@ trait FiltersTrait
         return [
             'ambito' => 'filterAmbit',
             'cliente' => 'filterClient',
+            'conductor' => 'filterConductor',
             'etapa' => 'filterStage',
             'fecha_hora' => 'filterDatetime',
             'orden' => 'filterOrder',
+            'vehiculo' => 'filterVehiculo',
         ];
     }
 
@@ -75,5 +77,21 @@ trait FiltersTrait
             return $query->orderBy('id', 'desc');
 
         return $query->orderBy('id', $orden);
+    }
+
+    public function scopeFilterVehiculo($query, $vehiculo)
+    {
+        if( ! ctype_digit($vehiculo) )
+            return $query;
+
+        return $query->where('vehiculo_id', $vehiculo);
+    }
+
+    public function scopeFilterConductor($query, $conductor)
+    {
+        if( ! ctype_digit($conductor) )
+            return $query;
+
+        return $query->where('conductor_id', $conductor);
     }
 }
