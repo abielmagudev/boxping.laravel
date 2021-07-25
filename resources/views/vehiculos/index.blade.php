@@ -20,11 +20,11 @@
 @component('@.bootstrap.card')
     @slot('body')
     @component('@.bootstrap.table')
-        @slot('thead', ['Alias','Descripción'])
+        @slot('thead', ['Nombre','Descripción'])
         @slot('tbody')
             @foreach($vehiculos as $vehiculo)
             <tr>
-                <td>{{ $vehiculo->alias }}</td>
+                <td>{{ $vehiculo->nombre }}</td>
                 <td>{{ $vehiculo->descripcion }}</td>
                 <td class="text-nowrap">
                     <a href="{{ route('vehiculos.show', $vehiculo) }}" class="btn btn-sm btn-outline-primary">

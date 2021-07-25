@@ -30,7 +30,7 @@
         'text' => 'Eliminar vehículo',
     ])
         @slot('content')
-        <p class="lead">¿Deseas eliminar vehículo <b>{{ $vehiculo->alias }}</b>?</p>
+        <p class="lead">¿Deseas eliminar vehículo <b>{{ $vehiculo->nombre }}</b>?</p>
         @endslot
     @endcomponent
 </div>

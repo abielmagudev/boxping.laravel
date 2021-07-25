@@ -2,7 +2,7 @@
 @section('content')
 
 @component('@.bootstrap.page-header', [
-    'title' => $vehiculo->alias,
+    'title' => $vehiculo->nombre,
     'pretitle' => 'Vehículo',
     'goback' => route('vehiculos.index'),
 ])

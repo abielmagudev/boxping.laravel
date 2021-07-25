@@ -12,7 +12,7 @@ class Vehiculo extends Model
     use SoftDeletes, Modifiers;
 
     protected $fillable = [
-        'alias',
+        'nombre',
         'descripcion',
         'created_by',
         'updated_by',
@@ -26,7 +26,7 @@ class Vehiculo extends Model
     public static function prepare($validated)
     {
         $prepared = [
-            'alias' => $validated['alias'],
+            'nombre' => $validated['nombre'],
             'descripcion' => $validated['descripcion'],
             'updated_by' => Fakeuser::live(),
         ];

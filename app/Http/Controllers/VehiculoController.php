@@ -26,10 +26,10 @@ class VehiculoController extends Controller
     {
         $prepared = Vehiculo::prepare( $request->validated() );
 
-        if(! $vehiculo = Vehiculo::create($prepared) )
+        if( ! $vehiculo = Vehiculo::create($prepared) )
             return back()->with('failure', 'Error al guardar vehículo');
 
-        return redirect()->route('importacion.index')->with('success', 'Vehículo guardado');
+        return redirect()->route('vehiculos.index')->with('success', "Vehículo {$vehiculo->nombre} guardado");
     }
 
     public function show(Vehiculo $vehiculo)
@@ -58,7 +58,7 @@ class VehiculoController extends Controller
     {
         $prepared = Vehiculo::prepare( $request->validated() );
 
-        if(! $vehiculo->fill($prepared)->save() )
+        if( ! $vehiculo->fill($prepared)->save() )
             return back()->with('failure', 'Error al actualizar vehículo');
 
         return back()->with('success', 'Vehículo actualizado');
@@ -66,9 +66,9 @@ class VehiculoController extends Controller
 
     public function destroy(Vehiculo $vehiculo)
     {
-        if(! $vehiculo->delete() )
+        if( ! $vehiculo->delete() )
             return back()->with('failure', 'Error al eliminar vehículo');
 
-        return redirect()->route('vehiculos.index')->with('success', "{$vehiculo->alias} eliminado");
+        return redirect()->route('vehiculos.index')->with('success', "Vehículo {$vehiculo->nombre} eliminado");
     }
 }

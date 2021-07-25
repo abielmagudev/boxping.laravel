@@ -15,7 +15,7 @@ class CreateVehiculosTable extends Migration
     {
         Schema::create('vehiculos', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('alias')->unique()->index();
+            $table->string('nombre')->unique()->index();
             $table->text('descripcion')->nullable();
             $table->unsignedSmallInteger('created_by');
             $table->unsignedSmallInteger('updated_by');

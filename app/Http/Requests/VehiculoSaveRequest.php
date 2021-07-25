@@ -11,12 +11,15 @@ class VehiculoSaveRequest extends FormRequest
         return true;
     }
 
+    public function prepareForValidation()
+    {
+        $this->route_vehiculo_id = $this->route('vehiculo')->id ?? 0;
+    }
+
     public function rules()
     {
-        $vehiculo_id = $this->route('vehiculo')->id ?? 0;
-
         return [
-            'alias' => ['required', 'unique:vehiculos,id,' . $vehiculo_id],
+            'nombre' => ['required', 'unique:vehiculos,id,' . $this->route_vehiculo_id],
             'descripcion' => 'nullable',
         ];
     }
@@ -24,8 +27,8 @@ class VehiculoSaveRequest extends FormRequest
     public function messages()
     {
         return [
-            'alias.required' => __('Escribe el alias del vehiculo'),
-            'alias.unique' => __('Escribe un alias diferente del vehiculo'),
+            'nombre.required' => __('Escribe el nombre del vehículo'),
+            'nombre.unique' => __('Escribe un nombre diferente del vehículo'),
         ];
     }
 }
