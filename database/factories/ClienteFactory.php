@@ -8,7 +8,7 @@ use Faker\Generator as Faker;
 $factory->define(Cliente::class, function (Faker $faker) {
     return [
         'nombre' => $faker->company,
-        'alias' => 'C' . substr($faker->company, 0, 2),
+        'alias' => 'C' . substr($faker->company, 0, 2) . rand(0,16),
         'contacto' => $faker->name(),
         'telefono' => $faker->phoneNumber,
         'correo_electronico' => $faker->safeEmail,
