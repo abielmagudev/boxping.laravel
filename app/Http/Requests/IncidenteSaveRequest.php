@@ -11,12 +11,15 @@ class IncidenteSaveRequest extends FormRequest
         return true;
     }
 
+    public function prepareForValidation()
+    {
+        $this->route_incidente_id = $this->route('incidente')->id ?? 0;
+    }
+
     public function rules()
     {
-        $incidente_id = $this->route('incidente')->id ?? 0;
-
         return [
-            'nombre' => ['required', 'unique:incidentes,nombre,' . $incidente_id],
+            'nombre' => ['required', 'unique:incidentes,nombre,' . $this->route_incidente_id],
             'descripcion' => 'nullable',
         ];
     }
