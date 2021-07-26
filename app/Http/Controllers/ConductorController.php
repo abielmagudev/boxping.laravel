@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Conductor;
 use App\Entrada;
 use App\Http\Requests\ConductorSaveRequest as SaveRequest;
+use App\Ahex\Entrada\Application\Counter as EntradaCounter;
 use Illuminate\Http\Request;
 
 class ConductorController extends Controller
@@ -31,17 +32,15 @@ class ConductorController extends Controller
 
     public function show(Request $request, Conductor $conductor)
     {
-        $ultimas_entradas = $request->input('ultimas', 5);
-        $limit = $ultimas_entradas <> 'todas' ? $ultimas_entradas : false;
-
-        $entradas = is_numeric($limit)
-                 ? Entrada::with(['destinatario'])->where('conductor_id', $conductor->id)->limit($limit)->get()
-                 : Entrada::with(['destinatario'])->where('conductor_id', $conductor->id)->get();
+        $entradas = Entrada::with(['vehiculo','consolidado','cliente','destinatario'])
+                            ->where('conductor_id', $conductor->id)
+                            ->orderBy('id', 'desc')
+                            ->get();
         
         return view('conductores.show', [
             'conductor' => $conductor,
             'entradas' => $entradas,
-            'ultimas_entradas' => $ultimas_entradas,
+            'vehiculos_counter' => EntradaCounter::byVehiculo($entradas),
         ]);
     }
 
