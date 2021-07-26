@@ -11,10 +11,12 @@ trait FiltersTrait
         return [
             'ambito' => 'filterAmbit',
             'cliente' => 'filterClient',
+            'codigor' => 'filterCodigor',
             'conductor' => 'filterConductor',
             'etapa' => 'filterStage',
             'fecha_hora' => 'filterDatetime',
             'orden' => 'filterOrder',
+            'reempacador' => 'filterReempacador',
             'vehiculo' => 'filterVehiculo',
         ];
     }
@@ -93,5 +95,21 @@ trait FiltersTrait
             return $query;
 
         return $query->where('conductor_id', $conductor);
+    }
+
+    public function scopeFilterReempacador($query, $reempacador)
+    {
+        if( ! ctype_digit($reempacador) )
+            return $query;
+
+        return $query->where('reempacador_id', $reempacador);
+    }
+
+    public function scopeFilterCodigor($query, $codigor)
+    {
+        if( ! ctype_digit($codigor) )
+            return $query;
+
+        return $query->where('codigor_id', $codigor);
     }
 }
