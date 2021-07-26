@@ -44,7 +44,7 @@ class DestinatarioController extends Controller
     {
         return view('destinatarios.show', [
             'destinatario' => $destinatario,
-            'entradas' => Entrada::with(['consolidado', 'cliente'])->where('destinatario_id', $destinatario->id)->get()
+            'entradas' => Entrada::with(['consolidado', 'cliente', 'destinatario'])->where('destinatario_id', $destinatario->id)->get()
         ]);
     }
 

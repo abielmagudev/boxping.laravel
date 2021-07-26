@@ -44,7 +44,7 @@ class RemitenteController extends Controller
     {
         return view('remitentes.show', [
             'remitente' => $remitente,
-            'entradas' => Entrada::with(['consolidado', 'cliente'])->where('remitente_id', $remitente->id)->get(),
+            'entradas' => Entrada::with(['consolidado','cliente','destinatario'])->where('remitente_id', $remitente->id)->get(),
         ]);
     }
 
