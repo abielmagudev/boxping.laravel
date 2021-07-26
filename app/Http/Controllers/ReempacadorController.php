@@ -5,13 +5,11 @@ namespace App\Http\Controllers;
 use App\Reempacador;
 use App\Entrada;
 use App\Http\Requests\ReempacadorSaveRequest as SaveRequest;
+use App\Ahex\Entrada\Application\Counter as EntradaCounter;
 use Illuminate\Http\Request;
-use App\Ahex\Reempacador\Application\CodigosrTrait as Codigosr;
 
 class ReempacadorController extends Controller
 {
-    use Codigosr;
-
     public function index()
     {
         return view('reempacadores.index')->with('reempacadores', Reempacador::all()->sortByDesc('id'));
@@ -34,12 +32,12 @@ class ReempacadorController extends Controller
 
     public function show(Reempacador $reempacador)
     {
-        $entradas = Entrada::with(['destinatario', 'codigor'])->where('reempacador_id', $reempacador->id)->get();
+        $entradas = Entrada::with(['codigor', 'destinatario', 'codigor'])->where('reempacador_id', $reempacador->id)->get();
         
         return view('reempacadores.show', [
             'reempacador' => $reempacador,
             'entradas' => $entradas,
-            'codigosr' => $this->codigosr($entradas),
+            'codigosr_counter' => EntradaCounter::byCodigor($entradas),
         ]);
     }
 

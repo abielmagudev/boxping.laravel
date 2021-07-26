@@ -19,9 +19,7 @@
                 @endslot
                 
                 @slot('right')
-                <a href="#!" class="">
-                    <span class="badge bg-primary text-white">{{ $entradas->count() }}</span>
-                </a>
+                <a href="{{ route('entradas.index', ['reempacador' => $reempacador->id, 'filter' => csrf_token()]) }}" class="btn btn-sm btn-primary py-0">{{ $entradas->count() }}</a>
                 @endslot
             @endcomponent
             @endslot
@@ -31,10 +29,13 @@
                 'thead' => ['Código', 'Entradas'],
             ])
                 @slot('tbody')
-                @foreach($codigosr as $codigor)
+                @foreach($codigosr_counter as $codigor)
+                <?php $params = ['reempacador' => $reempacador->id, 'codigor' => $codigor->id, 'filter' => csrf_token()] ?>
                 <tr>
                     <td>{{ $codigor->nombre }}</td>
-                    <td>{{ $codigor->counter }}</td>
+                    <td>
+                        <a href="{{ route('entradas.index', $params) }}">{{ $codigor->entradas->count() }}</a>
+                    </td>
                 </tr>
                 @endforeach
                 @endslot
