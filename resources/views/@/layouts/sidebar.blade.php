@@ -18,7 +18,7 @@ $menu = array(
     (object) [
         'title' => 'salidas',
         'route' => route('salidas.index'),
-        'active' => request()->is('salidas*') || request()->is('incidentes*'),
+        'active' => request()->is('salidas*'),
     ],
     (object) [
         'title' => 'clientes',
@@ -48,7 +48,7 @@ $menu = array(
     (object) [
         'title' => 'transportadoras',
         'route' => route('transportadoras.index'),
-        'active' => request()->is('transportadoras*'),
+        'active' => request()->is('transportadoras*') || request()->is('incidentes*'),
     ],
     (object) [
         'title' => 'Usuarios',
