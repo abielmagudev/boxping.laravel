@@ -9,7 +9,7 @@
         </tr>
         <tr>
             <td class="text-muted small">Vehículo</td>
-            <td>{{ is_object($entrada->vehiculo) ? $entrada->vehiculo->alias : 'Desconocido' }}</td>
+            <td>{{ is_object($entrada->vehiculo) ? $entrada->vehiculo->nombre : 'Desconocido' }}</td>
         </tr>
         <tr>
             <td class="text-muted small">No. de cruce</td>
