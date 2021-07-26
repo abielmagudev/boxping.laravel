@@ -20,12 +20,12 @@
 @component('@.bootstrap.card')
     @slot('body')
         @component('@.bootstrap.table', [
-            'thead' => ['Título','Descripción'],
+            'thead' => ['Nombre','Descripción'],
         ])
             @slot('tbody')
             @foreach($incidentes as $incidente)
             <tr>
-                <td class="text-nowrap">{{ $incidente->titulo }}</td>
+                <td class="text-nowrap">{{ $incidente->nombre }}</td>
                 <td class="text-nowrap">{{ $incidente->descripcion }}</td>
                 <td class="text-nowrap text-end">
                     <a href="{{ route('incidentes.edit', $incidente) }}" class="btn btn-sm btn-outline-warning">

@@ -1,7 +1,7 @@
 @csrf
 <div class="mb-3">
-    <label for="text-titulo" class="form-label small">Título</label>
-    <input id="text-titulo" name="titulo" value="{{ old('titulo', $incidente->titulo) }}" type="text" class="form-control" required>
+    <label for="text-nombre" class="form-label small">Nombre</label>
+    <input id="text-nombre" name="nombre" value="{{ old('nombre', $incidente->nombre) }}" type="text" class="form-control" required>
 </div>
 <div class="mb-3">
     <label for="textarea-descripcion" class="form-label small">Descripción</label>

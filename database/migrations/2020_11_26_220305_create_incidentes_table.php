@@ -15,7 +15,7 @@ class CreateIncidentesTable extends Migration
     {
         Schema::create('incidentes', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('titulo', 32)->unique()->index();
+            $table->string('nombre', 32)->unique()->index();
             $table->text('descripcion')->nullable();
             $table->unsignedSmallInteger('created_by');
             $table->unsignedSmallInteger('updated_by');

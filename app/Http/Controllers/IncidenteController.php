@@ -25,7 +25,7 @@ class IncidenteController extends Controller
         if( ! $incidente = Incidente::create($prepared) )
             return back()->with('failure', 'Error al guardar incidente');
 
-        return redirect()->route('incidentes.index')->with('success', 'Incidente guardado');
+        return redirect()->route('incidentes.index')->with('success', "Incidente {$incidente->nombre} guardado");
     }
 
     public function show(Incidente $incidente)
@@ -53,6 +53,6 @@ class IncidenteController extends Controller
         if( ! $incidente->delete() )
             return back()->with('failure', 'Error al eliminar incidente');
 
-        return redirect()->route('incidentes.index')->with('success', "{$incidente->titulo} eliminado");
+        return redirect()->route('incidentes.index')->with('success', "Incidente {$incidente->nombre} eliminado");
     }
 }

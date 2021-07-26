@@ -16,7 +16,7 @@ class IncidenteSaveRequest extends FormRequest
         $incidente_id = $this->route('incidente')->id ?? 0;
 
         return [
-            'titulo' => ['required', 'unique:incidentes,titulo,' . $incidente_id],
+            'nombre' => ['required', 'unique:incidentes,nombre,' . $incidente_id],
             'descripcion' => 'nullable',
         ];
     }
@@ -24,8 +24,8 @@ class IncidenteSaveRequest extends FormRequest
     public function messages()
     {
         return [
-            'titulo.required' => __('Escribe el titulo del incidente'),
-            'titulo.unique' => __('Escribe otro titulo al incidente'),
+            'nombre.required' => __('Escribe el nombre del incidente'),
+            'nombre.unique' => __('Escribe otro nombre al incidente'),
         ];
     }
 }

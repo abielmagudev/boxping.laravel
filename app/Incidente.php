@@ -11,7 +11,7 @@ class Incidente extends Model
     use Modifiers;
 
     protected $fillable = [
-        'titulo',
+        'nombre',
         'descripcion',
         'created_by',
         'updated_by',
@@ -20,7 +20,7 @@ class Incidente extends Model
     public static function prepare($validated)
     {
         $prepared = [
-            'titulo' => $validated['titulo'],
+            'nombre' => $validated['nombre'],
             'descripcion' => $validated['descripcion'] ?? null,
             'updated_by' => Fakeuser::live(),
         ];
