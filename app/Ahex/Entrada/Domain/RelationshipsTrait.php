@@ -25,7 +25,7 @@ Trait RelationshipsTrait
 
     public function comentarios()
     {
-        return $this->hasMany(Comentario::class)->with('updater')->orderBy('id', 'desc');
+        return $this->hasMany(Comentario::class)->with('creator')->orderBy('id', 'desc');
     }
     
     public function verificador()
