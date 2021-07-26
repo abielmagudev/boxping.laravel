@@ -3,11 +3,15 @@
 
 @component('@.bootstrap.page-header', [
     'pretitle' => 'Código de reempacado',
-    'subtitle' => $codigor->descripcion,
     'title' => $codigor->nombre,
     'goback' => route('codigosr.index'),
 ])
 @endcomponent
+
+@if( $codigor->haveDescription() )
+<p><em>{{ $codigor->descripcion }}</em></p>
+<br>
+@endif
 
 <div class="row">
 
@@ -21,27 +25,28 @@
                 @endslot
 
                 @slot('right')
-                <a href="#!" class="">
-                    <span class="badge bg-primary text-white">{{ $entradas->count() }}</span>
-                </a>
+                <a href="{{ route('entradas.index', ['codigor' => $codigor->id, 'filter' => csrf_token()]) }}" class="btn btn-sm btn-primary py-0">{{ $entradas->count() }}</a>
                 @endslot
             @endcomponent
             @endslot
 
             @slot('body')
-            @component('@.bootstrap.table', [
-                'thead' => ['Reempacador','Entradas'],
-                'borderless' => true,
-            ])
-                @slot('tbody')
-                @foreach($reempacadores as $id => $reempacador)
-                <tr>
-                    <td>{{ $reempacador->nombre }}</td>
-                    <td>{{ $reempacador->counter }}</td>
-                </tr>
-                @endforeach
-                @endslot
-            @endcomponent
+                @component('@.bootstrap.table', [
+                    'borderless' => true
+                ])
+                    @slot('thead', ['Reempacador', 'Entradas'])
+                    @slot('tbody')
+                    @foreach($reempacadores_counter as $reempacador_id => $reempacador)
+                    <?php $params = ['codigor' => $codigor->id, 'reempacador' => $reempacador_id, 'filter' => csrf_token()] ?>
+                    <tr>
+                        <td>{{ $reempacador->nombre }}</td>
+                        <td>
+                            <a href="{{ route('entradas.index', $params) }}">{{ $reempacador->entradas->count() }}</a>
+                        </td>
+                    </tr>
+                    @endforeach
+                    @endslot
+                @endcomponent
             @endslot
         @endcomponent
     </div>

@@ -4,14 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Codigor;
 use App\Entrada;
+use App\Ahex\Entrada\Application\Counter as EntradaCounter;
 use App\Http\Requests\CodigorSaveRequest as SaveRequest;
 use Illuminate\Http\Request;
-use App\Ahex\Codigor\Application\ReempacadoresTrait as Reempacadores;
 
 class CodigorController extends Controller
 {
-    use Reempacadores;
-
     public function index()
     {
         return view('codigosr.index')->with('codigosr', Codigor::all()->sortByDesc('id'));
@@ -42,7 +40,7 @@ class CodigorController extends Controller
         return view('codigosr.show', [
             'codigor' => $codigor,
             'entradas' => $entradas,
-            'reempacadores' => $this->reempacadores($entradas),
+            'reempacadores_counter' => EntradaCounter::byReempacador($entradas),
         ]);
     }
 
