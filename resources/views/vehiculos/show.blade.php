@@ -29,11 +29,10 @@
                 @component('@.bootstrap.table', [
                     'borderless' => true
                 ])
-                    @slot('thead', ['Conductores', 'Entradas'])
+                    @slot('thead', ['Conductor', 'Entradas'])
                     @slot('tbody')
                     @foreach($conductores_counter as $conductor_id => $conductor)
                     <?php $params = ['vehiculo' => $vehiculo->id, 'conductor' => $conductor_id, 'filter' => csrf_token()] ?>
-
                     <tr>
                         <td>{{ $conductor->nombre }}</td>
                         <td>
