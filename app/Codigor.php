@@ -20,6 +20,11 @@ class Codigor extends Model
         'updated_by',
     ];
 
+    public function haveDescription()
+    {
+        return blank($this->description);
+    }
+
     public static function prepare($validated)
     {
         $prepared = [
