@@ -24,6 +24,22 @@ abstract class Counter
         return self::$result;
     }
 
+    public static function byVehiculo(Collection $entradas)
+    {
+        foreach($entradas as $entrada)
+        {
+            if( ! array_key_exists($entrada->vehiculo_id, self::$result) )
+            {
+                self::$result[$entrada->vehiculo_id] = $entrada->vehiculo;
+                self::$result[$entrada->vehiculo_id]->entradas = collect();
+            }
+            
+            self::$result[$entrada->vehiculo_id]->entradas->push($entrada);
+        }
+
+        return self::$result;
+    }
+
     public static function byReempacador(Collection $entradas)
     {
         foreach($entradas as $entrada)
