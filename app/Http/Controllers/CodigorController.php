@@ -34,7 +34,10 @@ class CodigorController extends Controller
 
     public function show(Codigor $codigor)
     {
-        $entradas = Entrada::with(['destinatario','reempacador'])->where('codigor_id', $codigor->id)->get();
+        $entradas = Entrada::with(['reempacador','consolidado','cliente','destinatario'])
+                            ->where('codigor_id', $codigor->id)
+                            ->orderBy('id', 'desc')
+                            ->get();
 
         return view('codigosr.show', [
             'codigor' => $codigor,
