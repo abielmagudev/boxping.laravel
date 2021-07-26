@@ -20,10 +20,7 @@
                 @endslot
 
                 @slot('right')
-                <?php $params = ['vehiculo' => $vehiculo->id, 'filter' => csrf_token()] ?>
-                <a href="{{ route('entradas.index', $params) }}" class="badge bg-primary ">
-                    <span class="text-white">{{ $entradas->count() }}</span>
-                </a>
+                <a href="{{ route('entradas.index', ['vehiculo' => $vehiculo->id, 'filter' => csrf_token()]) }}" class="btn btn-sm btn-primary py-0">{{ $entradas->count() }}</a>
                 @endslot
             @endcomponent
             @endslot
