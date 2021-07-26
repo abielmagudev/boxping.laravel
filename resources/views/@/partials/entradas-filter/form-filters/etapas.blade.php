@@ -1,4 +1,3 @@
-<?php $etapas = \App\Etapa::all() ?>  
 <div class="mb-3">
     <label for="selectFilterEtapa" class="form-label small">Etapa</label>
     <select name="etapa" id="selectFilterEtapa" class="form-control">

@@ -1,4 +1,3 @@
-<?php $clientes = \App\Cliente::all() ?>
 <div class="mb-3">
     <label for="selectFilterCliente" class="form-label small">Cliente</label>
     <select name="cliente" id="selectFilterCliente" class="form-control">
