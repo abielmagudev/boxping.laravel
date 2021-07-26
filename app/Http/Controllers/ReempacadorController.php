@@ -32,12 +32,15 @@ class ReempacadorController extends Controller
 
     public function show(Reempacador $reempacador)
     {
-        $entradas = Entrada::with(['codigor', 'destinatario', 'codigor'])->where('reempacador_id', $reempacador->id)->get();
+        $entradas = Entrada::with(['codigor','consolidado','cliente','destinatario'])
+                            ->where('reempacador_id', $reempacador->id)
+                            ->orderBy('id', 'desc')
+                            ->get();
         
         return view('reempacadores.show', [
-            'reempacador' => $reempacador,
-            'entradas' => $entradas,
             'codigosr_counter' => EntradaCounter::byCodigor($entradas),
+            'entradas' => $entradas,
+            'reempacador' => $reempacador,
         ]);
     }
 
