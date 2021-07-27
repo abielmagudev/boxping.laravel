@@ -41,6 +41,11 @@ class Consolidado extends Model implements Search
         return $query->where('numero', 'like', "%{$value}%")->orderBy('id',$order);
     }
 
+    public function getStatusColorAttribute()
+    {
+        return config("system.consolidados.status.{$this->status}.color");
+    }
+
     /**
      * 
      * En caso de no encontrar un consolidado existente, 
