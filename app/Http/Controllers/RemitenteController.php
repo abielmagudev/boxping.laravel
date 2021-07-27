@@ -4,15 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Remitente;
 use App\Entrada;
-use App\Ahex\Remitente\Application\RoutingTrait as Routing;
-use App\Ahex\Remitente\Application\RelationsTrait as Relations;
 use App\Http\Requests\RemitenteSaveRequest as SaveRequest;
 use Illuminate\Http\Request;
 
 class RemitenteController extends Controller
 {
-    use Routing, Relations;
-
     public function index()
     {
         return view('remitentes.index')->with('remitentes', Remitente::orderBy('id', 'desc')->paginate(16));
@@ -20,13 +16,7 @@ class RemitenteController extends Controller
 
     public function create(Request $request)
     {
-        $entrada_id = $request->input('entrada', false);
-
-        return view('remitentes.create', [
-            'remitente' => new Remitente,
-            'entrada_id' => $entrada_id,
-            'goback' => $this->routeGoback($entrada_id),
-        ]);
+        return view('remitentes.create')->with('remitente', new Remitente);
     }
 
     public function store(SaveRequest $request)
@@ -36,8 +26,7 @@ class RemitenteController extends Controller
         if(! $remitente = Remitente::create($prepared) )
             return back()->with('failure', 'Error al guardar remitente');
 
-        $route = $this->routeAfterStore($request->input('entrada', false), $remitente->nombre);
-        return redirect($route)->with('success', 'Remitente guardardo');
+        return redirect()->route('remitentes.index')->with('success', 'Remitente guardardo');
     }
 
     public function show(Remitente $remitente)
@@ -48,15 +37,9 @@ class RemitenteController extends Controller
         ]);
     }
 
-    public function edit(Request $request, Remitente $remitente)
+    public function edit(Remitente $remitente)
     {
-        $entrada_id = $request->input('entrada', false);
-        $this->validateRelationshipEntrada($entrada_id, $remitente->id);
-
-        return view('remitentes.edit', [
-            'remitente' => $remitente,
-            'goback' => $this->routeGoback($entrada_id, $remitente->id),
-        ]);
+        return view('remitentes.edit')->with('remitente', $remitente);
     }
 
     public function update(SaveRequest $request, Remitente $remitente)
