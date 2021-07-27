@@ -6,14 +6,14 @@ use App\Consolidado;
 use App\Entrada;
 use App\Cliente;
 use App\Ahex\Consolidado\Domain\Decoupler;
-use App\Ahex\Consolidado\Application\RoutingTrait as Routing;
 use App\Ahex\Consolidado\Application\HandlerTrait as Handler;
+use App\Ahex\Consolidado\Application\StoreRouter;
 use App\Http\Requests\ConsolidadoSaveRequest as SaveRequest;
 use Illuminate\Http\Request;
 
 class ConsolidadoController extends Controller
 {
-    use Routing, Handler;
+    use Handler;
 
     public function index()
     {
@@ -41,7 +41,7 @@ class ConsolidadoController extends Controller
         if( ! $consolidado = Consolidado::create($prepared) )
             return back()->with('failure', 'Error al guardar consolidado');
         
-        $route = $this->routeAfterStore($request->input('guardar', 0), $consolidado->id);
+        $route = StoreRouter::get($request->guardar, $consolidado->id);
         return redirect($route)->with('success', "Consolidado {$consolidado->numero} guardado");
     }
 
