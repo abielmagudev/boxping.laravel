@@ -23,6 +23,11 @@ class Etapa extends Model
         'updated_by',
     ];
 
+    public function entradas()
+    {
+        return $this->belongsToMany(Entrada::class)->using(EntradaEtapa::class);
+    }
+
     public function zonas()
     {
         return $this->hasMany(Zona::class);

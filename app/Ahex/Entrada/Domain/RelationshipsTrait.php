@@ -75,11 +75,10 @@ Trait RelationshipsTrait
 
     public function etapas()
     {
-        return $this->belongsToMany(Etapa::class, 'entrada_etapa')
+        return $this->belongsToMany(Etapa::class)
                     ->using(EntradaEtapa::class)
                     ->as('entrada_etapa')
                     ->withPivot([
-                        'id',
                         'peso',
                         'medida_peso',
                         'ancho',
