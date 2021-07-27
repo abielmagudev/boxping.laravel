@@ -4,40 +4,29 @@ namespace App\Http\Controllers;
 
 use App\Destinatario;
 use App\Entrada;
-use App\Ahex\Destinatario\Application\RoutingTrait as Routing;
-use App\Ahex\Destinatario\Application\RelationsTrait as Relations;
 use App\Http\Requests\DestinatarioSaveRequest as SaveRequest;
 use Illuminate\Http\Request;
 
 class DestinatarioController extends Controller
 {
-    use Routing, Relations;
-
     public function index()
     {
         return view('destinatarios.index')->with('destinatarios', Destinatario::orderBy('id', 'desc')->paginate());
     }
 
-    public function create(Request $request)
+    public function create()
     {
-        $entrada_id = $request->input('entrada', false);
-
-        return view('destinatarios.create', [
-            'destinatario' => new Destinatario,
-            'entrada_id' => $entrada_id,
-            'goback' => $this->routeGoback($entrada_id),
-        ]);
+        return view('destinatarios.create')->with('destinatario', new Destinatario);
     }
 
     public function store(SaveRequest $request)
     {
-        $prepared = Destinatario::prepare($request->validated());
+        $prepared = Destinatario::prepare( $request->validated() );
 
         if(! $destinatario = Destinatario::create($prepared) )
             return back()->with('failure','Error al guardar destinatario');
         
-        $route = $this->routeAfterStore($request->input('entrada', false), $destinatario->nombre);
-        return redirect($route)->with('success', 'Destinatario guardado');
+        return redirect()->route('destinatarios.index')->with('success', 'Destinatario guardado');
     }
 
     public function show(Destinatario $destinatario)
@@ -48,22 +37,16 @@ class DestinatarioController extends Controller
         ]);
     }
 
-    public function edit(Request $request, Destinatario $destinatario)
+    public function edit(Destinatario $destinatario)
     {
-        $entrada_id = $request->input('entrada', false);
-        $this->validateRelationshipEntrada($entrada_id, $destinatario->id);
-
-        return view('destinatarios.edit', [
-            'destinatario' => $destinatario,
-            'goback' => $this->routeGoback($entrada_id, $destinatario->id),
-        ]);
+        return view('destinatarios.edit')->with('destinatario', $destinatario);
     }
 
     public function update(SaveRequest $request, Destinatario $destinatario)
     {
         $prepared = Destinatario::prepare( $request->validated() );
         
-        if(! $destinatario->fill( $prepared )->save() )
+        if(! $destinatario->fill($prepared)->save() )
             return back()->with('failure', 'Error al actualizar destinatario');
 
         return back()->with('success', 'Destinatario actualizado');
