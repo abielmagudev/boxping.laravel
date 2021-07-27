@@ -4,11 +4,12 @@
 
 use App\Etapa;
 use Faker\Generator as Faker;
+use Illuminate\Support\Str;
 
 $factory->define(Etapa::class, function (Faker $faker) {
 
     $nombre = 'Stage ' . $faker->unique(true)->randomNumber();
-    $slug = strtolower( str_replace(' ', '-', $nombre) );
+    $slug = Str::slug($nombre);
     $realiza_medicion = $faker->boolean;
     $medidas_peso = config('system.medidas.peso');
     $medidas_volumen = config('system.medidas.volumen');

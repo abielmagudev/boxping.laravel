@@ -5,8 +5,8 @@ namespace App;
 use App\Ahex\Fake\Domain\Fakeuser;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Str;
 use App\Ahex\Zkeleton\Domain\ModifiersTrait as Modifiers;
-use App\Ahex\Suppliers\Slugger\Slugger;
 
 class Etapa extends Model
 {
@@ -56,11 +56,9 @@ class Etapa extends Model
 
     public static function prepare($validated)
     {
-        $slugger = new Slugger;
-
         $prepared = [
             'nombre' => $validated['nombre'],
-            'slug' => $slugger->kebab($validated['nombre']),
+            'slug' => Str::slug($validated['nombre']),
             'orden' => $validated['orden'],
             'realiza_medicion' => $validated['realiza_medicion'] ? 1 : 0,
             'medida_peso' => isset($validated['unica_medida_peso']) ? $validated['unica_medida_peso'] : null,
