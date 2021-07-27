@@ -17,11 +17,12 @@ class ConsolidadoController extends Controller
 
     public function index()
     {
-        $consolidados = Consolidado::with(['cliente','entradas'])->orderBy('id', 'desc')->paginate();
-
         return view('consolidados/index', [
-            'consolidados' => $consolidados,
-            'config_consolidados' => (object) config('system.consolidados'),
+            'consolidados' => Consolidado::with(['cliente','entradas'])->orderBy('id', 'desc')->paginate(),
+            'consolidado_color' => (object) [
+                'abierto' => config('system.consolidados.status.abierto.color'),
+                'cerrado' => config('system.consolidados.status.cerrado.color'),
+            ],
         ]);
     }
 

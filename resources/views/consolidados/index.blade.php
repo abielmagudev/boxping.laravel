@@ -16,11 +16,11 @@
 @component('@.bootstrap.card')
     @slot('header')
     <div class="text-center small">
-        <span class="badge rounded-pill" style="background-color:{{ $config_consolidados->status['abierto']['color'] }}">
+        <span class="badge rounded-pill" style="background-color:{{ $consolidado_color->abierto }}">
             {{ $consolidados->where('status', 'abierto')->count() }}
         </span>
         <span class="me-3 align-middle">Abierto</span>
-        <span class="badge rounded-pill" style="background-color:{{ $config_consolidados->status['cerrado']['color'] }}">
+        <span class="badge rounded-pill" style="background-color:{{ $consolidado_color->cerrado }}">
             {{ $consolidados->where('status', 'cerrado')->count() }}
         </span>
         <span class="align-middle">Cerrado</span>   
@@ -34,8 +34,7 @@
         @foreach($consolidados as $consolidado)
         <tr>
             <td class="text-center" style="width:1%">
-                <?php $color = $config_consolidados->status[$consolidado->status]['color'] ?>
-                <span data-bs-title="{{ ucfirst($consolidado->status) }}" data-bs-toggle="tooltip" data-bs-placement="top" style="color:{{ $color }}">
+                <span data-bs-title="{{ ucfirst($consolidado->status) }}" data-bs-toggle="tooltip" data-bs-placement="top" style="color:{{ $consolidado->status_color }}">
                     {!! $symbols->circle !!}
                 </span>
             </td>
