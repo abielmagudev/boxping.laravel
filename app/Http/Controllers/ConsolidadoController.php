@@ -45,15 +45,17 @@ class ConsolidadoController extends Controller
         return redirect($route)->with('success', "Consolidado {$consolidado->numero} guardado");
     }
 
-    public function show($id, Request $request)
+    public function show(Consolidado $consolidado, Request $request)
     {
-        $consolidado = Consolidado::with(['entradas.destinatario'])->findOrFail($id);
-        $entradas = Entrada::where('consolidado_id', $id)->filterByRequest($request->all())->orderByDesc('id')->get();
+        $entradas = Entrada::with(['cliente','destinatario'])
+                            ->where('consolidado_id', $consolidado->id)
+                            ->filterByRequest($request->all())
+                            ->orderByDesc('id')
+                            ->get();
 
         return view('consolidados.show', [
             'consolidado' => $consolidado,
-            'entradas' => $entradas->load('cliente'),
-            'config_consolidados' => (object) config('system.consolidados'),
+            'entradas' => $entradas,
         ]);
     }
 

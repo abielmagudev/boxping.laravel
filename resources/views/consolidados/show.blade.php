@@ -9,17 +9,15 @@ $checker_id = 'checker-entradas';
 @extends('app')
 @section('content')
 
-@component('@.bootstrap.page-header')
-    @slot('title', $consolidado->numero)
-    @slot('pretitle', 'Consolidado')
+@component('@.bootstrap.page-header', [
+    'title' => $consolidado->numero,
+    'pretitle' => 'Consolidado',
+    'goback' => route('consolidados.index'),
+])
     @slot('options')
     <a href="{{ route('consolidados.edit', $consolidado) }}" class="btn btn-sm btn-warning">
         <span class="d-inline-block d-md-none">{!! $icons->pencil !!}</span>
         <span class="d-none d-md-inline-block">Editar</span>
-    </a>
-    <a href="{{ route('consolidados.printing', $consolidado) }}" class="btn btn-sm btn-primary">
-        <span class="d-block d-md-none">{!! $svg->printer !!}</span>
-        <span class="d-none d-md-block">Imprimir</span>
     </a>
     @endslot
 @endcomponent
@@ -28,13 +26,24 @@ $checker_id = 'checker-entradas';
     <!-- Column informacion -->
     <div class="col-sm">
         @component('@.bootstrap.card')
-            @slot('header', 'Información')
+            @slot('header')
+                @component('@.bootstrap.grid-left-right')
+                    @slot('left', 'Información')
+                    @slot('right')
+                    <a href="{{ route('consolidados.printing', $consolidado) }}" class="btn btn-sm btn-primary">
+                        <span class="d-block d-md-none">{!! $svg->printer !!}</span>
+                        <span class="d-none d-md-block">Imprimir</span>
+                    </a>
+                    @endslot
+                @endcomponent
+            @endslot
+
             @slot('body')
                 @component('@.bootstrap.table')
                     @slot('tbody')
                     <tr class="text-capitalize">
                         <td class="text-muted small" style="width:1%">Status</td>
-                        <td class="fw-bold" style="color:{{ $config_consolidados->status[$consolidado->status]['color'] }}">{{ ucfirst($consolidado->status) }}</td>
+                        <td class="fw-bold" style="color:{{ $consolidado->status_color }}">{{ ucfirst($consolidado->status) }}</td>
                     </tr>
                     <tr>
                         <td class="text-muted small">Cliente</td>
