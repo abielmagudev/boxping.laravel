@@ -32,7 +32,7 @@ class AppServiceProvider extends ServiceProvider
         \App\SalidaIncidente::observe(\App\Observers\SalidaIncidenteObserver::class);
 
         // Composers
-        View::composer('entradas.index', function ($view) {
+        View::composer(['entradas.index','consolidados.show'], function ($view) {
             View::share('clientes', \App\Cliente::all());
             View::share('etapas', \App\Etapa::all());
         });
