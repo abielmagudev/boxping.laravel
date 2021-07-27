@@ -4,6 +4,7 @@
 @component('@.bootstrap.page-header', [
     'pretitle' => 'Remitente',
     'title' => $remitente->nombre,
+    'goback' => route('remitentes.index'),
 ])
     @slot('options')
     <a href="{{ route('remitentes.edit', $remitente) }}" class="btn btn-sm btn-warning">
@@ -30,7 +31,7 @@
             </p>
             <p>
                 <small class="d-block text-muted">Código postal</small>
-                <span>{{ $remitente->codigo_postal }}</span>
+                <span>{{ $remitente->postal }}</span>
             </p>
             <p>
                 <small class="d-block text-muted">Localidad</small>

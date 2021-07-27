@@ -15,7 +15,7 @@ Class Remitente extends Model implements Search
     protected $fillable = array(
         'nombre',
         'direccion',
-        'codigo_postal',
+        'postal',
         'ciudad',
         'estado',
         'pais',
@@ -58,7 +58,7 @@ Class Remitente extends Model implements Search
         $prepared = [
             'nombre' => capitalize($validated['nombre']),
             'direccion' => capitalize($validated['direccion']),
-            'codigo_postal' => $validated['codigo_postal'],
+            'postal' => $validated['postal'],
             'ciudad' => capitalize($validated['ciudad']),
             'estado' => capitalize($validated['estado']),
             'pais' => capitalize($validated['pais']),

@@ -28,7 +28,7 @@
         <tr>
             <td class="text-nowrap">{{ $remitente->nombre }}</td>
             <td class="text-nowrap">{{ $remitente->direccion }}</td>
-            <td class="text-nowrap">{{ $remitente->codigo_postal }}</td>
+            <td class="text-nowrap">{{ $remitente->postal }}</td>
             <td class="text-nowrap">{{ $remitente->localidad }}</td>
             <td class="text-nowrap text-end">
                 <a href="{{ route('remitentes.show', $remitente) }}" class="btn btn-sm btn-outline-primary">{!! $svg->eye !!}</a>

@@ -26,7 +26,7 @@ class RemitenteSaveRequest extends FormRequest
         return [
             'nombre' => 'required',
             'direccion' => 'required',
-            'codigo_postal' => 'nullable',
+            'postal' => 'nullable',
             'ciudad' => 'nullable',
             'estado' => 'nullable',
             'pais' => 'required',

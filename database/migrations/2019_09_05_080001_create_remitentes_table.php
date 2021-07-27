@@ -17,7 +17,7 @@ class CreateRemitentesTable extends Migration
             $table->bigIncrements('id');
             $table->string('nombre')->index();
             $table->string('direccion')->index();
-            $table->string('codigo_postal')->nullable()->index();
+            $table->string('postal')->nullable()->index();
             $table->string('ciudad')->nullable()->index();
             $table->string('estado')->nullable();
             $table->string('pais');
