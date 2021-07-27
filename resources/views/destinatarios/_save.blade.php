@@ -13,8 +13,8 @@
         <input type="text" class="form-control" id="input-direccion" name="direccion" value="{{ old('direccion', $destinatario->direccion) }}" required>
     </div>
     <div class="col-sm mb-3">
-        <label for="input-codigo-postal" class="form-label small">Código postal</label>
-        <input type="text" class="form-control" id="input-codigo-postal" name="codigo_postal" value="{{ old('codigo_postal', $destinatario->codigo_postal) }}" required>
+        <label for="input-postal" class="form-label small">Postal</label>
+        <input type="text" class="form-control" id="input-postal" name="postal" value="{{ old('postal', $destinatario->postal) }}" required>
     </div>
 </div>
 <div class="row">

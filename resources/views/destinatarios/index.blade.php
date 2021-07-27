@@ -26,7 +26,7 @@
         <tr>
             <td class="text-nowrap">{{ $destinatario->nombre }}</td>
             <td class="text-nowrap">{{ $destinatario->direccion }}</td>
-            <td class="text-nowrap">{{ $destinatario->codigo_postal }}</td>
+            <td class="text-nowrap">{{ $destinatario->postal }}</td>
             <td class="text-nowrap">{{ $destinatario->localidad }}</td>
             <td class="text-nowrap text-end">
                 <a href="{{ route('destinatarios.show', $destinatario) }}" class="btn btn-sm btn-outline-primary">

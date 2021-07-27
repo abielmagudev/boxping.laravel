@@ -15,7 +15,7 @@ class Destinatario extends Model implements Search
     protected $fillable = array(
         'nombre',
         'direccion',
-        'codigo_postal',
+        'postal',
         'ciudad',
         'estado',
         'pais',
@@ -54,12 +54,19 @@ class Destinatario extends Model implements Search
                     ->get();
     }
 
+    public function haveRelationEntrada($entrada_id)
+    {
+        return Entrada::where('destinatario_id', $this->id)
+                      ->where('id', $entrada_id)
+                      ->exists();
+    }
+
     public static function prepare($validated)
     {
         $prepared = [
             'nombre' => capitalize($validated['nombre']),
             'direccion' => capitalize($validated['direccion']),
-            'codigo_postal' => $validated['codigo_postal'],
+            'postal' => $validated['postal'],
             'ciudad' => capitalize($validated['ciudad']),
             'estado' => capitalize($validated['estado']),
             'pais' => capitalize($validated['pais']),

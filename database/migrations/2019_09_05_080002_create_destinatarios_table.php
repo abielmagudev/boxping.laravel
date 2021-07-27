@@ -17,9 +17,9 @@ class CreateDestinatariosTable extends Migration
             $table->bigIncrements('id');
             $table->string('nombre')->index();
             $table->string('direccion')->index();
-            $table->string('codigo_postal')->index();
+            $table->string('postal')->index();
             $table->string('ciudad')->index();
-            $table->string('estado');
+            $table->string('estado')->index();
             $table->string('pais');
             $table->text('referencias')->nullable();
             $table->string('telefono')->index();

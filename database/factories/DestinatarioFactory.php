@@ -9,7 +9,7 @@ $factory->define(Destinatario::class, function (Faker $faker) {
     return [
         'nombre' => $faker->name(),
         'direccion' => $faker->streetAddress,
-        'codigo_postal' => $faker->postcode,
+        'postal' => $faker->postcode,
         'ciudad' => $faker->city,
         'estado' => $faker->state,
         'pais' => $faker->country,

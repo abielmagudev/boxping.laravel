@@ -4,6 +4,7 @@
 @component('@.bootstrap.page-header', [
     'pretitle' => 'Destinatario',
     'title' => $destinatario->nombre,
+    'goback' => route('destinatarios.index'),
 ])
     @slot('options')
     <a href="{{ route('destinatarios.edit', $destinatario) }}" class="btn btn-sm btn-warning">
@@ -28,8 +29,8 @@
             <span>{{ $destinatario->direccion }}</span>
         </p>
         <p>
-            <small class="d-block text-muted">Código postal</small>
-            <span>{{ $destinatario->codigo_postal }}</span>
+            <small class="d-block text-muted">Postal</small>
+            <span>{{ $destinatario->postal }}</span>
         </p>
         <p>
             <small class="d-block text-muted">Localidad</small>

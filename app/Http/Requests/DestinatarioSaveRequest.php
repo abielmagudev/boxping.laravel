@@ -26,7 +26,7 @@ class DestinatarioSaveRequest extends FormRequest
         return [
             'nombre' => 'required',
             'direccion' => 'required',
-            'codigo_postal' => 'required',
+            'postal' => 'required',
             'ciudad' => 'required',
             'estado' => 'required',
             'pais' => 'required',
@@ -40,7 +40,7 @@ class DestinatarioSaveRequest extends FormRequest
         return [
             'nombre.required' => __('Escribe el nombre'),
             'direccion.required' => __('Escribe la direccion'),
-            'codigo_postal.required' => __('Escribe el código postal'),
+            'postal.required' => __('Escribe el código postal'),
             'ciudad.required' => __('Escribe la ciudad'),
             'estado.required' => __('Escribe el estado'),
             'pais.required' => __('Escribe el pais'),

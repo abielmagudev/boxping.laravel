@@ -7,8 +7,7 @@
 
 @component('@.bootstrap.card')
     @slot('body')
-    <?php $route = $entrada_id ? route('destinatarios.store', ['entrada' => $entrada_id]) : route('destinatarios.store') ?>
-    <form action="{{ $route }}" method="post" autocomplete="off">
+    <form action="{{ route('destinatarios.store')  }}" method="post" autocomplete="off">
         @include('destinatarios._save')
         <button type="submit" class="btn btn-success">Guardar destinatario</button>
         <a href="{{ route('destinatarios.index') }}" class="btn btn-secondary">Cancelar</a>
