@@ -32,7 +32,7 @@
                     
                     if( $salida->cobertura == 'domicilio' && is_object($salida->entrada->destinatario) )
                     {
-                        $cobertura_content = "{$salida->entrada->destinatario->direccion}<br>C.P. {$salida->entrada->destinatario->codigo_postal}<br>{$salida->entrada->destinatario->ciudad}, {$salida->entrada->destinatario->estado}, {$salida->entrada->destinatario->pais}";
+                        $cobertura_content = "{$salida->entrada->destinatario->direccion}<br>C.P. {$salida->entrada->destinatario->postal}<br>{$salida->entrada->destinatario->ciudad}, {$salida->entrada->destinatario->estado}, {$salida->entrada->destinatario->pais}";
                     }
                     elseif( $salida->cobertura == 'ocurre' )
                     {
