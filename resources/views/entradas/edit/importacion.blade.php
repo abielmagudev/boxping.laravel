@@ -25,7 +25,7 @@
             <select name="vehiculo" id="select-vehiculo" class="form-select" required>
                 <option disabled selected></option>
                 @foreach($vehiculos as $vehiculo)
-                <option value="{{ $vehiculo->id }}" {{ toggleSelected($vehiculo->id, old('vehiculo', $entrada->vehiculo_id)) }}>{{ $vehiculo->alias }}</option>
+                <option value="{{ $vehiculo->id }}" {{ toggleSelected($vehiculo->id, old('vehiculo', $entrada->vehiculo_id)) }}>{{ $vehiculo->nombre }}</option>
                 @endforeach
             </select>
         </div>
