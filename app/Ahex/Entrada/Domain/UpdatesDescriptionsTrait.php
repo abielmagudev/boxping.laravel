@@ -43,6 +43,9 @@ trait UpdatesDescriptionsTrait
 
     private function clienteUpdateDescription()
     {
+        if( is_null($this->getOriginal('cliente_id')) )
+            return "actualizó cliente {$this->cliente->nombre}";
+
         $cliente_previous = \App\Cliente::find( $this->getOriginal('cliente_id') );
         return "actualizó cliente {$cliente_previous->nombre} a {$this->cliente->nombre}";
     }
