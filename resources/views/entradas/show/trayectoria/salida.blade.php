@@ -1,7 +1,36 @@
 <div class="tab-pane fade show active" id="salida" role="tabpanel" aria-labelledby="salida-tab">
     
-    <?php // Si la entrada tiene salida ?>
-    @if( isset($entrada->salida) )
+<?php // Si la Entrada no tiene destinatario ?>
+@if( ! $entrada->haveDestinatario() )
+    <p class="text-center lead mt-5">
+        <span>Se requiere agregar un destinatario para <br> habilitar la opción de crear salida.</span>
+    </p>
+    
+
+<?php // Si la Entrada no tiene confirmacion del destinatario ?>
+@elseif( ! $entrada->haveConfirmacion() )
+    <p class="text-center">
+        <span class="lead">Para habilitar la opción de crear ó mostrar la salida, <br> es necesario <b>confirmar el destinatario</b>.</span>
+    </p>
+    <div class="text-center">
+        @include('@.bootstrap.modal-trigger', [
+            'classes' => 'btn btn-primary',
+            'modal_id' => 'modalConfirmacion',
+            'text' => 'Confirmar destinatario',
+        ])
+        @include('entradas.edit.confirmacion-modal')
+    </div>
+
+
+<?php // Si la Entrada no tiene Salida ?>
+@elseif( ! $entrada->haveSalida() )
+    <div class="text-center mt-5">
+        <a href="{{ route('salidas.create', ['entrada' => $entrada->id]) }}" class="btn btn-primary">Crear salida</a>
+    </div>
+
+
+<?php // Muestra la Salida de la Entrada ?>
+@else
     @component('@.bootstrap.table')
         @slot('tbody')
         <tr>
@@ -54,7 +83,6 @@
         @endslot
     @endcomponent
     <br>
-
     <div class="text-end">
         <a href="{{ route('salidas.create', ['entrada' => $entrada->id]) }}" class="d-none btn btn-sm btn-outline-primary">
             <span>Nueva salida</span>
@@ -64,37 +92,6 @@
         </a>
     </div>
 
-    <?php // Si no tiene salida, pero tiene destinatario  ?>
-    @elseif( is_object($entrada->destinatario) )
 
-        <?php // Si tiene confirmacion del destinatario ?>
-        @if( $entrada->confirmado )
-        <div class="text-center mt-5">
-            <a href="{{ route('salidas.create', ['entrada' => $entrada->id]) }}" class="btn btn-primary">Crear salida</a>
-        </div>
-
-        <?php // Si no tiene confirmacion del destinatario, actualizar confirmacion ?>
-        @else
-        <p class="text-center">
-            <span class="lead">Para habilitar la opción de crear salida, <br> es necesario <b>confirmar el destinatario</b>.</span>
-        </p>
-        <div class="text-center">
-            @include('@.bootstrap.modal-trigger', [
-                'classes' => 'btn btn-primary',
-                'modal_id' => 'modalConfirmacion',
-                'text' => 'Confirmar destinatario',
-            ])
-        </div>
-
-        @include('entradas.edit.confirmacion-modal')
-
-        @endif
-
-    <?php // Si la entrada no tiene destinatario ?>
-    @else
-    <p class="text-center lead mt-5">
-        <span>Se requiere agregar un destinatario para <br> habilitar la opción de crear salida.</span>
-    </p>
-
-    @endif
+@endif
 </div>
