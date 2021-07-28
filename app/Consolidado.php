@@ -6,10 +6,11 @@ use App\Ahex\Fake\Domain\Fakeuser;
 use Illuminate\Database\Eloquent\Model;
 use App\Ahex\Zkeleton\Domain\SearchInterface as Search;
 use App\Ahex\Zkeleton\Domain\ModifiersTrait as Modifiers;
+use App\Ahex\Consolidado\Domain\EntradasHandler;
 
 class Consolidado extends Model implements Search
 {
-    use Modifiers;
+    use EntradasHandler, Modifiers;
 
     protected $fillable = array(
         'numero',

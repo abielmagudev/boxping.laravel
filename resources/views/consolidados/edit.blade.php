@@ -30,7 +30,12 @@
     ])
         @slot('content')
         <p class="lead">¿Deseas eliminar consolidado <b>{{ $consolidado->numero }}</b>?</p>
-        <p class="text-muted small">Contiene {{ $consolidado->entradas->count() }} entradas</p>
+        <div class="d-flex justify-content-center">
+            <div class="form-check form-switch">
+                <input class="form-check-input border-danger" type="checkbox" name="eliminar_entradas" value="si" id="checkbox-eliminar-entradas">
+            </div>
+            <label class="form-check-label" for="checkbox-eliminar-entradas-disabled">Eliminar <b>{{ $consolidado->entradas->count() }} entradas</b> que contiene este consolidado.</label>
+        </div>
         @endslot
     @endcomponent
 </div>

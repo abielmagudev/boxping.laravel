@@ -5,16 +5,12 @@ namespace App\Http\Controllers;
 use App\Consolidado;
 use App\Entrada;
 use App\Cliente;
-use App\Ahex\Consolidado\Domain\Decoupler;
-use App\Ahex\Consolidado\Application\HandlerTrait as Handler;
 use App\Ahex\Consolidado\Application\StoreRouter;
 use App\Http\Requests\ConsolidadoSaveRequest as SaveRequest;
 use Illuminate\Http\Request;
 
 class ConsolidadoController extends Controller
 {
-    use Handler;
-
     public function index()
     {
         return view('consolidados/index', [
@@ -75,20 +71,19 @@ class ConsolidadoController extends Controller
         if( ! $consolidado->fill($prepared)->save() )
             return back()->with('failure', 'Error al actualizar consolidado');
 
-        $this->updateEntradas($consolidado);
+        $consolidado->updateEntradas();
 
         return back()->with('success', 'Consolidado actualizado');
     }
 
-    public function destroy(Consolidado $consolidado)
+    public function destroy(Consolidado $consolidado, Request $request)
     {   
         if(! $consolidado->delete() )
             return back()->with('failure', 'Error al eliminar consolidado');
         
-        if( $consolidado->entradas->count() )
-            $this->uncoupleEntradas($consolidado->id);
+        $consolidado->uncoupleEntradas( $request->has('eliminar_entradas') );
 
-        return redirect()->route('consolidados.index')->with('success', "{$consolidado->numero} eliminado");
+        return redirect()->route('consolidados.index')->with('success', "Consolidado {$consolidado->numero} eliminado");
     }
 
     public function printing(Consolidado $consolidado)
