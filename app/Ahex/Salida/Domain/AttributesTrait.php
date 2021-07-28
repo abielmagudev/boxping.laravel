@@ -5,7 +5,7 @@ namespace App\Ahex\Salida\Domain;
 trait AttributesTrait{
     public function getIncidentesHtmlAttribute()
     {
-        return $this->incidentes->implode('titulo', '<br>');
+        return $this->incidentes->implode('nombre', '<br>');
     }
 
     public function getMostrarStatusAttribute()
