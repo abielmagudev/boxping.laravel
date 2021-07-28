@@ -73,21 +73,27 @@
 </div>
 @if( $incidentes->count() )
 <div class="mb-3">
-    <label class="form-label small">Incidentes</label>
-    <div class="border rounded py-2 px-3 overflow-auto" style="height:20vh">
-        @foreach($incidentes as $incidente)
-        <?php $element_id = "checkbox-incidente-{$incidente->id}" ?>
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" id="{{ $element_id }}" name="incidentes[]" value="{{ $incidente->id }}" {{ $salida->incidentes->firstWhere('id', $incidente->id) ? 'checked' : '' }}>
-            <label class="form-check-label" for="{{ $element_id }}">
-                <span>{{ $incidente->titulo }}</span>
-                @if( false )
-                <span class="badge badge-primary" data-container="body" data-toggle="popover" data-placement="top" data-content="{{ $incidente->descripcion }}">i</span>
-                @endif
-            </label>
-        </div>
-        @endforeach
+    <label class="form-label small">
+        <span>Incidentes</span>
+        <span class="badge bg-dark d-none">{{ $incidentes->count() }}</span>
+        <span class="badge bg-primary">{{ $salida->incidentes->count() }}</span>
+    </label>
+    <div class="border rounded overflow-auto" style="height:33vh">
+        <ul class="list-group list-group-flush">
+            @foreach($incidentes as $incidente)
+            <?php $incidente_checkbox_id = "checkbox-incidente-{$incidente->id}" ?>
+            <li class="list-group-item list-group-item-action d-flex">
+                <div class="me-3">
+                    <input class="form-check-input" type="checkbox" id="{{ $incidente_checkbox_id }}" name="incidentes[]" value="{{ $incidente->id }}" {{ $salida->incidentes->firstWhere('id', $incidente->id) ? 'checked' : '' }}>
+                </div>
+                <div class="">
+                    <label for="{{ $incidente_checkbox_id }}"> {{ $incidente->nombre }}</label>
+                </div>
+            </li>
+            @endforeach
+        </ul>
     </div>
+
 </div>
 @endif
 
