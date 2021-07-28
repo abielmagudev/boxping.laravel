@@ -43,7 +43,7 @@
             <td class="small text-muted">{{ $loop->iteration }}</td>
             <td class="{{ notHasSearchText($searched, $destinatario->nombre) ?: 'table-warning' }}">{{ $destinatario->nombre }}</td>
             <td class="{{ notHasSearchText($searched, $destinatario->direccion) ?: 'table-warning' }}">{{ $destinatario->direccion }}</td>
-            <td class="{{ notHasSearchText($searched, $destinatario->postal) ?: 'table-warning' }}">{{ $destinatario->codigo_postal }}</td>
+            <td class="{{ notHasSearchText($searched, $destinatario->postal) ?: 'table-warning' }}">{{ $destinatario->postal }}</td>
             <td class="{{ notHasSearchText($searched, $destinatario->localidad) ?: 'table-warning' }}">{{ $destinatario->localidad }}</td>
             <td class="{{ notHasSearchText($searched, $destinatario->telefono) ?: 'table-warning' }}">{{ $destinatario->telefono }}</td>
             <td class="text-end">
