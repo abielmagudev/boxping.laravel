@@ -46,6 +46,11 @@ class Consolidado extends Model implements Search
         return config("system.consolidados.status.{$this->status}.color");
     }
 
+    public function isReal()
+    {
+        return ! is_null($this->id);
+    }
+
     /**
      * 
      * En caso de no encontrar un consolidado existente, 
