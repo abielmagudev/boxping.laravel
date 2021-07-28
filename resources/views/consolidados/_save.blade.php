@@ -34,12 +34,12 @@
     <textarea name="notas" id="notas" cols="30" rows="5" class="form-control">{{ old('notas', $consolidado->notas) }}</textarea>
 </div>
 
-@if( ! is_null($consolidado->status) )
+@if( $consolidado->isReal() )
 <div class="mb-3">
     <label for="select-status" class="form-label small">Status</label>
     <select name="status" id="select-status" class="form-select">
         @foreach( $config_consolidados->status as $status => $props )
-        <option value="{{ $status }}" {{ $consolidado->status <> $status ?: 'selected' }}>{{ ucfirst($status) }} - {{ $config_consolidados->status[$status]['descripcion'] }}</option>
+        <option value="{{ $status }}" {{ $status <> $consolidado->status ?: 'selected' }}>{{ ucfirst($status) }} - {{ $props['descripcion'] }}</option>
         @endforeach
     </select>
 </div>
