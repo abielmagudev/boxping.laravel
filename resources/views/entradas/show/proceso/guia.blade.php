@@ -19,7 +19,7 @@
             <td>{{ $entrada->cliente->nombre }} ({{ $entrada->cliente->alias }})</td>
         </tr>
         <tr>
-            <td class="text-muted small">Contenido</td>
+            <td class="text-muted small align-top">Contenido</td>
             <td>{{ $entrada->contenido ?? 'Desconocido' }}</td>
         </tr>
         <tr>
