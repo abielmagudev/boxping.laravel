@@ -8,10 +8,10 @@
     @slot('body')
     <p class="h4 text-center">¿Se han realizado los siguientes pasos de confirmación?</p>
     <br>
-    <ol class="lead">
-        <li>Contactar al destinatario.</li>
-        <li>Verificar la información de destino.</li>
-        <li>Confirmar el envio del paquete.</li>
+    <ol class="lead text-start ms-5">
+        <li class="">Contactar al destinatario.</li>
+        <li class="">Verificar la información de destino.</li>
+        <li class="">Confirmar el envio del paquete.</li>
     </ol>
     <br>
     <form action="{{ route('entradas.update', $entrada) }}" method="post" autocomplete="off">
