@@ -26,7 +26,7 @@ class CreateSalidasTable extends Migration
             $table->string('postal', 10)->index()->nullable();
             $table->string('ciudad', 48)->index()->nullable();
             $table->string('estado', 48)->index()->nullable();
-            $table->string('pais', 48)->nullable();
+            $table->string('pais', 64)->nullable();
             $table->text('notas')->nullable();
             $table->enum('status', $status_values)->index()->default($status_default);
             $table->unsignedTinyInteger('transportadora_id');
