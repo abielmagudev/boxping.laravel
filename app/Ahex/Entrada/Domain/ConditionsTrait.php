@@ -2,13 +2,19 @@
 
 namespace App\Ahex\Entrada\Domain;
 
+use App\Consolidado;
 use App\Destinatario;
 
 Trait ConditionsTrait
 {
-    public function hasConsolidado()
+    public function issetConsolidado()
     {
-        return (bool) ! is_null($this->consolidado_id);
+        return (bool) is_int($this->consolidado_id);
+    }
+
+    public function haveConsolidado()
+    {
+        return (bool) Consolidado::where('id', $this->consolidado_id)->exists();
     }
 
     public function haveDestinatario()
@@ -18,7 +24,7 @@ Trait ConditionsTrait
 
     public function haveConfirmacion()
     {
-        return (bool) is_string($this->confirmado_at);
+        return (bool) is_integer($this->confirmado_by) && is_string($this->confirmado_at);
     }
 
     public function haveSalida()

@@ -50,7 +50,7 @@ $theads = array_diff_key($settings->all_theads, $except_keys);
                 @if( $settings->has_numero_consolidado )
                 <p class="text-muted small m-0">{{ $settings->numero_consolidado }}</p>
                     
-                @elseif( $entrada->hasConsolidado() )
+                @elseif( $entrada->issetConsolidado() )
                 <p class="small m-0">
                     <a href="#">{{ $entrada->consolidado->numero }}</a>
                 </p>
