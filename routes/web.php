@@ -75,3 +75,10 @@ Route::resource('reempacadores', ReempacadorController::class, [
         'reempacadores' => 'reempacador',
     ],
 ]);
+
+// Configuracion
+Route::resource('configuraciones', ConfiguracionController::class, [
+    'parameters' => [
+        'configuraciones' => 'configuracion',
+    ],
+])->except(['create','store','destroy']);

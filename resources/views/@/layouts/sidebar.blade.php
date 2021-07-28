@@ -55,6 +55,11 @@ $menu = array(
         'route' => route('usuarios.index'),
         'active' => request()->is('usuarios*'),
     ],
+    (object) [
+        'title' => 'Configuración',
+        'route' => route('configuraciones.index'),
+        'active' => request()->is('configuraciones*'),
+    ],
 );
 ?>
 
