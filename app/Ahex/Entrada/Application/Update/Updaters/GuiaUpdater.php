@@ -12,7 +12,8 @@ class GuiaUpdater extends Updater
         return [
             'consolidado_numero' => [
                 'nullable',
-                Rule::unique('consolidados', 'numero')->where('status','abierto')->ignore($this->entrada->consolidado_id),
+                'exists:consolidados,numero,status,abierto',
+                // Rule::unique('consolidados', 'numero')->where('status','abierto')->ignore($this->entrada->consolidado_id),
             ],
             'cliente' => ['required_if:consolidado_numero,null','exists:clientes,id'],
             'numero' => ['required','unique:entradas,numero,' . $this->entrada->id],
