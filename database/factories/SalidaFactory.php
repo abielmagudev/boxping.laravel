@@ -33,7 +33,7 @@ $factory->define(Salida::class, function (Faker $faker) use ($config_coberturas,
         'notas' => $faker->boolean ? $faker->sentence : null,
         'status' => $faker->randomElement($config_status),
         'transportadora_id' => $faker->numberBetween(1,10),
-        'entrada_id' => $faker->numberBetween(1,75),
+        'entrada_id' => $faker->numberBetween(1,50),
         'created_by' => $faker->numberBetween(1,10),
         'updated_by' => $faker->numberBetween(1,10),
     ];
