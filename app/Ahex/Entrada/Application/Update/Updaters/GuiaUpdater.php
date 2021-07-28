@@ -25,7 +25,8 @@ class GuiaUpdater extends Updater
     public function messages()
     {
         return [
-            'consolidado_numero.unique' => __('Escribe un número de consolidado válido y abierto'),
+            'consolidado_numero.exists' => __('Escribe un número de consolidado válido y abierto'),
+            // 'consolidado_numero.unique' => __('Escribe un número de consolidado válido y abierto'),
             'cliente.required_without' => __('Selecciona un cliente'),
             'cliente.exists' => __('Selecciona un cliente válido.'),
             'numero.required' => __('Escribe el número de entrada'),
