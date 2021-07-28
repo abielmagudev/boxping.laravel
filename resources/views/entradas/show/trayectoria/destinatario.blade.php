@@ -17,7 +17,7 @@
         </tr>
         <tr>
             <td class="text-muted small">Postal</td>
-            <td>{{ $entrada->destinatario->codigo_postal }}</td>
+            <td>{{ $entrada->destinatario->postal }}</td>
         </tr>
         <tr>
             <td class="text-muted small">Localidad</td>

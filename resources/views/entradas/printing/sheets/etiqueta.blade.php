@@ -51,7 +51,7 @@
             </tr>
             <tr>
                 <td class="text-muted small px-2" style="width:1%">Postal</td>
-                <td class="px-2">{{ $destinatario->codigo_postal ?? '?' }}</td>
+                <td class="px-2">{{ $destinatario->postal ?? '?' }}</td>
             </tr>
             <tr>
                 <td class="text-muted small px-2" style="width:1%">Localidad</td>

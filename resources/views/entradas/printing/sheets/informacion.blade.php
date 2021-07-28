@@ -70,10 +70,10 @@
             <tr>
                 <td class="text-muted small px-2 text-nowrap" style="width:15%">Postal</td>
                 <td class="px-2" style="width:35%">
-                    <span>{{ $remitente->codigo_postal }}</span>
+                    <span>{{ $remitente->postal }}</span>
                 <td class="text-muted small px-2" style="width:15%">Postal</td>
                 <td class="px-2">
-                    <span>{{ $destinatario->codigo_postal }}</span>
+                    <span>{{ $destinatario->postal }}</span>
                 </td>
             </tr>
             <tr>
