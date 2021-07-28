@@ -66,7 +66,7 @@
                 @if( $entrada->salida->incidentes->count() )
                 <div class="">
                     @foreach($entrada->salida->incidentes as $incidente)
-                    <span class="badge text-dark small" style="background-color:#ddd">{{ $incidente->titulo }}</span>
+                    <span class="badge text-dark small" style="background-color:#ddd">{{ $incidente->nombre }}</span>
                     @endforeach
                 </div>
                 @endif
