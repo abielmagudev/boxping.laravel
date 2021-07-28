@@ -47,7 +47,7 @@ class Destinatario extends Model implements Search
     {
         return $query->where('nombre', 'like', "%{$value}%")
                     ->orWhere('direccion', 'like', "%{$value}%")
-                    ->orWhere('codigo_postal', 'like', "%{$value}%")
+                    ->orWhere('postal', 'like', "%{$value}%")
                     ->orWhere('ciudad', 'like', "%{$value}%")
                     ->orWhere('telefono', 'like', "%{$value}%")
                     ->orderBy('id', 'desc')
