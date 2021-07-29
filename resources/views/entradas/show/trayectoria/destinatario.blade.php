@@ -24,8 +24,12 @@
             <td>{{ $entrada->destinatario->localidad }}</td>
         </tr>
         <tr>
-            <td class="text-muted small align-top border-0">Referencias</td>
-            <td class="border-0">{{ $entrada->destinatario->referencias }}</td>
+            <td class="text-muted small align-top">Referencias</td>
+            <td>{{ $entrada->destinatario->referencias }}</td>
+        </tr>
+        <tr>
+            <td class="text-muted small align-top border-0">Notas</td>
+            <td class="border-0">{{ $entrada->destinatario->notas }}</td>
         </tr>
         @endslot
     @endcomponent

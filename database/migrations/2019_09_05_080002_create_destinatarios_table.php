@@ -23,6 +23,7 @@ class CreateDestinatariosTable extends Migration
             $table->string('pais');
             $table->text('referencias')->nullable();
             $table->string('telefono')->index();
+            $table->text('notas')->nullable();
             $table->unsignedSmallInteger('created_by');
             $table->unsignedSmallInteger('updated_by');
             $table->timestamps();

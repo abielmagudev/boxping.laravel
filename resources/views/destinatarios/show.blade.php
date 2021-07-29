@@ -40,6 +40,10 @@
             <small class="d-block text-muted">Referencias</small>
             <span>{{ $destinatario->referencias }}</span>
         </p>
+        <p>
+            <small class="d-block text-muted">Notas</small>
+            <span>{{ $destinatario->notas }}</span>
+        </p>
         @endslot
     @endcomponent
     </div>

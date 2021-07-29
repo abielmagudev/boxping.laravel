@@ -31,4 +31,8 @@
         <input type="text" class="form-control" id="input-pais" name="pais" value="{{ old('pais', $remitente->pais) }}" required>
     </div>
 </div>
+<div class="mb-3">
+    <label for="input-notas" class="form-label small">Notas</label>
+    <textarea name="notas" id="input-notas" class="form-control" cols="30" rows="5">{{ old('notas', $remitente->notas) }}</textarea>
+</div>
 <br>

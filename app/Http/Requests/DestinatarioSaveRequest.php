@@ -32,6 +32,7 @@ class DestinatarioSaveRequest extends FormRequest
             'pais' => 'required',
             'referencias' => 'nullable',
             'telefono' => 'required',
+            'notas' => 'nullable',
         ];
     }
 

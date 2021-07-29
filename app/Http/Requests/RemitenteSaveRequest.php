@@ -31,6 +31,7 @@ class RemitenteSaveRequest extends FormRequest
             'estado' => 'nullable',
             'pais' => 'required',
             'telefono' => 'nullable',
+            'notas' => 'nullable',
         ];
     }
 

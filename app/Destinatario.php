@@ -21,6 +21,7 @@ class Destinatario extends Model implements Search
         'pais',
         'referencias',
         'telefono',
+        'notas',
         'created_by',
         'updated_by',
     );
@@ -72,6 +73,7 @@ class Destinatario extends Model implements Search
             'pais' => capitalize($validated['pais']),
             'referencias' => $validated['referencias'] ?? null,
             'telefono' => $validated['telefono'],
+            'notas' => $validated['notas'] ?? null,
             'updated_by' => Fakeuser::live(),
         ];
 

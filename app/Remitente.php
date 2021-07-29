@@ -20,6 +20,7 @@ Class Remitente extends Model implements Search
         'estado',
         'pais',
         'telefono',
+        'notas',
         'created_by',
         'updated_by',
     );
@@ -63,6 +64,7 @@ Class Remitente extends Model implements Search
             'estado' => capitalize($validated['estado']),
             'pais' => capitalize($validated['pais']),
             'telefono' => $validated['telefono'],
+            'notas' => $validated['notas'] ?? null,
             'updated_by' => Fakeuser::live(),
         ];
 

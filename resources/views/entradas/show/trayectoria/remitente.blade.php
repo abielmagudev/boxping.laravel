@@ -20,8 +20,12 @@
             <td>{{ $entrada->remitente->postal }}</td>
         </tr>
         <tr>
-            <td class="text-muted small border-0">Localidad</td>
-            <td class="border-0">{{ $entrada->remitente->localidad }}</td>
+            <td class="text-muted small">Localidad</td>
+            <td>{{ $entrada->remitente->localidad }}</td>
+        </tr>
+        <tr>
+            <td class="text-muted small border-0">Notas</td>
+            <td class="border-0">{{ $entrada->remitente->notas }}</td>
         </tr>
         @endslot
     @endcomponent

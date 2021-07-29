@@ -22,6 +22,7 @@ class CreateRemitentesTable extends Migration
             $table->string('estado')->nullable();
             $table->string('pais');
             $table->string('telefono')->nullable()->index();
+            $table->text('notas')->nullable();
             $table->unsignedSmallInteger('created_by');
             $table->unsignedSmallInteger('updated_by');
             $table->timestamps();

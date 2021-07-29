@@ -9,7 +9,7 @@
                 <a href="{{ route('consolidados.show', $entrada->consolidado) }}" class="link-primary">{{ $entrada->consolidado->numero }}</a>
                 
                 @else
-                <span>Sin consolidar</span>
+                <span class="d-none">Sin consolidar</span>
                 
                 @endif
             </td>

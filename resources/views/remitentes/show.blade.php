@@ -37,6 +37,10 @@
                 <small class="d-block text-muted">Localidad</small>
                 <span>{{ $remitente->localidad }}</span>
             </p>
+            <p>
+                <small class="d-block text-muted">Notas</small>
+                <span>{{ $remitente->notas }}</span>
+            </p>
             @endslot
         @endcomponent
     </div>
