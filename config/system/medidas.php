@@ -8,9 +8,15 @@ return array(
         'oz' => 'onzas',
     ],
     'volumen' => [
+        'mm' => 'milimetros',
         'cm' => 'centimetros',
-        'ft' => 'pies',
         'in' => 'pulgadas',
+        'ft' => 'pies',
         'm'  => 'metros',
-    ]
+    ],
+    'area' => [
+        'mm' => 'milimetros',
+        'cm' => 'centimetros',
+        'in' => 'pulgadas',
+    ],
 );
