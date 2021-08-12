@@ -3,9 +3,9 @@
     'style' => 'tabs',
     'is_card' => true,
     'is_toggle' => true,
-    'active' => 'Guía',
+    'active' => 'Información',
     'items' =>  [
-        'Guía' => '#guia',
+        'Información' => '#informacion',
         'Reempaque' => '#reempaque',
         'Importación' => '#importacion',
         'Actualizaciones' => '#actualizaciones',

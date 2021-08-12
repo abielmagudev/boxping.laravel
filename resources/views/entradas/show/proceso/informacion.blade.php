@@ -1,4 +1,4 @@
-<div class="tab-pane fade show active" id="guia" role="tabpanel" aria-labelledby="guia-tab">
+<div class="tab-pane fade show active" id="informacion" role="tabpanel" aria-labelledby="informacion-tab">
     <!-- Informacion -->
     @component('@.bootstrap.table')
         @slot('tbody')
@@ -31,8 +31,8 @@
     <br>
     
     <div class="text-end">
-        <a href="{{ route('entradas.edit', [$entrada, 'editor' => 'guia']) }}" class="btn btn-warning btn-sm">
-            <span>Editar guía</span>
+        <a href="{{ route('entradas.edit', [$entrada, 'editor' => 'informacion']) }}" class="btn btn-warning btn-sm">
+            <span>Editar información</span>
         </a>
     </div>
 </div>

@@ -5,7 +5,7 @@ namespace App\Ahex\Entrada\Application\Update\Updaters;
 use Illuminate\Validation\Rule;
 use App\Entrada;
 
-class GuiaUpdater extends Updater
+class InformacionUpdater extends Updater
 {
     public function rules()
     {

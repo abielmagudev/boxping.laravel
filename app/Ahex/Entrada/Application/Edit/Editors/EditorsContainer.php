@@ -8,8 +8,8 @@ class EditorsContainer
 {
     private static $editors = [
         'destinatario' => DestinatarioEditor::class,
-        'guia' => GuiaEditor::class,
         'importacion' => ImportacionEditor::class,
+        'informacion' => InformacionEditor::class,
         'reempaque' => ReempaqueEditor::class,
         'remitente' => RemitenteEditor::class,
     ];
@@ -17,7 +17,7 @@ class EditorsContainer
     public static function get(string $name, Entrada $entrada)
     {
         if( ! self::exists($name) )
-            return back()->with('failure', 'Selecciona un editor válido.');
+            return back()->with('failure', 'Editor para la entrada no existe.');
 
         return self::editor($name, $entrada);
     }

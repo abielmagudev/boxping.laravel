@@ -5,11 +5,11 @@ namespace App\Ahex\Entrada\Application\Edit\Editors;
 use App\Cliente;
 use App\Consolidado;
 
-class GuiaEditor extends Editor
+class InformacionEditor extends Editor
 {
     public function template(): string
     {
-        return 'entradas.edit.guia';
+        return 'entradas.edit.informacion';
     }
 
     public function data(): array

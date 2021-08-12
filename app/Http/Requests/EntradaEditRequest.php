@@ -11,7 +11,8 @@ class EntradaEditRequest extends FormRequest
 
     public function prepareForValidation()
     {
-        $this->editors = EditorsContainer::names();
+        $this->editors = implode(',', EditorsContainer::names());
+        // dd($this->editors);
     }
 
     public function authorize()
@@ -22,7 +23,7 @@ class EntradaEditRequest extends FormRequest
     public function rules()
     {
         return [
-            'editor' => ['required','in:' . implode(',', $this->editors)]
+            'editor' => ['required','in:' . $this->editors]
         ];
     }
 

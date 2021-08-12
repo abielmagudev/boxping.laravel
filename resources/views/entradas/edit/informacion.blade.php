@@ -3,7 +3,7 @@
 
 @include('@.bootstrap.page-header', [
     'pretitle' => "Entrada {$entrada->numero}",
-    'title' => 'Editar guía',
+    'title' => 'Editar información',
 ])
 
 @component('@.bootstrap.card')
@@ -42,7 +42,7 @@
         </div>
         <br>
 
-        <button class="btn btn-warning" type="submit" name="actualizar" value="guia">Actualizar guía</button>
+        <button class="btn btn-warning" type="submit" name="actualizar" value="informacion">Actualizar información</button>
         <a href="{{ route('entradas.show', $entrada) }}" class="btn btn-secondary">Regresar</a>
     </form>
     @endslot

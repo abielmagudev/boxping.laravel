@@ -38,7 +38,7 @@
             @slot('body_classes', 'overflow-scroll')
             @slot('body')
             <div class="tab-content mt-3" id="procesamientoContentTabs">
-                @include('entradas.show.proceso.guia')
+                @include('entradas.show.proceso.informacion')
                 @include('entradas.show.proceso.reempaque')
                 @include('entradas.show.proceso.importacion')
                 @include('entradas.show.proceso.actualizaciones')
