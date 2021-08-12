@@ -9,16 +9,16 @@ class EntradaEditRequest extends FormRequest
 {
     private $editors_names;
 
-    public function prepareForValidation()
-    {
-        $this->editors_names = implode(',', EditorsContainer::names());
-    }
-
     public function authorize()
     {
         return true;
     }
 
+    public function prepareForValidation()
+    {
+        $this->editors_names = implode(',', EditorsContainer::names());
+    }
+    
     public function rules()
     {
         return [

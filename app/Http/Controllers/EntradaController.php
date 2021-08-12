@@ -70,20 +70,21 @@ class EntradaController extends Controller
         ]);
     }
 
-    public function edit(EditRequest $request, Entrada $entrada)
+    public function edit(Entrada $entrada, EditRequest $request)
     {
         $editor = EditorsContainer::get($request->editor, $entrada);
         return view($editor->template, $editor->data);
     }
 
-    public function update(UpdateRequest $request, Entrada $entrada)
+    public function update(Entrada $entrada, UpdateRequest $request)
     {
-        $updater = UpdatersContainer::get($request, $entrada);
+        $updater = UpdatersContainer::find($request->actualizar, $request->validated());
         
-        if( ! $updater->save() )
-            return $updater->redirect()->failure();
+        if( ! $entrada->fill( $updater->prepared() )->save() )
+            return back()->with('failure', $updater->message('failure'));
 
-        return $updater->redirect()->success();
+        $route = $updater->route($entrada);
+        return redirect($route)->with('success', $updater->message('success'));
     }
 
     public function destroy(Entrada $entrada)

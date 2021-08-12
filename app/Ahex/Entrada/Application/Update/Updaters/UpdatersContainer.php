@@ -2,24 +2,27 @@
 
 namespace App\Ahex\Entrada\Application\Update\Updaters;
 
-use App\Http\Requests\EntradaUpdateRequest as UpdateRequest;
 use App\Entrada;
+use App\Http\Requests\EntradaUpdateRequest as UpdateRequest;
 
 abstract class UpdatersContainer
 {
-    public static function get(UpdateRequest $request, Entrada $entrada)
+    public static $updaters = [
+        'confirmacion' => ConfirmacionUpdater::class,
+        'destinatario' => DestinatarioUpdater::class,
+        'importacion' => ImportacionUpdater::class,
+        'informacion' => InformacionUpdater::class,
+        'reempaque' => ReempaqueUpdater::class,
+        'remitente' => RemitenteUpdater::class,
+    ];
+
+    public static function names()
     {
-        $classname = self::classname($request->actualizar);
-        return new $classname($request, $entrada);
+        return array_keys(self::$updaters);
     }
 
-    public static function classname($name)
+    public static function find($name, $validated)
     {
-        return __NAMESPACE__ . '\\' . ucfirst($name) . 'Updater';
-    }
-
-    public static function exists($name)
-    {
-        return class_exists( self::classname($name) );
+        return new self::$updaters[$name] ($validated);
     }
 }

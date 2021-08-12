@@ -4,22 +4,12 @@ namespace App\Ahex\Entrada\Application\Update\Updaters;
 
 class ConfirmacionUpdater extends Updater
 {
-    public function rules()
-    {
-        return [
-            'confirmado' => ['required','accepted'],
-        ];
-    }
+    protected $messages = [
+        'failure' => 'Error al actualizar la confirmación',
+        'success' => 'Confirmación actualizada',
+    ];
 
-    public function messages()
-    {
-        return [
-            'confirmado.required' => __('Activa la opción de verificación'),
-            'confirmado.accepted' => __('Activa la opción válida de verificación'),
-        ];
-    }
-
-    public function prepare()
+    public function prepared(): array
     {
         return [
             'confirmado_by' => rand(1,5),
@@ -28,19 +18,8 @@ class ConfirmacionUpdater extends Updater
         ];
     }
 
-    public function redirect()
+    public function route(\App\Entrada $entrada): string
     {
-        $this->redirect = redirect()->route('entradas.show', $this->entrada);
-        return $this;
-    }
-
-    public function failure()
-    {
-        return $this->redirect->with('failure', 'Error al actualizar la confirmación');
-    }
-
-    public function success()
-    {
-        return $this->redirect->with('success', 'Confirmación actualizada');
+        return route('entradas.show', $entrada);
     }
 }

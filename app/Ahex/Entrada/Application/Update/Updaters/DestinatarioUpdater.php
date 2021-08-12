@@ -4,22 +4,12 @@ namespace App\Ahex\Entrada\Application\Update\Updaters;
 
 class DestinatarioUpdater extends Updater
 {
-    public function rules()
-    {
-        return [
-            'destinatario' => ['required', 'exists:destinatarios,id']
-        ];
-    }
+    protected $messages = [
+        'failure' => 'Error al actualizar el destinatario',
+        'success' => 'Destinatario actualizada',
+    ];
 
-    public function messages()
-    {
-        return [
-            'destinatario.required' => 'Selecciona un destinatario válido.',
-            'destinatario.exists'   => 'Selecciona un destinatario existente.',
-        ];
-    }
-
-    public function prepare()
+    public function prepared(): array
     {
         return [
             'destinatario_id' => $this->validated['destinatario'],
@@ -29,19 +19,8 @@ class DestinatarioUpdater extends Updater
         ];
     }
 
-    public function redirect()
+    public function route(\App\Entrada $entrada): string
     {
-        $this->redirect = redirect()->route('entradas.show', $this->entrada);
-        return $this;
-    }
-
-    public function failure()
-    {
-        return $this->redirect->with('failure', 'Error al actualizar el destinatario');
-    }
-
-    public function success()
-    {
-        return $this->redirect->with('success', 'Destinatario actualizado');
+        return route('entradas.show', $entrada);
     }
 }
