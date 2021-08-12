@@ -42,17 +42,17 @@ class InformacionUpdater extends Updater
 
     public function redirect()
     {
-        $this->redirect = redirect()->route('entradas.edit', [$this->entrada, 'editor' => 'guia']);
+        $this->redirect = redirect()->route('entradas.edit', [$this->entrada, 'editor' => 'informacion']);
         return $this;
     }
 
     public function failure()
     {
-        return $this->redirect->with('failure', 'Error al actualizar la guía');
+        return $this->redirect->with('failure', 'Error al actualizar la información');
     }
 
     public function success()
     {
-        return $this->redirect->with('success', 'Guía actualizada');
+        return $this->redirect->with('success', 'Información actualizada');
     }
 }
