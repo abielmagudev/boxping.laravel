@@ -6,10 +6,7 @@ use App\Remitente;
 
 class RemitenteEditor extends Editor
 {
-    public function template(): string
-    {
-        return 'entradas.edit.remitente';
-    }
+    public $template = 'entradas.edit.remitente';
 
     public function data(): array
     {

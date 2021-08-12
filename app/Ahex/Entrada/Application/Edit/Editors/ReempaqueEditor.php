@@ -7,11 +7,8 @@ use App\Reempacador;
 
 class ReempaqueEditor extends Editor
 {
-    public function template(): string
-    {
-        return 'entradas.edit.reempaque';
-    }
-
+    public $template = 'entradas.edit.reempaque';
+    
     public function data(): array
     {
         return [

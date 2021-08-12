@@ -7,10 +7,7 @@ use App\Vehiculo;
 
 class ImportacionEditor extends Editor
 {
-    public function template(): string
-    {
-        return 'entradas.edit.importacion';
-    }
+    public $template = 'entradas.edit.importacion';
 
     public function data(): array
     {

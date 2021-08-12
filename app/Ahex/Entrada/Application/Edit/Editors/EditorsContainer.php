@@ -4,7 +4,7 @@ namespace App\Ahex\Entrada\Application\Edit\Editors;
 
 use App\Entrada;
 
-class EditorsContainer
+abstract class EditorsContainer
 {
     private static $editors = [
         'destinatario' => DestinatarioEditor::class,
@@ -16,16 +16,7 @@ class EditorsContainer
 
     public static function get(string $name, Entrada $entrada)
     {
-        if( ! self::exists($name) )
-            return back()->with('failure', 'Editor para la entrada no existe.');
-
-        return self::editor($name, $entrada);
-    }
-
-    public static function editor($name, $entrada)
-    {
-        $editor = self::$editors[$name];
-        return new $editor($entrada);
+        return new self::$editors[$name] ($entrada);
     }
 
     public static function exists($name)
@@ -35,11 +26,11 @@ class EditorsContainer
     
     public static function classes()
     {
-        return array_values(self::$editors);
+        return array_values( self::$editors );
     }
 
     public static function names()
     {
-        return array_keys(self::$editors);
+        return array_keys( self::$editors );
     }
 }

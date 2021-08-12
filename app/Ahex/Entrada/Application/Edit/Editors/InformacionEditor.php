@@ -7,10 +7,7 @@ use App\Consolidado;
 
 class InformacionEditor extends Editor
 {
-    public function template(): string
-    {
-        return 'entradas.edit.informacion';
-    }
+    public $template = 'entradas.edit.informacion';
 
     public function data(): array
     {

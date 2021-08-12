@@ -6,10 +6,7 @@ use App\Destinatario;
 
 class DestinatarioEditor extends Editor
 {
-    public function template(): string
-    {
-        return 'entradas.edit.destinatario';
-    }
+    public $template = 'entradas.edit.destinatario';
 
     public function data(): array
     {

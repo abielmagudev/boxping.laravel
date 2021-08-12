@@ -7,12 +7,11 @@ use App\Ahex\Entrada\Application\Edit\Editors\EditorsContainer;
 
 class EntradaEditRequest extends FormRequest
 {
-    private $editors;
+    private $editors_names;
 
     public function prepareForValidation()
     {
-        $this->editors = implode(',', EditorsContainer::names());
-        // dd($this->editors);
+        $this->editors_names = implode(',', EditorsContainer::names());
     }
 
     public function authorize()
@@ -23,7 +22,7 @@ class EntradaEditRequest extends FormRequest
     public function rules()
     {
         return [
-            'editor' => ['required','in:' . $this->editors]
+            'editor' => ['required','in:' . $this->editors_names]
         ];
     }
 
