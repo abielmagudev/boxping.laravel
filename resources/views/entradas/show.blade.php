@@ -32,16 +32,15 @@
         @component('@.bootstrap.card')
             @slot('classes', 'h-100')
             @slot('header')
-                @include('entradas.show.proceso.tabs')
+                @include('entradas.show.paquete.tabs')
             @endslot
 
             @slot('body_classes', 'overflow-scroll')
             @slot('body')
-            <div class="tab-content mt-3" id="procesamientoContentTabs">
-                @include('entradas.show.proceso.informacion')
-                @include('entradas.show.proceso.reempaque')
-                @include('entradas.show.proceso.importacion')
-                @include('entradas.show.proceso.actualizaciones')
+            <div class="tab-content mt-3" id="paqueteContentTabs">
+                @include('entradas.show.paquete.informacion')
+                @include('entradas.show.paquete.reempaque')
+                @include('entradas.show.paquete.importacion')
             </div>
 
             @endslot
@@ -98,6 +97,9 @@
     @endslot
 @endcomponent
 <br>
+
+@include('entradas.show.actualizaciones')
+
 
 @include('entradas.show.modal-comentarios')
 

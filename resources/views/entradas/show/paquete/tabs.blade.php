@@ -1,4 +1,4 @@
-<p>Proceso</p>
+<p>Paquete</p>
 @include('@.bootstrap.nav', [
     'style' => 'tabs',
     'is_card' => true,
@@ -8,6 +8,5 @@
         'Información' => '#informacion',
         'Reempaque' => '#reempaque',
         'Importación' => '#importacion',
-        'Actualizaciones' => '#actualizaciones',
     ],
 ])
