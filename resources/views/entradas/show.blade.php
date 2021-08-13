@@ -100,7 +100,6 @@
 
 @include('entradas.show.actualizaciones')
 
-
-@include('entradas.show.modal-comentarios')
+@include('comentarios.modal-create')
 
 @endsection
