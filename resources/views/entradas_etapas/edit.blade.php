@@ -17,9 +17,9 @@
     <form action="{{ route('entradas.etapas.update', [$entrada, $etapa]) }}" method="post" autocomplete="off">
         @method('patch')
         @csrf
-        @include('entradas.etapas._medidas')
-        @include('entradas.etapas._zonas')
-        @include('entradas.etapas._alertas')
+        @include('entradas_etapas._medidas')
+        @include('entradas_etapas._zonas')
+        @include('entradas_etapas._alertas')
         <br>
         <button class="btn btn-warning" type="submit" name="etapa" value="{{ $etapa->id }}">Actualizar etapa</button>
         <a href="{{ route('entradas.show', $entrada) }}" class="btn btn-secondary">Regresar</a>

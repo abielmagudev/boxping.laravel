@@ -68,35 +68,7 @@
 </div>
 <br>
 
-<!-- Etapas de la entrada -->
-@component('@.bootstrap.card')
-    @slot('header')
-    @component('@.bootstrap.grid-left-right')
-        @slot('left')
-        <span>Etapas</span> 
-        <span class="badge bg-secondary text-white">{{ $entrada->etapas->count() }}</span>
-        @endslot
-
-        @slot('right')
-        <a href="{{ route('entradas.etapas.add', $entrada) }}" class="btn btn-sm btn-primary">
-            <span class="d-block d-md-none fw-bold">+</span>
-            <span class="d-none d-md-block">Agregar etapa</span>
-        </a>
-        @endslot
-    @endcomponent
-    @endslot
-    
-    @slot('body')
-    @if( $entrada->etapas->count() )
-    @include('entradas.show.etapas.table')
-
-    @else
-    <p class="text-center text-muted m-0">Sin etapas</p>
-
-    @endif
-    @endslot
-@endcomponent
-<br>
+@include('entradas.show.etapas')
 
 @include('entradas.show.actualizaciones')
 

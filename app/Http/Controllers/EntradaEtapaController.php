@@ -15,7 +15,7 @@ class EntradaEtapaController extends Controller
     {
         $attached_etapas = $entrada->etapas->pluck('id');
 
-        return view('entradas.etapas.add', [
+        return view('entradas_etapas.add', [
             'alertas' => Alerta::orderBy('nombre', 'asc')->get(),
             'attached_alertas' => [],
             'entrada' => $entrada,
@@ -39,7 +39,7 @@ class EntradaEtapaController extends Controller
     {
         $attached_etapa = $entrada->etapas()->findOrFail($etapa);
 
-        return view('entradas.etapas.edit', [
+        return view('entradas_etapas.edit', [
             'attached_alertas' => json_decode($attached_etapa->entrada_etapa->alertas_id) ?? [],
             'alertas' => Alerta::orderBy('nombre','asc')->get(),
             'entrada' => $entrada,
