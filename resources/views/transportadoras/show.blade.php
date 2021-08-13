@@ -40,65 +40,35 @@
                 <span>{{ $transportadora->notas }}</span>
             </p>
             @endslot 
-        @endcomponent
-    
+        @endcomponent   
     </div>
 
     <!-- Salidas -->
     <div class="col-sm col-sm-8">
         @component('@.bootstrap.card')
-            @slot('header')
-                @component('@.bootstrap.grid-left-right')
-                    @slot('left', 'Guias de impresión')
-                    @slot('right')
-                    <a href="{{ route('guias.create', $transportadora) }}" class="btn btn-sm btn-primary">Nueva guía</a>
+            @slot('header', 'Salidas recientes')
+
+            @if( $salidas->count() > 0 )    
+            @slot('body')
+
+                @component('@.bootstrap.table')
+                    @slot('thead', ['Entrada'])
+                    @slot('tbody')
+                        @foreach($salidas as $salida)
+                        <tr>
+                            <td>{{ $salida->entrada->numero }}</td>
+                        </tr>
+                        @endforeach
                     @endslot
                 @endcomponent
-            @endslot
 
-            @slot('body')
-            @component('@.bootstrap.table')
-                @slot('thead', ['Nombre', 'Impresiónes (Intentos)'])
-                @slot('tbody')
-                @foreach($transportadora->guias->sortByDesc('id') as $guia)
-                <tr>
-                    <td>{{ $guia->nombre }}</td>
-                    <td>{{ $guia->impresiones }}</td>
-                    <td class="text-nowrap text-end">
-                        <a href="{{ route('guias.edit', [$transportadora, $guia]) }}" class="btn btn-sm btn-outline-warning">e</a>
-                    </td>
-                </tr>
-                @endforeach
-                @endslot
-            @endcomponent
             @endslot
+            @endif
             
         @endcomponent
     </div>
 
 </div>
 <br>
-
-@component('@.bootstrap.card')
-    @slot('header', 'Salidas recientes')
-
-    @if( $salidas->count() > 0 )    
-    @slot('body')
-
-        @component('@.bootstrap.table')
-            @slot('thead', ['Entrada'])
-            @slot('tbody')
-                @foreach($salidas as $salida)
-                <tr>
-                    <td>{{ $salida->entrada->numero }}</td>
-                </tr>
-                @endforeach
-            @endslot
-        @endcomponent
-
-    @endslot
-    @endif
-    
-@endcomponent
 
 @endsection

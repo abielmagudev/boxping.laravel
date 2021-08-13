@@ -25,11 +25,6 @@ class Transportadora extends Model
         return $this->hasMany(Salida::class);
     }
 
-    public function guias()
-    {
-        return $this->hasMany(GuiaImpresion::class);
-    }
-
     public static function prepare($validated)
     {
         $prepared = [
