@@ -2,47 +2,54 @@
 
 namespace App\Http\Controllers;
 
-use App\Transportadora;
 use App\GuiaImpresion;
-use App\Ahex\GuiaImpresion\Application\Contenido\ContentContainer;
-use App\Http\Requests\GuiaImpresionSaveRequest as SaveRequest;
 use Illuminate\Http\Request;
+use App\Http\Requests\GuiaImpresionSaveRequest as SaveRequest;
+use App\Ahex\GuiaImpresion\Application\Contenido\ContentContainer;
 
 class GuiaImpresionController extends Controller
 {
-    public function create(Transportadora $transportadora)
+    public function index()
+    {
+        return view('guias_impresion.index')->with('guias', GuiaImpresion::all()->sortByDesc('id'));
+    }
+
+    public function show(GuiaImpresion $guia)
+    {
+        return redirect()->route('guias_impresion.index');
+    }
+
+    public function create()
     {
         return view('guias_impresion.create', [
             'mediciones' => config('system.medidas'),
             'tipografias' => config('system.tipografias'),
             'contenidos' => ContentContainer::all(),
-            'transportadora' => $transportadora,
             'guia' => new GuiaImpresion,
         ]);
     }
 
-    public function store(Transportadora $transportadora, SaveRequest $request)
+    public function store(SaveRequest $request)
     {
         $prepared = GuiaImpresion::prepare($request->validated());
 
         if( ! $guia = GuiaImpresion::create($prepared) )
             return back()->with('failure', 'Error al guardar guía de impresión');
 
-        return redirect()->route('transportadoras.show', $guia->transportadora_id)->with('success', "Guía de impresión {$guia->nombre} guardada");
+        return redirect()->route('guias_impresion.index')->with('success', "Guía de impresión {$guia->nombre} guardada");
     }
 
-    public function edit(Transportadora $transportadora, GuiaImpresion $guia)
+    public function edit(GuiaImpresion $guia)
     {
         return view('guias_impresion.edit', [
             'mediciones' => config('system.medidas'),
             'tipografias' => config('system.tipografias'),
             'contenidos' => ContentContainer::all(),
-            'transportadora' => $transportadora,
             'guia' => $guia,
         ]);
     }
 
-    public function update(Transportadora $transportadora, GuiaImpresion $guia, SaveRequest $request)
+    public function update(GuiaImpresion $guia, SaveRequest $request)
     {
         $prepared = GuiaImpresion::prepare($request->validated());
 
@@ -52,11 +59,11 @@ class GuiaImpresionController extends Controller
         return back()->with('success', "Guía de impresión {$guia->nombre} actualizada");
     }
 
-    public function destroy(Transportadora $transportadora, GuiaImpresion $guia)
+    public function destroy(GuiaImpresion $guia)
     {
         if( ! $guia->delete() )
             return back()->with('failure', 'Error al eliminar guía de impresión');
 
-        return redirect()->route('transportadoras.show', $transportadora)->with('success', "Guía de impresión {$guia->nombre} eliminada");
+        return redirect()->route('guias_impresion.index')->with('success', "Guía de impresión {$guia->nombre} eliminada");
     }
 }

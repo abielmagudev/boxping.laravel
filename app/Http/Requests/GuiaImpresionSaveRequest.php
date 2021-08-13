@@ -6,16 +6,22 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class GuiaImpresionSaveRequest extends FormRequest
 {
+    private $except_guia_id;
+
     public function authorize()
     {
         return true;
     }
 
+    public function prepareForValidation()
+    {
+        $this->except_guia_id = $this->guia->id ?? 0;
+    }
+
     public function rules()
     {
         return [
-            'transportadora' => ['required', 'exists:transportadoras,id'],
-            'nombre' => 'required',
+            'nombre' => ['required','unique:guias_impresion,nombre,' . $this->except_guia_id],
             'formato' => ['required','array'],
             'margenes' => ['required','array'],
             'tipografia' => ['required','array'],
@@ -26,9 +32,8 @@ class GuiaImpresionSaveRequest extends FormRequest
     public function messages()
     {
         return [
-            'transportadora.required' => 'Se requiere una transportadora',
-            'transportadora.exists' => 'Selecciona una transportadora existente',
             'nombre.required' => 'Escribe el nombre de la guía de impresión',
+            'nombre.unique' => 'Escribe un nombre diferente a la guía de impresión',
             'formato.required' => 'Configura el formato de la guía de impresión',
             'formato.array' => 'Configura un formato válido de la guía de impresión',
             'margenes.required' => 'Configura los márgenes de la guía de impresión',

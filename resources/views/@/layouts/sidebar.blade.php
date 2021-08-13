@@ -51,6 +51,11 @@ $menu = array(
         'active' => request()->is('transportadoras*') || request()->is('incidentes*'),
     ],
     (object) [
+        'title' => 'Guías de impresión',
+        'route' => route('guias_impresion.index'),
+        'active' => request()->is('guias_impresion*'),
+    ],
+    (object) [
         'title' => 'Usuarios',
         'route' => route('usuarios.index'),
         'active' => request()->is('usuarios*'),

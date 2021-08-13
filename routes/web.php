@@ -38,21 +38,18 @@ Route::resources([
     'transportadoras' => TransportadoraController::class,
     'usuarios' => UserController::class,
     'vehiculos' => VehiculoController::class,
+    'guias_impresion' => GuiaImpresionController::class,
 ], [
     'parameters' => [
         'codigosr' => 'codigor',
         'conductores' => 'conductor',
         'reempacadores' => 'reempacador',
+        'guias_impresion' => 'guia', 
     ]
 ]);
 
 // Etapas
 Route::resource('etapas/{etapa}/zonas', 'ZonaController')->except(['index', 'show']);
-
-// Guias de impresion de Transportadora
-Route::resource('transportadoras/{transportadora}/guias', GuiaImpresionController::class)
-        ->parameters(['transportadoraGuia' => 'guia'])
-        ->except(['index', 'show']);
 
 // Consolidados
 Route::get('consolidados/{consolidado}/print', 'ConsolidadoController@printing')->name('consolidados.printing');

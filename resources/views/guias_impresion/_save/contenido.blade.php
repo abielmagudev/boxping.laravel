@@ -6,7 +6,7 @@
 
       @foreach($contenido->attributes as $atributo => $etiqueta)
       <?php
-         $checkbox_checked = $guia->haveContenido($contenido->name, $atributo) ? 'checked' : '';
+         $checkbox_checked = $guia->haveContenido($contenido->name, $atributo) || old("contenido.{$contenido->name}.{$atributo}") === 'yes' ? 'checked' : '';
          $checkbox_name = "contenido[{$contenido->name}][{$atributo}]";
          $checkbox_id = "checkbox-{$contenido->name}-{$atributo}";
       ?>

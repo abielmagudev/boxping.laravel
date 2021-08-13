@@ -6,22 +6,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class GuiaImpresion extends Model
 {
-    protected $table = 'transportadora_guias';
+    protected $table = 'guias_impresion';
 
     protected $fillable = [
         'nombre',
-        'transportadora_id',
         'formato',
         'margenes',
         'tipografia',
         'contenido',
-        'impresiones',
+        'intentos',
     ];
-
-    public function transportadora()
-    {
-        return $this->belongsTo(Transportadora::class);
-    }
 
     public function haveContenido($type = null, $attr = null)
     {
@@ -48,7 +42,6 @@ class GuiaImpresion extends Model
     {
         return [
             'nombre' => $validated['nombre'],
-            'transportadora_id' => $validated['transportadora'],
             'formato' => static::prepareFormato($validated['formato']),
             'margenes' => static::prepareMargenes($validated['margenes']),
             'tipografia' => static::prepareTipografia($validated['tipografia']),

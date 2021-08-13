@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTransportadoraGuiasTable extends Migration
+class CreateGuiasImpresionTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,14 @@ class CreateTransportadoraGuiasTable extends Migration
      */
     public function up()
     {
-        Schema::create('transportadora_guias', function (Blueprint $table) {
+        Schema::create('guias_impresion', function (Blueprint $table) {
             $table->id();
-            $table->unsignedSmallInteger('transportadora_id');
-            $table->string('nombre', 32);
+            $table->string('nombre', 32)->unique();
             $table->text('formato');
             $table->text('margenes');
             $table->text('tipografia');
             $table->text('contenido');
-            $table->unsignedInteger('impresiones')->default(0);
+            $table->unsignedInteger('intentos')->default(0);
             $table->timestamps();
         });
     }
@@ -33,6 +32,6 @@ class CreateTransportadoraGuiasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('transportadora_guias');
+        Schema::dropIfExists('guias_impresion');
     }
 }
