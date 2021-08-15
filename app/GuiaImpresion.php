@@ -10,12 +10,58 @@ class GuiaImpresion extends Model
 
     protected $fillable = [
         'nombre',
-        'formato',
-        'margenes',
-        'tipografia',
-        'contenido',
+        'formato_json',
+        'margenes_json',
+        'tipografia_json',
+        'contenido_json',
         'intentos',
     ];
+
+    public function getFormatoAttribute()
+    {
+        return json_decode($this->formato_json);
+    }
+
+    public function getMargenesAttribute()
+    {
+        return json_decode($this->margenes_json);
+    }
+
+    public function getTipografiaAttribute()
+    {
+        return json_decode($this->tipografia_json);
+    }
+
+    public function getContenidoAttribute()
+    {
+        return json_decode($this->contenido_json);
+    }
+
+    public function getPageSizeAttribute()
+    {
+        $width  = $this->formato->ancho . $this->formato->medicion;
+        $height = $this->formato->altura . $this->formato->medicion;
+        return  "{$width} {$height}";
+    }
+
+    public function getPageMarginsAttribute()
+    {
+        $top    = ! is_null($this->margenes->arriba)    ? $this->margenes->arriba . $this->margenes->medicion : 'auto';
+        $right  = ! is_null($this->margenes->derecha)   ? $this->margenes->derecha . $this->margenes->medicion : 'auto';
+        $bottom = ! is_null($this->margenes->abajo)     ? $this->margenes->abajo . $this->margenes->medicion : 'auto';
+        $left   = ! is_null($this->margenes->izquierda) ? $this->margenes->izquierda . $this->margenes->medicion : 'auto';
+        return "{$top} {$right} {$bottom} {$left}";
+    }
+
+    public function getFontAttribute()
+    {
+        return ucwords( $this->tipografia->fuente );
+    }
+
+    public function getFontSizeAttribute()
+    {
+        return $this->tipografia->tamano . $this->tipografia->medicion;
+    }
 
     public function haveContenido($type = null, $attr = null)
     {
@@ -28,24 +74,20 @@ class GuiaImpresion extends Model
         return isset($this->contenido);
     }
 
-    protected static function booted()
+    public function incrementarIntentos()
     {
-        static::retrieved(function ($guia) {
-            $guia->formato    = json_decode($guia->formato);
-            $guia->margenes   = json_decode($guia->margenes);
-            $guia->tipografia = json_decode($guia->tipografia);
-            $guia->contenido  = json_decode($guia->contenido);
-        });
+        $this->intentos++;
+        return $this;
     }
 
     public static function prepare($validated)
     {
         return [
             'nombre' => $validated['nombre'],
-            'formato' => static::prepareFormato($validated['formato']),
-            'margenes' => static::prepareMargenes($validated['margenes']),
-            'tipografia' => static::prepareTipografia($validated['tipografia']),
-            'contenido' => static::prepareContenido($validated['contenido']),
+            'formato_json' => static::prepareFormato($validated['formato']),
+            'margenes_json' => static::prepareMargenes($validated['margenes']),
+            'tipografia_json' => static::prepareTipografia($validated['tipografia']),
+            'contenido_json' => static::prepareContenido($validated['contenido']),
         ];
     }
 
@@ -89,4 +131,16 @@ class GuiaImpresion extends Model
     {
         return json_encode($contenido);
     }
+
+    /*
+    protected static function booted()
+    {
+        static::retrieved(function ($guia) {
+            $guia->formato    = json_decode($guia->formato);
+            $guia->margenes   = json_decode($guia->margenes);
+            $guia->tipografia = json_decode($guia->tipografia);
+            $guia->contenido  = json_decode($guia->contenido);
+        });
+    }
+    */
 }
