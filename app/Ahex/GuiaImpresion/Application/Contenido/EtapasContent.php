@@ -4,9 +4,9 @@ namespace App\Ahex\GuiaImpresion\Application\Contenido;
 
 use App\Etapa;
 
-class EtapaContent
+class EtapasContent
 {
-    public $name = 'etapa';
+    public $name = 'etapas';
     
     public $attributes = [];
     
