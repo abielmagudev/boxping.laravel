@@ -45,6 +45,36 @@ class EntradaEtapa extends Pivot
         return $this->belongsTo(Etapa::class);
     }
 
+    public function havePeso()
+    {
+        return is_numeric($this->peso); 
+    }
+
+    public function haveVolumen()
+    {
+        return !is_null($this->ancho) || !is_null($this->altura) || !is_null($this->largo); 
+    }
+
+    public function havePesoAndVolumen()
+    {
+        return $this->havePeso() === true && $this->haveVolumen() === true;
+    }
+
+    public function havePesoOrVolumen()
+    {
+        return $this->havePeso() === true || $this->haveVolumen() === true;
+    }
+
+    public function getPesoCompletoAttribute()
+    {
+        return "{$this->peso} {$this->medida_peso}";
+    }
+
+    public function getVolumenCompletoAttribute()
+    {
+        return "{$this->ancho} x {$this->altura} x {$this->largo} {$this->medida_volumen}";
+    }
+
     public static function prepare($validated)
     {
         $prepared = [
