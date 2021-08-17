@@ -6,6 +6,7 @@ use App\Ahex\Fake\Domain\Fakeuser;
 use App\Ahex\Salida\Domain\AttributesTrait as Attributes;
 use App\Ahex\Salida\Domain\RelationshipsTrait as Relationships;
 use App\Ahex\Salida\Domain\ScopesTrait as Scopes;
+use App\Ahex\Salida\Domain\ValidationsTrait as Validations;
 use App\Ahex\Salida\Domain\UpdatesDescriptionsTrait as UpdatesDescriptions;
 use App\Ahex\Zkeleton\Domain\UpdateDescriptionCallableTrait as UpdateDescriptionCallable;
 use App\Ahex\Zkeleton\Domain\ModifiersTrait as Modifiers;
@@ -16,6 +17,7 @@ class Salida extends Model
     use Attributes, 
         Relationships, 
         Scopes, 
+        Validations,
         UpdateDescriptionCallable, 
         UpdatesDescriptions, 
         Modifiers;
