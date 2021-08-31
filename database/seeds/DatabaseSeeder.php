@@ -14,25 +14,26 @@ class DatabaseSeeder extends Seeder
         // $this->call(UsersTableSeeder::class);
 
         $this->call([
-            ConfiguracionesTableSeeder::class,
+            AlertasTableSeeder::class,
             ClientesTableSeeder::class,
             CodigosrTableSeeder::class,
             ConductoresTableSeeder::class,
+            ConfiguracionesTableSeeder::class,
             ConsolidadosTableSeeder::class,
             DestinatariosSeeder::class,
+            EntradasTableSeeder::class,
+            EtapasTableSeeder::class,
+            GuiasImpresionTableSeeder::class,
+            IncidentesTableSeeder::class,
             ReempacadoresTableSeeder::class,
             RemitentesTableSeeder::class,
+            SalidasTableSeeder::class,
             TransportadorasTableSeeder::class,
             UsersTableSeeder::class,
             VehiculosTableSeeder::class,
-            AlertasTableSeeder::class,
-            EtapasTableSeeder::class,
-            EtapaZonasTableSeeder::class,
-            EntradasTableSeeder::class,
-            EntradaEtapaTableSeeder::class,
             EntradaComentariosTableSeeder::class,
-            IncidentesTableSeeder::class,
-            SalidasTableSeeder::class,
+            EntradaEtapaTableSeeder::class,
+            EtapaZonasTableSeeder::class,
         ]);
     }
 }
