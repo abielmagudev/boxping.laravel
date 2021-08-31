@@ -7,8 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Ahex\Zkeleton\Domain\SearchInterface as Search;
 use App\Ahex\Zkeleton\Domain\ModifiersTrait as Modifiers;
+use App\Ahex\GuiaImpresion\Application\ModelAttributesPrintableInterface as ModelAttributesPrintable;
 
-Class Remitente extends Model implements Search
+Class Remitente extends Model implements Search, ModelAttributesPrintable
 {
     use SoftDeletes, Modifiers;
 
@@ -72,5 +73,19 @@ Class Remitente extends Model implements Search
             $prepared['created_by'] = Fakeuser::live();
 
         return $prepared;
+    }
+
+    public static function attributesToPrint(): array
+    {
+        return [
+            'nombre' => 'Nombre',
+            'direccion' => 'Dirección',
+            'postal' => 'Postal',
+            'ciudad' => 'Ciudad',
+            'estado' => 'Estado',
+            'pais' => 'Pais',
+            'telefono' => 'Teléfono',
+            'notas' => 'Notas',
+        ];
     }
 }

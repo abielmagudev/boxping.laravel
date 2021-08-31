@@ -7,8 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
 use App\Ahex\Zkeleton\Domain\ModifiersTrait as Modifiers;
+use App\Ahex\GuiaImpresion\Application\ModelAttributesPrintableInterface as ModelAttributesPrintable;
 
-class Etapa extends Model
+class Etapa extends Model implements ModelAttributesPrintable
 {
     use SoftDeletes, Modifiers;
     
@@ -70,5 +71,16 @@ class Etapa extends Model
             $prepared['created_by'] = Fakeuser::live();
 
         return $prepared;
+    }
+
+    public static function attributesToPrint(): array
+    {
+        if( ! $all = self::all()->toArray() )
+            return [];
+
+        foreach($all as $etapa) 
+            $attributes[$etapa['slug']] = $etapa['nombre'];
+
+        return $attributes;
     }
 }

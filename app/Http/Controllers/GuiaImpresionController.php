@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\GuiaImpresion;
 use Illuminate\Http\Request;
 use App\Http\Requests\GuiaImpresionSaveRequest as SaveRequest;
-use App\Ahex\GuiaImpresion\Application\Contenido\ContentContainer;
 
 class GuiaImpresionController extends Controller
 {
@@ -24,7 +23,7 @@ class GuiaImpresionController extends Controller
         return view('guias_impresion.create', [
             'mediciones' => config('system.medidas'),
             'tipografias' => config('system.tipografias'),
-            'contenidos' => ContentContainer::all(),
+            'contenidos' => GuiaImpresion::getModelsContent(),
             'guia' => new GuiaImpresion,
         ]);
     }
@@ -44,7 +43,7 @@ class GuiaImpresionController extends Controller
         return view('guias_impresion.edit', [
             'mediciones' => config('system.medidas'),
             'tipografias' => config('system.tipografias'),
-            'contenidos' => ContentContainer::all(),
+            'contenidos' => GuiaImpresion::getModelsContent(),
             'guia' => $guia,
         ]);
     }

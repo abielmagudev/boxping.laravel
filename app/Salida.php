@@ -10,9 +10,10 @@ use App\Ahex\Salida\Domain\ValidationsTrait as Validations;
 use App\Ahex\Salida\Domain\UpdatesDescriptionsTrait as UpdatesDescriptions;
 use App\Ahex\Zkeleton\Domain\UpdateDescriptionCallableTrait as UpdateDescriptionCallable;
 use App\Ahex\Zkeleton\Domain\ModifiersTrait as Modifiers;
+use App\Ahex\GuiaImpresion\Application\ModelAttributesPrintableInterface as ModelAttributesPrintable;
 use Illuminate\Database\Eloquent\Model;
 
-class Salida extends Model
+class Salida extends Model implements ModelAttributesPrintable
 {
     use Attributes, 
         Relationships, 
@@ -65,5 +66,20 @@ class Salida extends Model
         }
 
         return $prepared;
+    }
+
+    public static function attributesToPrint(): array
+    {
+        return [
+            'rastreo' => 'Rastreo',
+            'confirmacion' => 'Confirmación',
+            'cobertura' => 'Cobertura',
+            'direccion' => 'Dirección',
+            'postal' => 'Postal',
+            'ciudad' => 'Ciudad',
+            'estado' => 'Estado',
+            'pais' => 'Pais',
+            'notas' => 'Notas',
+        ];
     }
 }

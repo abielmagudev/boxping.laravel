@@ -12,8 +12,9 @@ use App\Ahex\Entrada\Domain\ConditionsTrait as Conditions;
 use App\Ahex\Entrada\Domain\UpdatesDescriptionsTrait as UpdatesDescriptions;
 use App\Ahex\Zkeleton\Domain\UpdateDescriptionCallableTrait as UpdateDescriptionCallable;
 use App\Ahex\Zkeleton\Domain\ModifiersTrait as Modifiers;
+use App\Ahex\GuiaImpresion\Application\ModelAttributesPrintableInterface as ModelAttributesPrintable;
 
-class Entrada extends Model
+class Entrada extends Model implements ModelAttributesPrintable
 {
     use Attributes,
         Conditions,
@@ -74,5 +75,19 @@ class Entrada extends Model
             $prepared['created_by'] = Fakeuser::live();
 
         return $prepared;
+    }
+
+    public static function attributesToPrint(): array
+    {
+        return [
+            'numero' => 'Número',
+            'consolidado' => 'Consolidado',
+            'cliente' => 'Cliente',
+            'contenido' => 'Contenido',
+            'conductor' => 'Conductor',
+            'vehiculo' => 'Vehículo',
+            'reempacador' => 'Reempacador',
+            'codigor' => 'Código R',
+        ];
     }
 }
