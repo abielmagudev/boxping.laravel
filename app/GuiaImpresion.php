@@ -80,6 +80,17 @@ class GuiaImpresion extends Model
         return $this;
     }
 
+    public static function getModelsContent()
+    {
+        return [
+            'entrada' => Entrada::attributesToPrint(),
+            'remitente' => Remitente::attributesToPrint(),
+            'destinatario' => Destinatario::attributesToPrint(),
+            'salida' => Salida::attributesToPrint(),
+            'etapas' => Etapa::attributesToPrint(),
+        ];
+    }
+
     public static function prepare($validated)
     {
         return [
