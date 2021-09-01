@@ -21,6 +21,29 @@ Route::resource('configuraciones', ConfiguracionController::class, [
     ],
 ])->except(['create','store','destroy']);
 
+// Entradas
+Route::prefix('entradas')->group( function () {
+    // Comentarios
+    Route::post('{entrada}/comentarios', 'ComentarioController@store')->name('comentarios.store');
+    
+    // Imprimir
+    Route::get('{entrada}/imprimir/{guia}', 'EntradaController@imprimir')->name('entradas.imprimir');
+    Route::get('imprimir', 'EntradaController@imprimirMultiple')->name('entradas.imprimir.multiple');
+
+    // EntradaEtapa
+    Route::get('{entrada}/etapas/add', 'EntradaEtapaController@add')->name('entradas.etapas.add');
+    Route::get('{entrada}/etapas/{etapa}/edit', 'EntradaEtapaController@edit')->name('entradas.etapas.edit');
+    Route::post('{entrada}/etapas', 'EntradaEtapaController@store')->name('entradas.etapas.store');
+    Route::match(['put','patch'],'{entrada}/etapas/{etapa}', 'EntradaEtapaController@update')->name('entradas.etapas.update');
+    Route::delete('{entrada}/etapas/{etapa}', 'EntradaEtapaController@destroy')->name('entradas.etapas.destroy');
+});
+
+// Etapas
+Route::resource('etapas/{etapa}/zonas', 'ZonaController')->except(['index', 'show']);
+
+// Consolidados
+Route::get('consolidados/{consolidado}/print', 'ConsolidadoController@printing')->name('consolidados.printing');
+
 // Resources
 Route::resources([
     'alertas' => AlertaController::class,
@@ -47,26 +70,3 @@ Route::resources([
         'guias_impresion' => 'guia', 
     ]
 ]);
-
-// Etapas
-Route::resource('etapas/{etapa}/zonas', 'ZonaController')->except(['index', 'show']);
-
-// Consolidados
-Route::get('consolidados/{consolidado}/print', 'ConsolidadoController@printing')->name('consolidados.printing');
-
-// Entradas
-Route::prefix('entradas')->group( function () {
-    // Comentarios
-    Route::post('{entrada}/comentarios', 'ComentarioController@store')->name('comentarios.store');
-
-    // Printing
-    Route::get('{entrada}/print/{hoja}', 'EntradaController@printing')->name('entradas.printing');
-    Route::get('print/{hoja?}', 'EntradaController@printingMultiple')->name('entradas.printing.multiple');
-
-    // EntradaEtapa
-    Route::get('{entrada}/etapas/add', 'EntradaEtapaController@add')->name('entradas.etapas.add');
-    Route::get('{entrada}/etapas/{etapa}/edit', 'EntradaEtapaController@edit')->name('entradas.etapas.edit');
-    Route::post('{entrada}/etapas', 'EntradaEtapaController@store')->name('entradas.etapas.store');
-    Route::match(['put','patch'],'{entrada}/etapas/{etapa}', 'EntradaEtapaController@update')->name('entradas.etapas.update');
-    Route::delete('{entrada}/etapas/{etapa}', 'EntradaEtapaController@destroy')->name('entradas.etapas.destroy');
-});

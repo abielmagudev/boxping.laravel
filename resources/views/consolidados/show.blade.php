@@ -87,7 +87,8 @@ $checker_id = 'checker-entradas';
         @slot('right')
         @include('@.partials.entradas-filter.trigger')
         @include('@.partials.checkboxes-checker.trigger')
-        @include('@.partials.entradas-printing.multiple-sheets-dropdown')
+        @include('@.partials.guias-impresion-dropdown.multiple')
+
         @if( $consolidado->status === 'abierto' ) 
         <a href="{{ route('entradas.create', ['consolidado' => $consolidado->id]) }}" class="btn btn-sm btn-primary">
             <span class="d-block d-md-none fw-bold">+</span>
@@ -122,7 +123,5 @@ $checker_id = 'checker-entradas';
     'header' => 'Filtros para entradas del consolidado',
     'results_route' => route('consolidados.show', [$consolidado]),
 ])
-
-@include('@.partials.entradas-printing.multiple-sheets-script')
 
 @endsection

@@ -38,7 +38,7 @@ class AppServiceProvider extends ServiceProvider
         });
 
         View::composer(['entradas.index','entradas.show','consolidados.show'], function ($view) {
-            View::share('printing_sheets', PrintingContainer::sheets());
+            View::share('guias_impresion', \App\GuiaImpresion::all());
         });
 
         // Global

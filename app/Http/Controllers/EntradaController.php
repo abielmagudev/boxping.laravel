@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Cliente;
 use App\Consolidado;
 use App\Entrada;
+use App\GuiaImpresion;
 
 use App\Ahex\Entrada\Application\Printing\PrintingContainer;
 use App\Ahex\Entrada\Application\Edit\Editors\EditorsContainer;
@@ -14,7 +15,7 @@ use App\Http\Requests\EntradaCreateRequest as CreateRequest;
 use App\Http\Requests\EntradaEditRequest as EditRequest;
 use App\Http\Requests\EntradaStoreRequest as StoreRequest;
 use App\Http\Requests\EntradaUpdateRequest as UpdateRequest;
-use App\Http\Requests\EntradaPrintingRequest as PrintingRequest;
+use App\Http\Requests\EntradaPrintMultipleRequest as PrintMultipleRequest;
 use Illuminate\Http\Request;
 
 class EntradaController extends Controller
@@ -99,22 +100,24 @@ class EntradaController extends Controller
         return redirect($route)->with('success', "{$entrada->numero} eliminada");
     }
 
-    public function printing(Entrada $entrada, PrintingRequest $request)
+    public function imprimir(Entrada $entrada, GuiaImpresion $guia)
     {
-        $printing = PrintingContainer::get($request->hoja);
+        $guia->incrementarIntentos()->save();
 
-        return view('entradas.printing.single', $printing->content($entrada))->with('sheet', $printing->sheet());
+        return view('entradas.print.single', [
+            'entrada' => $entrada,
+            'guia' => $guia,
+        ]);
     }
 
-    public function printingMultiple(PrintingRequest $request)
+    public function imprimirMultiple(PrintMultipleRequest $request)
     {
-        $printing = PrintingContainer::get($request->hoja);
-        $entradas = Entrada::with(['consolidado','cliente','destinatario','remitente','conductor','vehiculo','codigor','reempacador','creator','updater','salida','salida.incidentes','salida.transportadora'])
-                            ->whereIn('id', $request->input('entradas', []))->get();
+        $guia = GuiaImpresion::find($request->guia);        
+        $guia->incrementarIntentos()->save();
 
-        return view('entradas.printing.multiple', [
-            'entradas' => $entradas,
-            'printing' => $printing,
+        return view('entradas.print.multiple', [
+            'entradas' => Entrada::withRelations()->whereIn('id', $request->entradas)->get(),
+            'guia' => $guia,
         ]);
     }
 }

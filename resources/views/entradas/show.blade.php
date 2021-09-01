@@ -10,22 +10,35 @@
     
     @component('@.bootstrap.modal-trigger', [
         'modal_id' => 'modalComentarios',
-        'classes' => 'btn btn-primary btn-sm',
+        'classes' => 'btn btn-sm btn-outline-primary',
     ])
         @slot('text')
         <span class="d-inline-block d-md-none me-2">{!! $svg->chat_left_text_fill !!}</span>
         <span class="d-none d-md-inline-block me-1">Comentarios</span>
-        <span class="badge border border-white">{{ $comentarios->count() }}</span>
+        <span class="badge bg-primary">{{ $comentarios->count() }}</span>
         @endslot
     @endcomponent
 
-    @include('@.partials.entradas-printing.single-sheets-dropdown')
+    <div class="dropdown d-inline-block">
+        <button class="btn btn-sm btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuPrintEntrada" data-bs-toggle="dropdown" aria-expanded="false">
+            <span>Imprimir</span>
+        </button>
+        @if( $guias_impresion->count() )            
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuPrintEntrada">
+
+            @foreach ($guias_impresion as $guia)
+            <li><a class="dropdown-item" href="{{ route('entradas.imprimir', [$entrada, $guia]) }}">{{ $guia->nombre }}</a></li>
+            @endforeach
+
+        </ul>
+        @endif
+    </div>
 
     @endslot
 @endcomponent
 
 <!-- Proceso y trayectoria -->
-<div class="row" style="min-height:560px">
+<div class="row" style="min-height:520px">
     
     <!-- Proceso de la entrada -->
     <div class="col-sm mb-3">
@@ -69,6 +82,8 @@
 <br>
 
 @include('entradas.show.etapas')
+
+<br>
 
 @include('entradas.show.actualizaciones')
 
