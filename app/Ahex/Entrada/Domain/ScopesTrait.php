@@ -13,4 +13,23 @@ Trait ScopesTrait
     {
         return $query->with(['comentarios.creator']);
     }
+
+    public function scopeWithRelations($query)
+    {
+        return $query->with([
+            'consolidado',
+            'cliente',
+            'destinatario',
+            'remitente',
+            'conductor',
+            'vehiculo',
+            'codigor',
+            'reempacador',
+            'creator',
+            'updater',
+            'salida',
+            'salida.incidentes',
+            'salida.transportadora',
+        ]);
+    }
 }
