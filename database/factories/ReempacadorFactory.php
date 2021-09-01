@@ -8,7 +8,7 @@ use Faker\Generator as Faker;
 $factory->define(Reempacador::class, function (Faker $faker) {
     return [
         'nombre' => $faker->name(),
-        'clave' => sha1('12345'),
+        'clave' => sha1(12345),
         'created_by' => rand(1,10),
         'updated_by' => rand(1,10),
     ];
