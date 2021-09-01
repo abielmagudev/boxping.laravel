@@ -38,11 +38,15 @@ Route::prefix('entradas')->group( function () {
     Route::delete('{entrada}/etapas/{etapa}', 'EntradaEtapaController@destroy')->name('entradas.etapas.destroy');
 });
 
-// Etapas
+// Zonas
 Route::resource('etapas/{etapa}/zonas', 'ZonaController')->except(['index', 'show']);
 
 // Consolidados
 Route::get('consolidados/{consolidado}/print', 'ConsolidadoController@printing')->name('consolidados.printing');
+
+// Reempaque
+Route::get('reempaque', 'ReempaqueController@index')->name('reempaque.index');
+Route::match(['put','patch'], 'reempaque', 'ReempaqueController@update')->name('reempaque.update');
 
 // Resources
 Route::resources([
