@@ -8,17 +8,17 @@ class CreateEtapasTable extends Migration
 {
     public function up()
     {
-        $medidas_peso = config('system.medidas.peso');
-        $medidas_volumen = config('system.medidas.volumen');
+        $mediciones_peso = config('system.mediciones.peso');
+        $mediciones_volumen = config('system.mediciones.longitud');
 
-        Schema::create('etapas', function (Blueprint $table) use ($medidas_peso, $medidas_volumen) {
+        Schema::create('etapas', function (Blueprint $table) use ($mediciones_peso, $mediciones_volumen) {
             $table->bigIncrements('id');
             $table->string('nombre')->unique()->index();
             $table->string('slug')->unique()->index();
             $table->unsignedTinyInteger('orden')->default(1);
-            $table->boolean('realiza_medicion')->default(1);
-            $table->enum('medida_peso', $medidas_peso)->nullable();
-            $table->enum('medida_volumen', $medidas_volumen)->nullable();
+            $table->unsignedTinyInteger('mediciones')->default(0);
+            $table->enum('mediciones_peso', $mediciones_peso)->nullable();
+            $table->enum('mediciones_volumen', $mediciones_volumen)->nullable();
             $table->unsignedInteger('created_by');
             $table->unsignedInteger('updated_by');
             $table->timestamps();
