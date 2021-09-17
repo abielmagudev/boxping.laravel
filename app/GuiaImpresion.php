@@ -142,16 +142,4 @@ class GuiaImpresion extends Model
     {
         return json_encode($contenido);
     }
-
-    /*
-    protected static function booted()
-    {
-        static::retrieved(function ($guia) {
-            $guia->formato    = json_decode($guia->formato);
-            $guia->margenes   = json_decode($guia->margenes);
-            $guia->tipografia = json_decode($guia->tipografia);
-            $guia->contenido  = json_decode($guia->contenido);
-        });
-    }
-    */
 }
