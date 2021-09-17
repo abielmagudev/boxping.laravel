@@ -21,16 +21,16 @@
             @slot('header', 'Información')
             @slot('body')
             <p>
-                <small class="d-block text-muted small">Realiza medición</small>
-                <span>{{ $etapa->realiza_medicion ? 'Si' : 'No' }}</span>
+                <small class="d-block text-muted small">Mediciones</small>
+                <span>{{ ucfirst($etapa->conceptoMedicion()) }}</span>
             </p>
             <p>
-                <small class="d-block text-muted small">Medida de peso</small>
-                <span class="text-capitalize">{{ $etapa->unica_medida_peso ?? 'Opcional' }}</span>
+                <small class="d-block text-muted small">Medición de peso</small>
+                <span class="text-capitalize">{{ $etapa->getNombreMedicionPeso() ?? 'Cualquiera' }}</span>
             </p>
             <p>
-                <small class="d-block text-muted small">Medida de volúmen</small>
-                <span class="text-capitalize">{{ $etapa->unica_medida_volumen ?? 'Opcional' }}</span>
+                <small class="d-block text-muted small">Medición de volúmen</small>
+                <span class="text-capitalize">{{ $etapa->getNombreMedicionVolumen() ?? 'Cualquiera' }}</span>
             </p>
             @endslot
         @endcomponent   

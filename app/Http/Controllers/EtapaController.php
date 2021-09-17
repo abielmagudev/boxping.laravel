@@ -13,15 +13,9 @@ class EtapaController extends Controller
         return view('etapas.index')->with('etapas', Etapa::all()->sortBy('orden'));
     }
 
-    public function create(Etapa $etapa)
+    public function create()
     {
-        $etapa->realiza_medicion = 1;
-
-        return view('etapas.create', [
-            'etapa' => $etapa,
-            'medidas_peso' => config('system.medidas.peso'),
-            'medidas_volumen' => config('system.medidas.volumen'),
-        ]);
+        return view('etapas.create')->with('etapa', new Etapa);
     }
 
     public function store(SaveRequest $request)
@@ -41,11 +35,7 @@ class EtapaController extends Controller
 
     public function edit(Etapa $etapa)
     {
-        return view('etapas.edit', [
-            'etapa' => $etapa,
-            'medidas_peso' => config('system.medidas.peso'),
-            'medidas_volumen' => config('system.medidas.volumen'),
-        ]);
+        return view('etapas.edit')->with('etapa', $etapa);
     }
 
     public function update(SaveRequest $request, Etapa $etapa)
@@ -60,7 +50,7 @@ class EtapaController extends Controller
 
     public function destroy(Etapa $etapa)
     {
-        if(! $etapa->delete() )
+        if( ! $etapa->delete() )
             return back()->with('failure', 'Error al eliminar etapa');
 
         return redirect()->route('etapas.index')->with('success', "{$etapa->nombre} eliminada");

@@ -6,19 +6,21 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class EtapaSaveRequest extends FormRequest
 {
-    private $medidas_peso = [];
-    private $medidas_volumen = [];
-
-    public function __construct()
-    {
-        parent::__construct();
-        $this->medidas_peso = implode(',', config('system.medidas.peso'));
-        $this->medidas_volumen = implode(',', config('system.medidas.volumen'));
-    }
+    private $mediciones_peso = [];
+    private $mediciones_volumen = [];
 
     public function authorize()
     {
         return true;
+    }
+
+    public function prepareForValidation()
+    {
+        $abbrs_peso = array_keys( config('system.mediciones.peso') );
+        $abbrs_volumen = array_keys( config('system.mediciones.longitud') );
+
+        $this->mediciones_peso = implode(',', $abbrs_peso);
+        $this->mediciones_volumen = implode(',', $abbrs_volumen);
     }
 
     public function rules()
@@ -28,9 +30,9 @@ class EtapaSaveRequest extends FormRequest
         return [
             'nombre' => ['required','regex:/^[A-Za-z0-9 ]+$/','unique:etapas,nombre,' . $etapa_id],
             'orden' => ['required','integer','min:1',],
-            'realiza_medicion' => ['required','boolean'],
-            'unica_medida_peso' => ['nullable','in:' . $this->medidas_peso],
-            'unica_medida_volumen' => ['nullable','in:' . $this->medidas_volumen],
+            'mediciones' => ['required','in:0,1,2'],
+            'medicion_peso' => ['nullable','in:' . $this->mediciones_peso],
+            'medicion_volumen' => ['nullable','in:' . $this->mediciones_volumen],
         ];
     }
 
@@ -43,9 +45,9 @@ class EtapaSaveRequest extends FormRequest
             'orden.required' => __('Escribe el orden correspondiente a la etapa'),
             'orden.integer' => __('La propiedad orden debe ser numerico entero'),
             'orden.min' => __('La propiedad orden de etapa es 1'),
-            'realiza_medicion.required' => __('Selecciona una opción de medición'),
-            'unica_medida_peso.in' => __('Selecciona una opción valida en peso'),
-            'unica_medida_volumen.in' => __('Selecciona una opción valida en volúmen'),
+            'mediciones.required' => __('Selecciona una opción de mediciones'),
+            'medicion_peso.in' => __('Selecciona una opción valida en medición de peso'),
+            'medicion_volumen.in' => __('Selecciona una opción valida en medición de volúmen'),
         ];
     }
 }

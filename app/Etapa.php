@@ -13,16 +13,35 @@ class Etapa extends Model implements ModelAttributesPrintable
 {
     use SoftDeletes, Modifiers;
     
+    const SIN_NOMBRE_MEDICION = null;
+    const SIN_CONCEPTO_MEDICION = null;
+
     protected $fillable = [
         'nombre',
         'slug',
         'orden',
-        'realiza_medicion',
-        'unica_medida_peso',
-        'unica_medida_volumen',
+        'mediciones',
+        'medicion_peso',
+        'medicion_volumen',
         'created_by',
         'updated_by',
     ];
+
+    public $todas_mediciones_peso, 
+           $todas_mediciones_volumen,
+           $conceptos_medicion;
+
+    public function __construct(array $attributes = [])
+    {
+        parent::__construct($attributes);
+        $this->todas_mediciones_peso = config('system.mediciones.peso');
+        $this->todas_mediciones_volumen = config('system.mediciones.longitud');
+        $this->conceptos_medicion = [
+            'solo registrar',
+            'medición de peso',
+            'medición de peso y volúmen',
+        ];
+    }
 
     public function entradas()
     {
@@ -39,20 +58,62 @@ class Etapa extends Model implements ModelAttributesPrintable
         return $query->where('slug', $slug)->first();
     }
 
-    public function getMedidasPesoAttribute()
+    public function conceptoMedicion(int $nivel = null)
     {
-        if( ! is_null($this->medida_peso) )
-            return array($this->medida_peso);
+        $nivel_medicion = ! is_null($nivel) ? $nivel : $this->mediciones;
 
-        return config('system.medidas.peso');
+        if( isset($this->conceptos_medicion[$nivel_medicion]) )
+            return $this->conceptos_medicion[$nivel_medicion];         
+            
+        return static::SIN_CONCEPTO_MEDICION;
     }
 
-    public function getMedidasVolumenAttribute()
+    public function hasMedicionPeso()
     {
-        if( ! is_null($this->medida_volumen) )
-            return array($this->medida_volumen);
+        return ! is_null($this->medicion_peso) && isset($this->todas_mediciones_peso[$this->medicion_peso]);
+    }
 
-        return config('system.medidas.volumen');
+    public function hasMedicionVolumen()
+    {
+        return ! is_null($this->medicion_volumen) && isset($this->todas_mediciones_volumen[$this->medicion_volumen]);
+    }
+
+    public function getNombreMedicionPeso($abreviacion = null)
+    {
+        if( ! is_null($abreviacion) )
+            return $this->todas_mediciones_peso[$abreviacion];
+        
+        if( $this->hasMedicionPeso() )
+            return $this->todas_mediciones_peso[$this->medicion_peso];
+        
+        return static::SIN_NOMBRE_MEDICION;
+    }
+
+    public function getNombreMedicionVolumen($abreviacion = null)
+    {
+        if( ! is_null($abreviacion) )
+            return $this->todas_mediciones_volumen[$abreviacion];
+        
+        if( $this->hasMedicionVolumen() )
+            return $this->todas_mediciones_volumen[$this->medicion_volumen];   
+        
+        return static::SIN_NOMBRE_MEDICION;
+    }
+
+    public function getMedicionesPesoAttribute()
+    {
+        if( ! $this->hasMedicionPeso() )
+            return $this->todas_mediciones_peso;
+        
+        return [$this->medicion_peso => $this->getNombreMedicionPeso()];
+    }
+
+    public function getMedicionesVolumenAttribute()
+    {
+        if( ! $this->hasMedicionVolumen() )
+            return $this->todas_mediciones_volumen;
+        
+        return [$this->medicion_volumen => $this->getNombreMedicionVolumen()];
     }
 
     public static function prepare($validated)
@@ -61,9 +122,9 @@ class Etapa extends Model implements ModelAttributesPrintable
             'nombre' => $validated['nombre'],
             'slug' => Str::slug($validated['nombre']),
             'orden' => $validated['orden'],
-            'realiza_medicion' => $validated['realiza_medicion'] ? 1 : 0,
-            'medida_peso' => isset($validated['unica_medida_peso']) ? $validated['unica_medida_peso'] : null,
-            'medida_volumen' => isset($validated['unica_medida_volumen']) ? $validated['unica_medida_volumen'] : null,
+            'mediciones' => $validated['mediciones'] ? $validated['mediciones'] : 0,
+            'medicion_peso' => isset($validated['medicion_peso']) ? $validated['medicion_peso'] : null,
+            'medicion_volumen' => isset($validated['medicion_volumen']) ? $validated['medicion_volumen'] : null,
             'updated_by' => Fakeuser::live(),
         ];
 

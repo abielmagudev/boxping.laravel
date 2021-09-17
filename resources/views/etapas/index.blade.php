@@ -20,16 +20,14 @@
 @component('@.bootstrap.card')
     @slot('body')
     @component('@.bootstrap.table', [
-        'thead' => ['Orden','Nombre','Medición','Medida de peso','Medida de volúmen'],
+        'thead' => ['Orden','Nombre','Mediciones'],
     ])
         @slot('tbody')
         @foreach($etapas as $etapa)
         <tr>
             <td>{{ $etapa->orden }}</td>
             <td>{{ $etapa->nombre }}</td>
-            <td>{{ $etapa->realiza_medicion ? 'Si' : 'No' }}</td>
-            <td class="text-capitalize {{ $etapa->unica_medida_peso ? '' : 'text-muted' }}">{{ $etapa->unica_medida_peso ?? 'opcional' }}</td>
-            <td class="text-capitalize {{ $etapa->unica_medida_volumen ? '' : 'text-muted' }}">{{ $etapa->unica_medida_volumen ?? 'opcional' }}</td>
+            <td>{{ ucfirst( $etapa->conceptoMedicion() ) }}</td>
             <td class="text-end">
                 <a href="{{ route('etapas.show', $etapa) }}" class="btn btn-sm btn-outline-primary">
                     {!! $svg->eye !!}
