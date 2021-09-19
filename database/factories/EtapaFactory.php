@@ -18,7 +18,7 @@ $factory->define(Etapa::class, function (Faker $faker) {
         'nombre' => $nombre,
         'slug' => $slug,
         'orden' => $faker->numberBetween(1, 20),
-        'json_tareas' => $faker->boolean ? json_encode($tareas) : json_encode([]),
+        'json_tareas' => $faker->boolean ? json_encode($tareas) : null,
         'medicion_unica_peso' => $faker->boolean ? $faker->randomElement($mediciones_peso) : null,
         'medicion_unica_volumen' => $faker->boolean ? $faker->randomElement($mediciones_volumen) : null,
         'created_by' => $faker->randomDigitNotNull,
