@@ -101,6 +101,9 @@ class Etapa extends Model implements ModelAttributesPrintable
 
     public function hasTarea(string $key)
     {
+        if( ! $this->hasTareas() )
+            return self::SIN_TAREAS;
+
         return in_array($key, $this->tareas);
     }
 
