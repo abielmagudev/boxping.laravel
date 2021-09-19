@@ -48,6 +48,10 @@ Route::get('consolidados/{consolidado}/print', 'ConsolidadoController@printing')
 Route::get('reempaque', 'ReempaqueController@index')->name('reempaque.index');
 Route::match(['put','patch'], 'reempaque', 'ReempaqueController@update')->name('reempaque.update');
 
+// Registrar
+Route::get('registrar', 'RegistrarController@index')->name('registrar.index');
+Route::match(['put','patch'], 'registrar', 'RegistrarController@update')->name('registrar.update');
+
 // Resources
 Route::resources([
     'alertas' => AlertaController::class,
