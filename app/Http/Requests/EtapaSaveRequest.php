@@ -30,7 +30,7 @@ class EtapaSaveRequest extends FormRequest
         return [
             'nombre' => ['required','regex:/^[A-Za-z0-9 ]+$/','unique:etapas,nombre,' . $etapa_id],
             'orden' => ['required','integer','min:1',],
-            'mediciones' => ['required','in:0,1,2'],
+            'tareas' => ['array'],
             'medicion_peso' => ['nullable','in:' . $this->mediciones_peso],
             'medicion_volumen' => ['nullable','in:' . $this->mediciones_volumen],
         ];
@@ -45,7 +45,7 @@ class EtapaSaveRequest extends FormRequest
             'orden.required' => __('Escribe el orden correspondiente a la etapa'),
             'orden.integer' => __('La propiedad orden debe ser numerico entero'),
             'orden.min' => __('La propiedad orden de etapa es 1'),
-            'mediciones.required' => __('Selecciona una opción de mediciones'),
+            'tareas.array' => __('Selecciona una opción válida de tareas'),
             'medicion_peso.in' => __('Selecciona una opción valida en medición de peso'),
             'medicion_volumen.in' => __('Selecciona una opción valida en medición de volúmen'),
         ];

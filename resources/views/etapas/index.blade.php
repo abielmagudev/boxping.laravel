@@ -20,14 +20,14 @@
 @component('@.bootstrap.card')
     @slot('body')
     @component('@.bootstrap.table', [
-        'thead' => ['Orden','Nombre','Mediciones'],
+        'thead' => ['Orden','Nombre','Tareas'],
     ])
         @slot('tbody')
         @foreach($etapas as $etapa)
         <tr>
             <td>{{ $etapa->orden }}</td>
             <td>{{ $etapa->nombre }}</td>
-            <td>{{ ucfirst( $etapa->conceptoMedicion() ) }}</td>
+            <td>{!! $etapa->descripcionesTareas(', ') !!}</td>
             <td class="text-end">
                 <a href="{{ route('etapas.show', $etapa) }}" class="btn btn-sm btn-outline-primary">
                     {!! $svg->eye !!}

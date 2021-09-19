@@ -10,7 +10,7 @@ $factory->define(Etapa::class, function (Faker $faker) {
 
     $nombre = 'Stage ' . $faker->unique(true)->randomNumber();
     $slug = Str::slug($nombre);
-    $mediciones = $faker->numberBetween(0,2);
+    $tareas = array_keys(Etapa::$todas_tareas);
     $mediciones_peso = array_keys(config('system.mediciones.peso'));
     $mediciones_volumen = array_keys(config('system.mediciones.longitud'));
 
@@ -18,9 +18,9 @@ $factory->define(Etapa::class, function (Faker $faker) {
         'nombre' => $nombre,
         'slug' => $slug,
         'orden' => $faker->numberBetween(1, 20),
-        'mediciones' => $mediciones,
-        'medicion_peso' => $mediciones >= 1 ? $faker->randomElement($mediciones_peso) : null,
-        'medicion_volumen' => $mediciones == 2 ? $faker->randomElement($mediciones_volumen) : null,
+        'json_tareas' => $faker->boolean ? json_encode($tareas) : json_encode([]),
+        'medicion_unica_peso' => $faker->boolean ? $faker->randomElement($mediciones_peso) : null,
+        'medicion_unica_volumen' => $faker->boolean ? $faker->randomElement($mediciones_volumen) : null,
         'created_by' => $faker->randomDigitNotNull,
         'updated_by' => $faker->randomDigitNotNull,
     ];

@@ -20,17 +20,25 @@
         @component('@.bootstrap.card')
             @slot('header', 'Información')
             @slot('body')
-            <p>
-                <small class="d-block text-muted small">Mediciones</small>
-                <span>{{ ucfirst($etapa->conceptoMedicion()) }}</span>
+            <p class="m-0">
+                <small class="d-block text-muted small">Tareas</small>
             </p>
+            <ul class="list-unstyled">
+                @forelse($etapa->descripcionesTareas() as $descripcion)
+                <li>{{ $descripcion }}</li>
+
+                @empty
+                <li>Solamente registrar</li>
+
+                @endforelse
+            </ul>
             <p>
                 <small class="d-block text-muted small">Medición de peso</small>
-                <span class="text-capitalize">{{ $etapa->getNombreMedicionPeso() ?? 'Cualquiera' }}</span>
+                <span class="text-capitalize">{{ $etapa->nombreMedicionUnicaPeso }}</span>
             </p>
             <p>
                 <small class="d-block text-muted small">Medición de volúmen</small>
-                <span class="text-capitalize">{{ $etapa->getNombreMedicionVolumen() ?? 'Cualquiera' }}</span>
+                <span class="text-capitalize">{{ $etapa->nombreMedicionUnicaVolumen }}</span>
             </p>
             @endslot
         @endcomponent   

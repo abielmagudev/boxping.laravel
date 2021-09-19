@@ -8,25 +8,19 @@
     <input name="orden" value="{{ old('orden', $etapa->orden) }}" id="input-orden" type="number" min="1" step="1" class="form-control" required>
 </div>  
 <div class="mb-3">
-    <label class="form-label small">Mediciones</label>
+    <label class="form-label small">Tareas</label>
     <div class="border rounded p-3">
+        @foreach($etapa->todas_tareas as $tarea => $descripcion)   
+        <?php 
+            $switch_id = 'checkbox' . ucfirst($tarea);
+            $has_tarea = $etapa->hasTarea($tarea) ? $tarea : false;
+            $checked = toggleChecked($tarea, old('tareas', $has_tarea));
+        ?>   
         <div class="form-check">
-            <?php $checked = toggleChecked(2, old('mediciones', $etapa->mediciones)) ?>
-            <input class="form-check-input" type="radio" id="radio-mediciones_peso_volumen" name="mediciones" value="2" {{ $checked }}>
-            <label class="form-check-label" for="radio-mediciones_peso_volumen">{{ ucfirst($etapa->conceptoMedicion(2)) }}</label>
+            <input class="form-check-input" type="checkbox" id="{{ $switch_id }}" name="tareas[]" value="{{ $tarea }}" {{ $checked }}>
+            <label class="form-check-label" for="{{ $switch_id }}">{{ ucfirst($descripcion ) }}</label>
         </div>
-        <div class="mb-3 mb-md-1"></div>
-        <div class="form-check">
-            <?php $checked = toggleChecked(1, old('mediciones', $etapa->mediciones)) ?>
-            <input class="form-check-input" type="radio" id="radio-mediciones_peso" name="mediciones" value="1" {{ $checked }}>
-            <label class="form-check-label" for="radio-mediciones_peso">{{ ucfirst($etapa->conceptoMedicion(1)) }}</label>
-        </div>
-        <div class="mb-3 mb-md-1"></div>
-        <div class="form-check">
-            <?php $checked = toggleChecked(0, old('mediciones', $etapa->mediciones)) ?>
-            <input class="form-check-input" type="radio" id="radio-mediciones_registro" name="mediciones" value="0" {{ $checked }}>
-            <label class="form-check-label" for="radio-mediciones_registro">{{ ucfirst($etapa->conceptoMedicion(0)) }}</label>
-        </div>
+        @endforeach
     </div>
 </div>
 <div class="row">
@@ -36,7 +30,7 @@
             <select name="medicion_peso" id="select-medicion_peso" class="form-select">
                 <option label="Cuaquiera" selected></option>
                 @foreach($etapa->todas_mediciones_peso as $abbr => $value)
-                <option value="{{ $abbr }}" {{ toggleSelected($abbr, old('medicion_peso', $etapa->medicion_peso)) }}>{{ ucfirst($value) }}</option>
+                <option value="{{ $abbr }}" {{ toggleSelected($abbr, old('medicion_peso', $etapa->medicion_unica_peso)) }}>{{ ucfirst($value) }}</option>
                 @endforeach
             </select>
         </div>
@@ -47,7 +41,7 @@
             <select name="medicion_volumen" id="select-medicion_volumen" class="form-select">
                 <option label="Cualquiera" selected></option>
                 @foreach($etapa->todas_mediciones_volumen as $abbr => $value)
-                <option value="{{ $abbr }}" {{ toggleSelected($abbr, old('medicion_volumen', $etapa->medicion_volumen)) }}>{{ ucfirst($value) }}</option>
+                <option value="{{ $abbr }}" {{ toggleSelected($abbr, old('medicion_volumen', $etapa->medicion_unica_volumen)) }}>{{ ucfirst($value) }}</option>
                 @endforeach
             </select>
         </div>
