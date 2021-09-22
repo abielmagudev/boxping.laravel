@@ -26,8 +26,8 @@
         @method('put')
         @include('registrar._etapa')
         @include('registrar._entrada')
-        @includeWhen($etapa->hasTarea('peso'), 'registrar._medicion_peso')
-        @includeWhen($etapa->hasTarea('volumen'), 'registrar._medicion_volumen')
+        @includeWhen($etapa->hasTarea('peso'), 'registrar._medidas_peso')
+        @includeWhen($etapa->hasTarea('volumen'), 'registrar._medidas_volumen')
         @include('registrar._zonas')
         @include('registrar._alertas')
         <br>
