@@ -1,8 +1,13 @@
+<?php 
+
+$peso_pivot = $etapa->entrada_etapa->peso ?? null;
+$medicion_peso_pivot = $etapa->entrada_etapa->medicion_peso ?? null;
+
+?>
 <!-- Peso -->
 <div class="row mb-3">
     <div class="col-sm">
         <label for="input-peso" class="form-label small">Peso</label>
-        <?php $peso_pivot = $etapa->entrada_etapa->peso ?? null ?>
         <input name="peso" value="{{ old('peso', $peso_pivot) }}" id="input-peso" type="number" step="0.01" min="0.01" class="form-control">
     </div>
     <div class="col-sm col-sm-3">
@@ -13,7 +18,7 @@
             @endif
 
             @foreach($etapa->mediciones_peso as $abbr => $medicion)
-            <option value="{{ $abbr }}" {{ toggleSelected($abbr, old('medicion_peso')) }}>{{ ucfirst($medicion) }}</option>
+            <option value="{{ $abbr }}" {{ toggleSelected($abbr, old('medicion_peso', $medicion_peso_pivot)) }}>{{ ucfirst($medicion) }}</option>
             @endforeach
         </select>
     </div>

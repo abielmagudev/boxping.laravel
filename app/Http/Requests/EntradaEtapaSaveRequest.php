@@ -3,11 +3,14 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Etapa;
 
 class EntradaEtapaSaveRequest extends FormRequest
 {
-    private $medidas_peso;
-    private $medidas_volumen;
+    const ETAPA_NO_EXISTE = null;
+
+    private $mediciones_peso_imploded;
+    private $mediciones_volumen_imploded;
 
     public function authorize()
     {
@@ -16,20 +19,23 @@ class EntradaEtapaSaveRequest extends FormRequest
 
     protected function prepareForValidation()
     {
-        $this->medidas_peso = implode(',', config('system.medidas.peso'));
-        $this->medidas_volumen = implode(',', config('system.medidas.volumen'));
+        if( ! $etapa_model = Etapa::where('id', $this->etapa)->first() )
+            return self::ETAPA_NO_EXISTE;
+
+        $this->mediciones_peso_imploded = implode(',', $etapa_model->abreviacionesMedicionesPeso());
+        $this->mediciones_volumen_imploded = implode(',', $etapa_model->abreviacionesMedicionesVolumen());
     }
 
     public function rules()
     {
         return [
-            'etapa' => ['required','exists:etapas,id'],
+            'etapa' => ['bail','required','exists:etapas,id'],
             'peso' => ['nullable','min:0'],
-            'medida_peso' => ['nullable','in:' . $this->medidas_peso],
+            'medicion_peso' => ['nullable','in:' . $this->mediciones_peso_imploded],
             'ancho' => ['nullable','min:0'],
             'altura' => ['nullable','min:0'],
             'largo' => ['nullable','min:0'],
-            'medida_volumen' => ['nullable','in:' . $this->medidas_volumen],
+            'medicion_volumen' => ['nullable','in:' . $this->mediciones_volumen_imploded],
             'zona' => ['nullable','exists:etapa_zonas,id'],
             'alertas' => ['nullable','array'],
         ];
@@ -41,11 +47,11 @@ class EntradaEtapaSaveRequest extends FormRequest
             'etapa.required' => __('Etapa es requerida'),
             'etapa.exists' => __('Selecciona una etapa válida'),
             'peso.min' => __('Peso minimo de 0.01'),
-            'medida_peso.in' => __('Selecciona una medida de peso válido'),
+            'medicion_peso.in' => __('Selecciona una medición de peso válido'),
             'ancho.min' => __('ancho minimo de 0.01'),
             'altura.min' => __('altura minimo de 0.01'),
             'largo.min' => __('largo minimo de 0.01'),
-            'medida_volumen.in' => __('Selecciona una medida de volúmen válido'),
+            'medicion_volumen.in' => __('Selecciona una medición de volúmen válido'),
             'zona.exists' => __('Selecciona una zona válida'),
         ];
     }
