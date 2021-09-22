@@ -24,10 +24,11 @@
     </form> 
 
     <!-- Opciones de etapa -->
-    @if( ! is_null($etapa->id) )
+    @if( $etapa->isReal() )
     <form action="{{ route('entradas.etapas.store', $entrada) }}" method="post" autocomplete="off">
         @csrf    
-        @include('entradas_etapas._medidas')
+        @includeWhen($etapa->hasTarea('peso'),'entradas_etapas._medidas_peso')
+        @includeWhen($etapa->hasTarea('volumen'),'entradas_etapas._medidas_volumen')
         @include('entradas_etapas._zonas')
         @include('entradas_etapas._alertas')
         <br>

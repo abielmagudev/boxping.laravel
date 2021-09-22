@@ -17,7 +17,8 @@
     <form action="{{ route('entradas.etapas.update', [$entrada, $etapa]) }}" method="post" autocomplete="off">
         @method('patch')
         @csrf
-        @include('entradas_etapas._medidas')
+        @includeWhen($etapa->hasTarea('peso'),'entradas_etapas._medidas_peso')
+        @includeWhen($etapa->hasTarea('volumen'),'entradas_etapas._medidas_volumen')
         @include('entradas_etapas._zonas')
         @include('entradas_etapas._alertas')
         <br>
