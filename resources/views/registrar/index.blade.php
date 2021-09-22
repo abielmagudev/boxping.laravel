@@ -20,7 +20,7 @@
     </form>
     <br class="my-5">
 
-    @if( $has_etapa ) 
+    @if( $etapa->isReal() ) 
     <form action="{{ route('registrar.update') }}" method="post" autocomplete="off">
         @csrf
         @method('put')
