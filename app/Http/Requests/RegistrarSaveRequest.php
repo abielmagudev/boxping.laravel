@@ -48,10 +48,10 @@ class RegistrarSaveRequest extends FormRequest
         ]);
 
         $this->addMessage([
-            'peso.required' => __('Ingresa el peso correspondiente'),
-            'peso.numeric' => __('Ingresa un peso válido'),
+            'peso.required' => __('Ingresa el número de peso correspondiente'),
+            'peso.numeric' => __('Ingresa un número de peso válido'),
             'medicion_peso.required' => __('Selecciona la medición de peso'),
-            'medicion_peso.in' => __('Selecciona una medición válida de peso'),
+            'medicion_peso.in' => __('Selecciona una medición de peso válida'),
         ]);
     }
 
@@ -72,7 +72,7 @@ class RegistrarSaveRequest extends FormRequest
             'largo.required' => __('Ingresa el número de largo correspondiente'),
             'largo.numeric' => __('Ingresa un número de largo válido'),
             'medicion_volumen.required' => __('Selecciona la medición de volúmen'),
-            'medicion_volumen.in' => __('Selecciona una medición válida de volúmen'),
+            'medicion_volumen.in' => __('Selecciona una medición de volúmen válida'),
         ]);
     }
 
