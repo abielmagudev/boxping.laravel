@@ -157,6 +157,16 @@ class Etapa extends Model implements ModelAttributesPrintable
         return [$this->medicion_unica_volumen => $this->nombreMedicionUnicaVolumen];
     }
 
+    public function abreviacionesMedicionesPeso()
+    {
+        return array_keys($this->mediciones_peso);
+    }
+
+    public function abreviacionesMedicionesVolumen()
+    {
+        return array_keys($this->mediciones_volumen);
+    }
+
 
 
     /** MEDICIONES GENERALES */
