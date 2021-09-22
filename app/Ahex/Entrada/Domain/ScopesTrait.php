@@ -4,6 +4,11 @@ namespace App\Ahex\Entrada\Domain;
 
 Trait ScopesTrait
 {
+    public function scopeFindByNumero($query, $numero)
+    {
+        return $query->where('numero', $numero)->first();
+    }
+
     public function scopeWithEtapas()
     {
         return $this->with('etapas');
