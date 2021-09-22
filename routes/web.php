@@ -50,7 +50,8 @@ Route::match(['put','patch'], 'reempaque', 'ReempaqueController@update')->name('
 
 // Registrar
 Route::get('registrar', 'RegistrarController@index')->name('registrar.index');
-Route::match(['put','patch'], 'registrar', 'RegistrarController@update')->name('registrar.update');
+Route::post('registrar', 'RegistrarController@update')->name('registrar.update');
+// Route::match(['put','patch'], 'registrar', 'RegistrarController@update')->name('registrar.update');
 
 // Resources
 Route::resources([

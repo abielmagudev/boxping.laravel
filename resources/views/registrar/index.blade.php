@@ -23,7 +23,6 @@
     @if( $etapa->isReal() ) 
     <form action="{{ route('registrar.update') }}" method="post" autocomplete="off">
         @csrf
-        @method('put')
         @include('registrar._etapa')
         @include('registrar._entrada')
         @includeWhen($etapa->hasTarea('peso'), 'registrar._medidas_peso')

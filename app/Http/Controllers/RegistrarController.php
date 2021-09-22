@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Etapa;
 use App\Alerta;
+use App\Entrada;
+use App\EntradaEtapa;
 use App\Http\Requests\RegistrarEtapaRequest;
 use App\Http\Requests\RegistrarSaveRequest;
 use Illuminate\Http\Request;
@@ -21,6 +23,15 @@ class RegistrarController extends Controller
 
     public function update(RegistrarSaveRequest $request)
     {
-        dd($request->validated());
+        $prepared = EntradaEtapa::prepare( $request->validated() );
+        $entrada  = Entrada::findByNumero($request->numero);
+        $etapa    = Etapa::findBySlug($request->etapa);
+
+        $entrada->etapas()->detach($etapa->id);
+
+        if( ! is_null( $entrada->etapas()->attach($etapa->id, $prepared) ) )
+            return back()->withInput()->with('failure', 'Error al actualizar etapa de la entrada');
+        
+        return redirect()->route('registrar.index', ['etapa' => $etapa->slug])->with('success', "Etapa de la entrada {$entrada->numero} actualizada");
     }
 }
