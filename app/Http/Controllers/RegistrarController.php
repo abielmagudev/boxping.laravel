@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Etapa;
 use App\Alerta;
 use App\Http\Requests\RegistrarEtapaRequest;
+use App\Http\Requests\RegistrarSaveRequest;
 use Illuminate\Http\Request;
 
 class RegistrarController extends Controller
@@ -18,8 +19,8 @@ class RegistrarController extends Controller
         ]);
     }
 
-    public function update(Request $request)
+    public function update(RegistrarSaveRequest $request)
     {
-        dd($request);
+        dd($request->validated());
     }
 }

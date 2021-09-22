@@ -16,14 +16,14 @@
         <input name="largo" value="{{ old('largo', $largo_pivot) }}" id="input-largo" type="number" step="0.01" min="0.01" class="form-control">
     </div>
     <div class="col-sm">
-        <label for="select-medida_volumen" class="form-label small">Medida de volúmen</label>
-        <select name="medida_volumen" id="select-medida_volumen" class="form-select">
+        <label for="select-medicion_volumen" class="form-label small">Medición de volúmen</label>
+        <select name="medicion_volumen" id="select-medicion_volumen" class="form-select">
             @if( ! $etapa->hasMedicionUnicaVolumen() )
             <option label="" disabled selected></option>
             @endif    
         
-            @foreach($etapa->mediciones_volumen as $abbr => $medida )
-            <option value="{{ $medida }}" {{ toggleSelected($medida, old('medida_volumen')) }}>{{ ucfirst($medida) }}</option>
+            @foreach($etapa->mediciones_volumen as $abbr => $medicion )
+            <option value="{{ $abbr }}" {{ toggleSelected($abbr, old('medicion_volumen')) }}>{{ ucfirst($medicion) }}</option>
             @endforeach
         </select>
     </div>
