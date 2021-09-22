@@ -46,6 +46,10 @@ class Etapa extends Model implements ModelAttributesPrintable
     }
 
 
+    public function isReal()
+    {
+        return isset($this->id) && is_int($this->id);
+    }
 
     /** TODAS LAS TAREAS */
 
