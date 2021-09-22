@@ -80,11 +80,11 @@ Trait RelationshipsTrait
                     ->as('entrada_etapa')
                     ->withPivot([
                         'peso',
-                        'medida_peso',
+                        'medicion_peso',
                         'ancho',
                         'altura',
                         'largo',
-                        'medida_volumen',
+                        'medicion_volumen',
                         'zona_id',
                         'alertas_id',
                         'created_by',

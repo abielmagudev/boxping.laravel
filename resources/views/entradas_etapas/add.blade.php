@@ -27,9 +27,9 @@
     @if( ! is_null($etapa->id) )
     <form action="{{ route('entradas.etapas.store', $entrada) }}" method="post" autocomplete="off">
         @csrf    
-        @include('entradas.etapas._medidas')
-        @include('entradas.etapas._zonas')
-        @include('entradas.etapas._alertas')
+        @include('entradas_etapas._medidas')
+        @include('entradas_etapas._zonas')
+        @include('entradas_etapas._alertas')
         <br>
         <button class="btn btn-success" type="submit" name="etapa" value="{{ $etapa->id }}">Guardar etapa</button>
         <a href="{{ route('entradas.show', $entrada) }}" class="btn btn-secondary">Cancelar</a>

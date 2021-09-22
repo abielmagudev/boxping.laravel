@@ -10,26 +10,32 @@ class EntradaEtapaTableSeeder extends Seeder
 {
     public function run(Faker $faker)
     {
-        $medidas_peso = config('system.medidas.peso');
-        $medidas_volumen = config('system.medidas.volumen');
+        $mediciones_peso = array_keys( config('system.mediciones.peso') );
+        $mediciones_volumen = array_keys( config('system.mediciones.longitud') );
         $entradas = Entrada::all(['id']);
         $etapas = Etapa::all();
         
         foreach($entradas as $entrada)
-        {      
-            $alertas_integers = range( rand(1, 3), rand(4, 7) );
-            $alertas_id = array_map('strval', $alertas_integers);
-            $etapas_sliced = $etapas->slice( rand(1, $etapas->count()) );
+        {   
+            // Divide la lista etapas apartir de un numero aleatorio
+            $etapas_slice_number = rand(1, $etapas->count());
+            $etapas_sliced = $etapas->slice( $etapas_slice_number  );
+
+            // Crea un range(array) aleatorio para obtener alertas por IDs
+            $range_min = rand(1, 3);
+            $range_max = rand(4, 7);
+            $alertas_range = range($range_min, $range_max);
+            $alertas_id = array_map('strval', $alertas_range);
             
             foreach($etapas_sliced as $e)
             {
                 $data = [
-                    'peso' => $e->realiza_medicion ? $faker->randomFloat(2, 0.1, 999) : null,
-                    'medida_peso' => $faker->randomElement( $medidas_peso ),
-                    'ancho'  => $e->realiza_medicion ? $faker->randomFloat(2, 0.1, 999) : null,
-                    'altura' => $e->realiza_medicion ? $faker->randomFloat(2, 0.1, 999) : null,
-                    'largo'  => $e->realiza_medicion ? $faker->randomFloat(2, 0.1, 999) : null,
-                    'medida_volumen' => $faker->randomElement( $medidas_volumen ),
+                    'peso' => $e->hasTarea('peso') ? $faker->randomFloat(2, 0.1, 999) : null,
+                    'medicion_peso' => $faker->randomElement( $mediciones_peso ),
+                    'ancho'  => $e->hasTarea('volumen') ? $faker->randomFloat(2, 0.1, 999) : null,
+                    'altura' => $e->hasTarea('volumen') ? $faker->randomFloat(2, 0.1, 999) : null,
+                    'largo'  => $e->hasTarea('volumen') ? $faker->randomFloat(2, 0.1, 999) : null,
+                    'medicion_volumen' => $faker->randomElement( $mediciones_volumen ),
                     'zona_id' => $faker->boolean ? $faker->numberBetween(1,5) : null,
                     'alertas_id' => json_encode( $alertas_id ),
                     'created_by' => $faker->numberBetween(1,10),
