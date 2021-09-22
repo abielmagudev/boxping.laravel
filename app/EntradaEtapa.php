@@ -110,11 +110,11 @@ class EntradaEtapa extends Pivot
     {
         $prepared = [
             'peso'             => $validated['peso'] ?? null,
-            'medicion_peso'    => $validated['medida_peso'] ?? null,
+            'medicion_peso'    => $validated['medicion_peso'] ?? null,
             'ancho'            => $validated['ancho'] ?? null,
             'altura'           => $validated['altura'] ?? null,
             'largo'            => $validated['largo'] ?? null,
-            'medicion_volumen' => $validated['medida_volumen'] ?? null,
+            'medicion_volumen' => $validated['medicion_volumen'] ?? null,
             'zona_id'          => $validated['zona'] ?? null,
             'alertas_id'       => isset($validated['alertas']) ? json_encode($validated['alertas']) : null,
             'updated_by'       => Fakeuser::live(),
