@@ -49,9 +49,9 @@ class Alerta extends Model
 
 
     /** Statics */
-    public static function allNiveles()
+    public static function getAllNiveles($return_object = false)
     {
-        return static::$niveles;
+        return $return_object ? (object) static::$niveles : static::$niveles;
     }
     
     public static function getNombresNiveles()

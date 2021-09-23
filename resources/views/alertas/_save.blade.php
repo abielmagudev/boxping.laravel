@@ -7,7 +7,7 @@
 <div class="mb-3">
     <label for="select-nivel" class="form-label small">Nivel</label>
     <div class="border rounded p-3"> 
-        @foreach($niveles as $nivel => $attrs)
+        @foreach($all_niveles as $nivel => $attrs)
         <!-- {{ $nivel }} -->
         <div class="row mb-3 mb-md-0">
             <div class="col-sm col-sm-1">

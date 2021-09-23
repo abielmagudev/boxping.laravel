@@ -12,7 +12,7 @@ class AlertaController extends Controller
     {
         return view('alertas.index', [
             'alertas' => Alerta::orderBy('id', 'desc')->get(),
-            'niveles' => Alerta::allNiveles(),
+            'all_niveles' => Alerta::getAllNiveles(),
         ]);
     }
 
@@ -20,7 +20,7 @@ class AlertaController extends Controller
     {
         return view('alertas.create', [
             'alerta' => new Alerta,
-            'niveles' => Alerta::allNiveles(),
+            'all_niveles' => Alerta::getAllNiveles(),
         ]);
     }
 
@@ -44,7 +44,7 @@ class AlertaController extends Controller
     {
         return view('alertas.edit', [
             'alerta' => $alerta,
-            'niveles' => Alerta::allNiveles(),
+            'all_niveles' => Alerta::getAllNiveles(),
         ]);
     }
 

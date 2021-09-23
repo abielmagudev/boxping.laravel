@@ -20,7 +20,7 @@
 @component('@.bootstrap.card')
     @slot('header')
     <div class="text-center small">
-        @foreach($niveles as $nivel => $attrs)        
+        @foreach($all_niveles as $nivel => $attrs)        
         <span class="badge rounded-pill" style="background-color:{{ $attrs['color'] }}">{{ $alertas->where('nivel', $nivel)->count() }}</span>
         <span class="align-middle me-2">{{ ucfirst($nivel) }}</span>
         @endforeach
