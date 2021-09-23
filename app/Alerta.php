@@ -11,7 +11,6 @@ class Alerta extends Model
     use Modifiers;
 
     const NIVEL_NO_EXISTE = null;
-    const NIVEL_SIN_ATRIBUTO = null;
     
     protected $fillable = [
         'nivel',
@@ -50,22 +49,22 @@ class Alerta extends Model
 
 
     /** Statics */
+    public static function allNiveles()
+    {
+        return static::$niveles;
+    }
+    
+    public static function getNombresNiveles()
+    {
+        return array_keys(static::$niveles);
+    }
+
     public static function existsNivel($key, $attr = null)
     {
         if( ! is_string($attr) )
             return isset(static::$niveles[$key]);
 
         return isset(static::$niveles[$key][$attr]);
-    }
-
-    public static function getNombresNiveles()
-    {
-        return array_keys(static::$niveles);
-    }
-
-    public static function allNiveles()
-    {
-        return static::$niveles;
     }
 
     public static function getNivel($key, $attr = null)
