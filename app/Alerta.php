@@ -9,6 +9,9 @@ use App\Ahex\Zkeleton\Domain\ModifiersTrait as Modifiers;
 class Alerta extends Model
 {    
     use Modifiers;
+
+    const NIVEL_NO_EXISTE = null;
+    const NIVEL_SIN_ATRIBUTO = null;
     
     protected $fillable = [
         'nivel',
@@ -18,14 +21,62 @@ class Alerta extends Model
         'updated_by',
     ];
 
+    public static $niveles = [
+        'alto' => [
+            'color' => '#FE0606',
+            'descripcion' => 'Detener el proceso e intervenir para una solucíon.',
+        ],
+        'medio' => [
+            'color' => '#FE7806',
+            'descripcion' => 'Intervenir para solucionar pero no detener el proceso.',
+        ],
+        'bajo' => [
+            'color' => '#FEC006',
+            'descripcion' => 'No es necesario internvenir ni detener el proceso.',
+        ],
+    ];
+
+    
+    /** Attributes */
     public function getColorAttribute()
     {
-        return config("system.alertas.{$this->nivel}.color");
+        return static::getNivel($this->nivel, 'color');
     }
 
-    public function getDescripcionNivelAttribute()
+    public function getDescripcionAttribute()
     {
-        return config("system.alertas.{$this->nivel}.descripcion");
+        return static::getNivel($this->nivel, 'descripcion');
+    }
+
+
+    /** Statics */
+    public static function existsNivel($key, $attr = null)
+    {
+        if( ! is_string($attr) )
+            return isset(static::$niveles[$key]);
+
+        return isset(static::$niveles[$key][$attr]);
+    }
+
+    public static function getNombresNiveles()
+    {
+        return array_keys(static::$niveles);
+    }
+
+    public static function allNiveles()
+    {
+        return static::$niveles;
+    }
+
+    public static function getNivel($key, $attr = null)
+    {
+        if( static::existsNivel($key) && ! is_string($attr) )
+            return static::$niveles[$key];
+
+        if( static::existsNivel($key, $attr) )
+            return static::$niveles[$key][$attr];
+
+        return static::NIVEL_NO_EXISTE;
     }
 
     public static function prepare($validated)
@@ -33,7 +84,6 @@ class Alerta extends Model
         $prepared = [
             'nivel'       => $validated['nivel'],
             'nombre'      => $validated['nombre'],
-            'descripcion' => $validated['descripcion'],
             'updated_by'  => Fakeuser::live(),
         ];
 

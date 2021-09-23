@@ -3,48 +3,37 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Alerta;
 
 class AlertaSaveRequest extends FormRequest
 {
-    public function __construct()
-    {
-        parent::__construct();
+    private $nombres_niveles,
+            $alerta_id;
 
-        $niveles = array_keys( config('system.alertas') );
-        $this->niveles = implode(',', $niveles);
-    }
-
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
     public function authorize()
     {
         return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array
-     */
+    public function prepareForValidation()
+    {
+        $this->nombres_niveles = implode(',', Alerta::getNombresNiveles());
+        $this->alerta_id = $this->route('alerta')->id ?? 0;
+    }
+
     public function rules()
     {
-        $alerta_id = $this->route('alerta')->id ?? 0;
-
         return [
-            'nivel' => ['required', 'in:' . $this->niveles],
-            'nombre' => ['required', 'unique:alertas,nombre,' . $alerta_id],
-            'descripcion' => 'nullable',
+            'nivel' => ['required', 'in:' . $this->nombres_niveles],
+            'nombre' => ['required', 'unique:alertas,nombre,' . $this->alerta_id],
         ];
     }
 
     public function messages()
     {
         return [
-            'nombre.required' => __('Escribe el nombre de obsevación'),
-            'nombre.unique' => __('Escribe un nombre diferente de observación'),
+            'nombre.required' => __('Escribe el nombre de alerta'),
+            'nombre.unique' => __('Escribe un nombre de alerta diferente'),
             'nivel.required' => __('Selecciona el nivel de alerta'),
             'nivel.in' => __('Selecciona un nivel válido de alerta'),
         ];

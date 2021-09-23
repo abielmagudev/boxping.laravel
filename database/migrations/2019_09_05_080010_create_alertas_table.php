@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Alerta;
 
 class CreateAlertasTable extends Migration
 {
@@ -13,13 +14,12 @@ class CreateAlertasTable extends Migration
      */
     public function up()
     {
-        $niveles = array_keys( config('system.alertas') );
+        $nombres_niveles = Alerta::getNombresNiveles();
 
-        Schema::create('alertas', function (Blueprint $table) use ($niveles) {
+        Schema::create('alertas', function (Blueprint $table) use ($nombres_niveles) {
             $table->bigIncrements('id');
-            $table->enum('nivel', $niveles)->index();
+            $table->enum('nivel', $nombres_niveles)->index();
             $table->string('nombre')->unique()->index();
-            $table->text('descripcion')->nullable();
             $table->unsignedSmallInteger('created_by');
             $table->unsignedSmallInteger('updated_by');
             $table->timestamps();
