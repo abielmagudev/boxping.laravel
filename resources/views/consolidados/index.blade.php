@@ -16,14 +16,12 @@
 @component('@.bootstrap.card')
     @slot('header')
     <div class="text-center small">
-        <span class="badge rounded-pill" style="background-color:{{ $consolidado_color->abierto }}">
-            {{ $consolidados->where('status', 'abierto')->count() }}
+        @foreach($all_status as $status => $attrs)   
+        <span class="badge rounded-pill" style="background-color:{{ $attrs['color'] }}">
+            {{ $consolidados->where('status', $status)->count() }}
         </span>
-        <span class="me-3 align-middle">Abierto</span>
-        <span class="badge rounded-pill" style="background-color:{{ $consolidado_color->cerrado }}">
-            {{ $consolidados->where('status', 'cerrado')->count() }}
-        </span>
-        <span class="align-middle">Cerrado</span>   
+        <span class="me-3 align-middle">{{ ucfirst($status) }}</span>
+        @endforeach
     </div>
     @endslot
 

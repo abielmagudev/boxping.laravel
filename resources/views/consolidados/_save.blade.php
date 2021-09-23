@@ -38,8 +38,8 @@
 <div class="mb-3">
     <label for="select-status" class="form-label small">Status</label>
     <select name="status" id="select-status" class="form-select">
-        @foreach( $config_consolidados->status as $status => $props )
-        <option value="{{ $status }}" {{ $status <> $consolidado->status ?: 'selected' }}>{{ ucfirst($status) }} - {{ $props['descripcion'] }}</option>
+        @foreach($all_status as $status => $attrs )
+        <option value="{{ $status }}" {{ toggleSelected($status, old('status', $consolidado->status)) }}>{{ ucfirst($status) }} - {{ $attrs['descripcion'] }}</option>
         @endforeach
     </select>
 </div>

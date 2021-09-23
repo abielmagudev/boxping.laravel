@@ -4,14 +4,23 @@ namespace App;
 
 use App\Ahex\Fake\Domain\Fakeuser;
 use Illuminate\Database\Eloquent\Model;
+use App\Ahex\Consolidado\Domain\Attributes;
+use App\Ahex\Consolidado\Domain\Scopes;
+use App\Ahex\Consolidado\Domain\Relationships;
+use App\Ahex\Consolidado\Domain\EntradasHandler;
 use App\Ahex\Zkeleton\Domain\SearchInterface as Search;
 use App\Ahex\Zkeleton\Domain\ModifiersTrait as Modifiers;
-use App\Ahex\Consolidado\Domain\EntradasHandler;
 
 class Consolidado extends Model implements Search
 {
-    use EntradasHandler, Modifiers;
+    use Attributes,
+        Scopes,
+        Relationships,
+        EntradasHandler,
+        Modifiers;
 
+    const STATUS_NO_EXISTE = null;
+    
     protected $fillable = array(
         'numero',
         'tarimas',
@@ -22,35 +31,16 @@ class Consolidado extends Model implements Search
         'updated_by',
     );
 
-    public function entradas()
-    {
-        return $this->hasMany(Entrada::class);
-    }
-
-    public function cliente()
-    {
-        return $this->belongsTo(Cliente::class)->withTrashed();
-    }
-
-    public function scopeIsAbierto($query, $value, $column = 'numero')
-    {
-        return $query->where($column, $value)->where('status', 'abierto')->exists();
-    }
-
-    public function scopeSearch($query, $value, $order = 'desc')
-    {
-        return $query->where('numero', 'like', "%{$value}%")->orderBy('id',$order);
-    }
-
-    public function getStatusColorAttribute()
-    {
-        return config("system.consolidados.status.{$this->status}.color");
-    }
-
-    public function isReal()
-    {
-        return ! is_null($this->id);
-    }
+    public static $all_status = [
+        'abierto' => [
+            'color' => '#FFC108',
+            'descripcion' => 'Es posible agregar entradas al consolidado',
+        ],
+        'cerrado' => [
+            'color' => '#6D757D',
+            'descripcion' => 'No es posible agregar entradas al consolidado',
+        ],
+    ];
 
     /**
      * 

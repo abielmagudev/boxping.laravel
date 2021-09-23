@@ -15,10 +15,7 @@ class ConsolidadoController extends Controller
     {
         return view('consolidados/index', [
             'consolidados' => Consolidado::with(['cliente','entradas'])->orderBy('id', 'desc')->paginate(),
-            'consolidado_color' => (object) [
-                'abierto' => config('system.consolidados.status.abierto.color'),
-                'cerrado' => config('system.consolidados.status.cerrado.color'),
-            ],
+            'all_status' => Consolidado::getAllStatus(),
         ]);
     }
 
@@ -60,7 +57,7 @@ class ConsolidadoController extends Controller
         return view('consolidados.edit', [
             'consolidado' => $consolidado,
             'clientes' => Cliente::all(['id','nombre','alias']),
-            'config_consolidados' => (object) config('system.consolidados'),
+            'all_status' => Consolidado::getAllStatus(),
         ]);
     }
 
