@@ -45,4 +45,9 @@ trait Attributes
 
         return self::$all_status;
     }
+
+    public static function getAllStatusClaves()
+    {
+        return array_keys( static::getAllStatus() );
+    }
 }

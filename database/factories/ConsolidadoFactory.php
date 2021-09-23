@@ -5,8 +5,7 @@
 use App\Consolidado;
 use Faker\Generator as Faker;
 
-$config_consolidados = config('system.consolidados');
-$all_status = array_keys($config_consolidados['status']);
+$all_status = Consolidado::getAllStatusClaves();
 
 $factory->define(Consolidado::class, function (Faker $faker) use($all_status) {
     return [

@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use App\Consolidado;
 
 class CreateConsolidadosTable extends Migration
 {
@@ -13,8 +14,7 @@ class CreateConsolidadosTable extends Migration
      */
     public function up()
     {
-        $config_consolidados = config('system.consolidados');
-        $all_status = array_keys($config_consolidados['status']);
+        $all_status = Consolidado::getAllStatusClaves();
         
         Schema::create('consolidados', function (Blueprint $table) use ($all_status) {
             $table->bigIncrements('id');
