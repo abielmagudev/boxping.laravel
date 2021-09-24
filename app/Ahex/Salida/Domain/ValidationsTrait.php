@@ -24,7 +24,7 @@ trait ValidationsTrait
         if( ! $this->hasTransportadora() )
             return false;
 
-        return is_string($this->transportadora->$attr);
+        return isset($this->transportadora->$attr);
     }
 
     public function belongsSomeEntrada()
