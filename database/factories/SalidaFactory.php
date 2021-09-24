@@ -5,14 +5,14 @@
 use App\Salida;
 use Faker\Generator as Faker;
 
-$config_coberturas = array_keys( config('system.salidas.cobertura') );
-$config_status = array_keys( config('system.salidas.status') );
+$all_status_nombres = Salida::getAllStatusNombres();
+$all_coberturas_nombres = Salida::getAllCoberturasNombres();
 
-$factory->define(Salida::class, function (Faker $faker) use ($config_coberturas, $config_status) {
+$factory->define(Salida::class, function (Faker $faker) use ($all_status_nombres, $all_coberturas_nombres) {
     
-    $cobertura = $faker->randomElement($config_coberturas);
+    $cobertura = $faker->randomElement($all_coberturas_nombres);
 
-    if( $cobertura == 'ocurre' )
+    if( $cobertura === 'ocurre' )
     {
         $direccion = $faker->streetAddress;
         $postal = $faker->postcode;
@@ -31,7 +31,7 @@ $factory->define(Salida::class, function (Faker $faker) use ($config_coberturas,
         'estado' => $estado ?? null,
         'pais' => $pais ?? null,
         'notas' => $faker->boolean ? $faker->sentence : null,
-        'status' => $faker->randomElement($config_status),
+        'status' => $faker->randomElement($all_status_nombres),
         'transportadora_id' => $faker->numberBetween(1,10),
         'entrada_id' => $faker->numberBetween(1,50),
         'created_by' => $faker->numberBetween(1,10),

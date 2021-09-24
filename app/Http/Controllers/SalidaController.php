@@ -16,19 +16,17 @@ class SalidaController extends Controller
     {
         return view('salidas.index', [
             'salidas' => Salida::with(['transportadora','entrada.destinatario','incidentes'])->get()->sortByDesc('id'),
-            'config_cobertura' => config('system.salidas.cobertura'),
-            'config_status'    => config('system.salidas.status'),
         ]);
     }
 
     public function create(CreateRequest $request)
     {
         return view('salidas.create', [
-            'entrada'          => Entrada::find($request->entrada),
-            'salida'           => new Salida,
-            'transportadoras'  => Transportadora::all(),
-            'incidentes'       => Incidente::all(),
-            'config_cobertura' => config('system.salidas.cobertura'),
+            'entrada'         => Entrada::find($request->entrada),
+            'salida'          => new Salida,
+            'transportadoras' => Transportadora::all(),
+            'incidentes'      => Incidente::all(),
+            'all_coberturas'  => Salida::getAllCoberturas(),
         ]);
     }
 
@@ -57,8 +55,8 @@ class SalidaController extends Controller
             'salida'          => $salida,
             'transportadoras' => Transportadora::all(),
             'incidentes'      => Incidente::all(),
-            'config_cobertura' => config('system.salidas.cobertura'),
-            'config_status'   => config('system.salidas.status'),
+            'all_coberturas'  => Salida::getAllCoberturas(),
+            'all_status'      => Salida::getAllStatus(),
         ]);
     }
 

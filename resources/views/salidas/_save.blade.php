@@ -21,20 +21,15 @@
 <p class="fw-bold">Destino</p>
 <div class="mb-3">
     <label class="form-label small">Cobertura</label>
-    <div class="form-check form-check-inline-x">
-        <input class="form-check-input" type="radio" id="radio-cobertura-domicilio" name="cobertura" value="domicilio" checked>
-        <label class="form-check-label" for="radio-cobertura-domicilio">
-            <span>Domicilio</span>
-            <small class="text-muted">({{ $config_cobertura['domicilio']['descripcion'] }})</small>
+    @foreach ($all_coberturas as $cobertura => $attrs)
+    <div class="form-check form-check-inlinex">
+        <input class="form-check-input" type="radio" id="radio-cobertura-{{ $cobertura }}" name="cobertura" value="{{ $cobertura }}" {{ toggleChecked($cobertura, old('cobertura', $salida->cobertura)) }}>
+        <label class="form-check-label" for="radio-cobertura-{{ $cobertura }}">
+            <span class="text-capitalize">{{ $cobertura }}</span>
+            <small class="text-muted">({{ $attrs['descripcion'] }})</small>
         </label>
     </div>
-    <div class="form-check">
-        <input class="form-check-input" type="radio" id="radio-cobertura-ocurre" name="cobertura" value="ocurre" {{  old('cobertura', $salida->cobertura) == 'ocurre' ? 'checked' : '' }}>
-        <label class="form-check-label" for="radio-cobertura-ocurre">
-            <span>Ocurre</span>
-            <small class="text-muted">({{ $config_cobertura['ocurre']['descripcion'] }})</small>
-        </label>
-    </div>
+    @endforeach
 </div>
 <fieldset class="row">
     <div class="col-sm col-sm-8 mb-3">
@@ -61,16 +56,17 @@
 </fieldset>
 <br>
 
-@if( $salida->id )
+@if( $salida->isReal() )
 <p class="fw-bold">Proceso</p>
 <div class="mb-3">
     <label for="select-status" class="form-label small">Status</label>
     <select class="form-select" id="select-status" name="status">
-        @foreach($config_status as $status => $props)
+        @foreach($all_status as $status => $props)
         <option value="{{ $status }}" {{ toggleSelected($status, old('status', $salida->status)) }}>{{ ucfirst($status) }}</option>
         @endforeach
     </select>
 </div>
+
 @if( $incidentes->count() )
 <div class="mb-3">
     <label class="form-label small">

@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Salida;
 
 class CreateSalidasTable extends Migration
 {
@@ -13,11 +14,9 @@ class CreateSalidasTable extends Migration
      */
     public function up()
     {
-        $config_status = config('system.salidas.status');
-        $status_values = array_keys($config_status);
-        $status_default = $status_values[0];
+        $all_status_names = Salida::getAllStatusNombres();
 
-        Schema::create('salidas', function (Blueprint $table) use ($status_values, $status_default) {
+        Schema::create('salidas', function (Blueprint $table) use ($all_status_names) {
             $table->bigIncrements('id');
             $table->string('rastreo', 20)->unique()->index()->nullable();
             $table->string('confirmacion', 40)->unique()->index()->nullable();
@@ -28,7 +27,7 @@ class CreateSalidasTable extends Migration
             $table->string('estado', 48)->index()->nullable();
             $table->string('pais', 64)->nullable();
             $table->text('notas')->nullable();
-            $table->enum('status', $status_values)->index()->default($status_default);
+            $table->enum('status', $all_status_names)->index()->default($all_status_names[0]);
             $table->unsignedTinyInteger('transportadora_id');
             $table->unsignedBigInteger('entrada_id');
             $table->unsignedSmallInteger('created_by');

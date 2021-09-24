@@ -40,6 +40,34 @@ class Salida extends Model implements ModelAttributesPrintable
         'updated_by',
     ];
 
+    public static $all_status = [
+        'en espera' => [
+            'color' => '#0E6FFD',
+            'descripcion' => 'Recopilando información para el envio',
+        ],
+        'en ruta' => [
+            'color' => '#FFC108',
+            'descripcion' => 'Envio en proceso hacia su destino',
+        ],
+        'arribo' => [
+            'color' => '#198754',
+            'descripcion' => 'Finalizo en el envio a su destino',
+        ],
+        'entregado' => [
+            'color' => '#212529',
+            'descripcion' => 'Paquete recibido por el destinatario',
+        ],
+    ];
+
+    public static $all_coberturas = [
+        'domicilio' => [
+            'descripcion' => 'Dirección del destinatario',
+        ],
+        'ocurre'    => [
+            'descripcion' => 'Dirección de la transportadora',
+        ],
+    ];
+
     public static function prepare($validated)
     {
         $prepared = [
@@ -52,7 +80,7 @@ class Salida extends Model implements ModelAttributesPrintable
             'estado'       => isset($validated['estado']) ? capitalize($validated['estado']) : null,
             'pais'         => $validated['pais'] ?? null,
             'notas'        => $validated['notas'] ?? null,
-            'status'       => $validated['status'] ?? array_key_first( config('system.salidas.status') ),
+            'status'       => $validated['status'] ?? array_key_first( static::getAllStatus() ),
             'transportadora_id' => $validated['transportadora'] ?? null,
             'updated_by'   => Fakeuser::live(),
         ];

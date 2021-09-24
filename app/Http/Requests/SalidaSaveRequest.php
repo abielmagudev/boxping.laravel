@@ -3,56 +3,56 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Salida;
 
 class SalidaSaveRequest extends FormRequest
 {
     private $salida_id;
-    private $coberturas;
-    private $status;
-
-    protected function prepareForValidation()
-    {
-        $this->salida_id = $this->route('salida')->id ?? 0;
-        $this->coberturas = array_keys( config('system.salidas.cobertura') );
-        $this->status = array_keys( config('system.salidas.status') );
-    }
+    private $all_coberturas;
+    private $all_status;
+    private $rules_added = [];
 
     public function authorize()
     {
         return true;
     }
 
+    protected function prepareForValidation()
+    {
+        $this->salida_id = $this->route('salida')->id ?? 0;
+        $this->all_coberturas = implode(',', Salida::getAllCoberturasNombres());
+        $this->all_status = implode(',', Salida::getAllStatusNombres());
+        $this->addRules();
+    }
+
+    protected function addRules()
+    {
+        if( $this->isMethod('post') )
+            $this->rules_added['entrada'] = ['bail','exists:entradas,id','unique:salidas,entrada_id'];
+
+        if( $this->isMethod('patch') || $this->isMethod('put') )
+        {
+            $this->rules_added['status']     = ['required','in:' . $this->all_status];
+            $this->rules_added['incidentes'] = ['nullable','array'];
+            $this->rules_added['notas']      = 'nullable';
+        }
+        
+        // $this->method(): Return http method
+    }
+
     public function rules()
     {
-        $rules = [
+        return array_merge($this->rules_added, [
             'transportadora' => ['required','exists:transportadoras,id'],
             'rastreo'        => ['nullable','unique:salidas,rastreo,' . $this->salida_id],
             'confirmacion'   => ['nullable','unique:salidas,confirmacion,' . $this->salida_id],
-            'cobertura'      => ['required','in:'.implode(',',$this->coberturas)],
+            'cobertura'      => ['required','in:' . $this->all_coberturas],
             'direccion'      => ['nullable','required_if:cobertura,ocurre'],
             'postal'         => ['nullable','required_if:cobertura,ocurre'],
             'ciudad'         => ['nullable','required_if:cobertura,ocurre'],
             'estado'         => ['nullable','required_if:cobertura,ocurre'],
             'pais'           => ['nullable','required_if:cobertura,ocurre'],
-        ];
-
-        if( in_array($this->method(), ['put','PUT','patch','PATCH']) )
-        {
-            $rules = array_merge($rules, [
-                'status'     => ['required','in:'.implode(',',$this->status)],
-                'incidentes' => ['nullable','array'],
-                'notas'      => 'nullable',
-            ]);
-        }
-
-        if( $this->isMethod('post') )
-        {
-            $rules = array_merge([
-                'entrada' => ['bail','exists:entradas,id','unique:salidas,entrada_id']
-            ], $rules);
-        }
-
-        return $rules;
+        ]);
     }
 
     public function messages()
