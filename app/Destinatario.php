@@ -27,10 +27,9 @@ class Destinatario extends Model implements Search, ModelAttributesPrintable
         'updated_by',
     );
 
-    public function entradas()
-    {
-        return $this->hasMany(Entrada::class);
-    }
+
+
+    /** Attributes */
 
     public function getLocalidadAttribute()
     {
@@ -45,6 +44,17 @@ class Destinatario extends Model implements Search, ModelAttributesPrintable
         return implode(', ', $localidad);
     }
 
+    public function getDomicilioStickerAttribute()
+    {
+        return "{$this->direccion}<br>
+                Postal {$this->postal}<br>
+                {$this->localidad}";
+    }
+
+
+
+    /** Scopes */
+
     public function scopeSearch($query, $value)
     {
         return $query->where('nombre', 'like', "%{$value}%")
@@ -56,12 +66,29 @@ class Destinatario extends Model implements Search, ModelAttributesPrintable
                     ->get();
     }
 
+
+
+    /** Validations */
+
     public function haveRelationEntrada($entrada_id)
     {
         return Entrada::where('destinatario_id', $this->id)
                       ->where('id', $entrada_id)
                       ->exists();
     }
+
+
+
+    /** Relationships */
+
+    public function entradas()
+    {
+        return $this->hasMany(Entrada::class);
+    }
+
+
+
+    /** Statics */
 
     public static function prepare($validated)
     {
