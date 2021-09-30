@@ -60,3 +60,16 @@ if( ! function_exists('notHasSearchText') )
         return stripos($string, $search) === false;
     }
 }
+
+if( ! function_exists('randomLetter') )
+{
+    function randomLetter($uppercase = false)
+    {
+        $random_letter = chr( rand(65,90) );
+
+        if( ! $uppercase )
+            return strtolower($random_letter);
+
+        return $random_letter;
+    }
+}
