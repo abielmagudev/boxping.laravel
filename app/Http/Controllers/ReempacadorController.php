@@ -27,7 +27,7 @@ class ReempacadorController extends Controller
         if(! Reempacador::create($prepared) )
             return back()->with('failure'. 'Error al guardar reempacador');
 
-        return redirect()->route('reempaque.index')->with('success', 'Reempacador guardado');
+        return redirect()->route('reempacadores.index')->with('success', 'Reempacador guardado');
     }
 
     public function show(Reempacador $reempacador)
