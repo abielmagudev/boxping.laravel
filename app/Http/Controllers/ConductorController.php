@@ -27,7 +27,7 @@ class ConductorController extends Controller
         if(! $conductor = Conductor::create($prepared) )
             return back()->with('failure', 'Error al guardar conductor');
 
-        return redirect()->route('importacion.index')->with('success', 'Conductor guardado');
+        return redirect()->route('conductores.index')->with('success', 'Conductor guardado');
     }
 
     public function show(Request $request, Conductor $conductor)
