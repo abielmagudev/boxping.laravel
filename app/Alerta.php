@@ -2,7 +2,6 @@
 
 namespace App;
 
-use App\Ahex\Fake\Domain\Fakeuser;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Ahex\Zkeleton\Domain\ModifiersTrait as Modifiers;
@@ -84,11 +83,11 @@ class Alerta extends Model
         $prepared = [
             'nivel'       => $validated['nivel'],
             'nombre'      => $validated['nombre'],
-            'updated_by'  => Fakeuser::live(),
+            'updated_by'  => mt_rand(1,10),
         ];
 
         if( request()->isMethod('post') )
-            $prepared['created_by'] = Fakeuser::live();
+            $prepared['created_by'] = $prepared['updated_by'];
 
         return $prepared;
     }

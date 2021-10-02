@@ -2,7 +2,6 @@
 
 namespace App;
 
-use App\Ahex\Fake\Domain\Fakeuser;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -257,11 +256,11 @@ class Etapa extends Model implements ModelAttributesPrintable
             'json_tareas' => $validated['tareas'] ? json_encode($validated['tareas']) : null,
             'medicion_unica_peso' => isset($validated['medicion_peso']) ? $validated['medicion_peso'] : null,
             'medicion_unica_volumen' => isset($validated['medicion_volumen']) ? $validated['medicion_volumen'] : null,
-            'updated_by' => Fakeuser::live(),
+            'updated_by' => mt_rand(1,10),
         ];
 
         if( request()->isMethod('post') )
-            $prepared['created_by'] = Fakeuser::live();
+            $prepared['created_by'] = $prepared['updated_by'];
 
         return $prepared;
     }

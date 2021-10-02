@@ -2,7 +2,6 @@
 
 namespace App;
 
-use App\Ahex\Fake\Domain\Fakeuser;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -31,11 +30,11 @@ class Codigor extends Model
         $prepared = [
             'nombre'      => $validated['nombre'],
             'descripcion' => $validated['descripcion'],
-            'updated_by'  => Fakeuser::live(),
+            'updated_by'  => mt_rand(1,10),
         ];
 
         if( request()->isMethod('post') )
-            $prepared['created_by'] = Fakeuser::live();
+            $prepared['created_by'] = $prepared['updated_by'];
 
         return $prepared;
     }

@@ -2,7 +2,6 @@
 
 namespace App;
 
-use App\Ahex\Fake\Domain\Fakeuser;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -67,11 +66,11 @@ Class Remitente extends Model implements Search, ModelAttributesPrintable
             'pais' => capitalize($validated['pais']),
             'telefono' => $validated['telefono'],
             'notas' => $validated['notas'] ?? null,
-            'updated_by' => Fakeuser::live(),
+            'updated_by' => mt_rand(1,10),
         ];
 
         if( request()->isMethod('post') )
-            $prepared['created_by'] = Fakeuser::live();
+            $prepared['created_by'] = $prepared['updated_by'];
 
         return $prepared;
     }

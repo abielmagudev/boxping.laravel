@@ -2,7 +2,6 @@
 
 namespace App;
 
-use App\Ahex\Fake\Domain\Fakeuser;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -50,6 +49,8 @@ class Cliente extends Model
 
     public static function prepare($validated)
     {
+        $user_id = mt_rand(1,10);
+
         $prepared = [
             'nombre' => $validated['nombre'],
             'alias' => strtoupper($validated['alias']),
@@ -61,11 +62,11 @@ class Cliente extends Model
             'estado' => capitalize($validated['estado']),
             'pais' => $validated['pais'],
             'notas'  => $validated['notas'],
-            'updated_by' => Fakeuser::live(),
+            'updated_by' => mt_rand(1,10),
         ];
 
         if( request()->isMethod('post') )
-            $prepared['created_by'] = Fakeuser::live();
+            $prepared['created_by'] = $prepared['updated_by'];
 
         return $prepared;
     }

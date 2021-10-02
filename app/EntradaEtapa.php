@@ -2,7 +2,6 @@
 
 namespace App;
 
-use App\Ahex\Fake\Domain\Fakeuser;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Ahex\Zkeleton\Domain\ModifiersTrait as Modifiers;
@@ -118,11 +117,11 @@ class EntradaEtapa extends Pivot
             'medicion_volumen' => $validated['medicion_volumen'] ?? null,
             'zona_id'          => $validated['zona'] ?? null,
             'alertas_id'       => isset($validated['alertas']) ? json_encode($validated['alertas']) : null,
-            'updated_by'       => Fakeuser::live(),
+            'updated_by'       => mt_rand(1,10),
         ];
 
         if( request()->isMethod('post') )
-            $prepared['created_by'] = Fakeuser::live();
+            $prepared['created_by'] = $prepared['updated_by'];
 
         return $prepared;
     }

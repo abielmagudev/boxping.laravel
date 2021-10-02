@@ -2,7 +2,6 @@
 
 namespace App;
 
-use App\Ahex\Fake\Domain\Fakeuser;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -35,7 +34,7 @@ class Comentario extends Model
         return [
             'entrada_id' => $validated['entrada'],
             'contenido'  => $validated['contenido'],
-            'created_by' => Fakeuser::live(),
+            'created_by' => mt_rand(1,10),
         ];
     }
 }

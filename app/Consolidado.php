@@ -2,7 +2,6 @@
 
 namespace App;
 
-use App\Ahex\Fake\Domain\Fakeuser;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Ahex\Consolidado\Domain\Attributes;
@@ -71,11 +70,11 @@ class Consolidado extends Model implements Search
             'status'     => isset($validated['status']) ? $validated['status'] : 'abierto',
             'notas'      => $validated['notas'],
             'cliente_id' => $validated['cliente'],
-            'updated_by' => Fakeuser::live(),
+            'updated_by' => mt_rand(1,10),
         ];
 
         if( request()->isMethod('post') )
-            $prepared['created_by'] = Fakeuser::live();
+            $prepared['created_by'] = $prepared['updated_by'];
 
         return $prepared;
     }

@@ -2,7 +2,6 @@
 
 namespace App;
 
-use App\Ahex\Fake\Domain\Fakeuser;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -25,14 +24,14 @@ class Reempacador extends Model
     {
         $prepared = [
             'nombre' => $validated['nombre'],
-            'updated_by'  => Fakeuser::live(),
+            'updated_by'  => mt_rand(1,10),
         ];
 
         if( isset($validated['clave']) )
-            $prepared['clave'] = sha1($validated['clave']);
+            $prepared['clave'] = hash('gost', $validated['clave']);
 
         if( request()->isMethod('post') )
-            $prepared['created_by'] = Fakeuser::live();
+            $prepared['created_by'] = $prepared['updated_by'];
 
         return $prepared;
     }

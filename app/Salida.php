@@ -2,7 +2,6 @@
 
 namespace App;
 
-use App\Ahex\Fake\Domain\Fakeuser;
 use App\Ahex\Salida\Domain\AttributesTrait as Attributes;
 use App\Ahex\Salida\Domain\RelationshipsTrait as Relationships;
 use App\Ahex\Salida\Domain\ScopesTrait as Scopes;
@@ -82,14 +81,14 @@ class Salida extends Model implements ModelAttributesPrintable
             'notas'        => $validated['notas'] ?? null,
             'status'       => $validated['status'] ?? array_key_first( static::getAllStatus() ),
             'transportadora_id' => $validated['transportadora'] ?? null,
-            'updated_by'   => Fakeuser::live(),
+            'updated_by'   => mt_rand(1,10),
         ];
 
         if( request()->isMethod('post') )
         {
             $prepared = array_merge($prepared, [
                 'entrada_id' => $validated['entrada'],
-                'created_by' => Fakeuser::live(),
+                'created_by' => $prepared['updated_by'],
             ]);
         }
 

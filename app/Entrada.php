@@ -2,7 +2,6 @@
 
 namespace App;
 
-use App\Ahex\Fake\Domain\Fakeuser;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Ahex\Entrada\Domain\RelationshipsTrait as Relationships;
@@ -70,11 +69,11 @@ class Entrada extends Model implements ModelAttributesPrintable
             'consolidado_id' => $consolidado->id ?? null,
             'cliente_id' => $consolidado->cliente_id ?? $validated['cliente'],
             'contenido' => $validated['contenido'] ?? null,
-            'updated_by' => Fakeuser::live(),
+            'updated_by' => mt_rand(1,10),
         ];
 
         if( request()->isMethod('post') )
-            $prepared['created_by'] = Fakeuser::live();
+            $prepared['created_by'] = $prepared['updated_by'];
 
         return $prepared;
     }
