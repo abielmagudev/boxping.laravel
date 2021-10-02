@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
+use Illuminate\Pagination\Paginator;
 use App\Ahex\Entrada\Application\Printing\PrintingContainer;
 
 class AppServiceProvider extends ServiceProvider
@@ -25,6 +26,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        // Actualizacion de Laravel 8: https://laravel.com/docs/8.x/upgrade#pagination-defaults
+        Paginator::useBootstrap();
+
         // Observers
         \App\Entrada::observe(\App\Observers\EntradaObserver::class);
         \App\EntradaEtapa::observe(\App\Observers\EntradaEtapaObserver::class);
