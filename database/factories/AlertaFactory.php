@@ -1,21 +1,34 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+namespace Database\Factories;
 
 use App\Alerta;
-use Faker\Generator as Faker;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-$niveles = Alerta::getNombresNiveles();
+class AlertaFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Alerta::class;
 
-$factory->define(Alerta::class, function (Faker $faker) use ($niveles) {
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        $nivel = $this->faker->randomElement( $this->model::getNombresNiveles() );
+        $nombre  = ucfirst($nivel) . $this->faker->unique(true)->numberBetween(1,50) . $this->faker->lexify('?');
 
-    $alerta_nivel = $faker->randomElement($niveles);
-    $alerta_nombre = ucfirst($alerta_nivel) . $faker->unique(true)->numberBetween(1,20) . chr(rand(65,90));
-
-    return [
-        'nivel' => $alerta_nivel,
-        'nombre' => $alerta_nombre,
-        'created_by' => rand(1,10),
-        'updated_by' => rand(1,10),
-    ];
-});
+        return [
+            'nivel' => $nivel,
+            'nombre' => $nombre,
+            'created_by' => $this->faker->numberBetween(1,10),
+            'updated_by' => $this->faker->numberBetween(1,10),
+        ];
+    }
+}

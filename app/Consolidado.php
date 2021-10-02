@@ -4,6 +4,7 @@ namespace App;
 
 use App\Ahex\Fake\Domain\Fakeuser;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Ahex\Consolidado\Domain\Attributes;
 use App\Ahex\Consolidado\Domain\Scopes;
 use App\Ahex\Consolidado\Domain\Relationships;
@@ -13,7 +14,8 @@ use App\Ahex\Zkeleton\Domain\ModifiersTrait as Modifiers;
 
 class Consolidado extends Model implements Search
 {
-    use Attributes,
+    use HasFactory, 
+        Attributes,
         Scopes,
         Relationships,
         EntradasHandler,

@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 
 class GuiaImpresion extends Model
-{
+{    
     protected $table = 'guias_impresion';
 
     protected $fillable = [

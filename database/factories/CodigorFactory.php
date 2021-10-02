@@ -1,15 +1,33 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+namespace Database\Factories;
 
 use App\Codigor;
-use Faker\Generator as Faker;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-$factory->define(Codigor::class, function (Faker $faker) {
-    return [
-        'nombre' => 'R' . $faker->unique()->numberBetween(1,15),
-        'descripcion' => $faker->text(100),
-        'created_by' => rand(1,10),
-        'updated_by' => rand(1,10),
-    ];
-});
+class CodigorFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Codigor::class;
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        $nombre = 'R' . $this->faker->unique()->numberBetween(1,25);
+
+        return [
+            'nombre' => $nombre,
+            'descripcion' => $this->faker->text(100),
+            'created_by' => $this->faker->numberBetween(1,10),
+            'updated_by' => $this->faker->numberBetween(1,10),
+        ];
+    }
+}

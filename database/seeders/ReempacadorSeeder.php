@@ -1,8 +1,11 @@
 <?php
 
-use Illuminate\Database\Seeder;
+namespace Database\Seeders;
 
-class CodigosrTableSeeder extends Seeder
+use Illuminate\Database\Seeder;
+use App\Reempacador;
+
+class ReempacadorSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,6 +14,6 @@ class CodigosrTableSeeder extends Seeder
      */
     public function run()
     {
-        return factory(App\Codigor::class, 10)->create();
+        return Reempacador::factory(10)->create();
     }
 }

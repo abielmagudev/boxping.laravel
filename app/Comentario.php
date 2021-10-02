@@ -4,9 +4,12 @@ namespace App;
 
 use App\Ahex\Fake\Domain\Fakeuser;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Comentario extends Model
 {
+    use HasFactory;
+    
     protected $table = 'entrada_comentarios';
     
     protected $with = ['creator'];

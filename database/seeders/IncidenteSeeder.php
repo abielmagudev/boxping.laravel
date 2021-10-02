@@ -1,8 +1,11 @@
 <?php
 
-use Illuminate\Database\Seeder;
+namespace Database\Seeders;
 
-class ClientesTableSeeder extends Seeder
+use Illuminate\Database\Seeder;
+use App\Incidente;
+
+class IncidenteSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,6 +14,6 @@ class ClientesTableSeeder extends Seeder
      */
     public function run()
     {
-        return factory(App\Cliente::class, 10)->create();
+        return Incidente::factory(10)->create();
     }
 }

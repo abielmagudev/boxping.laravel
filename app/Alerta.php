@@ -4,11 +4,12 @@ namespace App;
 
 use App\Ahex\Fake\Domain\Fakeuser;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Ahex\Zkeleton\Domain\ModifiersTrait as Modifiers;
 
 class Alerta extends Model
 {    
-    use Modifiers;
+    use hasFactory, Modifiers;
 
     const NIVEL_NO_EXISTE = null;
     

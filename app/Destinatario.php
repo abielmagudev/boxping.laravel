@@ -5,13 +5,14 @@ namespace App;
 use App\Ahex\Fake\Domain\Fakeuser;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Ahex\Zkeleton\Domain\SearchInterface as Search;
 use App\Ahex\Zkeleton\Domain\ModifiersTrait as Modifiers;
 use App\Ahex\GuiaImpresion\Application\ModelAttributesPrintableInterface as ModelAttributesPrintable;
 
 class Destinatario extends Model implements Search, ModelAttributesPrintable
 {
-    use SoftDeletes, Modifiers;
+    use HasFactory, SoftDeletes, Modifiers;
 
     protected $fillable = array(
         'nombre',

@@ -1,17 +1,33 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+namespace Database\Factories;
 
 use App\Transportadora;
-use Faker\Generator as Faker;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-$factory->define(Transportadora::class, function (Faker $faker) {
-    return [
-        'nombre' => $faker->company,
-        'web' => 'https://www.' . $faker->domainName,
-        'telefono' => $faker->phoneNumber,
-        'notas' => $faker->text(),
-        'created_by' => rand(1,10),
-        'updated_by' => rand(1,10),
-    ];
-});
+class TransportadoraFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Transportadora::class;
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        return [
+            'nombre' => $this->faker->company,
+            'web' => $this->faker->url,
+            'telefono' => $this->faker->phoneNumber,
+            'notas' => $this->faker->text(),
+            'created_by' => $this->faker->numberBetween(1,10),
+            'updated_by' => $this->faker->numberBetween(1,10),
+        ];
+    }
+}

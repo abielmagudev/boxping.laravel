@@ -6,12 +6,14 @@ use App\Ahex\Fake\Domain\Fakeuser;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Ahex\Zkeleton\Domain\ModifiersTrait as Modifiers;
 use App\Ahex\GuiaImpresion\Application\ModelAttributesPrintableInterface as ModelAttributesPrintable;
 
 class Etapa extends Model implements ModelAttributesPrintable
 {
-    use SoftDeletes, 
+    use HasFactory,
+        SoftDeletes, 
         Modifiers; 
     
     const MEDICION_SIN_NOMBRE = null;
@@ -41,17 +43,23 @@ class Etapa extends Model implements ModelAttributesPrintable
     {
         parent::__construct($attributes);
 
-        $this->todas_mediciones_peso = config('system.mediciones.peso');
-        $this->todas_mediciones_volumen = config('system.mediciones.longitud');
+        $this->todas_mediciones_peso    = self::getTodasMedicionesPeso();
+        $this->todas_mediciones_volumen = self::getTodasMedicionesVolumen();
     }
-
 
     public function isReal()
     {
         return isset($this->id) && is_int($this->id);
     }
 
+
+
     /** TODAS LAS TAREAS */
+
+    public static function getTodasTareas($nombres = true)
+    {
+        return $nombres ? array_keys(self::$todas_tareas) : array_values(self::$todas_tareas); // [nombre => descripcion]
+    }
 
     public function getTodasTareasAttribute()
     {
@@ -170,6 +178,22 @@ class Etapa extends Model implements ModelAttributesPrintable
 
 
     /** MEDICIONES GENERALES */
+
+    public static function getTodasMedicionesPeso($solo_claves = false)
+    {
+        if( ! $solo_claves )
+            return config('system.mediciones.peso');
+
+        return array_keys( config('system.mediciones.peso') );
+    }
+
+    public static function getTodasMedicionesVolumen($solo_claves = false)
+    {
+        if( ! $solo_claves )
+            return config('system.mediciones.longitud');
+
+        return array_keys( config('system.mediciones.longitud') );
+    }
 
     public function existsMedicionPeso($key)
     {

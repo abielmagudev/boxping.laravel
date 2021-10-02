@@ -1,8 +1,11 @@
 <?php
 
-use Illuminate\Database\Seeder;
+namespace Database\Seeders;
 
-class ReempacadoresTableSeeder extends Seeder
+use Illuminate\Database\Seeder;
+use App\Remitente;
+
+class RemitenteSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,6 +14,6 @@ class ReempacadoresTableSeeder extends Seeder
      */
     public function run()
     {
-        return factory(App\Reempacador::class, 10)->create();
+        return Remitente::factory(50)->create();
     }
 }

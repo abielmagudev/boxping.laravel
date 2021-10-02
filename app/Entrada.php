@@ -4,6 +4,7 @@ namespace App;
 
 use App\Ahex\Fake\Domain\Fakeuser;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Ahex\Entrada\Domain\RelationshipsTrait as Relationships;
 use App\Ahex\Entrada\Domain\AttributesTrait as Attributes;
 use App\Ahex\Entrada\Domain\ScopesTrait as Scopes;
@@ -16,7 +17,8 @@ use App\Ahex\GuiaImpresion\Application\ModelAttributesPrintableInterface as Mode
 
 class Entrada extends Model implements ModelAttributesPrintable
 {
-    use Attributes,
+    use HasFactory,
+        Attributes,
         Conditions,
         Filters,
         Modifiers,

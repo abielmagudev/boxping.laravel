@@ -1,8 +1,11 @@
 <?php
 
-use Illuminate\Database\Seeder;
+namespace Database\Seeders;
 
-class EntradasTableSeeder extends Seeder
+use Illuminate\Database\Seeder;
+use App\Codigor;
+
+class CodigorSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,6 +14,6 @@ class EntradasTableSeeder extends Seeder
      */
     public function run()
     {
-        return factory(App\Entrada::class, 100)->create();
+        return Codigor::factory(10)->create();
     }
 }

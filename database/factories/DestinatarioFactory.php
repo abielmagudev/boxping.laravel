@@ -1,21 +1,37 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+namespace Database\Factories;
 
 use App\Destinatario;
-use Faker\Generator as Faker;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-$factory->define(Destinatario::class, function (Faker $faker) {
-    return [
-        'nombre' => $faker->name(),
-        'direccion' => $faker->streetAddress,
-        'postal' => $faker->postcode,
-        'ciudad' => $faker->city,
-        'estado' => $faker->state,
-        'pais' => $faker->country,
-        'referencias' => $faker->boolean ? $faker->paragraph() : null,
-        'telefono' => $faker->phoneNumber,
-        'created_by' => $faker->numberBetween(1,10),
-        'updated_by' => $faker->numberBetween(1,10),
-    ];
-});
+class DestinatarioFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Destinatario::class;
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        return [
+            'nombre' => $this->faker->name(),
+            'direccion' => $this->faker->streetAddress,
+            'postal' => $this->faker->postcode,
+            'ciudad' => $this->faker->city,
+            'estado' => $this->faker->state,
+            'pais' => $this->faker->country,
+            'referencias' => $this->faker->boolean ? $this->faker->paragraph() : null,
+            'telefono' => $this->faker->phoneNumber,
+            'created_by' => $this->faker->numberBetween(1,10),
+            'updated_by' => $this->faker->numberBetween(1,10),
+        ];
+    }
+}

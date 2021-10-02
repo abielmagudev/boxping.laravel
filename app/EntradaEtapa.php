@@ -4,11 +4,12 @@ namespace App;
 
 use App\Ahex\Fake\Domain\Fakeuser;
 use Illuminate\Database\Eloquent\Relations\Pivot;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Ahex\Zkeleton\Domain\ModifiersTrait as Modifiers;
 
 class EntradaEtapa extends Pivot
 {
-    use Modifiers;
+    use HasFactory, Modifiers;
 
     const MEDICION_SIN_NOMBRE = null;
 

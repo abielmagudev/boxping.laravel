@@ -1,20 +1,36 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+namespace Database\Factories;
 
 use App\Consolidado;
-use Faker\Generator as Faker;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-$all_status = Consolidado::getAllStatusClaves();
+class ConsolidadoFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Consolidado::class;
 
-$factory->define(Consolidado::class, function (Faker $faker) use($all_status) {
-    return [
-        'numero' => $faker->unique(true)->randomNumber . time() . chr(rand(65,90)),
-        'tarimas' => $faker->numberBetween(1,5),
-        'status' => $faker->randomElement( $all_status ),
-        'notas' => $faker->boolean ? $faker->sentence() : null,
-        'cliente_id' => $faker->numberBetween(1,10),
-        'created_by' => 1,
-        'updated_by' => 1,
-    ];
-});
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        $all_status = Consolidado::getAllStatusClaves();
+
+        return [
+            'numero' => $this->faker->unique(true)->randomNumber . ucfirst($this->faker->lexify('?')),
+            'tarimas' => $this->faker->numberBetween(1,5),
+            'status' => $this->faker->randomElement( $all_status ),
+            'notas' => $this->faker->boolean ? $this->faker->sentence() : null,
+            'cliente_id' => $this->faker->numberBetween(1,10),
+            'created_by' => $this->faker->numberBetween(1,10),
+            'updated_by' => $this->faker->numberBetween(1,10),
+        ];
+    }
+}

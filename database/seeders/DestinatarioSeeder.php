@@ -1,8 +1,11 @@
 <?php
 
-use Illuminate\Database\Seeder;
+namespace Database\Seeders;
 
-class RemitentesTableSeeder extends Seeder
+use Illuminate\Database\Seeder;
+use App\Destinatario;
+
+class DestinatarioSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,6 +14,6 @@ class RemitentesTableSeeder extends Seeder
      */
     public function run()
     {
-        return factory(App\Remitente::class, 25)->create();
+        return Destinatario::factory(50)->create();
     }
 }

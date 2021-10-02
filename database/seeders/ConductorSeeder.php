@@ -1,8 +1,11 @@
 <?php
 
-use Illuminate\Database\Seeder;
+namespace Database\Seeders;
 
-class SalidasTableSeeder extends Seeder
+use Illuminate\Database\Seeder;
+use App\Conductor;
+
+class ConductorSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,6 +14,6 @@ class SalidasTableSeeder extends Seeder
      */
     public function run()
     {
-        return factory(App\Salida::class, 10)->create();
+        return Conductor::factory(10)->create();
     }
 }

@@ -1,8 +1,11 @@
 <?php
 
-use Illuminate\Database\Seeder;
+namespace Database\Seeders;
 
-class VehiculosTableSeeder extends Seeder
+use Illuminate\Database\Seeder;
+use App\Vehiculo;
+
+class VehiculoSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,6 +14,6 @@ class VehiculosTableSeeder extends Seeder
      */
     public function run()
     {
-        return factory(App\Vehiculo::class, 10)->create();
+        return Vehiculo::factory(10)->create();
     }
 }

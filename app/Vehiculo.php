@@ -5,11 +5,12 @@ namespace App;
 use App\Ahex\Fake\Domain\Fakeuser;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Ahex\Zkeleton\Domain\ModifiersTrait as Modifiers;
 
 class Vehiculo extends Model
 {
-    use SoftDeletes, Modifiers;
+    use HasFactory, SoftDeletes, Modifiers;
 
     protected $fillable = [
         'nombre',

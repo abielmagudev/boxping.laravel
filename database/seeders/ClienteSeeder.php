@@ -1,8 +1,11 @@
 <?php
 
-use Illuminate\Database\Seeder;
+namespace Database\Seeders;
 
-class ConfiguracionesTableSeeder extends Seeder
+use Illuminate\Database\Seeder;
+use App\Cliente;
+
+class ClienteSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,6 +14,6 @@ class ConfiguracionesTableSeeder extends Seeder
      */
     public function run()
     {
-        return factory(App\Configuracion::class, 1)->create();
+        return Cliente::factory(10)->create();
     }
 }

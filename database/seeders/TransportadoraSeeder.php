@@ -1,8 +1,11 @@
 <?php
 
-use Illuminate\Database\Seeder;
+namespace Database\Seeders;
 
-class ConsolidadosTableSeeder extends Seeder
+use Illuminate\Database\Seeder;
+use App\Transportadora;
+
+class TransportadoraSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,6 +14,6 @@ class ConsolidadosTableSeeder extends Seeder
      */
     public function run()
     {
-        return factory(App\Consolidado::class, 10)->create();
+        return Transportadora::factory(10)->create();
     }
 }
