@@ -24,7 +24,7 @@ Trait ConditionsTrait
 
     public function haveConfirmacion()
     {
-        return (bool) is_integer($this->confirmado_by) && is_string($this->confirmado_at);
+        return (bool) is_int($this->confirmado_by) && isset($this->confirmado_at);
     }
 
     public function haveSalida()
