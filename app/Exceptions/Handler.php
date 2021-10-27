@@ -36,6 +36,9 @@ class Handler extends ExceptionHandler
     // public function report(Exception $exception)
     public function report(Throwable $exception)
     {
+        // https://stackoverflow.com/posts/69265001/revisions
+        // To understand better the exception: dd($exception);
+        
         parent::report($exception);
     }
 
