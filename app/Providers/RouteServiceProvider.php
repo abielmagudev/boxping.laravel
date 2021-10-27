@@ -8,6 +8,15 @@ use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvi
 class RouteServiceProvider extends ServiceProvider
 {
     /**
+     * Agrega la constante HOME para implementarlo en paquetes de autenticación.
+     * 
+     * Ejemplo: Laravel/Fortify. 
+     * En el archivo config/fortify.php:64 ['home' => RouteServiceProvider::HOME]
+     * 
+     */
+    const HOME = 'home';
+
+    /**
      * This namespace is applied to your controller routes.
      *
      * In addition, it is set as the URL generator's root namespace.
