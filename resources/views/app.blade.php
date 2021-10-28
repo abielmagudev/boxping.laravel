@@ -10,18 +10,17 @@
 <body class="@yield('classes')">
 
     @auth
-        @include('@.layouts.navbar')
+        @include('layouts.navbar')
         <br>
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm d-none d-lg-block">
-                    @include('@.layouts.sidebar')
+                    @include('layouts.sidebar')
                 </div>
                 <div class="col-sm col-sm-12 col-lg-10">
-                    @include('@.layouts.alerts')
-                    @include('@.layouts.errors')
+                    @include('layouts.alerts')
+                    @include('layouts.errors')
                     @yield('content')
-                    <br>
                 </div>
             </div>
         </div>
