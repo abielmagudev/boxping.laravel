@@ -68,8 +68,14 @@ $menu = array(
 );
 ?>
 
-<div class="list-group list-group-flush">
+<aside class="col-sm col-sm-2 p-3 bg-primary bg-gradient" id="app-sidebar">
+    <h5 class="text-white">{{ config('app.name') }}</h5>
+    <hr class="text-white-50">
+    <ul class="nav nav-pills flex-column small">
     @foreach($menu as $item)
-    <a href="{{ $item->route }}" class="list-group-item list-group-item-action border-0 {{ $item->active ? 'active' : '' }}">{{ ucfirst($item->title) }}</a>
+        <li class="nav-item">
+            <a href="{{ $item->route }}" class="nav-link {{ ! $item->active ? 'text-white-50' : 'active text-white' }}">{{ ucfirst($item->title) }}</a>
+        </li>
     @endforeach
-</div>
+    </ul>
+</aside>

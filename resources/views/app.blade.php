@@ -7,23 +7,13 @@
     <link rel="stylesheet" href="{{ asset('css-bs/bootstrap-icons.css') }}">
     <title>{{ config('app.name') }}</title>
 </head>
-<body class="@yield('classes')">
+<body class="@yield('classes', 'bg-light bg-gradient')">
 
     @auth
-        @include('layouts.navbar')
-        <br>
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-sm d-none d-lg-block">
-                    @include('layouts.sidebar')
-                </div>
-                <div class="col-sm col-sm-12 col-lg-10">
-                    @include('layouts.alerts')
-                    @include('layouts.errors')
-                    @yield('content')
-                </div>
-            </div>
-        </div>
+    <div class="row g-0 vh-100">
+        @include('layouts.sidebar')
+        @include('layouts.content')
+    </div>
     
     <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script> -->
     <script src="{{ asset('js-bs/bootstrap.bundle.min.js') }}"></script>
