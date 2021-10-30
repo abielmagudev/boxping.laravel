@@ -69,12 +69,12 @@ $menu = array(
 ?>
 
 <aside class="col-sm col-sm-2 p-3 bg-primary bg-gradient" id="app-sidebar">
-    <h5 class="text-white">{{ config('app.name') }}</h5>
-    <hr class="text-white-50">
+    <p class="text-white text-center lead">{{ config('app.name') }}</p>
+    <br>
     <ul class="nav nav-pills flex-column small">
     @foreach($menu as $item)
         <li class="nav-item">
-            <a href="{{ $item->route }}" class="nav-link {{ ! $item->active ? 'text-white-50' : 'active text-white' }}">{{ ucfirst($item->title) }}</a>
+            <a href="{{ $item->route }}" class="nav-link {{ ! $item->active ? 'text-white' : 'active text-white' }}">{{ ucfirst($item->title) }}</a>
         </li>
     @endforeach
     </ul>

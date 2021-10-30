@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="{{ asset('css-bs/bootstrap-icons.css') }}">
     <title>{{ config('app.name') }}</title>
 </head>
-<body class="@yield('classes', 'bg-light bg-gradient')">
+<body class="@yield('classes', 'bg-light')">
 
     @auth
     <div class="row g-0 vh-100">

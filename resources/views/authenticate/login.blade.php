@@ -5,7 +5,7 @@
     <div class="row align-items-center justify-content-center h-100">
         <div class="col-sm col-sm-4">
             <div class="p-5 bg-white shadow">
-                <p class="lead text-center">Bienvenido</p>
+                <p class="lead text-center"><b>Bienvenido</b></p>
                 <form action="{{ route('login') }}" method="post" autocomplete="off">
                     @csrf
                     <div class="form-group mb-3">
@@ -24,7 +24,7 @@
                     </div>
                     <button type="submit" class="btn btn-primary rounded-pill w-100">Iniciar sesión</button>
                 </form>
-                <hr>
+                <hr class="my-4">
                 <p class="text-center">
                     <a href="{{ route('reempaque.index') }}">Área de reempaque</a>
                 </p>

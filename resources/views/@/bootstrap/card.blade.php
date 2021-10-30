@@ -16,7 +16,7 @@ $settings = (object) [
 
 ?>
 
-<div class="card {{ $settings->classes }}">
+<div class="card border-0 shadow {{ $settings->classes }}">
     @if( $settings->has_header )
     <div class="card-header {{ $settings->header_classes }}">
         {!! $settings->header !!}
