@@ -32,10 +32,10 @@ class AlertaSaveRequest extends FormRequest
     public function messages()
     {
         return [
-            'nombre.required' => __('Escribe el nombre de alerta'),
-            'nombre.unique' => __('Escribe un nombre de alerta diferente'),
-            'nivel.required' => __('Selecciona el nivel de alerta'),
-            'nivel.in' => __('Selecciona un nivel válido de alerta'),
+            'nombre.required' => __('Escribe el nombre de alerta.'),
+            'nombre.unique' => __('Escribe un nombre diferente de alerta.'),
+            'nivel.required' => __('Selecciona el nivel de alerta.'),
+            'nivel.in' => __('Selecciona un nivel válido de alerta.'),
         ];
     }
 }

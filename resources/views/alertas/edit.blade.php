@@ -1,13 +1,9 @@
 @extends('app')
 @section('content')
 
-@component('@.bootstrap.page-header', [
+@component('@.bootstrap.card', [
     'title' => 'Editar alerta'
 ])
-@endcomponent
-
-@component('@.bootstrap.card')
-    @slot('body')
     <form action="{{ route('alertas.update', $alerta) }}" method="post" autocomplete="off">
         @method('put')
         @include('alertas._save')
@@ -15,7 +11,6 @@
         <button type="submit" class="btn btn-warning">Actualizar alerta</button>
         <a href="{{ route('alertas.index') }}" class="btn btn-secondary">Regresar</a>
     </form>
-    @endslot
 
     @slot('footer')
         @include('@.partials.modifiers-block', [
