@@ -23,7 +23,7 @@ class Alerta extends Model
     public static $niveles = [
         'alto' => [
             'color' => '#FE0606',
-            'descripcion' => 'Detener el proceso e intervenir para una solucíon.',
+            'descripcion' => 'Detener el proceso e intervenir para una solución.',
         ],
         'medio' => [
             'color' => '#FE7806',
