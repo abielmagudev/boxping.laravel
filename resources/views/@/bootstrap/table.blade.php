@@ -22,8 +22,8 @@ $settings = (object) [
         @endif
 
         @if( $settings->has_thead )    
-        <thead class="">
-            <tr class="">
+        <thead>
+            <tr>
                 @foreach ($settings->thead as $thead)
                 <th class="small">{!! $thead !!}</th>
                 @endforeach
@@ -38,7 +38,7 @@ $settings = (object) [
         @endif
         
         @if( $settings->has_tfoot )          
-        <tfoot class="">
+        <tfoot>
             @foreach ($settings->tfoot as $tfoot)
             <td class="small">{!! $tfoot !!}</td>
             @endforeach
