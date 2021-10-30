@@ -31,6 +31,11 @@ $menu = array(
         'active' => request()->is('etapas*') || request()->is('alertas*'),
     ],
     (object) [
+        'title' => 'alertas',
+        'route' => route('alertas.index'),
+        'active' => request()->is('etapas*') || request()->is('alertas*'),
+    ],
+    (object) [
         'title' => 'importación',
         'route' => route('conductores.index'),
         'active' => request()->is('conductores*') || request()->is('vehiculos*'),
