@@ -15,7 +15,6 @@ class Alerta extends Model
     protected $fillable = [
         'nivel',
         'nombre',
-        'descripcion',
         'created_by',
         'updated_by',
     ];
@@ -83,7 +82,7 @@ class Alerta extends Model
         $prepared = [
             'nivel'       => $validated['nivel'],
             'nombre'      => $validated['nombre'],
-            'updated_by'  => mt_rand(1,10),
+            'updated_by'  => auth()->user()->id,
         ];
 
         if( request()->isMethod('post') )
