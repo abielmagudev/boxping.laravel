@@ -46,8 +46,6 @@ class AppServiceProvider extends ServiceProvider
         });
 
         // Global
-        View::share('symbols', config('resources.symbols'));
-        View::share('svg', config('resources.bootstrap-svg'));
-        View::share('icons', config('resources.bootstrap-icons'));
+        View::share('icons', config('resources.bootstrap-icons-svg'));
     }
 }
