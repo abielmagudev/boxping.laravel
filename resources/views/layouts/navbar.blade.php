@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand navbar-light bg-white mb-5" id="app-navbar" style="padding:0.7rem 1rem">
+<nav class="navbar navbar-expand navbar-light bg-white shadow-sm mb-5" id="app-navbar" style="padding:0.7rem 1rem">
   <div class="container-fluid">
     <span class="navbar-brand"></span>
     <ul class="navbar-nav">
