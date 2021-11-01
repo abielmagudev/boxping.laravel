@@ -1,8 +1,8 @@
 <?php
 
 $settings = (object) [
-    'model' => $model ?? new stdClass,
-    'has_model' => isset($model) && is_object($model),
+    'model' => $model ?? null,
+    'has_model' => isset($model) && $model instanceof \App\Ahex\Zowner\Domain\Contracts\ModifierIdentifiable,
     'show_updated' => isset($show_updated) && is_bool($show_updated) ? $show_updated : true,
     'show_created' => isset($show_created) && is_bool($show_created) ? $show_created : true,
 ];
