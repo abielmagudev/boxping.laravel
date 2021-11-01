@@ -31,7 +31,7 @@ $settings = (object) [
                 @endif
 
                 @if( $settings->header->subtitle )
-                <span class="d-block small">{!! $settings->header->subtitle !!}</span>
+                <div class="small">{!! $settings->header->subtitle !!}</div>
                 @endif
             </div>
 
