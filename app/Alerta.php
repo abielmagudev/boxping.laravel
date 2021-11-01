@@ -4,11 +4,13 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use App\Ahex\Zkeleton\Domain\ModifiersTrait as Modifiers;
+use App\Ahex\Zowner\Domain\Contracts\ModifierIdentifiable;
+use App\Ahex\Zowner\Domain\Features\ModifiersFeature;
 
-class Alerta extends Model
+class Alerta extends Model implements ModifierIdentifiable
 {    
-    use hasFactory, Modifiers;
+    use HasFactory;
+    use ModifiersFeature;
 
     const NIVEL_NO_EXISTE = null;
     
