@@ -43,13 +43,13 @@ $settings = (object) [
     @endif
 
     @if( $settings->has_body )    
-    <div class="card-body">
+    <div class="card-body p-4">
         {!! $settings->body !!}
     </div>
     @endif
 
     @if( $settings->has_footer )
-    <div class="card-footer bg-white py-3">
+    <div class="card-footer bg-white py-4">
         {!! $settings->footer !!}
     </div>
     @endif

@@ -9,12 +9,16 @@ $settings = (object) [
 
 ?>
 
-<div class="d-flex justify-content-between align-items-center">
+<div class="d-flex align-items-center justify-content-between">
     @if( $settings->has_left )
-    <div class="text-start">{!! $settings->left !!}</div>
+    <div class="text-start">
+        {!! $settings->left !!}
+    </div>
     @endif
 
     @if( $settings->has_right )
-    <div class="text-end">{!! $settings->right !!}</div>
+    <div class="text-end">
+        {!! $settings->right !!}
+    </div>
     @endif
 </div>

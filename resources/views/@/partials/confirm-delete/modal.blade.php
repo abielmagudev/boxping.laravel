@@ -2,7 +2,9 @@
     @slot('id', 'modalConfirmDelete')
     @slot('body')
     <div class="text-center"> 
-        <p class="text-danger">{!! $svg->exclamation_circle_fill !!}</p>
+        <div class="display-1 text-danger">
+            @include('@.bootstrap.icon', ['icon' => 'trash-fill'])
+        </div>
         <form action="{{ $route }}" method="post" id="formConfirmDelete">
             @csrf
             @method('delete')

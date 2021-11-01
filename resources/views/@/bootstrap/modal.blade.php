@@ -9,7 +9,7 @@ $sizes = [
 $settings = (object) [
     'backdrop' => isset($backdrop) && $backdrop === true ? 'data-bs-backdrop="static" data-bs-keyboard="false"' : null,
     'body_classes' => isset($body_classes) && is_string($body_classes) ? $body_classes : '',
-    'body' => $body ?? null,
+    'body' => $slot ?? null,
     'centered' => isset($centered) && $centered === true ? 'modal-dialog-centered' : null,
     'classes' => isset($classes) && is_string($classes) ? $classes : null,
     'footer_classes' => isset($footer_classes) && is_string($footer_classes) ? $footer_classes : '',
