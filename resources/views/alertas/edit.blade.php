@@ -8,28 +8,29 @@
         @method('put')
         @include('alertas._save')
         <br>
+
+    @component('@.bootstrap.grid-left-right')
+        @slot('left')
         <button type="submit" class="btn btn-warning">Actualizar alerta</button>
         <a href="{{ route('alertas.index') }}" class="btn btn-secondary">Regresar</a>
+        @endslot
+        
+        @slot('right')
+        @include('@.partials.modal-confirm-delete.trigger', ['only' => 'text'])
+        @endslot
+    @endcomponent
     </form>
-
-    @slot('footer')
-        @include('@.partials.modifiers-block', [
-            'model' => $alerta
-        ])
-    @endslot
 @endcomponent
 <br>
 
-<div class="text-end">
-    @component('@.partials.confirm-delete.bundle', [
-        'route' => route('alertas.destroy', $alerta),
-        'text' => 'Eliminar alerta',
-    ])
-        @slot('content')
-        <p class="lead">¿Deseas eliminar alerta <b>{{ $alerta->nombre }}</b>?</p>
-        @endslot
-    @endcomponent
+<div class="my-3">
+    @include('@.partials.block-modifiers.content', ['model' => $alerta])
 </div>
-<br>
+
+@component('@.partials.modal-confirm-delete.modal', [
+    'route' => route('alertas.destroy', $alerta)
+])
+<p class="">Eliminar la alerta <i>"{{ $alerta->nombre }}"</i>, afectaría la información de las etapas que contienen esta alerta.</p>
+@endcomponent
 
 @endsection

@@ -14,21 +14,25 @@
 
     @slot('options')
         <a href="{{ route('alertas.create') }}" class="btn btn-sm btn-primary">
-            <span class="fw-bold">+</span>
+            <span>+</span>
         </a>
     @endslot
 
     @component('@.bootstrap.table')
-        @slot('thead', ['Nivel','Nombre'])
+        @slot('thead', ['Nivel','Nombre','Descripción'])
         @foreach($alertas as $alerta)
         <tr>
             <td class="text-center" style="width:1%">
-                <span style="color:<?= $alerta->color ?>">{!! $symbols->circle !!}</span>
+                @include('@.bootstrap.icon', [
+                        'icon' => 'circle-fill',
+                        'style' => "color:{$alerta->color}",
+                ])
             </td>
             <td class="text-nowrap">{{ $alerta->nombre }}</td>
+            <td>{{ $alerta->descripcion }}</td>
             <td class="text-end">
                 <a href="{{ route('alertas.edit', $alerta) }}" class="btn btn-sm btn-outline-warning">
-                    {!! $svg->pencil !!}
+                    @include('@.bootstrap.icon', ['icon' => 'pencil-fill'])
                 </a>
             </td>
         </tr>
