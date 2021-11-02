@@ -5,6 +5,7 @@ $settings = (object) [
     'has_body' => $slot->isNotEmpty(),
     'has_footer' => isset($footer),
     'header' => (object) [
+        'pretitle' => $pretitle ?? null,
         'title' => $title ?? null,
         'subtitle' => $subtitle ?? null,
         'counter' => $counter ?? null,
@@ -18,10 +19,15 @@ $settings = (object) [
 ?>
 
 <div class="card border-0 shadow-sm">
+    <!-- Start header -->
     @if( $settings->has_header )
     <div class="card-header border-bottom bg-white py-3">
         <div class="d-flex justify-content-between align-items-center"> 
             <div class="text-start">
+                @if( $settings->header->pretitle )
+                <div class="text-muted small">{!! $settings->header->pretitle !!}</div>
+                @endif
+
                 @if( $settings->header->title )
                 <span class="lead align-middle">{!! $settings->header->title !!}</span>
                 @endif
@@ -31,7 +37,7 @@ $settings = (object) [
                 @endif
 
                 @if( $settings->header->subtitle )
-                <div class="small">{!! $settings->header->subtitle !!}</div>
+                <div class="text-muted small">{!! $settings->header->subtitle !!}</div>
                 @endif
             </div>
 
@@ -41,16 +47,21 @@ $settings = (object) [
         </div>
     </div>
     @endif
+    <!-- End header -->
 
+    <!-- Start body -->
     @if( $settings->has_body )    
     <div class="card-body p-4">
         {!! $settings->body !!}
     </div>
     @endif
+    <!-- End body -->
 
+    <!-- Start footer -->
     @if( $settings->has_footer )
     <div class="card-footer bg-white py-4">
         {!! $settings->footer !!}
     </div>
     @endif
+    <!-- End footer -->
 </div>
