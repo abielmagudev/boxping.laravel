@@ -3,13 +3,14 @@
 $settings = (object) [
     'model' => $model ?? null,
     'has_model' => isset($model) && $model instanceof \App\Ahex\Zowner\Domain\Contracts\ModifierIdentifiable,
+    'has_timestamps' => isset($model) && $model->timestamps,
     'show_updated' => isset($show_updated) && is_bool($show_updated) ? $show_updated : true,
     'show_created' => isset($show_created) && is_bool($show_created) ? $show_created : true,
 ];
 
 ?>
 
-@if( $settings->has_model )
+@if( $settings->has_model && $settings->has_timestamps )
 <div class="d-flex justify-content-center text-muted small">
     <div class="text-end me-2">
         @if( $settings->show_updated )
