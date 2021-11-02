@@ -12,6 +12,21 @@ Trait ConditionsTrait
         return (bool) is_int($this->consolidado_id);
     }
 
+    public function hasConsolidado()
+    {
+        return (bool) is_int($this->consolidado_id);
+    }
+
+    public function hasCliente()
+    {
+        return (bool) is_int($this->cliente_id);
+    }
+
+    public function hasDestinatario()
+    {
+        return (bool) is_int($this->destinatario_id);
+    }
+
     public function haveConsolidado()
     {
         return (bool) Consolidado::where('id', $this->consolidado_id)->exists();
