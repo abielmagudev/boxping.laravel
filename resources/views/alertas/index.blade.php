@@ -14,7 +14,7 @@
 
     @slot('options')
         <a href="{{ route('alertas.create') }}" class="btn btn-sm btn-primary">
-            <span>+</span>
+            <b>+</b>
         </a>
     @endslot
 
