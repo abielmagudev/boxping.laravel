@@ -5,11 +5,14 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use App\Ahex\Zkeleton\Domain\ModifiersTrait as Modifiers;
+use App\Ahex\Zowner\Domain\Contracts\ModifierIdentifiable;
+use App\Ahex\Zowner\Domain\Features\ModifiersFeature;
 
-class Conductor extends Model
+class Conductor extends Model implements ModifierIdentifiable
 {
-    use HasFactory, SoftDeletes, Modifiers;
+    use HasFactory,
+        SoftDeletes,
+        ModifiersFeature;
 
     protected $table = 'conductores';
 

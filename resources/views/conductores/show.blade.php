@@ -1,60 +1,56 @@
 @extends('app')
 @section('content')
 
-@component('@.bootstrap.page-header', [
+@include('@.bootstrap.page-header', [
     'title' => $conductor->nombre,
     'pretitle' => 'Conductor',
-    'goback' => route('conductores.index'),
 ])
-@endcomponent
 
 <div class="row">
-    <!-- Column importados -->
+    <!-- Column informacion -->
     <div class="col-sm">
-        @component('@.bootstrap.card')
-            @slot('header')
-            @component('@.bootstrap.grid-left-right')
-                @slot('left')
-                <span>Importados</span>
-                @endslot
-
-                @slot('right')
-                <a href="{{ route('entradas.index', ['conductor' => $conductor->id, 'filter' => csrf_token()]) }}" class="btn btn-sm btn-primary py-0">{{ $entradas->count() }}</a>
-                @endslot
+        @component('@.bootstrap.card', [
+            'title' => 'Información',
+        ])
+            <p class="m-0">
+                <small class="text-muted">Total</small>
+            </p>
+            @component('@.bootstrap.table')
+                <tr>
+                    <td>Entradas</td>
+                    <td class="text-end">
+                        <a href="{{ route('entradas.index', ['conductor' => $conductor->id, 'filter' => csrf_token()]) }}" class="link-primary text-decoration-none">{{ $entradas->count() }}</a>
+                    </td>
+                </tr>
             @endcomponent
-            @endslot
 
-            @slot('body')
-            @component('@.bootstrap.table', [
-                'borderless' => true
+            <p class="m-0">
+                <small class="text-muted">Contadores</small>
+            </p>
+            @component('@.bootstrap.table',[
+                'thead' => ['Vehículo', 'Entradas']
             ])
-                @slot('thead', ['Vehículo', 'Entradas'])
-                @slot('tbody')
                 @foreach($vehiculos_counter as $vehiculo_id => $vehiculo)
                 <?php $params = ['conductor' => $conductor->id, 'vehiculo' => $vehiculo_id, 'filter' => csrf_token()] ?>
                 <tr>
                     <td>{{ $vehiculo->nombre }}</td>
-                    <td>
-                        <a href="{{ route('entradas.index', $params) }}">{{ $vehiculo->entradas->count() }}</a>
+                    <td class="text-end">
+                        <a href="{{ route('entradas.index', $params) }}" class="text-decoration-none link-primary">{{ $vehiculo->entradas->count() }}</a>
                     </td>
                 </tr>
                 @endforeach
-                @endslot
             @endcomponent
-            @endslot
         @endcomponent
     </div>
 
     <!-- Column entradas -->
     <div class="col-sm col-sm-8">
-        @component('@.bootstrap.card')
-            @slot('header', 'Entradas recientes')
-            @slot('body')
-                @component('@.partials.entradas-table', [
-                    'entradas' => $entradas
-                ])
-                @endcomponent
-            @endslot
+        @component('@.bootstrap.card', [
+            'title' => 'Últimas entradas'
+        ])
+            @include('@.partials.table-entradas.content', [
+                'entradas' => $entradas
+            ])
         @endcomponent
     </div>
 </div>

@@ -6,35 +6,36 @@
 ])
 @endcomponent
 
-@component('@.bootstrap.card')
-    @slot('body')
-        <form action="{{ route('conductores.update', $conductor) }}" method="post" autocomplete="off">
-            @method('put')
-            @include('conductores._save')
-            <br>
+@component('@.bootstrap.card', [
+    'title' => 'Editar conductor'    
+])
+    <form action="{{ route('conductores.update', $conductor) }}" method="post" autocomplete="off">
+        @method('put')
+        @include('conductores._save')
+        <br>
+        @component('@.bootstrap.grid-left-right')
+            @slot('left')
             <button class="btn btn-warning">Actualizar conductor</button>
             <a href="{{ route('conductores.index') }}" class="btn btn-secondary">Regresar</a>
-        </form>
-    @endslot
-    
-    @slot('footer')
-        @include('@.partials.modifiers-block', [
-            'model' => $conductor
-        ])
-    @endslot
+            @endslot
+
+            @slot('right')
+            @include('@.partials.modal-confirm-delete.trigger', ['only' => 'text'])
+            @endslot
+        @endcomponent
+    </form>
 @endcomponent
 <br>
+    
+@include('@.partials.block-modifiers.content', ['model' => $conductor])
 
-<div class="text-end">
-    @component('@.partials.confirm-delete.bundle', [
-        'route' => route('conductores.destroy', $conductor),
-        'text' => 'Eliminar conductor',
-    ])
-        @slot('content')
-        <p class="lead">¿Deseas eliminar conductor <b>{{ $conductor->nombre }}</b>?</p>
-        @endslot
-    @endcomponent
-</div>
-<br>
+@component('@.partials.modal-confirm-delete.modal', [
+    'route' => route('conductores.destroy', $conductor),
+])
+<p>Al eliminar conductor <em>{{ $conductor->nombre }}</em> <br>no estará disponible en próximas operaciones.</p>
+<p>
+    <small>(Las entradas existentes conservarán este conductor.)</small>
+</p>
+@endcomponent
 
 @endsection
