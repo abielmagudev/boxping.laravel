@@ -1,62 +1,62 @@
 <?php
 $menu = array(
     (object) [
-        'title' => 'escritorio',
+        'title' => 'Escritorio',
         'route' => route('escritorio'),
         'active' => request()->is('escritorio*') || request()->is('/'),
     ],
     (object) [
-        'title' => 'consolidados',
+        'title' => 'Consolidados',
         'route' => route('consolidados.index'),
         'active' => request()->is('consolidados*'),
     ],
     (object) [
-        'title' => 'entradas',
+        'title' => 'Entradas',
         'route' => route('entradas.index'),
         'active' => request()->is('entradas*'),
     ],
     (object) [
-        'title' => 'salidas',
+        'title' => 'Salidas',
         'route' => route('salidas.index'),
         'active' => request()->is('salidas*'),
     ],
     (object) [
-        'title' => 'clientes',
+        'title' => 'Clientes',
         'route' => route('clientes.index'),
         'active' => request()->is('clientes*'),
     ],
     (object) [
-        'title' => 'etapas',
+        'title' => 'Etapas',
         'route' => route('etapas.index'),
         'active' => request()->is('etapas*') || request()->is('alertas*'),
     ],
     (object) [
-        'title' => 'alertas',
+        'title' => 'Alertas',
         'route' => route('alertas.index'),
         'active' => request()->is('etapas*') || request()->is('alertas*'),
     ],
     (object) [
-        'title' => 'importación',
+        'title' => 'Importación',
         'route' => route('conductores.index'),
         'active' => request()->is('conductores*') || request()->is('vehiculos*'),
     ],
     (object) [
-        'title' => 'reempacadores',
+        'title' => 'Reempacadores',
         'route' => route('reempacadores.index'),
         'active' => request()->is('reempacadores*') || request()->is('codigosr*'),
     ],
     (object) [
-        'title' => 'códigos Reempacado',
+        'title' => 'Códigos Reempacado',
         'route' => route('codigosr.index'),
         'active' => request()->is('reempacadores*') || request()->is('codigosr*'),
     ],
     (object) [
-        'title' => 'trayectorias',
+        'title' => 'Trayectorias',
         'route' => route('remitentes.index'),
         'active' => request()->is('destinatarios*') || request()->is('remitentes*'),
     ],
     (object) [
-        'title' => 'transportadoras',
+        'title' => 'Transportadoras',
         'route' => route('transportadoras.index'),
         'active' => request()->is('transportadoras*') || request()->is('incidentes*'),
     ],
@@ -84,7 +84,7 @@ $menu = array(
     <ul class="nav nav-pills flex-column small">
     @foreach($menu as $item)
         <li class="nav-item">
-            <a href="{{ $item->route }}" class="nav-link {{ ! $item->active ? 'text-white' : 'active text-white' }}">{{ ucfirst($item->title) }}</a>
+            <a href="{{ $item->route }}" class="nav-link {{ ! $item->active ? 'text-white' : 'active text-white' }}">{{ $item->title }}</a>
         </li>
     @endforeach
     </ul>
