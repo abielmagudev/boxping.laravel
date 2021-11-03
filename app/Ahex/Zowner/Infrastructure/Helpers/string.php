@@ -73,3 +73,15 @@ if( ! function_exists('randomLetter') )
         return $random_letter;
     }
 }
+
+if( ! function_exists('arrayToString') )
+{
+    function arrayToString($array, $glue = ' ')
+    {
+        if( is_string($array) )
+            return $array;
+
+        return (string) implode($glue, $array);
+    }
+}
+
