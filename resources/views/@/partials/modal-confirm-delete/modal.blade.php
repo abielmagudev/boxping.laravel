@@ -1,3 +1,10 @@
+<?php
+
+$settings = (object) [
+    'warning' => isset($warning) && is_bool($warning) ? $warning: false,
+];
+
+?>
 @component('@.bootstrap.modal', [
     'id' => 'modalConfirmDelete',
 ])
@@ -13,6 +20,12 @@
             <div class="h3 mb-4">¿Estás seguro?</div>
             <div class="px-4">
                 {!! $slot !!}
+
+                @if( $settings->warning )
+                <p>
+                    <small class="text-danger text-uppercase">* Eliminación permanente, no es recuperable</small>
+                </p>
+                @endif
             </div>
         </div>
 
