@@ -72,7 +72,7 @@ if(! $settings->checkbox->render )
             <!-- Destinatario & Localidad -->
             <td>
                 @if(! $entrada->hasDestinatario() )
-                <span class="text-muted">-</span>
+                <span class="d-block text-center text-muted">-</span>
 
                 @else
                 <span class="d-block">{{ $settings->defaults->destinatario->direccion ?? $entrada->destinatario->direccion ?? '-' }}</span>
