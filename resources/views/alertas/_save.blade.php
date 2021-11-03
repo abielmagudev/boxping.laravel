@@ -1,15 +1,13 @@
 @csrf
 <div class="mb-3">
     <label for="input-nombre" class="form-label small">Nombre</label>
-    <input name="nombre" value="{{ old('nombre', $alerta->nombre) }}" id="input-nombre" type="text" class="form-control {{ ! $errors->has('nombre') ?: 'is-invalid' }}" autofocus required>
-    @error('nombre')
-    <small class="text-danger">{{ $message }}</small>
-    @enderror
+    <input name="nombre" value="{{ old('nombre', $alerta->nombre) }}" id="input-nombre" type="text" class="form-control {{ bootstrap_isInputInvalid('nombre', $errors) }}" autofocus required>
+    @include('@.bootstrap.invalid-input-message', ['name' => 'nombre'])
 </div>
 
 <div class="mb-3">
     <label for="select-nivel" class="form-label small">Nivel</label>
-    <div class="border rounded p-3 {{ ! $errors->has('nivel') ?: 'border-danger' }}"> 
+    <div class="border rounded p-3 {{ bootstrap_isInputInvalid('nivel', $errors, 'border-danger') }}"> 
         @foreach($all_niveles as $nivel => $attrs)
         <!-- {{ $nivel }} -->
         <div class="row mb-3 mb-md-0">
@@ -25,7 +23,5 @@
         </div>
         @endforeach
     </div>
-    @error('nivel')
-    <small class="text-danger">{{ $message }}</small>
-    @enderror
+    @include('@.bootstrap.invalid-input-message', ['name' => 'nivel'])
 </div>
