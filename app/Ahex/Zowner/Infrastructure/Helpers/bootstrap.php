@@ -11,10 +11,13 @@
  */
 if( ! function_exists('bootstrap_validateInput') )
 {
-    function bootstrap_validateInput($validation)
+    function bootstrap_validateInput($validation, $add_classes_valid = [], $add_classes_invalid = [])
     {
-        $result_validation = (bool) is_callable($validation) ? $validation() : $validation;
-        return $result_validation ? 'is-valid' : 'is-invalid';
+        $add_classes_valid   = arrayToString($add_classes_valid);
+        $add_classes_invalid = arrayToString($add_classes_invalid);
+        $result_validation   = (bool) is_callable($validation) ? $validation() : $validation;
+        
+        return $result_validation ? "is-valid {$add_classes_valid}" : "is-invalid {$add_classes_invalid}";
     }
 }
 
@@ -31,10 +34,12 @@ if( ! function_exists('bootstrap_validateInput') )
  */
 if( ! function_exists('bootstrap_isInputInvalid') )
 {
-    function bootstrap_isInputInvalid($name, \Illuminate\Support\ViewErrorBag $errors, $return_valid_class = false)
+    function bootstrap_isInputInvalid($name, \Illuminate\Support\ViewErrorBag $errors, $add_classes = [], $return_valid_class = false)
     {
+        $add_classes = arrayToString($add_classes);
+
         if( $errors->has($name) )
-            return 'is-invalid';
+            return "is-invalid {$add_classes}";
 
         return ! $return_valid_class ?: 'is-valid';
     }
