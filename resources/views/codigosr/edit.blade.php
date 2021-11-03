@@ -1,40 +1,36 @@
 @extends('app')
 @section('content')
 
-@component('@.bootstrap.page-header', [
-    'title' => 'Editar código de reempacado',
+@component('@.bootstrap.card', [
+    'title' => 'Editar Código de Reempacado',
 ])
-@endcomponent
-
-@component('@.bootstrap.card')
-    @slot('body')
     <form action="{{ route('codigosr.update', $codigor) }}" method="post" autocomplete="off">
         @method('patch')
         @include('codigosr._save')
         <br>
-        <button class="btn btn-warning" type="submit">Actualizar código</button>
-        <a href="{{ route('codigosr.index') }}" class="btn btn-secondary">Regresar</a>
-    </form>
-    @endslot
+        @component('@.bootstrap.grid-left-right')
+            @slot('left')
+            <button class="btn btn-warning" type="submit">Actualizar código</button>
+            <a href="{{ route('codigosr.index') }}" class="btn btn-secondary">Regresar</a>
+            @endslot
 
-    @slot('footer')
-        @include('@.partials.modifiers-block', [
-            'model' => $codigor
-        ])
-    @endslot
+            @slot('right')
+            @include('@.partials.modal-confirm-delete.trigger', ['only' => 'text'])
+            @endslot
+        @endcomponent
+    </form>
 @endcomponent
 <br>
 
-<div class="text-end">
-    @component('@.partials.confirm-delete.bundle', [
-        'route' => route('codigosr.destroy', $codigor),
-        'text' => 'Eliminar código de reempacado'
-    ])
-        @slot('content')
-        <p class="lead">¿Deseas eliminar código de reempacado <b>{{ $codigor->nombre }}</b>?</p>
-        @endslot
-    @endcomponent 
-</div>
-<br>
+@include('@.partials.block-modifiers.content', ['model' => $codigor])
+
+@component('@.partials.modal-confirm-delete.modal', [
+    'route' => route('codigosr.destroy', $codigor),
+])
+    <p>Si eliminas código reempacado "{{ $codigor->nombre }}", no estará disponible para próximos reempaques.</p>
+    <p>
+        <small>(Las entradas existentes conservarán <br>este código de reempacado)</small>
+    </p>
+@endcomponent
 
 @endsection

@@ -40,7 +40,7 @@ class CodigorController extends Controller
         return view('codigosr.show', [
             'codigor' => $codigor,
             'entradas' => $entradas,
-            'reempacadores_counter' => EntradaCounter::byReempacador($entradas),
+            'reempacadores' => EntradaCounter::byReempacador($entradas),
         ]);
     }
 

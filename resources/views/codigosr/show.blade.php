@@ -1,67 +1,58 @@
 @extends('app')
 @section('content')
 
-@component('@.bootstrap.page-header', [
-    'pretitle' => 'Código de reempacado',
-    'title' => $codigor->nombre,
-    'goback' => route('codigosr.index'),
-])
-@endcomponent
-
-@if( $codigor->haveDescription() )
-<p><em>{{ $codigor->descripcion }}</em></p>
-<br>
-@endif
-
 <div class="row">
 
-    <!-- Column reempacados -->
+    <!-- Column Information -->
     <div class="col-sm">
-        @component('@.bootstrap.card')
-            @slot('header')
-            @component('@.bootstrap.grid-left-right')
-                @slot('left')
-                <span>Reempacados</span>
-                @endslot
+        @component('@.bootstrap.card', [
+            'pretitle' => 'Código Reempacado',
+            'title' => $codigor->nombre,
+        ])
+            <p>
+                <small class="d-block text-muted">Descripción</small>
+                <span>{{ $codigor->descripcion }}</span>
+            </p>
 
-                @slot('right')
-                <a href="{{ route('entradas.index', ['codigor' => $codigor->id, 'filter' => csrf_token()]) }}" class="btn btn-sm btn-primary py-0">{{ $entradas->count() }}</a>
-                @endslot
+            <hr class="text-secondary">
+
+            <p class="m-0">
+                <small class="d-block text-muted">Contadores</small>
+            </p>
+
+            @component('@.bootstrap.table')
+                <tr>
+                    <td>Entradas</td>
+                    <td class="text-end">
+                        <a href="{{ route('entradas.index', ['codigor' => $codigor->id, 'filter' => csrf_token()]) }}" class="link-primary text-decoration-none">{{ $entradas->count() }}</a>
+                    </td>
+                </tr>
             @endcomponent
-            @endslot
 
-            @slot('body')
-                @component('@.bootstrap.table', [
-                    'borderless' => true
-                ])
-                    @slot('thead', ['Reempacador', 'Entradas'])
-                    @slot('tbody')
-                    @foreach($reempacadores_counter as $reempacador_id => $reempacador)
-                    <?php $params = ['codigor' => $codigor->id, 'reempacador' => $reempacador_id, 'filter' => csrf_token()] ?>
-                    <tr>
-                        <td>{{ $reempacador->nombre }}</td>
-                        <td>
-                            <a href="{{ route('entradas.index', $params) }}">{{ $reempacador->entradas->count() }}</a>
-                        </td>
-                    </tr>
-                    @endforeach
-                    @endslot
-                @endcomponent
-            @endslot
+            @component('@.bootstrap.table', [
+                'thead' => ['Reempacador', 'Entradas']
+            ])
+                @foreach($reempacadores as $reempacador_id => $reempacador)
+                <tr>
+                    <td>{{ $reempacador->nombre }}</td>
+                    <td class="text-end">
+                        <a href="{{ route('entradas.index', ['codigor' => $codigor->id, 'reempacador' => $reempacador_id, 'filter' => csrf_token()]) }}" class="link-primary text-decoration-none">{{ $reempacador->entradas->count() }}</a>
+                    </td>
+                </tr>
+                @endforeach
+            @endcomponent
         @endcomponent
     </div>
 
-    <!-- Column entradas -->
+    <!-- Column Entradas -->
     <div class="col-sm col-sm-8">
         @component('@.bootstrap.card', [
-            'header' => 'Entradas recientes'
+            'pretitle' => 'Últimas',
+            'title' => 'Entradas actualizadas'
         ])
-            @slot('body')
-            @component('@.partials.entradas-table', [
+            @include('@.partials.table-entradas.content', [
                 'entradas' => $entradas
             ])
-            @endcomponent
-            @endslot
         @endcomponent
     </div>
 </div>

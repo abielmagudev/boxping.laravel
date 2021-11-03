@@ -1,46 +1,34 @@
 @extends('app')
 @section('content')
 
-@component('@.subnavs.reempacadores-codigosr')
-    @slot('active', 2)
-@endcomponent
-
-@component('@.bootstrap.page-header', [
-    'title' => 'Códigos de reempacado',
-    'counter' => $codigosr->count(),
+@component('@.bootstrap.card', [
+    'title' => 'Códigos Reempacado',
+    'counter' => $codigosr->count(),    
 ])
     @slot('options')
     <a href="{{ route('codigosr.create') }}" class="btn btn-sm btn-primary">
-        <span class="d-block d-md-none fw-bold">+</span>
-        <span class="d-none d-md-block">Nuevo código de reempacado</span>
+        <span class="fw-bold">+</span>
     </a>
     @endslot
-@endcomponent
 
-@component('@.bootstrap.card')
-    @slot('body')
     @component('@.bootstrap.table', [
         'thead' => ['Nombre','Descripción'],
     ])
-        @slot('tbody')
         @foreach($codigosr as $codigor)
         <tr>
             <td>{{ $codigor->nombre }}</td>
             <td>{{ $codigor->descripcion }}</td>
             <td class="text-nowrap text-end">
                 <a href="{{ route('codigosr.show', $codigor) }}" class="btn btn-sm btn-outline-primary">
-                    {!! $svg->eye !!}
+                    @include('@.bootstrap.icon', ['icon' => 'eye'])
                 </a>
                 <a href="{{ route('codigosr.edit', $codigor) }}" class="btn btn-sm btn-outline-warning">
-                    {!! $svg->pencil !!}
+                    @include('@.bootstrap.icon', ['icon' => 'pencil-fill'])
                 </a>
             </td>
         </tr>
         @endforeach
-        @endslot
     @endcomponent
-
-    @endslot
 @endcomponent
 <br>
 
