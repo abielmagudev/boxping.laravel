@@ -11,7 +11,7 @@
         @component('@.bootstrap.grid-left-right')
             @slot('left')
             <button class="btn btn-warning" type="submit">Actualizar cliente</button>
-            <a href="{{ route('clientes.show', $cliente) }}" class="btn btn-secondary">Regresar</a>
+            <a href="{{ route('clientes.index') }}" class="btn btn-secondary">Regresar</a>
             @endslot
             
             @slot('right')
@@ -27,9 +27,9 @@
 @component('@.partials.modal-confirm-delete.modal', [
     'route' => route('clientes.destroy', $cliente),
 ])
-    <p>Si eliminas el cliente "{{ $cliente->nombre }}", no estará disponible para consolidados y entradas.</p>
+    <p>Al eliminar el cliente <em>{{ $cliente->nombre }}</em> <br> no estará disponible para consolidados y entradas.</p>
     <p>
-        <small>Se conservará los consolidados y las entradas <br>ya existentes de este cliente.</small>
+        <small>(Se conservará los consolidados y las entradas existentes de este cliente.)</small>
     </p>
 @endcomponent
 

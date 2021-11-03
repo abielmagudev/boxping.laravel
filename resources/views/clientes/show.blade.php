@@ -1,18 +1,17 @@
 @extends('app')
 @section('content')
 
+@include('@.bootstrap.page-header', [
+    'pretitle' => 'Cliente',
+    'title' => $cliente->nombre,
+])
+
 <div class="row">
     <!-- Column Informacion Cliente -->
     <div class="col-sm col-sm-4">
     @component('@.bootstrap.card', [
-        'pretitle' => 'Cliente',
-        'title' => $cliente->nombre,
+        'title' => 'Información',
     ])
-        @slot('options')
-        <a href="{{ route('clientes.edit', $cliente) }}" class="btn btn-sm btn-warning">
-            @include('@.bootstrap.icon', ['icon' => 'pencil-fill'])
-        </a>
-        @endslot
         <p>
             <small class="d-block text-muted">Alias</small>
             <span>{{ $cliente->alias }}</span>
@@ -40,7 +39,7 @@
         </p>
         <hr class="text-secondary">
         <p class="m-0">
-            <small class="d-block text-muted">Contadores</small>
+            <small class="d-block text-muted">Totales</small>
         </p>
         @component('@.bootstrap.table')
             <tr>
@@ -63,13 +62,11 @@
     <!-- Column Entradas -->
     <div class="col-sm">
         @component('@.bootstrap.card', [
-            'pretitle' => 'Últimas',
-            'title' => 'Entradas actualizadas',
+            'title' => 'Últimas entradas',
         ])
             @include('@.partials.table-entradas.content', [
                 'entradas' => $entradas,
                 'cliente' => $cliente,
-                'form_id' => 'printing',
             ])
         @endcomponent
     </div>

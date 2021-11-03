@@ -28,9 +28,10 @@
 </div>
 
 @component('@.partials.modal-confirm-delete.modal', [
-    'route' => route('alertas.destroy', $alerta)
+    'route' => route('alertas.destroy', $alerta),
+    'warning' => true
 ])
-<p class="">Eliminar la alerta <i>"{{ $alerta->nombre }}"</i>, afectaría la información de las etapas que contienen esta alerta.</p>
+<p>Al eliminar la alerta <i>{{ $alerta->nombre }}</i> <br> no estará disponible para próximas operaciones <br> y afectaría la información de las etapas que contienen esta alerta.</p>
 @endcomponent
 
 @endsection

@@ -2,7 +2,7 @@
 @section('content')
 
 @component('@.bootstrap.card', [
-    'title' => 'Nuevo Código de Reempacado',
+    'title' => 'Nuevo código de reempacado',
 ])
     <form action="{{ route('codigosr.store') }}" method="post" autocomplete="off">
         @include('codigosr._save')

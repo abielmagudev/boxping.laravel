@@ -1,13 +1,17 @@
 @extends('app')
 @section('content')
 
+@include('@.bootstrap.page-header', [
+    'pretitle' => 'Código Reempacado',
+    'title' => $codigor->nombre,
+])
+
 <div class="row">
 
     <!-- Column Information -->
     <div class="col-sm">
         @component('@.bootstrap.card', [
-            'pretitle' => 'Código Reempacado',
-            'title' => $codigor->nombre,
+            'title' => 'Información',
         ])
             <p>
                 <small class="d-block text-muted">Descripción</small>
@@ -17,9 +21,8 @@
             <hr class="text-secondary">
 
             <p class="m-0">
-                <small class="d-block text-muted">Contadores</small>
+                <small class="d-block text-muted">Total</small>
             </p>
-
             @component('@.bootstrap.table')
                 <tr>
                     <td>Entradas</td>
@@ -29,6 +32,9 @@
                 </tr>
             @endcomponent
 
+            <p class="m-0">
+                <small class="d-block text-muted">Contadores</small>
+            </p>
             @component('@.bootstrap.table', [
                 'thead' => ['Reempacador', 'Entradas']
             ])

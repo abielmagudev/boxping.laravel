@@ -2,7 +2,7 @@
 @section('content')
 
 @component('@.bootstrap.card', [
-    'title' => 'Editar Código de Reempacado',
+    'title' => 'Editar código de reempacado',
 ])
     <form action="{{ route('codigosr.update', $codigor) }}" method="post" autocomplete="off">
         @method('patch')
@@ -27,7 +27,7 @@
 @component('@.partials.modal-confirm-delete.modal', [
     'route' => route('codigosr.destroy', $codigor),
 ])
-    <p>Si eliminas código reempacado "{{ $codigor->nombre }}", no estará disponible para próximos reempaques.</p>
+    <p>Al eliminar código reempacado <em>{{ $codigor->nombre }}</em> <br> no estará disponible para próximos reempaques.</p>
     <p>
         <small>(Las entradas existentes conservarán <br>este código de reempacado)</small>
     </p>
