@@ -41,8 +41,13 @@ $menu = array(
         'active' => request()->is('conductores*') || request()->is('vehiculos*'),
     ],
     (object) [
-        'title' => 'reempaque',
+        'title' => 'reempacadores',
         'route' => route('reempacadores.index'),
+        'active' => request()->is('reempacadores*') || request()->is('codigosr*'),
+    ],
+    (object) [
+        'title' => 'códigos Reempacado',
+        'route' => route('codigosr.index'),
         'active' => request()->is('reempacadores*') || request()->is('codigosr*'),
     ],
     (object) [
