@@ -34,7 +34,6 @@ $theads = array_diff_key($settings->all_theads, $except_keys);
     @component('@.bootstrap.table')
         @slot('thead', $theads)
 
-        @slot('tbody')
         @foreach($settings->entradas as $entrada)
         <?php $checkbox_id = "checkboxEntrada{$entrada->id}" ?>
         <tr>
@@ -80,12 +79,11 @@ $theads = array_diff_key($settings->all_theads, $except_keys);
 
             @if( ! in_array('options', $settings->except) )
             <td class='text-end'>
-                <a href="{{ route('entradas.show', $entrada) }}" class="btn btn-sm btn-outline-primary">{!! $svg->eye !!}</a>
+                <a href="{{ route('entradas.show', $entrada) }}" class="btn btn-sm btn-outline-primary">s</a>
             </td>
             @endif
         </tr>
         @endforeach
-        @endslot
     @endcomponent
 
 @else
