@@ -10,7 +10,7 @@ $settings = (object) [
 
 <a href="#!" class="link-danger text-decoration-none" data-bs-toggle="modal" data-bs-target="#modalConfirmDelete">
     @if( in_array('icon', $settings->only)  )      
-    <span class="<?= array_diff($items, $settings->only) ?: 'me-1' ?>">
+    <span class="<?= (bool) array_diff($items, $settings->only) ?: 'me-1' ?>">
         @include('@.bootstrap.icon', ['icon' => 'trash-fill'])
     </span>
     @endif
