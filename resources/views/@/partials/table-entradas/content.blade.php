@@ -29,7 +29,7 @@ $settings = (object) [
  * 
  */
 if(! $settings->checkbox->render )
-    array_unshift($settings->thead);
+    array_shift($settings->thead);
 
 ?>
 
