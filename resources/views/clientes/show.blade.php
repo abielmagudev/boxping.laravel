@@ -1,25 +1,22 @@
 @extends('app')
 @section('content')
 
-@component('@.bootstrap.page-header', [
-    'title' => "{$cliente->nombre} ({$cliente->alias})",
-    'pretitle' => 'Cliente',
-    'goback' => route('clientes.index'),
-])
-    @slot('options')
-    <a href="{{ route('clientes.edit', $cliente) }}" class="btn btn-sm btn-warning">
-        <span class="d-block d-md-none">{!! $svg->pencil_fill !!}</span>
-        <span class="d-none d-md-block">Editar</span>
-    </a>
-    @endslot
-@endcomponent
-
 <div class="row">
-    <!-- Column informacion -->
-    <div class="col-sm">
-    @component('@.bootstrap.card')
-        @slot('header', 'Información')
-        @slot('body')
+    <!-- Column Informacion Cliente -->
+    <div class="col-sm col-sm-4">
+    @component('@.bootstrap.card', [
+        'pretitle' => 'Cliente',
+        'title' => $cliente->nombre,
+    ])
+        @slot('options')
+        <a href="{{ route('clientes.edit', $cliente) }}" class="btn btn-sm btn-warning">
+            @include('@.bootstrap.icon', ['icon' => 'pencil-fill'])
+        </a>
+        @endslot
+        <p>
+            <small class="d-block text-muted">Alias</small>
+            <span>{{ $cliente->alias }}</span>
+        </p>
         <p>
             <small class="d-block text-muted">Contacto</small>
             <span>{{ $cliente->contacto }}</span>
@@ -41,41 +38,42 @@
             <small class="d-block text-muted">Notas</small>
             <span>{{ $cliente->notas }}</span>
         </p>
-        @endslot
+        <hr class="text-secondary">
+        <p class="m-0">
+            <small class="d-block text-muted">Contadores</small>
+        </p>
+        @component('@.bootstrap.table')
+            <tr>
+                <td class="ps-1">Consolidados</td>
+                <td class="text-end">
+                    <a class="link-primary text-decoration-none" href="{{ route('consolidados.index') }}">{{ $cliente->consolidados->count() }}</a>
+                </td>
+            </tr>
+            <tr>
+                <td class="ps-1">Entradas</td>
+                <td class="text-end">
+                    <a class="link-primary text-decoration-none" href="{{ route('entradas.index') }}">{{ $entradas->count() }}</a>
+                </td>
+            </tr>
+        @endcomponent
+
     @endcomponent
     </div>
 
-    <!-- Column graficas -->
+    <!-- Column Entradas -->
     <div class="col-sm">
-        @component('@.bootstrap.card')
-            @slot('header', 'Contadores')
-            @slot('body')
-            <div class="row align-items-center text-center">
-                <div class="col">
-                    <p class="small mb-1">CONSOLIDADOS</p>
-                    <a class="display-6 text-decoration-none" href="#!">{{ $cliente->consolidados->count() }}</a>
-                </div>
-                <div class="col">
-                    <p class="small mb-1">ENTRADAS</p>
-                    <a class="display-6 text-decoration-none" href="#!">{{ $entradas->count() }}</a>
-                </div>
-            </div>
-            @endslot
+        @component('@.bootstrap.card', [
+            'pretitle' => 'Últimas',
+            'title' => 'Entradas actualizadas',
+        ])
+            @include('@.partials.table-entradas.content', [
+                'entradas' => $entradas,
+                'cliente' => $cliente,
+                'form_id' => 'printing',
+            ])
         @endcomponent
     </div>
 </div>
-<br>
-
-@component('@.bootstrap.card')
-    @slot('header', 'Entradas recientes')
-    @slot('body')
-    @component('@.partials.entradas-table', [
-        'entradas' => $entradas,
-        'except' => ['cliente'],
-    ])
-    @endcomponent
-    @endslot
-@endcomponent
 <br>
 
 @endsection

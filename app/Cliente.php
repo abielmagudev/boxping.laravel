@@ -5,11 +5,14 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use App\Ahex\Zkeleton\Domain\ModifiersTrait as Modifiers;
+use App\Ahex\Zowner\Domain\Contracts\ModifierIdentifiable;
+use App\Ahex\Zowner\Domain\Features\ModifiersFeature;
 
-class Cliente extends Model
+class Cliente extends Model implements ModifierIdentifiable
 {
-    use HasFactory, SoftDeletes, Modifiers;
+    use HasFactory,
+        SoftDeletes,
+        ModifiersFeature;
     
     protected $fillable = array(
         'nombre',
@@ -49,8 +52,6 @@ class Cliente extends Model
 
     public static function prepare($validated)
     {
-        $user_id = mt_rand(1,10);
-
         $prepared = [
             'nombre' => $validated['nombre'],
             'alias' => strtoupper($validated['alias']),
@@ -62,7 +63,7 @@ class Cliente extends Model
             'estado' => capitalize($validated['estado']),
             'pais' => $validated['pais'],
             'notas'  => $validated['notas'],
-            'updated_by' => mt_rand(1,10),
+            'updated_by' => auth()->user()->id,
         ];
 
         if( request()->isMethod('post') )
