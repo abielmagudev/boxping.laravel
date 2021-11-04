@@ -1,9 +1,8 @@
 <h6>Contenido</h6>
-<div class="d-md-flex">
+<div class="d-md-flex border rounded p-3 {{ bootstrap_isInputInvalid('contenido', $errors, 'border-danger') }}">
    @foreach($contenidos as $contenido => $atributos)     
    <div class="mb-3">
       <label class="form-label small">{{ ucfirst($contenido) }}</label>
-
       @foreach($atributos as $atributo => $etiqueta)
       <?php
          $checkbox_checked = $guia->haveContenido($contenido, $atributo) || old("contenido.{$contenido}.{$atributo}") === 'yes' ? 'checked' : '';
@@ -15,8 +14,8 @@
          <label class="form-check-label" for="{{ $checkbox_id }}">{{ $etiqueta }}</label>
       </div>
       @endforeach
-
    </div>
    @endforeach
 </div>
+@include('@.bootstrap.invalid-input-message', ['name' => 'contenido'])
 <br>

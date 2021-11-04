@@ -21,7 +21,7 @@ class GuiaImpresionController extends Controller
     public function create()
     {
         return view('guias_impresion.create', [
-            'mediciones' => config('system.medidas'),
+            'mediciones' => config('system.mediciones'),
             'tipografias' => config('system.tipografias'),
             'contenidos' => GuiaImpresion::getModelsContent(),
             'guia' => new GuiaImpresion,
@@ -41,7 +41,7 @@ class GuiaImpresionController extends Controller
     public function edit(GuiaImpresion $guia)
     {
         return view('guias_impresion.edit', [
-            'mediciones' => config('system.medidas'),
+            'mediciones' => config('system.mediciones'),
             'tipografias' => config('system.tipografias'),
             'contenidos' => GuiaImpresion::getModelsContent(),
             'guia' => $guia,

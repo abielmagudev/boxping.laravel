@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class GuiaImpresion extends Model
 {    
     protected $table = 'guias_impresion';
-
+    
     protected $fillable = [
         'nombre',
         'formato_json',
@@ -104,25 +104,25 @@ class GuiaImpresion extends Model
 
     private static function prepareFormato($formato)
     {
-        $area = config('system.medidas.area');
+        $longitud = config('system.mediciones.longitud');
 
         return json_encode([
             'ancho' => $formato['ancho'] ?? null,
             'altura' => $formato['altura'] ?? null,
-            'medicion' => array_key_exists($formato['medicion'], $area) ? $formato['medicion'] : array_key_first($area),
+            'medicion' => array_key_exists($formato['medicion'], $longitud) ? $formato['medicion'] : array_key_first($longitud),
         ]);
     }
 
     private static function prepareMargenes($margenes)
     {
-        $area = config('system.medidas.area');
+        $longitud = config('system.mediciones.longitud');
 
         return json_encode([
             'arriba' => $margenes['arriba'] ?? null,
             'derecha' => $margenes['derecha'] ?? null,
             'abajo' => $margenes['abajo'] ?? null,
             'izquierda' => $margenes['izquierda'] ?? null,
-            'medicion' => array_key_exists($margenes['medicion'], $area) ? $margenes['medicion'] : array_key_first($area),
+            'medicion' => array_key_exists($margenes['medicion'], $longitud) ? $margenes['medicion'] : array_key_first($longitud),
         ]);
     }
 
