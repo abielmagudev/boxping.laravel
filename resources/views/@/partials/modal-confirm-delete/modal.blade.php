@@ -6,6 +6,7 @@ $settings = (object) [
     'custom' => $slot ?? null,
     'is_hard' => isset($is_hard) && is_bool($is_hard) ? $is_hard: false,
     'is_soft' => isset($is_soft) && is_bool($is_soft) ? $is_soft : true,
+    'route' => $route,
 ];
 
 ?>
@@ -44,7 +45,7 @@ $settings = (object) [
             </div>
         </div>
 
-        <form action="{{ $route }}" method="post" id="formConfirmDelete">
+        <form action="{{ $settings->route }}" method="post" id="formConfirmDelete">
             @csrf
             @method('delete')
             <br>
