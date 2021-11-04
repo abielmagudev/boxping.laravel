@@ -11,7 +11,7 @@
 </div>  
 <div class="mb-3">
     <label class="form-label small">Tareas</label>
-    <div class="border rounded p-3 {{ bootstrap_isInputInvalid('pais', $errors, 'border-danger) }}">
+    <div class="border rounded p-3 {{ bootstrap_isInputInvalid('pais', $errors, 'border-danger') }}">
         @foreach($etapa->todas_tareas as $tarea => $descripcion)   
         <?php 
             $switch_id = 'checkbox' . ucfirst($tarea);
