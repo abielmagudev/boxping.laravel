@@ -13,7 +13,7 @@ $settings = (object) [
 
 ?>
 
-@if( $settings->has_model )
+@if( $settings->has_model && $settings->has_timestamps || $settings->has_modifiers )
 <div class="d-md-flex align-items-center justify-content-evenly text-muted text-uppercase text-center my-3" style="font-size:0.75rem">
 
     @if( $settings->show_updated )      
