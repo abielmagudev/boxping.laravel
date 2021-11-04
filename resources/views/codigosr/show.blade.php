@@ -46,8 +46,7 @@
     <!-- Column Entradas -->
     <div class="col-sm col-sm-8">
         @component('@.bootstrap.card', [
-            'pretitle' => 'Últimas',
-            'title' => 'Entradas actualizadas'
+            'title' => 'Entradas recientes'
         ])
             @include('@.partials.table-entradas.content', [
                 'entradas' => $entradas
