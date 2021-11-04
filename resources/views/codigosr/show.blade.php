@@ -20,21 +20,14 @@
 
             <hr class="text-secondary">
 
-            <p class="m-0">
-                <small class="d-block text-muted">Total</small>
-            </p>
-            @component('@.bootstrap.table')
-                <tr>
-                    <td>Entradas</td>
-                    <td class="text-end">
-                        <a href="{{ route('entradas.index', ['codigor' => $codigor->id, 'filter' => csrf_token()]) }}" class="link-primary text-decoration-none">{{ $entradas->count() }}</a>
-                    </td>
-                </tr>
-            @endcomponent
+            @include('@.partials.grid-total-entradas.content', [
+                'route' => route('entradas.index', ['codigor' => $codigor->id, 'filter' => csrf_token()]),
+                'total' => $entradas->count(),
+            ])
 
-            <p class="m-0">
-                <small class="d-block text-muted">Contadores</small>
-            </p>
+            <hr class="text-secondary">
+
+            <small class="d-block text-muted">Contadores</small>
             @component('@.bootstrap.table', [
                 'thead' => ['Reempacador', 'Entradas']
             ])

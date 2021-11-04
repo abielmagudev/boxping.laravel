@@ -13,16 +13,10 @@
         @component('@.bootstrap.card', [
             'title' => 'Información'    
         ])
-            <p class="m-0 small text-muted">Total</p>
-            @component('@.bootstrap.grid-left-right')
-                @slot('left')
-                <span>Entradas</span>
-                @endslot
-
-                @slot('right')
-                <a href="{{ route('entradas.index', ['vehiculo' => $vehiculo->id, 'filter' => csrf_token()]) }}" class="btn btn-sm btn-primary py-0">{{ $entradas->count() }}</a>
-                @endslot
-            @endcomponent
+            @include('@.partials.grid-total-entradas.content', [
+                'route' => route('entradas.index', ['vehiculo' => $vehiculo->id, 'filter' => csrf_token()]),
+                'total' => $entradas->count(),
+            ])
             <br>
 
             <p class="m-0 small text-muted">Contadores</p>

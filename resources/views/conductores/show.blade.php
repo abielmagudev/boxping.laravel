@@ -12,21 +12,13 @@
         @component('@.bootstrap.card', [
             'title' => 'Información',
         ])
-            <p class="m-0">
-                <small class="text-muted">Total</small>
-            </p>
-            @component('@.bootstrap.table')
-                <tr>
-                    <td>Entradas</td>
-                    <td class="text-end">
-                        <a href="{{ route('entradas.index', ['conductor' => $conductor->id, 'filter' => csrf_token()]) }}" class="link-primary text-decoration-none">{{ $entradas->count() }}</a>
-                    </td>
-                </tr>
-            @endcomponent
+            @include('@.partials.grid-total-entradas.content', [
+                'route' => route('entradas.index', ['conductor' => $conductor->id, 'filter' => csrf_token()]),
+                'total' =>  $entradas->count(),   
+            ])
+            <br>
 
-            <p class="m-0">
-                <small class="text-muted">Contadores</small>
-            </p>
+            <small class="text-muted">Contadores</small>
             @component('@.bootstrap.table',[
                 'thead' => ['Vehículo', 'Entradas']
             ])
