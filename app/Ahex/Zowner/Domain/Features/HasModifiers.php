@@ -4,7 +4,7 @@ namespace App\Ahex\Zowner\Domain\Features;
 
 use App\User;
 
-trait ModifiersFeature
+trait HasModifiers
 {
     public function creator()
     {
