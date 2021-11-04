@@ -7,14 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Ahex\Zowner\Domain\Contracts\ModifierIdentifiable;
-use App\Ahex\Zowner\Domain\Features\ModifiersFeature;
+use App\Ahex\Zowner\Domain\Features\HasModifiers;
 use App\Ahex\GuiaImpresion\Application\ModelAttributesPrintableInterface as ModelAttributesPrintable;
 
 class Etapa extends Model implements ModifierIdentifiable, ModelAttributesPrintable
 {
     use HasFactory,
         SoftDeletes, 
-        ModifiersFeature; 
+        HasModifiers; 
     
     const MEDICION_SIN_NOMBRE = null;
     const SIN_TAREAS = null;

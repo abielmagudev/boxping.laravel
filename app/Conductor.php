@@ -6,13 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Ahex\Zowner\Domain\Contracts\ModifierIdentifiable;
-use App\Ahex\Zowner\Domain\Features\ModifiersFeature;
+use App\Ahex\Zowner\Domain\Features\HasModifiers;
 
 class Conductor extends Model implements ModifierIdentifiable
 {
     use HasFactory,
         SoftDeletes,
-        ModifiersFeature;
+        HasModifiers;
 
     protected $table = 'conductores';
 

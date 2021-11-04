@@ -7,14 +7,14 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Ahex\Zowner\Domain\Contracts\ValueSearchable;
 use App\Ahex\Zowner\Domain\Contracts\ModifierIdentifiable;
-use App\Ahex\Zowner\Domain\Features\ModifiersFeature;
+use App\Ahex\Zowner\Domain\Features\HasModifiers;
 use App\Ahex\GuiaImpresion\Application\ModelAttributesPrintableInterface as ModelAttributesPrintable;
 
 class Destinatario extends Model implements ModifierIdentifiable, ValueSearchable, ModelAttributesPrintable
 {
     use HasFactory,
         SoftDeletes, 
-        ModifiersFeature;
+        HasModifiers;
 
     protected $fillable = array(
         'nombre',
