@@ -23,6 +23,8 @@
 @endcomponent
 <br>
 
+@include('@.partials.block-modifiers.content', ['model' => $zona])
+
 @component('@.partials.modal-confirm-delete.modal', [
     'route' => route('zonas.destroy', [$etapa, $zona]),
     'warning' => true,
