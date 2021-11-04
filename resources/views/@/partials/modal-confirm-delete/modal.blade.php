@@ -1,7 +1,11 @@
 <?php
 
 $settings = (object) [
-    'warning' => isset($warning) && is_bool($warning) ? $warning: false,
+    'name' => $name,
+    'title' => strtolower($title),
+    'is_hard' => isset($is_hard) && is_bool($is_hard) ? $is_hard: false,
+    'is_soft' => isset($is_soft) && is_bool($is_soft) ? $is_soft : true,
+    'custom' => $slot ?? null,
 ];
 
 ?>
@@ -9,7 +13,7 @@ $settings = (object) [
     'id' => 'modalConfirmDelete',
 ])
     <div class="text-center my-4"> 
-        <div class="text-danger mb-4">
+        <div class="text-danger mb-3">
             @include('@.bootstrap.icon', [
                 'icon' => 'exclamation-triangle',
                 'square' => 104
@@ -17,13 +21,24 @@ $settings = (object) [
         </div>
 
         <div class="text-secondary">
-            <div class="h3 mb-4">¿Estás seguro?</div>
+            <div class="h2 mb-4">¿Estás seguro?</div>
             <div class="px-4">
-                {!! $slot !!}
-
-                @if( $settings->warning )
                 <p>
+                    Al eliminar {{ $settings->title }} <em>{{ $settings->name }}</em>
+                    <br> no estará disponible para próximas operaciones.
+                </p>
+
+                {!! $settings->custom !!}
+
+                @if( $settings->is_hard || $settings->is_soft )
+                <p>
+                    @if( $settings->is_hard )
                     <small class="text-danger text-uppercase">* Eliminación permanente, no es recuperable</small>
+
+                    @else
+                    <small class="fw-bold">(Se mantendrá en las operaciones existentes)</small>
+
+                    @endif
                 </p>
                 @endif
             </div>
