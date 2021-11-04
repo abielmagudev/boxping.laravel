@@ -1,40 +1,35 @@
 @extends('app')
 @section('content')
 
-@component('@.bootstrap.page-header', [
-    'title' => 'Editar reempacador',
+@component('@.bootstrap.card', [
+    'title' => 'Editar reempacador',    
 ])
-@endcomponent
-
-@component('@.bootstrap.card')
-    @slot('body')
     <form action="{{ route('reempacadores.update', $reempacador) }}" method="post" autocomplete="off">
         @method('patch')
         @include('reempacadores._save')
         <br>
-        <button class="btn btn-warning" type="submit">Actualizar reempacador</button>
-        <a href="{{ route('reempacadores.index') }}" class="btn btn-secondary">Regresar</a>
-    </form>
-    @endslot
 
-    @slot('footer')
-        @include('@.partials.modifiers-block', [
-            'model' => $reempacador
-        ])
-    @endslot
+        @component('@.bootstrap.grid-left-right')
+            @slot('left')
+            <button class="btn btn-warning" type="submit">Actualizar reempacador</button>
+            <a href="{{ route('reempacadores.index') }}" class="btn btn-secondary">Regresar</a>
+            @endslot
+
+            @slot('right')
+            @include('@.partials.modal-confirm-delete.trigger', ['only' => 'text'])
+            @endslot
+        @endcomponent
+    </form>
 @endcomponent
 <br>
 
-<div class="text-end">
-    @component('@.partials.confirm-delete.bundle', [
-        'route' => route('reempacadores.destroy', $reempacador),
-        'text' => 'Eliminar reempacador'
-    ])
-        @slot('content')
-        <p class="lead">¿Deseas eliminar reempacador <b>{{ $reempacador->nombre }}</b>?</p>
-        @endslot
-    @endcomponent
-</div>
-<br>
+@include('@.partials.block-modifiers.content', ['model' => $reempacador])
+
+@component('@.partials.modal-confirm-delete.modal', [
+    'route' => route('reempacadores.destroy', $reempacador),
+    'name' => $reempacador->nombre,
+    'category' => 'reempacador',
+])
+@endcomponent
 
 @endsection
