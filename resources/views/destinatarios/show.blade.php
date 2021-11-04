@@ -1,25 +1,17 @@
 @extends('app')
 @section('content')
 
-@component('@.bootstrap.page-header', [
+@include('@.bootstrap.page-header', [
     'pretitle' => 'Destinatario',
     'title' => $destinatario->nombre,
-    'goback' => route('destinatarios.index'),
 ])
-    @slot('options')
-    <a href="{{ route('destinatarios.edit', $destinatario) }}" class="btn btn-sm btn-warning">
-        <span class="d-block d-md-none">{!! $svg->pencil_fill !!}</span>
-        <span class="d-none d-md-block">Editar</span>
-    </a>
-    @endslot
-@endcomponent
 
 <div class="row">
     <!-- Column informacion -->
     <div class="col-sm col-sm-4">
-    @component('@.bootstrap.card')
-        @slot('header', 'Información')
-        @slot('body')
+    @component('@.bootstrap.card', [
+        'title' => 'Información',    
+    ])
         <p>
             <small class="d-block text-muted">Teléfono</small>
             <span>{{ $destinatario->telefono }}</span>
@@ -44,23 +36,17 @@
             <small class="d-block text-muted">Notas</small>
             <span>{{ $destinatario->notas }}</span>
         </p>
-        @endslot
     @endcomponent
     </div>
 
     <!-- Columnd entradas -->
     <div class="col-sm">
-    @component('@.bootstrap.card')
-        @slot('header', 'Entradas recientes')
-        @slot('body')
-        
-        @if( count($entradas) )
-        @component('@.partials.entradas-table')
-            @slot('entradas', $entradas)
-        @endcomponent
-        @endif
-
-        @endslot
+    @component('@.bootstrap.card', [
+        'title' => 'Últimas entradas',    
+    ])
+        @include('@.partials.table-entradas.content', [
+            'entradas' => $entradas    
+        ])
     @endcomponent
     </div>
 </div>

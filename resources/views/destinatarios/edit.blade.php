@@ -1,37 +1,35 @@
 @extends('app')
 @section('content')
-
-@component('@.bootstrap.page-header', [
-    'title' => 'Editar destinatario'
-])    
-@endcomponent
-@component('@.bootstrap.card')
-    @slot('body')
+  
+@component('@.bootstrap.card', [
+    'title' => 'Editar destinatario',    
+])
     <form action="{{ route('destinatarios.update', $destinatario) }}" method="post" autocomplete="off">
         @method('patch')
         @include('destinatarios._save')
-        <button type="submit" class="btn btn-warning">Actualizar destinatario</button>
-        <a href="{{ route('destinatarios.show', $destinatario) }}" class="btn btn-secondary">Regresar</a>
-    </form>
-    @endslot
+        @component('@.bootstrap.grid-left-right')
+            @slot('left')
+            <button type="submit" class="btn btn-warning">Actualizar destinatario</button>
+            <a href="{{ route('destinatarios.index') }}" class="btn btn-secondary">Regresar</a>
+            @endslot
 
-    @slot('footer')
-        @include('@.partials.modifiers-block', [
-            'model' => $destinatario,
-        ])
-    @endslot
+            @slot('right')
+            @include('@.partials.modal-confirm-delete.trigger', ['only' => 'text'])
+            @endslot
+        @endcomponent
+    </form>
 @endcomponent
 <br>
 
-<div class="text-end">
-    @component('@.partials.confirm-delete.bundle')
-        @slot('route', route('destinatarios.destroy', $destinatario))
-        @slot('text', 'Eliminar destinatario')
-        @slot('content')
-        <p class="lead">¿Deseas eliminar destinatario <b>{{ $destinatario->nombre }}</b>?</p>
-        @endslot
-    @endcomponent
-</div>
-<br>
+@include('@.partials.block-modifiers.content', ['model' => $destinatario])
+
+@component('@.partials.modal-confirm-delete.modal', [
+    'route' => route('destinatarios.destroy', $destinatario),
+])
+    <p>Al eliminar destinatario <em>{{ $destinatario->nombre }}</em> <br> no estará disponible para trayectorias de entradas</p>
+    <p>
+        <small>(Se conservará entradas existentes con el destinatario)</small>
+    </p>
+@endcomponent
 
 @endsection

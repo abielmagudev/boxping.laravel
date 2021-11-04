@@ -1,43 +1,38 @@
 @extends('app')
 @section('content')
 
-@component('@.subnavs.remitentes-destinatarios')
-    @slot('active', 2)
-@endcomponent
-
-@component('@.bootstrap.page-header', [
+@component('@.bootstrap.card', [
     'title' => 'Destinatarios',
     'counter' => $destinatarios->count(),
 ])
     @slot('options')
     <a href="{{ route('destinatarios.create') }}" class="btn btn-sm btn-primary">
-        <span class="d-block d-md-none fw-bold">+</span>
-        <span class="d-none d-md-block">Nuevo destinatario</span>
+        <span class="fw-bold">+</span>
     </a>
     @endslot
-@endcomponent
-
-@component('@.bootstrap.card')
-    @slot('body')
-    @component('@.bootstrap.table')
-        @slot('thead', ['Nombre','Dirección','Postal','Localidad'])
-        @slot('tbody')
+    @component('@.bootstrap.table', [
+        'thead' => ['Nombre','Dirección','Postal', 'Teléfono'],
+    ])
         @foreach($destinatarios as $destinatario)
         <tr>
             <td class="text-nowrap">{{ $destinatario->nombre }}</td>
-            <td class="text-nowrap">{{ $destinatario->direccion }}</td>
+            <td class="">
+                <span>{{ $destinatario->direccion }}</span>
+                <small class="d-block">{{ $destinatario->localidad }}</small>
+            </td>
             <td class="text-nowrap">{{ $destinatario->postal }}</td>
-            <td class="text-nowrap">{{ $destinatario->localidad }}</td>
+            <td class="text-nowrap">{{ $destinatario->telefono }}</td>
             <td class="text-nowrap text-end">
                 <a href="{{ route('destinatarios.show', $destinatario) }}" class="btn btn-sm btn-outline-primary">
-                    {!! $svg->eye !!}
+                    @include('@.bootstrap.icon', ['icon' => 'eye'])
                 </a>
+                <a href="{{ route('destinatarios.edit', $destinatario) }}" class="btn btn-sm btn-outline-warning">
+                    @include('@.bootstrap.icon', ['icon' => 'pencil-fill'])
+                </a>    
             </td>
         </tr>
         @endforeach
-        @endslot
     @endcomponent
-    @endslot
 @endcomponent
 <br>
 
