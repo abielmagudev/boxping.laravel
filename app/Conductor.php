@@ -31,7 +31,7 @@ class Conductor extends Model implements ModifierIdentifiable
     {
         $prepared = [
             'nombre' => $validated['nombre'],
-            'updated_by' => mt_rand(1,10),
+            'updated_by' => auth()->user()->id,
         ];
 
         if( request()->isMethod('post') )
