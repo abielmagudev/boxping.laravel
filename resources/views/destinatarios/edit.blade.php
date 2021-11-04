@@ -23,13 +23,10 @@
 
 @include('@.partials.block-modifiers.content', ['model' => $destinatario])
 
-@component('@.partials.modal-confirm-delete.modal', [
+@include('@.partials.modal-confirm-delete.modal', [
     'route' => route('destinatarios.destroy', $destinatario),
+    'category' => 'destinatario',
+    'name' => $destinatario->nombre,
 ])
-    <p>Al eliminar destinatario <em>{{ $destinatario->nombre }}</em> <br> no estará disponible para trayectorias de entradas</p>
-    <p>
-        <small>(Se conservará entradas existentes con el destinatario)</small>
-    </p>
-@endcomponent
 
 @endsection

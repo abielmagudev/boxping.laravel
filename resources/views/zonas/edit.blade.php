@@ -25,11 +25,12 @@
 
 @include('@.partials.block-modifiers.content', ['model' => $zona])
 
-@component('@.partials.modal-confirm-delete.modal', [
+@include('@.partials.modal-confirm-delete.modal', [
     'route' => route('zonas.destroy', [$etapa, $zona]),
-    'warning' => true,
+    'name' => $zona->nombre,
+    'category' => 'zona',
+    'is_hard' => true,
 ])
-    <p>Al eliminar zona <em>{{ $zona->nombre }}</em> <br> no estará disponible en la etapa {{ $etapa->nombre }}.</p>
-@endcomponent
+
 
 @endsection

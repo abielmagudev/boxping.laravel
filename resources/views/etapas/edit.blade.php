@@ -22,13 +22,10 @@
 
 @include('@.partials.block-modifiers.content', ['model' => $etapa])
 
-@component('@.partials.modal-confirm-delete.modal', [
+@include('@.partials.modal-confirm-delete.modal', [
     'route' => route('etapas.destroy', $etapa),
+    'category' => 'etapa',
+    'name' => $etapa->nombre,
 ])
-    <p>Al eliminar etapa <em>{{ $etapa->nombre }}</em> <br> no estará disponible para próximas entradas.</p>
-    <p>
-        <small>(Se conservará las entradas existentes de esta etapa)</small>
-    </p>
-@endcomponent
 
 @endsection

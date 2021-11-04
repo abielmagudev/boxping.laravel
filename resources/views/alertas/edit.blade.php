@@ -27,11 +27,11 @@
     @include('@.partials.block-modifiers.content', ['model' => $alerta])
 </div>
 
-@component('@.partials.modal-confirm-delete.modal', [
+@include('@.partials.modal-confirm-delete.modal', [
     'route' => route('alertas.destroy', $alerta),
-    'warning' => true
+    'category' => 'alerta',
+    'name' => $alerta->nombre,
+    'is_hard' => true,
 ])
-<p>Al eliminar la alerta <i>{{ $alerta->nombre }}</i> <br> no estará disponible para próximas operaciones <br> y afectaría la información de las etapas que contienen esta alerta.</p>
-@endcomponent
 
 @endsection

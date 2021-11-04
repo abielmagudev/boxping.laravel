@@ -24,13 +24,10 @@
 
 @include('@.partials.block-modifiers.content', ['model' => $codigor])
 
-@component('@.partials.modal-confirm-delete.modal', [
+@include('@.partials.modal-confirm-delete.modal', [
     'route' => route('codigosr.destroy', $codigor),
+    'category' => 'código de reempacado',
+    'name' => $codigor->nombre,
 ])
-    <p>Al eliminar código reempacado <em>{{ $codigor->nombre }}</em> <br> no estará disponible para próximos reempaques.</p>
-    <p>
-        <small>(Las entradas existentes conservarán <br>este código de reempacado)</small>
-    </p>
-@endcomponent
 
 @endsection

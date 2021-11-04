@@ -24,11 +24,11 @@
 
 @include('@.partials.block-modifiers.content', ['model' => $guia])
 
-@component('@.partials.modal-confirm-delete.modal', [
+@include('@.partials.modal-confirm-delete.modal', [
     'route' => route('guias_impresion.destroy', $guia),
-    'warning' => true,
+    'category' => 'guía de impresión',
+    'name' => $guia->nombre,
+    'is_hard' => true,
 ])
-    <p>Al eliminar guía de impresión <em>{{$guia->nombre}}</em> <br> no estará disponible para próximas impresiones.</p>
-@endcomponent
 
 @endsection

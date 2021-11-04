@@ -24,13 +24,10 @@
 
 @include('@.partials.block-modifiers.content', ['model' => $cliente])
 
-@component('@.partials.modal-confirm-delete.modal', [
+@include('@.partials.modal-confirm-delete.modal', [
     'route' => route('clientes.destroy', $cliente),
+    'category' => 'cliente',
+    'name' => $cliente->nombre,
 ])
-    <p>Al eliminar el cliente <em>{{ $cliente->nombre }}</em> <br> no estará disponible para consolidados y entradas.</p>
-    <p>
-        <small>(Se conservará los consolidados y las entradas existentes de este cliente.)</small>
-    </p>
-@endcomponent
 
 @endsection

@@ -1,11 +1,6 @@
 @extends('app')
 @section('content')
 
-@component('@.bootstrap.page-header', [
-    'title' => 'Editar conductor'
-])
-@endcomponent
-
 @component('@.bootstrap.card', [
     'title' => 'Editar conductor'    
 ])
@@ -29,13 +24,10 @@
     
 @include('@.partials.block-modifiers.content', ['model' => $conductor])
 
-@component('@.partials.modal-confirm-delete.modal', [
+@include('@.partials.modal-confirm-delete.modal', [
     'route' => route('conductores.destroy', $conductor),
+    'category' => 'conductor',
+    'name' => $conductor->nombre
 ])
-<p>Al eliminar conductor <em>{{ $conductor->nombre }}</em> <br>no estará disponible en próximas operaciones.</p>
-<p>
-    <small>(Las entradas existentes conservarán este conductor.)</small>
-</p>
-@endcomponent
 
 @endsection

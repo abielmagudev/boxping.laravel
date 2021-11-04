@@ -26,7 +26,7 @@
 
 @include('@.partials.modal-confirm-delete.modal', [
     'route' => route('vehiculos.destroy', $vehiculo),
-    'title' => 'vehículo',
+    'category' => 'vehículo',
     'name' => $vehiculo->nombre
 ])
 
