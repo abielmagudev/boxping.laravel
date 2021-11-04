@@ -17,7 +17,8 @@
                 'route' => route('entradas.index', ['vehiculo' => $vehiculo->id, 'filter' => csrf_token()]),
                 'total' => $entradas->count(),
             ])
-            <br>
+            
+            <hr class="text-secondary">
 
             <p class="m-0 small text-muted">Contadores</p>
             @component('@.bootstrap.table', [
