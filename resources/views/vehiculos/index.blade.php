@@ -1,44 +1,34 @@
 @extends('app')
 @section('content')
 
-@component('@.subnavs.conductores-vehiculos')
-    @slot('active', 2)
-@endcomponent
-
-@component('@.bootstrap.page-header', [
+@component('@.bootstrap.card', [
     'title' => 'Vehículos',
     'counter' => $vehiculos->count(),
 ])
     @slot('options')
     <a href="{{ route('vehiculos.create') }}" class="btn btn-sm btn-primary">
-        <span class="d-block d-md-none fw-bold">+</span>
-        <span class="d-none d-md-block">Nuevo vehículo</span>
+        <span class="fw-bold">+</span>
     </a>
     @endslot
-@endcomponent
 
-@component('@.bootstrap.card')
-    @slot('body')
-    @component('@.bootstrap.table')
-        @slot('thead', ['Nombre','Descripción'])
-        @slot('tbody')
-            @foreach($vehiculos as $vehiculo)
-            <tr>
-                <td>{{ $vehiculo->nombre }}</td>
-                <td>{{ $vehiculo->descripcion }}</td>
-                <td class="text-nowrap">
-                    <a href="{{ route('vehiculos.show', $vehiculo) }}" class="btn btn-sm btn-outline-primary">
-                        {!! $svg->eye !!}
-                    </a>
-                    <a href="{{ route('vehiculos.edit', $vehiculo) }}" class="btn btn-sm btn-outline-warning">
-                        {!! $svg->pencil !!}
-                    </a>
-                </td>
-            </tr>
-            @endforeach
-        @endslot
+    @component('@.bootstrap.table', [
+        'thead' => ['Nombre','Descripción'],    
+    ])
+        @foreach($vehiculos as $vehiculo)
+        <tr>
+            <td>{{ $vehiculo->nombre }}</td>
+            <td>{{ $vehiculo->descripcion }}</td>
+            <td class="text-nowrap">
+                <a href="{{ route('vehiculos.show', $vehiculo) }}" class="btn btn-sm btn-outline-primary">
+                    @include('@.bootstrap.icon', ['icon' => 'eye'])
+                </a>
+                <a href="{{ route('vehiculos.edit', $vehiculo) }}" class="btn btn-sm btn-outline-warning">
+                    @include('@.bootstrap.icon', ['icon' => 'pencil-fill'])
+                </a>
+            </td>
+        </tr>
+        @endforeach
     @endcomponent
-    @endslot
 
 @endcomponent
 <br>

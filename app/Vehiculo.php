@@ -5,11 +5,14 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use App\Ahex\Zkeleton\Domain\ModifiersTrait as Modifiers;
+use App\Ahex\Zowner\Domain\Contracts\ModifierIdentifiable;
+use App\Ahex\Zowner\Domain\Features\HasModifiers;
 
-class Vehiculo extends Model
+class Vehiculo extends Model implements ModifierIdentifiable
 {
-    use HasFactory, SoftDeletes, Modifiers;
+    use HasFactory, 
+        SoftDeletes,
+        HasModifiers;
 
     protected $fillable = [
         'nombre',
@@ -28,7 +31,7 @@ class Vehiculo extends Model
         $prepared = [
             'nombre' => $validated['nombre'],
             'descripcion' => $validated['descripcion'],
-            'updated_by' => mt_rand(1,10),
+            'updated_by' => auth()->user()->id,
         ];
 
         if( request()->isMethod('post') )
