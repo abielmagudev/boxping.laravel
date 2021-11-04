@@ -1,40 +1,33 @@
 @extends('app')
 @section('content')
 
-@component('@.bootstrap.page-header', [
+@component('@.bootstrap.card', [
     'pretitle' => "Etapa {$etapa->nombre}",
-    'title' => 'Editar zona',
+    'title' => 'Editar zona',    
 ])
-@endcomponent
-
-@component('@.bootstrap.card')
-    @slot('body')
     <form action="{{ route('zonas.update', [$etapa, $zona]) }}" method="post" autocomplete="off">
         @method('patch')
         @include('zonas._save')
         <br>
-        <button class="btn btn-warning" type="submit">Actualizar zona</button>
-        <a href="{{ route('etapas.show', $etapa) }}" class="btn btn-secondary">Regresar</a>
+        @component('@.bootstrap.grid-left-right')
+            @slot('left')
+            <button class="btn btn-warning" type="submit">Actualizar zona</button>
+            <a href="{{ route('etapas.show', $etapa) }}" class="btn btn-secondary">Regresar</a>
+            @endslot
+            
+            @slot('right')
+            @include('@.partials.modal-confirm-delete.trigger', ['only' => 'text'])
+            @endslot
+        @endcomponent
     </form>
-    @endslot
-
-    @slot('footer')
-        @include('@.partials.modifiers-block')
-    @endslot
-
 @endcomponent
 <br>
 
-<div class="text-end">
-    @component('@.partials.confirm-delete.bundle', [
-        'route' => route('zonas.destroy', [$etapa, $zona]),
-        'text' => 'Eliminar zona',
-    ])
-        @slot('content')
-        <p class="lead">¿Deseas eliminar zona <b>{{ $zona->nombre }}</b>?</p>
-        @endslot
-    @endcomponent
-</div>
-<br>
+@component('@.partials.modal-confirm-delete.modal', [
+    'route' => route('zonas.destroy', [$etapa, $zona]),
+    'warning' => true,
+])
+    <p>Al eliminar zona <em>{{ $zona->nombre }}</em> <br> no estará disponible en la etapa {{ $etapa->nombre }}.</p>
+@endcomponent
 
 @endsection

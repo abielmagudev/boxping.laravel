@@ -1,39 +1,34 @@
 @extends('app')
 @section('content')
 
-@component('@.bootstrap.page-header', [
-    'title' => 'Editar etapa'
+@component('@.bootstrap.card', [
+    'title' => 'Editar etapa'    
 ])
-@endcomponent
-
-@component('@.bootstrap.card')
-    @slot('body')
     <form action="{{ route('etapas.update', $etapa) }}" method="post" autocomplete="off">
         @method('patch')
         @include('etapas._save')
-        <button class="btn btn-warning" type="submit">Actualizar etapa</button>
-        <a href="{{ route('etapas.show', $etapa) }}" class="btn btn-secondary">Regresar</a>
+        @component('@.bootstrap.grid-left-right')
+            @slot('left')
+            <button class="btn btn-warning" type="submit">Actualizar etapa</button>
+            <a href="{{ route('etapas.index') }}" class="btn btn-secondary">Regresar</a>
+            @endslot
+            @slot('right')
+            @include('@.partials.modal-confirm-delete.trigger', ['only' => 'text'])
+            @endslot
+        @endcomponent
     </form>
-    @endslot
-
-    @slot('footer')
-        @include('@.partials.modifiers-block', [
-            'model' => $etapa
-        ])
-    @endslot
 @endcomponent
 <br>
 
-<div class="text-end">
-    @component('@.partials.confirm-delete.bundle', [
-        'route' => route('etapas.destroy', $etapa),
-        'text' => 'Eliminar etapa',
-    ])
-        @slot('content')
-        <p class="lead">¿Deseas eliminar etapa <b>{{ $etapa->nombre }}</b>?</p>
-        @endslot
-    @endcomponent
-</div>
-<br>
+@include('@.partials.block-modifiers.content', ['model' => $etapa])
+
+@component('@.partials.modal-confirm-delete.modal', [
+    'route' => route('etapas.destroy', $etapa),
+])
+    <p>Al eliminar etapa <em>{{ $etapa->nombre }}</em> <br> no estará disponible para próximas entradas.</p>
+    <p>
+        <small>(Se conservará las entradas existentes de esta etapa)</small>
+    </p>
+@endcomponent
 
 @endsection

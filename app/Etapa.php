@@ -6,14 +6,15 @@ use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use App\Ahex\Zkeleton\Domain\ModifiersTrait as Modifiers;
+use App\Ahex\Zowner\Domain\Contracts\ModifierIdentifiable;
+use App\Ahex\Zowner\Domain\Features\ModifiersFeature;
 use App\Ahex\GuiaImpresion\Application\ModelAttributesPrintableInterface as ModelAttributesPrintable;
 
-class Etapa extends Model implements ModelAttributesPrintable
+class Etapa extends Model implements ModifierIdentifiable, ModelAttributesPrintable
 {
     use HasFactory,
         SoftDeletes, 
-        Modifiers; 
+        ModifiersFeature; 
     
     const MEDICION_SIN_NOMBRE = null;
     const SIN_TAREAS = null;
@@ -253,10 +254,10 @@ class Etapa extends Model implements ModelAttributesPrintable
             'nombre' => $validated['nombre'],
             'slug' => Str::slug($validated['nombre']),
             'orden' => $validated['orden'],
-            'json_tareas' => $validated['tareas'] ? json_encode($validated['tareas']) : null,
+            'json_tareas' => isset($validated['tareas']) ? json_encode($validated['tareas']) : null,
             'medicion_unica_peso' => isset($validated['medicion_peso']) ? $validated['medicion_peso'] : null,
             'medicion_unica_volumen' => isset($validated['medicion_volumen']) ? $validated['medicion_volumen'] : null,
-            'updated_by' => mt_rand(1,10),
+            'updated_by' => auth()->user()->id,
         ];
 
         if( request()->isMethod('post') )
