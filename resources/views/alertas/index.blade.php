@@ -18,8 +18,9 @@
         </a>
     @endslot
 
-    @component('@.bootstrap.table')
-        @slot('thead', ['Nivel','Nombre','Descripción'])
+    @component('@.bootstrap.table', [
+        'thead' => ['Nivel','Nombre','Descripción']
+    ])
         @foreach($alertas as $alerta)
         <tr>
             <td class="text-center" style="width:1%">
