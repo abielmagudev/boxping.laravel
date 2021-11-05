@@ -5,13 +5,16 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use App\Ahex\Zkeleton\Domain\SearchInterface as Search;
-use App\Ahex\Zkeleton\Domain\ModifiersTrait as Modifiers;
+use App\Ahex\Zowner\Domain\Contracts\ValueSearchable;
+use App\Ahex\Zowner\Domain\Contracts\ModifierIdentifiable;
+use App\Ahex\Zowner\Domain\Features\HasModifiers;
 use App\Ahex\GuiaImpresion\Application\ModelAttributesPrintableInterface as ModelAttributesPrintable;
 
-Class Remitente extends Model implements Search, ModelAttributesPrintable
+Class Remitente extends Model implements ValueSearchable, ModifierIdentifiable, ModelAttributesPrintable
 {
-    use HasFactory, SoftDeletes, Modifiers;
+    use HasFactory, 
+        SoftDeletes, 
+        HasModifiers;
 
     protected $fillable = array(
         'nombre',
@@ -66,7 +69,7 @@ Class Remitente extends Model implements Search, ModelAttributesPrintable
             'pais' => capitalize($validated['pais']),
             'telefono' => $validated['telefono'],
             'notas' => $validated['notas'] ?? null,
-            'updated_by' => mt_rand(1,10),
+            'updated_by' => auth()->user()->id,
         ];
 
         if( request()->isMethod('post') )

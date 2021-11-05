@@ -1,39 +1,32 @@
 @extends('app')
 @section('content')
-
-@component('@.bootstrap.page-header', [
-    'title' => 'Editar remitente'
+    
+@component('@.bootstrap.card', [
+    'title' => 'Editar remitente' 
 ])
-@endcomponent
-
-@component('@.bootstrap.card')
-    @slot('body')
     <form action="{{ route('remitentes.update', $remitente) }}" method="post" autocomplete="off">
         @method('patch')
         @include('remitentes._save')
-        <button type="submit" class="btn btn-warning">Actualizar remitente</button>
-        <a href="{{ route('remitentes.show', $remitente) }}" class="btn btn-secondary">Regresar</a>
-    </form>
-    @endslot
+        @component('@.bootstrap.grid-left-right')
+            @slot('left')
+            <button type="submit" class="btn btn-warning">Actualizar remitente</button>
+            <a href="{{ route('remitentes.show', $remitente) }}" class="btn btn-secondary">Regresar</a>
+            @endslot
 
-    @slot('footer')
-        @include('@.partials.modifiers-block', [
-            'model' => $remitente
-        ])
-    @endslot
+            @slot('right')
+            @include('@.partials.modal-confirm-delete.trigger', ['only' => 'text'])
+            @endslot
+        @endcomponent
+    </form>
 @endcomponent
 <br>
 
-<div class="text-end">
-    @component('@.partials.confirm-delete.bundle', [
-        'route' => route('remitentes.destroy', $remitente),
-        'text' => 'Eliminar remitente'
-    ])
-        @slot('content')
-        <p class="lead">¿Deseas eliminar remitente <b>{{ $remitente->nombre }}</b>?</p>
-        @endslot
-    @endcomponent
-</div>
-<br>
+@include('@.partials.block-modifiers.content', ['model' => $remitente])
+
+@include('@.partials.modal-confirm-delete.modal', [
+    'route' => route('remitentes.destroy', $remitente),
+    'name' => $remitente->nombre,
+    'category' => 'remitente'
+])
 
 @endsection
