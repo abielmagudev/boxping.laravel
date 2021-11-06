@@ -10,7 +10,7 @@
         @component('@.bootstrap.grid-left-right')
             @slot('left')
             <button type="submit" class="btn btn-warning">Actualizar remitente</button>
-            <a href="{{ route('remitentes.show', $remitente) }}" class="btn btn-secondary">Regresar</a>
+            <a href="{{ route('remitentes.index') }}" class="btn btn-secondary">Regresar</a>
             @endslot
 
             @slot('right')
