@@ -13,7 +13,7 @@ $settings = (object) [
         'destinatario' => isset($destinatario) && $destinatario instanceof \App\Destinatario ? $destinatario : false,
     ],
     'thead' => [
-        'checkbox' => '',
+        'checkbox'  => '',
         'entrada'   => 'Número <small class="d-block fw-normal">Consolidado</small>',
         'direccion' => 'Dirección <small class="d-block fw-normal">Localidad</small>',
         'cliente'   => 'Cliente <small class="d-block fw-normal">Alias</small>',
@@ -23,9 +23,9 @@ $settings = (object) [
 
 /**
  * 
- * Si la propiedad $checkboxes no esta activo, entonces
- * ELIMINA el primer thead "checkbox" de $settings 
- * para el encabezado de la tabla de entradas
+ * Si la propiedad render de checkbox no es válido
+ * entonces ELIMINA el primer encabezado que es 'checkbox' => ''
+ * en la propiedad thead de $settings
  * 
  */
 if(! $settings->checkbox->render )
