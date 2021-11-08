@@ -1,44 +1,39 @@
 @extends('app')
 @section('content')
 
-@component('@.subnavs.transportadoras-incidentes')
-    @slot('active', 1)
-@endcomponent
-
-@component('@.bootstrap.page-header')
-    @slot('title', 'Transportadoras')
-    @slot('counter', $transportadoras->count())
+@component('@.bootstrap.card', [
+    'title' => 'Transportadoras',
+    'counter' => $transportadoras->count()
+])
     @slot('options')
     <a href="{{ route('transportadoras.create') }}" class="btn btn-sm btn-primary">
-        <span class="d-block d-md-none fw-bold">+</span>
-        <span class="d-none d-md-block">Nueva transportadora</span>
+        <span class="fw-bold">+</span>
     </a>
     @endslot
-@endcomponent
 
-@component('@.bootstrap.card')
-    @slot('body')
-
-    @component('@.bootstrap.table')
-        @slot('thead', ['Nombre', 'Teléfono', 'Web', ''])
-       
-        @slot('tbody')
+    @component('@.bootstrap.table', [
+        'thead' => ['Nombre', 'Teléfono']
+    ])
         @foreach($transportadoras as $transportadora)
         <tr>
             <td class="text-nowrap">{{ $transportadora->nombre }}</td>
             <td class="text-nowrap">{{ $transportadora->telefono }}</td>
-            <td class="text-nowrap">
-                <a href="{{ $transportadora->web }}" class="link-primary" target="_blank">{{ $transportadora->web }}</a>
-            </td>
             <td class="text-nowrap text-end">
-                <a href="{{ route('transportadoras.show', $transportadora) }}" class="btn btn-sm btn-outline-primary">{!! $svg->eye !!}</a>
+                @if( $transportadora->hasWeb() )
+                <a href="{{ $transportadora->web }}" class="btn btn-sm btn-outline-primary" target="_blank">
+                    <span>web</span>
+                </a>
+                @endif
+                <a href="{{ route('transportadoras.show', $transportadora) }}" class="btn btn-sm btn-outline-primary">
+                    @include('@.bootstrap.icon', ['icon' => 'eye'])
+                </a>
+                <a href="{{ route('transportadoras.edit', $transportadora) }}" class="btn btn-sm btn-outline-warning">
+                    @include('@.bootstrap.icon', ['icon' => 'pencil-fill'])
+                </a>
             </td>
         </tr>
         @endforeach
-        @endslot
-
     @endcomponent
-
-    @endslot
 @endcomponent
+
 @endsection
