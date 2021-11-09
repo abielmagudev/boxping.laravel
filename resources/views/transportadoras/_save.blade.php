@@ -6,7 +6,7 @@
 </div>
 <div class="mb-3">
     <label for="input-web" class="form-label small">Sitio web</label>
-    <input name="web" value="{{ old('web', $transportadora->web) }}" id="input-web" type="text" placeholder="Ej. https://dominio.com" class="form-control {{ bootstrap_isInputInvalid('web', $errors) }}">
+    <input name="web" value="{{ old('web', $transportadora->web) }}" id="input-web" type="text" placeholder="https://www.dominio.com" class="form-control {{ bootstrap_isInputInvalid('web', $errors) }}">
     @include('@.bootstrap.invalid-input-message', ['name' => 'web'])
 </div>
 <div class="mb-3">
