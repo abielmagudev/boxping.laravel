@@ -29,7 +29,15 @@ $settings = (object) [
                     <br> no estará disponible para próximas operaciones.
                 </p>
 
-                {!! $settings->custom !!}
+                <form action="{{ $settings->route }}" method="post" id="formConfirmDelete">
+                    @csrf
+                    @method('delete')
+                    @if( $settings->custom )
+                    <div class="my-3">
+                        {!! $settings->custom !!}
+                    </div>
+                    @endif
+                </form>
 
                 @if( $settings->is_hard || $settings->is_soft )
                 <p>
@@ -44,13 +52,9 @@ $settings = (object) [
                 @endif
             </div>
         </div>
+        <br>
 
-        <form action="{{ $settings->route }}" method="post" id="formConfirmDelete">
-            @csrf
-            @method('delete')
-            <br>
-            <button type="submit" class="btn btn-danger">Eliminar</button>
-            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
-        </form>
+        <button type="submit" class="btn btn-danger" form="formConfirmDelete">Eliminar</button>
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
     </div>
 @endcomponent
