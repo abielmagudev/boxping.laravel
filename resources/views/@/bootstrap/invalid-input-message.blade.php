@@ -1,3 +1,3 @@
 @error($name)
-<div class="form-text text-danger">{{ $message }}</div>
+<div class="invalid-feedback" role="alert">{{ $message }}</div>
 @enderror
