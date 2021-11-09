@@ -1,39 +1,36 @@
 @extends('app')
 @section('content')
 
-@component('@.bootstrap.page-header', [
+@component('@.bootstrap.card', [
     'title' => 'Consoliddos',
     'counter' => $consolidados->count(),
 ])
+    @slot('center')
+    @foreach($all_status as $status => $attrs)   
+    <span class="badge" style="background-color:<?= $attrs['color'] ?>">
+        {{ $consolidados->where('status', $status)->count() }}
+        {{ ucfirst($status) }}
+    </span>
+    @endforeach
+    @endslot
+
     @slot('options')
     <a href="{{ route('consolidados.create') }}" class="btn btn-sm btn-primary">
-        <span class="d-block d-md-none fw-bold">+</span>
-        <span class="d-none d-md-block">Nuevo consolidado</span>
+        <span class="fw-bold">+</span>
     </a>
     @endslot
-@endcomponent
 
-@component('@.bootstrap.card')
-    @slot('header')
-    <div class="text-center small">
-        @foreach($all_status as $status => $attrs)   
-        <span class="badge rounded-pill" style="background-color:{{ $attrs['color'] }}">
-            {{ $consolidados->where('status', $status)->count() }}
-        </span>
-        <span class="me-3 align-middle">{{ ucfirst($status) }}</span>
-        @endforeach
-    </div>
-    @endslot
-
-    @slot('body')
-    @component('@.bootstrap.table')
-        @slot('thead', ['Status','Número','Cliente','Tarimas','Entradas'])
-        @slot('tbody')
+    @component('@.bootstrap.table', [
+        'thead' => ['Status','Número','Cliente','Tarimas','Entradas']    
+    ])
         @foreach($consolidados as $consolidado)
         <tr>
             <td class="text-center" style="width:1%">
-                <span data-bs-title="{{ ucfirst($consolidado->status) }}" data-bs-toggle="tooltip" data-bs-placement="top" style="color:{{ $consolidado->status_color }}">
-                    {!! $symbols->circle !!}
+                <span data-bs-title="{{ ucfirst($consolidado->status) }}" data-bs-toggle="tooltip" data-bs-placement="top" style="color:<?= $consolidado->status_color ?>">
+                    @include('@.bootstrap.icon', [
+                            'icon' => 'circle-fill',
+                            'style' => "color:{$consolidado->color}",
+                    ])
                 </span>
             </td>
             <td class="min-width:288px">{{ $consolidado->numero }}</td>
@@ -41,13 +38,13 @@
             <td>{{ $consolidado->tarimas }}</td>
             <td>{{ $consolidado->entradas->count() }}</td>
             <td class="text-nowrap text-end">
-                <a href="{{ route('consolidados.show', $consolidado) }}" class="btn btn-sm btn-outline-primary">{!! $svg->eye !!}</a>
+                <a href="{{ route('consolidados.show', $consolidado) }}" class="btn btn-sm btn-outline-primary">
+                    @include('@.bootstrap.icon', ['icon' => 'eye'])
+                </a>
             </td>
         </tr>
         @endforeach
-        @endslot    
     @endcomponent
-    @endslot
 @endcomponent
 <br>
 

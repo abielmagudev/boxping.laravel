@@ -1,20 +1,16 @@
 @extends('app')
 @section('content')
 
-@component('@.bootstrap.page-header', [
+@component('@.bootstrap.card', [
     'title' => 'Nuevo consolidado',
 ])
-@endcomponent
-
-@component('@.bootstrap.card')
-    @slot('body')
     <form action="{{ route('consolidados.store') }}" method="post" autocomplete="off">
         @include('consolidados._save')
 
         <div class="btn-group" role="group">
-            <button type="submit" class="btn btn-success" name="guardar" value="0">Guardar consolidado</button>
-            <button type="button" class="btn btn-success dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
-                <span class="visually-hidden">Toggle Dropdown</span>
+            <button type="submit" class="btn btn-primary" name="guardar" value="0">Guardar consolidado</button>
+            <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                <span class="visually-hidden">Guardar consolidado dropdown</span>
             </button>
             <ul class="dropdown-menu">
                 <li>
@@ -32,9 +28,8 @@
             </ul>
         </div>
 
-        <a href="{{ route('consolidados.index') }}" class="btn btn-secondary d-inline-block">Cancelar</a>
+        <a href="{{ route('consolidados.index') }}" class="btn btn-outline-secondary d-inline-block">Cancelar</a>
     </form>
-    @endslot
 @endcomponent
 <br>
 

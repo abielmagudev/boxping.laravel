@@ -16,8 +16,7 @@ $checker_id = 'checker-entradas';
 ])
     @slot('options')
     <a href="{{ route('consolidados.edit', $consolidado) }}" class="btn btn-sm btn-warning">
-        <span class="d-inline-block d-md-none">{!! $icons->pencil !!}</span>
-        <span class="d-none d-md-inline-block">Editar</span>
+        @include('@.bootstrap.icon', ['icon' => 'edit'])
     </a>
     @endslot
 @endcomponent
@@ -31,8 +30,7 @@ $checker_id = 'checker-entradas';
                     @slot('left', 'Información')
                     @slot('right')
                     <a href="{{ route('consolidados.printing', $consolidado) }}" class="btn btn-sm btn-primary">
-                        <span class="d-block d-md-none">{!! $svg->printer !!}</span>
-                        <span class="d-none d-md-block">Imprimir</span>
+                        <span class="">Imprimir</span>
                     </a>
                     @endslot
                 @endcomponent
@@ -43,7 +41,7 @@ $checker_id = 'checker-entradas';
                     @slot('tbody')
                     <tr class="text-capitalize">
                         <td class="text-muted small" style="width:1%">Status</td>
-                        <td class="fw-bold" style="color:{{ $consolidado->status_color }}">{{ ucfirst($consolidado->status) }}</td>
+                        <td class="fw-bold" style="color:<?= $consolidado->status_color ?>">{{ ucfirst($consolidado->status) }}</td>
                     </tr>
                     <tr>
                         <td class="text-muted small">Cliente</td>

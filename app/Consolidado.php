@@ -8,17 +8,18 @@ use App\Ahex\Consolidado\Domain\Attributes;
 use App\Ahex\Consolidado\Domain\Scopes;
 use App\Ahex\Consolidado\Domain\Relationships;
 use App\Ahex\Consolidado\Domain\EntradasHandler;
-use App\Ahex\Zkeleton\Domain\SearchInterface as Search;
-use App\Ahex\Zkeleton\Domain\ModifiersTrait as Modifiers;
+use App\Ahex\Zowner\Domain\Contracts\ValueSearchable;
+use App\Ahex\Zowner\Domain\Contracts\ModifierIdentifiable;
+use App\Ahex\Zowner\Domain\Features\HasModifiers;
 
-class Consolidado extends Model implements Search
+class Consolidado extends Model implements ModifierIdentifiable, ValueSearchable
 {
     use HasFactory, 
         Attributes,
         Scopes,
         Relationships,
         EntradasHandler,
-        Modifiers;
+        HasModifiers;
 
     const STATUS_NO_EXISTE = null;
     

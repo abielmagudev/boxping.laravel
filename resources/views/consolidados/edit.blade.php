@@ -1,44 +1,41 @@
 @extends('app')
 @section('content')
 
-@component('@.bootstrap.page-header', [
+@component('@.bootstrap.card', [
     'title' => 'Editar consolidado',
 ])
-@endcomponent
-
-@component('@.bootstrap.card')
-    @slot('body')
     <form action="{{ route('consolidados.update', $consolidado) }}" method="post" autocomplete="off">
         @method('patch')
         @include('consolidados._save')
-        <button class="btn btn-warning" type="submit">Actualizar consolidado</button>
-        <a href="{{ route('consolidados.show', $consolidado) }}" class="btn btn-secondary">Regresar</a>
+
+        @component('@.bootstrap.grid-left-right')
+            @slot('left')
+            <button class="btn btn-warning" type="submit">Actualizar consolidado</button>
+            <a href="{{ route('consolidados.show', $consolidado) }}" class="btn btn-secondary">Regresar</a>
+            @endslot
+
+            @slot('right')
+            @include('@.partials.modal-confirm-delete.trigger', ['only' => 'text'])
+            @endslot
+        @endcomponent
     </form>
-    @endslot
-    @slot('footer')
-        @include('@.partials.modifiers-block', [
-            'model' => $consolidado,
-        ])
-    @endslot
 @endcomponent
 <br>
 
-<div class="text-end">
-    @component('@.partials.confirm-delete.bundle', [
-        'route' => route('consolidados.destroy', $consolidado),
-        'text' => 'Eliminar consolidado',
-    ])
-        @slot('content')
-        <p class="lead">¿Deseas eliminar consolidado <b>{{ $consolidado->numero }}</b>?</p>
-        <div class="d-flex justify-content-center">
-            <div class="form-check form-switch">
-                <input class="form-check-input border-danger" type="checkbox" name="eliminar_entradas" value="si" id="checkbox-eliminar-entradas">
-            </div>
-            <label class="form-check-label" for="checkbox-eliminar-entradas-disabled">Eliminar <b>{{ $consolidado->entradas->count() }} entradas</b> que contiene este consolidado.</label>
-        </div>
-        @endslot
-    @endcomponent
+@include('@.partials.block-modifiers.content', ['model' => $consolidado])
+
+@component('@.partials.modal-confirm-delete.modal', [
+    'route' => route('consolidados.destroy', $consolidado),
+    'category' => 'consolidado', 
+    'name' => $consolidado->numero,
+    'is_hard' => true,
+])
+<div class="border border-danger rounded p-3 my-3">
+    <div class="form-check d-flex align-items-center justify-content-center">
+        <input class="form-check-input border-danger mt-0 me-1" type="checkbox" name="eliminar_entradas" value="yes" id="checkbox-eliminar-entradas">
+        <label class="form-check-label" for="checkbox-eliminar-entradas">Eliminar las {{ $consolidado->entradas->count() }} entradas del consolidado.</label>
+    </div>
 </div>
-<br>
+@endcomponent
 
 @endsection
