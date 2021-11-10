@@ -11,18 +11,19 @@ use App\Ahex\Entrada\Domain\FiltersTrait as Filters;
 use App\Ahex\Entrada\Domain\ConditionsTrait as Conditions;
 use App\Ahex\Entrada\Domain\UpdatesDescriptionsTrait as UpdatesDescriptions;
 use App\Ahex\Zkeleton\Domain\UpdateDescriptionCallableTrait as UpdateDescriptionCallable;
-use App\Ahex\Zkeleton\Domain\ModifiersTrait as Modifiers;
+use App\Ahex\Zowner\Domain\Contracts\ModifierIdentifiable;
+use App\Ahex\Zowner\Domain\Features\HasModifiers;
 use App\Ahex\GuiaImpresion\Application\ModelAttributesPrintableInterface as ModelAttributesPrintable;
 
-class Entrada extends Model implements ModelAttributesPrintable
+class Entrada extends Model implements ModifierIdentifiable, ModelAttributesPrintable
 {
     use HasFactory,
         Attributes,
         Conditions,
         Filters,
-        Modifiers,
         Relationships,
         Scopes,
+        HasModifiers,
         UpdatesDescriptions,
         UpdateDescriptionCallable;
     
