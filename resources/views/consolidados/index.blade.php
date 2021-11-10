@@ -41,6 +41,9 @@
                 <a href="{{ route('consolidados.show', $consolidado) }}" class="btn btn-sm btn-outline-primary">
                     @include('@.bootstrap.icon', ['icon' => 'eye'])
                 </a>
+                <a href="{{ route('consolidados.edit', $consolidado) }}" class="btn btn-sm btn-outline-warning">
+                    @include('@.bootstrap.icon', ['icon' => 'pencil-fill'])
+                </a>
             </td>
         </tr>
         @endforeach

@@ -11,7 +11,7 @@
         @component('@.bootstrap.grid-left-right')
             @slot('left')
             <button class="btn btn-warning" type="submit">Actualizar consolidado</button>
-            <a href="{{ route('consolidados.show', $consolidado) }}" class="btn btn-secondary">Regresar</a>
+            <a href="{{ route('consolidados.index') }}" class="btn btn-secondary">Regresar</a>
             @endslot
 
             @slot('right')
