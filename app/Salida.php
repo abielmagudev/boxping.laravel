@@ -2,17 +2,18 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\Model;
 use App\Ahex\Salida\Domain\AttributesTrait as Attributes;
 use App\Ahex\Salida\Domain\RelationshipsTrait as Relationships;
 use App\Ahex\Salida\Domain\ScopesTrait as Scopes;
 use App\Ahex\Salida\Domain\ValidationsTrait as Validations;
 use App\Ahex\Salida\Domain\UpdatesDescriptionsTrait as UpdatesDescriptions;
+use App\Ahex\Zowner\Domain\Contracts\ModifierIdentifiable;
+use App\Ahex\Zowner\Domain\Features\HasModifiers;
 use App\Ahex\Zkeleton\Domain\UpdateDescriptionCallableTrait as UpdateDescriptionCallable;
-use App\Ahex\Zkeleton\Domain\ModifiersTrait as Modifiers;
 use App\Ahex\GuiaImpresion\Application\ModelAttributesPrintableInterface as ModelAttributesPrintable;
-use Illuminate\Database\Eloquent\Model;
 
-class Salida extends Model implements ModelAttributesPrintable
+class Salida extends Model implements ModifierIdentifiable, ModelAttributesPrintable
 {
     use Attributes, 
         Relationships, 
@@ -20,7 +21,7 @@ class Salida extends Model implements ModelAttributesPrintable
         Validations,
         UpdateDescriptionCallable, 
         UpdatesDescriptions, 
-        Modifiers;
+        HasModifiers;
     
     protected $fillable = [
         'rastreo',
@@ -81,7 +82,7 @@ class Salida extends Model implements ModelAttributesPrintable
             'notas'        => $validated['notas'] ?? null,
             'status'       => $validated['status'] ?? array_key_first( static::getAllStatus() ),
             'transportadora_id' => $validated['transportadora'] ?? null,
-            'updated_by'   => mt_rand(1,10),
+            'updated_by'   => auth()->user()->id,
         ];
 
         if( request()->isMethod('post') )

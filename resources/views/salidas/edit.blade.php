@@ -1,60 +1,43 @@
 @extends('app')
 @section('content')
 
-@component('@.bootstrap.page-header', [
-    'pretitle' => "Entrada {$salida->entrada->numero}",
+@component('@.bootstrap.card', [
+    'pretitle' => $salida->entrada->numero,
     'title' => 'Editar salida',
 ])
-@endcomponent
-
-@component('@.bootstrap.card')
-    @slot('body')
     <form action="{{ route('salidas.update', $salida) }}" method="post" autocomplete="off">
         @method('put')
         @include('salidas._save')
-        <div class="text-right">
+        @component('@.bootstrap.grid-left-right')
+            @slot('left')
             <button class="btn btn-warning" type="submit">Actualizar salida</button>
             <a href="{{ route('entradas.show', $salida->entrada) }}" class="btn btn-secondary">Regresar</a>
-        </div>
-    </form>
-    @endslot
+            @endslot
 
-    @slot('footer')
-        @include('@.partials.modifiers-block', [
-            'model' => $salida,
-        ])
-    @endslot
+            @slot('right')
+            @include('@.partials.modal-confirm-delete.trigger', ['only' => 'text'])
+            @endslot
+        @endcomponent
+    </form>
 @endcomponent
 <br>
 
-<div class="text-end">
-    @component('@.partials.confirm-delete.bundle', [
-        'route' => route('salidas.destroy', $salida),
-        'text' => 'Eliminar salida',
-    ])
-        @slot('content')
-        <p class="lead">¿Deseas eliminar salida de la entrada <br><b>{{ $salida->entrada->numero }}</b>?</p>
-        <div class="border rounded mx-4 py-1">
-            <table class="table table-sm table-borderless small m-0">
-                <tbody>
-                    <tr>
-                        <td class="text-muted text-end">Transportadora</td>
-                        <td class="text-start">{{ $salida->transportadora->nombre }}</td>
-                    </tr>
-                    <tr>
-                        <td class="text-muted text-end">Confirmación</td>
-                        <td class="text-start">{{ $salida->confirmacion }}</td>
-                    </tr>
-                    <tr>
-                        <td class="text-muted text-end">Rastreo</td>
-                        <td class="text-start">{{ $salida->rastreo }}</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        @endslot
-    @endcomponent
-</div>
-<br>
+@include('@.partials.block-modifiers.content', ['model' => $salida])
+
+@component('@.partials.modal-confirm-delete.modal', [
+    'route' => route('salidas.destroy', $salida),
+    'category' => 'salida',
+    'name' => 'de entrada ' . $salida->entrada->numero,
+    'is_hard' => true,
+])
+    <div class="row g-1 py-3 border border-danger rounded small">
+        <div class="col-6 text-end">Transportadora</div>
+        <div class="col-6 text-start text-dark">{{ $salida->transportadora->nombre }}</div>
+        <div class="col-6 text-end">Rastreo</div>
+        <div class="col-6 text-start text-dark">{{ $salida->rastreo }}</div>
+        <div class="col-6 text-end">Confirmación</div>
+        <div class="col-6 text-start text-dark">{{ $salida->confirmacion }}</div>
+    </div>
+@endcomponent
 
 @endsection
