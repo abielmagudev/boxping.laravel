@@ -50,7 +50,7 @@ class EntradaEtapaController extends Controller
     public function update(Entrada $entrada, $etapa, SaveRequest $request)
     {
         $prepared = EntradaEtapa::prepare($request->validated());
-
+        
         if( ! $entrada->etapas()->updateExistingPivot($etapa, $prepared) )
             return back()->with('failure', 'Error al actualizar etapa');
         
