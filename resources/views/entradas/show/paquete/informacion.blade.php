@@ -1,7 +1,6 @@
 <div class="tab-pane fade show active" id="informacion" role="tabpanel" aria-labelledby="informacion-tab">
     <!-- Informacion -->
     @component('@.bootstrap.table')
-        @slot('tbody')
         <tr>
             <td class="text-muted small">Consolidado</td>
             <td>
@@ -26,7 +25,6 @@
             <td class="text-muted small border-0">Actualizado</td>
             <td class="border-0">{{ $entrada->updated_at }}, {{ $entrada->updater->name }}</td>
         </tr>
-        @endslot
     @endcomponent
     <br>
     

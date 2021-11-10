@@ -4,8 +4,6 @@
   'header_close' => true,
   'header_classes' => 'border-0',
 ])
-
-  @slot('body')
   <ul class="nav nav-tabs nav-fill">
     <li class="nav-item">
       <a class="nav-link {{ $comentarios->count() > 0 ? 'active' : 'disabled' }}" id="comentariosTab" data-bs-toggle="tab" href="#contentComentarios" role="tab" aria-controls="contentComentarios" aria-selected="true">
@@ -50,7 +48,5 @@
       </form>
       <br>
     </div>
-  </div>
-  @endslot
-  
+  </div>  
 @endcomponent

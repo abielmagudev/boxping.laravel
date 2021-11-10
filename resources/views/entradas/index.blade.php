@@ -1,44 +1,37 @@
 @extends('app')
 @section('content')
 
-@component('@.bootstrap.page-header', [
+@component('@.bootstrap.card', [
     'title' => 'Entradas',
     'counter' => $counter,
 ])
     @slot('options')
     <a href="{{ route('entradas.create') }}" class="btn btn-sm btn-primary">
-        <span class="d-block d-md-none fw-bold">+</span>
-        <span class="d-none d-md-block">Nueva entrada</span>
+        <span class="fw-bold">+</span>
     </a>
     @endslot
-@endcomponent
 
-@component('@.bootstrap.card')
     @slot('header')
     <div class="text-end">
-        @include('@.partials.entradas-filter.trigger')
-        @include('@.partials.checkboxes-checker.trigger')
-        @include('@.partials.guias-impresion-dropdown.multiple')
+        <!-- @ include('@.partials.entradas-filter.trigger') -->
+        <!-- @ include('@.partials.checkboxes-checker.trigger') -->
+        <!-- @ include('@.partials.guias-impresion-dropdown.multiple') -->
     </div>
     @endslot
 
-    @slot('body')
-    @include('@.partials.entradas-table', [
+    @include('@.partials.table-entradas.content', [
         'entradas' => $entradas,
-        'checkboxes_form' => 'formEntradasPrinting',
+        'form_id' => 'formEntradasPrinting',
     ]) 
-    @endslot
 @endcomponent
 <br>
 
-@if( $has_pagination  ) 
-    @include('@.bootstrap.pagination-simple', [
-        'prev' => $collection->previousPageUrl(),
-        'next' => $collection->nextPageUrl(),
-    ])
-@endif
+@includeWhen($has_pagination, '@.bootstrap.pagination-simple', [
+    'prev' => $collection->previousPageUrl(),
+    'next' => $collection->nextPageUrl(),
+])
 
-@include('@.partials.entradas-filter.modal', ['results_route' => route('entradas.index')])
-@include('@.partials.checkboxes-checker.scripts', ['checkbox_prefix' => 'checkboxEntrada'])
+<!-- @ include('@.partials.entradas-filter.modal', ['results_route' => route('entradas.index')]) -->
+<!-- @ include('@.partials.checkboxes-checker.scripts', ['checkbox_prefix' => 'checkboxEntrada']) -->
 
 @endsection

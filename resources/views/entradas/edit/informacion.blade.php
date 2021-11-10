@@ -1,13 +1,10 @@
 @extends('app')
 @section('content')
 
-@include('@.bootstrap.page-header', [
-    'pretitle' => "Entrada {$entrada->numero}",
+@component('@.bootstrap.card', [
+    'pretitle' => $entrada->numero,
     'title' => 'Editar información',
 ])
-
-@component('@.bootstrap.card')
-    @slot('body')
     <form action="{{ route('entradas.update', $entrada) }}" method="post" autocomplete="off">
         @csrf
         @method('put')
@@ -41,39 +38,32 @@
             <textarea name="contenido" id="textarea-contenido" cols="30" rows="5" class="form-control">{{ old('contenido', $entrada->contenido) }}</textarea>
         </div>
         <br>
+        @component('@.bootstrap.grid-left-right')
+            @slot('left')
+            <button class="btn btn-warning" type="submit" name="actualizar" value="informacion">Actualizar información</button>
+            <a href="{{ route('entradas.show', $entrada) }}" class="btn btn-secondary">Regresar</a>
+            @endslot
 
-        <button class="btn btn-warning" type="submit" name="actualizar" value="informacion">Actualizar información</button>
-        <a href="{{ route('entradas.show', $entrada) }}" class="btn btn-secondary">Regresar</a>
+            @slot('right')
+            @include('@.partials.modal-confirm-delete.trigger', ['only' => 'text'])
+            @endslot
+        @endcomponent
     </form>
-    @endslot
-
-    @slot('footer')
-        @include('@.partials.modifiers-block', [
-            'model' => $entrada,
-        ])
-    @endslot
 @endcomponent
 <br>
 
-<div class="text-end">
-@component('@.partials.confirm-delete.bundle', [
+@include('@.partials.block-modifiers.content', ['model' => $entrada])
+
+@component('@.partials.modal-confirm-delete.modal', [
     'route' => route('entradas.destroy', $entrada),
-    'text' => 'Eliminar entrada',
+    'category' => 'entrada',
+    'name' => $entrada->numero,
+    'is_hard' => true,
 ])
-    @slot('content')
-    <p class="lead">¿Deseas eliminar entrada <br>{{ $entrada->numero }}?</p>
-    <p class="text-muted small">
-        @if( ! is_null($entrada->consolidado_id) )
-        <span>Consolidado {{ $entrada->consolidado->numero }}</span>
+    @if( ! is_null($entrada->consolidado_id) )
+    <p class="small text-dark text-uppercase">Consolidado <em>{{ $entrada->consolidado->numero }}</em></p>
 
-        @else
-        <span>Sin consolidado</span>
-
-        @endif
-    </p>
-    @endslot
+    @endif
 @endcomponent
-</div>
-<br>
 
 @endsection

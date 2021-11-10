@@ -1,13 +1,10 @@
 @extends('app')
 @section('content')
 
-@include('@.bootstrap.page-header', [
-    'subtitle' => 'Sin consolidado',
+@component('@.bootstrap.card', [
+    'pretitle' => 'SIN CONSOLIDADO',
     'title' => 'Nueva entrada',
 ])
-
-@component('@.bootstrap.card')
-    @slot('body')
     <form action="{{ route('entradas.store') }}" method="post" autocomplete="off">
         @csrf
         
@@ -18,7 +15,7 @@
         
         <div class="">
             <div class="dropdown d-inline-block">
-                <button type="button" class="btn btn-success dropdown-toggle" id="dropdownMenuButtonSave" data-bs-toggle="dropdown" aria-expanded="false">
+                <button type="button" class="btn btn-primary dropdown-toggle" id="dropdownMenuButtonSave" data-bs-toggle="dropdown" aria-expanded="false">
                     <span>Guardar entrada</span>
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButtonSave">
@@ -36,10 +33,9 @@
                     </li>
                 </ul>
             </div>
-            <a href="{{ route('entradas.index') }}" class="btn btn-secondary">Cancelar</a>
+            <a href="{{ route('entradas.index') }}" class="btn btn-outline-secondary">Cancelar</a>
         </div>
     </form>
-    @endslot
 @endcomponent
 
 @endsection

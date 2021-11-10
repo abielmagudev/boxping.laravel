@@ -15,10 +15,10 @@
     <div class="text-center">
         @include('@.bootstrap.modal-trigger', [
             'classes' => 'btn btn-primary',
-            'modal_id' => 'modalConfirmacion',
+            'modal_id' => 'modalConfirmDestinatario',
             'text' => 'Confirmar destinatario',
         ])
-        @include('entradas.edit.confirmacion-modal')
+        @include('entradas.edit.modal-confirm-destinatario')
     </div>
 
 
@@ -32,7 +32,6 @@
 <?php // Muestra la Salida de la Entrada ?>
 @else
     @component('@.bootstrap.table')
-        @slot('tbody')
         <tr>
             <td class="text-muted small">Status</td>
             <td>{{ ucfirst($entrada->salida->status) }}</td>
@@ -80,7 +79,6 @@
             <td class="text-muted small border-0">Actualizado</td>
             <td class="border-0">{{ $entrada->salida->updated_at }}, {{ $entrada->salida->updater->name }}</td>
         </tr>
-        @endslot
     @endcomponent
     <br>
     <div class="text-end">
@@ -91,7 +89,6 @@
             <span>Editar salida</span>
         </a>
     </div>
-
 
 @endif
 </div>

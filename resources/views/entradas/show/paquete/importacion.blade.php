@@ -2,7 +2,6 @@
  
     @if( is_object($entrada->conductor) )
     @component('@.bootstrap.table')
-        @slot('tbody')
         <tr>
             <td class="text-muted small">Conductor</td>
             <td>{{ is_object($entrada->conductor) ? $entrada->conductor->nombre : 'Conductor desconocido' }}</td>
@@ -19,7 +18,6 @@
             <td class="text-muted small border-0">Horario</td>
             <td class="border-0">{{ $entrada->importado_horario }}</td>      
         </tr>
-        @endslot
     @endcomponent
     <br>
 

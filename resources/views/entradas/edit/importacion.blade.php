@@ -1,13 +1,10 @@
 @extends('app')
 @section('content')
 
-@include('@.bootstrap.page-header', [
-    'pretitle' => "Entrada {$entrada->numero}",
-    'title' => 'Editar importación',
+@component('@.bootstrap.card', [
+    'pretitle' => $entrada->numero,
+    'title' => 'Editar importación',    
 ])
-
-@component('@.bootstrap.card')
-    @slot('body')
     <form action="{{ route('entradas.update', $entrada) }}" method="post" autocomplete="off">
         @csrf
         @method('put')
@@ -49,14 +46,6 @@
         <button class="btn btn-warning" type="submit" name="actualizar" value="importacion">Actualizar importación</button>
         <a href="{{ route('entradas.show', $entrada) }}" class="btn btn-secondary">Regresar</a>
     </form>
-    @endslot
-
-    @slot('footer')
-    @include('@.partials.modifiers-block', [
-        'model' => $entrada,
-        'show_created' => false,
-    ])
-    @endslot
 @endcomponent
 <br>
 

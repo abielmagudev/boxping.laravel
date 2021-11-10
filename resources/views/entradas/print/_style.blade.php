@@ -5,8 +5,8 @@
     print-color-adjust: exact;
 }
 @page {
-    margin: {{ $guia->page_margins }};
-    size: {{ $guia->page_size }}; 
+    margin: <?= $guia->page_margins ?>;
+    size: <?= $guia->page_size ?>; 
     /* size: A4; */
     /* orientation: portrait || landscape */
 }
@@ -17,11 +17,11 @@
     margin-bottom:0.25rem;
 }
 .content__text {
-    font-family: {{ $guia->font }};
-    font-size: {{ $guia->font_size }};
+    font-family: <?= $guia->font ?>;
+    font-size: <?= $guia->font_size ?>;
 }
 .content__title {
-    font-size: calc({{ $guia->font_size }} - 7%);
+    font-size: calc(<?= $guia->font_size ?> - 7%);
     font-weight: bold;
 }
 

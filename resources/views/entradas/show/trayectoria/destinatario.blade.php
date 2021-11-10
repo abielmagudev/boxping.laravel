@@ -2,7 +2,6 @@
 
     @if( is_object($entrada->destinatario) )
     @component('@.bootstrap.table')
-        @slot('tbody')
         <tr>
             <td class="text-muted small">Nombre</td>
             <td>{{ $entrada->destinatario->nombre }}</td>
@@ -31,7 +30,6 @@
             <td class="text-muted small align-top border-0">Notas</td>
             <td class="border-0">{{ $entrada->destinatario->notas }}</td>
         </tr>
-        @endslot
     @endcomponent
     <br>
 

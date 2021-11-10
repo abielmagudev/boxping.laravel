@@ -2,7 +2,6 @@
     
     @if( is_object($entrada->reempacador) )   
     @component('@.bootstrap.table')
-        @slot('tbody')
         <tr>
             <td class="text-muted small">Reempacador</td>
             <td>{{ $entrada->reempacador->nombre }}</td>
@@ -19,7 +18,6 @@
             <td class="text-muted small border-0">Horario</td>
             <td class="border-0">{{ $entrada->reempacado_horario }}</td>
         </tr>
-        @endslot
     @endcomponent
     <br>
 

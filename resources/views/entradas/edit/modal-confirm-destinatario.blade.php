@@ -3,9 +3,8 @@
   'backdrop' => true,
   'body_classes' => 'p-5',
   'centered' => true,
-  'id' => 'modalConfirmacion',
+  'id' => 'modalConfirmDestinatario',
 ])
-    @slot('body')
     <p class="h4 text-center">¿Se han realizado los siguientes pasos de confirmación?</p>
     <br>
     <ol class="lead text-start ms-5">
@@ -23,5 +22,4 @@
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No, aún no</button>
         </div>
     </form>
-    @endslot
 @endcomponent
