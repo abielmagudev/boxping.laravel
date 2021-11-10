@@ -32,7 +32,7 @@
 @endcomponent
 <br>
 
-@include('@.partials.block-modifiers.content', ['model' => $etapa])
+<!-- @ include('@.partials.block-modifiers.content', ['model' => $etapa]) -->
 
 @component('@.partials.modal-confirm-delete.modal', [
     'route' => route('entradas.etapas.destroy', [$entrada, $etapa]),
