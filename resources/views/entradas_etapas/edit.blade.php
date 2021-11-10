@@ -1,14 +1,10 @@
 @extends('app')
 @section('content')
 
-@component('@.bootstrap.page-header', [
-    'pretitle' => "Entrada {$entrada->numero}",
+@component('@.bootstrap.card', [
+    'pretitle' => $entrada->numero,
     'title' => 'Editar etapa',
 ])
-@endcomponent
-
-@component('@.bootstrap.card')
-    @slot('body')
     <div class="mb-3">
         <label class="form-label small">Etapa</label>
         <div class="form-control bg-light">{{ $etapa->nombre }}</div>
@@ -22,32 +18,29 @@
         @include('entradas_etapas._zonas')
         @include('entradas_etapas._alertas')
         <br>
-        <button class="btn btn-warning" type="submit" name="etapa" value="{{ $etapa->id }}">Actualizar etapa</button>
-        <a href="{{ route('entradas.show', $entrada) }}" class="btn btn-secondary">Regresar</a>
-    </form>
-    @endslot
 
-    @slot('footer')
-    @component('@.partials.modifiers-block', [
-        'model' => $etapa
-    ])
-    @endcomponent
-    @endslot
-    
+        @component('@.bootstrap.grid-left-right')
+            @slot('left')
+            <button class="btn btn-warning" type="submit" name="etapa" value="{{ $etapa->id }}">Actualizar etapa</button>
+            <a href="{{ route('entradas.show', $entrada) }}" class="btn btn-secondary">Regresar</a>
+            @endslot
+            @slot('right')
+            @include('@.partials.modal-confirm-delete.trigger', ['only' => 'text'])
+            @endslot
+        @endcomponent
+    </form>
 @endcomponent
 <br>
 
-<div class="text-end">
-    @component('@.partials.confirm-delete.bundle', [
-        'route' => route('entradas.etapas.destroy', [$entrada, $etapa]),
-        'text' => 'Eliminar etapa',
-    ])
-        @slot('content')    
-        <p class="lead m-0">¿Deseas eliminar la etapa <b>{{ $etapa->nombre }}</b>?</p>
-        <p class="small">De la entrada {{ $entrada->numero }}</p>
-        @endslot
-    @endcomponent
-</div>
-<br>
+@include('@.partials.block-modifiers.content', ['model' => $etapa])
+
+@component('@.partials.modal-confirm-delete.modal', [
+    'route' => route('entradas.etapas.destroy', [$entrada, $etapa]),
+    'category' => 'etapa',
+    'name' => $etapa->nombre,
+    'is_hard' => true,
+])
+    <p class="small text-uppercase">Entrada {{ $entrada->numero }}</p>
+@endcomponent
 
 @endsection
