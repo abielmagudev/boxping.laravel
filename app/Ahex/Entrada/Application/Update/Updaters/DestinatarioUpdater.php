@@ -15,7 +15,7 @@ class DestinatarioUpdater extends Updater
             'destinatario_id' => $this->validated['destinatario'],
             'confirmado_by' => null,
             'confirmado_at' => null,
-            'updated_by' => rand(1,5),
+            'updated_by' => auth()->user()->id,
         ];
     }
 

@@ -16,7 +16,7 @@ class ReempaqueUpdater extends Updater
             'reempacado_fecha' => $this->validated['reempacado_fecha'],
             'reempacado_hora' => $this->validated['reempacado_hora'],
             'reempacador_id' => $this->validated['reempacador'],
-            'updated_by' => rand(1,5),
+            'updated_by' => auth()->user()->id,
         ];
     }
 

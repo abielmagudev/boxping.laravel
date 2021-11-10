@@ -70,7 +70,7 @@ class Entrada extends Model implements ModifierIdentifiable, ModelAttributesPrin
             'consolidado_id' => $consolidado->id ?? null,
             'cliente_id' => $consolidado->cliente_id ?? $validated['cliente'],
             'contenido' => $validated['contenido'] ?? null,
-            'updated_by' => mt_rand(1,10),
+            'updated_by' => auth()->user()->id,
         ];
 
         if( request()->isMethod('post') )

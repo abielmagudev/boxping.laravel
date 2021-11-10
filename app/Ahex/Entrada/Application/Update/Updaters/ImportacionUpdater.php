@@ -17,7 +17,7 @@ class ImportacionUpdater extends Updater
             'numero_cruce'    => $this->validated['numero_cruce'],
             'importado_fecha' => $this->validated['importado_fecha'],
             'importado_hora'  => $this->validated['importado_hora'],
-            'updated_by'      => rand(1,5),
+            'updated_by'      => auth()->user()->id,
         ];
     }
 

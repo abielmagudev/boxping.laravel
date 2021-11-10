@@ -13,7 +13,7 @@ class RemitenteUpdater extends Updater
     {
         return [
             'remitente_id' => $this->validated['remitente'],
-            'updated_by' => rand(1,10),
+            'updated_by' => auth()->user()->id,
         ];
     }
 

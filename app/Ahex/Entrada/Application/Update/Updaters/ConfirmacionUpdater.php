@@ -12,9 +12,9 @@ class ConfirmacionUpdater extends Updater
     public function prepared(): array
     {
         return [
-            'confirmado_by' => rand(1,5),
+            'confirmado_by' => auth()->user()->id,
             'confirmado_at' => now(),
-            'updated_by' => rand(1,5),
+            'updated_by' => auth()->user()->id,
         ];
     }
 
