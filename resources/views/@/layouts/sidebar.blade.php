@@ -86,15 +86,21 @@ $menu = array(
         'active' => request()->is('configuraciones*'),
     ],
 );
+
+$link = (object) [
+    'inactive' => 'text-white',
+    'active' => 'active bg-black bg-opacity-25 rounded-0',
+];
+
 ?>
 
-<aside class="col-sm col-sm-2 p-3 bg-primary bg-gradient" id="app-sidebar">
-    <p class="text-white text-center lead">{{ config('app.name') }}</p>
+<aside class="bg-primary h-100" id="app-sidebar">
+    <div class="text-white lead p-3">{{ config('app.name') }}</div>
     <br>
-    <ul class="nav nav-pills flex-column small">
+    <ul class="nav nav-pills flex-column">
     @foreach($menu as $item)
         <li class="nav-item">
-            <a href="{{ $item->route }}" class="nav-link {{ ! $item->active ? 'text-white' : 'active text-white' }}">{{ $item->title }}</a>
+            <a href="{{ $item->route }}" class="nav-link {{ ! $item->active ? $link->inactive : $link->active }}">{{ $item->title }}</a>
         </li>
     @endforeach
     </ul>

@@ -1,4 +1,4 @@
-<footer class="my-5 text-secondary small">
+<footer class="text-secondary small my-5 px-3 px-md-4" id="app-footer">
     <hr>
     <div class="row">
         <div class="col-sm order-last order-md-first">

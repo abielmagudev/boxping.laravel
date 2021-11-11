@@ -10,9 +10,16 @@
 <body class="@yield('classes', 'bg-light')">
 
     @auth
-    <div class="row g-0 vh-100">
-        @include('layouts.sidebar')
-        @include('layouts.content')
+    <div class="row g-0">
+        <div class="col-sm col-sm-2">
+            @include('@.layouts.sidebar')
+        </div>
+        <div class="col-sm col-lg-10">
+            @include('@.layouts.navbar')
+            @include('@.layouts.notifications')
+            @include('@.layouts.content')
+            @include('@.layouts.footer')
+        </div>
     </div>
     
     <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script> -->
