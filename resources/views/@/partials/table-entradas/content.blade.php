@@ -71,10 +71,7 @@ if(! $settings->checkbox->render )
 
             <!-- Destinatario & Localidad -->
             <td>
-                @if(! $entrada->hasDestinatario() )
-                <span class="d-block text-center text-muted">-</span>
-
-                @else
+                @if( $entrada->hasDestinatario() )
                 <span class="d-block">{{ $settings->defaults->destinatario->direccion ?? $entrada->destinatario->direccion ?? '-' }}</span>
                 <small>{{ $settings->defaults->destinatario->localidad ?? $entrada->destinatario->localidad }}</small>
 
@@ -95,7 +92,7 @@ if(! $settings->checkbox->render )
             <!-- Opciones -->
             <td class="text-end">
                 <a href="{{ route('entradas.show', $entrada) }}" class="btn btn-sm btn-outline-primary" style="padding-top:1px">
-                    @include('@.bootstrap.icon', ['icon' => 'eye'])
+                    {!! $graffiti->load('eye')->svg() !!}
                 </a>
             </td>
         </tr>
