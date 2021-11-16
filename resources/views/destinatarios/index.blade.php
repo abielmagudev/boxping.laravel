@@ -24,10 +24,10 @@
             <td class="text-nowrap">{{ $destinatario->telefono }}</td>
             <td class="text-nowrap text-end">
                 <a href="{{ route('destinatarios.show', $destinatario) }}" class="btn btn-sm btn-outline-primary">
-                    @include('@.bootstrap.icon', ['icon' => 'eye'])
+                    {!! $graffiti->load('eye')->svg() !!}
                 </a>
                 <a href="{{ route('destinatarios.edit', $destinatario) }}" class="btn btn-sm btn-outline-warning">
-                    @include('@.bootstrap.icon', ['icon' => 'pencil-fill'])
+                    {!! $graffiti->load('pencil-fill')->svg() !!}
                 </a>    
             </td>
         </tr>
