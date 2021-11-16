@@ -4,7 +4,7 @@ $settings = (object) [
     'animated' => isset($animated) && $animated === true ? 'progress-bar-animated' : '',
     'color' => isset($color) && is_string($color) ? $color : '',
     'height' => isset($height) && is_numeric($height) ? $height . 'px' : '', 
-    'label' => isset($label) && is_string($label) ? $value.$label : '',
+    'label' => isset($label) ? (string) $label : '',
     'striped' => isset($striped) && $striped === true ? 'progress-bar-striped' : '',
     'text' => isset($text) && is_string($text) ?$text : null,
     'value' => isset($value) && is_numeric($value) ? $value : 0,
