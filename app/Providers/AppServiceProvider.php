@@ -7,6 +7,9 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Pagination\Paginator;
 use App\Ahex\Entrada\Application\Printing\PrintingContainer;
 
+use \App\Ahex\Zowner\Infrastructure\Graffiti\Graffiti;
+use \App\Ahex\Zowner\Infrastructure\Graffiti\Stencils\BootstrapIcons;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -46,6 +49,6 @@ class AppServiceProvider extends ServiceProvider
         });
 
         // Global
-        View::share('icons', config('resources.bootstrap-icons-svg'));
+        View::share('graffiti', new Graffiti(BootstrapIcons::class, 'vectors'));
     }
 }
