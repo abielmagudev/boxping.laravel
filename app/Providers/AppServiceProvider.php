@@ -8,7 +8,7 @@ use Illuminate\Pagination\Paginator;
 use App\Ahex\Entrada\Application\Printing\PrintingContainer;
 
 use \App\Ahex\Zowner\Infrastructure\Graffiti\Graffiti;
-use \App\Ahex\Zowner\Infrastructure\Graffiti\Stencils\BootstrapIcons;
+use \App\Ahex\Zowner\Infrastructure\Graffiti\Samples\BootstrapIcons;
 
 class AppServiceProvider extends ServiceProvider
 {

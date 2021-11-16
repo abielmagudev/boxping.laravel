@@ -91,8 +91,8 @@ if(! $settings->checkbox->render )
 
             <!-- Opciones -->
             <td class="text-end">
-                <a href="{{ route('entradas.show', $entrada) }}" class="btn btn-sm btn-outline-primary" style="padding-top:1px">
-                    {!! $graffiti->load('eye')->svg() !!}
+                <a href="{{ route('entradas.show', $entrada) }}" class="btn btn-sm btn-outline-primary">
+                    {!! $graffiti->design('eye')->draw('svg', true) !!}
                 </a>
             </td>
         </tr>
