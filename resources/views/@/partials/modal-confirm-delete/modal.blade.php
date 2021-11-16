@@ -15,10 +15,7 @@ $settings = (object) [
 ])
     <div class="text-center my-4"> 
         <div class="text-danger mb-3">
-            @include('@.bootstrap.icon', [
-                'icon' => 'exclamation-triangle',
-                'square' => 104
-            ])
+            {!! $graffiti->design('exclamation-triangle', ['width' => 104, 'height' => 104])->draw('svg') !!}
         </div>
 
         <div class="text-secondary">

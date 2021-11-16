@@ -9,6 +9,7 @@ $settings = (object) [
     'has_timestamps' => property_exists($model_cache, 'timestamps') && $model_cache->timestamps,
     'show_updated' => isset($show_updated) && is_bool($show_updated) ? $show_updated : true,
     'show_created' => isset($show_created) && is_bool($show_created) ? $show_created : true,
+    'icon' => $graffiti->design('clock-history')->draw('svg'),
 ];
 
 ?>
@@ -20,7 +21,7 @@ $settings = (object) [
     <!-- Updated -->
     <div>
         <div class="mb-1" style="color:#B5B5B5">
-            @include('@.bootstrap.icon', ['icon' => 'clock-history'])
+            {!! $settings->icon !!}
             <span class="align-middle">Actualizado</span>
         </div>
 
@@ -41,7 +42,7 @@ $settings = (object) [
     <!-- Created -->
     <div class="">
         <div class="mb-1" style="color:#B5B5B5">
-            @include('@.bootstrap.icon', ['icon' => 'clock-history'])
+            {!! $settings->icon !!}
             <span class="align-middle">Creado</span>
         </div>
 
