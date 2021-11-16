@@ -38,15 +38,15 @@ trait Attributes
         return static::STATUS_NO_EXISTE;
     }
 
-    public static function getAllStatus($return_object = false)
+    public static function getAllStatus($return_like_object = false)
     {
-        if( $return_object )
+        if( $return_like_object )
             return (object) self::$all_status;
 
         return self::$all_status;
     }
 
-    public static function getAllStatusClaves()
+    public static function getAllStatusKeys()
     {
         return array_keys( static::getAllStatus() );
     }

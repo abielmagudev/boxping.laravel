@@ -71,7 +71,7 @@ class Consolidado extends Model implements ModifierIdentifiable, ValueSearchable
             'status'     => isset($validated['status']) ? $validated['status'] : 'abierto',
             'notas'      => $validated['notas'],
             'cliente_id' => $validated['cliente'],
-            'updated_by' => mt_rand(1,10),
+            'updated_by' => auth()->user()->id,
         ];
 
         if( request()->isMethod('post') )

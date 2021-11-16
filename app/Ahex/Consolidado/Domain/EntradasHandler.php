@@ -8,23 +8,30 @@ trait EntradasHandler
 {
     public function updateEntradas()
     {
-        return Entrada::where('consolidado_id', $this->id)->update(['cliente_id' => $this->cliente_id]);
+        return Entrada::where('consolidado_id', $this->id)
+                        ->update([
+                            'cliente_id' => $this->cliente_id
+                        ]);
     }
 
-    public function unbindEntradas()
+    public function removeEntradas()
     {
-        return Entrada::where('consolidado_id', $this->id)->update(['consolidado_id' => null]);
+        return Entrada::where('consolidado_id', $this->id)
+                        ->update([
+                            'consolidado_id' => null
+                        ]);
     }
 
     public function deleteEntradas()
     {
-        return Entrada::where('consolidado_id', $this->id)->delete();
+        return Entrada::where('consolidado_id', $this->id)
+                        ->delete();
     }
 
-    public function uncoupleEntradas( $delete_entradas = false )
+    public function unbindEntradas( $delete = false )
     {
-        if( ! $delete_entradas )
-            return $this->unbindEntradas();
+        if( ! $delete )
+            return $this->removeEntradas();
 
         return $this->deleteEntradas();
     }

@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use App\Consolidado;
 use App\Entrada;
 use App\Cliente;
-use App\Ahex\Consolidado\Application\StoreRouter;
 use App\Http\Requests\ConsolidadoSaveRequest as SaveRequest;
-use Illuminate\Http\Request;
+use App\Ahex\Consolidado\Application\AfterStored;
 
 class ConsolidadoController extends Controller
 {
     public function index()
     {
         return view('consolidados/index', [
-            'consolidados' => Consolidado::with(['cliente','entradas'])->orderBy('id', 'desc')->paginate(),
+            'consolidados' => Consolidado::with(['cliente'])->withCount(['entradas'])->orderBy('id', 'desc')->simplePaginate(10),
             'all_status' => Consolidado::getAllStatus(),
         ]);
     }
@@ -31,11 +31,11 @@ class ConsolidadoController extends Controller
     {       
         $prepared = Consolidado::prepare($request->validated());
         
-        if( ! $consolidado = Consolidado::create($prepared) )
+        if(! $consolidado = Consolidado::create($prepared) )
             return back()->with('failure', 'Error al guardar consolidado');
         
-        $route = StoreRouter::get($request->guardar, $consolidado->id);
-        return redirect($route)->with('success', "Consolidado {$consolidado->numero} guardado");
+        return redirect( AfterStored::route($request->guardar, $consolidado) )
+                ->with('success', "Consolidado {$consolidado->numero} guardado");
     }
 
     public function show(Consolidado $consolidado, Request $request)
@@ -78,7 +78,7 @@ class ConsolidadoController extends Controller
         if(! $consolidado->delete() )
             return back()->with('failure', 'Error al eliminar consolidado');
         
-        $consolidado->uncoupleEntradas( $request->has('eliminar_entradas') );
+        $consolidado->unbindEntradas( $request->has('eliminar_entradas') );
 
         return redirect()->route('consolidados.index')->with('success', "Consolidado {$consolidado->numero} eliminado");
     }

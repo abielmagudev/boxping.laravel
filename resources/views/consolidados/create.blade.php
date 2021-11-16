@@ -14,7 +14,7 @@
             </button>
             <ul class="dropdown-menu">
                 <li>
-                    <span class="dropdown-header">Guardar consolidado y después...</span>
+                    <span class="dropdown-header">Posteriormente...</span>
                 </li>
                 <li class="d-none">
                     <hr class="dropdown-divider">

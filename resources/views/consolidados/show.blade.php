@@ -9,16 +9,16 @@ $checker_id = 'checker-entradas';
 
 ?>
 
-@component('@.bootstrap.page-header', [
+@include('@.bootstrap.page-header', [
     'title' => $consolidado->numero,
     'pretitle' => 'Consolidado',
 ])
-    @slot('options')
-    <a href="{{ route('consolidados.edit', $consolidado) }}" class="btn btn-sm btn-warning">
-        @include('@.bootstrap.icon', ['icon' => 'edit'])
+
+<p class="text-end">
+    <a href="{{ route('consolidados.printing', $consolidado) }}" class="btn btn-sm btn-primary">
+        <span class="">Imprimir</span>
     </a>
-    @endslot
-@endcomponent
+</p>
 
 <div class="row">
     <!-- Column informacion -->
@@ -26,12 +26,6 @@ $checker_id = 'checker-entradas';
         @component('@.bootstrap.card', [
             'title' => 'Información'    
         ])
-            @slot('options')
-            <a href="{{ route('consolidados.printing', $consolidado) }}" class="btn btn-sm btn-primary">
-                <span class="">Imprimir</span>
-            </a>
-            @endslot
-
             @component('@.bootstrap.table')
                 <tr class="text-capitalize">
                     <td class="text-muted small" style="width:1%">Status</td>
@@ -58,7 +52,19 @@ $checker_id = 'checker-entradas';
         @component('@.bootstrap.card', [
             'title' => 'Gráficas',    
         ])
-        <p class="text-center">...</p>
+            @include('@.bootstrap.progress-bar', [
+                'color' => 'bg-success', 
+                'label' => '%',
+                'text' => 'Confirmados', 
+                'value' => ( 0 . $entradas->whereNotNull('confirmado_at')->count()) / $entradas->count() * 100, 
+            ])
+
+            @include('@.bootstrap.progress-bar', [
+                'color' => 'bg-warning', 
+                'label' => '%',
+                'text' => 'No confirmados', 
+                'value' => ( 0 . $entradas->whereNull('confirmado_at')->count()) / $entradas->count() * 100, 
+            ])
         @endcomponent
     </div>
 </div>
@@ -66,7 +72,7 @@ $checker_id = 'checker-entradas';
 
 @component('@.bootstrap.card', [
     'title' => 'Entradas',
-    'counter' => $consolidado->entradas->count()
+    'counter' => $entradas->count()
 ])
     <!-- Slot options  -->
     @slot('options')

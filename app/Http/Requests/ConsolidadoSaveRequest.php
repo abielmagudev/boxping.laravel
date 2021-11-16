@@ -7,32 +7,27 @@ use Illuminate\Validation\Rule;
 
 class ConsolidadoSaveRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
+    private $consolidado_id_route;
+    private $consolidado_all_status;
+
     public function authorize()
     {
         return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array
-     */
+    public function prepareForValidation()
+    {
+        $this->consolidado_id_route = $this->route('consolidado')->id ?? 0;
+        $this->consolidado_all_status = implode(',', \App\Consolidado::getAllStatusKeys());
+    }
+
     public function rules()
     {
-        $consolidado_id = $this->route('consolidado')->id ?? 0;
-        $config_consolidados = (object) config('system.consolidados');
-        $all_status = implode(',', array_keys($config_consolidados->status));
-
         return [
             'cliente' => ['required','exists:clientes,id'],
-            'numero'  => ['required','unique:consolidados,numero,' . $consolidado_id],
+            'numero'  => ['required','unique:consolidados,numero,' . $this->consolidado_id_route],
             'tarimas' => ['required','numeric'],
-            'status'  => ['in:' . $all_status],
+            'status'  => ['in:' . $this->consolidado_all_status],
             'notas'   => 'nullable',
         ];
     }
