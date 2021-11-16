@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Ahex\Zowner\Infrastructure\Graffiti\Stencils;
+namespace App\Ahex\Zowner\Infrastructure\Graffiti\Samples;
 
 abstract class HtmlSymbols extends Book
 {
@@ -43,6 +43,6 @@ abstract class HtmlSymbols extends Book
 
     public static function names()
     {
-
+        // 
     }
 }

@@ -2,50 +2,45 @@
 
 namespace App\Ahex\Zowner\Infrastructure\Graffiti;
 
-use App\Ahex\Zowner\Infrastructure\Graffiti\Core\CacheHandler;
-use App\Ahex\Zowner\Infrastructure\Graffiti\Core\StencilHandler;
+use App\Ahex\Zowner\Infrastructure\Graffiti\Core\Cache;
+use App\Ahex\Zowner\Infrastructure\Graffiti\Core\Canvas;
+use App\Ahex\Zowner\Infrastructure\Graffiti\Core\Setup;
 
 class Graffiti
 {
-    use StencilHandler;
+    use Cache;
+    use Canvas;
+    use Setup;
 
-    private $stencils;
-    private $stencil;
     private $attributes;
-
-    public function __construct(string $stencils_book, string $category)
+    private $cache;
+    private $stencil;
+    private $stencils;
+    
+    public function __construct(string $book, string $stencils)
     {
-        $this->stencils = call_user_func([$stencils_book, $category]);
+        $this->loop = 0;
+        $this->stencils = call_user_func([$book, $stencils]);
+        $this->cleanCache();
     }
 
-    public function toDraw(string $name, array $attributes = null)
+    public function design(string $name, array $attributes = null)
     {
-        $this->setStencil($name)
-             ->setAttributes($attributes);
+        if( ! $this->hasCache() )
+            $this->setStencil($name)->setAttributes($attributes);
 
         return $this;
     }
 
-    public function svg()
+    public function draw(string $canvas, bool $caching = false)
     {
-        return "
-            <svg xmlns='http://www.w3.org/2000/svg'
-                fill='currentColor' 
-                viewBox='0 0 16 16'
-                width='{$this->getAttribute('width', 16)}' 
-                height='{$this->getAttribute('height', 16)}'
-                class='{$this->getAttribute('class')}'
-                style='{$this->getAttribute('style')}'
-            >
-                {$this->getStencil()}
-            </svg>
-        ";
-    }
+        if( $this->hasCache() )
+            return $this->getCache();
+        
+        $drawn = call_user_func([$this, $canvas]);
 
-    public function icon()
-    {
-        return "
-            <i class='{$this->getStencil()}' {$this->getAttribute('class')} style='{$this->getAttribute('style')}'></i>
-        ";
+        $this->modeCache($caching, $drawn);
+
+        return $drawn;
     }
 }

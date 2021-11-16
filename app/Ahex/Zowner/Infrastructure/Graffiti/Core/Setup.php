@@ -2,7 +2,7 @@
 
 namespace App\Ahex\Zowner\Infrastructure\Graffiti\Core;
 
-trait StencilHandler
+trait Setup
 {
     public function setStencil(string $name)
     {
@@ -27,7 +27,7 @@ trait StencilHandler
     
     public function hasAttributes()
     {
-        return is_array($this->attributes) && count($this->attributes) > 0;
+        return (bool) is_array($this->attributes) && count($this->attributes);
     }
 
     public function hasAttribute($name)

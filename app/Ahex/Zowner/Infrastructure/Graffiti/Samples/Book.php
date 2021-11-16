@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Ahex\Zowner\Infrastructure\Graffiti\Stencils;
+namespace App\Ahex\Zowner\Infrastructure\Graffiti\Samples;
 
 abstract class Book
 {
@@ -8,7 +8,5 @@ abstract class Book
     {
         if(! method_exists(self::class, $name) )
             return [];
-
-        return call_user_func([self::class, $name]);
     }
 }
