@@ -2,17 +2,27 @@
 @section('content')
 
 @component('@.bootstrap.card', [
-    'title' => 'Consoliddos',
-    'counter' => $consolidados->count(),
+    'title' => 'Consolidados',
+    'counter' => $consolidados->total(),
 ])
     @slot('center')
-    @foreach($all_status as $status => $attrs)   
-    <span class="badge" style="background-color:<?= $attrs['color'] ?>">
-        {{ $consolidados->where('status', $status)->count() }}
-        {{ ucfirst($status) }}
-    </span>
-    @endforeach
+    <div class="d-flex">
+        <div class="d-flex">
+            <span class="badge text-dark" style="background-color:<?= $all_status['abierto']['color'] ?>">
+                {{ $counter->abierto }}
+            </span>
+            <span class="d-none d-md-inline-block badge bg-light text-dark">Abierto</span>
+        </div>
+        <div class="vr mx-1 mx-md-3"></div>
+        <div class="d-flex">
+            <span class="badge" style="background-color:<?= $all_status['cerrado']['color'] ?>">
+                {{ $counter->cerrado }}
+            </span>
+            <span class="d-none d-md-inline-block badge bg-light text-dark">Cerrado</span>
+        </div>
+    </div>
     @endslot
+
 
     @slot('options')
     <a href="{{ route('consolidados.create') }}" class="btn btn-sm btn-primary">
@@ -27,10 +37,7 @@
         <tr>
             <td class="text-center" style="width:1%">
                 <span data-bs-title="{{ ucfirst($consolidado->status) }}" data-bs-toggle="tooltip" data-bs-placement="top" style="color:<?= $consolidado->status_color ?>">
-                    @include('@.bootstrap.icon', [
-                            'icon' => 'circle-fill',
-                            'style' => "color:{$consolidado->color}",
-                    ])
+                    {!! $graffiti->design('circle-fill', ['style' => "color:{$consolidado->color}"])->draw('svg') !!}
                 </span>
             </td>
             <td class="min-width:288px">{{ $consolidado->numero }}</td>
@@ -39,10 +46,10 @@
             <td>{{ $consolidado->entradas_count }}</td>
             <td class="text-nowrap text-end">
                 <a href="{{ route('consolidados.show', $consolidado) }}" class="btn btn-sm btn-outline-primary">
-                    @include('@.bootstrap.icon', ['icon' => 'eye'])
+                    {!! $graffiti->design('eye')->draw('svg') !!}
                 </a>
                 <a href="{{ route('consolidados.edit', $consolidado) }}" class="btn btn-sm btn-outline-warning">
-                    @include('@.bootstrap.icon', ['icon' => 'pencil-fill'])
+                    {!! $graffiti->design('pencil-fill')->draw('svg') !!}
                 </a>
             </td>
         </tr>

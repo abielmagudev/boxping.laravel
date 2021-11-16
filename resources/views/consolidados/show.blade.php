@@ -15,8 +15,8 @@ $checker_id = 'checker-entradas';
 ])
 
 <p class="text-end">
-    <a href="{{ route('consolidados.printing', $consolidado) }}" class="btn btn-sm btn-primary">
-        <span class="">Imprimir</span>
+    <a href="{{ route('consolidados.print', $consolidado) }}" class="btn btn-sm btn-primary">
+        {!! $graffiti->design('printer-fill')->draw('svg') !!}
     </a>
 </p>
 
@@ -29,7 +29,9 @@ $checker_id = 'checker-entradas';
             @component('@.bootstrap.table')
                 <tr class="text-capitalize">
                     <td class="text-muted small" style="width:1%">Status</td>
-                    <td class="fw-bold" style="color:<?= $consolidado->status_color ?>">{{ ucfirst($consolidado->status) }}</td>
+                    <td class="text-uppercase">
+                        <span class="badge <?= $consolidado->status == 'abierto' ? 'text-dark' : 'text-white' ?>" style="background-color:<?= $consolidado->status_color ?>">{{ $consolidado->status }}</span>
+                    </td>
                 </tr>
                 <tr>
                     <td class="text-muted small">Cliente</td>
@@ -53,17 +55,31 @@ $checker_id = 'checker-entradas';
             'title' => 'Gráficas',    
         ])
             @include('@.bootstrap.progress-bar', [
-                'color' => 'bg-success', 
-                'label' => '%',
+                'color' => 'bg-primary', 
                 'text' => 'Confirmados', 
-                'value' => ( 0 . $entradas->whereNotNull('confirmado_at')->count()) / $entradas->count() * 100, 
+                'label' => subtraction($entradas->count(), $entradas->whereNull('confirmado_at')->count()),
+                'value' => percentage($entradas->count(), $entradas->whereNotNull('confirmado_at')->count()), 
             ])
 
             @include('@.bootstrap.progress-bar', [
-                'color' => 'bg-warning', 
-                'label' => '%',
-                'text' => 'No confirmados', 
-                'value' => ( 0 . $entradas->whereNull('confirmado_at')->count()) / $entradas->count() * 100, 
+                'color' => 'bg-primary', 
+                'text' => 'Importados', 
+                'label' => subtraction($entradas->count(), $entradas->whereNull('importado_fecha')->count()), 
+                'value' => percentage($entradas->count(), $entradas->whereNotNull('importado_fecha')->count()), 
+            ])
+
+            @include('@.bootstrap.progress-bar', [
+                'color' => 'bg-primary', 
+                'text' => 'Reempacados', 
+                'label' => subtraction($entradas->count(), $entradas->whereNull('codigor_id')->count()), 
+                'value' => percentage($entradas->count(), $entradas->whereNotNull('codigor_id')->count()), 
+            ])
+                
+            @include('@.bootstrap.progress-bar', [
+                'color' => 'bg-primary', 
+                'text' => 'Destinados', 
+                'label' => subtraction($entradas->count(), $entradas->whereNull('destinatario_id')->count()), 
+                'value' => percentage($entradas->count(), $entradas->whereNotNull('destinatario_id')->count()), 
             ])
         @endcomponent
     </div>
@@ -93,6 +109,7 @@ $checker_id = 'checker-entradas';
         'entradas' => $entradas,
         'form_id' => 'formEntradasPrinting',
         'consolidado' => $consolidado,
+        'cliente' => $consolidado->cliente,
     ])
     <!-- Endslot body  -->
 

@@ -21,7 +21,7 @@ class ConsolidadoFactory extends Factory
      */
     public function definition()
     {
-        $all_status = Consolidado::getAllStatusClaves();
+        $all_status = Consolidado::getAllStatusKeys();
 
         return [
             'numero' => $this->faker->unique(true)->randomNumber . ucfirst($this->faker->lexify('?')),

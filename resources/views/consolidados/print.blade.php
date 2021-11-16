@@ -14,7 +14,7 @@
                     <td class="fw-bold text-white px-2" colspan="4">
                         <div class="d-flex align-items-middle justify-content-between">
                             <div>BOXPING | {{ config('app.name') }}</div>
-                            <div>Consolidado</div>
+                            <div></div>
                         </div>
                     </td>
                 </tr>
@@ -22,7 +22,7 @@
 
             <tbody>
                 <tr>
-                    <td class="bg-light fw-bold px-2" colspan="4">Información</td>
+                    <td class="bg-light fw-bold px-2" colspan="4">Consolidado</td>
                 </tr>
                 <tr>
                     <td class="text-muted small px-2" style="width:12%">Número</td>
@@ -33,12 +33,12 @@
                     <td class="text-capitalize px-2" colspan="3">{{ $consolidado->status }}</td>
                 </tr>
                 <tr>
-                    <td class="text-muted small px-2" >Tarimas</td>
-                    <td class="px-2" colspan="3">{{ $consolidado->tarimas }}</td>
-                </tr>
-                <tr>
                     <td class="text-muted small px-2" >Cliente</td>
                     <td class="px-2" colspan="3">{{ $cliente->nombre }} ({{ $cliente->alias }})</td>
+                </tr>
+                <tr>
+                    <td class="text-muted small px-2" >Tarimas</td>
+                    <td class="px-2" colspan="3">{{ $consolidado->tarimas }}</td>
                 </tr>
                 <tr>
                     <td class="text-muted small px-2" >Notas</td>

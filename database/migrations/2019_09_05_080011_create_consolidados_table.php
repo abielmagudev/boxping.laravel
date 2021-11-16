@@ -14,7 +14,7 @@ class CreateConsolidadosTable extends Migration
      */
     public function up()
     {
-        $all_status = Consolidado::getAllStatusClaves();
+        $all_status = Consolidado::getAllStatusKeys();
         
         Schema::create('consolidados', function (Blueprint $table) use ($all_status) {
             $table->bigIncrements('id');

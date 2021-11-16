@@ -14,6 +14,6 @@ class ConsolidadoSeeder extends Seeder
      */
     public function run()
     {
-        return Consolidado::factory(10)->create();
+        return Consolidado::factory(25)->create();
     }
 }

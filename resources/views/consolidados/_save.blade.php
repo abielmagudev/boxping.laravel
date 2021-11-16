@@ -1,5 +1,11 @@
 @csrf
 <div class="mb-3">
+    <label for="numero" class="form-label small">Número</label>
+    <input type="text" class="form-control {{ bootstrap_isInputInvalid('numero', $errors) }}" id="numero" name="numero" value="{{ old('numero', $consolidado->numero) }}" required>
+    @include('@.bootstrap.invalid-input-message', ['name' => 'numero'])
+</div>
+
+<div class="mb-3">
     <label for="cliente" class="form-label small">Cliente</label>
     <select name="cliente" id="cliente" class="form-select {{ bootstrap_isInputInvalid('cliente', $errors) }}" required>
         <option disabled selected label=""></option>
@@ -9,12 +15,6 @@
         @endforeach
     </select>
     @include('@.bootstrap.invalid-input-message', ['name' => 'cliente'])
-</div>
-
-<div class="mb-3">
-    <label for="numero" class="form-label small">Número</label>
-    <input type="text" class="form-control {{ bootstrap_isInputInvalid('numero', $errors) }}" id="numero" name="numero" value="{{ old('numero', $consolidado->numero) }}" required>
-    @include('@.bootstrap.invalid-input-message', ['name' => 'numero'])
 </div>
 
 <div class="mb-3">

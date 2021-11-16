@@ -57,7 +57,7 @@ Route::middleware('auth')->group( function () {
     Route::resource('etapas/{etapa}/zonas', 'ZonaController')->except(['index', 'show']);
     
     // Consolidados
-    Route::get('consolidados/{consolidado}/print', 'ConsolidadoController@printing')->name('consolidados.printing');
+    Route::get('consolidados/{consolidado}/print', 'ConsolidadoController@toPrint')->name('consolidados.print');
 
     // Registrar
     Route::get('registrar', 'RegistrarController@index')->name('registrar.index');

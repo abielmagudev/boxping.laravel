@@ -14,7 +14,14 @@ class ConsolidadoController extends Controller
     public function index()
     {
         return view('consolidados/index', [
-            'consolidados' => Consolidado::with(['cliente'])->withCount(['entradas'])->orderBy('id', 'desc')->simplePaginate(10),
+            'counter' => (object) [
+                'abierto' => Consolidado::where('status', 'abierto')->count(),
+                'cerrado' => Consolidado::where('status', 'cerrado')->count()
+            ],
+            'consolidados' => Consolidado::with(['cliente'])
+                                        ->withCount(['entradas'])
+                                        ->orderBy('id', 'desc')
+                                        ->paginate(10),
             'all_status' => Consolidado::getAllStatus(),
         ]);
     }
@@ -40,7 +47,7 @@ class ConsolidadoController extends Controller
 
     public function show(Consolidado $consolidado, Request $request)
     {
-        $entradas = Entrada::with(['cliente','destinatario'])
+        $entradas = Entrada::with(['destinatario'])
                             ->where('consolidado_id', $consolidado->id)
                             ->filterByRequest($request->all())
                             ->orderByDesc('id')
@@ -83,15 +90,16 @@ class ConsolidadoController extends Controller
         return redirect()->route('consolidados.index')->with('success', "Consolidado {$consolidado->numero} eliminado");
     }
 
-    public function printing(Consolidado $consolidado)
+    public function toPrint(Consolidado $consolidado)
     {
-        $entradas_salidas = $consolidado->entradas()->with('salida')->has('salida')->get();
+        // $entradas = $consolidado->entradas()->with('salida')->has('salida')->get();
+        $entradas = $consolidado->entradas()->with('salida')->get();
 
         $counters = (object) [
-            'pendientes' => $consolidado->entradas->whereNull('importado_fecha')->count(),
-            'registradas' => $consolidado->entradas->whereNotNull('importado_fecha')->count(),
-            'entregadas' => $entradas_salidas->where('salida.status', 'entregado')->count(),
-            'total' => $consolidado->entradas->count(),
+            'pendientes' => $entradas->whereNull('importado_fecha')->count(),
+            'registradas' => $entradas->whereNotNull('importado_fecha')->count(),
+            'entregadas' => $entradas->where('salida.status', 'entregado')->count(),
+            'total' => $entradas->count(),
         ];
 
         return view('consolidados.print', [
