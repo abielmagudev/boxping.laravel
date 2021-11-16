@@ -24,16 +24,13 @@
         @foreach($alertas as $alerta)
         <tr>
             <td class="text-center" style="width:1%">
-                @include('@.bootstrap.icon', [
-                        'icon' => 'circle-fill',
-                        'style' => "color:{$alerta->color}",
-                ])
+                {!! $graffiti->load('circle-fill', ['style' => "color:{$alerta->color}"])->svg() !!}
             </td>
             <td class="text-nowrap">{{ $alerta->nombre }}</td>
             <td>{{ $alerta->descripcion }}</td>
             <td class="text-end">
                 <a href="{{ route('alertas.edit', $alerta) }}" class="btn btn-sm btn-outline-warning">
-                    @include('@.bootstrap.icon', ['icon' => 'pencil-fill'])
+                    {!! $graffiti->load('eye')->svg() !!}
                 </a>
             </td>
         </tr>
