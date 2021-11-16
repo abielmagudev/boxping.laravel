@@ -18,7 +18,7 @@ class Graffiti
         $this->stencils = call_user_func([$stencils_book, $category]);
     }
 
-    public function load(string $name, array $attributes = null)
+    public function toDraw(string $name, array $attributes = null)
     {
         $this->setStencil($name)
              ->setAttributes($attributes);
