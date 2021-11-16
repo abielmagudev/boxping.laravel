@@ -30,17 +30,16 @@ class EntradaSeeder extends Seeder
 
     public function run()
     {
-        $entradas = Entrada::factory(100)->create();
+        $entradas = Entrada::factory(400)->create();
 
+        $this->command->getOutput()->writeln("<comment>Seeding:</comment> Comentarios, etapas y salida de entradas");
         foreach( $entradas as $entrada )
         {
             $this->seedComentarios($entrada);
             $this->seedEtapas($entrada);
             $this->seedSalida($entrada);
-
-            if( $entrada->id === 100 )
-                $this->command->getOutput()->writeln("<info>Seeded:</info>  Comentarios, etapas y salida de entradas");
         }
+        $this->command->getOutput()->writeln("<info>Seeded:</info>  Comentarios, etapas y salida de entradas");
     }
 
     public function seedComentarios(Entrada $entrada)
