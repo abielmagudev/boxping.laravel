@@ -27,7 +27,9 @@ Route::middleware('guest')->group( function () {
 Route::middleware('auth')->group( function () {
 
     // Escritorio
-    Route::get('/', fn() => view('app'))->name('escritorio');
+    Route::get('/{home?}', fn() => view('app'))
+            ->name('escritorio')
+            ->where(['home' => 'home|dashboard']);
     
     // Configuracion
     Route::resource('configuraciones', ConfiguracionController::class, [
