@@ -6,6 +6,8 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class IncidenteSaveRequest extends FormRequest
 {
+    private $route_incidente_id;
+    
     public function authorize()
     {
         return true;
@@ -28,7 +30,7 @@ class IncidenteSaveRequest extends FormRequest
     {
         return [
             'nombre.required' => __('Escribe el nombre del incidente'),
-            'nombre.unique' => __('Escribe otro nombre al incidente'),
+            'nombre.unique' => __('Escribe otro nombre diferente'),
         ];
     }
 }

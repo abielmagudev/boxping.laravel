@@ -1,40 +1,34 @@
 @extends('app')
 @section('content')
 
-@component('@.bootstrap.page-header', [
-    'title' => 'Editar incidente',
+@component('@.bootstrap.card', [
+    'title' => 'Editar incidente',    
 ])
-@endcomponent
-
-@component('@.bootstrap.card')
-    @slot('body')
     <form action="{{ route('incidentes.update', $incidente) }}" method="post" autocomplete="off">
         @method('put')
         @include('incidentes._save')
-        <br>
-        <button class="btn btn-warning" type="submit">Actualizar incidente</button>
-        <a href="{{ route('incidentes.index') }}" class="btn btn-secondary">Regresar</a>
-    </form>
-    @endslot
+        @component('@.bootstrap.grid-left-right')
+            @slot('left')
+            <button class="btn btn-warning" type="submit">Actualizar incidente</button>
+            <a href="{{ route('incidentes.index') }}" class="btn btn-secondary">Regresar</a>
+            @endslot
 
-    @slot('footer')
-        @include('@.partials.modifiers-block', [
-            'model' => $incidente,
-        ])
-    @endslot
+            @slot('right')
+            @include('@.partials.modal-confirm-delete.trigger', ['only' => 'text'])
+            @endslot
+        @endcomponent
+    </form>
 @endcomponent
 <br>
 
-<div class="text-end">
-    @component('@.partials.confirm-delete.bundle', [
-            'route' => route('incidentes.destroy', $incidente),
-            'text' => 'Eliminar incidente',
-        ])
-        @slot('content')
-        <p class="lead">¿Deseas eliminar incidente <b>{{ $incidente->titulo }}</b>?</p>
-        @endslot
-    @endcomponent
-</div>
+@include('@.partials.block-modifiers.content', ['model' => $incidente])
+
+@include('@.partials.modal-confirm-delete.modal', [
+    'route' => route('incidentes.destroy', $incidente),
+    'category' => 'incidente',
+    'name' => $incidente->nombre,
+    'is_hard' => true,
+])
 <br>
 
 @endsection
