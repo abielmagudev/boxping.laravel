@@ -19,7 +19,6 @@ class Graffiti
     
     public function __construct(string $book, string $stencils)
     {
-        $this->loop = 0;
         $this->stencils = call_user_func([$book, $stencils]);
         $this->cleanCache();
     }
