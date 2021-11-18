@@ -47,11 +47,9 @@ class Destinatario extends Model implements ModifierIdentifiable, ValueSearchabl
         return implode(', ', $localidad);
     }
 
-    public function getDomicilioStickerAttribute()
+    public function getDomicilioCompletoAttribute()
     {
-        return "{$this->direccion}<br>
-                Postal {$this->postal}<br>
-                {$this->localidad}";
+        return "{$this->direccion}, Postal {$this->postal} <br> {$this->localidad}";
     }
 
 
