@@ -2,7 +2,8 @@
 
 namespace App\Ahex\Salida\Domain;
 
-trait RelationshipsTrait{
+trait Relationships
+{
     public function entrada()
     {
         return $this->belongsTo(\App\Entrada::class);

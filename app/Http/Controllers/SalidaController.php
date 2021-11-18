@@ -15,7 +15,8 @@ class SalidaController extends Controller
     public function index()
     {
         return view('salidas.index', [
-            'salidas' => Salida::with(['transportadora','entrada.destinatario','incidentes'])->get()->sortByDesc('id'),
+            'salidas' => Salida::with(['transportadora','entrada.destinatario','incidentes'])
+                                ->paginate(25)
         ]);
     }
 

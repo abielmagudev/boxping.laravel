@@ -1,6 +1,10 @@
 @extends('app')
 @section('content')
 
+<p class="text-end">
+    <a href="{{ route('salidas.index') }}" class="link-primary text-decoration-none small"> &laquo; Salidas</a>
+</p>
+
 @component('@.bootstrap.card', [
     'pretitle' => $salida->entrada->numero,
     'title' => 'Editar salida',

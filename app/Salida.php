@@ -3,13 +3,16 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Ahex\Salida\Domain\AttributesTrait as Attributes;
-use App\Ahex\Salida\Domain\RelationshipsTrait as Relationships;
-use App\Ahex\Salida\Domain\ScopesTrait as Scopes;
-use App\Ahex\Salida\Domain\ValidationsTrait as Validations;
+use App\Ahex\Salida\Domain\Attributes;
+use App\Ahex\Salida\Domain\Relationships;
+use App\Ahex\Salida\Domain\Scopes;
+use App\Ahex\Salida\Domain\Validations;
+
 use App\Ahex\Salida\Domain\UpdatesDescriptionsTrait as UpdatesDescriptions;
+
 use App\Ahex\Zowner\Domain\Contracts\ModifierIdentifiable;
 use App\Ahex\Zowner\Domain\Features\HasModifiers;
+
 use App\Ahex\Zkeleton\Domain\UpdateDescriptionCallableTrait as UpdateDescriptionCallable;
 use App\Ahex\GuiaImpresion\Application\ModelAttributesPrintableInterface as ModelAttributesPrintable;
 
@@ -19,9 +22,9 @@ class Salida extends Model implements ModifierIdentifiable, ModelAttributesPrint
         Relationships, 
         Scopes, 
         Validations,
+        HasModifiers,
         UpdateDescriptionCallable, 
-        UpdatesDescriptions, 
-        HasModifiers;
+        UpdatesDescriptions;
     
     protected $fillable = [
         'rastreo',
