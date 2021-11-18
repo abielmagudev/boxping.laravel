@@ -24,7 +24,10 @@ Trait ConditionsTrait
 
     public function hasDestinatario()
     {
-        return (bool) is_int($this->destinatario_id);
+        if( is_null($this->destinatario_id) )
+            return false;
+
+        return is_a($this->destinatario, \App\Destinatario::class);
     }
 
     public function haveConsolidado()
