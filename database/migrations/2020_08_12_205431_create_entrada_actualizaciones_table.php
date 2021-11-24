@@ -18,7 +18,7 @@ class CreateEntradaActualizacionesTable extends Migration
             $table->string('descripcion', 128);
             $table->unsignedBigInteger('entrada_id')->index();
             $table->unsignedInteger('user_id')->index();
-            $table->timestamps();
+            $table->timestamp('created_at');
 
             $table->foreign('entrada_id')
                   ->references('id')
