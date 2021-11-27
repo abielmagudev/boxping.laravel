@@ -6,11 +6,22 @@ trait HasValidations
 {
     public function hasCollection($var): bool
     {
-        return ($var instanceof \Illuminate\Support\Collection) || ($var instanceof \Illuminate\Database\Eloquent\Collection);
+        return is_a($var, \Illuminate\Support\Collection::class) || 
+               is_a($var, \Illuminate\Database\Eloquent\Collection::class);
     }
 
     public function hasPagination($var): bool
     {
-        return is_a($var, \Illuminate\Pagination\LengthAwarePaginator::class);
+        return $var instanceof \Illuminate\Pagination\LengthAwarePaginator;
+    }
+
+    public function hasSimplePagination($var): bool
+    {
+        return $var instanceof \Illuminate\Pagination\Paginator;
+    }
+
+    public function hasCursorPagination($var): bool
+    {
+        return $var instanceof \Illuminate\Pagination\CursorPaginator;
     }
 }
