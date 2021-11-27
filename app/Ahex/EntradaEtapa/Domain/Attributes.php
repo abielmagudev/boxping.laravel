@@ -17,12 +17,12 @@ trait Attributes
         return $mapped->implode('');
     }
 
-    public function getPesoCompletoAttribute()
+    public function getLecturaPesoAttribute()
     {
         return "{$this->peso} {$this->medida_peso}";
     }
 
-    public function getVolumenCompletoAttribute()
+    public function getLecturaVolumenAttribute()
     {
         return "{$this->ancho} x {$this->altura} x {$this->largo} {$this->medida_volumen}";
     }
@@ -41,15 +41,5 @@ trait Attributes
             return self::MEDICION_SIN_NOMBRE;
 
         return $this->todas_mediciones_volumen[$this->medicion_volumen];
-    }
-
-    public function existsNombreMedicionPeso($key)
-    {
-        return isset($this->todas_mediciones_peso[$key]);
-    }
-
-    public function existsNombreMedicionVolumen($key)
-    {
-        return isset($this->todas_mediciones_volumen[$key]);
     }
 }

@@ -6,12 +6,12 @@ trait Validations
 {
     public function hasZona()
     {
-        return (bool) isset($this->zona_id);
+        return isset($this->zona_id);
     }
 
     public function hasAlertas()
     {
-        return (bool) isset($this->alertas_id);
+        return isset($this->alertas_id);
     }
 
     public function hasAlerta(string $nivel)
@@ -26,23 +26,43 @@ trait Validations
         return (bool) count($filtered);
     }
 
-    public function havePeso()
+    public function hasPeso()
     {
         return is_numeric($this->peso); 
     }
 
-    public function haveVolumen()
+    public function hasVolumen()
     {
-        return !is_null($this->ancho) || !is_null($this->altura) || !is_null($this->largo); 
+        return isset($this->ancho, $this->altura, $this->largo); 
     }
 
-    public function havePesoAndVolumen()
+    public function hasAnyVolumen()
     {
-        return $this->havePeso() === true && $this->haveVolumen() === true;
+        return isset($this->ancho) || isset($this->altura) || isset($this->largo); 
     }
 
-    public function havePesoOrVolumen()
+    public function hasPesoAndVolumen()
     {
-        return $this->havePeso() === true || $this->haveVolumen() === true;
+        return $this->hasPeso() && $this->hasVolumen();
+    }
+
+    public function hasPesoAndAnyVolumen()
+    {
+        return $this->hasPeso() && $this->hasAnyVolumen();
+    }
+
+    public function hasPesoOrVolumen()
+    {
+        return $this->havePeso() || $this->hasVolumen();
+    }
+
+    public function existsNombreMedicionPeso($key)
+    {
+        return isset($this->todas_mediciones_peso[$key]);
+    }
+
+    public function existsNombreMedicionVolumen($key)
+    {
+        return isset($this->todas_mediciones_volumen[$key]);
     }
 }
