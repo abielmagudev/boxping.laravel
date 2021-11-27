@@ -8,6 +8,7 @@ $settings = (object) [
         'pretitle' => $pretitle ?? null,
         'title' => $title ?? null,
         'subtitle' => $subtitle ?? null,
+        'has_counter' => is_numeric($counter),
         'counter' => $counter ?? null,
         'center' => $center ?? null,
         'options' => $options ?? null,
@@ -32,7 +33,7 @@ $settings = (object) [
                 <span class="lead align-middle">{!! $settings->header->title !!}</span>
                 @endif
 
-                @if( $settings->header->counter )
+                @if( $settings->header->has_counter )
                 <span class="badge bg-dark">{!! $settings->header->counter !!}</span>
                 @endif
 
