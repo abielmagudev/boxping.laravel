@@ -20,12 +20,10 @@ if( ! function_exists('isMinNumber') )
 {
     function isMinNumber($number, int $min, bool $is_float = false)
     {
-        $options = ['options' => ['min_range' => $min]];
-
         if(! $is_float )
-            return (bool) filter_var($number, FILTER_VALIDATE_INT, $options);
+            return (bool) filter_var($number, FILTER_VALIDATE_INT, ['options' => ['mmin_range' => $min]]);
             
-        return (bool) filter_var($number, FILTER_VALIDATE_FLOAT, $options);
+        return (bool) is_float($number) && $number >= $min;
     }
 }
 
@@ -33,12 +31,10 @@ if( ! function_exists('isMaxNumber') )
 {
     function isMaxNumber($number, int $max, bool $is_float = false)
     {
-        $options = ['options' => ['max_range' => $max]];
-
         if(! $is_float )
-            return (bool) filter_var($number, FILTER_VALIDATE_INT, $options);
+            return (bool) filter_var($number, FILTER_VALIDATE_INT, ['options' => ['max_range' => $max]]);
             
-        return (bool) filter_var($number, FILTER_VALIDATE_FLOAT, $options);
+        return (bool) is_float($number) && $number <= $max;
     }
 }
 
