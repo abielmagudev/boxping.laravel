@@ -2,31 +2,33 @@
 
 namespace App\Http\Controllers;
 
-use App\Cliente;
+use App\Ahex\Zowner\Application\HasValidations;
+use App\Ahex\Entrada\Application\StoreCalled\Redirects\StoredRedirect;
+use App\Ahex\Entrada\Application\EditCalled\Editors\EditorsContainer;
+use App\Ahex\Entrada\Application\UpdateCalled\Updaters\UpdatersContainer;
+
+use App\Http\Requests\EntradaCreateRequest as CreateRequest;
+use App\Http\Requests\EntradaStoreRequest as StoreRequest;
+use App\Http\Requests\EntradaEditRequest as EditRequest;
+use App\Http\Requests\EntradaUpdateRequest as UpdateRequest;
+use App\Http\Requests\EntradaPrintManyRequest as PrintManyRequest;
+use Illuminate\Http\Request;
+
 use App\Consolidado;
 use App\Entrada;
 use App\GuiaImpresion;
 
-use App\Ahex\Entrada\Application\Printing\PrintingContainer;
-use App\Ahex\Entrada\Application\Edit\Editors\EditorsContainer;
-use App\Ahex\Entrada\Application\Store\Redirects\StoredRedirect;
-use App\Ahex\Entrada\Application\Update\Updaters\UpdatersContainer;
-use App\Http\Requests\EntradaCreateRequest as CreateRequest;
-use App\Http\Requests\EntradaEditRequest as EditRequest;
-use App\Http\Requests\EntradaStoreRequest as StoreRequest;
-use App\Http\Requests\EntradaUpdateRequest as UpdateRequest;
-use App\Http\Requests\EntradaPrintMultipleRequest as PrintMultipleRequest;
-use Illuminate\Http\Request;
-
 class EntradaController extends Controller
 {
+    use HasValidations;
+
     public function index(Request $request)
     {
         $entradas = Entrada::with(['consolidado','cliente','destinatario'])
                             ->filterByRequest( $request->all() )
                             ->getFiltered( $request->input('muestreo', 25) );
 
-        $has_pagination = hasPagination($entradas);
+        $has_pagination = $this->hasPagination($entradas);
 
         return view('entradas.index', [
             'collection' => $entradas,
@@ -45,7 +47,7 @@ class EntradaController extends Controller
             ]);
 
         return view('entradas.create.sin-consolidado', [
-            'clientes' => Cliente::all(),
+            'clientes' => \App\Cliente::all(),
             'entrada' => new Entrada,
         ]);
     }
@@ -54,7 +56,7 @@ class EntradaController extends Controller
     {
         $prepared = Entrada::prepare( $request->validated() );
 
-        if( ! $entrada = Entrada::create($prepared) )
+        if(! $entrada = Entrada::create($prepared) )
             return back()->with('failure', 'Error al guardar entrada');
 
         return StoredRedirect::hasConsolidado($entrada->consolidado_id)
@@ -62,12 +64,13 @@ class EntradaController extends Controller
                              ->with('success', "{$entrada->numero} guardada");
     }
 
-    public function show(Entrada $entrada)
-    {        
+    public function show(Entrada $entrada, Request $request)
+    {
+        $shows = ['informacion','etapas','actualizaciones'];
+
         return view('entradas.show', [
-            'actualizaciones' => $entrada->actualizaciones,
-            'comentarios' => $entrada->comentarios,
             'entrada' => $entrada,
+            'show' => $request->filled('show') && in_array($request->show, $shows) ? $request->show : $shows[0],
         ]);
     }
 
@@ -81,16 +84,15 @@ class EntradaController extends Controller
     {
         $updater = UpdatersContainer::find($request->actualizar, $request->validated());
         
-        if( ! $entrada->fill( $updater->prepared() )->save() )
+        if(! $entrada->fill( $updater->prepared() )->save() )
             return back()->with('failure', $updater->message('failure'));
 
-        $route = $updater->route($entrada);
-        return redirect($route)->with('success', $updater->message('success'));
+        return redirect( $updater->route($entrada) )->with('success', $updater->message('success'));
     }
 
     public function destroy(Entrada $entrada)
     {
-        if( ! $entrada->delete() )
+        if(! $entrada->delete() )
             return back()->with('failure', 'Error al eliminar entrada');
         
         $route = Consolidado::where('id', $entrada->consolidado_id)->exists()
@@ -100,7 +102,12 @@ class EntradaController extends Controller
         return redirect($route)->with('success', "{$entrada->numero} eliminada");
     }
 
-    public function imprimir(Entrada $entrada, GuiaImpresion $guia)
+    public function destroyMany()
+    {
+        // code...
+    }
+
+    public function toPrint(Entrada $entrada, GuiaImpresion $guia)
     {
         $guia->incrementarIntentos()->save();
 
@@ -110,7 +117,7 @@ class EntradaController extends Controller
         ]);
     }
 
-    public function imprimirMultiple(PrintMultipleRequest $request)
+    public function toPrintMany(PrintManyRequest $request)
     {
         $guia = GuiaImpresion::find($request->guia);        
         $guia->incrementarIntentos()->save();

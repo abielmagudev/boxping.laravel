@@ -1,27 +1,22 @@
 @extends('app')
 @section('content')
 
-@component('@.bootstrap.page-header', [
-
-   'goback' => route('entradas.show', $entrada)
-])
-@endcomponent
+<p>
+   <a href="{{ route('entradas.show', $entrada) }}" class="link-primary text-decoration-none">Regresar</a>
+</p>
 
 @component('@.bootstrap.card', [
    'title' => 'Agregar remitente',
    'subtitle' => "Encontrados con \"{$searched}\": {$remitentes->count()}",
 ])
    @slot('options')
-      @include('@.bootstrap.modal-trigger', [
-         'classes' => 'btn btn-primary btn-sm',
-         'modal_id' => 'modalSearchToChangeRemitente',
-         'text' => 'P',
+      @include('remitentes.modal-search.trigger', [
+         'classes' => 'btn btn-sm btn-primary',
+         'text' => $graffiti->design('search')->draw('svg')
       ])
-      <a href="{{ route('remitentes.create', ['entrada' => $entrada->id]) }}" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="left" title="Nuevo remitente">
-         <b>+</b>
-      </a>
-      <a href="{{ route('entradas.show', $entrada) }}" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="left" title="Regresar">
-         <b>R</b>
+
+      <a href="{{ route('remitentes.create', ['entrada' => $entrada->id]) }}" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="left" title="Nuevo destinatario">
+         {!!  $graffiti->design('plus-lg')->draw('svg') !!}
       </a>
    @endslot
 
@@ -59,6 +54,10 @@
    @endif
 @endcomponent
 
-@include('entradas.show.trayectoria.modal-change-remitente')
+@component('remitentes.modal-search.modal', [
+    'route' => route('entradas.edit', $entrada),    
+])
+    <input type="hidden" name="editor" value="remitente">
+@endcomponent
 
 @endsection

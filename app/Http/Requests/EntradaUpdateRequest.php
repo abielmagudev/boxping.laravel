@@ -4,8 +4,8 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
-use App\Ahex\Entrada\Application\Update\Updaters\UpdatersContainer;
-use App\Ahex\Entrada\Application\Update\Validators\ValidatorsContainer;
+use App\Ahex\Entrada\Application\UpdateCalled\Updaters\UpdatersContainer;
+use App\Ahex\Entrada\Application\UpdateCalled\Validators\ValidatorsContainer;
 
 class EntradaUpdateRequest extends FormRequest
 {

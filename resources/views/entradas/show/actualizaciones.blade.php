@@ -1,19 +1,18 @@
-<?php $updates_counter = $actualizaciones->count() ?>
 @component('@.bootstrap.card', [
     'title' => 'Actualizaciones',
-    'counter' =>  $updates_counter,
+    'counter' =>  $entrada->actualizaciones->count(),
 ])
-    @if( $actualizaciones->count() )
+    @if( $entrada->hasActualizaciones() )
         @component('@.bootstrap.table', [
             'striped' => true,
             'thead' => ['#', 'Usuario', 'Descripción', 'Fecha'],
         ])
-            @foreach($actualizaciones as $actualizacion)
-            <tr class="align-top">
-                <td class=""><small>{{ $updates_counter-- }}</small></td>
-                <td class="">{{ $actualizacion->updater->name ?? 'Desconocido' }}</td>
-                <td class="" style="max-width:320px">{{ ucfirst($actualizacion->descripcion) }}</td>
-                <td class="">{{ $actualizacion->created_at }}</td>
+            @foreach($entrada->actualizaciones as $number => $actualizacion)
+            <tr>
+                <td class=""><small>{{ ($entrada->actualizaciones->count() - $number) }}</small></td>
+                <td class="text-nowrap">{{ $actualizacion->updater->name ?? 'Desconocido' }}</td>
+                <td style="max-width:320px">{{ ucfirst($actualizacion->descripcion) }}</td>
+                <td class="text-nowrap">{{ $actualizacion->fecha_hora_creado }}</td>
             </tr>
             @endforeach
         @endcomponent

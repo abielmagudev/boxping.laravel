@@ -4,25 +4,34 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use App\Ahex\Entrada\Domain\RelationshipsTrait as Relationships;
-use App\Ahex\Entrada\Domain\AttributesTrait as Attributes;
-use App\Ahex\Entrada\Domain\ScopesTrait as Scopes;
-use App\Ahex\Entrada\Domain\FiltersTrait as Filters;
-use App\Ahex\Entrada\Domain\ConditionsTrait as Conditions;
+use App\Ahex\Entrada\Domain\Topics\Confirmado as ConfirmadoTopic;
+use App\Ahex\Entrada\Domain\Topics\Importado as ImportadoTopic;
+use App\Ahex\Entrada\Domain\Topics\Reempacado as ReempacadTopic;
+use App\Ahex\Entrada\Domain\Attributes;
+use App\Ahex\Entrada\Domain\Relationships;
+use App\Ahex\Entrada\Domain\Validations;
+use App\Ahex\Entrada\Domain\Scopes;
+use App\Ahex\Entrada\Domain\FiltersByRequest;
+
 use App\Ahex\Entrada\Domain\UpdatesDescriptionsTrait as UpdatesDescriptions;
 use App\Ahex\Zkeleton\Domain\UpdateDescriptionCallableTrait as UpdateDescriptionCallable;
+
 use App\Ahex\Zowner\Domain\Contracts\ModifierIdentifiable;
 use App\Ahex\Zowner\Domain\Features\HasModifiers;
+
 use App\Ahex\GuiaImpresion\Application\ModelAttributesPrintableInterface as ModelAttributesPrintable;
 
 class Entrada extends Model implements ModifierIdentifiable, ModelAttributesPrintable
 {
     use HasFactory,
+        ConfirmadoTopic,
+        ImportadoTopic,
+        ReempacadTopic,
         Attributes,
-        Conditions,
-        Filters,
         Relationships,
+        Validations,
         Scopes,
+        FiltersByRequest,
         HasModifiers,
         UpdatesDescriptions,
         UpdateDescriptionCallable;
@@ -59,6 +68,14 @@ class Entrada extends Model implements ModifierIdentifiable, ModelAttributesPrin
         'created_by',
         'updated_by',
     );
+
+    protected $casts = [
+        'importado_fecha' => 'datetime',
+        'importado_hora' => 'datetime',
+        'reempacado_fecha' => 'datetime',
+        'reempacado_hora' => 'datetime',
+        'confirmado_at' => 'datetime',
+    ];
 
     public static function prepare($validated)
     {

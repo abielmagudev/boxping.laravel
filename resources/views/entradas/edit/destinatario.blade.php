@@ -1,21 +1,22 @@
 @extends('app')
 @section('content')
 
+<p>
+   <a href="{{ route('entradas.show', $entrada) }}" class="link-primary text-decoration-none">Regresar</a>
+</p>
+
 @component('@.bootstrap.card', [
    'subtitle' => "Encontrados con \"{$searched}\": {$destinatarios->count()}",
    'title' => 'Agregar destinatario',
 ])
    @slot('options')
-      @include('@.bootstrap.modal-trigger', [
-         'classes' => 'btn btn-primary btn-sm',
-         'modal_id' => 'modalSearchToChangeDestinatario',
-         'text' => "P",
+      @include('destinatarios.modal-search.trigger', [
+         'classes' => 'btn btn-sm btn-primary',
+         'text' => $graffiti->design('search')->draw('svg')
       ])
+
       <a href="{{ route('destinatarios.create', ['entrada' => $entrada->id]) }}" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="left" title="Nuevo destinatario">
-         <b>+</b>
-      </a>
-      <a href="{{ route('entradas.show', $entrada) }}" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="left" title="Regresar">
-         <b>R</b>
+         {!!  $graffiti->design('plus-lg')->draw('svg') !!}
       </a>
    @endslot
 
@@ -53,6 +54,10 @@
    @endif
 @endcomponent
 
-@include('entradas.show.trayectoria.modal-change-destinatario')
+@component('destinatarios.modal-search.modal', [
+    'route' => route('entradas.edit', $entrada),    
+])
+    <input type="hidden" name="editor" value="destinatario">
+@endcomponent
 
 @endsection

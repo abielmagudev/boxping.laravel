@@ -14,18 +14,18 @@ use App\Incidente;
 class EntradaSeeder extends Seeder
 {
     private $fakerphp;
-    private $etapas_all, $alertas_all;
-    private $salida_all_status, $salida_all_coberturas;
-    private $incidentes_all;
+    private $all_etapas, $all_alertas;
+    private $all_status_salida, $all_coberturas_salida;
+    private $all_incidentes;
 
     public function __construct()
     {        
         $this->fakerphp    = Factory::create();
-        $this->etapas_all  = Etapa::all();
-        $this->alertas_all = Alerta::all();
-        $this->salida_all_status = Salida::getAllStatusNombres();
-        $this->salida_all_coberturas = Salida::getAllCoberturasNombres();
-        $this->incidentes_all = Incidente::all();
+        $this->all_etapas  = Etapa::all();
+        $this->all_alertas = Alerta::all();
+        $this->all_status_salida = Salida::getAllStatusNombres();
+        $this->all_coberturas_salida = Salida::getAllCoberturasNombres();
+        $this->all_incidentes = Incidente::all();
     }
 
     public function run()
@@ -64,8 +64,8 @@ class EntradaSeeder extends Seeder
 
         while( $counter > 1 )
         {
-            $etapa_random   = $this->etapas_all->random(); // Solo una etapa aleatoria
-            $alertas_random = $this->alertas_all->random( mt_rand(0,10) ); // Cantidad de alertas aleatorias
+            $etapa_random   = $this->all_etapas->random(); // Solo una etapa aleatoria
+            $alertas_random = $this->all_alertas->random( mt_rand(0,10) ); // Cantidad de alertas aleatorias
 
             $entrada->etapas()->attach($etapa_random->id, [
                 'peso'             => $etapa_random->hasTarea('peso') ? $this->fakerphp->randomFloat(2, 0.1, 999) : null,
@@ -86,10 +86,10 @@ class EntradaSeeder extends Seeder
 
     public function seedSalida(Entrada $entrada)
     {
-        if( ! $entrada->haveDestinatario() || ! $entrada->haveConfirmacion() )
+        if( ! $entrada->hasDestinatario() || ! $entrada->hasConfirmado() )
             return;
         
-        $cobertura = $this->fakerphp->randomElement( $this->salida_all_coberturas );
+        $cobertura = $this->fakerphp->randomElement( $this->all_coberturas_salida );
         $is_cobertura_ocurre = $cobertura === 'ocurre';
 
         $salida = Salida::create([
@@ -102,7 +102,7 @@ class EntradaSeeder extends Seeder
             'estado' => $is_cobertura_ocurre ? $this->fakerphp->state : null,
             'pais' => $is_cobertura_ocurre ? $this->fakerphp->country : null,
             'notas' => $this->fakerphp->boolean ? $this->fakerphp->sentence : null,
-            'status' => $this->fakerphp->randomElement( $this->salida_all_status ),
+            'status' => $this->fakerphp->randomElement( $this->all_status_salida ),
             'transportadora_id' => $this->fakerphp->numberBetween(1,10),
             'entrada_id' => $entrada->id,
             'created_by' => $this->fakerphp->numberBetween(1,10),
@@ -111,7 +111,7 @@ class EntradaSeeder extends Seeder
 
         if( $this->fakerphp->boolean ) // True: Agrega incidentes aleatorios a la salida
         {
-            $incidentes_random_id = $this->incidentes_all->random( mt_rand(1,10) )->pluck('id')->toArray();
+            $incidentes_random_id = $this->all_incidentes->random( mt_rand(1,10) )->pluck('id')->toArray();
             return $salida->incidentes()->sync( $incidentes_random_id );
         }
     }

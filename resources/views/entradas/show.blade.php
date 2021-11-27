@@ -1,83 +1,79 @@
 @extends('app')
 @section('content')
 
-<!-- Cabecera -->
-@include('@.bootstrap.page-header', [
-    'pretitle' => 'Entrada',
-    'title' => $entrada->numero,
-])
-
-<!-- Comentarios -->
-@component('@.bootstrap.modal-trigger', [
-    'modal_id' => 'modalComentarios',
-    'classes' => 'btn btn-sm btn-outline-primary',
-])
-    @slot('text')
-    <span class="d-inline-block d-md-none me-2">
-        @include('@.bootstrap.icon', ['icon' => 'chat'])
-    </span>
-    <span class="d-none d-md-inline-block me-1">Comentarios</span>
-    <span class="badge bg-primary">{{ $comentarios->count() }}</span>
-    @endslot
-@endcomponent
-
-<!-- Imprimir -->
-<div class="dropdown d-inline-block">
-    <button class="btn btn-sm btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuPrintEntrada" data-bs-toggle="dropdown" aria-expanded="false">
-        <span>Imprimir</span>
-    </button>
-    @if( $guias_impresion->count() )            
-    <ul class="dropdown-menu" aria-labelledby="dropdownMenuPrintEntrada">
-
-        @foreach ($guias_impresion as $guia)
-        <li><a class="dropdown-item" href="{{ route('entradas.imprimir', [$entrada, $guia]) }}">{{ $guia->nombre }}</a></li>
-        @endforeach
-
-    </ul>
-    @endif
-</div>
-
-<!-- Proceso y trayectoria -->
-<div class="row" style="min-height:520px">
-    
-    <!-- Proceso de la entrada -->
-    <div class="col-sm mb-3">
-        @component('@.bootstrap.card', [
-            'classes' => 'h-100',
-            'body_classes' => 'overflow-scroll'
-        ])
-            @include('entradas.show.paquete.tabs')
-            <div class="tab-content mt-3" id="paqueteContentTabs">
-                @include('entradas.show.paquete.informacion')
-                @include('entradas.show.paquete.reempaque')
-                @include('entradas.show.paquete.importacion')
-            </div>
-        @endcomponent
-    </div>
-
-    <!-- Trayectoria de la entrada -->
-    <div class="col-sm mb-3">
-        @component('@.bootstrap.card', [
-            'classes' => 'h-100',
-            'body_classes' => 'overflow-scroll',
-        ])
-            @include('entradas.show.trayectoria.tabs')
-            <div class="tab-content mt-3" id="trayectoriaContentTabs">
-                @include('entradas.show.trayectoria.salida')
-                @include('entradas.show.trayectoria.destinatario')
-                @include('entradas.show.trayectoria.remitente')
-            </div>
-        @endcomponent
+<div class="text-center">
+    <div class="btn-group">
+        <a href="{{ route('entradas.show', [$entrada, 'show' => 'informacion']) }}" class="btn btn-primary {{ request()->input('show', 'informacion') === 'informacion' ? 'active' : '' }}" aria-current="page">Información</a>
+        <a href="{{ route('entradas.show', [$entrada, 'show' => 'etapas']) }}" class="btn btn-primary {{ request()->input('show') === 'etapas' ? 'active' : '' }}">Etapas</a>
+        <a href="{{ route('entradas.show', [$entrada, 'show' => 'actualizaciones']) }}" class="btn btn-primary {{ request()->input('show') === 'actualizaciones' ? 'active' : '' }}">Actualizaciones</a>
     </div>
 </div>
 <br>
 
-@include('entradas.show.etapas')
+<div class="row">
+    <div class="col-sm col-sm-4">
+    @component('@.bootstrap.card', [
+        'title' => 'Entrada'
+    ])
 
-<br>
+        @slot('options')
+        <!-- Comentarios -->
+        @include('entradas.show.modal-comentarios.trigger')
 
-@include('entradas.show.actualizaciones')
+        <!-- Imprimir -->
+        <div class="dropdown d-inline-block">
+            <button class="btn btn-sm btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuPrintEntrada" data-bs-toggle="dropdown" aria-expanded="false">
+                {!! $graffiti->design('printer-fill')->draw('svg') !!}
+            </button>
+            @if( $guias_impresion->count() )            
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuPrintEntrada">
 
-@include('entradas.show.modal-comentarios')
+                @foreach ($guias_impresion as $guia)
+                <li><a class="dropdown-item" href="{{ route('entradas.imprimir', [$entrada, $guia]) }}">{{ $guia->nombre }}</a></li>
+                @endforeach
+
+            </ul>
+            @endif
+        </div>
+        @endslot
+
+        <label class="text-muted small">Número</label>
+        <p>{{ $entrada->numero }}</p>
+
+        <label class="text-muted small">Cliente</label>
+        <p>{{ $entrada->cliente->nombre }}</p>
+
+        <label class="text-muted small">Consolidado</label>
+        <p>
+            @if( $entrada->hasConsolidado() )
+            <a href="{{ route('consolidados.show', $entrada->consolidado) }}" class="link-primary">{{ $entrada->consolidado->numero }}</a>
+            
+            @else
+            <span>&nbsp;</span>
+            
+            @endif
+        </p>
+
+        <label class="text-muted small">Contenido</label>
+        <p>{!! $entrada->hasContenido() ? $entrada->contenido_html : 'Desconocido' !!}</p>
+
+        <label class="text-muted small">Actualizado</label>
+        <p>{{ $entrada->fecha_hora_actualizado }}<br>{{ $entrada->updater->name }}</p>   
+        <br>
+
+        <div class="text-end">
+            <a href="{{ route('entradas.edit', [$entrada, 'editor' => 'informacion']) }}" class="btn btn-warning btn-sm">
+                <span>Editar</span>
+            </a>
+        </div>
+        @endcomponent
+    </div>
+
+    <div class="col-sm col-sm-8">
+        @include("entradas.show.{$show}")
+    </div>
+</div>
+
+@include('entradas.show.modal-comentarios.modal')
 
 @endsection

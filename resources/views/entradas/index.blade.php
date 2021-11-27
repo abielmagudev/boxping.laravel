@@ -19,7 +19,7 @@
     </div>
     @endslot
 
-    @include('@.partials.table-entradas.content', [
+    @include('entradas.table-index.render', [
         'entradas' => $entradas,
         'form_id' => 'formEntradasPrinting',
     ]) 
