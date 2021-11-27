@@ -1,17 +1,44 @@
 <?php
 
-if( ! function_exists('hasCollection') )
+/**
+ * Function to compare if the values ​​are equal
+ * 
+ * @return bool
+ */
+if( ! function_exists('equals') )
 {
-    function hasCollection($param): bool
+    function equals($a, $b, bool $strict = false)
     {
-        return ($param instanceof \Illuminate\Support\Collection) || ($param instanceof \Illuminate\Database\Eloquent\Collection);
+        if( $strict )
+            return $a === $b;
+        
+        return $a == $b;
     }
 }
 
-if( ! function_exists('hasPagination') )
+if( ! function_exists('isMinNumber') )
 {
-    function hasPagination($param): bool
+    function isMinNumber($number, int $min, bool $is_float = false)
     {
-        return is_a($param, \Illuminate\Pagination\LengthAwarePaginator::class);
+        $options = ['options' => ['min_range' => $min]];
+
+        if(! $is_float )
+            return (bool) filter_var($number, FILTER_VALIDATE_INT, $options);
+            
+        return (bool) filter_var($number, FILTER_VALIDATE_FLOAT, $options);
     }
 }
+
+if( ! function_exists('isMaxNumber') )
+{
+    function isMaxNumber($number, int $max, bool $is_float = false)
+    {
+        $options = ['options' => ['max_range' => $max]];
+
+        if(! $is_float )
+            return (bool) filter_var($number, FILTER_VALIDATE_INT, $options);
+            
+        return (bool) filter_var($number, FILTER_VALIDATE_FLOAT, $options);
+    }
+}
+
