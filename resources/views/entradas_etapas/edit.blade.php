@@ -22,7 +22,7 @@
         @component('@.bootstrap.grid-left-right')
             @slot('left')
             <button class="btn btn-warning" type="submit" name="etapa" value="{{ $etapa->id }}">Actualizar etapa</button>
-            <a href="{{ route('entradas.show', $entrada) }}" class="btn btn-secondary">Regresar</a>
+            <a href="{{ route('entradas.show', [$entrada, 'show' => 'etapas']) }}" class="btn btn-secondary">Regresar</a>
             @endslot
             @slot('right')
             @include('@.partials.modal-confirm-delete.trigger', ['only' => 'text'])

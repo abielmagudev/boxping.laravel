@@ -29,7 +29,7 @@
         @include('entradas_etapas._alertas')
         <br>
         <button class="btn btn-primary" type="submit" name="etapa" value="{{ $etapa->id }}">Guardar etapa</button>
-        <a href="{{ route('entradas.show', $entrada) }}" class="btn btn-outline-secondary">Cancelar</a>
+        <a href="{{ route('entradas.show', [$entrada, 'show' => 'etapas']) }}" class="btn btn-outline-secondary">Cancelar</a>
     </form>
     @endif
 @endcomponent
