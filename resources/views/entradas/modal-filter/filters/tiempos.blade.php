@@ -1,26 +1,26 @@
 <?php
 
-$options_fechas_horas = (object) [
-    'cualquier'   => '- Cualquier fecha y hora -',
-    'actualizado' => 'Actualización',
-    'creado'      => 'Creación',
-    'confirmado'  => 'Confirmación',
-    'importado'   => 'Importación',
+$options_tiempo = (object) [
+    'cualquier'   => '- Cualquier tiempo -',
+    'actualizado' => 'Actualizado',
+    'creado'      => 'Creado',
+    'confirmado'  => 'Confirmado',
+    'importado'   => 'Importado',
     'reempacado'  => 'Reempacado',
 ];
 
 $fieldset_fechas_horas = (object) [
-    'display' => request('fecha_hora', 'cualquier') <> 'cualquier' ?: 'd-none',
-    'disabled' => request('fecha_hora', 'cualquier') <> 'cualquier' ?: 'disabled',
+    'display' => request('tiempo', 'cualquier') <> 'cualquier' ?: 'd-none',
+    'disabled' => request('tiempo', 'cualquier') <> 'cualquier' ?: 'disabled',
 ];
 
 ?>
 
 <div class="mb-3">
-    <label for="selectFilterFechaHora" class="form-label small">Fecha y hora</label>
-    <select name="fecha_hora" id="selectFilterFechaHora" class="form-control">
-        @foreach($options_fechas_horas as $value => $label)
-        <option value="{{ $value }}" {{ toggleSelected($value, request('fecha_hora')) }}>{{ $label }}</option>
+    <label for="selectFilterTiempo" class="form-label small">Tiempo</label>
+    <select name="tiempo" id="selectFilterTiempo" class="form-control">
+        @foreach($options_tiempo as $value => $label)
+        <option value="{{ $value }}" <?= toggleSelected($value, request('tiempo')) ?>>{{ $label }}</option>
         @endforeach
     </select>
     <fieldset id="fieldsetFechasHoras" class="mt-3 p-3 bg-light {{ $fieldset_fechas_horas->display }}" {{ $fieldset_fechas_horas->disabled }}>
@@ -53,7 +53,7 @@ $fieldset_fechas_horas = (object) [
 <script>
 
 const DatetimeSelectFilter = {
-    element: document.getElementById('selectFilterFechaHora'),
+    element: document.getElementById('selectFilterTiempo'),
     selectedValue: function () {
         return this.element.value
     },

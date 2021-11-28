@@ -25,16 +25,19 @@ class EntradaController extends Controller
     public function index(Request $request)
     {
         $entradas = Entrada::with(['consolidado','cliente','destinatario'])
-                            ->filterByRequest( $request->all() )
-                            ->getFiltered( $request->input('muestreo', 25) );
+                            ->filterByRequest($request)
+                            ->getFiltered();
 
         $has_pagination = $this->hasPagination($entradas);
 
         return view('entradas.index', [
-            'collection' => $entradas,
-            'counter' => $has_pagination ? $entradas->total() : $entradas->count(),
-            'entradas' => $has_pagination ? $entradas->getCollection() : $entradas,
-            'has_pagination' => $has_pagination,
+            'counter'    => $has_pagination ? $entradas->total() : $entradas->count(),
+            'entradas'   => $has_pagination ? $entradas->getCollection() : $entradas,
+            'pagination' => (object) [
+                'available' => $has_pagination,
+                'next' => ! $has_pagination ?: $entradas->nextPageUrl(),
+                'prev' => ! $has_pagination ?: $entradas->previousPageUrl(), 
+            ],
         ]);
     }
 

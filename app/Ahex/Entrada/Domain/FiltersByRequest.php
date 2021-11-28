@@ -2,75 +2,87 @@
 
 namespace App\Ahex\Entrada\Domain;
 
+use Illuminate\Http\Request;
+
 trait FiltersByRequest
 {
+    protected $all_filters = [
+        'ambito' => 'filterAmbit',
+        'cliente' => 'filterClient',
+        'codigor' => 'filterCodigor',
+        'conductor' => 'filterConductor',
+        'etapa' => 'filterStage',
+        'tiempo' => 'filterDatetime',
+        'orden' => 'filterOrder',
+        'reempacador' => 'filterReempacador',
+        'vehiculo' => 'filterVehiculo',
+    ];
+
+    protected $request_filters;
+
+
     /** Scopes Mains ********************************************************/
 
-    private function getScopeFilters()
+    public function scopeFilterByRequest($query, Request $request)
     {
-        return [
-            'ambito' => 'filterAmbit',
-            'cliente' => 'filterClient',
-            'codigor' => 'filterCodigor',
-            'conductor' => 'filterConductor',
-            'etapa' => 'filterStage',
-            'fecha_hora' => 'filterDatetime',
-            'orden' => 'filterOrder',
-            'reempacador' => 'filterReempacador',
-            'vehiculo' => 'filterVehiculo',
-        ];
-    }
+        $filters = $request->except(['mostrar_completo','page']);
 
-    public function scopeFilterByRequest($query, $request)
-    {
-        foreach($this->getScopeFilters() as $filter => $action)
+        foreach($filters as $filter => $value)
         {
-            if( isset($request[$filter]) )
-                $query = call_user_func([$query, $action], $request[$filter]);
+            if( isset($this->all_filters[$filter]) )
+            {
+                $scope = $this->all_filters[$filter];
+                $query = call_user_func([$query, $scope], $request);
+            }
         }
 
+        $this->request_filters = $request;
         return $query;
     }
 
-    public function scopeGetFiltered($query, $sampling)
+    public function scopeGetFiltered($query, int $per_page = 25, string $orderBy = 'id')
     {
-        if( is_int($sampling) || is_numeric($sampling) )
-            return $query->orderByDesc('id')->paginate($sampling);
-        
-        return $query->orderByDesc('id')->get();
+        if( $this->request_filters->filled('mostrar_completo') )
+        {
+            return $query
+                    ->orderByDesc( $this->request_filters->get('ordenar', $orderBy) )
+                    ->get();
+        }
+
+        return $query
+                ->orderByDesc( $this->request_filters->get('ordenar', $orderBy) )
+                ->paginate( $this->request_filters->get('mostrar', $per_page) )
+                ->withQueryString();
     }
-
-
 
 
     /** Scopes Relationships ********************************************************/
 
-    public function scopeFilterAmbit($query, $ambit)
+    public function scopeFilterAmbit($query, $request)
     {
-        if( ! in_array($ambit, ['consolidadas', 'sin-consolidar']) )
+        if(! in_array($request->ambito, ['consolidadas', 'sin-consolidar']) )
             return $query;
-
-        if( $ambit == 'consolidadas' )
-            return $query->whereNotNull('consolidado_id');
-
-        return $query->whereNull('consolidado_id');
+        
+        return $request->ambito === 'consolidadas'
+                                ? $query->whereNotNull('consolidado_id')
+                                : $query->whereNull('consolidado_id');
     }
 
-    public function scopeFilterClient($query, $cliente)
+    public function scopeFilterClient($query, $request)
     {
-        if( ! ctype_digit($cliente) )
+        if(! isMinNumber($request->cliente, 1) )
             return $query;
 
-        return $query->where('cliente_id', $cliente);
+        return $query->where('cliente_id', $request->cliente);
     }
 
-    public function scopeFilterStage($query, $etapa)
+    public function scopeFilterStage($query, $request)
     {
-        if( ! ctype_digit($etapa) )
+        if(! isMinNumber($request->etapa, 1) )
             return $query;
 
-        return $query->whereHas('etapas', function ($subquery) use ($etapa) {
-            return $subquery->where('etapa_id', $etapa);
+        return $query->whereHas('etapas', function ($subquery) use ($request) {
+            return $subquery->where('etapa_id', $request->etapa);
         });
 
         // return $query->with(['etapas' => function ($subquery) use ($etapa_id) {
@@ -78,54 +90,52 @@ trait FiltersByRequest
         // }]);
     }
 
-    public function scopeFilterOrder($query, $orden)
+    public function scopeFilterOrder($query, $request)
     {
-        if( ! in_array($orden, ['asc', 'desc']) )
+        if(! in_array($request->orden, ['asc', 'desc']) )
             return $query->orderBy('id', 'desc');
 
-        return $query->orderBy('id', $orden);
+        return $query->orderBy('id', $request->orden);
     }
 
-    public function scopeFilterVehiculo($query, $vehiculo)
+    public function scopeFilterVehiculo($query, $request)
     {
-        if( ! ctype_digit($vehiculo) )
+        if(! isMinNumber($request->vehiculo, 1) )
             return $query;
 
-        return $query->where('vehiculo_id', $vehiculo);
+        return $query->where('vehiculo_id', $request->vehiculo);
     }
 
-    public function scopeFilterConductor($query, $conductor)
+    public function scopeFilterConductor($query, $request)
     {
-        if( ! ctype_digit($conductor) )
+        if(! isMinNumber($request->conductor, 1) )
             return $query;
 
-        return $query->where('conductor_id', $conductor);
+        return $query->where('conductor_id', $request->conductor);
     }
 
-    public function scopeFilterReempacador($query, $reempacador)
+    public function scopeFilterReempacador($query, $request)
     {
-        if( ! ctype_digit($reempacador) )
+        if(! isMinNumber($request->reempacador, 1) )
             return $query;
 
-        return $query->where('reempacador_id', $reempacador);
+        return $query->where('reempacador_id', $request->reempacador);
     }
 
-    public function scopeFilterCodigor($query, $codigor)
+    public function scopeFilterCodigor($query, $request)
     {
-        if( ! ctype_digit($codigor) )
+        if(! isMinNumber($request->codigor, 1) )
             return $query;
 
-        return $query->where('codigor_id', $codigor);
+        return $query->where('codigor_id', $request->codigor);
     }
-
-
 
 
     /** Scopes DateTimes ************************************************************/
 
-    public function getFilterDatetime($key)
-    {
-        $filters = [
+    public function scopeFilterDatetime($query, $request)
+    {        
+        $times = [
             'actualizado' => 'filterDatetimeUpdated',
             'confirmado'  => 'filterDatetimeConfirmed',
             'creado'      => 'filterDatetimeCreated',
@@ -133,22 +143,14 @@ trait FiltersByRequest
             'reempacado'  => 'filterDatetimeRepackaged',
         ];
 
-        if( isset($filters[$key]) )
-            return $filters[$key];
+        if(! isset($times[$request->tiempo]) )
+            return $query;
 
-        return false;
-    }
+        $datetime_filter = $times[$request->tiempo];
+        $datetime_from = implode(' ', $request->only(['desde_fecha', 'desde_hora']));
+        $datetime_to   = implode(' ', $request->only(['hasta_fecha', 'hasta_hora']));
 
-    public function scopeFilterDatetime($query, $datetime)
-    {
-        if( $datetime_filter = $this->getFilterDatetime($datetime) )
-        {
-            $datetime_from = request('desde_fecha') . ' ' . request('desde_hora');
-            $datetime_to = request('hasta_fecha') . ' ' . request('hasta_hora');
-            return call_user_func_array([$this, $datetime_filter], [$datetime_from, $datetime_to]);
-        }
-
-        return $query;
+        return call_user_func_array([$query, $datetime_filter], [$datetime_from, $datetime_to]);
     }
 
     public function scopeFilterDatetimeCreated($query, $datetime_from, $datetime_to)
@@ -170,13 +172,15 @@ trait FiltersByRequest
     {
         list($date_from, $time_from) = explode(' ', $datetime_from);
         list($date_to, $time_to) = explode(' ', $datetime_to);
-        return $query->whereBetween('importado_fecha', [$date_from, $date_to])->whereBetween('importado_hora', [$time_from, $time_to]);
+        return $query->whereBetween('importado_fecha', [$date_from, $date_to])
+                     ->whereBetween('importado_hora', [$time_from, $time_to]);
     }
 
     public function scopeFilterDatetimeRepackaged($query, $datetime_from, $datetime_to)
     {
         list($date_from, $time_from) = explode(' ', $datetime_from);
         list($date_to, $time_to) = explode(' ', $datetime_to);
-        return $query->whereBetween('reempacado_fecha', [$date_from, $date_to])->whereBetween('reempacado_hora', [$time_from, $time_to]);
+        return $query->whereBetween('reempacado_fecha', [$date_from, $date_to])
+                     ->whereBetween('reempacado_hora', [$time_from, $time_to]);
     }
 }

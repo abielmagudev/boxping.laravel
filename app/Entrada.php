@@ -47,20 +47,20 @@ class Entrada extends Model implements ModifierIdentifiable, ModelAttributesPrin
         'destinatario_id',
         'remitente_id',
 
-        // Importacion
+        // Importado
         'vehiculo_id',
         'conductor_id',
         'numero_cruce',
         'importado_fecha',
         'importado_hora',
 
-        // Reempaque
+        // Reempacado
         'codigor_id',
         'reempacador_id',
         'reempacado_fecha',
         'reempacado_hora',
 
-        // Confirmación
+        // Confirmado
         'confirmado_by',
         'confirmado_at',
 
