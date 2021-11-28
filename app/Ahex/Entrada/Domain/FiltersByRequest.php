@@ -42,17 +42,17 @@ trait FiltersByRequest
 
     public function scopeGetFiltered($query, int $per_page = 25, string $orderBy = 'id')
     {
-        if( $this->request_filters->filled('mostrar_completo') )
+        if(! $this->request_filters->filled('mostrar_completo') )
         {
             return $query
                     ->orderByDesc( $this->request_filters->get('ordenar', $orderBy) )
-                    ->get();
+                    ->paginate( $this->request_filters->get('mostrar', $per_page) )
+                    ->withQueryString();
         }
-
+                
         return $query
                 ->orderByDesc( $this->request_filters->get('ordenar', $orderBy) )
-                ->paginate( $this->request_filters->get('mostrar', $per_page) )
-                ->withQueryString();
+                ->get();
     }
 
 
