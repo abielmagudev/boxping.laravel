@@ -13,4 +13,9 @@ trait Scopes
     {
         return $query->where('numero', 'like', "%{$value}%")->orderBy('id',$order);
     }
+
+    public function scopeFindByNumero($query, $numero)
+    {
+        return $query->where('numero', $numero)->first();
+    }
 }
