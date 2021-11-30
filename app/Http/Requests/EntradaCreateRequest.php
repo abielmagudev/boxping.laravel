@@ -7,6 +7,11 @@ use App\Consolidado;
 
 class EntradaCreateRequest extends FormRequest
 {
+    public function authorize()
+    {
+        return true;
+    }
+
     /**
      * 
      * Si existe el consolidado-id obtenido del request,
@@ -22,13 +27,8 @@ class EntradaCreateRequest extends FormRequest
      */
     public function prepareForValidation()
     {
-        if( Consolidado::where('id', $this->consolidado)->exists() ) 
-            $this->redirect = route('consolidados.show', $this->consolidado);
-    }
-
-    public function authorize()
-    {
-        return true;
+        # if( $this->has('consolidado') )
+        #    $this->redirect = route('consolidados.show', $this->consolidado);
     }
 
     public function rules()
