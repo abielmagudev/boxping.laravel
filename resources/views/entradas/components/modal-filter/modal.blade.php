@@ -23,7 +23,7 @@ $settings = (object) [
     <!-- Inicio del formulario para filtrar entradas -->
     <form action="{{ $settings->route }}" method="get" id="formFiltersEntradas">
         @foreach($settings->filters as $filter)
-            @include("entradas.modal-filter.filters.{$filter}")
+            @include("entradas.components.modal-filter.filters.{$filter}")
         @endforeach
         <hr>
         

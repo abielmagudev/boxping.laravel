@@ -48,7 +48,7 @@
         @component('@.bootstrap.card', [
             'title' => 'Entradas recientes'
         ])
-            @include('@.partials.table-entradas.content', [
+            @include('entradas.components.index.table', [
                 'entradas' => $entradas
             ])
         @endcomponent

@@ -42,7 +42,7 @@ if(! $settings->checkbox->render )
             <!-- Checkbox -->
             @if( $settings->checkbox->render )
             <?php $checkbox_id = "checkbox-entrada-{$entrada->id}" ?>
-            <td class="align-top">
+            <td class="align-top" style="width:1%">
                 <input 
                     type="checkbox" 
                     class="form-check-input" 
@@ -92,7 +92,7 @@ if(! $settings->checkbox->render )
             <!-- Opciones -->
             <td class="text-end">
                 <a href="{{ route('entradas.show', $entrada) }}" class="btn btn-sm btn-outline-primary">
-                    {!! $graffiti->design('eye')->draw('svg', true) !!}
+                    {!! $graffiti->design('eye')->cache('svg') !!}
                 </a>
             </td>
         </tr>

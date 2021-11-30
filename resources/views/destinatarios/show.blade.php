@@ -42,9 +42,9 @@
     <!-- Columnd entradas -->
     <div class="col-sm">
     @component('@.bootstrap.card', [
-        'title' => 'Últimas entradas',    
+        'title' => 'Entradas recientes',    
     ])
-        @include('@.partials.table-entradas.content', [
+        @include('entradas.components.index.table', [
             'entradas' => $entradas    
         ])
     @endcomponent
