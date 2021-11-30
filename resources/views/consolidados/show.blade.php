@@ -105,7 +105,7 @@ $checker_id = 'checker-entradas';
     <!-- Endslot options  -->
     
     <!-- Slot body  -->
-    @include('@.partials.table-entradas.content', [   
+    @include('entradas.table-index.render', [   
         'entradas' => $entradas,
         'form_id' => 'formEntradasPrinting',
         'consolidado' => $consolidado,
