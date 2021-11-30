@@ -2,20 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Ahex\Zowner\Application\HasValidations;
-use App\Ahex\Entrada\Application\StoreCalled\Redirects\StoredRedirect;
-use App\Ahex\Entrada\Application\EditCalled\Editors\EditorsContainer;
-use App\Ahex\Entrada\Application\UpdateCalled\Updaters\UpdatersContainer;
-
+use Illuminate\Http\Request;
 use App\Http\Requests\EntradaCreateRequest as CreateRequest;
 use App\Http\Requests\EntradaStoreRequest as StoreRequest;
 use App\Http\Requests\EntradaEditRequest as EditRequest;
 use App\Http\Requests\EntradaUpdateRequest as UpdateRequest;
 use App\Http\Requests\EntradaPrintManyRequest as PrintManyRequest;
-use Illuminate\Http\Request;
-
-use App\Consolidado;
+use App\Ahex\Zowner\Application\HasValidations;
+use App\Ahex\Entrada\Application\RedirectAfterStored;
+use App\Ahex\Entrada\Application\EditCalled\Editors\EditorsContainer;
+use App\Ahex\Entrada\Application\UpdateCalled\Updaters\UpdatersContainer;
 use App\Entrada;
+use App\Consolidado;
 use App\GuiaImpresion;
 
 class EntradaController extends Controller
@@ -43,15 +41,11 @@ class EntradaController extends Controller
 
     public function create(CreateRequest $request)
     {   
-        if( $consolidado = Consolidado::find($request->consolidado) )
-            return view('entradas.create.consolidado', [
-                'consolidado' => $consolidado,
-                'entrada' => new Entrada,
-            ]);
-
-        return view('entradas.create.sin-consolidado', [
-            'clientes' => \App\Cliente::all(),
+        return view('entradas.create', [
             'entrada' => new Entrada,
+            'clientes' => $request->has('consolidado') ?: \App\Cliente::all(),
+            'consolidado' => $request->has('consolidado') ? Consolidado::findOrFail($request->consolidado) : false,
+            'route_cancel' => $request->has('consolidado') ? route('consolidados.show', $request->consolidado) : route('entradas.index'),
         ]);
     }
 
@@ -62,9 +56,8 @@ class EntradaController extends Controller
         if(! $entrada = Entrada::create($prepared) )
             return back()->with('failure', 'Error al guardar entrada');
 
-        return StoredRedirect::hasConsolidado($entrada->consolidado_id)
-                             ->redirect($request->siguiente)
-                             ->with('success', "{$entrada->numero} guardada");
+        $redirect = RedirectAfterStored::next($entrada, $request->siguiente);
+        return $redirect->with('success', "{$entrada->numero} guardada");
     }
 
     public function show(Entrada $entrada, Request $request)

@@ -14,10 +14,9 @@ class EntradaStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'consolidado'          => 'exists:consolidados,id,status,abierto',
-            'cliente'              => ['required_without:consolidado','exists:clientes,id'],
-            'numero'               => ['required','unique:entradas'],
-            'cliente_alias_numero' => ['sometimes','accepted'],
+            'numero' => ['bail','required','unique:entradas'],
+            'consolidado' => ['bail','exists:consolidados,id,status,abierto'],
+            'cliente' => ['required_without:consolidado','exists:clientes,id'],
             'contenido' => 'nullable',
         ];
     }
@@ -25,12 +24,11 @@ class EntradaStoreRequest extends FormRequest
     public function messages()
     {
         return [
-            'consolidado.exists'       => __('Selecciona un consolidado válido y abierto'),
+            'numero.required' => __('Escribe el número de entrada'),          
+            'numero.unique' => __('Escribe el número de entrada diferente'),          
+            'consolidado.exists' => __('Selecciona un consolidado válido y abierto'),
+            'cliente.exists' => __('Selecciona un cliente válido'),
             'cliente.required_without' => __('Selecciona un cliente'),
-            'cliente.exists'           => __('Selecciona un cliente válido'),
-            'numero.required'          => __('Escribe el número de entrada'),          
-            'numero.unique'            => __('Escribe el número de entrada diferente'),          
-            'cliente_alias_numero.accepted' => __('Activa o desactiva la opcion "Alias del cliente..."'),
         ];
     }
 }
