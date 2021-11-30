@@ -10,7 +10,7 @@ use App\Http\Requests\EntradaUpdateRequest as UpdateRequest;
 use App\Http\Requests\EntradaPrintManyRequest as PrintManyRequest;
 use App\Ahex\Zowner\Application\HasValidations;
 use App\Ahex\Entrada\Application\RedirectAfterStored;
-use App\Ahex\Entrada\Application\ShowsPresenter;
+use App\Ahex\Entrada\Application\ShowPresenter;
 use App\Ahex\Entrada\Application\EditCalled\Editors\EditorsContainer;
 use App\Ahex\Entrada\Application\UpdateCalled\Updaters\UpdatersContainer;
 use App\Entrada;
@@ -65,7 +65,7 @@ class EntradaController extends Controller
     {
         return view('entradas.show', [
             'entrada' => $entrada,
-            'presenter' => new ShowsPresenter($entrada, $request),
+            'presenter' => new ShowPresenter($entrada, $request),
         ]);
     }
 

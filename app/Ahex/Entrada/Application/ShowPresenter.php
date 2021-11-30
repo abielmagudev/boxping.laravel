@@ -5,7 +5,7 @@ namespace App\Ahex\Entrada\Application;
 use Illuminate\Http\Request;
 use App\Entrada;
 
-class ShowsPresenter
+class ShowPresenter
 {
     /**
      * Todos los shows disponibles
