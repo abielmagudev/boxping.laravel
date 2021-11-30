@@ -36,6 +36,8 @@ class Entrada extends Model implements ModifierIdentifiable, ModelAttributesPrin
         UpdatesDescriptions,
         UpdateDescriptionCallable;
     
+    const SIN_CONSOLIDADO = null;
+
     protected $fillable = array(
         // Entrada
         'numero',
@@ -77,15 +79,25 @@ class Entrada extends Model implements ModifierIdentifiable, ModelAttributesPrin
         'confirmado_at' => 'datetime',
     ];
 
-    public static function prepare($validated)
+    public static function prepareWithConsolidado(array $validated)
     {
-        $consolidado_number_id = $validated['consolidado_numero'] ?? $validated['consolidado'] ?? 0;
-        $consolidado = Consolidado::searchForceToEntrada( $consolidado_number_id );
+        if( isset($validated['consolidado_numero']) )
+            return Consolidado::findByNumero($validated['consolidado_numero']);
+
+        if( isset($validated['consolidado']) )
+            return Consolidado::find($validated['consolidado']);
+
+        return (bool) self::SIN_CONSOLIDADO;
+    }
+
+    public static function prepare(array $validated)
+    {
+        $consolidado = self::prepareWithConsolidado($validated);
 
         $prepared = [
             'numero' => $validated['numero'],
-            'consolidado_id' => $consolidado->id ?? null,
-            'cliente_id' => $consolidado->cliente_id ?? $validated['cliente'],
+            'cliente_id' => $consolidado ? $consolidado->cliente_id : $validated['cliente'],
+            'consolidado_id' => $consolidado ? $consolidado->id : null,
             'contenido' => $validated['contenido'] ?? null,
             'updated_by' => auth()->user()->id,
         ];
