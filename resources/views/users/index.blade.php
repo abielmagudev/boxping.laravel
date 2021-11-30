@@ -19,10 +19,10 @@
             <td>{{ $user->email }}</td>
             <td class="text-end">
                 <a href="{{ route('usuarios.show', $user) }}" class="btn btn-sm btn-outline-primary">
-                    @include('@.bootstrap.icon', ['icon' => 'eye'])
+                    {!! $graffiti->design('eye')->svg() !!}
                 </a>
                 <a href="{{ route('usuarios.edit', $user) }}" class="btn btn-sm btn-outline-warning">
-                    @include('@.bootstrap.icon', ['icon' => 'pencil-fill'])
+                    {!! $graffiti->design('pencil-fill')->svg() !!}
                 </a>
             </td>
         </tr>

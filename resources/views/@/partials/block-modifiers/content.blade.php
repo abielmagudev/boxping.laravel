@@ -9,7 +9,7 @@ $settings = (object) [
     'has_timestamps' => property_exists($model_cache, 'timestamps') && $model_cache->timestamps,
     'show_updated' => isset($show_updated) && is_bool($show_updated) ? $show_updated : true,
     'show_created' => isset($show_created) && is_bool($show_created) ? $show_created : true,
-    'icon' => $graffiti->design('clock-history')->draw('svg'),
+    'icon' => $graffiti->design('clock-history')->svg(),
 ];
 
 ?>

@@ -20,7 +20,7 @@
             <td class="text-nowrap">{{ $incidente->descripcion }}</td>
             <td class="text-nowrap text-end">
                 <a href="{{ route('incidentes.edit', $incidente) }}" class="btn btn-sm btn-outline-warning">
-                    {!! $graffiti->design('pencil-fill')->draw('svg') !!}
+                    {!! $graffiti->design('pencil-fill')->cache('svg') !!}
                 </a>
             </td>
         </tr>

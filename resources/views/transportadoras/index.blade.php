@@ -21,14 +21,14 @@
             <td class="text-nowrap text-end">
                 @if( $transportadora->hasWeb() )
                 <a href="{{ $transportadora->web }}" class="btn btn-sm btn-outline-primary" target="_blank">
-                    <span>web</span>
+                    <span>Web</span>
                 </a>
                 @endif
                 <a href="{{ route('transportadoras.show', $transportadora) }}" class="btn btn-sm btn-outline-primary">
-                    @include('@.bootstrap.icon', ['icon' => 'eye'])
+                    {!! $graffiti->design('eye')->svg() !!}
                 </a>
                 <a href="{{ route('transportadoras.edit', $transportadora) }}" class="btn btn-sm btn-outline-warning">
-                    @include('@.bootstrap.icon', ['icon' => 'pencil-fill'])
+                    {!! $graffiti->design('pencil-fill')->svg() !!}
                 </a>
             </td>
         </tr>

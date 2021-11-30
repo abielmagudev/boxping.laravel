@@ -19,7 +19,7 @@
             <td>{{ $guia->intentos }}</td>
             <td class="text-end">
                 <a href="{{ route('guias_impresion.edit', $guia) }}" class="btn btn-sm btn-outline-warning">
-                    @include('@.bootstrap.icon', ['icon' => 'pencil-fill'])
+                    {!! $graffiti->design('pencil-fill')->cache('svg') !!}
                 </a>
             </td>
         </tr>

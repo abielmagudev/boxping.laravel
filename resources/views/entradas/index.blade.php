@@ -7,13 +7,15 @@
 ])
     @slot('options')
     <div class="dropdown">
-        <button class="btn border-0 dropdown-toggle-arrowless" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">{!! $graffiti->design('three-dots-vertical')->draw('svg') !!}</button>
+        <button class="btn border-0 dropdown-toggle-arrowless" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+            {!! $graffiti->design('three-dots-vertical')->svg() !!}
+        </button>
         <ul class="dropdown-menu border-0 shadow" aria-labelledby="dropdownMenuButton1">
             <li>
                 <a href="{{ route('entradas.create') }}" class="dropdown-item">Nueva entrada</a>
             </li>
             <li>
-                @include('entradas.modal-filter.trigger', [
+                @include('entradas.components.modal-filter.trigger', [
                     'classes' => 'dropdown-item',
                     'text' => 'Filtrar entradas'
                 ])
@@ -28,7 +30,7 @@
     </div>
     @endslot
 
-    @include('entradas.table-index.render', [
+    @include('entradas.components.index.table', [
         'entradas' => $entradas,
         'form_id' => 'formEntradasPrinting',
     ]) 
@@ -40,7 +42,7 @@
     'next' => $pagination->next,
 ])
 
-@include('entradas.modal-filter.modal', [
+@include('entradas.components.modal-filter.modal', [
     'route' => route('entradas.index'),
 ])
 

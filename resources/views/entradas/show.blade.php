@@ -23,7 +23,7 @@
         <!-- Imprimir -->
         <div class="dropdown d-inline-block">
             <button class="btn btn-sm btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuPrintEntrada" data-bs-toggle="dropdown" aria-expanded="false">
-                {!! $graffiti->design('printer-fill')->draw('svg') !!}
+                {!! $graffiti->design('printer-fill')->svg() !!}
             </button>
             @if( $guias_impresion->count() )            
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuPrintEntrada">

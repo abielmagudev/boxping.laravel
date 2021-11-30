@@ -4,6 +4,8 @@ $items = ['icon', 'text'];
 
 $settings = (object) [
     'only' => isset($only) && is_string($only) ? [$only] : $items,
+    'icon' => $graffiti->design('trash-fill')->svg(),
+    'text' => 'Eliminar',
 ];
 
 ?>
@@ -11,13 +13,13 @@ $settings = (object) [
 <a href="#!" class="link-danger text-decoration-none" data-bs-toggle="modal" data-bs-target="#modalConfirmDelete">
     @if( in_array('icon', $settings->only)  )      
     <span class="<?= (bool) array_diff($items, $settings->only) ?: 'me-1' ?>">
-        @include('@.bootstrap.icon', ['icon' => 'trash-fill'])
+        {!! $settings->icon !!}
     </span>
     @endif
 
     @if( in_array('text', $settings->only)  )      
     <span class="align-middle">
-        Eliminar
+        {!! $settings->text !!}
     </span>
     @endif
 </a>

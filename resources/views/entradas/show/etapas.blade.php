@@ -61,7 +61,7 @@
                 </td>
                 <td class="text-end">
                     <a href="{{ route('entradas.etapas.edit', ['entrada' => $entrada, 'etapa' => $etapa]) }}" class="btn btn-outline-warning btn-sm">
-                        {!! $graffiti->design('pencil-fill')->draw('svg') !!}
+                        {!! $graffiti->design('pencil-fill')->cache('svg') !!}
                     </a>
                 </td>
             </tr>

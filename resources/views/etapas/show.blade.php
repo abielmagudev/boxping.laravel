@@ -55,7 +55,7 @@
                     <td>{{ $zona->descripcion }}</td>
                     <td class="text-end">
                         <a href="{{ route('zonas.edit', [$etapa, $zona]) }}" class="btn btn-sm btn-outline-warning">
-                            @include('@.bootstrap.icon', ['icon' => 'pencil-fill'])
+                            {!! $graffiti->design('pencil-fill')->cache('svg') !!}
                         </a>
                     </td>
                 </tr>

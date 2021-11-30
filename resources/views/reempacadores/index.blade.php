@@ -19,10 +19,10 @@
             <td>{{ $reempacador->nombre }}</td>
             <td class="text-nowrap text-end">
                 <a href="{{ route('reempacadores.show', $reempacador) }}" class="btn btn-sm btn-outline-primary">
-                    @include('@.bootstrap.icon', ['icon' => 'eye'])
+                    {!! $graffiti->design('eye')->svg() !!}
                 </a>
                 <a href="{{ route('reempacadores.edit', $reempacador) }}" class="btn btn-sm btn-outline-warning">
-                    @include('@.bootstrap.icon', ['icon' => 'pencil-fill'])
+                    {!! $graffiti->design('pencil-fill')->svg() !!}
                 </a>
             </td>
         </tr>

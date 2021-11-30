@@ -18,10 +18,10 @@
             <td>{{ $conductor->nombre }}</td>
             <td class="text-end">
                 <a href="{{ route('conductores.show',$conductor) }}" class="btn btn-sm btn-outline-primary">
-                    @include('@.bootstrap.icon', ['icon' => 'eye'])
+                    {!! $graffiti->design('eye')->svg() !!}
                 </a>
                 <a href="{{ route('conductores.edit',$conductor) }}" class="btn btn-sm btn-outline-warning">
-                    @include('@.bootstrap.icon', ['icon' => 'pencil-fill'])
+                    {!! $graffiti->design('pencil-fill')->svg() !!}
                 </a>
             </td>
         </tr>

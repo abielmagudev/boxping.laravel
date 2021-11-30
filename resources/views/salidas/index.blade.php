@@ -56,12 +56,12 @@
             <td class="text-end text-nowrap">                
                 @if( $salida->hasTransportadora() && $salida->transportadora->hasWeb() )
                 <a href="<?= $salida->transportadora->web ?>" target="_blank" class="btn btn-sm btn-outline-primary">
-                    {!! $graffiti->design('globe')->draw('svg') !!}
+                    {!! $graffiti->design('globe')->svg() !!}
                 </a>
                 @endif
 
                 <a href="{{ route('salidas.edit', $salida) }}" class="btn btn-sm btn-outline-warning">
-                    {!! $graffiti->design('pencil-fill')->draw('svg') !!}
+                    {!! $graffiti->design('pencil-fill')->svg() !!}
                 </a>
             </td>
         </tr>

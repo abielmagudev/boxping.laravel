@@ -31,7 +31,7 @@ class Graffiti
         return $this;
     }
 
-    public function draw(string $canvas, bool $caching = false)
+    public function cache(string $canvas, bool $caching = true)
     {
         if( $this->hasCache() )
             return $this->getCache();
