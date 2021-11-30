@@ -3,9 +3,9 @@
 
 <div class="text-center">
     <div class="btn-group">
-        <a href="{{ route('entradas.show', [$entrada, 'show' => 'informacion']) }}" class="btn btn-primary {{ request()->input('show', 'informacion') === 'informacion' ? 'active' : '' }}" aria-current="page">Información</a>
-        <a href="{{ route('entradas.show', [$entrada, 'show' => 'etapas']) }}" class="btn btn-primary {{ request()->input('show') === 'etapas' ? 'active' : '' }}">Etapas</a>
-        <a href="{{ route('entradas.show', [$entrada, 'show' => 'actualizaciones']) }}" class="btn btn-primary {{ request()->input('show') === 'actualizaciones' ? 'active' : '' }}">Actualizaciones</a>
+    @foreach( $presenter->links() as $link )
+        {!! $link !!}
+    @endforeach
     </div>
 </div>
 <br>
@@ -70,7 +70,7 @@
     </div>
 
     <div class="col-sm col-sm-8">
-        @include("entradas.show.{$show}")
+        @include("entradas.show.{$presenter->showname()}")
     </div>
 </div>
 
