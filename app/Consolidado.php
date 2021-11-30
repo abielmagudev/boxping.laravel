@@ -44,31 +44,12 @@ class Consolidado extends Model implements ModifierIdentifiable, ValueSearchable
         ],
     ];
 
-    /**
-     * 
-     * En caso de no encontrar un consolidado existente, 
-     * retornará un objeto vacio de Consolidado
-     * para crear o actualiza una Entrada.
-     * 
-     * De manera forzada, siempre retornará un objeto de Consolidado
-     * 
-     * @return new Consolidado || Consolidado existente
-     * 
-     */
-    public static function searchForceToEntrada($needle)
-    {
-        if( ! self::where('numero', $needle)->orWhere('id', $needle)->exists() )
-            return new self; 
-        
-        return self::where('numero', $needle)->orWhere('id', $needle)->first();
-    }
-
     public static function prepare($validated)
     {
         $prepared = [
             'numero'     => $validated['numero'],
             'tarimas'    => $validated['tarimas'],
-            'status'     => isset($validated['status']) ? $validated['status'] : 'abierto',
+            'status'     => $validated['status'] ?? 'abierto',
             'notas'      => $validated['notas'],
             'cliente_id' => $validated['cliente'],
             'updated_by' => auth()->user()->id,
