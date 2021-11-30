@@ -49,7 +49,7 @@ class ConsolidadoController extends Controller
     {
         $entradas = Entrada::with(['destinatario'])
                             ->where('consolidado_id', $consolidado->id)
-                            ->filterByRequest($request->all())
+                            ->filterByRequest($request)
                             ->orderByDesc('id')
                             ->get();
 
