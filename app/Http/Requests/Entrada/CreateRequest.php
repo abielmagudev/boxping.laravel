@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Entrada;
 
 use Illuminate\Foundation\Http\FormRequest;
 use App\Consolidado;
 
-class EntradaCreateRequest extends FormRequest
+class CreateRequest extends FormRequest
 {
     public function authorize()
     {

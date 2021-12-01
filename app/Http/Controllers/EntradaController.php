@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\EntradaCreateRequest as CreateRequest;
-use App\Http\Requests\EntradaStoreRequest as StoreRequest;
-use App\Http\Requests\EntradaEditRequest as EditRequest;
-use App\Http\Requests\EntradaUpdateRequest as UpdateRequest;
-use App\Http\Requests\EntradaPrintManyRequest as PrintManyRequest;
+use App\Http\Requests\Entrada\CreateRequest;
+use App\Http\Requests\Entrada\StoreRequest;
+use App\Http\Requests\Entrada\EditRequest;
+use App\Http\Requests\Entrada\UpdateRequest;
+use App\Http\Requests\Entrada\PrintManyRequest;
 use App\Ahex\Zowner\Application\HasValidations;
 use App\Ahex\Entrada\Application\RedirectAfterStored;
 use App\Ahex\Entrada\Application\ShowPresenter;

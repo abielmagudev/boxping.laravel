@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Entrada;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class EntradaPrintManyRequest extends FormRequest
+class PrintManyRequest extends FormRequest
 {
     public function authorize()
     {

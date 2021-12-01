@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Entrada;
 
 use Illuminate\Foundation\Http\FormRequest;
 use App\Ahex\Entrada\Application\EditCalled\EditorsContainer;
 
-class EntradaEditRequest extends FormRequest
+class EditRequest extends FormRequest
 {
     private $editors_names;
 

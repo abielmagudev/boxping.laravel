@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Entrada;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 use App\Ahex\Entrada\Application\UpdateCalled\Updaters\UpdatersContainer;
 use App\Ahex\Entrada\Application\UpdateCalled\Validators\ValidatorsContainer;
 
-class EntradaUpdateRequest extends FormRequest
+class UpdateRequest extends FormRequest
 {
     private $validator_rules;
     private $validator_messages;
