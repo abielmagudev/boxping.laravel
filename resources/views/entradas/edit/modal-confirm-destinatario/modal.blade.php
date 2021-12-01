@@ -18,7 +18,7 @@
         @csrf
         <input type="hidden" name="confirmado" value="yes">
         <div class="text-center">
-            <button class="btn btn-success" type="submit" name="actualizar" value="confirmacion">Si, realizé cada paso</button>
+            <button class="btn btn-success" type="submit" name="actualizar" value="confirmado">Si, realizé cada paso</button>
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No, aún no</button>
         </div>
     </form>
