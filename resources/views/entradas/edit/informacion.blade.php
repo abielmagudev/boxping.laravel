@@ -14,15 +14,15 @@
         </div>
         <div class="mb-3">
             <label for="input-consolidado" class="form-label small">Número de consolidado</label>
-            <input name="consolidado_numero" value="{{ $consolidado->numero ?? '' }}" placeholder="Sin consolidar" type="text" id="input-consolidado" class="form-control">
+            <input name="consolidado_numero" value="{{ $consolidado->numero ?? '' }}" placeholder="Sin consolidado" type="text" id="input-consolidado" class="form-control">
         </div>
         <div class="mb-3">
             <label for="select-cliente" class="form-label small">Cliente</label>
-            @if( $consolidado )
+            @if( $entrada->hasConsolidado() )
             <div class="form-control bg-light">
-                <span>{{ $entrada->cliente->nombre }} ({{ $entrada->cliente->alias }})</span>
+                <span>{{ $entrada->consolidado->cliente->nombre }} ({{ $entrada->consolidado->cliente->alias }})</span>
             </div>
-            <input type="hidden" name="cliente" value="{{ $entrada->cliente->id }}">
+            <input type="hidden" name="cliente" value="{{ $entrada->consolidado->cliente_id }}">
 
             @else
             <select name="cliente" id="select-cliente" class="form-select">

@@ -46,7 +46,7 @@
     <div class="text-center">
         @include('destinatarios.modal-search.trigger', [
             'text' => 'Agregar destinatario',
-            'classes' => 'btn btn-sm btn-primary',
+            'classes' => 'btn btn-primary',
         ])
     </div>
 

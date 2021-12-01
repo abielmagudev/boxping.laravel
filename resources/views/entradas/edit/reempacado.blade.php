@@ -30,10 +30,10 @@
             <label class="form-label small">Fecha y hora</label>
             <div class="row">
                 <div class="col-sm">
-                    <input name="reempacado_fecha" value="{{ old('reempacado_fecha', $entrada->reempacado_fecha) }}" type="date" class="form-control" required>
+                    <input name="reempacado_fecha" value="{{ old('reempacado_fecha', $entrada->getFechaReempacado(false)) }}" type="date" class="form-control" required>
                 </div>
                 <div class="col-sm">
-                    <input name="reempacado_hora" value="{{ old('reempacado_hora', $entrada->reempacado_hora) }}" type="time" step="1" class="form-control" required>
+                    <input name="reempacado_hora" value="{{ old('reempacado_hora', $entrada->getHoraReempacado(false)) }}" type="time" step="1" class="form-control" required>
                 </div>
             </div>
         </div>

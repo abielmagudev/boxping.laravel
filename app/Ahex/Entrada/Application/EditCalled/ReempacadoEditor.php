@@ -1,14 +1,17 @@
 <?php
 
-namespace App\Ahex\Entrada\Application\EditCalled\Editors;
+namespace App\Ahex\Entrada\Application\EditCalled;
 
 use App\Codigor;
 use App\Reempacador;
 
 class ReempacadoEditor extends Editor
-{
-    public $template = 'entradas.edit.reempacado';
-    
+{    
+    public function template(): string
+    {
+        return 'entradas.edit.reempacado';
+    }
+
     public function data(): array
     {
         return [

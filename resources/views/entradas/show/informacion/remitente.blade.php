@@ -42,7 +42,7 @@
     <div class="text-center">
         @include('remitentes.modal-search.trigger', [
             'text' => 'Agregar remitente',
-            'classes' => 'btn btn-sm btn-primary',
+            'classes' => 'btn btn-primary',
         ])
     </div>
 

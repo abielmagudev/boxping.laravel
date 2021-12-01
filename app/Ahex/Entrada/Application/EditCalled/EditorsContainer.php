@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Ahex\Entrada\Application\EditCalled\Editors;
+namespace App\Ahex\Entrada\Application\EditCalled;
 
+use Illuminate\Http\Request;
 use App\Entrada;
 
 abstract class EditorsContainer
@@ -14,16 +15,17 @@ abstract class EditorsContainer
         'remitente' => RemitenteEditor::class,
     ];
 
-    public static function get(string $name, Entrada $entrada)
+    public static function editor(Request $request, Entrada $entrada)
     {
-        return new self::$editors[$name] ($entrada);
-    }
-
-    public static function exists($name)
-    {
-        return isset( self::$editors[$name] );
+        $editor_class = self::get( $request->editor );
+        return new $editor_class($entrada, $request);
     }
     
+    public static function get($editor_name)
+    {
+        return self::$editors[ $editor_name ];
+    }
+
     public static function classes()
     {
         return array_values( self::$editors );

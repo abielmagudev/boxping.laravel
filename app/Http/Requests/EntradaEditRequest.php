@@ -3,7 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use App\Ahex\Entrada\Application\EditCalled\Editors\EditorsContainer;
+use App\Ahex\Entrada\Application\EditCalled\EditorsContainer;
 
 class EntradaEditRequest extends FormRequest
 {

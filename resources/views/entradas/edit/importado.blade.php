@@ -34,10 +34,10 @@
             <label class="small">Fecha y hora</label>
             <div class="row">
                 <div class="col-sm">
-                    <input name="importado_fecha" value="{{ old('importado_fecha', $entrada->importado_fecha) }}" type="date" class="form-control" required>
+                    <input name="importado_fecha" value="{{ old('importado_fecha', $entrada->getFechaImportado(false)) }}" type="date" class="form-control" required>
                 </div>
                 <div class="col-sm">
-                    <input name="importado_hora" value="{{ old('importado_hora', $entrada->importado_hora) }}" type="time" step="1" class="form-control" required>
+                    <input name="importado_hora" value="{{ old('importado_hora', $entrada->getHoraImportado(false)) }}" type="time" step="1" class="form-control" required>
                 </div>
             </div>
         </div>

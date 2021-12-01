@@ -11,7 +11,7 @@ use App\Http\Requests\EntradaPrintManyRequest as PrintManyRequest;
 use App\Ahex\Zowner\Application\HasValidations;
 use App\Ahex\Entrada\Application\RedirectAfterStored;
 use App\Ahex\Entrada\Application\ShowPresenter;
-use App\Ahex\Entrada\Application\EditCalled\Editors\EditorsContainer;
+use App\Ahex\Entrada\Application\EditCalled\EditorsContainer;
 use App\Ahex\Entrada\Application\UpdateCalled\Updaters\UpdatersContainer;
 use App\Entrada;
 use App\Consolidado;
@@ -71,8 +71,8 @@ class EntradaController extends Controller
 
     public function edit(Entrada $entrada, EditRequest $request)
     {
-        $editor = EditorsContainer::get($request->editor, $entrada);
-        return view($editor->template, $editor->data);
+        $editor = EditorsContainer::editor($request, $entrada);
+        return view($editor->template(), $editor->data());
     }
 
     public function update(Entrada $entrada, UpdateRequest $request)

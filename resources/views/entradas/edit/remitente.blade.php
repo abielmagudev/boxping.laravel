@@ -12,11 +12,11 @@
    @slot('options')
       @include('remitentes.modal-search.trigger', [
          'classes' => 'btn btn-sm btn-primary',
-         'text' => $graffiti->design('search')->draw('svg')
+         'text' => $graffiti->design('search')->svg()
       ])
 
       <a href="{{ route('remitentes.create', ['entrada' => $entrada->id]) }}" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="left" title="Nuevo destinatario">
-         {!!  $graffiti->design('plus-lg')->draw('svg') !!}
+         {!!  $graffiti->design('plus-lg')->svg() !!}
       </a>
    @endslot
 
