@@ -69,7 +69,7 @@
         @endcomponent
 
     @else
-        <p class="text-center text-muted m-0">Sin etapas en este momento.</p>
+        <p class="text-center text-muted">Sin etapas en este momento.</p>
 
     @endif
 
