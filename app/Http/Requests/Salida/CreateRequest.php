@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Salida;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class SalidaCreateRequest extends FormRequest
+class CreateRequest extends FormRequest
 {
     public function authorize()
     {

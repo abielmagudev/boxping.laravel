@@ -6,8 +6,8 @@ use App\Entrada;
 use App\Salida;
 use App\Incidente;
 use App\Transportadora;
-use App\Http\Requests\SalidaCreateRequest as CreateRequest;
-use App\Http\Requests\SalidaSaveRequest as SaveRequest;
+use App\Http\Requests\Salida\CreateRequest;
+use App\Http\Requests\Salida\SaveRequest;
 use Illuminate\Http\Request;
 
 class SalidaController extends Controller

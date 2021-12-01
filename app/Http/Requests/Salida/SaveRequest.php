@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Salida;
 
 use Illuminate\Foundation\Http\FormRequest;
 use App\Salida;
 
-class SalidaSaveRequest extends FormRequest
+class SaveRequest extends FormRequest
 {
     private $salida_id;
     private $all_coberturas;

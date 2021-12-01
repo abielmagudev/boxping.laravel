@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Salida;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class SalidaPrintingRequest extends FormRequest
+class PrintingRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
