@@ -16,7 +16,7 @@ $checker_id = 'checker-entradas';
 
 <p class="text-end">
     <a href="{{ route('consolidados.print', $consolidado) }}" class="btn btn-sm btn-primary">
-        {!! $graffiti->design('printer-fill')->draw('svg') !!}
+        {!! $graffiti->design('printer-fill')->svg() !!}
     </a>
 </p>
 

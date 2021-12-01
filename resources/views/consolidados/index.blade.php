@@ -37,7 +37,7 @@
         <tr>
             <td class="text-center" style="width:1%">
                 <span data-bs-title="{{ ucfirst($consolidado->status) }}" data-bs-toggle="tooltip" data-bs-placement="top" style="color:<?= $consolidado->status_color ?>">
-                    {!! $graffiti->design('circle-fill', ['style' => "color:{$consolidado->color}"])->draw('svg') !!}
+                    {!! $graffiti->design('circle-fill', ['style' => "color:{$consolidado->color}"])->svg() !!}
                 </span>
             </td>
             <td class="min-width:288px">{{ $consolidado->numero }}</td>
@@ -46,10 +46,10 @@
             <td>{{ $consolidado->entradas_count }}</td>
             <td class="text-nowrap text-end">
                 <a href="{{ route('consolidados.show', $consolidado) }}" class="btn btn-sm btn-outline-primary">
-                    {!! $graffiti->design('eye')->draw('svg') !!}
+                    {!! $graffiti->design('eye')->svg() !!}
                 </a>
                 <a href="{{ route('consolidados.edit', $consolidado) }}" class="btn btn-sm btn-outline-warning">
-                    {!! $graffiti->design('pencil-fill')->draw('svg') !!}
+                    {!! $graffiti->design('pencil-fill')->svg() !!}
                 </a>
             </td>
         </tr>
