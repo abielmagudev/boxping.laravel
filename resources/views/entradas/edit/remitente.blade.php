@@ -1,8 +1,10 @@
 @extends('app')
 @section('content')
 
-<p>
-   <a href="{{ route('entradas.show', $entrada) }}" class="link-primary text-decoration-none">Regresar</a>
+<p class="">
+   <a href="{{ route('entradas.show', $entrada) }}" class="link-primary text-decoration-none small">&laquo; Regresar</a>
+   <br>
+   <b>{{ $entrada->numero }}</b>
 </p>
 
 @component('@.bootstrap.card', [
