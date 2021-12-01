@@ -1,6 +1,6 @@
 <div class="tab-pane fade show active" id="content-salida" role="tabpanel" aria-labelledby="salida-tab">
 <?php // Si la Entrada no tiene destinatario ?>
-@if( ! $entrada->hasDestinatario() )
+@if(! $entrada->hasDestinatario() )
     <br>
     <p class="text-center lead">
         <span>Se requiere agregar un destinatario para <br> habilitar la opción de crear salida.</span>
@@ -8,7 +8,7 @@
     
 
 <?php // Si la Entrada no tiene confirmacion del destinatario ?>
-@elseif( ! $entrada->hasConfirmado() )
+@elseif(! $entrada->hasConfirmado() )
     <br>
     <p class="text-center">
         <span class="lead">Para habilitar la opción de crear ó mostrar la salida, <br> es necesario <b>confirmar el destinatario</b>.</span>
@@ -20,8 +20,9 @@
     @include('entradas.show.modal-confirm-destinatario.modal')
 
 <?php // Si la Entrada no tiene Salida ?>
-@elseif( ! $entrada->hasSalida() )
-    <div class="text-center mt-5">
+@elseif(! $entrada->hasSalida() )
+    <br>
+    <div class="text-center">
         <a href="{{ route('salidas.create', ['entrada' => $entrada->id]) }}" class="btn btn-primary">Crear salida</a>
     </div>
 
@@ -59,13 +60,11 @@
         <tr>
             <td class="text-muted small align-top">Incidentes</td>
             <td>
-                @if( $entrada->salida->incidentes->count() )
-                <div class="">
-                    @foreach($entrada->salida->incidentes as $incidente)
-                    <span class="badge text-dark small" style="background-color:#ddd">{{ $incidente->nombre }}</span>
-                    @endforeach
-                </div>
-                @endif
+            @if( $entrada->salida->incidentes->count() )
+                @foreach($entrada->salida->incidentes as $incidente)
+                <span class="border border-danger badge bg-light text-dark">{{ $incidente->nombre }}</span>
+                @endforeach
+            @endif
             </td>
         </tr>
         <tr>

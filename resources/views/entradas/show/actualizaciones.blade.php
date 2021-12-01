@@ -18,7 +18,7 @@
         @endcomponent
 
     @else
-    <p class="text-muted text-center">Sin actualizaciones hasta el momento.</p>
+    <p class="text-muted text-center">Sin actualizaciones en este momento.</p>
 
     @endif
 @endcomponent
