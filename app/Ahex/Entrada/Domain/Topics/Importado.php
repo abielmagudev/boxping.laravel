@@ -4,6 +4,16 @@ namespace App\Ahex\Entrada\Domain\Topics;
 
 trait Importado
 {
+    public function vehiculo()
+    {
+        return $this->belongsTo(\App\Vehiculo::class)->withTrashed();
+    }
+
+    public function conductor()
+    {
+        return $this->belongsTo(\App\Conductor::class)->withTrashed();
+    }
+    
     public function hasConductor()
     {
         if(! isset($this->conductor_id) )

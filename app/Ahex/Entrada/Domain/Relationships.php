@@ -36,31 +36,6 @@ trait Relationships
         return $this->belongsTo(\App\Remitente::class)->withTrashed();
     }
 
-    public function codigor()
-    {
-        return $this->belongsTo(\App\Codigor::class)->withTrashed();
-    }
-
-    public function reempacador()
-    {
-        return $this->belongsTo(\App\Reempacador::class)->withTrashed();
-    }
-
-    public function vehiculo()
-    {
-        return $this->belongsTo(\App\Vehiculo::class)->withTrashed();
-    }
-
-    public function conductor()
-    {
-        return $this->belongsTo(\App\Conductor::class)->withTrashed();
-    }
-
-    public function confirmador()
-    {
-        return $this->belongsTo(\App\User::class);
-    }
-
     public function salida()
     {
         return $this->hasOne(Salida::class);
@@ -95,8 +70,8 @@ trait Relationships
 
     public function ultimaEtapa()
     {
+        return $this->etapas->sortBy('orden')->last();
         // return $etapas->max('orden') 
         // return $etapas->firstWhere('orden', $max_orden) 
-        return $this->etapas->sortBy('orden')->last();
     }
 }

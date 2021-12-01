@@ -86,9 +86,13 @@ class EntradaSeeder extends Seeder
 
     public function seedSalida(Entrada $entrada)
     {
-        if( ! $entrada->hasDestinatario() || ! $entrada->hasConfirmado() )
+        $this->command->getOutput()->writeln("<comment>Validating:</comment> Destinatario y confirmación...");
+        
+        if( !$entrada->hasDestinatario() || !$entrada->hasConfirmado() )
             return;
         
+        $this->command->getOutput()->writeln("<info>Validated:</info> Creando salida");
+
         $cobertura = $this->fakerphp->randomElement( $this->all_coberturas_salida );
         $is_cobertura_ocurre = $cobertura === 'ocurre';
 

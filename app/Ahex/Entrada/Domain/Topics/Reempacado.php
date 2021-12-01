@@ -4,6 +4,16 @@ namespace App\Ahex\Entrada\Domain\Topics;
 
 trait Reempacado
 {
+    public function reempacador()
+    {
+        return $this->belongsTo(\App\Reempacador::class)->withTrashed();
+    }
+
+    public function codigor()
+    {
+        return $this->belongsTo(\App\Codigor::class)->withTrashed();
+    }
+    
     public function hasReempacador()
     {
         if(! isset($this->reempacador_id) )

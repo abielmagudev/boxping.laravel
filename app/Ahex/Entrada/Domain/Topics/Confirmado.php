@@ -4,12 +4,17 @@ namespace App\Ahex\Entrada\Domain\Topics;
 
 trait Confirmado
 {
+    public function confirmador()
+    {
+        return $this->belongsTo(\App\User::class, 'confirmado_by');
+    }
+    
     public function hasConfirmador()
     {
         if(! isset($this->confirmado_by) )
             return false;
 
-        return $this->confirmador instanceof \App\User;
+        return is_a($this->confirmador, \App\User::class);
     }
 
     public function hasFechaHoraConfirmado()

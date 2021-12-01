@@ -20,6 +20,11 @@ trait Validations
         return (bool) $this->loadCount('comentarios')->comentarios_count;
     }
 
+    public function hasEtapas()
+    {
+        return (bool) $this->etapas->count();
+    }
+
     public function hasContenido()
     {
         return isset($this->contenido);
@@ -38,7 +43,7 @@ trait Validations
         if(! isset($this->consolidado_id) )
             return false;
 
-        return $this->consolidado instanceof \App\Consolidado;
+        return is_a($this->consolidado, \App\Consolidado::class);
     }
 
     public function hasDestinatario()
@@ -55,11 +60,6 @@ trait Validations
             return false;
 
         return is_a($this->remitente, \App\Remitente::class);
-    }
-
-    public function hasEtapas()
-    {
-        return (bool) $this->etapas->count();
     }
 
     public function hasSalida()
