@@ -63,8 +63,7 @@ class Destinatario extends Model implements ModifierIdentifiable, ValueSearchabl
                     ->orWhere('postal', 'like', "%{$value}%")
                     ->orWhere('ciudad', 'like', "%{$value}%")
                     ->orWhere('telefono', 'like', "%{$value}%")
-                    ->orderBy('id', 'desc')
-                    ->get();
+                    ->orderBy('id', 'desc');
     }
 
 

@@ -54,8 +54,7 @@ Class Remitente extends Model implements ValueSearchable, ModifierIdentifiable, 
                      ->orWhere('postal', 'like', "%{$value}%")
                      ->orWhere('telefono', 'like', "%{$value}%")
                      ->orWhere('ciudad', 'like', "%{$value}%")
-                     ->orderBy('id', 'desc')
-                     ->get();
+                     ->orderBy('id', 'desc');
     }
 
     public static function prepare($validated)
