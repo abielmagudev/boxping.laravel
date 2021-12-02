@@ -2,7 +2,6 @@
 
 $settings = (object) [
     'classes' => isset($classes) && is_string($classes) ? $classes : 'btn btn-primary',
-    'icon' => $graffiti->design('filter')->svg(),
     'text' => isset($text) && is_string($text) ? $text : 'Filtrar',
 ];
 
