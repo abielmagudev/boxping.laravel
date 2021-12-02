@@ -26,6 +26,9 @@
             <li>
                 <a class="dropdown-item disabled" href="#">Imprimir seleccionadas</a>
             </li>
+            <li>
+                <a class="dropdown-item disabled" href="#">Eliminar seleccionadas</a>
+            </li>
         </ul>
     </div>
     @endslot
