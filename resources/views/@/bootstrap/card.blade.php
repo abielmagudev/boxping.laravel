@@ -44,7 +44,7 @@ $settings = (object) [
 
             <div class="text-center">{!! $settings->header->center !!}</div>
 
-            <div class="text-end">{!! $settings->header->options !!}</div>
+            <div class="d-flex justify-content-end align-items-center">{!! $settings->header->options !!}</div>
         </div>
     </div>
     @endif
