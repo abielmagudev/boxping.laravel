@@ -90,7 +90,7 @@ class EntradaController extends Controller
         if(! $entrada->delete() )
             return back()->with('failure', 'Error al eliminar entrada');
         
-        $route = Consolidado::where('id', $entrada->consolidado_id)->exists()
+        $route = $entrada->hasConsolidado()
                 ? route('consolidados.show', $entrada->consolidado_id)
                 : route('entradas.index');
 
