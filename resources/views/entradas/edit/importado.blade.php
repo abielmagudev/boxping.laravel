@@ -43,7 +43,7 @@
         </div>
         <br>
 
-        <button class="btn btn-warning" type="submit" name="actualizar" value="importacion">Actualizar importado</button>
+        <button class="btn btn-warning" type="submit" name="actualizar" value="importado">Actualizar importado</button>
         <a href="{{ route('entradas.show', $entrada) }}" class="btn btn-secondary">Regresar</a>
     </form>
 @endcomponent

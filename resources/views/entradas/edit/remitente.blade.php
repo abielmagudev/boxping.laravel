@@ -35,7 +35,13 @@
          <td class="{{ notHasSearchText($searched, $remitente->localidad) ?: 'table-warning' }}">{{ $remitente->localidad }}</td>
          <td class="{{ notHasSearchText($searched, $remitente->telefono) ?: 'table-warning' }}">{{ $remitente->telefono }}</td>
          <td class="text-end">
-            <button name="remitente" value="{{ $remitente->id }}" class="btn btn-outline-success btn-sm" form="form-update-remitente" type="submit">Agregar</button>
+         @if( $remitente->id <> $entrada->remitente_id )  
+            <button name="remitente" value="{{ $remitente->id }}" class="btn btn-outline-primary btn-sm" form="form-update-remitente" type="submit">Agregar</button>
+         
+         @else
+            <button class="btn btn-sm btn-secondary disabled">Agregado</button>
+
+         @endif
          </td>
       </tr>
       @endforeach

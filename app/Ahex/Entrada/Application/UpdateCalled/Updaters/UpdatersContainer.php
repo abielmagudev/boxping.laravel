@@ -2,24 +2,47 @@
 
 namespace App\Ahex\Entrada\Application\UpdateCalled\Updaters;
 
+use App\Http\Requests\Entrada\UpdateRequest;
+
 abstract class UpdatersContainer
 {
+    const UPDATER_NOT_FOUND = false;
+
     public static $updaters = [
-        'confirmacion' => ConfirmacionUpdater::class,
+        'confirmado' => ConfirmadoUpdater::class,
         'destinatario' => DestinatarioUpdater::class,
-        'importacion' => ImportacionUpdater::class,
+        'importado' => ImportadoUpdater::class,
         'informacion' => InformacionUpdater::class,
-        'reempaque' => ReempaqueUpdater::class,
+        'reempacado' => ReempacadoUpdater::class,
         'remitente' => RemitenteUpdater::class,
     ];
 
-    public static function names()
+    public static function get(UpdateRequest $request, \App\Entrada $entrada)
     {
-        return array_keys(self::$updaters);
+        if(! self::exists($request->actualizar) )
+            return self::UPDATER_NOT_FOUND;
+
+        $updater_class = self::classname($request->actualizar);
+        return new $updater_class($entrada, $request);
     }
 
-    public static function find($name, $validated)
+    public static function exists($updater_name)
     {
-        return new self::$updaters[$name] ($validated);
+        return isset( self::$updaters[$updater_name] );
+    }
+
+    public static function classname($updater_name)
+    {
+        return self::$updaters[$updater_name];
+    }
+
+    public static function names()
+    {
+        return array_keys( self::$updaters );
+    }
+
+    public static function classnames()
+    {
+        return array_values( self::$updaters );
     }
 }

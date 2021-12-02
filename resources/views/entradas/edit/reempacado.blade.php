@@ -39,7 +39,7 @@
         </div>
         <br>
 
-        <button class="btn btn-warning" type="submit" name="actualizar" value="reempaque">Actualizar reempacado</button>
+        <button class="btn btn-warning" type="submit" name="actualizar" value="reempacado">Actualizar reempacado</button>
         <a href="{{ route('entradas.show', $entrada) }}" class="btn btn-secondary">Regresar</a>
     </form>
 @endcomponent

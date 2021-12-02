@@ -2,13 +2,11 @@
 
 namespace App\Ahex\Entrada\Application\UpdateCalled\Validators;
 
-use App\Entrada;
-
 abstract class Validator
 {
     protected $entrada;
 
-    public function __construct(Entrada $entrada)
+    public function __construct(\App\Entrada $entrada)
     {
         $this->entrada = $entrada;
     }

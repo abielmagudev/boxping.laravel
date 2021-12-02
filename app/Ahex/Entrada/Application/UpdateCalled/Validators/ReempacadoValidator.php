@@ -2,7 +2,7 @@
 
 namespace App\Ahex\Entrada\Application\UpdateCalled\Validators;
 
-class ReempaqueValidator extends Validator
+class ReempacadoValidator extends Validator
 {
     public function rules(): array
     {

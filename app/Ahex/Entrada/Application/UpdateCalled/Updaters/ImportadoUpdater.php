@@ -2,14 +2,9 @@
 
 namespace App\Ahex\Entrada\Application\UpdateCalled\Updaters;
 
-class ImportacionUpdater extends Updater
+class ImportadoUpdater extends Updater
 {
-    protected $messages = [
-        'failure' => 'Error al actualizar la importación',
-        'success' => 'Importación actualizada',
-    ];
-
-    public function prepared(): array
+    public function prepare(): array
     {
         return [
             'vehiculo_id'     => $this->validated['vehiculo'],
@@ -21,8 +16,13 @@ class ImportacionUpdater extends Updater
         ];
     }
 
-    public function route(\App\Entrada $entrada): string
+    public function failure(): string
     {
-        return route('entradas.edit', [$entrada, 'editor' => 'importacion']);
+        return 'Error al actualizar el importado de la entrada.';
+    }
+
+    public function success(): string
+    {
+        return 'Importado de la entrada actualizada.';
     }
 }

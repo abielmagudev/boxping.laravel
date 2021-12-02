@@ -2,14 +2,9 @@
 
 namespace App\Ahex\Entrada\Application\UpdateCalled\Updaters;
 
-class ReempaqueUpdater extends Updater
+class ReempacadoUpdater extends Updater
 {
-    protected $messages = [
-        'failure' => 'Error al actualizar el reempaque',
-        'success' => 'Reempaque actualizado',
-    ];
-
-    public function prepared(): array
+    public function prepare(): array
     {
         return [
             'codigor_id' => $this->validated['codigo_reempacado'],
@@ -20,8 +15,13 @@ class ReempaqueUpdater extends Updater
         ];
     }
 
-    public function route(\App\Entrada $entrada): string
+    public function failure(): string
     {
-        return route('entradas.edit', [$entrada, 'editor' => 'reempaque']);
+        return 'Error al actualizar el reempacado de la entrada.';
+    }
+
+    public function success(): string
+    {
+        return 'Reempacado de la entrada actualizada.';
     }
 }

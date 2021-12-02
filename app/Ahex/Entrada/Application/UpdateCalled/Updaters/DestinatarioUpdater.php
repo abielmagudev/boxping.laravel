@@ -4,12 +4,7 @@ namespace App\Ahex\Entrada\Application\UpdateCalled\Updaters;
 
 class DestinatarioUpdater extends Updater
 {
-    protected $messages = [
-        'failure' => 'Error al actualizar el destinatario',
-        'success' => 'Destinatario actualizada',
-    ];
-
-    public function prepared(): array
+    public function prepare(): array
     {
         return [
             'destinatario_id' => $this->validated['destinatario'],
@@ -19,8 +14,13 @@ class DestinatarioUpdater extends Updater
         ];
     }
 
-    public function route(\App\Entrada $entrada): string
+    public function failure(): string
     {
-        return route('entradas.show', $entrada);
+        return 'Error al actualizar el destinatario de la entrada.';
+    }
+
+    public function success(): string
+    {
+        return 'Destinatario de la entrada actualizada.';
     }
 }

@@ -77,12 +77,12 @@ class EntradaController extends Controller
 
     public function update(Entrada $entrada, UpdateRequest $request)
     {
-        $updater = UpdatersContainer::find($request->actualizar, $request->validated());
+        $updater = UpdatersContainer::get($request, $entrada);
         
-        if(! $entrada->fill( $updater->prepared() )->save() )
-            return back()->with('failure', $updater->message('failure'));
+        if(! $entrada->fill( $updater->prepare() )->save() )
+            return back()->with('failure', $updater->failure());
 
-        return redirect( $updater->route($entrada) )->with('success', $updater->message('success'));
+        return back()->with('success', $updater->success());
     }
 
     public function destroy(Entrada $entrada)

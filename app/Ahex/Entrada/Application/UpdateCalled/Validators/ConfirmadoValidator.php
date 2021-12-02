@@ -2,7 +2,7 @@
 
 namespace App\Ahex\Entrada\Application\UpdateCalled\Validators;
 
-class ConfirmacionValidator extends Validator
+class ConfirmadoValidator extends Validator
 {
     public function rules(): array
     {

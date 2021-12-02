@@ -4,12 +4,7 @@ namespace App\Ahex\Entrada\Application\UpdateCalled\Updaters;
 
 class RemitenteUpdater extends Updater
 {
-    protected $messages = [
-        'failure' => 'Error al actualizar el remitente',
-        'success' => 'Remitente actualizado',
-    ];
-
-    public function prepared(): array
+    public function prepare(): array
     {
         return [
             'remitente_id' => $this->validated['remitente'],
@@ -17,8 +12,13 @@ class RemitenteUpdater extends Updater
         ];
     }
 
-    public function route(\App\Entrada $entrada): string
+    public function failure(): string
     {
-        return route('entradas.show', $entrada);
+        return 'Error al actualiza el remitente de la entrada.';
+    }
+
+    public function success(): string
+    {
+        return 'Remitente de la entrada actualizado.';
     }
 }

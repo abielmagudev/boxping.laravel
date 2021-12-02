@@ -2,31 +2,29 @@
 
 namespace App\Ahex\Entrada\Application\UpdateCalled\Updaters;
 
+use App\Entrada;
+use App\Http\Requests\Entrada\UpdateRequest;
+
 abstract class Updater
 {
-    const NOT_MESSAGE = null;
+    protected $validated;
+    protected $entrada;
 
-    protected $validated = [];
-
-    protected $messages = [
-        'failure' => 'Error al actualizar',
-        'success' => 'Actualización con éxito',
-    ];
-    
-    public function __construct(array $validated)
+    public function __construct(Entrada $entrada, UpdateRequest $request)
     {
-        $this->validated = $validated;
+        $this->entrada = $entrada;
+        $this->validated = $request->validated();
     }
 
-    public function message(string $status): string
-    {
-        if( ! isset( $this->messages[$status] ) )
-            return self::NOT_MESSAGE;
+    abstract public function prepare(): array;
 
-        return $this->messages[$status];
+    public function failure(): string
+    {
+        return 'Error al intentar actualizar la entrada.';
     }
 
-    abstract public function prepared(): array;
-
-    abstract public function route(\App\Entrada $entrada): string;
+    public function success(): string
+    {
+        return 'Entrada ha sido actualizada.';
+    }
 }

@@ -2,22 +2,20 @@
 
 namespace App\Ahex\Entrada\Application\UpdateCalled\Updaters;
 
-use App\Entrada;
-
 class InformacionUpdater extends Updater
 {
-    protected $messages = [
-        'failure' => 'Error al actualizar la información',
-        'success' => 'Información actualizada',
-    ];
-
-    public function prepared(): array
+    public function prepare(): array
     {
-        return Entrada::prepare($this->validated);
+        return \App\Entrada::prepare($this->validated);
+    }
+    
+    public function failure(): string
+    {
+        return 'Error al actualizar la información de la entrada.';
     }
 
-    public function route(Entrada $entrada): string
+    public function success(): string
     {
-        return route('entradas.edit', [$entrada, 'editor' => 'informacion']);
+        return 'Información de la entrada actualizada.';
     }
 }

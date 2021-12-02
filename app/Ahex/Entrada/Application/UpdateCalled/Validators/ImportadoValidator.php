@@ -2,7 +2,7 @@
 
 namespace App\Ahex\Entrada\Application\UpdateCalled\Validators;
 
-class ImportacionValidator extends Validator
+class ImportadoValidator extends Validator
 {
     public function rules(): array
     {
