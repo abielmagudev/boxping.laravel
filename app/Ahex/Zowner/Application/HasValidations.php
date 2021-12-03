@@ -4,24 +4,31 @@ namespace App\Ahex\Zowner\Application;
 
 trait HasValidations
 {
-    public function hasCollection($var): bool
+    public function hasCollection($collection): bool
     {
-        return is_a($var, \Illuminate\Support\Collection::class) || 
-               is_a($var, \Illuminate\Database\Eloquent\Collection::class);
+        return is_a($collection, \Illuminate\Support\Collection::class) || 
+               is_a($collection, \Illuminate\Database\Eloquent\Collection::class);
     }
 
-    public function hasPagination($var): bool
+    public function hasPagination($collection): bool
     {
-        return $var instanceof \Illuminate\Pagination\LengthAwarePaginator;
+        return $collection instanceof \Illuminate\Pagination\LengthAwarePaginator;
     }
 
-    public function hasSimplePagination($var): bool
+    public function hasSimplePagination($collection): bool
     {
-        return $var instanceof \Illuminate\Pagination\Paginator;
+        return $collection instanceof \Illuminate\Pagination\Paginator;
     }
 
-    public function hasCursorPagination($var): bool
+    public function hasCursorPagination($collection): bool
     {
-        return $var instanceof \Illuminate\Pagination\CursorPaginator;
+        return $collection instanceof \Illuminate\Pagination\CursorPaginator;
+    }
+
+    public function hasAnyPagination($collection)
+    {
+        return  $this->hasPagination($collection) ||
+                $this->hasSimplePagination($collection) ||
+                $this->hasCursorPagination($collection);
     }
 }
