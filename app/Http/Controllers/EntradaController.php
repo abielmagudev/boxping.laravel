@@ -8,7 +8,7 @@ use App\Http\Requests\Entrada\StoreRequest;
 use App\Http\Requests\Entrada\EditRequest;
 use App\Http\Requests\Entrada\UpdateRequest;
 use App\Http\Requests\Entrada\PrintManyRequest;
-use App\Ahex\Zowner\Application\HasValidations;
+use App\Ahex\Zowner\Application\Features\HasValidations;
 use App\Ahex\Entrada\Application\RedirectAfterStored;
 use App\Ahex\Entrada\Application\ShowPresenter;
 use App\Ahex\Entrada\Application\EditCalled\EditorsContainer;
