@@ -4,8 +4,8 @@ $settings = (object) [
     'entradas' => $entradas,
     'has_entradas' => is_a($entradas, \Illuminate\Database\Eloquent\Collection::class) && $entradas->count(),
     'checkbox' => (object) [
-        'form_id' => $form_id ?? null,
-        'render' => isset($form_id) && is_string($form_id),
+        'form_id' => 'formEntradasAction',
+        'render' => isset($checkbox) && is_bool($checkbox) ? $checkbox : true,
     ],
     'defaults' => (object) [
         'cliente'      => isset($cliente) && $cliente instanceof \App\Cliente ? $cliente : false,
