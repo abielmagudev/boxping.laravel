@@ -11,12 +11,13 @@ $entradas_filters = [
 $settings = (object) [
     'filters' => isset($except) && is_array($except) ? array_diff($entradas_filters, $settings->except) : $entradas_filters,
     'route' => $route,
+    'id' => 'modalFiltrarEntradas',
 ];
 
 ?>
 
 @component('@.bootstrap.modal', [
-    'id' => 'modalFiltrarEntradas',
+    'id' => $settings->id,
     'title' => 'Filtrar entradas',
     'header_close' => true,
 ])
