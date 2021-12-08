@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 trait FiltersByRequest
 {
     protected $all_filters = [
+        'numero' => 'filterNumber',
         'ambito' => 'filterAmbit',
         'cliente' => 'filterClient',
         'codigor' => 'filterCodigor',
@@ -21,7 +22,7 @@ trait FiltersByRequest
     protected $request_filters;
 
 
-    /** Scopes Mains ********************************************************/
+    /** Scopes Edges: Start & Over ********************************************************/
 
     public function scopeFilterByRequest($query, Request $request)
     {
@@ -52,6 +53,19 @@ trait FiltersByRequest
 
 
     /** Scopes Relationships ********************************************************/
+    
+    public function scopeFilterNumber($query, Request $request)
+    {
+        if(! $request->has(['comodin', 'numero']) ||! 
+             in_array($request->comodin, ['inicial', 'final']) ||! 
+             $request->filled('numero') )
+            return $query;
+
+        if( $request->comodin === 'inicial' )
+            return $query->where('numero', 'like', "{$request->numero}%");
+            
+        return $query->where('numero', 'like', "%{$request->numero}");
+    }
 
     public function scopeFilterAmbit($query, $request)
     {
