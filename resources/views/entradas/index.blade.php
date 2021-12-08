@@ -1,8 +1,10 @@
 @extends('app')
 @section('content')
 
-@include('entradas.components.index.bundle', [
-    
+@include('entradas.components.index.card', [
+    'dropdown' => [
+        'except' => false
+    ],
 ])
 
 @endsection

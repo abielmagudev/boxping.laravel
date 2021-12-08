@@ -27,15 +27,11 @@ class EntradaController extends Controller
                             ->filterByRequest($request)
                             ->getFiltered();
 
-        $has_pagination = $this->hasPagination($entradas);
-
         return view('entradas.index', [
-            'counter'    => $has_pagination ? $entradas->total() : $entradas->count(),
-            'entradas'   => $has_pagination ? $entradas->getCollection() : $entradas,
-            'pagination' => (object) [
-                'available' => $has_pagination,
-                'next' => ! $has_pagination ?: $entradas->nextPageUrl(),
-                'prev' => ! $has_pagination ?: $entradas->previousPageUrl(), 
+            'entradas' => $entradas,
+            'pagination' => ! $this->hasAnyPagination($entradas) ?: [
+                'prev' => $entradas->previousPageUrl() ?? null,
+                'next' => $entradas->nextPageUrl() ?? null,
             ],
         ]);
     }
