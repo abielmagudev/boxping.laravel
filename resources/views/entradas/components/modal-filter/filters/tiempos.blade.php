@@ -2,8 +2,8 @@
 
 $options_tiempo = (object) [
     'cualquier'   => '- Cualquier tiempo -',
-    'actualizado' => 'Actualizado',
     'creado'      => 'Creado',
+    'actualizado' => 'Actualizado',
     'confirmado'  => 'Confirmado',
     'importado'   => 'Importado',
     'reempacado'  => 'Reempacado',
@@ -18,7 +18,7 @@ $fieldset_fechas_horas = (object) [
 
 <div class="mb-3">
     <label for="selectFilterTiempo" class="form-label small">Tiempo</label>
-    <select name="tiempo" id="selectFilterTiempo" class="form-control">
+    <select name="tiempo" id="selectFilterTiempo" class="form-select">
         @foreach($options_tiempo as $value => $label)
         <option value="{{ $value }}" <?= toggleSelected($value, request('tiempo')) ?>>{{ $label }}</option>
         @endforeach

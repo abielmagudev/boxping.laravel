@@ -1,6 +1,7 @@
 <?php 
 
 $entradas_filters = [
+    'numero',
     'ambitos',
     'clientes',
     'etapas',
@@ -31,7 +32,7 @@ $settings = (object) [
         <input type="hidden" name="token" value="<?= csrf_token() ?>">
         <div class="text-end">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-            <button type="submit" class="btn btn-success" form="formFiltersEntradas">Filtrar entradas</button>
+            <button type="submit" class="btn btn-primary" form="formFiltersEntradas">Filtrar entradas</button>
         </div>
     </form>
     <!-- Fin del formulario para filtrar entradas -->
