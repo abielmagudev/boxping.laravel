@@ -6,7 +6,7 @@ trait HasValidations
 {
     /** COLLECTIONs */
 
-    public function hasAnyCollection($collection)
+    public function hasAnyCollection($collection): bool
     {
         return $this->hasCollection($collection) ||
                $this->hasEloquentCollection($collection);
@@ -17,14 +17,14 @@ trait HasValidations
         return $collection instanceof \Illuminate\Support\Collection;
     }
 
-    public function hasEloquentCollection($collection)
+    public function hasEloquentCollection($collection): bool
     {
         return $collection instanceof \Illuminate\Database\Eloquent\Collection;
     }
 
     /** PAGINATIONs */
     
-    public function hasAnyPagination($collection)
+    public function hasAnyPagination($collection): bool
     {
         return  $this->hasPagination($collection) ||
                 $this->hasSimplePagination($collection) ||
