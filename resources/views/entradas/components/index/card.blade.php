@@ -1,33 +1,46 @@
 <?php
 
 $settings = (object) [
-    'with_counter' => isset($with_counter) && is_bool($with_counter) ? $with_counter : true,
-    'has_counter' => isset($counter) && is_int($counter),
-    'has_center' => isset($center),
-    'center' => $center ?? false,
-    'has_options' => isset($options),
-    'options' => $options ?? false,
+    'has_checkbox' => isset($checkbox) && is_bool($checkbox) ? $checkbox : true,
+    'has_dropdown' => isset($dropdown) && is_array($dropdown),
 ];
 
 ?>
 
 @component('@.bootstrap.card', [
     'title' => 'Entradas',
-    'counter' => $settings->with_counter && $settings->has_counter ? $counter : null,
+    'counter' => method_exists($entradas, 'total') ? $entradas->total() : $entradas->count(),
 ])
 
-@if( $settings->has_center )
-    @slot('center')
-    {!! $settings->center !!}
-    @endslot
-@endif
+    @isset($center) 
+    @slot('center'){!! $center !!}@endslot
+    @endisset
 
-@if( $settings->has_options )
     @slot('options')
-    {!! $settings->options !!}
+    @includeWhen($settings->has_checkbox, '@.partials.checkboxes-toggle.trigger')
+    @includeWhen($settings->has_dropdown, 'entradas.components.index.dropdown')
     @endslot
-@endif
 
-    @include('entradas.components.index.table')
+    @include('entradas.components.index.table', [
+        'checkbox' => $settings->has_checkbox,
+        'entradas' => method_exists($entradas, 'getCollection') ? $entradas->getCollection() : $entradas,
+        'consolidado' => $consolidado ?? false,
+        'destinatario' => $destinatario ?? false,
+        'cliente' => $cliente ?? false,
+    ])
 
 @endcomponent
+<br>
+
+@includeWhen( isset($pagination), '@.bootstrap.pagination-simple', [
+    'prev' => $pagination['prev'] ?? null,
+    'next' => $pagination['next'] ?? null,
+])
+
+@includeWhen($settings->has_checkbox, '@.partials.checkboxes-toggle.script', [
+    'checkbox_name' => 'entradas',    
+])
+
+@includeWhen($settings->has_dropdown, 'entradas.components.modal-filter.modal', [
+        'route' => route('entradas.index'),
+])

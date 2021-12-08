@@ -1,15 +1,15 @@
 <?php
 
 $settings = (object) [
-    'entradas' => $entradas,
+    'entradas'     => $entradas,
     'has_entradas' => is_a($entradas, \Illuminate\Database\Eloquent\Collection::class) && $entradas->count(),
-    'checkbox' => (object) [
-        'form_id' => 'formEntradasAction',
-        'render' => isset($checkbox) && is_bool($checkbox) ? $checkbox : true,
+    'checkbox'     => (object) [
+        'form_id'  => 'formEntradasAction',
+        'render'   => isset($checkbox) && is_bool($checkbox) ? $checkbox : true,
     ],
     'defaults' => (object) [
-        'cliente'      => isset($cliente)      && is_a($cliente, \App\Cliente::class) ? $cliente : false,
-        'consolidado'  => isset($consolidado)  && is_a($consolidado, \App\Consolidado::class) ? $consolidado : false,
+        'cliente'      => isset($cliente) && is_a($cliente, \App\Cliente::class) ? $cliente : false,
+        'consolidado'  => isset($consolidado) && is_a($consolidado, \App\Consolidado::class) ? $consolidado : false,
         'destinatario' => isset($destinatario) && is_a($destinatario, \App\Destinatario::class) ? $destinatario : false,
     ],
     'thead' => [
@@ -22,10 +22,11 @@ $settings = (object) [
 ];
 
 /**
+ * Elimina el elemento checkbox del thead
  * 
- * Si la propiedad render de checkbox no es válido
- * entonces ELIMINA el primer encabezado que es 'checkbox' => ''
- * en la propiedad thead de $settings
+ * Si la propiedad render de checkbox es FALSE
+ * ELIMINA el primer encabezado de la tabla 
+ * ubicado en 'thead' => ['checkbox' => '', ...
  * 
  */
 if(! $settings->checkbox->render )
