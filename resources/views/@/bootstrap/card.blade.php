@@ -15,11 +15,12 @@ $settings = (object) [
     ],
     'body' => $slot ?? '',
     'footer' => $footer ?? '',
+    'id' => $id ?? '',
 ];
 
 ?>
 
-<div class="card border-0 shadow-sm">
+<div class="card border-0 shadow-sm" id="<?= $settings->id ?>">
     <!-- Start header -->
     @if( $settings->has_header )
     <div class="card-header border-bottom bg-white py-3">
