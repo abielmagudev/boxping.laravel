@@ -2,12 +2,14 @@
 
 $settings = (object) [
     'has_checkbox' => isset($checkbox) && is_bool($checkbox) ? $checkbox : true,
-    'has_dropdown' => isset($dropdown) && is_array($dropdown),
+    'has_dropdown' => isset($dropdown) && is_array($dropdown) || $dropdown === true,
+    'has_filtering' => isset($dropdown['except']) && is_array($dropdown['except']) &&! in_array('filtering', $dropdown['except']),
 ];
 
 ?>
 
 @component('@.bootstrap.card', [
+    'id' => 'lista-entradas',
     'title' => 'Entradas',
     'counter' => method_exists($entradas, 'total') ? $entradas->total() : $entradas->count(),
 ])
@@ -37,10 +39,8 @@ $settings = (object) [
     'next' => $pagination['next'] ?? null,
 ])
 
+@includeWhen($settings->has_filtering, 'entradas.components.modal-filter.modal')
+
 @includeWhen($settings->has_checkbox, '@.partials.checkboxes-toggle.script', [
     'checkbox_name' => 'entradas',    
-])
-
-@includeWhen($settings->has_dropdown, 'entradas.components.modal-filter.modal', [
-        'route' => route('entradas.index'),
 ])

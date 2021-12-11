@@ -10,8 +10,8 @@ $entradas_filters = [
 ];
 
 $settings = (object) [
-    'filters' => isset($except) && is_array($except) ? array_diff($entradas_filters, $settings->except) : $entradas_filters,
-    'route' => $route,
+    'filters' => isset($filtering['except']) && is_array($filtering['except']) ? array_diff($entradas_filters, $filtering['except']) : $entradas_filters,
+    'route' => isset($filtering['route']) && is_string($filtering['route']) ? $filtering['route'] : route('entradas.index'),
     'id' => 'modalFiltrarEntradas',
 ];
 
@@ -22,7 +22,6 @@ $settings = (object) [
     'title' => 'Filtrar entradas',
     'header_close' => true,
 ])
-    <!-- Inicio del formulario para filtrar entradas -->
     <form action="{{ $settings->route }}" method="get" id="formFiltersEntradas">
         @foreach($settings->filters as $filter)
             @include("entradas.components.modal-filter.filters.{$filter}")
@@ -35,5 +34,4 @@ $settings = (object) [
             <button type="submit" class="btn btn-primary" form="formFiltersEntradas">Filtrar entradas</button>
         </div>
     </form>
-    <!-- Fin del formulario para filtrar entradas -->
 @endcomponent
