@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Ahex\Consolidado\Domain\Attributes;
 use App\Ahex\Consolidado\Domain\Scopes;
+use App\Ahex\Consolidado\Domain\Validations;
 use App\Ahex\Consolidado\Domain\Relationships;
 use App\Ahex\Consolidado\Domain\EntradasHandler;
 use App\Ahex\Zowner\Domain\Contracts\ValueSearchable;
@@ -17,6 +18,7 @@ class Consolidado extends Model implements ModifierIdentifiable, ValueSearchable
     use HasFactory, 
         Attributes,
         Scopes,
+        Validations,
         Relationships,
         EntradasHandler,
         HasModifiers;
