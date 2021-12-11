@@ -1,24 +1,10 @@
 @extends('app')
 @section('content')
 
-<?php
-
-$checkbox_form = '';
-$checkbox_prefix = 'checkboxEntrada';
-$checker_id = 'checker-entradas';
-
-?>
-
 @include('@.bootstrap.page-header', [
     'title' => $consolidado->numero,
     'pretitle' => 'Consolidado',
 ])
-
-<p class="text-end">
-    <a href="{{ route('consolidados.print', $consolidado) }}" class="btn btn-sm btn-primary">
-        {!! $graffiti->design('printer-fill')->svg() !!}
-    </a>
-</p>
 
 <div class="row">
     <!-- Column informacion -->
@@ -26,6 +12,12 @@ $checker_id = 'checker-entradas';
         @component('@.bootstrap.card', [
             'title' => 'Información'    
         ])
+            @slot('options')
+            <a href="{{ route('consolidados.print', $consolidado) }}" class="btn btn-sm btn-primary">
+                {!! $graffiti->design('printer-fill')->svg() !!}
+            </a>
+            @endslot
+
             @component('@.bootstrap.table')
                 <tr class="text-capitalize">
                     <td class="text-muted small" style="width:1%">Status</td>
@@ -86,45 +78,17 @@ $checker_id = 'checker-entradas';
 </div>
 <br>
 
-@component('@.bootstrap.card', [
-    'title' => 'Entradas',
-    'counter' => $entradas->count()
+@include('entradas.components.index.card', [
+    'consolidado' => $consolidado,
+    'cliente' => $consolidado->cliente,
+    'dropdown' => [
+        'route_create' => route('entradas.index', ['consolidado' => $consolidado->id]),
+        'except' => $consolidado->hasCerrado() ? ['create'] : [],
+    ],
+    'filtering' => [
+        'route' => route('consolidados.show', $consolidado),
+        'except' => ['ambitos', 'clientes'],
+    ],
 ])
-    <!-- Slot options  -->
-    @slot('options')
-    <!-- @ include('@.partials.entradas-filter.trigger') -->
-    <!-- @ include('@.partials.checkboxes-checker.trigger') -->
-    <!-- @ include('@.partials.guias-impresion-dropdown.multiple') -->
-
-    @if( $consolidado->status === 'abierto' ) 
-    <a href="{{ route('entradas.create', ['consolidado' => $consolidado->id]) }}" class="btn btn-sm btn-primary">
-        <span class="fw-bold">+</span>
-    </a>
-    @endif
-    @endslot
-    <!-- Endslot options  -->
-    
-    <!-- Slot body  -->
-    @include('entradas.components.index.table', [   
-        'entradas' => $entradas,
-        'form_id' => 'formEntradasPrinting',
-        'consolidado' => $consolidado,
-        'cliente' => $consolidado->cliente,
-    ])
-    <!-- Endslot body  -->
-
-@endcomponent
-<br>
-
-<!-- @ include('@.partials.checkboxes-checker.scripts', [
-    'checkbox_prefix' => $checkbox_prefix,
-    'checker_id' => $checker_id,
-]) -->
-
-<!-- @ include('@.partials.entradas-filter.modal', [
-    'except' => ['ambitos', 'clientes','muestreos'],
-    'header' => 'Filtros para entradas del consolidado',
-    'results_route' => route('consolidados.show', [$consolidado]),
-]) -->
 
 @endsection
