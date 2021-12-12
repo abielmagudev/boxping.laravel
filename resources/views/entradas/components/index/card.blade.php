@@ -2,8 +2,9 @@
 
 $settings = (object) [
     'has_checkbox' => isset($checkbox) && is_bool($checkbox) ? $checkbox : true,
-    'has_dropdown' => isset($dropdown) && is_array($dropdown) || $dropdown === true,
-    'has_filtering' => isset($dropdown['except']) && is_array($dropdown['except']) &&! in_array('filtering', $dropdown['except']),
+    'has_dropdown' => isset($dropdown) && is_array($dropdown) || is_bool($dropdown) ? boolval($dropdown) : true,
+    'has_filter' => isset($dropdown['except']) && is_array($dropdown['except']) &&! in_array('filter', $dropdown['except']),
+    'has_pagination' => isset($pagination),
 ];
 
 ?>
@@ -34,12 +35,12 @@ $settings = (object) [
 @endcomponent
 <br>
 
-@includeWhen( isset($pagination), '@.bootstrap.pagination-simple', [
-    'prev' => $pagination['prev'] ?? null,
-    'next' => $pagination['next'] ?? null,
+@includeWhen($settings->has_pagination, '@.bootstrap.pagination-simple', [
+    'prev' => $pagination['prev'] ?? false,
+    'next' => $pagination['next'] ?? false,
 ])
 
-@includeWhen($settings->has_filtering, 'entradas.components.modal-filter.modal')
+@includeWhen($settings->has_filter, 'entradas.components.modal-filter.modal')
 
 @includeWhen($settings->has_checkbox, '@.partials.checkboxes-toggle.script', [
     'checkbox_name' => 'entradas',    

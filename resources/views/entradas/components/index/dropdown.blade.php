@@ -3,34 +3,36 @@
 $dropdown_all_items = [
     'create',
     'delete',
-    'filtering',
+    'filter',
     'printing',
 ];
 
 $dropdown_settings = (object) [
     'items' => isset($dropdown['except']) && is_array($dropdown['except']) ? array_diff($dropdown_all_items, $dropdown['except']) : $dropdown_all_items,
-    'route_create' => isset($consolidado) && is_a($consolidado, App\Consolidado::class) ? route('entradas.create', ['consolidado' => $consolidado->id]) : route('entradas.create'),
+    'routes' => [
+        'create' => isset($dropdown['routes']['create']) && is_string($dropdown['routes']['create']) ? $dropdown['routes']['create'] : route('entradas.create'),
+    ],
 ];
 
 ?>
 
 <div class="dropdown ms-1">
-    <button class="btn btn-sm btn-primary dropdown-toggle-arrowless" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+    <button class="btn btn-sm btn-primary dropdown-toggle-arrowless" type="button" id="dropdownEntradasTrigger" data-bs-toggle="dropdown" aria-expanded="false">
         {!! $graffiti->design('three-dots-vertical')->svg() !!}
     </button>
-    <ul class="dropdown-menu border-0 shadow" aria-labelledby="dropdownMenuButton1">
+    <ul class="dropdown-menu border-0 shadow" aria-labelledby="dropdownEntradasTrigger">
         
         @if( in_array('create', $dropdown_settings->items) )      
         <!-- Crear nueva entrada -->
         <li>
-            <a href="<?= $dropdown_settings->route_create ?>" class="dropdown-item">
+            <a href="<?= $dropdown_settings->routes['create'] ?>" class="dropdown-item">
                 <span>{!! $graffiti->design('plus-lg')->svg() !!}</span>
                 <span class="align-middle ms-1">Nueva</span>
             </a>
         </li>
         @endif
 
-        @if( in_array('filtering', $dropdown_settings->items) )  
+        @if( in_array('filter', $dropdown_settings->items) )  
         <!-- Filtrar entradas  -->
         <li>
             @include('entradas.components.modal-filter.trigger', [

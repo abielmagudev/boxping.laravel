@@ -1,6 +1,6 @@
 <?php 
 
-$entradas_filters = [
+$all_entradas_filters = [
     'numero',
     'ambitos',
     'clientes',
@@ -9,25 +9,28 @@ $entradas_filters = [
     'muestreos',
 ];
 
-$settings = (object) [
-    'filters' => isset($filtering['except']) && is_array($filtering['except']) ? array_diff($entradas_filters, $filtering['except']) : $entradas_filters,
-    'route' => isset($filtering['route']) && is_string($filtering['route']) ? $filtering['route'] : route('entradas.index'),
+$filter_settings = (object) [
     'id' => 'modalFiltrarEntradas',
+    'filters' => isset($filter['except']) && is_array($filter['except']) ? array_diff($all_entradas_filters, $filter['except']) : $all_entradas_filters,
+    'route' => isset($filter['route']) && is_string($filter['route']) ? $filter['route'] : route('entradas.index'),
+    'hook' => $filter_hook ?? null,
 ];
 
 ?>
 
 @component('@.bootstrap.modal', [
-    'id' => $settings->id,
+    'id' => $filter_settings->id,
     'title' => 'Filtrar entradas',
     'header_close' => true,
 ])
-    <form action="{{ $settings->route }}" method="get" id="formFiltersEntradas">
-        @foreach($settings->filters as $filter)
+    <form action="{{ $filter_settings->route }}" method="get" id="formFiltersEntradas">
+        @foreach($filter_settings->filters as $filter)
             @include("entradas.components.modal-filter.filters.{$filter}")
         @endforeach
         <hr>
-        
+
+        {!! $filter_settings->hook !!}
+
         <input type="hidden" name="token" value="<?= csrf_token() ?>">
         <div class="text-end">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
