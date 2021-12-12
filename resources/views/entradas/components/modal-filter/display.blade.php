@@ -41,7 +41,7 @@ $display_filters_settings = (object) [
             <ul>
                 @if( request()->filled('cliente') )
                 <?php $cliente = $clientes->firstWhere('id', request('cliente')) ?>
-                <li>Cliente: {{ $cliente->nombre }} ({{ $cliente->alias }})</li> 
+                <li>Cliente: {{ $cliente ? $cliente->nombre . "({$cliente->alias})" : 'Cualquier' }}</li> 
                 @endif
     
                 @if( request()->filled('etapa') )
