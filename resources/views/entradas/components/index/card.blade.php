@@ -9,8 +9,11 @@ $settings = (object) [
 
 ?>
 
+<a id="lista-entradas"></a>
+
+@includeWhen( request()->filled('filter_token'), 'entradas.components.modal-filter.display')
+
 @component('@.bootstrap.card', [
-    'id' => 'lista-entradas',
     'title' => 'Entradas',
     'counter' => method_exists($entradas, 'total') ? $entradas->total() : $entradas->count(),
 ])
