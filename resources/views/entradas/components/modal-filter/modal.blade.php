@@ -31,7 +31,7 @@ $filter_settings = (object) [
 
         {!! $filter_settings->hook !!}
 
-        <input type="hidden" name="token" value="<?= csrf_token() ?>">
+        <input type="hidden" name="filter_token" value="<?= csrf_token() ?>">
         <div class="text-end">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
             <button type="submit" class="btn btn-primary" form="formFiltersEntradas">Filtrar entradas</button>
