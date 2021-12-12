@@ -3,7 +3,7 @@
 $settings = (object) [
     'has_checkbox' => isset($checkbox) && is_bool($checkbox) ? $checkbox : true,
     'has_dropdown' => isset($dropdown) ? boolval($dropdown) : true,
-    'has_filter' => isset($dropdown['except']) && is_array($dropdown['except']) ? in_array('filter', $dropdown['except']) : true,
+    'has_filter' => isset($dropdown['except']) && is_array($dropdown['except']) ? !in_array('filter', $dropdown['except']) : true,
     'has_pagination' => isset($pagination),
 ];
 
