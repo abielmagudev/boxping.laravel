@@ -8,7 +8,7 @@ $wildcards = [
 ?>
 <label for="inputFilterEntrada" class="form-label small">Número</label>
 <div class="input-group mb-3">
-  <select name="comodin" class="form-select bg-light" style="max-width:100px">
+  <select name="comodin" class="form-select" style="max-width:100px">
     @foreach($wildcards as $wildcard => $label)
     <option value="<?= $wildcard ?>" {{ toggleSelected($wildcard, request('comodin', 'inicial')) }}><?= $label ?></option>
     @endforeach
