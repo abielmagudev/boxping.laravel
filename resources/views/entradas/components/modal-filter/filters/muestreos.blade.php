@@ -1,6 +1,6 @@
 <div class="mb-3">
     <label for="inputFilterMostrar" class="form-label small">Por página</label>
-    <input type="number" class="form-control" step="1" min="10" max="100" name="mostrar" value="<?= request('mostrar', 25) ?>" id="inputFilterMostrar" required>
+    <input type="number" class="form-control" step="1" min="1" max="100" name="mostrar" value="<?= request('mostrar', 25) ?>" id="inputFilterMostrar" required>
 </div>
 <div class="mb-3">
     <div class="form-check">
