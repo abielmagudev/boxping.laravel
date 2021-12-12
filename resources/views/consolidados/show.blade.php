@@ -33,6 +33,10 @@
                     <td class="text-muted small">Tarimas</td>
                     <td>{{ $consolidado->tarimas }}</td>
                 </tr>
+                <tr class="">
+                    <td class="text-muted small">Entradas</td>
+                    <td>{{ $consolidado->entradas->count() }}</td>
+                </tr>
                 <tr class="border-0">
                     <td class="text-muted small border-0">Notas</td>
                     <td class="border-0">{{ $consolidado->notas }}</td>
@@ -46,49 +50,44 @@
         @component('@.bootstrap.card', [
             'title' => 'Gráficas',    
         ])
-            @include('@.bootstrap.progress-bar', [
-                'color' => 'bg-primary', 
-                'text' => 'Confirmados', 
-                'label' => subtraction($entradas->count(), $entradas->whereNull('confirmado_at')->count()),
-                'value' => percentage($entradas->count(), $entradas->whereNotNull('confirmado_at')->count()), 
-            ])
+            <?php
+            $includes = [
+                'confirmado_by' => 'Confirmados', 
+                'importado_fecha' => 'Importados', 
+                'codigor_id' => 'Reempacados', 
+                'destinatario_id' => 'Destinados',
+                'contenido' => 'Contenidos',
+            ];
+            ?>
 
+            @foreach($includes as $column => $title)  
             @include('@.bootstrap.progress-bar', [
                 'color' => 'bg-primary', 
-                'text' => 'Importados', 
-                'label' => subtraction($entradas->count(), $entradas->whereNull('importado_fecha')->count()), 
-                'value' => percentage($entradas->count(), $entradas->whereNotNull('importado_fecha')->count()), 
+                'text' => $title, 
+                'label' => subtraction($consolidado->entradas->count(), $consolidado->entradas->whereNull($column)->count()),
+                'value' => percentage($consolidado->entradas->count(), $consolidado->entradas->whereNotNull($column)->count()), 
             ])
-
-            @include('@.bootstrap.progress-bar', [
-                'color' => 'bg-primary', 
-                'text' => 'Reempacados', 
-                'label' => subtraction($entradas->count(), $entradas->whereNull('codigor_id')->count()), 
-                'value' => percentage($entradas->count(), $entradas->whereNotNull('codigor_id')->count()), 
-            ])
-                
-            @include('@.bootstrap.progress-bar', [
-                'color' => 'bg-primary', 
-                'text' => 'Destinados', 
-                'label' => subtraction($entradas->count(), $entradas->whereNull('destinatario_id')->count()), 
-                'value' => percentage($entradas->count(), $entradas->whereNotNull('destinatario_id')->count()), 
-            ])
+            @endforeach
         @endcomponent
     </div>
 </div>
 <br>
 
-@include('entradas.components.index.card', [
+@component('entradas.components.index.card', [
+    'entradas' => $entradas,
     'consolidado' => $consolidado,
     'cliente' => $consolidado->cliente,
     'dropdown' => [
-        'route_create' => route('entradas.index', ['consolidado' => $consolidado->id]),
+        'routes' => [
+            'create' => route('entradas.create', ['consolidado' => $consolidado->id])
+        ],
         'except' => $consolidado->hasCerrado() ? ['create'] : [],
     ],
-    'filtering' => [
-        'route' => route('consolidados.show', $consolidado),
+    'filter' => [
+        'route' => route('consolidados.show', [$consolidado, '#lista-entradas']),
         'except' => ['ambitos', 'clientes'],
     ],
 ])
+@endcomponent
 
 @endsection

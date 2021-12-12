@@ -38,11 +38,11 @@ class Consolidado extends Model implements ModifierIdentifiable, ValueSearchable
     public static $all_status = [
         'abierto' => [
             'color' => '#FFC108',
-            'descripcion' => 'Es posible agregar entradas al consolidado',
+            'descripcion' => 'Entradas pendientes y disponible para agregar entradas.',
         ],
         'cerrado' => [
             'color' => '#6D757D',
-            'descripcion' => 'No es posible agregar entradas al consolidado',
+            'descripcion' => 'Entradas terminadas, imposible agregar entradas.',
         ],
     ];
 

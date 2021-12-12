@@ -9,14 +9,14 @@
     <div class="d-flex">
         <div class="d-flex">
             <span class="badge text-dark" style="background-color:<?= $all_status['abierto']['color'] ?>">
-                {{ $counter->abierto }}
+                {{ $all_consolidados->where('status', 'abierto')->count() }}
             </span>
             <span class="d-none d-md-inline-block badge bg-light text-dark">Abierto</span>
         </div>
         <div class="vr mx-1 mx-md-3"></div>
         <div class="d-flex">
             <span class="badge" style="background-color:<?= $all_status['cerrado']['color'] ?>">
-                {{ $counter->cerrado }}
+                {{ $all_consolidados->where('status', 'cerrado')->count() }}
             </span>
             <span class="d-none d-md-inline-block badge bg-light text-dark">Cerrado</span>
         </div>

@@ -12,12 +12,9 @@ use App\Ahex\Consolidado\Application\AfterStored;
 class ConsolidadoController extends Controller
 {
     public function index()
-    {
+    {        
         return view('consolidados/index', [
-            'counter' => (object) [
-                'abierto' => Consolidado::where('status', 'abierto')->count(),
-                'cerrado' => Consolidado::where('status', 'cerrado')->count()
-            ],
+            'all_consolidados' => Consolidado::all(),
             'consolidados' => Consolidado::with(['cliente'])
                                         ->withCount(['entradas'])
                                         ->orderBy('id', 'desc')
