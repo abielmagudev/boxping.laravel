@@ -5,7 +5,7 @@
       <label class="form-label small">{{ ucfirst($contenido) }}</label>
       @foreach($atributos as $atributo => $etiqueta)
       <?php
-         $checkbox_checked = $guia->haveContenido($contenido, $atributo) || old("contenido.{$contenido}.{$atributo}") === 'yes' ? 'checked' : '';
+         $checkbox_checked = $guia->hasContenido($contenido, $atributo) || old("contenido.{$contenido}.{$atributo}") === 'yes' ? 'checked' : '';
          $checkbox_name = "contenido[{$contenido}][{$atributo}]";
          $checkbox_id = "checkbox-{$contenido}-{$atributo}";
       ?>
