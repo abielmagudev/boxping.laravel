@@ -4,24 +4,24 @@ namespace App\Ahex\GuiaImpresion\Domain;
 
 trait Attributes
 {
-    public function getFormatsAttribute()
+    public function getFormatoAttribute()
     {
-        return json_decode($this->formato_json);
+        return json_decode($this->formato_encoded);
     }
 
-    public function getMarginsAttribute()
+    public function getMargenesAttribute()
     {
-        return json_decode($this->margenes_json);
+        return json_decode($this->margenes_encoded);
     }
 
-    public function getTypographyAttribute()
+    public function getTipografiaAttribute()
     {
-        return json_decode($this->tipografia_json);
+        return json_decode($this->tipografia_encoded);
     }
 
-    public function getContentAttribute()
+    public function getContenidoAttribute()
     {
-        return json_decode($this->contenido_json);
+        return json_decode($this->contenido_encoded);
     }
 
     public function getFontNameAttribute()

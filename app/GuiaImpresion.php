@@ -21,10 +21,10 @@ class GuiaImpresion extends Model
     
     protected $fillable = [
         'nombre',
-        'formato_json',
-        'margenes_json',
-        'tipografia_json',
-        'contenido_json',
+        'formato_encoded',
+        'margenes_encoded',
+        'tipografia_encoded',
+        'contenido_encoded',
         'intentos',
     ];
 
@@ -32,10 +32,10 @@ class GuiaImpresion extends Model
     {
         return [
             'nombre' => $validated['nombre'],
-            'formato_json' => static::prepareFormato($validated['formato']),
-            'margenes_json' => static::prepareMargenes($validated['margenes']),
-            'tipografia_json' => static::prepareTipografia($validated['tipografia']),
-            'contenido_json' => static::prepareContenido($validated['contenido']),
+            'formato_encoded' => static::prepareFormato($validated['formato']),
+            'margenes_encoded' => static::prepareMargenes($validated['margenes']),
+            'tipografia_encoded' => static::prepareTipografia($validated['tipografia']),
+            'contenido_encoded' => static::prepareContenido($validated['contenido']),
         ];
     }
 

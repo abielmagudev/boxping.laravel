@@ -16,10 +16,10 @@ class GuiaImpresionSeeder extends Seeder
     {
         return GuiaImpresion::create([
             'nombre' => 'Información completa',
-            'formato_json' => json_encode([]),
-            'margenes_json' => json_encode([]),
-            'tipografia_json' => json_encode([]),
-            'contenido_json' => json_encode([]),
+            'formato_encoded' => json_encode([]),
+            'margenes_encoded' => json_encode([]),
+            'tipografia_encoded' => json_encode([]),
+            'contenido_encoded' => json_encode([]),
         ]);
     }
 }

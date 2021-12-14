@@ -16,10 +16,10 @@ class CreateGuiasImpresionTable extends Migration
         Schema::create('guias_impresion', function (Blueprint $table) {
             $table->id();
             $table->string('nombre', 32)->unique();
-            $table->text('formato_json');
-            $table->text('margenes_json');
-            $table->text('tipografia_json');
-            $table->text('contenido_json');
+            $table->text('formato_encoded');
+            $table->text('margenes_encoded');
+            $table->text('tipografia_encoded');
+            $table->text('contenido_encoded');
             $table->unsignedInteger('intentos')->default(0);
             $table->timestamps();
         });
