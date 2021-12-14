@@ -4,3 +4,4 @@
 @include('guias_impresion._save.margenes')
 @include('guias_impresion._save.tipografia')
 @include('guias_impresion._save.contenido')
+@include('guias_impresion._save.notas')
