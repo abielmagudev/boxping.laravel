@@ -21,7 +21,7 @@
         @include('entradas.show.modal-comentarios.trigger')
 
         <!-- Imprimir -->
-        <div class="dropdown d-inline-block">
+        <div class="dropdown d-inline-block ms-1">
             <button class="btn btn-sm btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuPrintEntrada" data-bs-toggle="dropdown" aria-expanded="false">
                 {!! $graffiti->design('printer-fill')->svg() !!}
             </button>
