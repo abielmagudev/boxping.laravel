@@ -22,7 +22,7 @@ class GuiaImpresionController extends Controller
     {
         return view('guias_impresion.create', [
             'pagina' => GuiaImpresion::allPageSettings(),
-            'contenidos' => GuiaImpresion::getModelsContent(),
+            'contenidos' => GuiaImpresion::allContenidos(),
             'guia' => new GuiaImpresion,
         ]);
     }
@@ -41,7 +41,7 @@ class GuiaImpresionController extends Controller
     {
         return view('guias_impresion.edit', [
             'pagina' => GuiaImpresion::allPageSettings(),
-            'contenidos' => GuiaImpresion::getModelsContent(),
+            'contenidos' => GuiaImpresion::allContenidos(),
             'guia' => $guia,
         ]);
     }

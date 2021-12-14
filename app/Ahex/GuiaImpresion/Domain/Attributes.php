@@ -52,7 +52,7 @@ trait Attributes
         return "{$top} {$right} {$bottom} {$left}";
     }
 
-    public static function getModelsContent()
+    public static function allContenidos()
     {
         return [
             'entrada' => \App\Entrada::attributesToPrint(),
