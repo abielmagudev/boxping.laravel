@@ -3,25 +3,25 @@
    <div class="col-sm">
       <?php $margenes_arriba = $guia->margenes->arriba ?? null ?>
       <label class="form-label small" for="input-margen-arriba">Arriba</label>
-      <input type="number" min="0.0" step="0.1" id="input-margen-arriba" class="form-control {{ bootstrap_isInputInvalid('margenes.arriba', $errors) }}" name="margenes[arriba]" value="{{ old('margenes.arriba', $margenes_arriba) }}">
+      <input type="number" min="0.0" step="0.1" id="input-margen-arriba" class="form-control {{ bootstrap_isInputInvalid('margenes.arriba', $errors) }}" name="margenes[arriba]" value="{{ old('margenes.arriba', $margenes_arriba) }}" placeholder="Auto">
       @include('@.bootstrap.invalid-input-message', ['name' => 'margenes.arriba'])
    </div>
    <div class="col-sm">
       <?php $margenes_derecha = $guia->margenes->derecha ?? null ?>
       <label class="form-label small" for="input-margen-derecha">Derecha</label>
-      <input type="number" min="0.0" step="0.1" id="input-margen-derecha" class="form-control {{ bootstrap_isInputInvalid('margenes.derecha', $errors) }}" name="margenes[derecha]" value="{{ old('margenes.derecha', $margenes_derecha) }}">
+      <input type="number" min="0.0" step="0.1" id="input-margen-derecha" class="form-control {{ bootstrap_isInputInvalid('margenes.derecha', $errors) }}" name="margenes[derecha]" value="{{ old('margenes.derecha', $margenes_derecha) }}" placeholder="Auto">
       @include('@.bootstrap.invalid-input-message', ['name' => 'margenes.derecha'])
    </div>
    <div class="col-sm">
       <?php $margenes_abajo = $guia->margenes->abajo ?? null ?>
       <label class="form-label small" for="input-margen-abajo">Abajo</label>
-      <input type="number" min="0.0" step="0.1" id="input-margen-abajo" class="form-control {{ bootstrap_isInputInvalid('margenes.abajo', $errors) }}" name="margenes[abajo]" value="{{ old('margenes.abajo', $margenes_abajo) }}">
+      <input type="number" min="0.0" step="0.1" id="input-margen-abajo" class="form-control {{ bootstrap_isInputInvalid('margenes.abajo', $errors) }}" name="margenes[abajo]" value="{{ old('margenes.abajo', $margenes_abajo) }}" placeholder="Auto">
       @include('@.bootstrap.invalid-input-message', ['name' => 'margenes.abajo'])
    </div>
    <div class="col-sm">
       <?php $margenes_izquierda = $guia->margenes->izquierda ?? null ?>
       <label class="form-label small" for="input-margen-izquierda">Izquierda</label>
-      <input type="number" min="0.0" step="0.1" id="input-margen-izquierda" class="form-control {{ bootstrap_isInputInvalid('margenes.izquierda', $errors) }}" name="margenes[izquierda]" value="{{ old('margenes.izquierda', $margenes_izquierda) }}">
+      <input type="number" min="0.0" step="0.1" id="input-margen-izquierda" class="form-control {{ bootstrap_isInputInvalid('margenes.izquierda', $errors) }}" name="margenes[izquierda]" value="{{ old('margenes.izquierda', $margenes_izquierda) }}" placeholder="Auto">
       @include('@.bootstrap.invalid-input-message', ['name' => 'margenes.izquierda'])
    </div>
    <div class="col-sm col-sm-4">
