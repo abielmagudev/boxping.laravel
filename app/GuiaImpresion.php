@@ -79,4 +79,15 @@ class GuiaImpresion extends Model
     {
         return json_encode($contenido);
     }
+
+    public static function allPageSettings()
+    {
+        return (object) [
+            'mediciones' => self::allPageMeasurements(),
+            'tipografia' => (object) [
+                'fuentes' => self::allFontNames(),
+                'mediciones' => self::allFontMeasurements(),
+            ],
+        ];
+    }
 }

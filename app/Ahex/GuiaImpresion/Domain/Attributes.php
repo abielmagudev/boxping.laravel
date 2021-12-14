@@ -51,26 +51,4 @@ trait Attributes
         
         return "{$top} {$right} {$bottom} {$left}";
     }
-
-    public static function allContenidos()
-    {
-        return [
-            'entrada' => \App\Entrada::attributesToPrint(),
-            'remitente' => \App\Remitente::attributesToPrint(),
-            'destinatario' => \App\Destinatario::attributesToPrint(),
-            'salida' => \App\Salida::attributesToPrint(),
-            'etapas' => \App\Etapa::attributesToPrint(),
-        ];
-    }
-
-    public static function allPageSettings()
-    {
-        return (object) [
-            'mediciones' => self::allPageMeasurements(),
-            'tipografia' => (object) [
-                'fuentes' => self::allFontNames(),
-                'mediciones' => self::allFontMeasurements(),
-            ],
-        ];
-    }
 }
