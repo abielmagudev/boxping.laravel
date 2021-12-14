@@ -26,6 +26,7 @@ class GuiaImpresionSaveRequest extends FormRequest
             'margenes' => ['required','array'],
             'tipografia' => ['required','array'],
             'contenido' => ['required','array'],
+            'notas' => 'nullable',
         ];
     }
 

@@ -14,4 +14,9 @@ trait Validations
 
         return isset($this->contenido);
     }
+
+    public function hasNotas()
+    {
+        return isset($this->notas);
+    }
 }

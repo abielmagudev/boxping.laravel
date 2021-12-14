@@ -25,6 +25,7 @@ class GuiaImpresion extends Model
         'margenes_encoded',
         'tipografia_encoded',
         'contenido_encoded',
+        'notas',
         'intentos',
     ];
 
@@ -36,6 +37,7 @@ class GuiaImpresion extends Model
             'margenes_encoded' => static::prepareMargenes($validated['margenes']),
             'tipografia_encoded' => static::prepareTipografia($validated['tipografia']),
             'contenido_encoded' => static::prepareContenido($validated['contenido']),
+            'notas' => $validated['notas'] ?? null,
         ];
     }
 

@@ -20,6 +20,7 @@ class CreateGuiasImpresionTable extends Migration
             $table->text('margenes_encoded');
             $table->text('tipografia_encoded');
             $table->text('contenido_encoded');
+            $table->text('notas')->nullable();
             $table->unsignedInteger('intentos')->default(0);
             $table->timestamps();
         });
