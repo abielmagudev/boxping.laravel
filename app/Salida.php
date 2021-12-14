@@ -14,9 +14,9 @@ use App\Ahex\Zowner\Domain\Contracts\ModifierIdentifiable;
 use App\Ahex\Zowner\Domain\Features\HasModifiers;
 
 use App\Ahex\Zkeleton\Domain\UpdateDescriptionCallableTrait as UpdateDescriptionCallable;
-use App\Ahex\GuiaImpresion\Application\ModelAttributesPrintableInterface as ModelAttributesPrintable;
+use App\Ahex\GuiaImpresion\Infrastructure\PrintableContentContract as PrintableContent;
 
-class Salida extends Model implements ModifierIdentifiable, ModelAttributesPrintable
+class Salida extends Model implements ModifierIdentifiable, PrintableContent
 {
     use Attributes, 
         Relationships, 
@@ -99,7 +99,7 @@ class Salida extends Model implements ModifierIdentifiable, ModelAttributesPrint
         return $prepared;
     }
 
-    public static function attributesToPrint(): array
+    public static function contentForPrintingGuide(): array
     {
         return [
             'rastreo' => 'Rastreo',

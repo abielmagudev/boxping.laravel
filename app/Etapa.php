@@ -8,9 +8,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Ahex\Zowner\Domain\Contracts\ModifierIdentifiable;
 use App\Ahex\Zowner\Domain\Features\HasModifiers;
-use App\Ahex\GuiaImpresion\Application\ModelAttributesPrintableInterface as ModelAttributesPrintable;
 
-class Etapa extends Model implements ModifierIdentifiable, ModelAttributesPrintable
+use App\Ahex\GuiaImpresion\Infrastructure\PrintableContentContract as PrintableContent;
+
+class Etapa extends Model implements ModifierIdentifiable, PrintableContent
 {
     use HasFactory,
         SoftDeletes, 
@@ -266,7 +267,7 @@ class Etapa extends Model implements ModifierIdentifiable, ModelAttributesPrinta
         return $prepared;
     }
 
-    public static function attributesToPrint(): array
+    public static function contentForPrintingGuide(): array
     {
         if( ! $all = self::all()->toArray() )
             return [];

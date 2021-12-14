@@ -8,9 +8,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Ahex\Zowner\Domain\Contracts\ValueSearchable;
 use App\Ahex\Zowner\Domain\Contracts\ModifierIdentifiable;
 use App\Ahex\Zowner\Domain\Features\HasModifiers;
-use App\Ahex\GuiaImpresion\Application\ModelAttributesPrintableInterface as ModelAttributesPrintable;
 
-class Destinatario extends Model implements ModifierIdentifiable, ValueSearchable, ModelAttributesPrintable
+use App\Ahex\GuiaImpresion\Infrastructure\PrintableContentContract as PrintableContent;
+
+class Destinatario extends Model implements ModifierIdentifiable, ValueSearchable, PrintableContent
 {
     use HasFactory,
         SoftDeletes, 
@@ -70,7 +71,7 @@ class Destinatario extends Model implements ModifierIdentifiable, ValueSearchabl
 
     /** Validations */
 
-    public function haveRelationEntrada($entrada_id)
+    public function hasRelationEntrada($entrada_id)
     {
         return Entrada::where('destinatario_id', $this->id)
                       ->where('id', $entrada_id)
@@ -111,7 +112,7 @@ class Destinatario extends Model implements ModifierIdentifiable, ValueSearchabl
         return $prepared;
     }
 
-    public static function attributesToPrint(): array
+    public static function contentForPrintingGuide(): array
     {
         return [
             'nombre' => 'Nombre',

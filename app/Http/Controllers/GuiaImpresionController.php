@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\GuiaImpresion;
 use Illuminate\Http\Request;
+use App\GuiaImpresion;
 use App\Http\Requests\GuiaImpresionSaveRequest as SaveRequest;
+use App\Ahex\GuiaImpresion\Infrastructure\PrintableContentContainer;
 
 class GuiaImpresionController extends Controller
 {
@@ -22,7 +23,7 @@ class GuiaImpresionController extends Controller
     {
         return view('guias_impresion.create', [
             'pagina' => GuiaImpresion::allPageSettings(),
-            'contenidos' => GuiaImpresion::allContenidos(),
+            'contenidos' => PrintableContentContainer::all(),
             'guia' => new GuiaImpresion,
         ]);
     }
@@ -41,7 +42,7 @@ class GuiaImpresionController extends Controller
     {
         return view('guias_impresion.edit', [
             'pagina' => GuiaImpresion::allPageSettings(),
-            'contenidos' => GuiaImpresion::allContenidos(),
+            'contenidos' => PrintableContentContainer::all(),
             'guia' => $guia,
         ]);
     }

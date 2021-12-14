@@ -8,9 +8,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Ahex\Zowner\Domain\Contracts\ValueSearchable;
 use App\Ahex\Zowner\Domain\Contracts\ModifierIdentifiable;
 use App\Ahex\Zowner\Domain\Features\HasModifiers;
-use App\Ahex\GuiaImpresion\Application\ModelAttributesPrintableInterface as ModelAttributesPrintable;
 
-Class Remitente extends Model implements ValueSearchable, ModifierIdentifiable, ModelAttributesPrintable
+use App\Ahex\GuiaImpresion\Infrastructure\PrintableContentContract as PrintableContent;
+
+Class Remitente extends Model implements ValueSearchable, ModifierIdentifiable, PrintableContent
 {
     use HasFactory, 
         SoftDeletes, 
@@ -77,7 +78,7 @@ Class Remitente extends Model implements ValueSearchable, ModifierIdentifiable, 
         return $prepared;
     }
 
-    public static function attributesToPrint(): array
+    public static function contentForPrintingGuide(): array
     {
         return [
             'nombre' => 'Nombre',
