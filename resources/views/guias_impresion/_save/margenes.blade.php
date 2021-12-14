@@ -28,7 +28,7 @@
       <?php $margenes_medicion = $guia->margenes->medicion ?? null ?>
       <label class="form-label small" for="select-margen-medicion">Medición</label>
       <select id="select-margen-medicion" class="form-select {{ bootstrap_isInputInvalid('margenes.medicion', $errors) }}" name="margenes[medicion]">
-         @foreach ($mediciones['longitud'] as $value => $tag)
+         @foreach ($pagina->mediciones as $value => $tag)
          <option value="{{ $value }}" {{ toggleSelected($value, old('margenes.medicion', $margenes_medicion)) }}>{{ ucfirst($tag) }}</option>
          @endforeach
       </select>

@@ -4,30 +4,41 @@ namespace App\Ahex\GuiaImpresion\Domain;
 
 trait Attributes
 {
-    public function getFormatoAttribute()
+    public function getFormatsAttribute()
     {
         return json_decode($this->formato_json);
     }
 
-    public function getMargenesAttribute()
+    public function getMarginsAttribute()
     {
         return json_decode($this->margenes_json);
     }
 
-    public function getTipografiaAttribute()
+    public function getTypographyAttribute()
     {
         return json_decode($this->tipografia_json);
     }
 
-    public function getContenidoAttribute()
+    public function getContentAttribute()
     {
         return json_decode($this->contenido_json);
+    }
+
+    public function getFontNameAttribute()
+    {
+        return ucwords( $this->tipografia->fuente );
+    }
+
+    public function getFontSizeAttribute()
+    {
+        return $this->tipografia->tamano . $this->tipografia->medicion;
     }
 
     public function getPageSizeAttribute()
     {
         $width  = $this->formato->ancho . $this->formato->medicion;
         $height = $this->formato->altura . $this->formato->medicion;
+        
         return  "{$width} {$height}";
     }
 
@@ -37,16 +48,18 @@ trait Attributes
         $right  = ! is_null($this->margenes->derecha)   ? $this->margenes->derecha . $this->margenes->medicion : 'auto';
         $bottom = ! is_null($this->margenes->abajo)     ? $this->margenes->abajo . $this->margenes->medicion : 'auto';
         $left   = ! is_null($this->margenes->izquierda) ? $this->margenes->izquierda . $this->margenes->medicion : 'auto';
+        
         return "{$top} {$right} {$bottom} {$left}";
     }
 
-    public function getFontAttribute()
+    public static function getModelsContent()
     {
-        return ucwords( $this->tipografia->fuente );
-    }
-
-    public function getFontSizeAttribute()
-    {
-        return $this->tipografia->tamano . $this->tipografia->medicion;
+        return [
+            'entrada' => \App\Entrada::attributesToPrint(),
+            'remitente' => \App\Remitente::attributesToPrint(),
+            'destinatario' => \App\Destinatario::attributesToPrint(),
+            'salida' => \App\Salida::attributesToPrint(),
+            'etapas' => \App\Etapa::attributesToPrint(),
+        ];
     }
 }

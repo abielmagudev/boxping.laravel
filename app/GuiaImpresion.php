@@ -3,14 +3,18 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Ahex\GuiaImpresion\Domain\Attributes;
-use App\Ahex\GuiaImpresion\Domain\Validations;
 use App\Ahex\GuiaImpresion\Domain\Actions;
+use App\Ahex\GuiaImpresion\Domain\Attributes;
+use App\Ahex\GuiaImpresion\Domain\PageMeasurement;
+use App\Ahex\GuiaImpresion\Domain\PageTypography;
+use App\Ahex\GuiaImpresion\Domain\Validations;
 
 class GuiaImpresion extends Model
 {   
-    use Attributes,
-        Actions,
+    use Actions,
+        Attributes,
+        PageMeasurement,
+        PageTypography,
         Validations;
 
     protected $table = 'guias_impresion';
@@ -37,37 +41,35 @@ class GuiaImpresion extends Model
 
     private static function prepareFormato($formato)
     {
-        $longitud = config('system.mediciones.longitud');
-
         return json_encode([
             'ancho' => $formato['ancho'] ?? null,
             'altura' => $formato['altura'] ?? null,
-            'medicion' => array_key_exists($formato['medicion'], $longitud) ? $formato['medicion'] : array_key_first($longitud),
+            'medicion' => ! self::existsPageMeasurement($formato['medicion']) 
+                          ? self::defaultPageMeasurement()
+                          : $formato['medicion'],
         ]);
     }
 
     private static function prepareMargenes($margenes)
     {
-        $longitud = config('system.mediciones.longitud');
-
         return json_encode([
             'arriba' => $margenes['arriba'] ?? null,
             'derecha' => $margenes['derecha'] ?? null,
             'abajo' => $margenes['abajo'] ?? null,
             'izquierda' => $margenes['izquierda'] ?? null,
-            'medicion' => array_key_exists($margenes['medicion'], $longitud) ? $margenes['medicion'] : array_key_first($longitud),
-        ]);
+            'medicion' => ! self::existsPageMeasurement($margenes['medicion'])
+                          ? self::defaultPageMeasurement()
+                          : $margenes['medicion'],
+            ]);
     }
 
     private static function prepareTipografia($tipografia)
     {
-        $config = config('system.tipografias');
-
         return json_encode([
-            'fuente' => array_key_exists($tipografia['fuente'], $config['fuentes']) ? $tipografia['fuente'] : array_key_first($config['fuentes']),
-            'tamano' => (float) $tipografia['tamano'] ?? 12,
-            'medicion' => array_key_exists($tipografia['medicion'], $config['mediciones']) ? $tipografia['medicion'] : array_key_first($config['mediciones']),
             'interlineado' => 0.5,
+            'fuente' => ! self::existsFontName($tipografia['fuente']) ? self::defaultFontName() : $tipografia['fuente'],
+            'medicion' => ! self::existsFontMeasurement($tipografia['medicion']) ? self::defaultFontMeasurement() : $tipografia['medicion'],
+            'tamano' => (float) $tipografia['tamano'] ?? 12,
         ]);
     }
 

@@ -16,7 +16,7 @@
       <?php $formato_medicion = $guia->formato->medicion ?? null ?>
       <label class="form-label small" for="select-formato-medicion">Medición</label>
       <select id="select-formato-medicion" class="form-select {{ bootstrap_isInputInvalid('formato.medicion', $errors) }}" name="formato[medicion]">
-         @foreach($mediciones['longitud'] as $value => $tag)
+         @foreach($pagina->mediciones as $value => $tag)
          <option value="{{ $value }}" {{ toggleSelected($value, old('formato.medicion', $formato_medicion)) }}>{{ ucfirst($tag) }}</option>
          @endforeach
       </select>
