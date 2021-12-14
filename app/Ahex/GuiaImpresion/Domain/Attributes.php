@@ -62,4 +62,15 @@ trait Attributes
             'etapas' => \App\Etapa::attributesToPrint(),
         ];
     }
+
+    public static function allPageSettings()
+    {
+        return (object) [
+            'mediciones' => self::allPageMeasurements(),
+            'tipografia' => (object) [
+                'fuentes' => self::allFontNames(),
+                'mediciones' => self::allFontMeasurements(),
+            ],
+        ];
+    }
 }

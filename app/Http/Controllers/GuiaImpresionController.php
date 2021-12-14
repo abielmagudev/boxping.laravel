@@ -21,13 +21,7 @@ class GuiaImpresionController extends Controller
     public function create()
     {
         return view('guias_impresion.create', [
-            'pagina' => (object) [
-                'mediciones' => GuiaImpresion::allPageMeasurements(),
-                'tipografia' => (object) [
-                    'fuentes' => GuiaImpresion::allFontNames(),
-                    'mediciones' => GuiaImpresion::allFontMeasurements(),
-                ],
-            ],
+            'pagina' => GuiaImpresion::allPageSettings(),
             'contenidos' => GuiaImpresion::getModelsContent(),
             'guia' => new GuiaImpresion,
         ]);
@@ -46,13 +40,7 @@ class GuiaImpresionController extends Controller
     public function edit(GuiaImpresion $guia)
     {
         return view('guias_impresion.edit', [
-            'pagina' => (object) [
-                'mediciones' => GuiaImpresion::allPageMeasurements(),
-                'tipografia' => (object) [
-                    'fuentes' => GuiaImpresion::allFontNames(),
-                    'mediciones' => GuiaImpresion::allFontMeasurements(),
-                ],
-            ],
+            'pagina' => GuiaImpresion::allPageSettings(),
             'contenidos' => GuiaImpresion::getModelsContent(),
             'guia' => $guia,
         ]);
