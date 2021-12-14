@@ -24,17 +24,17 @@ trait Attributes
         return json_decode($this->contenido_encoded);
     }
 
-    public function getFontNameAttribute()
+    public function getNombreFuenteAttribute()
     {
         return ucwords( $this->tipografia->fuente );
     }
 
-    public function getFontSizeAttribute()
+    public function getMedidasFuenteAttribute()
     {
         return $this->tipografia->tamano . $this->tipografia->medicion;
     }
 
-    public function getPageSizeAttribute()
+    public function getMedidasPaginaAttribute()
     {
         $width  = $this->formato->ancho . $this->formato->medicion;
         $height = $this->formato->altura . $this->formato->medicion;
@@ -42,7 +42,7 @@ trait Attributes
         return  "{$width} {$height}";
     }
 
-    public function getPageMarginsAttribute()
+    public function getMargenesPaginaAttribute()
     {
         $top    = ! is_null($this->margenes->arriba)    ? $this->margenes->arriba . $this->margenes->medicion : 'auto';
         $right  = ! is_null($this->margenes->derecha)   ? $this->margenes->derecha . $this->margenes->medicion : 'auto';
