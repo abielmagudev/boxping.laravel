@@ -4,7 +4,7 @@ namespace App\Ahex\GuiaImpresion\Domain;
 
 trait Actions
 {
-    public function incrementarIntentos()
+    public function intentarImprimir()
     {
         $this->intentos++;
         return $this;
