@@ -16,6 +16,7 @@ class GuiaImpresionSeeder extends Seeder
     {
         return GuiaImpresion::create([
             'nombre' => 'Información completa',
+            'descripcion' => 'Imprime todo la información de la entrada.',
             'formato_encoded' => json_encode([]),
             'margenes_encoded' => json_encode([]),
             'tipografia_encoded' => json_encode([]),

@@ -21,23 +21,27 @@ class GuiaImpresion extends Model
     
     protected $fillable = [
         'nombre',
+        'descripcion',
         'formato_encoded',
         'margenes_encoded',
         'tipografia_encoded',
         'contenido_encoded',
-        'notas',
+        'texto_final',
         'intentos',
+        'desactivada',
     ];
 
     public static function prepare($validated)
     {
         return [
             'nombre' => $validated['nombre'],
+            'descripcion' => $validated['descripcion'] ?? null,
             'formato_encoded' => static::prepareFormato($validated['formato']),
             'margenes_encoded' => static::prepareMargenes($validated['margenes']),
             'tipografia_encoded' => static::prepareTipografia($validated['tipografia']),
             'contenido_encoded' => static::prepareContenido($validated['contenido']),
-            'notas' => $validated['notas'] ?? null,
+            'texto_final' => $validated['texto_final'] ?? null,
+            'desactivada' => isset($validated['desactivar']) ? 1 : 0,
         ];
     }
 

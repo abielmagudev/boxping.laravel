@@ -15,13 +15,15 @@ class CreateGuiasImpresionTable extends Migration
     {
         Schema::create('guias_impresion', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre', 32)->unique();
+            $table->string('nombre', 40)->unique();
+            $table->text('descripcion')->nullable();
             $table->text('formato_encoded');
             $table->text('margenes_encoded');
             $table->text('tipografia_encoded');
             $table->text('contenido_encoded');
-            $table->text('notas')->nullable();
+            $table->text('texto_final')->nullable();
             $table->unsignedInteger('intentos')->default(0);
+            $table->boolean('desactivada')->default(0);
             $table->timestamps();
         });
     }

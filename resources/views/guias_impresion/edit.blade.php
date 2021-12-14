@@ -7,7 +7,6 @@
     <form action="{{ route('guias_impresion.update', $guia) }}" method="post" autocomplete="off">
         @method('put')
         @include('guias_impresion._save')
-        <br>
         @component('@.bootstrap.grid-left-right')
             @slot('left')
             <button class="btn btn-warning" type="submit">Actualizar <span class="d-none d-md-inline-block">guía de impresión</span></button>

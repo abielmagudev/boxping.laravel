@@ -5,7 +5,7 @@
    <div class="col-sm">
       <label class="form-label fw-bold small">{{ ucfirst($name) }}</label>
       <div class="input-group input-group-sm mb-3">
-         <span class="input-group-text text-secondary small" id="input-orden">ORDEN</span>
+         <span class="input-group-text text-secondary small" id="input-orden">Orden</span>
          <input type="number" class="form-control" step="1" min="1" max="100" name="contenido[<?= $name ?>][orden]" value="<?= $guia->hasContenido($name, 'orden') ? old("contenido.{$name}.orden", $guia->getContenidoOrden($name)) : $loop->iteration ?>" id="input-orden">
       </div>
       @foreach($content as $attr => $label)

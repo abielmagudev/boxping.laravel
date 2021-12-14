@@ -22,11 +22,13 @@ class GuiaImpresionSaveRequest extends FormRequest
     {
         return [
             'nombre' => ['required','unique:guias_impresion,nombre,' . $this->except_guia_id],
+            'descripcion' => ['nullable', 'string'],
             'formato' => ['required','array'],
             'margenes' => ['required','array'],
             'tipografia' => ['required','array'],
             'contenido' => ['required','array'],
-            'notas' => 'nullable',
+            'texto_final' => ['nullable', 'string'],
+            'desactivar' => ['boolean'],
         ];
     }
 
