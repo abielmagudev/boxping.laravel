@@ -2,18 +2,15 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
 use App\Ahex\Salida\Domain\Attributes;
 use App\Ahex\Salida\Domain\Relationships;
 use App\Ahex\Salida\Domain\Scopes;
-use App\Ahex\Salida\Domain\Validations;
-
 use App\Ahex\Salida\Domain\UpdatesDescriptionsTrait as UpdatesDescriptions;
-
+use App\Ahex\Salida\Domain\Validations;
 use App\Ahex\Zowner\Domain\Contracts\ModifierIdentifiable;
 use App\Ahex\Zowner\Domain\Features\HasModifiers;
-
-use App\Ahex\Zkeleton\Domain\UpdateDescriptionCallableTrait as UpdateDescriptionCallable;
+use App\Ahex\Zowner\Domain\Features\UpdateDescriptionHandler;
+use Illuminate\Database\Eloquent\Model;
 use App\Ahex\GuiaImpresion\Infrastructure\PrintableContentContract as PrintableContent;
 
 class Salida extends Model implements ModifierIdentifiable, PrintableContent
@@ -23,7 +20,7 @@ class Salida extends Model implements ModifierIdentifiable, PrintableContent
         Scopes, 
         Validations,
         HasModifiers,
-        UpdateDescriptionCallable, 
+        UpdateDescriptionHandler, 
         UpdatesDescriptions;
     
     protected $fillable = [

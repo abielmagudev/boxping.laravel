@@ -2,23 +2,20 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Ahex\Entrada\Domain\Attributes;
+use App\Ahex\Entrada\Domain\FiltersByRequest;
+use App\Ahex\Entrada\Domain\Relationships;
+use App\Ahex\Entrada\Domain\Scopes;
 use App\Ahex\Entrada\Domain\Topics\Confirmado as ConfirmadoTopic;
 use App\Ahex\Entrada\Domain\Topics\Importado as ImportadoTopic;
 use App\Ahex\Entrada\Domain\Topics\Reempacado as ReempacadTopic;
-use App\Ahex\Entrada\Domain\Attributes;
-use App\Ahex\Entrada\Domain\Relationships;
-use App\Ahex\Entrada\Domain\Validations;
-use App\Ahex\Entrada\Domain\Scopes;
-use App\Ahex\Entrada\Domain\FiltersByRequest;
-
 use App\Ahex\Entrada\Domain\UpdatesDescriptionsTrait as UpdatesDescriptions;
-use App\Ahex\Zkeleton\Domain\UpdateDescriptionCallableTrait as UpdateDescriptionCallable;
-
+use App\Ahex\Entrada\Domain\Validations;
 use App\Ahex\Zowner\Domain\Contracts\ModifierIdentifiable;
 use App\Ahex\Zowner\Domain\Features\HasModifiers;
-
+use App\Ahex\Zowner\Domain\Features\UpdateDescriptionHandler;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use App\Ahex\GuiaImpresion\Infrastructure\PrintableContentContract as PrintableContent;
 
 class Entrada extends Model implements ModifierIdentifiable, PrintableContent
@@ -34,7 +31,7 @@ class Entrada extends Model implements ModifierIdentifiable, PrintableContent
         FiltersByRequest,
         HasModifiers,
         UpdatesDescriptions,
-        UpdateDescriptionCallable;
+        UpdateDescriptionHandler;
     
     const SIN_CONSOLIDADO = null;
 

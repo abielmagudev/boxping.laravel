@@ -1,11 +1,14 @@
 <?php
 
-namespace App\Ahex\Zkeleton\Domain;
+namespace App\Ahex\Zowner\Domain\Features;
 
-trait UpdateDescriptionCallableTrait {
+use App\User;
+
+trait UpdateDescriptionHandler
+{
     public function hasUpdateDescription($updated)
     {
-        return (bool) array_key_exists($updated, $this->descriptions);
+        return array_key_exists($updated, $this->descriptions);
     }
 
     public function getUpdateDescription($updated)
