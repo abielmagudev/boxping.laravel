@@ -19,11 +19,6 @@ trait Attributes
         return json_decode($this->tipografia_encoded);
     }
 
-    public function getContenidoAttribute()
-    {
-        return json_decode($this->contenido_encoded);
-    }
-
     public function getNombreFuenteAttribute()
     {
         return ucwords( $this->tipografia->fuente );
@@ -50,5 +45,15 @@ trait Attributes
         $left   = ! is_null($this->margenes->izquierda) ? $this->margenes->izquierda . $this->margenes->medicion : 'auto';
         
         return "{$top} {$right} {$bottom} {$left}";
+    }
+
+    public function getContenidoAttribute()
+    {
+        return json_decode($this->contenido_encoded);
+    }
+
+    public function getContenidoOrden($type)
+    {
+        return $this->contenido->{$type}->orden;
     }
 }
