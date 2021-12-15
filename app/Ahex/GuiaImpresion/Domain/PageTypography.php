@@ -47,9 +47,14 @@ trait PageTypography
         return self::getTypography('fuentes');
     }
 
-    public static function allFontMeasurements(string $glue = null)
+    public static function allFontMeasurements()
     {
         return self::getTypography('mediciones');
+    }
+
+    public static function allLineHeights()
+    {
+        return self::getTypography('interlineados') ?? range(0.5, 2.5, 0.5);
     }
 
     public static function listFontNames(string $glue = ',')
@@ -72,5 +77,16 @@ trait PageTypography
     public static function defaultFontMeasurement()
     {
         return array_key_first( self::allFontsMeasurements() );
+    }
+
+    public static function defaultFontSize()
+    {
+        return 16;
+    }
+
+    public static function defaultLineHeight()
+    {
+        $lineheights = self::allLineHeights();
+        return array_shift( $lineheights );
     }
 }
