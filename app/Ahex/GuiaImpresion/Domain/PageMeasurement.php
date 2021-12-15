@@ -14,10 +14,15 @@ trait PageMeasurement
         return self::$cache_page_measurements;
     }
 
-    public static function allPageMeasurements(string $glue = null)
+    public static function allPageMeasurements()
     {
-        $measurements = self::cachePageMeasurements();
-        return is_null($glue) ? $measurements : implode($glue, array_keys($measurements));
+        return self::cachePageMeasurements();
+    }
+
+    public static function listPageMeasurements(string $glue = ',')
+    {
+        $all_page_measurements = self::cachePageMeasurements();
+        return implode($glue, array_keys($all_page_measurements));
     }
 
     public static function existsPageMeasurement(string $key)
