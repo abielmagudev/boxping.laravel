@@ -72,10 +72,10 @@ class GuiaImpresion extends Model
     private static function prepareTipografia($tipografia)
     {
         return json_encode([
-            'interlineado' => 0.5,
             'fuente' => ! self::existsFontName($tipografia['fuente']) ? self::defaultFontName() : $tipografia['fuente'],
             'medicion' => ! self::existsFontMeasurement($tipografia['medicion']) ? self::defaultFontMeasurement() : $tipografia['medicion'],
-            'tamano' => (float) $tipografia['tamano'] ?? 12,
+            'tamano' => (float) $tipografia['tamano'] ?? self::defaultFontSize(),
+            'interlineado' => self::defaultLineHeight(),
         ]);
     }
 
