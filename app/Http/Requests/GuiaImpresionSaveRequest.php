@@ -3,10 +3,14 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\GuiaImpresion;
 
 class GuiaImpresionSaveRequest extends FormRequest
 {
-    private $except_guia_id;
+    private $guia_impresion_actual;
+    private $mediciones_pagina;
+    private $mediciones_fuente;
+    private $nombres_fuentes;
 
     public function authorize()
     {
@@ -15,19 +19,44 @@ class GuiaImpresionSaveRequest extends FormRequest
 
     public function prepareForValidation()
     {
-        $this->except_guia_id = $this->guia->id ?? 0;
+        $this->guia_impresion_actual = $this->guia->id ?? 0;
+        $this->mediciones_pagina = GuiaImpresion::listPageMeasurements();
+        $this->mediciones_fuente = GuiaImpresion::listFontMeasurements();
+        $this->nombres_fuentes = GuiaImpresion::listFontNames();
     }
 
     public function rules()
     {
         return [
-            'nombre' => ['required','unique:guias_impresion,nombre,' . $this->except_guia_id],
-            'descripcion' => ['nullable', 'string'],
-            'formato' => ['required','array'],
-            'margenes' => ['required','array'],
-            'tipografia' => ['required','array'],
+            // Guia
+            'nombre' => ['required',"unique:guias_impresion,nombre,{$this->guia_impresion_actual}"],
+            'descripcion' => ['nullable','string'],
+
+            // Formato
+            'formato' => ['required','array:ancho,altura,medicion'],
+            'formato.ancho' => 'numeric',
+            'formato.altura' => 'numeric',
+            'formato.medicion' => "in:{$this->mediciones_pagina}",
+
+            // Márgenes
+            'margenes' => ['array:arriba,derecha,abajo,izquierda,medicion'],
+            'margenes.arriba' => ['nullable','numeric'],
+            'margenes.derecha' => ['nullable','numeric'],
+            'margenes.abajo' => ['nullable','numeric'],
+            'margenes.izquierda' => ['nullable','numeric'],
+            'margenes.medicion' => "in:{$this->mediciones_pagina}",
+
+            // Tipografía
+            'tipografia' => ['required','array:fuente,tamano,medicion'],
+            'tipografia.fuente' => "in:{$this->nombres_fuentes}",
+            'tipografia.tamano' => 'numeric',
+            'tipografia.medicion' => "in:{$this->mediciones_fuente}",
+
+            // Contenido
             'contenido' => ['required','array'],
-            'texto_final' => ['nullable', 'string'],
+
+            // Extra
+            'texto_final' => ['nullable','string'],
             'desactivar' => ['boolean'],
         ];
     }
@@ -35,16 +64,35 @@ class GuiaImpresionSaveRequest extends FormRequest
     public function messages()
     {
         return [
-            'nombre.required' => 'Escribe el nombre de la guía de impresión',
-            'nombre.unique' => 'Escribe un nombre diferente a la guía de impresión',
-            'formato.required' => 'Configura el formato de la guía de impresión',
-            'formato.array' => 'Configura un formato válido de la guía de impresión',
-            'margenes.required' => 'Configura los márgenes de la guía de impresión',
-            'margenes.array' => 'Configura unos márgenes válidos de la guía de impresión',
-            'tipografia.required' => 'Configura la tipografía de la guía de impresión',
-            'tipografia.array' => 'Configura una tipografía válida de la guía de impresión',
-            'contenido.required' => 'Selecciona el contenido de la guía de impresión',
-            'contenido.array' => 'Selecciona un contenido válido de la guía de impresión',
+            // Guía
+            'nombre.required' => __('Escribe el nombre de la guía de impresión'),
+            'nombre.unique' => __('Escribe un nombre diferente a la guía de impresión'),
+
+            // Formato
+            'formato.required' => __('Configura el formato'),
+            'formato.array' => __('Configura un formato válido de ancho, altura y medicion'),
+            'formato.ancho.numeric' => __('Escribe el ancho de formato'),
+            'formato.altura.numeric' => __('Escribe la altura de formato'),
+            'formato.medicion.in' => __('Selecciona una medición válida de formato'),
+
+            // Márgenes
+            'margenes.array' => __('Configura márgenes válidos'),
+            'margenes.arriba.numeric' => __('Escribe un margen válido de arriba'),
+            'margenes.derecha.numeric' => __('Escribe un margen válido de derecha'),
+            'margenes.abajo.numeric' => __('Escribe un margen válido de abajo'),
+            'margenes.izquierda.numeric' => __('Escribe un margen válido de izquierda'),
+            'margenes.medicion.in' => __('Selecciona un medición válida para margenes'),
+
+            // Tipografía
+            'tipografia.required' => __('Configura la tipografía'),
+            'tipografia.array' => __('Configura una tipografía válida'),
+            'tipografia.fuente.in' => __('Selecciona el tipo válido de fuente'),
+            'tipografia.tamano.numeric' => __('Escribe el tamaño de la fuente'),
+            'tipografia.medicion.in' => __('Selecciona una medición válida de fuente'),
+
+            // Contenido
+            'contenido.required' => __('Selecciona el contenido'),
+            'contenido.array' => __('Selecciona un contenido válido'),
         ];
     }
 }
