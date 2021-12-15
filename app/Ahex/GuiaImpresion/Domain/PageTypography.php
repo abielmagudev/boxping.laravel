@@ -42,14 +42,14 @@ trait PageTypography
         return self::existsTypography('mediciones', $name);
     }
 
-    public static function allFontNames()
+    public static function allFontNames(string $glue = null)
     {
-        return self::getTypography('fuentes');
+        return is_null($glue) ? self::getTypography('fuentes') : implode($glue, self::getTypography('fuentes'));
     }
 
-    public static function allFontMeasurements()
+    public static function allFontMeasurements(string $glue = null)
     {
-        return self::getTypography('mediciones');
+        return is_null($glue) ? self::getTypography('mediciones') : implode($glue, self::getTypography('mediciones'));
     }
 
     public static function defaultFontName()
