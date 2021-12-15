@@ -1,5 +1,5 @@
 <h6>Contenido</h6>
-<div class="row border rounded mx-1 py-3 {{ bootstrap_isInputInvalid('contenido', $errors, 'border-danger') }}">
+<div class="row border rounded mx-1 py-3 <?= bootstrap_isInputInvalid('contenido', $errors, 'border-danger') ?>">
    @foreach($contenidos as $name => $model)
    <?php $content = $model::contentForPrintingGuide() ?>
    <div class="col-sm">

@@ -1,6 +1,6 @@
 @extends('app')
 @section('content')
-    
+
 @component('@.bootstrap.card', [
     'title' => 'Nueva guia de impresión',    
 ])

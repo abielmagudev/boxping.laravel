@@ -11,7 +11,7 @@
     </a>
     @endslot
     @component('@.bootstrap.table', [
-        'thead' => ['Disponible', 'Nombre', 'Descripción', 'Intentos de impresión'],
+        'thead' => ['', 'Nombre', 'Descripción', 'Intentos de impresión'],
     ])
         @foreach($guias as $guia)
         <tr>
@@ -20,7 +20,7 @@
             </td>
             <td>{{ $guia->nombre }}</td>
             <td>{{ $guia->descripcion }}</td>
-            <td class="text-center">{{ $guia->intentos }}</td>
+            <td>{{ $guia->intentos }}</td>
             <td class="text-end">
                 <a href="{{ route('guias_impresion.edit', $guia) }}" class="btn btn-sm btn-outline-warning">
                     {!! $graffiti->design('pencil-fill')->svg() !!}
