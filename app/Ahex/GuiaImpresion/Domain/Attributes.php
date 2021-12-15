@@ -24,9 +24,14 @@ trait Attributes
         return ucwords( $this->tipografia->fuente );
     }
 
+    public function getMedicionTamanoFuenteAttribute()
+    {
+        return $this->tipografia->medicion <> 'pc' ? $this->tipografia->medicion : '%';
+    }
+
     public function getMedidasFuenteAttribute()
     {
-        return $this->tipografia->tamano . $this->tipografia->medicion;
+        return $this->tipografia->tamano . $this->medicion_tamano_fuente;
     }
 
     public function getMedidasPaginaAttribute()
