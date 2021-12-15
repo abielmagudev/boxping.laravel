@@ -16,7 +16,8 @@ trait PageMeasurement
 
     public static function allPageMeasurements(string $glue = null)
     {
-        return is_null($glue) ? self::cachePageMeasurements() : implode($glue, self::cachePageMeasurements());
+        $measurements = self::cachePageMeasurements();
+        return is_null($glue) ? $measurements : implode($glue, array_keys($measurements));
     }
 
     public static function existsPageMeasurement(string $key)
