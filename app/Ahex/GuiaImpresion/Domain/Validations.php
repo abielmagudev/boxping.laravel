@@ -19,14 +19,14 @@ trait Validations
         return isset($this->texto_final);
     }
 
-    public function isDesactivada()
+    public function isNotDisponible()
     {
-        return (bool) $this->desactivada;
+        return ! (bool) $this->disponible;
     }
 
-    public function isActivada()
+    public function isDisponible()
     {
-        return ! (bool) $this->desactivada;
+        return (bool) $this->disponible;
     }
 
     public function hasContenido($type = null, $attr = null)

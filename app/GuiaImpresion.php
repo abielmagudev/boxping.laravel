@@ -27,8 +27,8 @@ class GuiaImpresion extends Model
         'tipografia_encoded',
         'contenido_encoded',
         'texto_final',
-        'intentos',
-        'desactivada',
+        'intentos_impresion',
+        'disponible',
     ];
 
     public static function prepare($validated)
@@ -41,7 +41,7 @@ class GuiaImpresion extends Model
             'tipografia_encoded' => static::prepareTipografia($validated['tipografia']),
             'contenido_encoded' => static::prepareContenido($validated['contenido']),
             'texto_final' => $validated['texto_final'] ?? null,
-            'desactivada' => isset($validated['desactivar']) ? 1 : 0,
+            'disponible' => isset($validated['inhabilitar']) ? 0 : 1,
         ];
     }
 

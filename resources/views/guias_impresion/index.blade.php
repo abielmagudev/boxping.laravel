@@ -11,16 +11,14 @@
     </a>
     @endslot
     @component('@.bootstrap.table', [
-        'thead' => ['', 'Nombre', 'Descripción', 'Intentos de impresión'],
+        'thead' => ['Nombre', 'Descripción', 'Disponible', 'Intentos de impresión'],
     ])
         @foreach($guias as $guia)
         <tr>
-            <td class="text-center <?= $guia->isActivada() ? 'text-success' : 'text-muted' ?>">
-                {!! $graffiti->design('check-circle-fill')->svg() !!}
-            </td>
             <td>{{ $guia->nombre }}</td>
             <td>{{ $guia->descripcion }}</td>
-            <td>{{ $guia->intentos }}</td>
+            <td>{{ $guia->isDisponible() ? 'Si' : 'No' }}</td>
+            <td>{{ $guia->intentos_impresion }}</td>
             <td class="text-end">
                 <a href="{{ route('guias_impresion.edit', $guia) }}" class="btn btn-sm btn-outline-warning">
                     {!! $graffiti->design('pencil-fill')->svg() !!}

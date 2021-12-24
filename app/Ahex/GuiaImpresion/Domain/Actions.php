@@ -6,7 +6,7 @@ trait Actions
 {
     public function intentarImprimir()
     {
-        $this->intentos++;
+        $this->intentos_impresion++;
         return $this;
     }
 }
