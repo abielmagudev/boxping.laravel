@@ -16,15 +16,13 @@
         </div>
     </div>
     <div class="ms-2">
-        <button class="btn btn-danger fw-bold contents-remove-button" type="button">-</button>
+        <button class="btn btn-outline-danger fw-bold contents-remove-button" type="button">-</button>
     </div>
 </div>
-<button class="btn btn-outline-primary border-0 fw-bold w-100" type="button" style="padding:6px 10px" id="addContentButton">+</button>
-<br>
-<br>
+<button class="btn btn-outline-primary fw-bold w-100" type="button" style="padding:6px 10px" id="addContentButton">+</button>
+<br><br><br><br>
 
 <script>
-
 const addContentButton = {
     button: document.getElementById('addContentButton'),
     example: document.getElementById('contentSelectionExample'),
@@ -37,8 +35,12 @@ const addContentButton = {
         cloned = this.example.cloneNode(true)
         cloned.classList.replace('d-none','d-flex')
         cloned.removeAttribute('id')
-        cloned.querySelector('select').removeAttribute('id')
-        cloned.querySelector('select').required = true
+        
+        cloneSelect = cloned.querySelector('select')
+        cloneSelect.removeAttribute('id')
+        cloneSelect.required = true
+        cloneSelect.value = this.values_selected.length > 0 ? this.values_selected.shift() : null
+        
         removeContentButton.setup(cloned)
         
         return cloned
@@ -51,8 +53,12 @@ const addContentButton = {
     listening: function () {
         this.button.addEventListener('click', () => this.add() )
     },
-    shootClick: function () {
-        this.button.dispatchEvent( new Event('click') )
+    shootClick: function (loop = 1, values_selected = null) {
+
+        this.values_selected = Array.isArray(values_selected) ? values_selected : []
+
+        for(i = 1; i <= loop; i++)
+            this.button.dispatchEvent( new Event('click') )
     }
 }
 
@@ -73,6 +79,5 @@ const removeContentButton = {
 }
 
 addContentButton.listening()
-addContentButton.shootClick()
-
+addContentButton.shootClick(<?= $guia->isReal() ? $guia->contenido_counter : 1 ?>, <?= $guia->contenido_json ?? '[]' ?>)
 </script>
