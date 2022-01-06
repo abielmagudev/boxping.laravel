@@ -29,7 +29,6 @@ class GuiaImpresionController extends Controller
 
     public function store(SaveRequest $request)
     {
-        dd($request->validated());
         $prepared = GuiaImpresion::prepare($request->validated());
 
         if( ! $guia = GuiaImpresion::create($prepared) )
@@ -42,7 +41,6 @@ class GuiaImpresionController extends Controller
     {
         return view('guias_impresion.edit', [
             'pagina' => GuiaImpresion::allPageSettings(),
-            'contenidos' => PrintableContentContainer::all(),
             'guia' => $guia,
         ]);
     }
