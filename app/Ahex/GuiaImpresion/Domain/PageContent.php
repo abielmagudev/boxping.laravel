@@ -7,59 +7,45 @@ trait PageContent
     public static function allPageContents()
     {
         return [
-            'consolidado' => self::getConsolidadoContent(),
             'entrada' => self::getEntradaContent(),
             'salida' => self::getSalidaContent(),
             'etapas' => self::getEtapasContent(),
         ];
     }
 
-    public static function getConsolidadoContent()
-    {
-        return [
-            'numero' => 'Número',
-            'status' => 'Status',
-            'cliente' => 'Cliente',
-            'graficas' => 'Gráficas',
-            'notas' => 'Notas',
-            'tarimas_count' => 'Contador de tarimas',
-            'entradas_count' => 'Contador de entradas',
-        ];
-    }
-
     public static function getEntradaContent()
     {
         return [
-            'numero' => 'Número',
-            'cliente' => 'Cliente',
-            'consolidado' => 'Consolidado',
-            'contenido' => 'Contenido',
-            'importado' => 'Importado',
+            'numero' => 'Número de entrada',
+            'cliente' => 'Nombre del cliente',
+            'consolidado' => 'Número del consolidado',
+            'contenido' => 'Contenido de la entrada',
+            'importado' => 'Fecha y número de cruce de importado',
             'importado_cruce' => 'Número de cruce',
             'importado_fecha' => 'Fecha de importado',
-            'reempacado' => 'Reempacado',
+            'reempacado' => 'Fecha y descripción de reempacado',
             'reempacado_descripcion' => 'Descripción de reempacado',
             'reempacado_fecha' => 'Fecha de reempacado',
-            'remitente' => 'Remitente',
-            'destinatario' => 'Destinatario',
+            'remitente' => 'Información del remitente',
+            'destinatario' => 'Información del destinatario',
         ];
     }
 
     public static function getSalidaContent()
     {
         return [
-            'rastreo' => 'Rastreo',
-            'status' => 'Status',
-            'transportadora' => 'Transportadora',
-            'confirmacion' => 'Confirmación',
-            'cobertura' => 'Cobertura',
-            'incidentes' => 'Incidentes',
-            'notas' => 'notas',
+            'transportadora' => 'Nombre de la transportadora',
+            'rastreo' => 'Número de rastreo',
+            'confirmacion' => 'Número de confirmación',
+            'status' => 'Status de salida',
+            'cobertura' => 'Tipo de cobertura',
+            'incidentes' => 'Incidentes de salida',
+            'salida_notas' => 'Notas de salida',
         ];
     }
 
     public static function getEtapasContent()
-    {
+    {        
         if(! $etapas = \App\Etapa::all() )
             return [];
 
