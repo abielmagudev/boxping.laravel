@@ -7,6 +7,7 @@ use App\Ahex\GuiaImpresion\Domain\Actions;
 use App\Ahex\GuiaImpresion\Domain\Attributes;
 use App\Ahex\GuiaImpresion\Domain\PageMeasurement;
 use App\Ahex\GuiaImpresion\Domain\PageTypography;
+use App\Ahex\GuiaImpresion\Domain\PageContent;
 use App\Ahex\GuiaImpresion\Domain\Validations;
 
 class GuiaImpresion extends Model
@@ -15,6 +16,7 @@ class GuiaImpresion extends Model
         Attributes,
         PageMeasurement,
         PageTypography,
+        PageContent,
         Validations;
 
     protected $table = 'guias_impresion';
@@ -92,6 +94,7 @@ class GuiaImpresion extends Model
                 'fuentes' => self::allFontNames(),
                 'mediciones' => self::allFontMeasurements(),
             ],
+            'contenidos' => self::allPageContents(),
         ];
     }
 }
