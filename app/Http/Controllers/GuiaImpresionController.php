@@ -23,13 +23,13 @@ class GuiaImpresionController extends Controller
     {
         return view('guias_impresion.create', [
             'pagina' => GuiaImpresion::allPageSettings(),
-            'contenidos' => PrintableContentContainer::all(),
             'guia' => new GuiaImpresion,
         ]);
     }
 
     public function store(SaveRequest $request)
     {
+        dd($request->validated());
         $prepared = GuiaImpresion::prepare($request->validated());
 
         if( ! $guia = GuiaImpresion::create($prepared) )
