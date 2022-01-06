@@ -20,7 +20,9 @@
     </div>
 </div>
 <button class="btn btn-outline-primary fw-bold w-100" type="button" style="padding:6px 10px" id="addContentButton">+</button>
-<br><br><br><br>
+<br>
+<br>
+<br>
 
 <script>
 const addContentButton = {
