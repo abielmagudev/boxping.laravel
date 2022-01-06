@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
             ConfiguracionSeeder::class,
             DestinatarioSeeder::class,
             EtapaSeeder::class, // Relaciones: zonas
-            GuiaImpresionSeeder::class,
+            // GuiaImpresionSeeder::class,
             IncidenteSeeder::class,
             ReempacadorSeeder::class,
             RemitenteSeeder::class,

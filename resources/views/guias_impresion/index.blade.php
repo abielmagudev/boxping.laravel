@@ -10,14 +10,15 @@
         <span class="fw-bold">+</span>
     </a>
     @endslot
+
+    @if( $guias->count() )
     @component('@.bootstrap.table', [
-        'thead' => ['Nombre', 'Descripción', 'Activada', 'Intentos de impresión'],
+        'thead' => ['Nombre', 'Descripción', 'Intentos de impresión'],
     ])
         @foreach($guias as $guia)
-        <tr>
+        <tr @class(['text-black-50' => $guia->isDesactivada()])>
             <td>{{ $guia->nombre }}</td>
             <td>{{ $guia->descripcion }}</td>
-            <td>{{ $guia->isActivada() ? 'Si' : 'No' }}</td>
             <td>{{ $guia->intentos_impresion }}</td>
             <td class="text-end">
                 <a href="{{ route('guias_impresion.edit', $guia) }}" class="btn btn-sm btn-outline-warning">
@@ -27,6 +28,7 @@
         </tr>
         @endforeach
     @endcomponent
-@endcomponent
+    @endif
 
+@endcomponent
 @endsection
