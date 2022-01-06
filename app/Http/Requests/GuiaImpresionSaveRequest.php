@@ -57,7 +57,7 @@ class GuiaImpresionSaveRequest extends FormRequest
 
             // Extra
             'texto_final' => ['nullable','string'],
-            'inhabilitar' => ['boolean'],
+            'desactivar' => ['boolean'],
         ];
     }
 

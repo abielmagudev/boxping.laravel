@@ -11,13 +11,13 @@
     </a>
     @endslot
     @component('@.bootstrap.table', [
-        'thead' => ['Nombre', 'Descripción', 'Disponible', 'Intentos de impresión'],
+        'thead' => ['Nombre', 'Descripción', 'Activada', 'Intentos de impresión'],
     ])
         @foreach($guias as $guia)
         <tr>
             <td>{{ $guia->nombre }}</td>
             <td>{{ $guia->descripcion }}</td>
-            <td>{{ $guia->isDisponible() ? 'Si' : 'No' }}</td>
+            <td>{{ $guia->isActivada() ? 'Si' : 'No' }}</td>
             <td>{{ $guia->intentos_impresion }}</td>
             <td class="text-end">
                 <a href="{{ route('guias_impresion.edit', $guia) }}" class="btn btn-sm btn-outline-warning">
