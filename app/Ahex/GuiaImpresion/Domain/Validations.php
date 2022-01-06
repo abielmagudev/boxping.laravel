@@ -29,14 +29,28 @@ trait Validations
         return (bool) $this->activada;
     }
 
-    public function hasContenido($type = null, $attr = null)
+    public function hasContenido(string $prop = null)
     {
-        if( is_string($type) && is_string($attr) )
-            return isset($this->contenido->{$type}->{$attr});
+        if(! is_string($prop) )
+            return isset($this->contenido);
+        
+        return isset($this->contenido->{$prop});
+    }
 
-        if( is_string($type) )
-            return isset($this->contenido->{$type});
-
-        return isset($this->contenido);
+    /**
+     * 
+     * Valida si el valor de contenido_encoded es un formato JSON correcto.
+     * 
+     * @json_decode: Ejecuta la decodificación del contenido_encoded, con @ ignora cualquier error de PHP.
+     * json_last_error: Compara si el último error es igual a NINGUNO al momento de decodificar el valor.
+     * 
+     * https://www.php.net/manual/en/function.json-last-error.php
+     * 
+     * @return bool
+     */
+    public function hasValidateContenidoJson()
+    {
+        @json_decode( $this->contenido_encoded );
+        return (json_last_error() === JSON_ERROR_NONE);
     }
 }

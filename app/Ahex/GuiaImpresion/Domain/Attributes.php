@@ -56,9 +56,20 @@ trait Attributes
     {
         return json_decode($this->contenido_encoded);
     }
-
-    public function getContenidoOrden($type)
+    
+    public function getContenidoArrayAttribute()
     {
-        return $this->contenido->{$type}->orden;
+        return json_decode($this->contenido_encoded, true); // get_object_vars( $this->contenido )
     }
+
+    public function getContenidoJsonAttribute()
+    {
+        return $this->contenido_encoded;
+    }
+
+    public function getContenidoCounterAttribute()
+    {
+        return count( (array) $this->contenido );
+    }
+
 }
