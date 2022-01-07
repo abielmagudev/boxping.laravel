@@ -71,5 +71,4 @@ trait Attributes
     {
         return count( (array) $this->contenido );
     }
-
 }

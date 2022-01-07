@@ -8,6 +8,7 @@ use App\Ahex\GuiaImpresion\Domain\Attributes;
 use App\Ahex\GuiaImpresion\Domain\PageMeasurement;
 use App\Ahex\GuiaImpresion\Domain\PageTypography;
 use App\Ahex\GuiaImpresion\Domain\PageContent;
+use App\Ahex\GuiaImpresion\Domain\Scopes;
 use App\Ahex\GuiaImpresion\Domain\Validations;
 
 class GuiaImpresion extends Model
@@ -17,6 +18,7 @@ class GuiaImpresion extends Model
         PageMeasurement,
         PageTypography,
         PageContent,
+        Scopes,
         Validations;
 
     protected $table = 'guias_impresion';
