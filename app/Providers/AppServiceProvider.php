@@ -45,7 +45,7 @@ class AppServiceProvider extends ServiceProvider
         });
 
         View::composer(['entradas.index','entradas.show','consolidados.show'], function ($view) {
-            View::share('guias_impresion', \App\GuiaImpresion::all());
+            View::share('guias_impresion', \App\GuiaImpresion::activadas());
         });
 
         // Global
