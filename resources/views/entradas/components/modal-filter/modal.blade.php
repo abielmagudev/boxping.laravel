@@ -23,7 +23,7 @@ $filter_settings = (object) [
     'title' => 'Filtrar entradas',
     'header_close' => true,
 ])
-    <form action="{{ $filter_settings->route }}" method="get" id="formFiltersEntradas">
+    <form action="{{ $filter_settings->route }}" method="get" id="formFiltersEntradas" autocomplete="off">
         @foreach($filter_settings->filters as $filter)
             @include("entradas.components.modal-filter.filters.{$filter}")
         @endforeach
