@@ -4,9 +4,9 @@ namespace App\Ahex\GuiaImpresion\Domain;
 
 trait Actions
 {
-    public function incrementarIntentosImpresion()
+    public function incrementarIntentosImpresion(int $counter = 1)
     {
-        $this->intentos_impresion++;
-        return $this;
+        $this->intentos_impresion += $counter;
+        return $this->save();
     }
 }
