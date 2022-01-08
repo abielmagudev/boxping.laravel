@@ -4,9 +4,14 @@ namespace App\Ahex\GuiaImpresion\Domain;
 
 trait Validations
 {
-    public static function existsAndActived($value, $column = 'id')
+    public static function existsActivada($value)
     {
-        return self::where($column, $value)->where('activada', 1)->exists();
+        return self::where('id', $value)->where('activada', 1)->exists();
+    }
+
+    public static function existsDesactivada($value)
+    {
+        return self::where('id', $value)->where('activada', 0)->exists();
     }
 
     public function isReal()
