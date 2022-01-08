@@ -25,15 +25,14 @@
             <button class="btn btn-sm btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuPrintEntrada" data-bs-toggle="dropdown" aria-expanded="false">
                 {!! $graffiti->design('printer-fill')->svg() !!}
             </button>
-            @if( $guias_impresion->count() )            
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuPrintEntrada">
-
+                <li><a class="dropdown-item" href="{{ route('entradas.imprimir', $entrada) }}">Información</a></li>
+                <li class="dropdown-divider"></li>
+                <li class="dropdown-header">Guías de impresión</li>
                 @foreach ($guias_impresion as $guia)
                 <li><a class="dropdown-item" href="{{ route('entradas.imprimir', [$entrada, $guia]) }}">{{ $guia->nombre }}</a></li>
                 @endforeach
-
             </ul>
-            @endif
         </div>
         @endslot
 
