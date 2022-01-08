@@ -99,4 +99,8 @@ if(! $table_settings->checkbox->render )
         </tr>
         @endforeach
     @endcomponent
+
+    @if( $table_settings->checkbox->render )
+    <form action="" method="get" id="<?= $table_settings->checkbox->form_id ?>" target="_blank"></form>
+    @endif
 @endif
