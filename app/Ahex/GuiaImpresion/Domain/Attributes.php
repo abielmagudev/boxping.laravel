@@ -4,7 +4,7 @@ namespace App\Ahex\GuiaImpresion\Domain;
 
 trait Attributes
 {
-    // Decodes
+    // JSON Decodes
     public function getFormatoAttribute()
     {
         return json_decode($this->formato_encoded);
@@ -29,7 +29,6 @@ trait Attributes
     {
         return json_decode($this->contenido_encoded, true); // get_object_vars( $this->contenido )
     }
-
 
 
     // Formato attributes
