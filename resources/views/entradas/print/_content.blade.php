@@ -24,11 +24,11 @@
             </tr>
             <tr>
                 <td class="text-muted small px-2" style="width:15%">Consolidado</td>
-                <td class="px-2">{{ $consolidado->numero ?? 'Sin consolidar' }}</td>
+                <td class="px-2">{{ $entrada->hasConsolidado() ? $entrada->consolidado->numero : 'Sin consolidar' }}</td>
             </tr>
             <tr>
                 <td class="text-muted small px-2" style="width:15%">Cliente</td>
-                <td class="px-2">{{ $cliente->id ? $cliente->nombre_con_alias : '' }}</td>
+                <td class="px-2">{{ $entrada->cliente->id ? $entrada->cliente->nombre_con_alias : '' }}</td>
             </tr>
             <tr>
                 <td class="text-muted small px-2" style="width:15%">Contenido</td>
@@ -54,43 +54,43 @@
             </tr>
             <tr>
                 <td class="text-muted small px-2" style="width:15%">Nombre</td>
-                <td class="px-2" style="width:35%">{{ $remitente->nombre ?? '' }}</td>
+                <td class="px-2" style="width:35%">{{ $entrada->remitente->nombre ?? '' }}</td>
                 <td class="text-muted small px-2" style="width:15%">Nombre</td>
-                <td class="px-2">{{ $destinatario->nombre ?? '' }}</td>
+                <td class="px-2">{{ $entrada->destinatario->nombre ?? '' }}</td>
             </tr>
             <tr>
                 <td class="text-muted small px-2 text-nowrap" style="width:15%">Dirección</td>
                 <td class="px-2" style="width:35%">
-                    <span class="d-block">{{ $remitente->direccion }}</span>
+                    <span class="d-block">{{ $entrada->remitente->direccion ?? '' }}</span>
                 <td class="text-muted small px-2" style="width:15%">Dirección</td>
                 <td class="px-2">
-                    <span class="d-block">{{ $destinatario->direccion }} </span>
+                    <span class="d-block">{{ $entrada->destinatario->direccion ?? '' }} </span>
                 </td>
             </tr>
             <tr>
                 <td class="text-muted small px-2 text-nowrap" style="width:15%">Postal</td>
                 <td class="px-2" style="width:35%">
-                    <span>{{ $remitente->postal }}</span>
+                    <span>{{ $entrada->remitente->postal ?? '' }}</span>
                 <td class="text-muted small px-2" style="width:15%">Postal</td>
                 <td class="px-2">
-                    <span>{{ $destinatario->postal }}</span>
+                    <span>{{ $entrada->destinatario->postal ?? '' }}</span>
                 </td>
             </tr>
             <tr>
                 <td class="text-muted small px-2" style="width:15%">Localidad</td>
-                <td class="small px-2" style="width:35%">{{ $remitente->localidad ?? '' }}</td>
+                <td class="small px-2" style="width:35%">{{ $entrada->remitente->localidad ?? '' }}</td>
                 <td class="text-muted small px-2" style="width:15%">Localidad</td>
-                <td class="px-2">{{ $destinatario->localidad ?? '' }}</td>
+                <td class="px-2">{{ $entrada->destinatario->localidad ?? '' }}</td>
             </tr>
             <tr>
                 <td class="text-muted small px-2" style="width:15%" rowspan="2">Teléfono</td>
-                <td class="small px-2" style="width:35%" rowspan="2">{{ $remitente->telefono ?? '' }}</td>
+                <td class="small px-2" style="width:35%" rowspan="2">{{ $entrada->remitente->telefono ?? '' }}</td>
                 <td class="text-muted small px-2" style="width:15%">Referencias</td>
-                <td class="small px-2">{{ $destinatario->referencias ?? '' }}</td>
+                <td class="small px-2">{{ $entrada->destinatario->referencias ?? '' }}</td>
             </tr>
             <tr>
                 <td class="text-muted small px-2" style="width:15%">Teléfono</td>
-                <td class="px-2">{{ $destinatario->telefono ?? '' }}</td>
+                <td class="px-2">{{ $entrada->destinatario->telefono ?? '' }}</td>
             </tr>
         </tbody>
     </table>
@@ -137,13 +137,13 @@
             </tr>
             <tr>
                 <td class="text-muted small px-2" style="width:15%">Status</td>
-                <td class="px-2">{{ $salida->mostrar_status ?? '' }}</td>
+                <td class="px-2">{{ $entrada->salida->mostrar_status ?? '' }}</td>
             </tr>
             <tr>
                 <td class="text-muted small px-2" style="width:15%">Incidentes</td>
                 <td class="small px-2">
-                    @if( $salida->incidentes->count() )
-                        @foreach($salida->incidentes as $incidente)
+                    @if( $entrada->hasSalida() && $entrada->salida->incidentes->count() )
+                        @foreach($entrada->salida->incidentes as $incidente)
                         <span>{{ $incidente->titulo }}</span> 
                         @if(! $loop->last )
                         <span class="mx-1">/</span>
@@ -154,34 +154,34 @@
             </tr>
             <tr>
                 <td class="text-muted small px-2 text-nowrap" style="width:15%">Transportadora</td>
-                <td class="px-2">{{ $salida->transportadora->nombre ?? '' }}</td>
+                <td class="px-2">{{ $entrada->salida->transportadora->nombre ?? '' }}</td>
             </tr>
             <tr>
                 <td class="text-muted small px-2" style="width:15%">Rastreo</td>
-                <td class="px-2">{{ $salida->rastreo }}</td>
+                <td class="px-2">{{ $entrada->salida->rastreo ?? '' }}</td>
             </tr>
             <tr>
                 <td class="text-muted small px-2" style="width:15%">Confirmación</td>
-                <td class="px-2">{{ $salida->confirmacion }}</td>
+                <td class="px-2">{{ $entrada->salida->confirmacion ?? '' }}</td>
             </tr>
             <tr>
                 <td class="text-muted small px-2" style="width:15%">Cobertura</td>
                 <td class="px-2">
-                    <span class="d-block">{{ $salida->mostrar_cobertura }}</span>
-                    @if( $salida->cobertura === 'ocurre' )
-                    <span class="d-block">{{ $salida->direccion }}, Postal {{ $salida->postal }}, {{ $salida->localidad }}</span>
+                    <span class="d-block">{{ $entrada->salida->mostrar_cobertura ?? '' }}</span>
+                    @if( $entrada->hasSalida() && $entrada->salida->cobertura === 'ocurre' )
+                    <span class="d-block">{{ $entrada->salida->direccion }}, Postal {{ $entrada->salida->postal }}, {{ $entrada->salida->localidad }}</span>
                     @endif
                 </td>
             </tr>
             <tr>
                 <td class="text-muted small px-2" style="width:15%">Notas</td>
-                <td class="px-2">{{ $salida->notas }}</td>
+                <td class="px-2">{{ $entrada->salida->notas ?? '' }}</td>
             </tr>
             <tr>
                 <td class="text-muted small px-2" style="width:15%">Actualizado</td>
                 <td class="px-2">
-                    @if( $salida->updater )
-                    {{ "{$salida->updated_at}, {$salida->updater->name}" ?? '?' }}
+                    @if( $entrada->hasSalida() && $entrada->salida->updater )
+                    {{ "{$entrada->salida->updated_at}, {$entrada->salida->updater->name}" ?? '?' }}
                     @endif
                 </td>
             </tr>
