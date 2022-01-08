@@ -44,8 +44,8 @@ Route::middleware('auth')->group( function () {
         Route::post('{entrada}/comentarios', 'ComentarioController@store')->name('comentarios.store');
         
         // Imprimir
-        Route::get('{entrada}/imprimir/{guia}', 'EntradaController@toPrint')->name('entradas.imprimir');
-        Route::get('imprimir', 'EntradaController@toPrintMany')->name('entradas.imprimir.multiple');
+        Route::get('{entrada}/imprimir/{guia?}', 'EntradaController@toPrint')->name('entradas.imprimir')->middleware('guia_impresion.activada');
+        Route::get('imprimir/{guia?}', 'EntradaController@toPrintMany')->name('entradas.imprimir.multiple')->middleware('guia_impresion.activada');
     
         // EntradaEtapa
         Route::get('{entrada}/etapas/add', 'EntradaEtapaController@add')->name('entradas.etapas.add');

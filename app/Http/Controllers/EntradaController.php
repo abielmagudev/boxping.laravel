@@ -98,24 +98,23 @@ class EntradaController extends Controller
         // code...
     }
 
-    public function toPrint(Entrada $entrada, GuiaImpresion $guia)
+    public function toPrint(Entrada $entrada, GuiaImpresion $guia = null)
     {
-        $guia->incrementarIntentos()->save();
-
-        return view('entradas.print.single', [
-            'entrada' => $entrada,
-            'guia' => $guia,
-        ]);
+        $view_name = is_object($guia) && $guia->incrementarIntentosImpresion()
+                    ? 'guias_impresion.print.single'
+                    : 'entradas.print.single';
+   
+        return view($view_name, compact('entrada', 'guia'));
     }
 
-    public function toPrintMany(PrintManyRequest $request)
+    public function toPrintMany(PrintManyRequest $request, GuiaImpresion $guia = null)
     {
-        $guia = GuiaImpresion::find($request->guia);        
-        $guia->incrementarIntentos()->save();
+        $entradas = Entrada::withRelations()->whereIn('id', $request->entradas)->get();
 
-        return view('entradas.print.multiple', [
-            'entradas' => Entrada::withRelations()->whereIn('id', $request->entradas)->get(),
-            'guia' => $guia,
-        ]);
+        $view_name = is_object($guia) && $guia->incrementarIntentosImpresion( $entradas->count() )
+                    ? 'guias_impresion.print.multiple'
+                    : 'entradas.print.multiple';
+        
+        return view($view_name, compact('entradas', 'guia'));
     }
 }
