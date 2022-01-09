@@ -34,6 +34,9 @@ trait Validations
 
     public function hasTransportadora()
     {
+        if( is_null($this->transportadora_id) )
+            return false;
+            
         return is_a($this->transportadora, \App\Transportadora::class);
     }
     
