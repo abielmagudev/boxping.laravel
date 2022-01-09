@@ -15,16 +15,16 @@ class EntradaContent extends Content
             'large' => 'Contenido de la entrada',
             'small' => 'Contenido',
         ],
-        'actualizado_fecha' => [
-            'large' => 'Fecha de la última actualización de la entrada',
+        'actualizado_fecha_hora' => [
+            'large' => 'Fecha y hora de la última actualización de la entrada',
             'small' => 'Actualizado',
         ],
         'actualizado_nombre' => [
-            'large' => 'Nombre de usuario que actualizó por última vez la entrada',
+            'large' => 'Nombre de usuario que recien actualizó la entrada',
             'small' => 'Actualizado por',
         ],
-        'creado_fecha' => [
-            'large' => 'Fecha de creación de la entrada',
+        'creado_fecha_hora' => [
+            'large' => 'Fecha y hora de creación de la entrada',
             'small' => 'Creado',
         ],
         'creado_nombre' => [
@@ -43,7 +43,7 @@ class EntradaContent extends Content
         return $entrada->contenido;
     }
 
-    public static function actualizado_fecha(Entrada $entrada)
+    public static function actualizado_fecha_hora(Entrada $entrada)
     {
         return $entrada->updated_at;
     }
@@ -53,7 +53,7 @@ class EntradaContent extends Content
         return $entrada->updater ? $entrada->updater->name : 'Desconocido';
     }
 
-    public static function creado_fecha(Entrada $entrada)
+    public static function creado_fecha_hora(Entrada $entrada)
     {
         return $entrada->created_at;
     }
