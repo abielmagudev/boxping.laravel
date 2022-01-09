@@ -4,6 +4,39 @@ namespace App\Ahex\Salida\Domain;
 
 trait Attributes
 {
+    public static $all_status = [
+        'en espera' => [
+            'color' => '#0E6FFD',
+            'descripcion' => 'Recopilando información para el envio',
+        ],
+        'en ruta' => [
+            'color' => '#FFC108',
+            'descripcion' => 'Envio en proceso hacia su destino',
+        ],
+        'arribo' => [
+            'color' => '#198754',
+            'descripcion' => 'Finalizo en el envio a su destino',
+        ],
+        'entregado' => [
+            'color' => '#212529',
+            'descripcion' => 'Paquete recibido por el destinatario',
+        ],
+    ];
+
+    public static $all_coberturas = [
+        'domicilio' => [
+            'descripcion' => 'Dirección del destinatario',
+        ],
+        'ocurre'    => [
+            'descripcion' => 'Dirección de la transportadora',
+        ],
+    ];
+
+    public function getStatusTituloAttribute()
+    {
+        return ucfirst($this->status);
+    }
+
     public function getStatusColorAttribute()
     {
         return static::$all_status[$this->status]['color'];
