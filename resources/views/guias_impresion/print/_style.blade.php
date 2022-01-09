@@ -4,11 +4,12 @@
     print-color-adjust: exact;
 }
 @page {
-    size: <?= $guia->medidas_pagina ?>; /* A4, Letter... */
+    size: <?= $guia->medidas_pagina ?>; /* A4, Letter, Legal ... */
     margin: <?= $guia->margenes_pagina ?>;
-    font-family: <?= $guia->nombre_fuente ?>;
-    font-size: <?= $guia->medidas_fuente ?>;
-    /* font-size: calc($guia->tamano_fuente - 7%); */
+}
+.content {
+    font-family: "<?= $guia->nombre_fuente ?>";
+    font-size: <?= $guia->medidas_fuente ?>; /* calc($guia->tamano_fuente - ?%); */
 }
 .break-before {
     page-break-before: always;
