@@ -19,12 +19,6 @@ trait PageMeasurement
         return self::cachePageMeasurements();
     }
 
-    public static function listPageMeasurements(string $glue = ',')
-    {
-        $all_page_measurements = self::cachePageMeasurements();
-        return implode($glue, array_keys($all_page_measurements));
-    }
-
     public static function existsPageMeasurement(string $key)
     {
         return isset( self::allPageMeasurements()[$key] );
@@ -33,5 +27,11 @@ trait PageMeasurement
     public static function defaultPageMeasurement()
     {
         return array_key_first( self::allPageMeasurements() );
+    }
+
+    public static function listPageMeasurements(string $glue = ',')
+    {
+        $all_page_measurements = self::cachePageMeasurements();
+        return implode($glue, array_keys($all_page_measurements));
     }
 }
