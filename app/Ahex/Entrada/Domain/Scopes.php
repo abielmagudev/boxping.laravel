@@ -35,6 +35,7 @@ trait Scopes
             'salida',
             'salida.incidentes',
             'salida.transportadora',
+            'salida.updater',
         ]);
     }
 }
