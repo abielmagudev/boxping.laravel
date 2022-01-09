@@ -1,11 +1,10 @@
 @extends('print')
 @section('style')
+    @include('guias_impresion.print._style')
 @endsection
-
-@section('header')
-    <h4>Header</h4>
-@endsection
-
 @section('content')
-    <p>Guia de impresion multiple...</p>
+@foreach($entradas as $entrada)   
+    @include('guias_impresion.print._content')
+    <div class="break-before"></div>
+@endforeach
 @endsection

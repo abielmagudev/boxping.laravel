@@ -1,5 +1,5 @@
 <!-- Informacion -->
-<div class="mt-3" style="font-size:9pt;page-break-before:always">
+<div style="font-size:9pt;page-break-before:always">
     <table class="table table-sm table-bordered m-0 align-middle">
         <!-- App & Entrada -->
         <tbody>
@@ -137,18 +137,13 @@
             </tr>
             <tr>
                 <td class="text-muted small px-2" style="width:15%">Status</td>
-                <td class="px-2">{{ $entrada->salida->mostrar_status ?? '' }}</td>
+                <td class="px-2">{{ $entrada->salida->status_titulo ?? '' }}</td>
             </tr>
             <tr>
                 <td class="text-muted small px-2" style="width:15%">Incidentes</td>
                 <td class="small px-2">
                     @if( $entrada->hasSalida() && $entrada->salida->incidentes->count() )
-                        @foreach($entrada->salida->incidentes as $incidente)
-                        <span>{{ $incidente->titulo }}</span> 
-                        @if(! $loop->last )
-                        <span class="mx-1">/</span>
-                        @endif
-                        @endforeach
+                    <small>{{ $entrada->salida->incidentes->implode('nombre', ', ') }}</small>
                     @endif
                 </td>
             </tr>
