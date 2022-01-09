@@ -2,56 +2,54 @@
 
 namespace App\Ahex\GuiaImpresion\Domain;
 
+use App\Ahex\GuiaImpresion\Infrastructure\Contents\ClienteContent;
+use App\Ahex\GuiaImpresion\Infrastructure\Contents\ConfirmadoContent;
+use App\Ahex\GuiaImpresion\Infrastructure\Contents\ConsolidadoContent;
+use App\Ahex\GuiaImpresion\Infrastructure\Contents\DestinatarioContent;
+use App\Ahex\GuiaImpresion\Infrastructure\Contents\EntradaContent;
+use App\Ahex\GuiaImpresion\Infrastructure\Contents\EtapaContent;
+use App\Ahex\GuiaImpresion\Infrastructure\Contents\ImportadoContent;
+use App\Ahex\GuiaImpresion\Infrastructure\Contents\ReempacadoContent;
+use App\Ahex\GuiaImpresion\Infrastructure\Contents\RemitenteContent;
+use App\Ahex\GuiaImpresion\Infrastructure\Contents\SalidaContent;
+use App\Entrada;
+
 trait PageContent
 {
+    protected static $all_page_contents = [
+        'entrada' => EntradaContent::class,
+        'cliente' => ClienteContent::class,
+        'consolidado' => ConsolidadoContent::class,
+        'destinatario' => DestinatarioContent::class,
+        'remitente' => RemitenteContent::class,
+        'confirmado' => ConfirmadoContent::class,
+        'importado' => ImportadoContent::class,
+        'reempacado' => ReempacadoContent::class,
+        'salida' => SalidaContent::class,
+        // 'etapas' => EtapaContent::class,
+    ];
+
     public static function allPageContents()
     {
-        return [
-            'entrada' => self::getEntradaContent(),
-            'salida' => self::getSalidaContent(),
-            'etapas' => self::getEtapasContent(),
-        ];
+        return self::$all_page_contents;
     }
 
-    public static function getEntradaContent()
+    public static function existsPageContent(string $classkey, string $action = null)
     {
-        return [
-            'numero' => 'Número de entrada',
-            'cliente' => 'Nombre del cliente',
-            'consolidado' => 'Número del consolidado',
-            'contenido' => 'Contenido de la entrada',
-            'importado' => 'Fecha y número de cruce de importado',
-            'importado_cruce' => 'Número de cruce',
-            'importado_fecha' => 'Fecha de importado',
-            'reempacado' => 'Fecha y descripción de reempacado',
-            'reempacado_descripcion' => 'Descripción de reempacado',
-            'reempacado_fecha' => 'Fecha de reempacado',
-            'remitente' => 'Información del remitente',
-            'destinatario' => 'Información del destinatario',
-        ];
+        if( is_null($action) )
+            return isset( self::$all_page_contents[$classkey] );
+
+        return array_key_exists($classkey, self::$all_page_contents) && method_exists(self::$all_page_contents[$classkey], $action);
     }
 
-    public static function getSalidaContent()
+    public static function getPageContent(string $classkey)
     {
-        return [
-            'transportadora' => 'Nombre de la transportadora',
-            'rastreo' => 'Número de rastreo',
-            'confirmacion' => 'Número de confirmación',
-            'status' => 'Status de salida',
-            'cobertura' => 'Tipo de cobertura',
-            'incidentes' => 'Incidentes de salida',
-            'salida_notas' => 'Notas de salida',
-        ];
+        return self::$all_page_contents[$classkey];
     }
 
-    public static function getEtapasContent()
-    {        
-        if(! $etapas = \App\Etapa::all() )
-            return [];
-
-        foreach($etapas as $etapa) 
-            $attributes[$etapa->slug] = $etapa->nombre;
-
-        return $attributes;
+    public static function callPageContent(string $classkey, string $action, Entrada $entrada)
+    {
+        $classname = self::getPageContent($classkey);
+        return call_user_func([$classname, $action], $entrada);
     }
 }

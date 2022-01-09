@@ -5,10 +5,10 @@
             <small class="input-group-text text-muted contents-counter"></small>
             <select name="contenido[]" id="select-contenido" class="form-select">
                 <option selected disabled></option>
-                @foreach($pagina->contenidos as $titulo => $contenido)
-                <optgroup label="<?= ucfirst($titulo) ?>">
-                    @foreach($contenido as $value => $label)
-                    <option value="<?= $value ?>">{{ $label }}</option>
+                @foreach($pagina->contenidos as $key => $class)
+                <optgroup label="<?= ucfirst($key) ?>">
+                    @foreach($class::getActionsLabels() as $action => $label)
+                    <option value='<?= "{$key}.{$action}" ?>'>{{ $label['large'] }}</option>
                     @endforeach
                 </optgroup>
                 @endforeach
