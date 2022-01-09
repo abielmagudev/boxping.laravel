@@ -30,11 +30,15 @@ Class Remitente extends Model implements ValueSearchable, ModifierIdentifiable, 
         'updated_by',
     );
 
+
+    // Relationships
     public function entradas()
     {
         return $this->hasMany(Entrada::class);
     }
 
+
+    // Attributes
     public function getLocalidadAttribute()
     {
         $localidad = array();
@@ -48,6 +52,18 @@ Class Remitente extends Model implements ValueSearchable, ModifierIdentifiable, 
         return implode(', ', $localidad);
     }
 
+    public function getDomicilioCompletoAttribute()
+    {
+        return "{$this->direccion}, Postal {$this->postal} <br> {$this->localidad}";
+    }
+
+    public function getInformacionCompletaAttribute()
+    {
+        return "{$this->domicilio_completo} <br> {$this->telefono}";
+    }
+
+
+    // Scopes
     public function scopeSearch($query, $value)
     {
         return $query->where('nombre', 'like', "%{$value}%")
@@ -58,6 +74,8 @@ Class Remitente extends Model implements ValueSearchable, ModifierIdentifiable, 
                      ->orderBy('id', 'desc');
     }
 
+
+    // Statics
     public static function prepare($validated)
     {
         $prepared = [
