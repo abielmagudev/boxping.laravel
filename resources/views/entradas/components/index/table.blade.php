@@ -100,7 +100,5 @@ if(! $table_settings->checkbox->render )
         @endforeach
     @endcomponent
 
-    @if( $table_settings->checkbox->render )
-    <form action="" method="get" id="<?= $table_settings->checkbox->form_id ?>" target="_blank"></form>
-    @endif
+    @includeWhen($table_settings->checkbox->render, 'entradas.components.index.dynamics-actions')
 @endif
