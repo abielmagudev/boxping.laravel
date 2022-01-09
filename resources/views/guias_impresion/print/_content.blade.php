@@ -1,4 +1,5 @@
 <div class="content">
-    <p>{{ $guia->nombre }}</p>
-    <p>{{ $entrada->numero }}</p>
+    @foreach($guia->obtenerContenidos($entrada) as $contenido)
+    <div>{!! $contenido !!}</div>
+    @endforeach
 </div>
