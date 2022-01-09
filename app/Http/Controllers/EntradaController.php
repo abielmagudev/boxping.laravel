@@ -7,7 +7,7 @@ use App\Http\Requests\Entrada\CreateRequest;
 use App\Http\Requests\Entrada\StoreRequest;
 use App\Http\Requests\Entrada\EditRequest;
 use App\Http\Requests\Entrada\UpdateRequest;
-use App\Http\Requests\Entrada\PrintManyRequest;
+use App\Http\Requests\Entrada\MultipleRequest;
 use App\Ahex\Zowner\Application\Features\HasValidations;
 use App\Ahex\Entrada\Application\RedirectAfterStored;
 use App\Ahex\Entrada\Application\ShowPresenter;
@@ -107,7 +107,7 @@ class EntradaController extends Controller
         return view($view_name, compact('entrada', 'guia'));
     }
 
-    public function toPrintMany(PrintManyRequest $request, GuiaImpresion $guia = null)
+    public function toPrintMany(MultipleRequest $request, GuiaImpresion $guia = null)
     {
         $entradas = Entrada::withRelations()->whereIn('id', $request->entradas)->get();
 
