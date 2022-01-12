@@ -4,13 +4,6 @@ namespace App\Ahex\GuiaImpresion\Infrastructure\PageDesigner;
 
 trait FormatActions
 {
-    public static $margin_sides = [
-        'arriba' => 'top',
-        'derecha' => 'right',
-        'abajo' => 'bottom',
-        'izquierda' => 'left',
-    ];
-
     public static function allMeasurements()
     {
         if( self::hasCache('measurements') )
