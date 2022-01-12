@@ -27,15 +27,23 @@ trait FormatActions
         return implode($glue, array_keys(self::allMeasurements()));
     }
 
+    public function width($with_measure = true)
+    {
+        return $with_measure 
+                ? $this->guide->formato->ancho . $this->guide->formato->medicion
+                : $this->guide->formato->ancho;
+    }
+
+    public function height($with_measure = true)
+    {
+        return $with_measure 
+                ? $this->guide->formato->alto . $this->guide->formato->medicion
+                : $this->guide->formato->alto;
+    }
+
     public function size()
     {
-        $self = $this;
-
-        $sides = array_filter(['ancho','alto'], function ($side) use ($self) {
-            if( isset($self->guide->$side) )
-                return $self->guide->formato->$side . $self->guide->formato->medicion;
-        });
-        
+        $sides = array_filter([$this->width(), $this->height()], fn($side) => $side);
         return implode(' ', $sides);
     }
 
