@@ -81,5 +81,5 @@ const removeInformationButton = {
 }
 
 addInformationButton.listening()
-addInformationButton.shootClick(<?= $guia->isReal() ? $guia->contenido_counter : 1 ?>, <?= $guia->contenido_json ?? '[]' ?>)
+addInformationButton.shootClick(<?= $guia->isReal() ? $guia->informacion_counter : 1 ?>, <?= $guia->informacion_json ?? '[]' ?>)
 </script>
