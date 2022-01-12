@@ -3,7 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use App\GuiaImpresion;
+use App\Ahex\GuiaImpresion\Infrastructure\PageDesigner\PageDesigner;
 
 class GuiaImpresionSaveRequest extends FormRequest
 {
@@ -20,9 +20,9 @@ class GuiaImpresionSaveRequest extends FormRequest
     public function prepareForValidation()
     {
         $this->guia_impresion_actual = $this->guia->id ?? 0;
-        $this->mediciones_pagina = GuiaImpresion::listPageMeasurements();
-        $this->mediciones_fuente = GuiaImpresion::listFontMeasurements();
-        $this->nombres_fuentes = GuiaImpresion::listFontNames();
+        $this->mediciones_pagina = PageDesigner::implodeMeasurements();
+        $this->mediciones_fuente = PageDesigner::implodeFontMeasurements();
+        $this->nombres_fuentes   = PageDesigner::implodeFonts();
     }
 
     public function rules()
