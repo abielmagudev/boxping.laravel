@@ -7,10 +7,10 @@
       @include('@.bootstrap.invalid-input-message', ['name' => 'formato.ancho'])
    </div>
    <div class="col-sm">
-      <?php $formato_altura = $guia->formato->altura ?? null ?>
-      <label class="form-label small" for="input-formato-altura">Altura</label>
-      <input type="number" min="0.01" step="0.01" id="input-formato-altura" class="form-control <?= bootstrap_isInputInvalid('formato.altura', $errors) ?>" name="formato[altura]" value="<?= old('formato.altura', $formato_altura) ?>" required>
-      @include('@.bootstrap.invalid-input-message', ['name' => 'formato.altura'])
+      <?php $formato_alto = $guia->formato->alto ?? null ?>
+      <label class="form-label small" for="input-formato-alto">Alto</label>
+      <input type="number" min="0.01" step="0.01" id="input-formato-alto" class="form-control <?= bootstrap_isInputInvalid('formato.alto', $errors) ?>" name="formato[alto]" value="<?= old('formato.alto', $formato_alto) ?>" required>
+      @include('@.bootstrap.invalid-input-message', ['name' => 'formato.alto'])
    </div>
    <div class="col-sm">
       <?php $formato_medicion = $guia->formato->medicion ?? null ?>

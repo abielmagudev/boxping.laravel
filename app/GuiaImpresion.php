@@ -48,7 +48,7 @@ class GuiaImpresion extends Model
     {
         return json_encode([
             'ancho' => $formato['ancho'] ?? null,
-            'altura' => $formato['altura'] ?? null,
+            'alto' => $formato['alto'] ?? null,
             'medicion' => ! PageDesigner::existsMeasurement($formato['medicion']) 
                           ? PageDesigner::defaultMeasurement()
                           : $formato['medicion'],

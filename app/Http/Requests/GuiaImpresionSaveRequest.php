@@ -33,9 +33,9 @@ class GuiaImpresionSaveRequest extends FormRequest
             'descripcion' => ['nullable','string'],
 
             // Formato
-            'formato' => ['required','array:ancho,altura,medicion'],
+            'formato' => ['required','array:ancho,alto,medicion'],
             'formato.ancho' => 'numeric',
-            'formato.altura' => 'numeric',
+            'formato.alto' => 'numeric',
             'formato.medicion' => "in:{$this->mediciones_pagina}",
 
             // Márgenes
@@ -71,9 +71,9 @@ class GuiaImpresionSaveRequest extends FormRequest
             // Formato
             'formato.required' => __('Configura el formato'),
             'formato.array' => __('Configura un formato válido de ancho, altura y medicion'),
-            'formato.ancho.numeric' => __('Escribe el ancho de formato'),
-            'formato.altura.numeric' => __('Escribe la altura de formato'),
-            'formato.medicion.in' => __('Selecciona una medición válida de formato'),
+            'formato.ancho.numeric' => __('Escribe el ancho de página'),
+            'formato.alto.numeric' => __('Escribe el alto de página'),
+            'formato.medicion.in' => __('Selecciona una medición válida de página'),
 
             // Márgenes
             'margenes.array' => __('Configura márgenes válidos'),
