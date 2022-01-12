@@ -9,9 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Ahex\Zowner\Domain\Contracts\ModifierIdentifiable;
 use App\Ahex\Zowner\Domain\Features\HasModifiers;
 
-use App\Ahex\GuiaImpresion\Infrastructure\PrintableContentContract as PrintableContent;
-
-class Etapa extends Model implements ModifierIdentifiable, PrintableContent
+class Etapa extends Model implements ModifierIdentifiable
 {
     use HasFactory,
         SoftDeletes, 
@@ -265,16 +263,5 @@ class Etapa extends Model implements ModifierIdentifiable, PrintableContent
             $prepared['created_by'] = $prepared['updated_by'];
 
         return $prepared;
-    }
-
-    public static function contentForPrintingGuide(): array
-    {
-        if( ! $all = self::all()->toArray() )
-            return [];
-
-        foreach($all as $etapa) 
-            $attributes[$etapa['slug']] = $etapa['nombre'];
-
-        return $attributes;
     }
 }

@@ -9,9 +9,7 @@ use App\Ahex\Zowner\Domain\Contracts\ValueSearchable;
 use App\Ahex\Zowner\Domain\Contracts\ModifierIdentifiable;
 use App\Ahex\Zowner\Domain\Features\HasModifiers;
 
-use App\Ahex\GuiaImpresion\Infrastructure\PrintableContentContract as PrintableContent;
-
-class Destinatario extends Model implements ModifierIdentifiable, ValueSearchable, PrintableContent
+class Destinatario extends Model implements ModifierIdentifiable, ValueSearchable
 {
     use HasFactory,
         SoftDeletes, 
@@ -115,20 +113,5 @@ class Destinatario extends Model implements ModifierIdentifiable, ValueSearchabl
             $prepared['created_by'] = $prepared['updated_by'];
 
         return $prepared;
-    }
-
-    public static function contentForPrintingGuide(): array
-    {
-        return [
-            'nombre' => 'Nombre',
-            'direccion' => 'Dirección',
-            'postal' => 'Postal',
-            'ciudad' => 'Ciudad',
-            'estado' => 'Estado',
-            'pais' => 'Pais',
-            'referencias' => 'Referencias',
-            'telefono' => 'Teléfono',
-            'notas' => 'Notas',
-        ];
     }
 }

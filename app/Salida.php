@@ -11,9 +11,8 @@ use App\Ahex\Zowner\Domain\Contracts\ModifierIdentifiable;
 use App\Ahex\Zowner\Domain\Features\HasModifiers;
 use App\Ahex\Zowner\Domain\Features\UpdateDescriptionHandler;
 use Illuminate\Database\Eloquent\Model;
-use App\Ahex\GuiaImpresion\Infrastructure\PrintableContentContract as PrintableContent;
 
-class Salida extends Model implements ModifierIdentifiable, PrintableContent
+class Salida extends Model implements ModifierIdentifiable
 {
     use Attributes, 
         Relationships, 
@@ -66,20 +65,5 @@ class Salida extends Model implements ModifierIdentifiable, PrintableContent
         }
 
         return $prepared;
-    }
-
-    public static function contentForPrintingGuide(): array
-    {
-        return [
-            'rastreo' => 'Rastreo',
-            'confirmacion' => 'Confirmación',
-            'cobertura' => 'Cobertura',
-            'direccion' => 'Dirección',
-            'postal' => 'Postal',
-            'ciudad' => 'Ciudad',
-            'estado' => 'Estado',
-            'pais' => 'Pais',
-            'notas' => 'Notas',
-        ];
     }
 }

@@ -16,9 +16,8 @@ use App\Ahex\Zowner\Domain\Features\HasModifiers;
 use App\Ahex\Zowner\Domain\Features\UpdateDescriptionHandler;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Ahex\GuiaImpresion\Infrastructure\PrintableContentContract as PrintableContent;
 
-class Entrada extends Model implements ModifierIdentifiable, PrintableContent
+class Entrada extends Model implements ModifierIdentifiable
 {
     use HasFactory,
         ConfirmadoTopic,
@@ -103,19 +102,5 @@ class Entrada extends Model implements ModifierIdentifiable, PrintableContent
             $prepared['created_by'] = $prepared['updated_by'];
 
         return $prepared;
-    }
-
-    public static function contentForPrintingGuide(): array
-    {
-        return [
-            'numero' => 'Número',
-            'consolidado' => 'Consolidado',
-            'cliente' => 'Cliente',
-            'contenido' => 'Contenido',
-            'conductor' => 'Conductor',
-            'vehiculo' => 'Vehículo',
-            'reempacador' => 'Reempacador',
-            'codigor' => 'Código R',
-        ];
     }
 }
