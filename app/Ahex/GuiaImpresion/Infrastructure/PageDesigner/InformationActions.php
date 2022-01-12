@@ -28,6 +28,6 @@ trait InformationActions
             
             return '...?';
 
-        }, $this->guide->contenido_array);
+        }, $this->guide->informacion_array);
     }
 }
