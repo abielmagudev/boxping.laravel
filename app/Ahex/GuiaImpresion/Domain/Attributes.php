@@ -20,14 +20,14 @@ trait Attributes
         return json_decode($this->tipografia_encoded);
     }
 
-    public function getContenidoAttribute()
+    public function getInformacionAttribute()
     {
-        return json_decode($this->contenido_encoded);
+        return json_decode($this->informacion_encoded);
     }
     
-    public function getContenidoArrayAttribute()
+    public function getInformacionArrayAttribute()
     {
-        return json_decode($this->contenido_encoded, true); // get_object_vars( $this->contenido )
+        return json_decode($this->informacion_encoded, true); // get_object_vars( $this->informacion )
     }
 
 
@@ -78,11 +78,11 @@ trait Attributes
     // Contenido attributes
     public function getContenidoJsonAttribute()
     {
-        return $this->contenido_encoded;
+        return $this->informacion_encoded;
     }
 
     public function getContenidoCounterAttribute()
     {
-        return count( (array) $this->contenido );
+        return count( $this->informacion_array );
     }
 }

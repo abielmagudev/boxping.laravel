@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Ahex\GuiaImpresion\Infrastructure\PageDesigner\PageDesigner;
+use App\Http\Requests\GuiaImpresionSaveRequest as SaveRequest;
 use Illuminate\Http\Request;
 use App\GuiaImpresion;
-use App\Http\Requests\GuiaImpresionSaveRequest as SaveRequest;
-use App\Ahex\GuiaImpresion\Infrastructure\PrintableContentContainer;
 
 class GuiaImpresionController extends Controller
 {

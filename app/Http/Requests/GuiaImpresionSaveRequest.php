@@ -52,8 +52,8 @@ class GuiaImpresionSaveRequest extends FormRequest
             'tipografia.tamano' => 'numeric',
             'tipografia.medicion' => "in:{$this->mediciones_fuente}",
 
-            // Contenido
-            'contenido' => ['required','array'],
+            // Informacion
+            'informacion' => ['required','array'],
 
             // Extra
             'texto_final' => ['nullable','string'],
@@ -90,9 +90,9 @@ class GuiaImpresionSaveRequest extends FormRequest
             'tipografia.tamano.numeric' => __('Escribe el tamaño de la fuente'),
             'tipografia.medicion.in' => __('Selecciona una medición válida de fuente'),
 
-            // Contenido
-            'contenido.required' => __('Selecciona el contenido'),
-            'contenido.array' => __('Selecciona un contenido válido'),
+            // Informacion
+            'informacion.required' => __('Selecciona la información para la guía'),
+            'informacion.array' => __('Selecciona una informacion válida'),
         ];
     }
 }

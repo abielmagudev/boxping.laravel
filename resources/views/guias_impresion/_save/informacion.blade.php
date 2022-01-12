@@ -1,14 +1,14 @@
-<h6>Contenido</h6>
-<div class="d-none mb-2" id="contentSelectionExample">
+<h6>Información</h6>
+<div class="d-none mb-2" id="informationSelectionTemplate">
     <div class="flex-fill">
         <div class="input-group">
-            <small class="input-group-text text-muted contents-counter"></small>
-            <select name="contenido[]" id="select-contenido" class="form-select">
+            <small class="input-group-text text-muted information-order"></small>
+            <select name="informacion[]" id="select-informacion" class="form-select">
                 <option selected disabled></option>
-                @foreach($page::allContents() as $key => $class)
-                <optgroup label="<?= ucfirst($key) ?>">
+                @foreach($page::allInformants() as $informant => $class)
+                <optgroup label="<?= ucfirst($informant) ?>">
                     @foreach($class::getActionsLabels() as $action => $label)
-                    <option value='<?= "{$key}.{$action}" ?>'>{{ $label['large'] }}</option>
+                    <option value='<?= "{$informant}.{$action}" ?>'>{{ $label['large'] }}</option>
                     @endforeach
                 </optgroup>
                 @endforeach
@@ -16,18 +16,18 @@
         </div>
     </div>
     <div class="ms-2">
-        <button class="btn btn-outline-danger fw-bold contents-remove-button" type="button">-</button>
+        <button class="btn btn-outline-danger fw-bold remove-information-button" type="button">-</button>
     </div>
 </div>
-<button class="btn btn-outline-primary fw-bold w-100" type="button" style="padding:6px 10px" id="addContentButton">+</button>
+<button class="btn btn-outline-primary fw-bold w-100" type="button" style="padding:6px 10px" id="addInformationButton">+</button>
 <br>
 <br>
 <br>
 
 <script>
-const addContentButton = {
-    button: document.getElementById('addContentButton'),
-    example: document.getElementById('contentSelectionExample'),
+const addInformationButton = {
+    button: document.getElementById('addInformationButton'),
+    example: document.getElementById('informationSelectionTemplate'),
     add: function () {
         element = this.factory() 
         this.button.before( element )
@@ -43,12 +43,12 @@ const addContentButton = {
         cloneSelect.required = true
         cloneSelect.value = this.values_selected.length > 0 ? this.values_selected.shift() : null
         
-        removeContentButton.setup(cloned)
+        removeInformationButton.setup(cloned)
         
         return cloned
     },
     enumerating: function () {
-        document.querySelectorAll('.contents-counter').forEach( function (element, index) {
+        document.querySelectorAll('.information-order').forEach( function (element, index) {
             element.textContent = index
         })
     },
@@ -64,8 +64,8 @@ const addContentButton = {
     }
 }
 
-const removeContentButton = {
-    classname: '.contents-remove-button',
+const removeInformationButton = {
+    classname: '.remove-information-button',
     all: function () {
         return document.querySelectorAll( this.classname )
     },
@@ -75,11 +75,11 @@ const removeContentButton = {
     setup: function (element) {
         element.querySelector( this.classname ).addEventListener('click', function () {
             this.parentElement.parentElement.remove()
-            addContentButton.enumerating()
+            addInformationButton.enumerating()
         })
     }
 }
 
-addContentButton.listening()
-addContentButton.shootClick(<?= $guia->isReal() ? $guia->contenido_counter : 1 ?>, <?= $guia->contenido_json ?? '[]' ?>)
+addInformationButton.listening()
+addInformationButton.shootClick(<?= $guia->isReal() ? $guia->contenido_counter : 1 ?>, <?= $guia->contenido_json ?? '[]' ?>)
 </script>

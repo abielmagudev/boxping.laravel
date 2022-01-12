@@ -8,7 +8,7 @@ class PageDesigner
 {
     use CacheActions,
         FormatActions,
-        InformantionActions,
+        InformationActions,
         TypographyActions;
 
     const DEFAULT_FONT_SIZE = 16;

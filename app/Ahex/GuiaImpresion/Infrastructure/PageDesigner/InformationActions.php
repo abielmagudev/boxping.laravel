@@ -4,7 +4,7 @@ namespace App\Ahex\GuiaImpresion\Infrastructure\PageDesigner;
 
 use App\Ahex\GuiaImpresion\Application\InformantsMananger;
 
-trait InformantionActions
+trait InformationActions
 {
     public static function allInformants()
     {

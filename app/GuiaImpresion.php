@@ -24,7 +24,7 @@ class GuiaImpresion extends Model
         'formato_encoded',
         'margenes_encoded',
         'tipografia_encoded',
-        'contenido_encoded',
+        'informacion_encoded',
         'texto_final',
         'activada',
         'intentos_impresion',
@@ -38,7 +38,7 @@ class GuiaImpresion extends Model
             'formato_encoded' => static::prepareFormato($validated['formato']),
             'margenes_encoded' => static::prepareMargenes($validated['margenes']),
             'tipografia_encoded' => static::prepareTipografia($validated['tipografia']),
-            'contenido_encoded' => static::prepareContenido($validated['contenido']),
+            'informacion_encoded' => static::prepareInformacion($validated['informacion']),
             'texto_final' => $validated['texto_final'] ?? null,
             'activada' => isset($validated['desactivar']) ? 0 : 1,
         ];
@@ -83,8 +83,8 @@ class GuiaImpresion extends Model
         ]);
     }
 
-    private static function prepareContenido($contenido)
+    private static function prepareInformacion($informacion)
     {
-        return json_encode($contenido);
+        return json_encode($informacion);
     }
 }
