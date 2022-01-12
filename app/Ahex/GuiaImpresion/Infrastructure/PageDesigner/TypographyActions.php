@@ -62,12 +62,12 @@ trait TypographyActions
     // Implodes
     public static function implodeFonts(string $glue = ',')
     {
-        return implode($glue, self::allFonts());
+        return implode($glue, array_keys(self::allFonts()));
     }
 
     public static function implodeFontMeasurements(string $glue = ',')
     {
-        return implode($glue, self::allFontMeasurements());
+        return implode($glue, array_keys(self::allFontMeasurements()));
     }
 
 
