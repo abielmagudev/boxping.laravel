@@ -28,8 +28,8 @@
       <?php $margenes_medicion = $guia->margenes->medicion ?? null ?>
       <label class="form-label small" for="select-margen-medicion">Medición</label>
       <select id="select-margen-medicion" class="form-select <?= bootstrap_isInputInvalid('margenes.medicion', $errors) ?>" name="margenes[medicion]">
-         @foreach ($pagina->mediciones as $value => $tag)
-         <option value="<?= $value ?>" <?= toggleSelected($value, old('margenes.medicion', $margenes_medicion)) ?>><?= ucfirst($tag) ?></option>
+         @foreach ($page::allMeasurements() as $value => $label)
+         <option value="<?= $value ?>" <?= toggleSelected($value, old('margenes.medicion', $margenes_medicion)) ?>><?= ucfirst($label) ?></option>
          @endforeach
       </select>
       @include('@.bootstrap.invalid-input-message', ['name' => 'margenes.medicion'])

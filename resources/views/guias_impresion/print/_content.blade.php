@@ -1,5 +1,5 @@
 <div class="content">
-    @foreach($guia->obtenerContenidos($entrada) as $contenido)
-    <div>{!! $contenido !!}</div>
+    @foreach($page->allInformation($entrada) as $informacion)
+    <div>{!! $informacion !!}</div>
     @endforeach
 </div>

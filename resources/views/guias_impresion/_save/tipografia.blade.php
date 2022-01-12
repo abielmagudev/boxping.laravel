@@ -4,8 +4,8 @@
       <?php $tipografia_fuente = $guia->tipografia->fuente ?? null ?>
       <label class="form-label small" for="select-fuente">Fuente</label>
       <select id="select-fuente" class="form-select <?= bootstrap_isInputInvalid('tipografia.fuente', $errors) ?>" name="tipografia[fuente]" required>
-         @foreach ($pagina->tipografia->fuentes as $value => $tag)
-         <option value="<?= $value ?>" <?= toggleSelected($value, old('tipografia.fuente', $tipografia_fuente)) ?>>{{ $tag }}</option>
+         @foreach ($page::allFonts() as $value => $label)
+         <option value="<?= $value ?>" <?= toggleSelected($value, old('tipografia.fuente', $tipografia_fuente)) ?>>{{ $label }}</option>
          @endforeach
       </select>
       @include('@.bootstrap.invalid-input-message', ['name' => 'tipografia.fuente'])
@@ -20,8 +20,8 @@
       <?php $tipografia_medicion = $guia->tipografia->medicion ?? null ?>
       <label class="form-label small" for="select-fuente-medicion">Medición</label>
       <select id="select-fuente-medicion" class="form-select <?= bootstrap_isInputInvalid('tipografia.medicion', $errors) ?>" name="tipografia[medicion]" required>
-         @foreach ($pagina->tipografia->mediciones as $value => $tag)
-         <option value="<?= $value ?>" <?= toggleSelected($value, old('tipografia.medicion', $tipografia_medicion)) ?>>{{ $tag }}</option>
+         @foreach ($page::allFontMeasurements() as $value => $label)
+         <option value="<?= $value ?>" <?= toggleSelected($value, old('tipografia.medicion', $tipografia_medicion)) ?>>{{ $label }}</option>
          @endforeach
       </select>
       @include('@.bootstrap.invalid-input-message', ['name' => 'tipografia.medicion'])

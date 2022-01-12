@@ -2,20 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Http\Requests\Entrada\CreateRequest;
-use App\Http\Requests\Entrada\StoreRequest;
-use App\Http\Requests\Entrada\EditRequest;
-use App\Http\Requests\Entrada\UpdateRequest;
-use App\Http\Requests\Entrada\MultipleRequest;
 use App\Ahex\Zowner\Application\Features\HasValidations;
+use App\Ahex\Entrada\Application\EditCalled\EditorsContainer;
 use App\Ahex\Entrada\Application\RedirectAfterStored;
 use App\Ahex\Entrada\Application\ShowPresenter;
-use App\Ahex\Entrada\Application\EditCalled\EditorsContainer;
 use App\Ahex\Entrada\Application\UpdateCalled\Updaters\UpdatersContainer;
-use App\Entrada;
+use App\Http\Requests\Entrada\CreateRequest;
+use App\Http\Requests\Entrada\EditRequest;
+use App\Http\Requests\Entrada\MultipleRequest;
+use App\Http\Requests\Entrada\StoreRequest;
+use App\Http\Requests\Entrada\UpdateRequest;
+use Illuminate\Http\Request;
+use App\Ahex\GuiaImpresion\Infrastructure\PageDesigner\PageDesigner;
 use App\Consolidado;
 use App\GuiaImpresion;
+use App\Entrada;
 
 class EntradaController extends Controller
 {
@@ -104,7 +105,10 @@ class EntradaController extends Controller
                     ? 'guias_impresion.print.single'
                     : 'entradas.print.single';
    
-        return view($view_name, compact('entrada', 'guia'));
+        return view($view_name, [
+            'entrada' => $entrada,
+            'page' => new PageDesigner($guia),
+        ]);
     }
 
     public function toPrintMany(MultipleRequest $request, GuiaImpresion $guia = null)
@@ -115,6 +119,9 @@ class EntradaController extends Controller
                     ? 'guias_impresion.print.multiple'
                     : 'entradas.print.multiple';
         
-        return view($view_name, compact('entradas', 'guia'));
+        return view($view_name, [
+            'entradas' => $entradas,
+            'page' => new PageDesigner($guia),
+        ]);
     }
 }

@@ -5,19 +5,14 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use App\Ahex\GuiaImpresion\Domain\Actions;
 use App\Ahex\GuiaImpresion\Domain\Attributes;
-use App\Ahex\GuiaImpresion\Domain\PageMeasurement;
-use App\Ahex\GuiaImpresion\Domain\PageTypography;
-use App\Ahex\GuiaImpresion\Domain\PageContent;
 use App\Ahex\GuiaImpresion\Domain\Scopes;
 use App\Ahex\GuiaImpresion\Domain\Validations;
+use App\Ahex\GuiaImpresion\Infrastructure\PageDesigner\PageDesigner;
 
 class GuiaImpresion extends Model
 {   
     use Actions,
         Attributes,
-        PageMeasurement,
-        PageTypography,
-        PageContent,
         Scopes,
         Validations;
 
@@ -54,8 +49,8 @@ class GuiaImpresion extends Model
         return json_encode([
             'ancho' => $formato['ancho'] ?? null,
             'altura' => $formato['altura'] ?? null,
-            'medicion' => ! self::existsPageMeasurement($formato['medicion']) 
-                          ? self::defaultPageMeasurement()
+            'medicion' => ! PageDesigner::existsMeasurement($formato['medicion']) 
+                          ? PageDesigner::defaultMeasurement()
                           : $formato['medicion'],
         ]);
     }
@@ -67,8 +62,8 @@ class GuiaImpresion extends Model
             'derecha' => $margenes['derecha'] ?? null,
             'abajo' => $margenes['abajo'] ?? null,
             'izquierda' => $margenes['izquierda'] ?? null,
-            'medicion' => ! self::existsPageMeasurement($margenes['medicion'])
-                          ? self::defaultPageMeasurement()
+            'medicion' => ! PageDesigner::existsMeasurement($margenes['medicion'])
+                          ? PageDesigner::defaultMeasurement()
                           : $margenes['medicion'],
             ]);
     }
@@ -76,27 +71,20 @@ class GuiaImpresion extends Model
     private static function prepareTipografia($tipografia)
     {
         return json_encode([
-            'fuente' => ! self::existsFontName($tipografia['fuente']) ? self::defaultFontName() : $tipografia['fuente'],
-            'medicion' => ! self::existsFontMeasurement($tipografia['medicion']) ? self::defaultFontMeasurement() : $tipografia['medicion'],
-            'tamano' => (float) $tipografia['tamano'] ?? self::defaultFontSize(),
-            'interlineado' => self::defaultLineHeight(),
+            'fuente' => ! PageDesigner::existsFont($tipografia['fuente']) 
+                        ? PageDesigner::defaultFont() 
+                        : $tipografia['fuente'],
+            'medicion' => ! PageDesigner::existsFontMeasurement($tipografia['medicion']) 
+                          ? PageDesigner::defaultFontMeasurement() 
+                          : $tipografia['medicion'],
+            'tamano' => (float) $tipografia['tamano'] 
+                        ?? PageDesigner::DEFAULT_FONT_SIZE,
+            'interlineado' => PageDesigner::defaultLineHeight(),
         ]);
     }
 
     private static function prepareContenido($contenido)
     {
         return json_encode($contenido);
-    }
-
-    public static function allPageSettings()
-    {
-        return (object) [
-            'mediciones' => self::allPageMeasurements(),
-            'tipografia' => (object) [
-                'fuentes' => self::allFontNames(),
-                'mediciones' => self::allFontMeasurements(),
-            ],
-            'contenidos' => self::allPageContents(),
-        ];
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Ahex\GuiaImpresion\Infrastructure\PageDesigner\PageDesigner;
 use Illuminate\Http\Request;
 use App\GuiaImpresion;
 use App\Http\Requests\GuiaImpresionSaveRequest as SaveRequest;
@@ -22,7 +23,7 @@ class GuiaImpresionController extends Controller
     public function create()
     {
         return view('guias_impresion.create', [
-            'pagina' => GuiaImpresion::allPageSettings(),
+            'page' => PageDesigner::class,
             'guia' => new GuiaImpresion,
         ]);
     }
@@ -40,7 +41,7 @@ class GuiaImpresionController extends Controller
     public function edit(GuiaImpresion $guia)
     {
         return view('guias_impresion.edit', [
-            'pagina' => GuiaImpresion::allPageSettings(),
+            'page' => PageDesigner::class,
             'guia' => $guia,
         ]);
     }
