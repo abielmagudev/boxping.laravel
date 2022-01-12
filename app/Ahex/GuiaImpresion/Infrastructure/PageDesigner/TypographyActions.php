@@ -60,12 +60,12 @@ trait TypographyActions
 
     
     // Implodes
-    public function implodeFonts(string $glue = ',')
+    public static function implodeFonts(string $glue = ',')
     {
         return implode($glue, self::allFonts());
     }
 
-    public function implodeFontMeasurements(string $glue = ',')
+    public static function implodeFontMeasurements(string $glue = ',')
     {
         return implode($glue, self::allFontMeasurements());
     }

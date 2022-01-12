@@ -29,7 +29,7 @@ trait FormatActions
         return isset( self::allMeasurements()[$abbr] );
     }
 
-    public function implodeMeasurements(string $glue = ',')
+    public static function implodeMeasurements(string $glue = ',')
     {
         return implode($glue, array_keys(self::allMeasurements()));
     }
