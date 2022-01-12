@@ -6,7 +6,7 @@ use App\Ahex\GuiaImpresion\Application\InformantsMananger;
 
 trait InformantionActions
 {
-    public static function allInformats()
+    public static function allInformants()
     {
         if( self::hasCache('informants') )
             return  self::cache('informants');
