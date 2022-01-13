@@ -8,28 +8,28 @@ class ReempacadoInformant extends Informant
 {
     protected static $actions_labels = [
         'fecha_hora' => [
-            'large' => 'Fecha y hora de reempacado de la entrada',
-            'small' => 'Reempacado Fecha Hora',
+            'completa' => 'Fecha y hora de reempacado de la entrada',
+            'compacta' => 'Reempacado',
         ],
         'fecha' => [
-            'large' => 'Fecha de reempacado de la entrada',
-            'small' => 'Reempacado Fecha',
+            'completa' => 'Fecha de reempacado de la entrada',
+            'compacta' => 'Reempacado(fecha)',
         ],
         'hora' => [
-            'large' => 'Hora de reempacado de la entrada',
-            'small' => 'Reempacado Hora',
+            'completa' => 'Hora de reempacado de la entrada',
+            'compacta' => 'Reempacado(hora)',
         ],
         'codigor' => [
-            'large' => 'Código de reempacado de la entrada',
-            'small' => 'Reempacado Vehículo',
+            'completa' => 'Código de reempacado de la entrada',
+            'compacta' => 'Reempacado(código)',
         ],
         'descripcion' => [
-            'large' => 'Descripción del código de reempacado de la entrada',
-            'small' => 'Reempacado Descripción',
+            'completa' => 'Descripción del código de reempacado de la entrada',
+            'compacta' => 'Reempacadod(descripción)',
         ],
         'reempacador' => [
-            'large' => 'Reempacador que realizó el reempacado de la entrada',
-            'small' => 'Reempacado Conductor',
+            'completa' => 'Reempacador que realizó el reempacado de la entrada',
+            'compacta' => 'Reempacado(usuario)',
         ],
     ];
 

@@ -8,32 +8,32 @@ class DestinatarioInformant extends Informant
 {
     protected static $actions_labels = [
         'informacion' => [
-            'large' => 'Información completa del destinatario (Excepto notas)',
-            'small' => 'Destinatario',
+            'completa' => 'Información completa del destinatario (Excepto notas)',
+            'compacta' => 'Destinatario',
         ],
         'domicilio' => [
-            'large' => 'Domicilio del destinatario (Calle, número y código postal)',
-            'small' => 'Destinatario Dirección',
+            'completa' => 'Domicilio del destinatario (Calle, número y código postal)',
+            'compacta' => 'Destinatario(dirección)',
         ],
         'postal' => [
-            'large' => 'Código postal del destinatario',
-            'small' => 'Destinatario Postal',
+            'completa' => 'Código postal del destinatario',
+            'compacta' => 'Destinatario(postal)',
         ],
         'localidad' => [
-            'large' => 'Localidad del destinatario (Ciudad, estado y pais)',
-            'small' => 'Destinatario Localidad',
+            'completa' => 'Localidad del destinatario (Ciudad, estado y pais)',
+            'compacta' => 'Destinatario(localidad)',
         ],
         'referencias' => [
-            'large' => 'Referencias del destinatario',
-            'small' => 'Destinatario Referencias',
+            'completa' => 'Referencias del destinatario',
+            'compacta' => 'Destinatario(referencias)',
         ],
         'telefono' => [
-            'large' => 'Telefóno(s) del destinatario',
-            'small' => 'Destinatario Teléfono',
+            'completa' => 'Telefóno(s) del destinatario',
+            'compacta' => 'Destinatario(teléfono)',
         ],
         'notas' => [
-            'large' => 'Notas del destinatario',
-            'small' => 'Destinatario Notas',
+            'completa' => 'Notas del destinatario',
+            'compacta' => 'Destinatario(notas)',
         ],
     ];
     

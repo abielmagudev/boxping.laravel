@@ -8,12 +8,12 @@ class ConfirmadoInformant extends Informant
 {
     protected static $actions_labels = [
         'fecha_hora' => [
-            'large' => 'Fecha y hora de confirmado de la entrada',
-            'small' => 'Confirmado',
+            'completa' => 'Fecha y hora de confirmado de la entrada',
+            'compacta' => 'Confirmado',
         ],
         'nombre' => [
-            'large' => 'Nombre de usuario que confirmó la entrada',
-            'small' => 'Confirmado por',
+            'completa' => 'Nombre de usuario que confirmó la entrada',
+            'compacta' => 'Confirmado(usuario)',
         ],
     ];
 

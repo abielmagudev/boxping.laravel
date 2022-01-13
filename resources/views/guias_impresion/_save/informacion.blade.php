@@ -8,7 +8,7 @@
                 @foreach($page::allInformants() as $informant => $class)
                 <optgroup label="<?= ucfirst($informant) ?>">
                     @foreach($class::getActionsLabels() as $action => $label)
-                    <option value='<?= "{$informant}.{$action}" ?>'>{{ $label['large'] }}</option>
+                    <option value='<?= "{$informant}.{$action}" ?>'>{{ $label['completa'] }}</option>
                     @endforeach
                 </optgroup>
                 @endforeach
@@ -20,7 +20,6 @@
     </div>
 </div>
 <button class="btn btn-outline-primary fw-bold w-100" type="button" style="padding:6px 10px" id="addInformationButton">+</button>
-<br>
 <br>
 <br>
 

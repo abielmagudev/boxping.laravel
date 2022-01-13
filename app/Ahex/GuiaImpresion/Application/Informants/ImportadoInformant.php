@@ -8,28 +8,28 @@ class ImportadoInformant extends Informant
 {
     protected static $actions_labels = [
         'fecha_hora' => [
-            'large' => 'Fecha y hora de importado de la entrada',
-            'small' => 'Importado Fecha Hora',
+            'completa' => 'Fecha y hora de importado de la entrada',
+            'compacta' => 'Importado',
         ],
         'fecha' => [
-            'large' => 'Fecha de importado de la entrada',
-            'small' => 'Importado Fecha',
+            'completa' => 'Fecha de importado de la entrada',
+            'compacta' => 'Importado(fecha)',
         ],
         'hora' => [
-            'large' => 'Hora de importado de la entrada',
-            'small' => 'Importado Hora',
+            'completa' => 'Hora de importado de la entrada',
+            'compacta' => 'Importado(hora)',
         ],
         'vehiculo' => [
-            'large' => 'Vehículo que realizo el importado la entrada',
-            'small' => 'Importado Vehículo',
+            'completa' => 'Vehículo que realizo el importado la entrada',
+            'compacta' => 'Importado(vehículo)',
         ],
         'conductor' => [
-            'large' => 'Conductor que realizo el importado la entrada',
-            'small' => 'Importado Conductor',
+            'completa' => 'Conductor que realizo el importado la entrada',
+            'compacta' => 'Importado(conductor)',
         ],
         'numero_cruce' => [
-            'large' => 'Número de cruce del importado de la entrada',
-            'small' => 'Importado Número Cruce',
+            'completa' => 'Número de cruce del importado de la entrada',
+            'compacta' => 'Importado(cruce)',
         ],
     ];
 

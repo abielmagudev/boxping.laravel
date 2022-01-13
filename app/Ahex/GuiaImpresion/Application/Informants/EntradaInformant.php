@@ -8,28 +8,28 @@ class EntradaInformant extends Informant
 {
     protected static $actions_labels = [
         'numero' => [
-            'large' => 'Número de entrada',
-            'small' => 'Entrada',
+            'completa' => 'Número de entrada',
+            'compacta' => 'Entrada',
         ],
         'contenido' => [
-            'large' => 'Contenido de la entrada',
-            'small' => 'Contenido',
+            'completa' => 'Contenido de la entrada',
+            'compacta' => 'Contenido',
         ],
         'actualizado_fecha_hora' => [
-            'large' => 'Fecha y hora de la última actualización de la entrada',
-            'small' => 'Actualizado',
+            'completa' => 'Fecha y hora de la última actualización de la entrada',
+            'compacta' => 'Actualizado',
         ],
         'actualizado_nombre' => [
-            'large' => 'Nombre de usuario que recién actualizó la entrada',
-            'small' => 'Actualizado por',
+            'completa' => 'Nombre de usuario que recién actualizó la entrada',
+            'compacta' => 'Actualizado(usuario)',
         ],
         'creado_fecha_hora' => [
-            'large' => 'Fecha y hora de creación de la entrada',
-            'small' => 'Creado',
+            'completa' => 'Fecha y hora de creación de la entrada',
+            'compacta' => 'Creado',
         ],
         'creado_nombre' => [
-            'large' => 'Nombre de usuario que creó la entrada',
-            'small' => 'Creado por',
+            'completa' => 'Nombre de usuario que creó la entrada',
+            'compacta' => 'Creado(usuario)',
         ],
     ];
 

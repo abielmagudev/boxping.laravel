@@ -8,36 +8,36 @@ class SalidaInformant extends Informant
 {
     protected static $actions_labels = [
         'transportadora' => [
-            'large' => 'Nombre de la transportadora',
-            'small' => 'Transportadora',
+            'completa' => 'Nombre de la transportadora',
+            'compacta' => 'Transportadora)',
         ],
         'rastreo' => [
-            'large' => 'Número de rastreo',
-            'small' => 'Rastreo',
+            'completa' => 'Número de rastreo',
+            'compacta' => 'Rastreo',
         ],
         'confirmacion' => [
-            'large' => 'Número de confirmación',
-            'small' => 'Confirmación',
+            'completa' => 'Número de confirmación',
+            'compacta' => 'Confirmación',
         ],
         'status' => [
-            'large' => 'Status de salida',
-            'small' => 'Salida Status',
+            'completa' => 'Status de salida',
+            'compacta' => 'Salida(status)',
         ],
         'cobertura' => [
-            'large' => 'Tipo de cobertura',
-            'small' => 'Cobertura',
+            'completa' => 'Tipo de cobertura',
+            'compacta' => 'Cobertura',
         ],
         'ocurre' => [
-            'large' => 'Información completa de cobertura "Ocurre"',
-            'small' => 'Ocurre',
+            'completa' => 'Información completa de cobertura "Ocurre"',
+            'compacta' => 'Ocurre',
         ],
         'incidentes' => [
-            'large' => 'Incidentes de salida',
-            'small' => 'Incidentes',
+            'completa' => 'Incidentes de salida',
+            'compacta' => 'Salida(incidentes)',
         ],
         'notas' => [
-            'large' => 'Notas de salida',
-            'small' => 'Salida Notas',
+            'completa' => 'Notas de salida',
+            'compacta' => 'Salida(notas)',
         ],
     ];
 

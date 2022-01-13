@@ -8,16 +8,16 @@ class ClienteInformant extends Informant
 {
     protected static $actions_labels = [
         'nombre' => [
-            'large' => 'Nombre del cliente',
-            'small' => 'Cliente Nombre',
+            'completa' => 'Nombre del cliente',
+            'compacta' => 'Cliente',
         ],
         'alias' => [
-            'large' => 'Alias del cliente',
-            'small' => 'Cliente Alias',
+            'completa' => 'Alias del cliente',
+            'compacta' => 'Cliente(alias)',
         ],
         'contacto' => [
-            'large' => 'Contacto del cliente',
-            'small' => 'Cliente Contacto',
+            'completa' => 'Contacto del cliente',
+            'compacta' => 'Cliente(contacto)',
         ],
     ];
 

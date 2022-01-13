@@ -8,28 +8,28 @@ class RemitenteInformant extends Informant
 {
     protected static $actions_labels = [
         'informacion' => [
-            'large' => 'Información completa del remitente (Excepto notas)',
-            'small' => 'Remitente',
+            'completa' => 'Información completa del remitente (Excepto notas)',
+            'compacta' => 'Remitente',
         ],
         'domicilio' => [
-            'large' => 'Domicilio del remitente (Calle, número y código postal)',
-            'small' => 'Remitente Dirección',
+            'completa' => 'Domicilio del remitente (Calle, número y código postal)',
+            'compacta' => 'Remitente(dirección)',
         ],
         'postal' => [
-            'large' => 'Código postal del remitente',
-            'small' => 'Remitente Postal',
+            'completa' => 'Código postal del remitente',
+            'compacta' => 'Remitente(postal)',
         ],
         'localidad' => [
-            'large' => 'Localidad del remitente (Ciudad, estado y pais)',
-            'small' => 'Remitente Localidad',
+            'completa' => 'Localidad del remitente (Ciudad, estado y pais)',
+            'compacta' => 'Remitente(localidad)',
         ],
         'telefono' => [
-            'large' => 'Telefóno(s) del remitente',
-            'small' => 'Remitente Teléfono',
+            'completa' => 'Telefóno(s) del remitente',
+            'compacta' => 'Remitente(teléfono)',
         ],
         'notas' => [
-            'large' => 'Notas del remitente',
-            'small' => 'Remitente Notas',
+            'completa' => 'Notas del remitente',
+            'compacta' => 'Remitente(notas)',
         ],
     ];
 

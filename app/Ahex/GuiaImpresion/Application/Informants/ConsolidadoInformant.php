@@ -8,20 +8,20 @@ class ConsolidadoInformant extends Informant
 {
     protected static $actions_labels = [
         'numero' => [
-            'large' => 'Número de consolidado',
-            'small' => 'Consolidado',
+            'completa' => 'Número de consolidado',
+            'compacta' => 'Consolidado',
         ],
         'status' => [
-            'large' => 'Status del consolidado',
-            'small' => 'Consolidado Status',
+            'completa' => 'Status del consolidado',
+            'compacta' => 'Consolidado(status)',
         ],
         'tarimas' => [
-            'large' => 'Cantidad de tarimas del consolidado',
-            'small' => 'Tarimas',
+            'completa' => 'Cantidad de tarimas del consolidado',
+            'compacta' => 'Consolidado(tarimas)',
         ],
         'notas' => [
-            'large' => 'Notas del consolidado',
-            'small' => 'Consolidado Notas',
+            'completa' => 'Notas del consolidado',
+            'compacta' => 'Consolidado(notas)',
         ]
     ];
     
