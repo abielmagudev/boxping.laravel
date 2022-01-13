@@ -19,7 +19,11 @@
         <button class="btn btn-outline-danger fw-bold remove-information-button" type="button">-</button>
     </div>
 </div>
-<button class="btn btn-outline-primary fw-bold w-100" type="button" style="padding:6px 10px" id="addInformationButton">+</button>
+<button class="btn btn-outline-primary fw-bold w-100 mb-2" type="button" style="padding:6px 10px" id="addInformationButton">+</button>
+<div class="form-check">
+    <input class="form-check-input" type="checkbox" name="etiquetas" value="1" id="checkbox-etiqueta-informacion" <?= $guia->hasEtiquetas() ? 'checked' : '' ?>>
+    <label class="form-check-label" for="checkbox-etiqueta-informacion">Mostrar etiquetas para la información seleccionada.</label>
+</div>
 <br>
 <br>
 

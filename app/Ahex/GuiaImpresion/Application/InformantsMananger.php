@@ -51,4 +51,9 @@ class InformantsMananger
     {
         return call_user_func([self::informant($key), $action], $entrada);
     }
+
+    public static function label(string $key, string $action, string $label)
+    {
+        return call_user_func_array([self::informant($key), 'getLabel'], [$action, $label]);
+    }
 }

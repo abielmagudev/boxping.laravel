@@ -54,6 +54,7 @@ class GuiaImpresionSaveRequest extends FormRequest
 
             // Informacion
             'informacion' => ['required','array'],
+            'etiquetas' => 'boolean',
             'texto_final' => ['nullable','string'],
 
             // Extra

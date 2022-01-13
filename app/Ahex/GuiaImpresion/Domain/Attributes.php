@@ -38,4 +38,9 @@ trait Attributes
     {
         return count( $this->informacion_array );
     }
+
+    public function getTipoEtiquetaAttribute()
+    {
+        return $this->informacion_etiquetas;
+    }
 }

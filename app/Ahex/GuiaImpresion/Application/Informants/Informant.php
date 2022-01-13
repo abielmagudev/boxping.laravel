@@ -10,4 +10,9 @@ abstract class Informant
     {
         return static::$actions_labels;
     }
+
+    public static function getLabel(string $action, string $label)
+    {
+        return static::$actions_labels[$action][$label];
+    }
 }

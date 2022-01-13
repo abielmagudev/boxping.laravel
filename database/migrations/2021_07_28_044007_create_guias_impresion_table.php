@@ -21,6 +21,7 @@ class CreateGuiasImpresionTable extends Migration
             $table->text('margenes_encoded');
             $table->text('tipografia_encoded');
             $table->text('informacion_encoded');
+            $table->enum('informacion_etiquetas', ['completa', 'compacta'])->nullable();
             $table->text('texto_final')->nullable();
             $table->boolean('activada')->default(1);
             $table->unsignedInteger('intentos_impresion')->default(0);

@@ -17,13 +17,13 @@ class ConfirmadoInformant extends Informant
         ],
     ];
 
-    public static function fecha(Entrada $entrada)
+    public static function fecha_hora(Entrada $entrada)
     {
-        return $entrada->hasFechaHoraConfirmado() ? $entrada->confirmado_at : '';
+        return $entrada->hasFechaHoraConfirmado() ? $entrada->confirmado_at : '?';
     }
 
     public static function nombre(Entrada $entrada)
     {
-        return $entrada->hasConfirmador() ? $entrada->confirmador->name : '';
+        return $entrada->hasConfirmador() ? $entrada->confirmador->name : '?';
     }
 }

@@ -16,19 +16,31 @@ trait InformationActions
 
     public function allInformation(\App\Entrada $entrada)
     {
-        return array_map(function ($informant_action) use ($entrada) {
-
+        foreach($this->guide->informacion_array as $informant_action)
+        {
             if( strpos($informant_action, '.') <> false )
             {
                 list($informant, $action) = explode('.', $informant_action);
                 
                 if( InformantsMananger::exists($informant, $action) )
-                    return InformantsMananger::action($informant, $action, $entrada);
-            }
-            
-            return '...?';
+                {
+                    $information = InformantsMananger::action($informant, $action, $entrada);
+                    $label = InformantsMananger::label($informant, $action, $this->guide->tipo_etiqueta);
 
-        }, $this->guide->informacion_array);
+                    if( $this->guide->hasEtiquetas()  )
+                    {
+                        $all_information[ $label ] = $information;
+                        continue;
+                    }
+                    
+                    array_push($all_information, $information);
+                }
+            }
+
+            array_push($all_information, '...?');
+        }
+
+        return $all_information ?? [];
     }
 
     public function hasFinalInformation()
