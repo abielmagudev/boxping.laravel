@@ -7,7 +7,7 @@
     size: <?= $page->size() ?>; /* A4, Letter, Legal ... */
     margin: <?= $page->margins() ?>;
 }
-.content {
+.information {
     font-family: "<?= $page->fontname() ?>";
     font-size: <?= $page->fontsize() ?>; /* calc($guia->tamano_fuente - ?%); */
 }

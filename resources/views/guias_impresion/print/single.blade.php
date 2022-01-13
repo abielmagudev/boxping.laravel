@@ -3,5 +3,5 @@
     @include('guias_impresion.print._style')
 @endsection
 @section('content')
-    @include('guias_impresion.print._content')
+    @include('guias_impresion.print._information')
 @endsection

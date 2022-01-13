@@ -4,8 +4,7 @@
 @endsection
 @section('content')
 @foreach($entradas as $entrada)   
-    @include('guias_impresion.print._content')
-    
+    @include('guias_impresion.print._information')
     @if(! $loop->last ) 
     <div class="break-before"></div>
     @endif
