@@ -5,10 +5,10 @@
             <small class="input-group-text text-muted information-order"></small>
             <select name="informacion[]" id="select-informacion" class="form-select">
                 <option selected disabled></option>
-                @foreach($page::allInformants() as $informant => $class)
-                <optgroup label="<?= ucfirst($informant) ?>">
-                    @foreach($class::getActionsLabels() as $action => $label)
-                    <option value='<?= "{$informant}.{$action}" ?>'>{{ $label['completa'] }}</option>
+                @foreach($informantsManager::all() as $informant_name => $informant_class)
+                <optgroup label="<?= ucfirst($informant_name) ?>">
+                    @foreach($informant_class::getActionsLabels() as $action => $label)
+                    <option value='<?= "{$informant_name}.{$action}" ?>'>{{ $label['completa'] }}</option>
                     @endforeach
                 </optgroup>
                 @endforeach

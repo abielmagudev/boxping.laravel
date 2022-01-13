@@ -4,7 +4,7 @@
       <?php $tipografia_fuente = $guia->tipografia->fuente ?? null ?>
       <label class="form-label small" for="select-fuente">Fuente</label>
       <select id="select-fuente" class="form-select <?= bootstrap_isInputInvalid('tipografia.fuente', $errors) ?>" name="tipografia[fuente]" required>
-         @foreach ($page::allFonts() as $value => $label)
+         @foreach ($pageDesigner::allFonts() as $value => $label)
          <option value="<?= $value ?>" <?= toggleSelected($value, old('tipografia.fuente', $tipografia_fuente)) ?>>{{ $label }}</option>
          @endforeach
       </select>
@@ -20,7 +20,7 @@
       <?php $tipografia_medicion = $guia->tipografia->medicion ?? null ?>
       <label class="form-label small" for="select-fuente-medicion">Medición</label>
       <select id="select-fuente-medicion" class="form-select <?= bootstrap_isInputInvalid('tipografia.medicion', $errors) ?>" name="tipografia[medicion]" required>
-         @foreach ($page::allFontMeasurements() as $value => $label)
+         @foreach ($pageDesigner::allFontMeasurements() as $value => $label)
          <option value="<?= $value ?>" <?= toggleSelected($value, old('tipografia.medicion', $tipografia_medicion)) ?>>{{ $label }}</option>
          @endforeach
       </select>
