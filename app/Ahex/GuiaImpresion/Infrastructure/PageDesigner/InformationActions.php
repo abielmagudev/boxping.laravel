@@ -30,4 +30,14 @@ trait InformationActions
 
         }, $this->guide->informacion_array);
     }
+
+    public function hasFinalInformation()
+    {
+        return $this->guide->hasTextoFinal();
+    }
+
+    public function finalInformation()
+    {
+        return $this->guide->texto_final;
+    }
 }
