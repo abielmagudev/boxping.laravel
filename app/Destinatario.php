@@ -53,7 +53,8 @@ class Destinatario extends Model implements ModifierIdentifiable, ValueSearchabl
 
     public function getInformacionCompletaAttribute()
     {
-        return "{$this->domicilio_completo} <br> {$this->referencias} <br> {$this->telefono}";
+        $referencias = $this->referencias ?? 'Sin referencias';
+        return "{$this->domicilio_completo} <br> {$referencias} <br> {$this->telefono}";
     }
 
 
