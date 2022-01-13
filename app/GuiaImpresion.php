@@ -32,7 +32,7 @@ class GuiaImpresion extends Model
 
     public static function prepare($validated)
     {
-        return [
+        $prepared = [
             'nombre' => $validated['nombre'],
             'descripcion' => $validated['descripcion'] ?? null,
             'formato_encoded' => static::prepareFormato($validated['formato']),
@@ -42,6 +42,11 @@ class GuiaImpresion extends Model
             'texto_final' => $validated['texto_final'] ?? null,
             'activada' => isset($validated['desactivar']) ? 0 : 1,
         ];
+
+        if( isset( $validated['resetear'] ) )
+            $prepared['intentos_impresion'] = 0;
+
+        return $prepared;
     }
 
     private static function prepareFormato($formato)
