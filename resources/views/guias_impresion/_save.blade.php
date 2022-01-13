@@ -5,4 +5,4 @@
 @include('guias_impresion._save.tipografia')
 @include('guias_impresion._save.informacion')
 @include('guias_impresion._save.texto_final')
-@includeWhen($guia->isReal(), 'guias_impresion._save.desactivar')
+@includeWhen($guia->isReal(), 'guias_impresion._save.atencion')
