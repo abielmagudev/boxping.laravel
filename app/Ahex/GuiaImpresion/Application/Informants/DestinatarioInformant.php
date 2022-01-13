@@ -39,36 +39,36 @@ class DestinatarioInformant extends Informant
     
     public static function informacion(Entrada $entrada)
     {
-        return ! $entrada->hasDestinatario() ?: $entrada->destinatario->informacion_completa;
+        return $entrada->hasDestinatario() ? $entrada->destinatario->informacion_completa : 'informacion?';
     }
 
     public static function domicilio(Entrada $entrada)
     {
-        return ! $entrada->hasDestinatario() ?: $entrada->destinatario->domicilio_completo;
+        return $entrada->hasDestinatario() ? $entrada->destinatario->domicilio_completo : 'domicilio?';
     }
 
     public static function postal(Entrada $entrada)
     {
-        return ! $entrada->hasDestinatario() ?: $entrada->destinatario->postal;
+        return $entrada->hasDestinatario() ? $entrada->destinatario->postal : 'postal?';
     }
 
     public static function localidad(Entrada $entrada)
     {
-        return ! $entrada->hasDestinatario() ?: $entrada->destinatario->localidad;
+        return $entrada->hasDestinatario() ? $entrada->destinatario->localidad : 'localidad?';
     }
 
     public static function referencias(Entrada $entrada)
     {
-        return ! $entrada->hasDestinatario() ?: $entrada->destinatario->referencias;
+        return $entrada->hasDestinatario() ? $entrada->destinatario->referencias : 'referencias?';
     }
 
     public static function telefono(Entrada $entrada)
     {
-        return ! $entrada->hasDestinatario() ?: $entrada->destinatario->telefono;
+        return $entrada->hasDestinatario() ? $entrada->destinatario->telefono : 'telefono?';
     }
 
     public static function notas(Entrada $entrada)
     {
-        return ! $entrada->hasDestinatario() ?: $entrada->destinatario->notas;
+        return $entrada->hasDestinatario() ? $entrada->destinatario->notas : '';
     }
 }
