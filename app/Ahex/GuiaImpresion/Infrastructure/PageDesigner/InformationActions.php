@@ -6,14 +6,6 @@ use App\Ahex\GuiaImpresion\Application\InformantsMananger;
 
 trait InformationActions
 {
-    public static function allInformants()
-    {
-        if( self::hasCache('informants') )
-            return  self::cache('informants');
-
-        return self::setCache('informants', InformantsMananger::all());
-    }
-
     public function allInformation(\App\Entrada $entrada)
     {
         foreach($this->guide->informacion_array as $informant_action)
@@ -45,11 +37,11 @@ trait InformationActions
 
     public function hasFinalInformation()
     {
-        return $this->guide->hasTextoFinal();
+        return $this->guide->hasInformacionFinal();
     }
 
     public function finalInformation()
     {
-        return $this->guide->texto_final;
+        return $this->guide->informacion_final;
     }
 }

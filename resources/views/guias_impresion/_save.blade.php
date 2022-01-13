@@ -4,5 +4,5 @@
 @include('guias_impresion._save.margenes')
 @include('guias_impresion._save.tipografia')
 @include('guias_impresion._save.informacion')
-@include('guias_impresion._save.texto_final')
+@include('guias_impresion._save.informacion_final')
 @includeWhen($guia->isReal(), 'guias_impresion._save.atencion')
