@@ -12,7 +12,7 @@
       <input type="number" min="0.01" step="0.01" id="input-formato-alto" class="form-control <?= bootstrap_isInputInvalid('formato.alto', $errors) ?>" name="formato[alto]" value="<?= old('formato.alto', $formato_alto) ?>" required>
       @include('@.bootstrap.invalid-input-message', ['name' => 'formato.alto'])
    </div>
-   <div class="col-sm">
+   <div class="col-sm col-sm-3">
       <?php $formato_medicion = $guia->formato->medicion ?? null ?>
       <label class="form-label small" for="select-formato-medicion">Medición</label>
       <select id="select-formato-medicion" class="form-select <?= bootstrap_isInputInvalid('formato.medicion', $errors) ?>" name="formato[medicion]" required>

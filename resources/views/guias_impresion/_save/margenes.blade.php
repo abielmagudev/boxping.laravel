@@ -24,7 +24,7 @@
       <input type="number" min="0.0" step="0.1" id="input-margen-izquierda" class="form-control <?= bootstrap_isInputInvalid('margenes.izquierda', $errors) ?>" name="margenes[izquierda]" value="<?= old('margenes.izquierda', $margenes_izquierda) ?>" placeholder="Auto">
       @include('@.bootstrap.invalid-input-message', ['name' => 'margenes.izquierda'])
    </div>
-   <div class="col-sm col-sm-4">
+   <div class="col-sm col-sm-3">
       <?php $margenes_medicion = $guia->margenes->medicion ?? null ?>
       <label class="form-label small" for="select-margen-medicion">Medición</label>
       <select id="select-margen-medicion" class="form-select <?= bootstrap_isInputInvalid('margenes.medicion', $errors) ?>" name="margenes[medicion]">
