@@ -19,4 +19,17 @@ class PageDesigner
     {
         $this->guide = $guia_impresion;
     }
+
+    public function __call($method, $arguments)
+    {
+        if(! method_exists($this->guide, $method) )
+            return abort(500, 'Funcionalidad inválida de guia de impresion');
+
+        return call_user_func_array([$this->guide, $method], $arguments);
+    }
+
+    public function __get($prop)
+    {
+        return $this->guide->$prop ?? null;
+    }
 }

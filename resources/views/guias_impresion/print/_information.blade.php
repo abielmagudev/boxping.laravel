@@ -8,9 +8,9 @@
     </div>
     @endforeach
     
-    @if( $page->hasFinalInformation() )
+    @if( $page->hasInformacionFinal() )
     <br>
-    <p class="m-0">{{ $page->finalInformation() }}</p>
+    <p class="m-0">{{ $page->informacion_final }}</p>
     @endif
 </div>
 

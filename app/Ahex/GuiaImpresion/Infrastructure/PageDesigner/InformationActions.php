@@ -34,14 +34,4 @@ trait InformationActions
 
         return $all_information ?? [];
     }
-
-    public function hasFinalInformation()
-    {
-        return $this->guide->hasInformacionFinal();
-    }
-
-    public function finalInformation()
-    {
-        return $this->guide->informacion_final;
-    }
 }
