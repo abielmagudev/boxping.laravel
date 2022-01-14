@@ -6,38 +6,38 @@ use App\Entrada;
 
 class SalidaInformant extends Informant
 {
-    protected static $actions_labels = [
+    protected static $actions_descriptions = [
         'transportadora' => [
             'completa' => 'Nombre de la transportadora',
-            'compacta' => 'Transportadora)',
+            'minima' => 'Transportadora)',
         ],
         'rastreo' => [
             'completa' => 'Número de rastreo',
-            'compacta' => 'Rastreo',
+            'minima' => 'Rastreo',
         ],
         'confirmacion' => [
             'completa' => 'Número de confirmación',
-            'compacta' => 'Confirmación',
+            'minima' => 'Confirmación',
         ],
         'status' => [
             'completa' => 'Status de salida',
-            'compacta' => 'Salida(status)',
+            'minima' => 'Salida(status)',
         ],
         'cobertura' => [
             'completa' => 'Tipo de cobertura',
-            'compacta' => 'Cobertura',
+            'minima' => 'Cobertura',
         ],
         'ocurre' => [
             'completa' => 'Información completa de cobertura "Ocurre"',
-            'compacta' => 'Ocurre',
+            'minima' => 'Ocurre',
         ],
         'incidentes' => [
             'completa' => 'Incidentes de salida',
-            'compacta' => 'Salida(incidentes)',
+            'minima' => 'Salida(incidentes)',
         ],
         'notas' => [
             'completa' => 'Notas de salida',
-            'compacta' => 'Salida(notas)',
+            'minima' => 'Salida(notas)',
         ],
     ];
 

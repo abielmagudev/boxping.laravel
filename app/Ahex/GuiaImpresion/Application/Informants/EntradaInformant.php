@@ -6,30 +6,30 @@ use App\Entrada;
 
 class EntradaInformant extends Informant
 {
-    protected static $actions_labels = [
+    protected static $actions_descriptions = [
         'numero' => [
             'completa' => 'Número de entrada',
-            'compacta' => 'Entrada',
+            'minima' => 'Entrada',
         ],
         'contenido' => [
             'completa' => 'Contenido de la entrada',
-            'compacta' => 'Contenido',
+            'minima' => 'Contenido',
         ],
         'actualizado_fecha_hora' => [
             'completa' => 'Fecha y hora de la última actualización de la entrada',
-            'compacta' => 'Actualizado',
+            'minima' => 'Actualizado',
         ],
         'actualizado_nombre' => [
             'completa' => 'Nombre de usuario que recién actualizó la entrada',
-            'compacta' => 'Actualizado(usuario)',
+            'minima' => 'Actualizado(usuario)',
         ],
         'creado_fecha_hora' => [
             'completa' => 'Fecha y hora de creación de la entrada',
-            'compacta' => 'Creado',
+            'minima' => 'Creado',
         ],
         'creado_nombre' => [
             'completa' => 'Nombre de usuario que creó la entrada',
-            'compacta' => 'Creado(usuario)',
+            'minima' => 'Creado(usuario)',
         ],
     ];
 

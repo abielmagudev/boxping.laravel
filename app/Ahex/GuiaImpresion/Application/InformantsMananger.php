@@ -12,6 +12,7 @@ use App\Ahex\GuiaImpresion\Application\Informants\ImportadoInformant;
 use App\Ahex\GuiaImpresion\Application\Informants\ReempacadoInformant;
 use App\Ahex\GuiaImpresion\Application\Informants\RemitenteInformant;
 use App\Ahex\GuiaImpresion\Application\Informants\SalidaInformant;
+use App\Ahex\GuiaImpresion\Application\Informants\Informant;
 use App\Entrada;
 
 class InformantsMananger
@@ -44,16 +45,26 @@ class InformantsMananger
 
     public static function informant(string $key)
     {
-        return self::$all_informants[$key];
+        return self::all()[$key];
     }
 
-    public static function action(string $key, string $action, Entrada $entrada)
-    {
-        return call_user_func([self::informant($key), $action], $entrada);
+    public static function action(string $informant_key, string $action, Entrada $entrada)
+    {        
+        return call_user_func([self::informant($informant_key), $action], $entrada);
     }
 
-    public static function label(string $key, string $action, string $label)
+    public static function description(string $informant_key, string $action, string $type_description)
     {
-        return call_user_func_array([self::informant($key), 'getLabel'], [$action, $label]);
+        return call_user_func_array([self::informant($informant_key), 'getActionDescription'], [$action, $type_description]);
+    }
+
+    public static function descriptionTypes(string $glue = null)
+    {
+        return isset($glue) ? implode($glue, Informant::$description_types) : Informant::$description_types;
+    }
+
+    public static function defaultDescriptionType()
+    {
+        return Informant::$default_description_type;
     }
 }

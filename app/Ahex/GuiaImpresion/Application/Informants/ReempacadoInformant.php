@@ -6,30 +6,30 @@ use App\Entrada;
 
 class ReempacadoInformant extends Informant
 {
-    protected static $actions_labels = [
+    protected static $actions_descriptions = [
         'fecha_hora' => [
             'completa' => 'Fecha y hora de reempacado de la entrada',
-            'compacta' => 'Reempacado',
+            'minima' => 'Reempacado',
         ],
         'fecha' => [
             'completa' => 'Fecha de reempacado de la entrada',
-            'compacta' => 'Reempacado(fecha)',
+            'minima' => 'Reempacado(fecha)',
         ],
         'hora' => [
             'completa' => 'Hora de reempacado de la entrada',
-            'compacta' => 'Reempacado(hora)',
+            'minima' => 'Reempacado(hora)',
         ],
         'codigor' => [
             'completa' => 'Código de reempacado de la entrada',
-            'compacta' => 'Reempacado(código)',
+            'minima' => 'Reempacado(código)',
         ],
         'descripcion' => [
             'completa' => 'Descripción del código de reempacado de la entrada',
-            'compacta' => 'Reempacadod(descripción)',
+            'minima' => 'Reempacadod(descripción)',
         ],
         'reempacador' => [
             'completa' => 'Reempacador que realizó el reempacado de la entrada',
-            'compacta' => 'Reempacado(usuario)',
+            'minima' => 'Reempacado(usuario)',
         ],
     ];
 

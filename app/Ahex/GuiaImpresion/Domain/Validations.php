@@ -47,12 +47,12 @@ trait Validations
         return isset($this->informacion_final);
     }
     
-    public function hasEtiquetas($type = null)
+    public function hasTipoDescripcion($type = null)
     {
         if(! isset($type) )
-            return isset($this->informacion_etiquetas);
+            return isset($this->tipo_descripcion_informacion);
 
-        return $this->informacion_etiquetas === $type;
+        return $this->tipo_descripcion_informacion === $type;
     }
 
     /**

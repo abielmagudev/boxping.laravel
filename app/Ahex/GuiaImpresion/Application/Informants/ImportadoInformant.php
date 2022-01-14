@@ -6,30 +6,30 @@ use App\Entrada;
 
 class ImportadoInformant extends Informant
 {
-    protected static $actions_labels = [
+    protected static $actions_descriptions = [
         'fecha_hora' => [
             'completa' => 'Fecha y hora de importado de la entrada',
-            'compacta' => 'Importado',
+            'minima' => 'Importado',
         ],
         'fecha' => [
             'completa' => 'Fecha de importado de la entrada',
-            'compacta' => 'Importado(fecha)',
+            'minima' => 'Importado(fecha)',
         ],
         'hora' => [
             'completa' => 'Hora de importado de la entrada',
-            'compacta' => 'Importado(hora)',
+            'minima' => 'Importado(hora)',
         ],
         'vehiculo' => [
             'completa' => 'Vehículo que realizo el importado la entrada',
-            'compacta' => 'Importado(vehículo)',
+            'minima' => 'Importado(vehículo)',
         ],
         'conductor' => [
             'completa' => 'Conductor que realizo el importado la entrada',
-            'compacta' => 'Importado(conductor)',
+            'minima' => 'Importado(conductor)',
         ],
         'numero_cruce' => [
             'completa' => 'Número de cruce del importado de la entrada',
-            'compacta' => 'Importado(cruce)',
+            'minima' => 'Importado(cruce)',
         ],
     ];
 

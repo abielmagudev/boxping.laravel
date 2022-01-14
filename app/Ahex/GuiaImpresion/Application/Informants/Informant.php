@@ -4,15 +4,19 @@ namespace App\Ahex\GuiaImpresion\Application\Informants;
 
 abstract class Informant
 {   
-    protected static $actions_labels = [];
-    
-    public static function getActionsLabels()
+    public static $description_types = ['completa', 'minima'];
+
+    public static $default_description_type = 'minima';
+
+    protected static $actions_descriptions = [];
+
+    public static function getActionsDescriptions()
     {
-        return static::$actions_labels;
+        return static::$actions_descriptions;
     }
 
-    public static function getLabel(string $action, string $label)
+    public static function getActionDescription(string $action, string $type_description)
     {
-        return static::$actions_labels[$action][$label];
+        return static::$actions_descriptions[$action][$type_description];
     }
 }

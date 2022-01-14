@@ -25,8 +25,8 @@ class GuiaImpresion extends Model
         'margenes_encoded',
         'tipografia_encoded',
         'informacion_encoded',
-        'informacion_etiquetas',
         'informacion_final',
+        'tipo_descripcion_informacion',
         'activada',
         'intentos_impresion',
     ];
@@ -41,7 +41,7 @@ class GuiaImpresion extends Model
             'tipografia_encoded' => static::prepareTipografia($validated['tipografia']),
             'informacion_encoded' => static::prepareInformacion($validated['informacion']),
             'informacion_final' => $validated['informacion_final'] ?? null,
-            'informacion_etiquetas' => isset($validated['etiquetas']) ? 'compacta' : null,
+            'tipo_descripcion_informacion' => $validated['tipo_descripcion'] ?? null,
             'activada' => isset($validated['desactivar']) ? 0 : 1,
         ];
 

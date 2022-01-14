@@ -7,8 +7,8 @@
                 <option selected disabled></option>
                 @foreach($informantsManager::all() as $informant_name => $informant_class)
                 <optgroup label="<?= ucfirst($informant_name) ?>">
-                    @foreach($informant_class::getActionsLabels() as $action => $label)
-                    <option value='<?= "{$informant_name}.{$action}" ?>'>{{ $label['completa'] }}</option>
+                    @foreach($informant_class::getActionsDescriptions() as $action => $description)
+                    <option value='<?= "{$informant_name}.{$action}" ?>'>{{ $description['completa'] }}</option>
                     @endforeach
                 </optgroup>
                 @endforeach
@@ -20,10 +20,12 @@
     </div>
 </div>
 <button class="btn btn-outline-primary fw-bold w-100 mb-2" type="button" style="padding:6px 10px" id="addInformationButton">+</button>
+@include('@.bootstrap.invalid-input-message', ['name' => 'informacion'])
 <div class="form-check">
-    <input class="form-check-input" type="checkbox" name="etiquetas" value="1" id="checkbox-etiqueta-informacion" <?= $guia->hasEtiquetas() ? 'checked' : '' ?>>
-    <label class="form-check-label" for="checkbox-etiqueta-informacion">Mostrar etiquetas para la información seleccionada.</label>
+    <input class="form-check-input" type="checkbox" name="tipo_descripcion" value="<?= $informantsManager::defaultDescriptionType() ?>" id="checkbox-tipo-descripcion-informacion" <?= $guia->hasTipoDescripcion() ? 'checked' : '' ?>>
+    <label class="form-check-label" for="checkbox-tipo-descripcion-informacion">Mostrar descripciones de la información seleccionada en la guía impresa.</label>
 </div>
+@include('@.bootstrap.invalid-input-message', ['name' => 'tipo_descripcion'])
 <br>
 <br>
 

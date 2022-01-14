@@ -17,11 +17,11 @@ trait InformationActions
                 if( InformantsMananger::exists($informant, $action) )
                 {
                     $information = InformantsMananger::action($informant, $action, $entrada);
-                    $label = InformantsMananger::label($informant, $action, $this->guide->tipo_etiqueta);
-
-                    if( $this->guide->hasEtiquetas()  )
+                    
+                    if( $this->guide->hasTipoDescripcion()  )
                     {
-                        $all_information[ $label ] = $information;
+                        $description = InformantsMananger::description($informant, $action, $this->guide->tipo_descripcion);
+                        $all_information[ $description ] = $information;
                         continue;
                     }
                     
@@ -29,7 +29,7 @@ trait InformationActions
                 }
             }
 
-            array_push($all_information, '...?');
+            array_push($all_information, '???');
         }
 
         return $all_information ?? [];

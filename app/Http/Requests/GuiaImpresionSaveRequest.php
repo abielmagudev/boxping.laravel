@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use App\Ahex\GuiaImpresion\Infrastructure\PageDesigner\PageDesigner;
+use App\Ahex\GuiaImpresion\Application\InformantsMananger;
 
 class GuiaImpresionSaveRequest extends FormRequest
 {
@@ -11,6 +12,7 @@ class GuiaImpresionSaveRequest extends FormRequest
     private $mediciones_pagina;
     private $mediciones_fuente;
     private $nombres_fuentes;
+    private $tipos_descripcion;
 
     public function authorize()
     {
@@ -23,6 +25,7 @@ class GuiaImpresionSaveRequest extends FormRequest
         $this->mediciones_pagina = PageDesigner::implodeMeasurements();
         $this->mediciones_fuente = PageDesigner::implodeFontMeasurements();
         $this->nombres_fuentes   = PageDesigner::implodeFonts();
+        $this->tipos_descripcion = InformantsMananger::descriptionTypes(',');
     }
 
     public function rules()
@@ -55,7 +58,7 @@ class GuiaImpresionSaveRequest extends FormRequest
             // Informacion
             'informacion' => ['required','array'],
             'informacion_final' => ['nullable','string'],
-            'etiquetas' => 'boolean',
+            'tipo_descripcion' => ['nullable',"in:{$this->tipos_descripcion}"],
 
             // Extra
             'resetear' => ['boolean'],
@@ -95,6 +98,7 @@ class GuiaImpresionSaveRequest extends FormRequest
             // Informacion
             'informacion.required' => __('Selecciona la información para la guía'),
             'informacion.array' => __('Selecciona una informacion válida'),
+            'tipo_descripcion.in' => __('Selecciona un tipo de descripción válido para la información'),
         ];
     }
 }

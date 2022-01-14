@@ -6,22 +6,22 @@ use App\Entrada;
 
 class ConsolidadoInformant extends Informant
 {
-    protected static $actions_labels = [
+    protected static $actions_descriptions = [
         'numero' => [
             'completa' => 'Número de consolidado',
-            'compacta' => 'Consolidado',
+            'minima' => 'Consolidado',
         ],
         'status' => [
             'completa' => 'Status del consolidado',
-            'compacta' => 'Consolidado(status)',
+            'minima' => 'Consolidado(status)',
         ],
         'tarimas' => [
             'completa' => 'Cantidad de tarimas del consolidado',
-            'compacta' => 'Consolidado(tarimas)',
+            'minima' => 'Consolidado(tarimas)',
         ],
         'notas' => [
             'completa' => 'Notas del consolidado',
-            'compacta' => 'Consolidado(notas)',
+            'minima' => 'Consolidado(notas)',
         ]
     ];
     

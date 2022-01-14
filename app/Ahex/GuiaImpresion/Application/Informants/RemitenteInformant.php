@@ -6,30 +6,30 @@ use App\Entrada;
 
 class RemitenteInformant extends Informant
 {
-    protected static $actions_labels = [
+    protected static $actions_descriptions = [
         'informacion' => [
             'completa' => 'Información completa del remitente (Excepto notas)',
-            'compacta' => 'Remitente',
+            'minima' => 'Remitente',
         ],
         'domicilio' => [
             'completa' => 'Domicilio del remitente (Calle, número y código postal)',
-            'compacta' => 'Remitente(dirección)',
+            'minima' => 'Remitente(dirección)',
         ],
         'postal' => [
             'completa' => 'Código postal del remitente',
-            'compacta' => 'Remitente(postal)',
+            'minima' => 'Remitente(postal)',
         ],
         'localidad' => [
             'completa' => 'Localidad del remitente (Ciudad, estado y pais)',
-            'compacta' => 'Remitente(localidad)',
+            'minima' => 'Remitente(localidad)',
         ],
         'telefono' => [
             'completa' => 'Telefóno(s) del remitente',
-            'compacta' => 'Remitente(teléfono)',
+            'minima' => 'Remitente(teléfono)',
         ],
         'notas' => [
             'completa' => 'Notas del remitente',
-            'compacta' => 'Remitente(notas)',
+            'minima' => 'Remitente(notas)',
         ],
     ];
 

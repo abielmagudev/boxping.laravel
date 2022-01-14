@@ -6,21 +6,21 @@ use App\Etapa;
 
 class EtapaInformant extends Informant
 {
-    public static function getActionsLabels()
+    public static function getActionsDescriptions()
     {
-        return static::$actions_labels = self::generateActiosLabels();
+        return static::$actions_descriptions = self::generateActiosDescriptions();
     }
 
-    public static function generateActiosLabels()
+    public static function generateActiosDescriptions()
     {    
         foreach(Etapa::all() as $etapa)
         {
-            $actions_labels[$etapa->id] = [
-                'completa' => $etapa->nombre,
-                'compacta' => $etapa->slug,
+            $actions_descriptions[$etapa->id] = [
+                'completa' => "Etapa {$etapa->nombre}",
+                'minima' => "Etapa({$etapa->slug})",
             ];
         }
     
-        return $actions_labels ?? [];
+        return $actions_descriptions ?? [];
     }
 }

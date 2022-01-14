@@ -39,8 +39,8 @@ trait Attributes
         return count( $this->informacion_array );
     }
 
-    public function getTipoEtiquetaAttribute()
+    public function getTipoDescripcionAttribute()
     {
-        return $this->informacion_etiquetas;
+        return $this->tipo_descripcion_informacion;
     }
 }

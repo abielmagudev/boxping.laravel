@@ -6,34 +6,34 @@ use App\Entrada;
 
 class DestinatarioInformant extends Informant
 {
-    protected static $actions_labels = [
+    protected static $actions_descriptions = [
         'informacion' => [
             'completa' => 'Información completa del destinatario (Excepto notas)',
-            'compacta' => 'Destinatario',
+            'minima' => 'Destinatario',
         ],
         'domicilio' => [
             'completa' => 'Domicilio del destinatario (Calle, número y código postal)',
-            'compacta' => 'Destinatario(dirección)',
+            'minima' => 'Destinatario(dirección)',
         ],
         'postal' => [
             'completa' => 'Código postal del destinatario',
-            'compacta' => 'Destinatario(postal)',
+            'minima' => 'Destinatario(postal)',
         ],
         'localidad' => [
             'completa' => 'Localidad del destinatario (Ciudad, estado y pais)',
-            'compacta' => 'Destinatario(localidad)',
+            'minima' => 'Destinatario(localidad)',
         ],
         'referencias' => [
             'completa' => 'Referencias del destinatario',
-            'compacta' => 'Destinatario(referencias)',
+            'minima' => 'Destinatario(referencias)',
         ],
         'telefono' => [
             'completa' => 'Telefóno(s) del destinatario',
-            'compacta' => 'Destinatario(teléfono)',
+            'minima' => 'Destinatario(teléfono)',
         ],
         'notas' => [
             'completa' => 'Notas del destinatario',
-            'compacta' => 'Destinatario(notas)',
+            'minima' => 'Destinatario(notas)',
         ],
     ];
     

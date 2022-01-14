@@ -6,18 +6,18 @@ use App\Entrada;
 
 class ClienteInformant extends Informant
 {
-    protected static $actions_labels = [
+    protected static $actions_descriptions = [
         'nombre' => [
             'completa' => 'Nombre del cliente',
-            'compacta' => 'Cliente',
+            'minima' => 'Cliente',
         ],
         'alias' => [
             'completa' => 'Alias del cliente',
-            'compacta' => 'Cliente(alias)',
+            'minima' => 'Cliente(alias)',
         ],
         'contacto' => [
             'completa' => 'Contacto del cliente',
-            'compacta' => 'Cliente(contacto)',
+            'minima' => 'Cliente(contacto)',
         ],
     ];
 
