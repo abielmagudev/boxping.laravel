@@ -58,7 +58,7 @@ trait TypographyActions
     {
         return self::allLineHeights()[0];
     }
-    
+
 
     // Object
     public function textAlign()
@@ -66,12 +66,12 @@ trait TypographyActions
         return $this->guide->tipografia->alineacion;
     }
 
-    public function fontname()
+    public function fontName()
     {
         return $this->guide->tipografia->fuente;
     }
 
-    public function fontsize()
+    public function fontSize()
     {
         return $this->guide->tipografia->tamano . $this->guide->tipografia->medicion;
     }

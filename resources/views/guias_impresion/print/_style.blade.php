@@ -8,8 +8,8 @@
     margin: <?= $page->margins() ?>;
 }
 .information {
-    font-family: "<?= $page->fontname() ?>";
-    font-size: <?= $page->fontsize() ?>; /* calc($guia->tamano_fuente - ?%); */
+    font-family: "<?= $page->fontName() ?>";
+    font-size: <?= $page->fontSize() ?>; /* calc(tamano_fuente - ?%); */
     text-align: <?= $page->textAlign() ?>;
 }
 .break-before {
