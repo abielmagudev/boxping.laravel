@@ -13,32 +13,37 @@ trait TypographyActions
         return isset($glue) ? implode($glue, array_keys(self::cache('alignments'))) : self::cache('alignments');
     }
 
-    public static function allFonts()
+    public static function allFonts(string $glue = null)
     {
-        if( self::hasCache('fonts') )
-            return self::cache('fonts');
-
-        return self::setCache('fonts', config('system.tipografias.fuentes'));
+        if(! self::hasCache('fonts') )
+            self::setCache('fonts', config('system.tipografias.fuentes'));
+            
+        return isset($glue) ? implode($glue, array_keys(self::cache('fonts'))) : self::cache('fonts');
     }
 
-    public static function allFontMeasurements()
+    public static function allFontMeasurements(string $glue = null)
     {
-        if( self::hasCache('font_measurements') )
-            return self::cache('font_measurements');
-
-        return self::setCache('font_measurements', config('system.tipografias.mediciones'));
+        if(! self::hasCache('font_measurements') )
+            self::setCache('font_measurements', config('system.tipografias.mediciones'));
+        
+        return isset($glue) ? implode($glue, array_keys(self::cache('font_measurements'))) : self::cache('font_measurements');
     }
 
-    public static function allLineHeights()
+    public static function allLineHeights(string $glue = null)
     {
-        if( self::hasCache('line_heights') )
-            return self::cache('line_heights');
-
-        return self::setCache('line_heights', config('system.tipografias.interlineados'));
+        if(! self::hasCache('line_heights') )
+            self::setCache('line_heights', config('system.tipografias.interlineados'));
+        
+        return isset($glue) ? implode($glue, array_keys(self::cache('line_heights'))) : self::cache('line_heights');
     }
 
 
     // Defaults
+    public static function defaultAlignment()
+    {
+        return array_key_first( self::allAlignments() );
+    }
+
     public static function defaultFont()
     {
         return array_key_first( self::allFonts() );
@@ -65,19 +70,7 @@ trait TypographyActions
     {
         return isset( self::allFontMeasurements()[$font_measurement] );
     }
-
     
-    // Implodes
-    public static function implodeFonts(string $glue = ',')
-    {
-        return implode($glue, array_keys(self::allFonts()));
-    }
-
-    public static function implodeFontMeasurements(string $glue = ',')
-    {
-        return implode($glue, array_keys(self::allFontMeasurements()));
-    }
-
 
     // Object
     public function textAlign()

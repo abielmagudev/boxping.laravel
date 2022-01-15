@@ -4,12 +4,12 @@ namespace App\Ahex\GuiaImpresion\Infrastructure\PageDesigner;
 
 trait FormatActions
 {
-    public static function allMeasurements()
+    public static function allMeasurements(string $glue = null)
     {
-        if( self::hasCache('measurements') )
-            return self::cache('measurements');
+        if(! self::hasCache('measurements') )
+            self::setCache('measurements', config('system.mediciones.longitud'));
         
-        return self::setCache('measurements', config('system.mediciones.longitud'));
+        return isset($glue) ? implode($glue, array_keys(self::cache('measurements'))) : self::cache('measurements');
     }
 
     public static function defaultMeasurement()
@@ -20,11 +20,6 @@ trait FormatActions
     public static function existsMeasurement(string $abbr)
     {
         return isset( self::allMeasurements()[$abbr] );
-    }
-
-    public static function implodeMeasurements(string $glue = ',')
-    {
-        return implode($glue, array_keys(self::allMeasurements()));
     }
 
     public function width($with_measure = true)

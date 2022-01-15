@@ -23,9 +23,9 @@ class GuiaImpresionSaveRequest extends FormRequest
     public function prepareForValidation()
     {
         $this->guia_impresion_actual = $this->guia->id ?? 0;
-        $this->mediciones_pagina = PageDesigner::implodeMeasurements();
-        $this->mediciones_fuente = PageDesigner::implodeFontMeasurements();
-        $this->nombres_fuentes   = PageDesigner::implodeFonts();
+        $this->mediciones_pagina = PageDesigner::allMeasurements(',');
+        $this->mediciones_fuente = PageDesigner::allFontMeasurements(',');
+        $this->nombres_fuentes   = PageDesigner::allFonts(',');
         $this->tipos_descripcion = InformantsMananger::descriptionTypes(',');
         $this->tipos_alineacion = PageDesigner::allAlignments(',');
     }
