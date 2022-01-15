@@ -56,9 +56,7 @@ class GuiaImpresion extends Model
         return json_encode([
             'ancho' => $formato['ancho'] ?? null,
             'alto' => $formato['alto'] ?? null,
-            'medicion' => ! PageDesigner::existsMeasurement($formato['medicion']) 
-                          ? PageDesigner::defaultMeasurement()
-                          : $formato['medicion'],
+            'medicion' => $formato['medicion'] ?? PageDesigner::defaultMeasurement(),
         ]);
     }
 
@@ -69,24 +67,17 @@ class GuiaImpresion extends Model
             'derecha' => $margenes['derecha'] ?? null,
             'abajo' => $margenes['abajo'] ?? null,
             'izquierda' => $margenes['izquierda'] ?? null,
-            'medicion' => ! PageDesigner::existsMeasurement($margenes['medicion'])
-                          ? PageDesigner::defaultMeasurement()
-                          : $margenes['medicion'],
-            ]);
+            'medicion' => $margenes['medicion'] ?? PageDesigner::defaultMeasurement(),
+        ]);
     }
 
     private static function prepareTipografia($tipografia)
     {
         return json_encode([
             'alineacion' => $tipografia['alineacion'],
-            'fuente' => ! PageDesigner::existsFont($tipografia['fuente']) 
-                        ? PageDesigner::defaultFont() 
-                        : $tipografia['fuente'],
-            'medicion' => ! PageDesigner::existsFontMeasurement($tipografia['medicion']) 
-                          ? PageDesigner::defaultFontMeasurement() 
-                          : $tipografia['medicion'],
-            'tamano' => (float) $tipografia['tamano'] 
-                        ?? PageDesigner::DEFAULT_FONT_SIZE,
+            'fuente' => $tipografia['fuente'] ?? PageDesigner::defaultFont(),
+            'medicion' => $tipografia['medicion'] ?? PageDesigner::defaultFontMeasurement(),
+            'tamano' => (float) $tipografia['tamano'] ?? PageDesigner::DEFAULT_FONT_SIZE,
             'interlineado' => PageDesigner::defaultLineHeight(),
         ]);
     }

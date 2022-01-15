@@ -58,18 +58,6 @@ trait TypographyActions
     {
         return self::allLineHeights()[0];
     }
-
-
-    // Exists
-    public static function existsFont(string $font)
-    {
-        return isset( self::allFonts()[$font] );
-    }
-
-    public static function existsFontMeasurement(string $font_measurement)
-    {
-        return isset( self::allFontMeasurements()[$font_measurement] );
-    }
     
 
     // Object

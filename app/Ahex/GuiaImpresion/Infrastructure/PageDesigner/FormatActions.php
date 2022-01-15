@@ -17,11 +17,6 @@ trait FormatActions
         return array_key_first( self::allMeasurements() );
     }
 
-    public static function existsMeasurement(string $abbr)
-    {
-        return isset( self::allMeasurements()[$abbr] );
-    }
-
     public function width($with_measure = true)
     {
         return $with_measure 
