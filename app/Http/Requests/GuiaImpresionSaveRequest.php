@@ -63,8 +63,8 @@ class GuiaImpresionSaveRequest extends FormRequest
             'tipo_descripcion' => ['nullable',"in:{$this->in_list['tipos_descripcion']}"],
 
             // Extra
-            'resetear' => ['boolean'],
-            'desactivar' => ['boolean'],
+            'resetear' => 'boolean',
+            'desactivar' => 'boolean',
         ];
     }
 
@@ -73,35 +73,35 @@ class GuiaImpresionSaveRequest extends FormRequest
         return [
             // Guía
             'nombre.required' => __('Escribe el nombre de la guía de impresión'),
-            'nombre.unique' => __('Escribe un nombre diferente a la guía de impresión'),
+            'nombre.unique' => __('Escribe un nombre diferente para la guía de impresión'),
 
             // Formato
             'formato.required' => __('Configura el formato'),
-            'formato.array' => __('Configura un formato válido de ancho, altura y medicion'),
+            'formato.array' => __('Configura un formato de ancho, alto y medicion válido'),
             'formato.alto.numeric' => __('Escribe el alto de página'),
             'formato.ancho.numeric' => __('Escribe el ancho de página'),
-            'formato.medicion.in' => __('Selecciona una medición válida de página'),
+            'formato.medicion.in' => __('Selecciona una medición de página válida'),
 
             // Márgenes
             'margenes.array' => __('Configura márgenes válidos'),
-            'margenes.abajo.numeric' => __('Escribe un margen válido de abajo'),
-            'margenes.arriba.numeric' => __('Escribe un margen válido de arriba'),
-            'margenes.derecha.numeric' => __('Escribe un margen válido de derecha'),
-            'margenes.izquierda.numeric' => __('Escribe un margen válido de izquierda'),
-            'margenes.medicion.in' => __('Selecciona un medición válida para margenes'),
+            'margenes.abajo.numeric' => __('Escribe un margen válido para abajo'),
+            'margenes.arriba.numeric' => __('Escribe un margen válido para arriba'),
+            'margenes.derecha.numeric' => __('Escribe un margen válido para derecha'),
+            'margenes.izquierda.numeric' => __('Escribe un margen válido para izquierda'),
+            'margenes.medicion.in' => __('Selecciona una medición de margenes válida'),
 
             // Tipografía
             'tipografia.required' => __('Configura la tipografía'),
-            'tipografia.array' => __('Configura una tipografía válida'),
+            'tipografia.array' => __('Configura una tipografía de alineacion, fuente, tamaño y medición válida'),
             'tipografia.alineacion.in' => __('Selecciona una alineacion válida'),
-            'tipografia.fuente.in' => __('Selecciona el tipo válido de fuente'),
-            'tipografia.medicion.in' => __('Selecciona una medición válida de fuente'),
+            'tipografia.fuente.in' => __('Selecciona una fuente válida'),
+            'tipografia.medicion.in' => __('Selecciona una medición de fuente válida'),
             'tipografia.tamano.numeric' => __('Escribe el tamaño de la fuente'),
 
             // Informacion
-            'informacion.required' => __('Selecciona la información para la guía'),
+            'informacion.required' => __('Debe contener al menos una información para la página'),
             'informacion.array' => __('Selecciona una informacion válida'),
-            'tipo_descripcion.in' => __('Selecciona un tipo de descripción válido para la información'),
+            'tipo_descripcion.in' => __('Selecciona un tipo de descripción válido de información'),
         ];
     }
 }
