@@ -27,6 +27,7 @@ class CreateGuiasImpresionTable extends Migration
             $table->boolean('activada')->default(1);
             $table->unsignedInteger('intentos_impresion')->default(0);
             $table->timestamps();
+            $table->index(['activada','intentos_impresion']);
         });
     }
 
