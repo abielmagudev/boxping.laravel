@@ -8,8 +8,10 @@ trait InformationActions
 {
     public function allInformation(\App\Entrada $entrada)
     {
+        $all_information = [];
+
         foreach($this->guide->informacion_array as $informant_action)
-        {
+        {            
             if( strpos($informant_action, '.') <> false )
             {
                 list($informant, $action) = explode('.', $informant_action);
@@ -26,6 +28,7 @@ trait InformationActions
                     }
                     
                     array_push($all_information, $information);
+                    continue;
                 }
             }
 
