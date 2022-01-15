@@ -78,6 +78,7 @@ class GuiaImpresion extends Model
     private static function prepareTipografia($tipografia)
     {
         return json_encode([
+            'alineacion' => $tipografia['alineacion'],
             'fuente' => ! PageDesigner::existsFont($tipografia['fuente']) 
                         ? PageDesigner::defaultFont() 
                         : $tipografia['fuente'],

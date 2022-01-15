@@ -1,6 +1,16 @@
 <h6>Tipografía</h6>
 <div class="mb-3 row">
    <div class="col-sm mb-3">
+      <?php $tipografia_alineacion = $guia->tipografia->alineacion ?? null ?>
+      <label class="form-label small" for="select-fuente">Alineación</label>
+      <select id="select-fuente" class="form-select <?= bootstrap_isInputInvalid('tipografia.alineacion', $errors) ?>" name="tipografia[alineacion]" required>
+         @foreach ($pageDesigner::allAlignments() as $value => $label)
+         <option value="<?= $value ?>" <?= toggleSelected($value, old('tipografia.alineacion', $tipografia_alineacion)) ?>>{{ $label }}</option>
+         @endforeach
+      </select>
+      @include('@.bootstrap.invalid-input-message', ['name' => 'tipografia.alineacion'])
+   </div>
+   <div class="col-sm mb-3">
       <?php $tipografia_fuente = $guia->tipografia->fuente ?? null ?>
       <label class="form-label small" for="select-fuente">Fuente</label>
       <select id="select-fuente" class="form-select <?= bootstrap_isInputInvalid('tipografia.fuente', $errors) ?>" name="tipografia[fuente]" required>

@@ -13,6 +13,7 @@ class GuiaImpresionSaveRequest extends FormRequest
     private $mediciones_fuente;
     private $nombres_fuentes;
     private $tipos_descripcion;
+    private $tipos_alineacion;
 
     public function authorize()
     {
@@ -26,6 +27,7 @@ class GuiaImpresionSaveRequest extends FormRequest
         $this->mediciones_fuente = PageDesigner::implodeFontMeasurements();
         $this->nombres_fuentes   = PageDesigner::implodeFonts();
         $this->tipos_descripcion = InformantsMananger::descriptionTypes(',');
+        $this->tipos_alineacion = PageDesigner::allAlignments(',');
     }
 
     public function rules()
@@ -50,7 +52,8 @@ class GuiaImpresionSaveRequest extends FormRequest
             'margenes.medicion' => "in:{$this->mediciones_pagina}",
 
             // Tipografía
-            'tipografia' => ['required','array:fuente,tamano,medicion'],
+            'tipografia' => ['required','array:alineacion,fuente,tamano,medicion'],
+            'tipografia.alineacion' => "in:{$this->tipos_alineacion}",
             'tipografia.fuente' => "in:{$this->nombres_fuentes}",
             'tipografia.tamano' => 'numeric',
             'tipografia.medicion' => "in:{$this->mediciones_fuente}",
@@ -91,6 +94,7 @@ class GuiaImpresionSaveRequest extends FormRequest
             // Tipografía
             'tipografia.required' => __('Configura la tipografía'),
             'tipografia.array' => __('Configura una tipografía válida'),
+            'tipografia.alineacion.in' => __('Selecciona una alineacion válida'),
             'tipografia.fuente.in' => __('Selecciona el tipo válido de fuente'),
             'tipografia.tamano.numeric' => __('Escribe el tamaño de la fuente'),
             'tipografia.medicion.in' => __('Selecciona una medición válida de fuente'),

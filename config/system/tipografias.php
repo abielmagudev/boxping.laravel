@@ -1,6 +1,11 @@
 <?php
 
 return [
+    'alineaciones' => [
+        'left' => 'Izquierda',
+        'center' => 'Centro',
+        'right' => 'Derecha',
+    ],
     'fuentes' => [
         'arial' => 'Arial',
         'courier' => 'Courier',

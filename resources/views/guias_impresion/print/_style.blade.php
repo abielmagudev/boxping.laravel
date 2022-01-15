@@ -10,6 +10,7 @@
 .information {
     font-family: "<?= $page->fontname() ?>";
     font-size: <?= $page->fontsize() ?>; /* calc($guia->tamano_fuente - ?%); */
+    text-align: <?= $page->textAlign() ?>;
 }
 .break-before {
     page-break-before: always;

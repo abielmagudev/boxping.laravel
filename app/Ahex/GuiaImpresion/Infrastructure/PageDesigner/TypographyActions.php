@@ -5,6 +5,14 @@ namespace App\Ahex\GuiaImpresion\Infrastructure\PageDesigner;
 trait TypographyActions
 {
     // All
+    public static function allAlignments(string $glue = null)
+    {
+        if(! self::hasCache('alignments') )
+            self::setCache('alignments', config('system.tipografias.alineaciones'));
+            
+        return isset($glue) ? implode($glue, array_keys(self::cache('alignments'))) : self::cache('alignments');
+    }
+
     public static function allFonts()
     {
         if( self::hasCache('fonts') )
@@ -72,6 +80,11 @@ trait TypographyActions
 
 
     // Object
+    public function textAlign()
+    {
+        return $this->guide->tipografia->alineacion;
+    }
+
     public function fontname()
     {
         return $this->guide->tipografia->fuente;
