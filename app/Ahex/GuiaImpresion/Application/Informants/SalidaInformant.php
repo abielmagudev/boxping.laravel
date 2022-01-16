@@ -24,15 +24,15 @@ class SalidaInformant extends Informant
             'minima' => 'Salida(status)',
         ],
         'cobertura' => [
-            'completa' => 'Tipo de cobertura',
+            'completa' => 'Tipo de cobertura de la transportadora',
             'minima' => 'Salida(cobertura)',
         ],
         'ocurre' => [
-            'completa' => 'Información completa de cobertura "Ocurre"',
+            'completa' => 'Información de cobertura "Ocurre"',
             'minima' => 'Salida(ocurre)',
         ],
         'incidentes' => [
-            'completa' => 'Incidentes de salida',
+            'completa' => 'Lista de incidentes en la transportadora',
             'minima' => 'Salida(incidentes)',
         ],
         'notas' => [
@@ -48,22 +48,22 @@ class SalidaInformant extends Informant
 
     public static function rastreo(Entrada $entrada)
     {
-        return $entrada->hasSalida() && isset($entrada->salida->rastreo) ? $entrada->salida->rastreo : '?';
+        return $entrada->hasSalida() && $entrada->salida->hasRastreo() ? $entrada->salida->rastreo : '?';
     }
 
     public static function confirmacion(Entrada $entrada)
     {
-        return $entrada->hasSalida() && isset($entrada->salida->confirmacion) ? $entrada->salida->confirmacion : '?';
+        return $entrada->hasSalida() && $entrada->salida->hasConfirmacion() ? $entrada->salida->confirmacion : '?';
     }
 
     public static function status(Entrada $entrada)
     {
-        return $entrada->hasSalida() ? $entrada->salida->status : '?';
+        return $entrada->hasSalida() ? $entrada->salida->status_titulo : '?';
     }
 
     public static function cobertura(Entrada $entrada)
     {
-        return $entrada->hasSalida() && $entrada->salida->hasCobertura() ? $entrada->salida->cobertura : '?';
+        return $entrada->hasSalida() && $entrada->salida->hasCobertura() ? $entrada->salida->cobertura_titulo : '?';
     }
 
     public static function ocurre(Entrada $entrada)
@@ -73,11 +73,11 @@ class SalidaInformant extends Informant
 
     public static function incidentes(Entrada $entrada)
     {
-        return ! $entrada->hasSalida() ||! $entrada->salida->hasIncidentes() ?: $entrada->salida->getListaIncidentes();
+        return $entrada->hasSalida() && $entrada->salida->hasIncidentes() ? $entrada->salida->getListaIncidentes() : 'Ninguno';
     }
 
     public static function notas(Entrada $entrada)
     {
-        return ! $entrada->hasSalida() ?: $entrada->salida->notas;
+        return $entrada->hasSalida() ? $entrada->salida->notas : '';
     }
 }
