@@ -4,6 +4,7 @@ $all_entradas_filters = [
     'numero',
     'ambitos',
     'clientes',
+    'salidas',
     'etapas',
     'tiempos',
     'muestreos',

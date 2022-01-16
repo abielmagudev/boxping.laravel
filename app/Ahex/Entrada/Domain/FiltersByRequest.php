@@ -7,15 +7,16 @@ use Illuminate\Http\Request;
 trait FiltersByRequest
 {
     protected $all_filters = [
-        'numero' => 'filterNumber',
         'ambito' => 'filterAmbit',
         'cliente' => 'filterClient',
         'codigor' => 'filterCodigor',
         'conductor' => 'filterConductor',
         'etapa' => 'filterStage',
-        'tiempo' => 'filterDatetime',
+        'numero' => 'filterNumber',
         'orden' => 'filterOrder',
         'reempacador' => 'filterReempacador',
+        'salida' => 'filterSalida',
+        'tiempo' => 'filterDatetime',
         'vehiculo' => 'filterVehiculo',
     ];
 
@@ -137,6 +138,21 @@ trait FiltersByRequest
             return $query;
 
         return $query->where('codigor_id', $request->codigor);
+    }
+
+    public function scopeFilterSalida($query, $request)
+    {
+        if(! in_array($request->salida, ['con', 'sin']) )
+            return $query;
+
+        if( $request->salida === 'con' )
+            return $query->whereIn('id', function($subquery) {
+                $subquery->select('entrada_id')->from('salidas');
+            });
+
+        return $query->whereNotIn('id', function($subquery) {
+            $subquery->select('entrada_id')->from('salidas');
+        });  
     }
 
 
