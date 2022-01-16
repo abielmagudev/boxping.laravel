@@ -4,6 +4,7 @@ namespace App\Ahex\Salida\Domain;
 
 trait Attributes
 {
+    // Static props
     public static $all_status = [
         'en espera' => [
             'color' => '#0E6FFD',
@@ -25,13 +26,30 @@ trait Attributes
 
     public static $all_coberturas = [
         'domicilio' => [
-            'descripcion' => 'Dirección del destinatario',
+            'descripcion' => 'Domicilio del destinatario',
         ],
-        'ocurre'    => [
-            'descripcion' => 'Dirección de la transportadora',
+        'ocurre' => [
+            'descripcion' => 'Sucursal de la transportadora',
         ],
     ];
 
+
+    // Status
+    public static function allStatusConPropiedades(bool $like_object = false)
+    {
+        return $like_object ? (object) self::$all_status : self::$all_status;
+    }
+
+    public static function allStatus(string $glue = null)
+    {
+        return $glue ? implode($glue, array_keys(self::$all_status)) : array_keys(self::$all_status);
+    }
+
+    public static function defaultStatus()
+    {
+        return array_key_first( self::$all_status );
+    }
+    
     public function getStatusTituloAttribute()
     {
         return ucfirst($this->status);
@@ -39,27 +57,44 @@ trait Attributes
 
     public function getStatusColorAttribute()
     {
-        return static::$all_status[$this->status]['color'];
+        return self::$all_status[$this->status]['color'];
     }
 
     public function getStatusDescripcionAttribute()
     {
-        return static::$all_status[$this->status]['descripcion'];
+        return self::$all_status[$this->status]['descripcion'];
+    }
+
+
+    // Cobertura
+    public static function allCoberturasConDescripciones(bool $like_object = false)
+    {
+        return $like_object ? (object) self::$all_coberturas : self::$all_coberturas;
+    }
+
+    public static function allCoberturas(string $glue = null)
+    {
+        return $glue ? implode($glue, array_keys(self::$all_coberturas)) : array_keys(self::$all_coberturas);
+    }
+    
+    public static function defaultCobertura()
+    {
+        return array_key_first( self::$all_coberturas );
     }
 
     public function getCoberturaDescripcionAttribute()
     {
-        return static::$all_coberturas[$this->cobertura]['descripcion'];
+        return self::$all_coberturas[$this->cobertura]['descripcion'];
     }
 
+    
+    // Attributes
     public function getLocalidadAttribute()
     {
         $filtered = array_filter([$this->ciudad, $this->estado, $this->pais]);
         return implode(', ', $filtered);
     }
 
-
-    /** Bundle */
     public function getDomicilioOcurreAttribute()
     {
         return "{$this->direccion}, Postal {$this->postal} <br> {$this->localidad}";
@@ -80,27 +115,5 @@ trait Attributes
 
         $tagged = $this->incidentes->map( fn($incidente) => "<{$tag}>{$incidente->nombre}</{$tag}>" );
         return $tagged->implode('');
-    }
-
-
-    /** Statics */
-    public static function getAllStatus($return_object = false)
-    {
-        return $return_object ? (object) self::$all_status : self::$all_status;
-    }
-
-    public static function getAllStatusNombres()
-    {
-        return array_keys( self::$all_status );
-    }
-
-    public static function getAllCoberturas($return_object = false)
-    {
-        return $return_object ? (object) self::$all_coberturas : self::$all_coberturas;
-    }
-
-    public static function getAllCoberturasNombres()
-    {
-        return array_keys( self::$all_coberturas );
     }
 }

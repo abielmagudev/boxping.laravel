@@ -15,19 +15,18 @@ class SalidaController extends Controller
     public function index()
     {
         return view('salidas.index', [
-            'salidas' => Salida::with(['transportadora','entrada.destinatario','incidentes'])
-                                ->paginate(25)
+            'salidas' => Salida::with(['transportadora','entrada.destinatario','incidentes'])->paginate(25)
         ]);
     }
 
     public function create(CreateRequest $request)
     {
         return view('salidas.create', [
-            'entrada'         => Entrada::find($request->entrada),
-            'salida'          => new Salida,
+            'entrada' => Entrada::find($request->entrada),
+            'salida' => new Salida,
             'transportadoras' => Transportadora::all(),
-            'incidentes'      => Incidente::all(),
-            'all_coberturas'  => Salida::getAllCoberturas(),
+            'incidentes' => Incidente::all(),
+            'all_coberturas' => Salida::allCoberturasConDescripciones(),
         ]);
     }
 
@@ -36,28 +35,25 @@ class SalidaController extends Controller
         $prepared = Salida::prepare( $request->validated() );
 
         if(! $salida = Salida::create($prepared) )
-            return back()->with('failure', 'Error al guardar salida');
-
-        // if( $request->has('incidentes') )
-        //     $salida->incidentes()->sync( $request->incidentes );
+            return back()->with('failure', 'Error al guardar la salida');
 
         return redirect()->route('entradas.show', $salida->entrada_id)->with('success','Salida guardada');
     }
 
     public function show(Salida $salida)
     {
+        // return view('salidas.show')->with('salida', $salida);
         return redirect()->route('entradas.show', $salida->entrada_id);
-       // return view('salidas.show')->with('salida', $salida);
     }
 
     public function edit(Salida $salida)
     {
         return view('salidas.edit', [
-            'salida'          => $salida,
+            'salida' => $salida,
             'transportadoras' => Transportadora::all(),
-            'incidentes'      => Incidente::all(),
-            'all_coberturas'  => Salida::getAllCoberturas(),
-            'all_status'      => Salida::getAllStatus(),
+            'incidentes' => Incidente::all(),
+            'all_coberturas' => Salida::allCoberturasConDescripciones(),
+            'all_status' => Salida::allStatusConPropiedades(),
         ]);
     }
 

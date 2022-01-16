@@ -20,8 +20,8 @@ class SaveRequest extends FormRequest
     protected function prepareForValidation()
     {
         $this->salida_id = $this->route('salida')->id ?? 0;
-        $this->all_coberturas = implode(',', Salida::getAllCoberturasNombres());
-        $this->all_status = implode(',', Salida::getAllStatusNombres());
+        $this->all_coberturas = Salida::allCoberturas(',');
+        $this->all_status = Salida::allStatus(',');
         $this->addRules();
     }
 

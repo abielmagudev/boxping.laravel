@@ -14,19 +14,22 @@ trait Validations
         return $this->status === 'entregado';
     }
 
-    public function hasStatus($status)
+    public function hasStatus(string $status)
     {
         return $this->status === $status;
     }
 
     public function belongsSomeEntrada()
     {
+        if( is_null($this->entrada_id) )
+            return false;
+
         return $this->entrada instanceof \App\Entrada;
     }
 
     public function hasDestinatario()
     {
-        if( ! $this->belongsSomeEntrada() )
+        if(! $this->belongsSomeEntrada() )
             return false;
 
         return $this->entrada->hasDestinatario();
@@ -39,11 +42,6 @@ trait Validations
             
         return is_a($this->transportadora, \App\Transportadora::class);
     }
-    
-    public function hasIncidentes()
-    {
-        return $this->incidentes->count() > 0;
-    }
 
     public function hasCobertura($cobertura = null)
     {
@@ -53,8 +51,8 @@ trait Validations
         return $this->cobertura === $cobertura;
     }
 
-    public static function existsCobertura($cobertura)
+    public function hasIncidentes()
     {
-        return isset( self::$all_coberturas[$cobertura] );
+        return $this->incidentes->count() > 0;
     }
 }

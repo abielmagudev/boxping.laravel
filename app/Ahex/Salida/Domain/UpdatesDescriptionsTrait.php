@@ -2,7 +2,8 @@
 
 namespace App\Ahex\Salida\Domain;
 
-trait UpdatesDescriptionsTrait {
+trait UpdatesDescriptionsTrait
+{
     protected $descriptions = [
         'ciudad' => 'ciudadUpdateDescription',
         'cobertura' => 'coberturaUpdateDescription',

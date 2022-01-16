@@ -23,8 +23,8 @@ class EntradaSeeder extends Seeder
         $this->fakerphp    = Factory::create();
         $this->all_etapas  = Etapa::all();
         $this->all_alertas = Alerta::all();
-        $this->all_status_salida = Salida::getAllStatusNombres();
-        $this->all_coberturas_salida = Salida::getAllCoberturasNombres();
+        $this->all_status_salida = Salida::allStatus();
+        $this->all_coberturas_salida = Salida::allCoberturas();
         $this->all_incidentes = Incidente::all();
     }
 

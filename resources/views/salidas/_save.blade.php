@@ -24,10 +24,11 @@
 <p class="fw-bold">Destino</p>
 <div class="mb-3">
     <label class="form-label small">Cobertura</label>
-    @foreach ($all_coberturas as $cobertura => $attrs)
+    <?php $default_cobertura = old('cobertura', $salida->cobertura) ?? $salida::defaultCobertura() ?>
+    @foreach($all_coberturas as $cobertura => $attrs)
     <div class="form-check">
-        <input class="form-check-input {{ bootstrap_isInputInvalid('cobertura', $errors) }}" id="radio-cobertura-{{ $cobertura }}" name="cobertura" value="{{ $cobertura }}" type="radio" {{ toggleChecked($cobertura, old('cobertura', $salida->cobertura)) }}>
-        <label class="form-check-label" for="radio-cobertura-{{ $cobertura }}">
+        <input class="form-check-input <?= bootstrap_isInputInvalid('cobertura', $errors) ?>" id="radio-cobertura-<?= $cobertura ?>" name="cobertura" value="<?= $cobertura ?>" type="radio" {{ toggleChecked($cobertura, $default_cobertura) }}>
+        <label class="form-check-label" for="radio-cobertura-<?= $cobertura ?>">
             <span class="text-capitalize">{{ $cobertura }}</span>
             <small class="text-muted">({{ $attrs['descripcion'] }})</small>
         </label>
@@ -84,7 +85,7 @@
         <span class="badge bg-dark d-none">{{ $incidentes->count() }}</span>
         <span class="badge bg-primary">{{ $salida->incidentes->count() }}</span>
     </label>
-    <div class="border rounded overflow-auto {{ bootstrap_isInputInvalid('incidentes', $errors, 'border-danger') }}" style="height:33vh">
+    <div class="border rounded overflow-auto {{ bootstrap_isInputInvalid('incidentes', $errors, 'border-danger') }}" style="height:30vh">
         <ul class="list-group list-group-flush">
             @foreach($incidentes as $incidente)
             <?php $incidente_checkbox_id = "checkbox-incidente-{$incidente->id}" ?>
@@ -105,7 +106,7 @@
 
 <div class="mb-3">
     <label for="textarea-notas" class="form-label small">Notas</label>
-    <textarea cols="30" rows="5" class="form-control {{ bootstrap_isInputInvalid('notas', $errors) }}" id="textarea-notas" name="notas">{{ old('notas', $salida->notas) }}</textarea>
+    <textarea cols="30" rows="3" class="form-control {{ bootstrap_isInputInvalid('notas', $errors) }}" id="textarea-notas" name="notas">{{ old('notas', $salida->notas) }}</textarea>
     @include('@.bootstrap.invalid-input-message', ['name' => 'notas'])
 </div>
 <br>

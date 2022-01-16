@@ -51,7 +51,7 @@ class Salida extends Model implements ModifierIdentifiable
             'estado'       => !isset($validated['estado']) ?: capitalize($validated['estado']),
             'pais'         => $validated['pais'] ?? null,
             'notas'        => $validated['notas'] ?? null,
-            'status'       => $validated['status'] ?? array_key_first( static::getAllStatus() ),
+            'status'       => $validated['status'] ?? static::defaultStatus(),
             'transportadora_id' => $validated['transportadora'] ?? null,
             'updated_by'   => auth()->user()->id,
         ];

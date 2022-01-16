@@ -14,20 +14,19 @@ class CreateSalidasTable extends Migration
      */
     public function up()
     {
-        $all_status_names = Salida::getAllStatusNombres();
-
-        Schema::create('salidas', function (Blueprint $table) use ($all_status_names) {
+        Schema::create('salidas', function (Blueprint $table)
+        {
             $table->bigIncrements('id');
             $table->string('rastreo', 20)->unique()->index()->nullable();
             $table->string('confirmacion', 40)->unique()->index()->nullable();
             $table->string('cobertura', 10)->index();
-            $table->string('direccion', 80)->index()->nullable();
-            $table->string('postal', 10)->index()->nullable();
-            $table->string('ciudad', 48)->index()->nullable();
-            $table->string('estado', 48)->index()->nullable();
+            $table->string('direccion', 80)->nullable()->index();
+            $table->string('postal', 10)->nullable()->index();
+            $table->string('ciudad', 48)->nullable()->index();
+            $table->string('estado', 48)->nullable()->index();
             $table->string('pais', 64)->nullable();
             $table->text('notas')->nullable();
-            $table->enum('status', $all_status_names)->index()->default($all_status_names[0]);
+            $table->enum('status', Salida::allStatus())->default(Salida::defaultStatus())->index();
             $table->unsignedTinyInteger('transportadora_id');
             $table->unsignedBigInteger('entrada_id');
             $table->unsignedSmallInteger('created_by');
