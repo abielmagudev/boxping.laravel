@@ -7,9 +7,13 @@ use App\Entrada;
 class ReempacadoInformant extends Informant
 {
     protected static $actions_descriptions = [
+        'informacion' => [
+            'completa' => 'Información de reempacado de la entrada (excepto descripción)',
+            'minima' => 'Reempacado',
+        ],
         'fecha_hora' => [
             'completa' => 'Fecha y hora de reempacado de la entrada',
-            'minima' => 'Reempacado',
+            'minima' => 'Reempacado(fecha hora)',
         ],
         'fecha' => [
             'completa' => 'Fecha de reempacado de la entrada',
@@ -32,6 +36,11 @@ class ReempacadoInformant extends Informant
             'minima' => 'Reempacado(usuario)',
         ],
     ];
+
+    public static function informacion(Entrada $entrada)
+    {
+        return $entrada->hasReempacado() ? self::fecha_hora($entrada) . ' / ' . self::codigor($entrada) . ' / ' . self::reempacador($entrada) : 'Sin reempacado';
+    }
 
     public static function fecha_hora(Entrada $entrada)
     {

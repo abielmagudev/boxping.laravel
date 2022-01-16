@@ -32,12 +32,12 @@ class ConsolidadoInformant extends Informant
 
     public static function status(Entrada $entrada)
     {
-        return $entrada->hasConsolidado() ? $entrada->consolidado->status : '';
+        return $entrada->hasConsolidado() ? ucfirst($entrada->consolidado->status) : 'X';
     }
 
     public static function tarimas(Entrada $entrada)
     {
-        return $entrada->hasConsolidado() ? $entrada->consolidado->tarimas : '';
+        return $entrada->hasConsolidado() ? $entrada->consolidado->tarimas : 'X';
     }
 
     public static function notas(Entrada $entrada)

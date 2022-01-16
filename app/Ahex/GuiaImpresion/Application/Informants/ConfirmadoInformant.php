@@ -7,22 +7,31 @@ use App\Entrada;
 class ConfirmadoInformant extends Informant
 {
     protected static $actions_descriptions = [
-        'fecha_hora' => [
-            'completa' => 'Fecha y hora de confirmado de la entrada',
+        'informacion' => [
+            'completa' => 'Información completa de confirmado de la entrada',
             'minima' => 'Confirmado',
         ],
-        'nombre' => [
-            'completa' => 'Nombre de usuario que confirmó la entrada',
+        'fecha_hora' => [
+            'completa' => 'Fecha y hora de confirmado de la entrada',
+            'minima' => 'Confirmado(fecha hora)',
+        ],
+        'usuario' => [
+            'completa' => 'Usuario que confirmó la entrada',
             'minima' => 'Confirmado(usuario)',
         ],
     ];
+
+    public static function informacion(Entrada $entrada)
+    {
+        return $entrada->hasConfirmado() ? self::fecha_hora($entrada) . ' / ' . self::usuario($entrada) : 'Sin confirmación';
+    }
 
     public static function fecha_hora(Entrada $entrada)
     {
         return $entrada->hasFechaHoraConfirmado() ? $entrada->confirmado_at : '?';
     }
 
-    public static function nombre(Entrada $entrada)
+    public static function usuario(Entrada $entrada)
     {
         return $entrada->hasConfirmador() ? $entrada->confirmador->name : '?';
     }

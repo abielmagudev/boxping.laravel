@@ -7,9 +7,13 @@ use App\Entrada;
 class ImportadoInformant extends Informant
 {
     protected static $actions_descriptions = [
+        'informacion' => [
+            'completa' => 'Información de importado de la entrada (excepto número de cruce)',
+            'minima' => 'Importado',
+        ],
         'fecha_hora' => [
             'completa' => 'Fecha y hora de importado de la entrada',
-            'minima' => 'Importado',
+            'minima' => 'Importado(fecha hora)',
         ],
         'fecha' => [
             'completa' => 'Fecha de importado de la entrada',
@@ -20,46 +24,51 @@ class ImportadoInformant extends Informant
             'minima' => 'Importado(hora)',
         ],
         'vehiculo' => [
-            'completa' => 'Vehículo que realizo el importado la entrada',
+            'completa' => 'Vehículo que realizó el importado la entrada',
             'minima' => 'Importado(vehículo)',
         ],
         'conductor' => [
-            'completa' => 'Conductor que realizo el importado la entrada',
+            'completa' => 'Conductor que realizó el importado la entrada',
             'minima' => 'Importado(conductor)',
         ],
         'numero_cruce' => [
-            'completa' => 'Número de cruce del importado de la entrada',
+            'completa' => 'Número de cruce de importado de la entrada',
             'minima' => 'Importado(cruce)',
         ],
     ];
 
+    public static function informacion(Entrada $entrada)
+    {
+        return $entrada->hasImportado() ? self::fecha_hora($entrada) . ' / ' . self::vehiculo($entrada) . ' / ' . self::conductor($entrada) : 'Sin importado';
+    }
+
     public static function fecha_hora(Entrada $entrada)
     {
-        return $entrada->hasFechaHoraImportado() ? $entrada->getFechaHoraImportado() : '';
+        return $entrada->hasFechaHoraImportado() ? $entrada->getFechaHoraImportado() : '?';
     }
 
     public static function fecha(Entrada $entrada)
     {
-        return $entrada->hasFechaImportado() ? $entrada->getFechaImportado() : '';
+        return $entrada->hasFechaImportado() ? $entrada->getFechaImportado() : '?';
     }
 
     public static function hora(Entrada $entrada)
     {
-        return $entrada->hasHoraImportado() ? $entrada->getHoraImportado() : '';
+        return $entrada->hasHoraImportado() ? $entrada->getHoraImportado() : '?';
     }
 
     public static function vehiculo(Entrada $entrada)
     {
-        return $entrada->hasVehiculo() ? $entrada->vehiculo->nombre : '';
+        return $entrada->hasVehiculo() ? $entrada->vehiculo->nombre : '?';
     }
 
     public static function conductor(Entrada $entrada)
     {
-        return $entrada->hasVehiculo() ? $entrada->conductor->nombre : '';
+        return $entrada->hasVehiculo() ? $entrada->conductor->nombre : '?';
     }
 
     public static function numero_cruce(Entrada $entrada)
     {
-        return $entrada->numero_cruce;
+        return $entrada->numero_cruce ?? '?';
     }
 }
