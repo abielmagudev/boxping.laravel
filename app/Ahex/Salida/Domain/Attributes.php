@@ -82,6 +82,11 @@ trait Attributes
         return array_key_first( self::$all_coberturas );
     }
 
+    public function getCoberturaTituloAttribute()
+    {
+        return ucfirst($this->cobertura);
+    }
+
     public function getCoberturaDescripcionAttribute()
     {
         return self::$all_coberturas[$this->cobertura]['descripcion'];

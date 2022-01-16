@@ -19,20 +19,32 @@ trait Validations
         return $this->status === $status;
     }
 
+    public function hasRastreo()
+    {
+        return isset($this->rastreo);
+    }
+
+    public function hasConfirmacion()
+    {
+        return isset($this->confirmacion);
+    }
+
+    public function hasCobertura(string $cobertura = null)
+    {
+        if( is_null($cobertura) )
+            return isset($this->cobertura);
+
+        return $this->cobertura === $cobertura;
+    }
+
+
+    // Relations
     public function belongsSomeEntrada()
     {
         if( is_null($this->entrada_id) )
             return false;
 
         return $this->entrada instanceof \App\Entrada;
-    }
-
-    public function hasDestinatario()
-    {
-        if(! $this->belongsSomeEntrada() )
-            return false;
-
-        return $this->entrada->hasDestinatario();
     }
 
     public function hasTransportadora()
@@ -43,16 +55,16 @@ trait Validations
         return is_a($this->transportadora, \App\Transportadora::class);
     }
 
-    public function hasCobertura($cobertura = null)
-    {
-        if( is_null($cobertura) )
-            return isset($this->cobertura);
-
-        return $this->cobertura === $cobertura;
-    }
-
     public function hasIncidentes()
     {
         return $this->incidentes->count() > 0;
+    }
+
+    public function hasDestinatario()
+    {
+        if(! $this->belongsSomeEntrada() )
+            return false;
+
+        return $this->entrada->hasDestinatario();
     }
 }
