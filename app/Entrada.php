@@ -32,7 +32,7 @@ class Entrada extends Model implements ModifierIdentifiable
         UpdatesDescriptions,
         UpdateDescriptionHandler;
     
-    const SIN_CONSOLIDADO = null;
+    const SIN_CONSOLIDADO = false;
 
     protected $fillable = array(
         // Entrada
@@ -83,7 +83,7 @@ class Entrada extends Model implements ModifierIdentifiable
         if( isset($validated['consolidado']) )
             return Consolidado::find($validated['consolidado']);
 
-        return (bool) self::SIN_CONSOLIDADO;
+        return self::SIN_CONSOLIDADO;
     }
 
     public static function prepare(array $validated)
