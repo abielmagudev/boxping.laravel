@@ -17,7 +17,7 @@
          'text' => $graffiti->design('search')->svg()
       ])
 
-      <a href="{{ route('destinatarios.create', ['entrada' => $entrada->id]) }}" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="left" title="Nuevo destinatario">
+      <a href="{{ route('destinatarios.create', ['entrada' => $entrada->id]) }}" class="btn btn-primary btn-sm ms-1" data-toggle="tooltip" data-placement="left" title="Nuevo destinatario">
          {!!  $graffiti->design('plus-lg')->svg() !!}
       </a>
    @endslot
@@ -35,7 +35,7 @@
          <td class="{{ notHasSearchText($searched, $destinatario->localidad) ?: 'table-warning' }}">{{ $destinatario->localidad }}</td>
          <td class="{{ notHasSearchText($searched, $destinatario->telefono) ?: 'table-warning' }}">{{ $destinatario->telefono }}</td>
          <td class="text-end">
-         @if( $destinatario->id <> $entrada->destinatario->id )
+         @if( $destinatario->id <> $entrada->destinatario_id )
             <button name="destinatario" value="{{ $destinatario->id }}" class="btn btn-outline-primary btn-sm" form="formUpdateDestinatario" type="submit">Agregar</button>
             
          @else
