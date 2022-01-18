@@ -101,11 +101,10 @@ class EntradaController extends Controller
 
     public function toPrint(Entrada $entrada, GuiaImpresion $guia = null)
     {
-        $view_name = is_object($guia) && $guia->incrementarIntentosImpresion()
-                    ? 'guias_impresion.print.single'
-                    : 'entradas.print.single';
-   
-        return view($view_name, [
+        if(! is_object($guia) ) 
+            return view('entradas.print.single')->with('entrada', $entrada);
+
+        return view('guias_impresion.print.single', [
             'entrada' => $entrada,
             'page' => new PageDesigner($guia),
         ]);
@@ -115,11 +114,10 @@ class EntradaController extends Controller
     {
         $entradas = Entrada::withRelations()->whereIn('id', $request->entradas)->get();
 
-        $view_name = is_object($guia) && $guia->incrementarIntentosImpresion( $entradas->count() )
-                    ? 'guias_impresion.print.multiple'
-                    : 'entradas.print.multiple';
-        
-        return view($view_name, [
+        if(! is_object($guia) ) 
+            return view('entradas.print.multiple', compact('entradas'));
+
+        return view('guias_impresion.print.multiple', [
             'entradas' => $entradas,
             'page' => new PageDesigner($guia),
         ]);
