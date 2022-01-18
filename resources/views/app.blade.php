@@ -30,6 +30,7 @@
 
     @endauth
 
+    @stack('modals')
     @stack('scripts')
 
 </body>
