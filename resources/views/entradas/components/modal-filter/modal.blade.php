@@ -11,7 +11,6 @@ $all_entradas_filters = [
 ];
 
 $filter_settings = (object) [
-    'id' => 'modalFiltrarEntradas',
     'filters' => isset($filter['except']) && is_array($filter['except']) ? array_diff($all_entradas_filters, $filter['except']) : $all_entradas_filters,
     'route' => isset($filter['route']) && is_string($filter['route']) ? $filter['route'] : route('entradas.index'),
     'hook' => $filter_hook ?? null,
@@ -20,7 +19,7 @@ $filter_settings = (object) [
 ?>
 
 @component('@.bootstrap.modal', [
-    'id' => $filter_settings->id,
+    'id' => 'modalFiltrarEntradas',
     'title' => 'Filtrar entradas',
     'header_close' => true,
 ])
