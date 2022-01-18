@@ -102,6 +102,6 @@ if(! $table_settings->checkbox->render )
         </tr>
         @endforeach
     @endcomponent
-
+    @include('entradas.components.modal-delete-multiple.modal')
     @includeWhen($table_settings->checkbox->render, 'entradas.components.index.dynamics-actions')
 @endif

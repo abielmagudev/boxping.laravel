@@ -94,9 +94,14 @@ class EntradaController extends Controller
         return redirect($route)->with('success', "{$entrada->numero} eliminada");
     }
 
-    public function destroyMultiple()
+    public function destroyMultiple(MultipleRequest $request)
     {
-        // code...
+        if(! Entrada::destroy($request->entradas) )
+            return back()->with('failure', 'Error al eliminar la selección de entradas');
+        
+        $entradas_count = count($request->entradas);
+        
+        return back()->with('success', "Se eliminarón {$entradas_count} entradas con éxito");        
     }
 
     public function toPrint(Entrada $entrada, GuiaImpresion $guia = null)

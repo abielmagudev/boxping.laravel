@@ -53,6 +53,9 @@ Route::middleware('auth')->group( function () {
         Route::post('{entrada}/etapas', 'EntradaEtapaController@store')->name('entradas.etapas.store');
         Route::match(['put','patch'],'{entrada}/etapas/{etapa}', 'EntradaEtapaController@update')->name('entradas.etapas.update');
         Route::delete('{entrada}/etapas/{etapa}', 'EntradaEtapaController@destroy')->name('entradas.etapas.destroy');
+
+        // Multiple
+        Route::delete('', 'EntradaController@destroyMultiple')->name('entradas.destroy.multiple');
     });
     
     // Zonas

@@ -56,7 +56,7 @@ $dropdown_settings = (object) [
             </a>
             <ul class="dropdown-menu border-0 shadow" aria-labelledby="dropdownGuiasImpresionTrigger">
                 <li>
-                    <button class="dropdown-item" type="button" data-action="<?= route('entradas.imprimir.multiple') ?>">Información</button>
+                    <button class="dropdown-item" type="button" data-form-entradas-route="<?= route('entradas.imprimir.multiple') ?>">Información</button>
                 </li>
                 <li>
                     <div class="dropdown-divider"></div>
@@ -70,7 +70,7 @@ $dropdown_settings = (object) [
 
                 @foreach($guias_impresion as $guia)
                 <li>
-                    <button class="dropdown-item" type="button" data-action="<?= route('entradas.imprimir.multiple', $guia) ?>">{{ $guia->nombre }}</button>
+                    <button class="dropdown-item" type="button" data-form-entradas-route="<?= route('entradas.imprimir.multiple', $guia) ?>">{{ $guia->nombre }}</button>
                 </li>
                 @endforeach
             </ul>
@@ -80,7 +80,7 @@ $dropdown_settings = (object) [
         @if( in_array('update', $dropdown_settings->items) )      
         <!-- Actualizar entradas -->
         <li>
-            <button class="dropdown-item" type="button" data-action="#update">
+            <button class="dropdown-item" type="button" data-form-entradas-route="#update">
                 <span>{!! $graffiti->design('file-arrow-up')->svg() !!}</span>
                 <span class="align-middle ms-1">Actualizar</span>
             </button>
@@ -90,10 +90,7 @@ $dropdown_settings = (object) [
         @if( in_array('delete', $dropdown_settings->items) )      
         <!-- Eliminar entradas -->
         <li>
-            <button class="dropdown-item" type="button" data-action="#delete">
-                <span>{!! $graffiti->design('trash')->svg() !!}</span>
-                <span class="align-middle ms-1">Eliminar</span>
-            </button>
+            @include('entradas.components.modal-delete-multiple.trigger')
         </li>
         @endif
     </ul>
