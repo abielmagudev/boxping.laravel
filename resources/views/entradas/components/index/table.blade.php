@@ -19,6 +19,9 @@ $table_settings = (object) [
         'cliente'   => 'Cliente <small class="d-block fw-normal">Alias</small>',
         'options'   => null,
     ],
+    'icon' => (object) [
+        'show' => $graffiti->design('eye')->svg(),
+    ],
 ];
 
 /**
@@ -93,7 +96,7 @@ if(! $table_settings->checkbox->render )
             <!-- Opciones -->
             <td class="text-end">
                 <a href="{{ route('entradas.show', $entrada) }}" class="btn btn-sm btn-outline-primary">
-                    {!! $graffiti->design('eye')->cache('svg') !!}
+                    {!! $table_settings->icon->show !!}
                 </a>
             </td>
         </tr>
