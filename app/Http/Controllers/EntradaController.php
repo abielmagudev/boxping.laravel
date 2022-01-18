@@ -94,7 +94,7 @@ class EntradaController extends Controller
         return redirect($route)->with('success', "{$entrada->numero} eliminada");
     }
 
-    public function destroyMany()
+    public function destroyMultiple()
     {
         // code...
     }
@@ -111,7 +111,7 @@ class EntradaController extends Controller
         ]);
     }
 
-    public function toPrintMany(MultipleRequest $request, GuiaImpresion $guia = null)
+    public function toPrintMultiple(MultipleRequest $request, GuiaImpresion $guia = null)
     {
         $entradas = Entrada::withRelations()->whereIn('id', $request->entradas)->get();
 

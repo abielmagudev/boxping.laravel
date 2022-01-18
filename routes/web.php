@@ -45,7 +45,7 @@ Route::middleware('auth')->group( function () {
         
         // Imprimir
         Route::get('{entrada}/imprimir/{guia?}', 'EntradaController@toPrint')->name('entradas.imprimir')->middleware('guia_impresion.activada');
-        Route::get('imprimir/{guia?}', 'EntradaController@toPrintMany')->name('entradas.imprimir.multiple')->middleware('guia_impresion.activada');
+        Route::get('imprimir/{guia?}', 'EntradaController@toPrintMultiple')->name('entradas.imprimir.multiple')->middleware('guia_impresion.activada');
     
         // EntradaEtapa
         Route::get('{entrada}/etapas/add', 'EntradaEtapaController@add')->name('entradas.etapas.add');
