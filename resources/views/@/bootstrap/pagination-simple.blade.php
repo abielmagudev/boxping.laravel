@@ -1,44 +1,102 @@
 <?php
 
-use \Illuminate\Support\Facades\Route;
+$settings = [
+    'size'  => $size ?? false,
+    'align' => $align ?? false,
+];
 
-$sizes = array(
-    'sm' => 'pagination-sm',
-    'lg' => 'pagination-lg',
-);
+$paginationHandler = new class ($collection, $settings) {
 
-$aligns = array(
-    'center' => 'justify-content-center',
-    'right'  => 'justify-content-end',
-);
+    public $all_sizes = [
+        'sm' => 'pagination-sm',
+        'lg' => 'pagination-lg',
+    ];
 
-$settings = (object) array(
-    'size'  => isset($size) && array_key_exists($size, $sizes) ? $sizes[$size] : '',
-    'align' => isset($align) && array_key_exists($align, $aligns) ? $aligns[$align] : '',
-    'prev' => (object) [
-        'exists' => isset($prev) && is_string($prev),
-        'route' => $prev ?? null,
-        'text' => isset($prev_text) && is_string($prev_text) ? $prev_text : 'Anterior',
-    ],
-    'next' => (object) [
-        'exists' => isset($next) && is_string($next),
-        'route' => $next ?? null,
-        'text' => isset($next_text) && is_string($next_text) ? $next_text : 'Siguiente',
-    ],
-);
+    public $all_alignments = [
+        'center' => 'justify-content-center',
+        'right'  => 'justify-content-end',
+    ];
+
+    public $collection;
+
+    public $settings;
+
+    public function __construct(object $collection, array $settings)
+    {
+        $this->collection = $collection;
+        $this->settings = [
+            'size' => $this->existsSize( $settings['size'] ?? null ) ? $this->getSize($settings['size']) : '',
+            'align' => $this->existsSize( $settings['size'] ?? null ) ? $this->getSize($settings['size']) : '',
+        ];
+    }
+
+    public function existsSize(string $size)
+    {
+        return array_key_exists($size, $this->all_sizes);
+    }
+
+    public function getSize(string $size)
+    {
+        return $this->all_sizes[$size];
+    }
+
+    public function size()
+    {
+        return $this->settings['size'];
+    }
+
+    public function existsAlign(string $align)
+    {
+        return array_key_exists($align, $this->all_alignments);
+    }
+
+    public function getAlign(string $align)
+    {
+        return $this->all_alignments[$align];
+    }
+
+    public function align()
+    {
+        return $this->settings['align'];
+    }
+
+    public function hasPrev()
+    {
+        return method_exists($this->collection, 'previousPageUrl') &&! is_null($this->collection->previousPageUrl());
+    }
+
+    public function hasNext()
+    {
+        return method_exists($this->collection, 'nextPageUrl') &&! is_null($this->collection->nextPageUrl());
+    }
+
+    public function hasPagination()
+    {
+        return $this->hasPrev() || $this->hasNext();
+    }
+
+    public function prev()
+    {
+        return $this->collection->previousPageUrl() ?? null;
+    } 
+
+    public function next()
+    {
+        return $this->collection->nextPageUrl() ?? null;
+    } 
+}
 
 ?>
 
+@if( $paginationHandler->hasPagination() ) 
 <div id="wrapper-pagination-simple">
-    <ul class="pagination {{ $settings->size }} {{ $settings->align }}">
-        <!-- Prev -->
-        <li class="page-item <?= $settings->prev->exists ?: 'disabled' ?>">
-            <a href="{{ $settings->prev->route }}" class="page-link">{{ $settings->prev->text }}</a>
+    <ul class="pagination <?= $paginationHandler->size() ?> <?= $paginationHandler->align() ?>">
+        <li class="page-item <?= ! $paginationHandler->hasPrev() ? 'disabled' : '' ?>">
+            <a href="<?= $paginationHandler->prev() ?? '#anterior' ?>" class="page-link">Anterior</a>
         </li>
-        
-        <!-- Next -->
-        <li class="page-item <?= $settings->next->exists ?: 'disabled' ?>">
-            <a href="{{ $settings->next->route }}" class="page-link">{{ $settings->next->text }}</a>
+        <li class="page-item <?= ! $paginationHandler->hasNext() ? 'disabled' : '' ?>">
+            <a href="<?= $paginationHandler->next() ?? '#siguiente' ?>" class="page-link">Siguiente</a>
         </li>
     </ul>
 </div>
+@endif
