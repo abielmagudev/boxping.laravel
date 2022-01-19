@@ -5,11 +5,15 @@ $settings = (object) [
     'caption_top' => isset($caption_top) && $caption_top === true ? 'caption-top' : '',
     'caption' => $caption ?? null,
     'has_caption' => isset($caption) && is_string($caption),
-    'has_thead' => isset($thead) && is_array($thead),
+    'has_thead_items' => isset($thead_items) && is_array($thead_items),
+    'has_thead' => isset($thead),
     'has_tbody' => $slot->isNotEmpty(),
-    'has_tfoot' => isset($tfoot) && is_array($tfoot),
+    'has_tfoot_items' => isset($tfoot_items) && is_array($tfoot_items),
+    'has_tfoot' => isset($tfoot),
+    'thead_items' => $thead_items ?? false,
     'thead' => $thead ?? false,
     'tbody' => $slot,
+    'tfoot_items' => $tfoot_items ?? false,
     'tfoot' => $tfoot ?? false,
 ];
 
@@ -21,13 +25,19 @@ $settings = (object) [
         <caption>{{ $settings->caption }}</caption>
         @endif
 
-        @if( $settings->has_thead )    
+        @if( $settings->has_thead || $settings->has_thead_items )    
         <thead>
+            @if( $settings->has_thead_items  )
             <tr>
                 @foreach ($settings->thead as $thead)
                 <th class="small">{!! $thead !!}</th>
                 @endforeach
             </tr>
+
+            @else
+            {!! $settings->thead !!}
+
+            @endif
         </thead>
         @endif
 
