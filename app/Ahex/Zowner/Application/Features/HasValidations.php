@@ -6,12 +6,6 @@ trait HasValidations
 {
     /** COLLECTIONs */
 
-    public function hasAnyCollection($collection): bool
-    {
-        return $this->hasCollection($collection) ||
-               $this->hasEloquentCollection($collection);
-    }
-
     public function hasCollection($collection): bool
     {
         return $collection instanceof \Illuminate\Support\Collection;
@@ -22,14 +16,14 @@ trait HasValidations
         return $collection instanceof \Illuminate\Database\Eloquent\Collection;
     }
 
-    /** PAGINATIONs */
-    
-    public function hasAnyPagination($collection): bool
+    public function hasAnyCollection($collection): bool
     {
-        return  $this->hasPagination($collection) ||
-                $this->hasSimplePagination($collection) ||
-                $this->hasCursorPagination($collection);
+        return $this->hasCollection($collection) ||
+               $this->hasEloquentCollection($collection);
     }
+
+
+    /** PAGINATIONs */
 
     public function hasPagination($collection): bool
     {
@@ -44,5 +38,12 @@ trait HasValidations
     public function hasCursorPagination($collection): bool
     {
         return $collection instanceof \Illuminate\Pagination\CursorPaginator;
+    }
+
+    public function hasAnyPagination($collection): bool
+    {
+        return  $this->hasPagination($collection) ||
+                $this->hasSimplePagination($collection) ||
+                $this->hasCursorPagination($collection);
     }
 }
