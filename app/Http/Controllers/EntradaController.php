@@ -28,13 +28,7 @@ class EntradaController extends Controller
                             ->filterByRequest($request)
                             ->getFiltered();
 
-        return view('entradas.index', [
-            'entradas' => $entradas,
-            'pagination' => ! $this->hasAnyPagination($entradas) ?: [
-                'prev' => $entradas->previousPageUrl() ?? null,
-                'next' => $entradas->nextPageUrl() ?? null,
-            ],
-        ]);
+        return view('entradas.index', compact('entradas'));
     }
 
     public function create(CreateRequest $request)
