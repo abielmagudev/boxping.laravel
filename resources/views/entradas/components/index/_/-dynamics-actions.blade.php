@@ -1,4 +1,3 @@
-<form action="#" id="<?= $table_settings->checkbox->form_id ?>"></form>
 <script type="text/javascript">
 const dropdownButtonAction = {
     all: () => document.querySelectorAll('button[data-form-entradas-route]'),

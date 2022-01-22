@@ -1,70 +1,107 @@
 <?php
 
-$table_settings = (object) [
-    'entradas'     => $entradas,
-    'has_entradas' => is_a($entradas, \Illuminate\Database\Eloquent\Collection::class) && $entradas->count(),
-    'checkbox'     => (object) [
-        'form_id'  => 'formEntradasAction',
-        'render'   => isset($checkbox) && is_bool($checkbox) ? $checkbox : true,
-    ],
-    'default' => (object) [
-        'cliente'      => isset($cliente) && is_a($cliente, \App\Cliente::class) ? $cliente : false,
-        'consolidado'  => isset($consolidado) && is_a($consolidado, \App\Consolidado::class) ? $consolidado : false,
-        'destinatario' => isset($destinatario) && is_a($destinatario, \App\Destinatario::class) ? $destinatario : false,
-    ],
-    'thead' => [
-        'checkbox'  => '',
-        'entrada'   => 'Número <small class="d-block fw-normal">Consolidado</small>',
-        'direccion' => 'Dirección <small class="d-block fw-normal">Localidad</small>',
-        'cliente'   => 'Cliente <small class="d-block fw-normal">Alias</small>',
-        'options'   => null,
-    ],
-    'icon' => (object) [
-        'show' => $graffiti->design('eye')->svg(),
-    ],
+$settings = [
+    'checkboxes' => $checkboxes ?? false,
+    'cliente' => $cliente ?? false,
+    'consolidado' => $consolidado ?? false,
+    'destinatario' => $destinatario ?? false,
 ];
 
-/**
- * Elimina el elemento checkbox del thead
- * 
- * Si la propiedad render de checkbox es FALSE
- * ELIMINA el primer encabezado de la tabla 
- * ubicado en 'thead' => ['checkbox' => '', ...
- * 
- */
-if(! $table_settings->checkbox->render )
-    array_shift($table_settings->thead);
+$tableManager = new class ($entradas, $settings)
+{
+    public function __construct(object $entradas, array $settings)
+    {
+        $this->entradas = $entradas;
+
+        $this->checkboxes = isset($settings['checkboxes']) && is_bool($settings['checkboxes']) 
+                            ? $settings['checkboxes'] 
+                            : false;
+                            
+        $this->cache = [
+            'cliente' => isset($settings['cliente']) && is_a($settings['cliente'], \App\Cliente::class) ? $settings['cliente'] : false,
+            'consolidado' => isset($settings['consolidado']) && is_a($settings['consolidado'], \App\Consolidado::class) ? $settings['consolidado'] : false,
+            'destinatario' => isset($settings['destinatario']) && is_a($settings['destinatario'], \App\Destinatario::class) ? $settings['destinatario'] : false,
+        ];
+    }
+
+    public function hasCheckboxes()
+    {
+        return $this->checkboxes;
+    }
+
+    public function hasEntradas()
+    {
+        return method_exists($this->entradas, 'total') 
+                ? $this->entradas->total() > 0
+                : $this->entradas->count() > 0;
+    }
+
+    public function hasCache(string $model)
+    {
+        return isset($this->cache[$model]) && is_object($this->cache[$model]);
+    }
+
+    public function entradas()
+    {
+        return method_exists($this->entradas, 'getCollection') 
+                ? $this->entradas->getCollection() 
+                : $this->entradas;
+    }
+
+    public function cache(string $model)
+    {
+        return $this->cache[$model];
+    }
+};
 
 ?>
 
-@if( $table_settings->has_entradas ) 
-    @component('@.bootstrap.table', [
-        'thead' => $table_settings->thead,
-    ])
-        @foreach($entradas as $entrada)
+@if( $tableManager->hasEntradas() ) 
+    <?php $formHandle = include resource_path('views/entradas/components/index/_/EntradasFormManager.php') ?>
+
+    @component('@.bootstrap.table')
+        @slot('thead')
         <tr>
-            <!-- Checkbox -->
-            @if( $table_settings->checkbox->render )
-            <?php $checkbox_id = "checkbox-entrada-{$entrada->id}" ?>
-            <td class="align-top" style="width:1%">
+            @if( $tableManager->hasCheckboxes() )
+            <th class="align-middle text-center ps-3" style="width:1%">
+                @include('@.partials.checkboxes-switcher', [
+                    'checkboxes_name' => $formHandle->checkboxName(),
+                    'switcher' => $formHandle->switcher(),
+                ])
+            </th>
+
+            @endif
+
+            <th>Número <small class="d-block fw-normal">Consolidado</small></th>
+            <th>Domicilio <small class="d-block fw-normal">Destinatario</small></th>
+            <th>Cliente <small class="d-block fw-normal">Alias</small></th>
+            <th></th>
+        </tr>
+        @endslot
+
+        @foreach($tableManager->entradas() as $entrada)
+        <tr>
+            <?php // Checkboxes ?>
+            @if( $tableManager->hasCheckboxes() )
+            <td class="text-center" style="width:1%">
                 <input 
                     type="checkbox" 
                     class="form-check-input" 
-                    form="{{ $table_settings->checkbox->form_id }}"
-                    id="{{ $checkbox_id }}" 
-                    name="entradas[]" 
-                    value="{{ $entrada->id }}" 
+                    form="<?= $formHandle->id() ?>"
+                    id="<?= $formHandle->checkboxId( $entrada->id ) ?>" 
+                    name="<?= $formHandle->checkboxName() ?>" 
+                    value="<?= $entrada->id ?>" 
                 >
             </td>
             @endif
 
-            <!-- Entrada & Consolidado -->
+            <?php // Numero Entrada / Numero consolidado ?>
             <td>
-                <label for="{{ $checkbox_id ?? '' }}">{{ $entrada->numero }}</label>
+                <label for="<?= $formHandle->checkboxId( $entrada->id ) ?>">{{ $entrada->numero }}</label>
                 <small class="d-block">
-                @if( $table_settings->default->consolidado || $entrada->hasConsolidado() )
-                    <?php $route = route('consolidados.show', $table_settings->default->consolidado->id ?? $entrada->consolidado->id) ?>
-                    <a href="{{ $route }}">{{ $table_settings->default->consolidado->numero ?? $entrada->consolidado->numero }}</a>
+                @if( $tableManager->hasCache('consolidado') || $entrada->hasConsolidado() )
+                    <?php $route = route('consolidados.show', $tableManager->cache('consolidado')->id ?? $entrada->consolidado->id) ?>
+                    <a href="<?= $route ?>">{{ $tableManager->cache('consolidado')->numero ?? $entrada->consolidado->numero }}</a>
                     
                 @else
                     <span class="small" style="color:#BBBBBB">SIN CONSOLIDAR</span>
@@ -73,19 +110,19 @@ if(! $table_settings->checkbox->render )
                 </small>
             </td>
 
-            <!-- Destinatario & Localidad -->
+            <?php // Domicilio destinatario / Localidad destinatario ?>
             <td>
-                @if( $table_settings->default->destinatario || $entrada->hasDestinatario() )
-                <span class="d-block">{{ $table_settings->default->destinatario->direccion ?? $entrada->destinatario->direccion ?? '-' }}</span>
-                <small>{{ $table_settings->default->destinatario->localidad ?? $entrada->destinatario->localidad }}</small>
+                @if( $tableManager->hasCache('destinatario') || $entrada->hasDestinatario() )
+                <span class="d-block">{{ $tableManager->cache('destinatario')->direccion ?? $entrada->destinatario->direccion ?? '-' }}</span>
+                <small>{{ $tableManager->cache('destinatario')->localidad ?? $entrada->destinatario->localidad }}</small>
 
                 @endif
             </td>
 
-            <!-- Alias cliente -->
+            <?php // Alias cliente ?>
             <td>
-                @if( $table_settings->default->cliente || $entrada->hasCliente() )
-                <span class="d-block">{{ $table_settings->default->cliente->alias ?? $entrada->cliente->alias }}</span>
+                @if( $tableManager->hasCache('cliente') || $entrada->hasCliente() )
+                <span class="d-block">{{ $tableManager->cache('cliente')->alias ?? $entrada->cliente->alias }}</span>
                 
                 @else
                 <span class="text-muted">-</span>
@@ -93,15 +130,16 @@ if(! $table_settings->checkbox->render )
                 @endif
             </td>
 
-            <!-- Opciones -->
+            <?php // Opciones ?>
             <td class="text-end">
-                <a href="{{ route('entradas.show', $entrada) }}" class="btn btn-sm btn-outline-primary">
-                    {!! $table_settings->icon->show !!}
+                <a href="<?= route('entradas.show', $entrada) ?>" class="btn btn-sm btn-outline-primary">
+                    {!! $graffiti->design('eye')->svg() !!}
                 </a>
             </td>
         </tr>
         @endforeach
     @endcomponent
-    @include('entradas.components.modal-delete-multiple.modal')
-    @includeWhen($table_settings->checkbox->render, 'entradas.components.index.dynamics-actions')
+
+    <?= $tableManager->hasCheckboxes() ? $formHandle->htmlForm() : '' ?>
+
 @endif
