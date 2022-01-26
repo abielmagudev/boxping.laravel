@@ -1,16 +1,16 @@
 <?php
 
 $settings = [
-    'checkboxes' => $checkboxes ?? false,
+    'filtered' => request()->filled('filter_token'),
     'options' => isset($options) ? boolval($options) : false,
     'pagination' => $pagination ?? false,
 ];
 
-$cardManager = new class ($entradas, $settings)
+$component = new class ($entradas, $settings)
 {
-    private $settings;
-
     private $entradas;
+
+    private $settings;
 
     public function __construct(object $entradas, array $settings)
     {
@@ -21,7 +21,7 @@ $cardManager = new class ($entradas, $settings)
 
     public function has(string $setting)
     {
-        return isset($this->settings[$setting]) ? $this->settings[$setting] : false;
+        return $this->settings[$setting] ?? false;
     }
 
     public function entradas()
@@ -45,29 +45,28 @@ $cardManager = new class ($entradas, $settings)
     <div class="col-sm">
     @component('@.bootstrap.card', [
         'title' => 'Entradas',
-        'counter' => $cardManager->entradasCount(),
+        'counter' => $component->entradasCount(),
     ])
 
         @slot('options')
-        @includeWhen($cardManager->has('options'), 'entradas.components.index.card-options')
+        @includeWhen($component->has('options'), 'entradas.components.index.card.options')
         
         @endslot
 
         @include('entradas.components.index.table', [
-            'entradas' => $cardManager->entradas(),
-            'checkboxes' => $cardManager->has('checkboxes'),
-            'cliente' => $cliente ?? false,
-            'consolidado' => $consolidado ?? false,
-            'destinatario' => $destinatario ?? false,
+            'entradas' => $component->entradas(),
         ])
 
     @endcomponent
     </div>
 
+    @if( $component->has('filtered') )   
     <div class="col-sm col-sm-3">
-    @includeWhen(request()->filled('filter_token'), 'entradas.components.index.modal-filter-display')
+    @include('entradas.components.index.modal-filter.filtered-display')
+
     </div>
+    @endif
 </div>
 <br>
 
-@includeWhen($cardManager->has('pagination'), '@.bootstrap.pagination-simple', ['collection' => $cardManager->entradas()])
+@includeWhen($component->has('pagination'), '@.bootstrap.pagination-simple', ['collection' => $component->entradas()])

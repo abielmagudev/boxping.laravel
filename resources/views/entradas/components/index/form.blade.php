@@ -1,6 +1,11 @@
+<?php include resource_path('views/entradas/components/index/_entradas_form_config.php') ?>
+
+<form action='<?= $entradas_form_config->action ?>' id='<?= $entradas_form_config->id ?>'></form>
+
+@push('scripts')
 <script type="text/javascript">
-const dropdownButtonAction = {
-    all: () => document.querySelectorAll('button[data-form-entradas-route]'),
+const formActionButton = {
+    all: () => document.querySelectorAll('<?= $entradas_form_config->button_data_action ?>'),
     listening: function () {
         this.all().forEach( function (button) {
             button.addEventListener('click', function (e) {
@@ -13,20 +18,20 @@ const dropdownButtonAction = {
 }
 
 const formEntradasHandler = {
-    element: document.querySelector('#formEntradasAction'),
-    addTokenElement: function (value) {
-        let token_element = document.createElement('input')
-        token_element.type = 'hidden'
-        token_element.name = '_token'
-        token_element.value = value
-        this.element.appendChild(token_element)
-    },
+    element: document.querySelector('#<?= $entradas_form_config->id ?>'),
     addMethodElement: function (value) {
         let method_element = document.createElement('input')
         method_element.type = 'hidden'
         method_element.name = '_method'
         method_element.value = value
         this.element.appendChild(method_element)
+    },
+    addTokenElement: function (value) {
+        let token_element = document.createElement('input')
+        token_element.type = 'hidden'
+        token_element.name = '_token'
+        token_element.value = value
+        this.element.appendChild(token_element)
     },
     setMethod: function (value) {
         this.element.setAttribute('method', value)
@@ -36,12 +41,12 @@ const formEntradasHandler = {
     },
     setup: function (trigger) {
 
-        this.setAction( trigger.dataset.formEntradasRoute )
+        this.setAction( trigger.dataset.entradasFormAction )
 
-        if( 'formEntradasMethod' in trigger.dataset )
+        if( 'entradasFormMethod' in trigger.dataset )
         {
             this.setMethod('POST')
-            this.addMethodElement( trigger.dataset.formEntradasMethod )
+            this.addMethodElement( trigger.dataset.entradasFormMethod )
             this.addTokenElement( '<?= csrf_token() ?>' )
         }
     },  
@@ -50,5 +55,7 @@ const formEntradasHandler = {
     }
 }
 
-dropdownButtonAction.listening()
+formActionButton.listening()
+
 </script>
+@endpush

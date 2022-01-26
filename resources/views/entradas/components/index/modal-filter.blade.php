@@ -9,7 +9,7 @@ $settings = [
     'icon' => $graffiti->design('funnel')->svg(),
 ];
 
-$modalFilterHandler = new class ($settings)
+$component = new class ($settings)
 {
     const MODAL_ID = 'modalFiltrarEntradas';
 
@@ -82,24 +82,24 @@ $modalFilterHandler = new class ($settings)
 ?>
 
 @include('@.bootstrap.modal-trigger', [
-    'modal_id' => $modalFilterHandler::MODAL_ID,
-    'classes' => $modalFilterHandler->button_class,
-    'text' => $modalFilterHandler->button_content,
+    'modal_id' => $component::MODAL_ID,
+    'classes' => $component->button_class,
+    'text' => $component->button_content,
 ])    
 
 @push('modals')
     @component('@.bootstrap.modal', [
-        'id' => $modalFilterHandler::MODAL_ID,
+        'id' => $component::MODAL_ID,
         'title' => 'Filtrar entradas',
         'header_close' => true,
     ])
-        <form action="<?= $modalFilterHandler->route ?>" id="formFiltersEntradas" autocomplete="off">
-            @foreach($modalFilterHandler->getFilters() as $filter)
-                @include("entradas.components.index.modal-filters.{$filter}")
+        <form action="<?= $component->route ?>" id="formFiltersEntradas" autocomplete="off">
+            @foreach($component->getFilters() as $filter)
+                @include("entradas.components.index.modal-filter.filters.{$filter}")
             @endforeach
             <hr>
 
-            {!! $modalFilterHandler->modal_content !!}
+            {!! $component->modal_content !!}
 
             <input type="hidden" name="filter_token" value="<?= csrf_token() ?>">
             <div class="text-end">

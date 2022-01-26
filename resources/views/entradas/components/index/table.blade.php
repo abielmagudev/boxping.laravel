@@ -1,13 +1,15 @@
 <?php
 
+include resource_path('views/entradas/components/index/_entradas_form_config.php');
+
 $settings = [
-    'checkboxes' => $checkboxes ?? false,
+    'checkboxes' => $checkboxes ?? true,
     'cliente' => $cliente ?? false,
     'consolidado' => $consolidado ?? false,
     'destinatario' => $destinatario ?? false,
 ];
 
-$tableManager = new class ($entradas, $settings)
+$component = new class ($entradas, $settings)
 {
     public function __construct(object $entradas, array $settings)
     {
@@ -56,17 +58,16 @@ $tableManager = new class ($entradas, $settings)
 
 ?>
 
-@if( $tableManager->hasEntradas() ) 
-    <?php $formHandle = include resource_path('views/entradas/components/index/_/EntradasFormManager.php') ?>
+@if( $component->hasEntradas() ) 
 
     @component('@.bootstrap.table')
         @slot('thead')
         <tr>
-            @if( $tableManager->hasCheckboxes() )
+            @if( $component->hasCheckboxes() )
             <th class="align-middle text-center ps-3" style="width:1%">
                 @include('@.partials.checkboxes-switcher', [
-                    'checkboxes_name' => $formHandle->checkboxName(),
-                    'switcher' => $formHandle->switcher(),
+                    'checkboxes_name' => $entradas_form_config->checkbox_name,
+                    'switcher' => $entradas_form_config->type_switcher,
                 ])
             </th>
 
@@ -79,17 +80,18 @@ $tableManager = new class ($entradas, $settings)
         </tr>
         @endslot
 
-        @foreach($tableManager->entradas() as $entrada)
+        @foreach($component->entradas() as $entrada)
+        <?php $checkbox_id = $entradas_form_config->checkbox_prefix . $entrada->id ?>
         <tr>
             <?php // Checkboxes ?>
-            @if( $tableManager->hasCheckboxes() )
+            @if( $component->hasCheckboxes() )
             <td class="text-center" style="width:1%">
                 <input 
                     type="checkbox" 
                     class="form-check-input" 
-                    form="<?= $formHandle->id() ?>"
-                    id="<?= $formHandle->checkboxId( $entrada->id ) ?>" 
-                    name="<?= $formHandle->checkboxName() ?>" 
+                    form="<?= $entradas_form_config->id ?>"
+                    id="<?= $checkbox_id ?>" 
+                    name="<?= $entradas_form_config->checkbox_name ?>" 
                     value="<?= $entrada->id ?>" 
                 >
             </td>
@@ -97,11 +99,11 @@ $tableManager = new class ($entradas, $settings)
 
             <?php // Numero Entrada / Numero consolidado ?>
             <td>
-                <label for="<?= $formHandle->checkboxId( $entrada->id ) ?>">{{ $entrada->numero }}</label>
+                <label for="<?= $checkbox_id ?>">{{ $entrada->numero }}</label>
                 <small class="d-block">
-                @if( $tableManager->hasCache('consolidado') || $entrada->hasConsolidado() )
-                    <?php $route = route('consolidados.show', $tableManager->cache('consolidado')->id ?? $entrada->consolidado->id) ?>
-                    <a href="<?= $route ?>">{{ $tableManager->cache('consolidado')->numero ?? $entrada->consolidado->numero }}</a>
+                @if( $component->hasCache('consolidado') || $entrada->hasConsolidado() )
+                    <?php $route = route('consolidados.show', $component->cache('consolidado')->id ?? $entrada->consolidado->id) ?>
+                    <a href="<?= $route ?>">{{ $component->cache('consolidado')->numero ?? $entrada->consolidado->numero }}</a>
                     
                 @else
                     <span class="small" style="color:#BBBBBB">SIN CONSOLIDAR</span>
@@ -112,17 +114,17 @@ $tableManager = new class ($entradas, $settings)
 
             <?php // Domicilio destinatario / Localidad destinatario ?>
             <td>
-                @if( $tableManager->hasCache('destinatario') || $entrada->hasDestinatario() )
-                <span class="d-block">{{ $tableManager->cache('destinatario')->direccion ?? $entrada->destinatario->direccion ?? '-' }}</span>
-                <small>{{ $tableManager->cache('destinatario')->localidad ?? $entrada->destinatario->localidad }}</small>
+                @if( $component->hasCache('destinatario') || $entrada->hasDestinatario() )
+                <span class="d-block">{{ $component->cache('destinatario')->direccion ?? $entrada->destinatario->direccion ?? '-' }}</span>
+                <small>{{ $component->cache('destinatario')->localidad ?? $entrada->destinatario->localidad }}</small>
 
                 @endif
             </td>
 
             <?php // Alias cliente ?>
             <td>
-                @if( $tableManager->hasCache('cliente') || $entrada->hasCliente() )
-                <span class="d-block">{{ $tableManager->cache('cliente')->alias ?? $entrada->cliente->alias }}</span>
+                @if( $component->hasCache('cliente') || $entrada->hasCliente() )
+                <span class="d-block">{{ $component->cache('cliente')->alias ?? $entrada->cliente->alias }}</span>
                 
                 @else
                 <span class="text-muted">-</span>
@@ -140,6 +142,5 @@ $tableManager = new class ($entradas, $settings)
         @endforeach
     @endcomponent
 
-    <?= $tableManager->hasCheckboxes() ? $formHandle->htmlForm() : '' ?>
-
+    @includeWhen($component->hasCheckboxes(), 'entradas.components.index.form', ['entradas' => $entradas])
 @endif

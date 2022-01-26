@@ -2,7 +2,7 @@
 @section('content')
 
 @include('entradas.components.index.card', [
-    'checkboxes' => true,
+    'entradas' => $entradas,
     'options' => true, 
     'pagination' => true,
 ])
