@@ -73,8 +73,8 @@ $component = new class ($entradas, $settings)
 
             @endif
 
-            <th>Número <small class="d-block fw-normal">Consolidado</small></th>
-            <th>Domicilio <small class="d-block fw-normal">Destinatario</small></th>
+            <th>Entrada<small class="d-block fw-normal">Consolidado</small></th>
+            <th>Destinatario <small class="d-block fw-normal">Domicilio</small></th>
             <th>Cliente <small class="d-block fw-normal">Alias</small></th>
             <th></th>
         </tr>
