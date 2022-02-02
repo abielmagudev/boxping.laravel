@@ -2,9 +2,9 @@
 
 namespace App\Exceptions;
 
-// use Exception;
-Use Throwable;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Exception;
+Use Throwable;
 
 class Handler extends ExceptionHandler
 {
