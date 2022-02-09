@@ -76,6 +76,11 @@ class EntradaController extends Controller
         return back()->with('success', $updater->success());
     }
 
+    public function updateMultiple(Request $request)
+    {
+        dd($request->all());
+    }
+
     public function destroy(Entrada $entrada)
     {
         if(! $entrada->delete() )

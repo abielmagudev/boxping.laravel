@@ -10,10 +10,7 @@
             </a>
         </li>
         <li>
-            <a class="dropdown-item" href="#update">
-                <span>{!! $graffiti->design('arrow-clockwise')->svg() !!}</span>
-                <span class="align-middle ms-1">Actualizar</span>
-            </a>
+            @include('entradas.components.index.modal-edit')
         </li>
         <li>
             @include('entradas.components.index.modal-delete')

@@ -55,6 +55,7 @@ Route::middleware('auth')->group( function () {
         Route::delete('{entrada}/etapas/{etapa}', 'EntradaEtapaController@destroy')->name('entradas.etapas.destroy');
 
         // Multiple
+        Route::match(['put','patch'], 'multiple', 'EntradaController@updateMultiple')->name('entradas.update.multiple');
         Route::delete('', 'EntradaController@destroyMultiple')->name('entradas.destroy.multiple');
     });
     
