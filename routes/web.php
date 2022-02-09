@@ -56,7 +56,7 @@ Route::middleware('auth')->group( function () {
 
         // Multiple
         Route::match(['put','patch'], 'multiple', 'EntradaController@updateMultiple')->name('entradas.update.multiple');
-        Route::delete('', 'EntradaController@destroyMultiple')->name('entradas.destroy.multiple');
+        Route::delete('multiple', 'EntradaController@destroyMultiple')->name('entradas.destroy.multiple');
     });
     
     // Zonas
