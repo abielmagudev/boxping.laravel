@@ -83,7 +83,7 @@ class EntradaController extends Controller
 
         if( $request->has('consolidado') && is_null($request->consolidado) || Consolidado::isAbierto($request->consolidado) )
         {
-            $consolidado_id = Consolidado::isAbierto($request->consolidado) ? Consolidado::findByNumber($request->consolidado)->id : null;
+            $consolidado_id = Consolidado::isAbierto($request->consolidado) ? Consolidado::findByNumero($request->consolidado)->id : null;
 
             Entrada::whereIn('id', $request->entradas)->update(['consolidado_id' => $consolidado_id]);
             return back()->with('success', "Actualización de consolidado a {$entradas_count} entradas");
