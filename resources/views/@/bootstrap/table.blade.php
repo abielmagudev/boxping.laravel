@@ -29,7 +29,7 @@ $settings = (object) [
         <thead>
             @if( $settings->has_thead_items  )
             <tr>
-                @foreach ($settings->thead as $thead)
+                @foreach ($settings->thead_items as $thead)
                 <th class="small">{!! $thead !!}</th>
                 @endforeach
             </tr>
