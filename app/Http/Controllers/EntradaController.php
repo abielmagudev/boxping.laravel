@@ -78,7 +78,24 @@ class EntradaController extends Controller
 
     public function updateMultiple(Request $request)
     {
-        dd($request->all());
+        $entradas_count = count($request->entradas);
+        $message = 'Error al actualizar la selección de entradas';
+
+        if( $request->has('consolidado') && is_null($request->consolidado) || Consolidado::isAbierto($request->consolidado) )
+        {
+            $consolidado_id = Consolidado::isAbierto($request->consolidado) ? Consolidado::findByNumber($request->consolidado)->id : null;
+
+            Entrada::whereIn('id', $request->entradas)->update(['consolidado_id' => $consolidado_id]);
+            return back()->with('success', "Actualización de consolidado a {$entradas_count} entradas");
+        }
+
+        if( $request->has('cliente') && \App\Cliente::exists($request->cliente) )
+        {
+            Entrada::whereIn('id', $request->entradas)->update(['cliente_id' => $request->cliente]);
+            return back()->with('success', "Actualización de cliente a {$entradas_count} entradas");
+        }
+
+        return back()->with('failure', $message);
     }
 
     public function destroy(Entrada $entrada)
