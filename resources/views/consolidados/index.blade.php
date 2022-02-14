@@ -31,7 +31,7 @@
     @endslot
 
     @component('@.bootstrap.table', [
-        'thead' => ['Status','Número','Cliente','Tarimas','Entradas']    
+        'thead_items' => ['Status','Número','Cliente','Tarimas','Entradas']    
     ])
         @foreach($consolidados as $consolidado)
         <tr>
@@ -58,10 +58,7 @@
 @endcomponent
 <br>
 
-@include('@.bootstrap.pagination-simple', [
-    'prev' => $consolidados->previousPageUrl(),  
-    'next' => $consolidados->nextPageUrl()  
-])
+@include('@.bootstrap.pagination-simple', ['collection' => $consolidados])
 <br>
 
 @endsection
