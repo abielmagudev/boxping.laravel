@@ -38,7 +38,7 @@ $settings = (object) [
             @if( $settings->has_title || $settings->has_header_close )             
             <div class="modal-header {{ $settings->header_classes }}">
                 @if( $settings->has_title )
-                <h5 class="modal-title" id="{{ $settings->id_label }}">{{ $settings->title }}</h5>
+                <div class="modal-title" id="{{ $settings->id_label }}">{!! $settings->title !!}</div>
                 @endif
 
                 @if( $settings->has_header_close )
