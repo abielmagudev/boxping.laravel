@@ -28,37 +28,26 @@ $component = (object) [
         'id' => $component->modal_id,
         'header_close' => true,
         'footer_close' => true,
+        'header_classes' => 'bg-warning',
+        'title' => "<span>{$graffiti->design('exclamation-triangle-fill', ['width' => 24, 'height' => 24])->svg()}</span><span class='h4 align-middle ms-1'>Atención</span>"
     ])
         <div id='<?= $component->content_id ?>'>
-            <div class="row my-3 px-5">
-                <div class="col-sm">
-                    <div class="text-center text-warning">
-                        {!! $graffiti->design('exclamation-triangle-fill', ['width' => 112, 'height' => 112])->svg() !!}
-                    </div>
-                </div>
-                <div class="col-sm">
-                    <div class="text-center text-secondary lead">
-                        <p class="mt-4 mb-0">Se actualizarán</p>
-                        <p class="h4">
-                            <span id="<?= $component->counter_id ?>"></span>
-                            <span>entradas</span>
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <hr>
-    
+            <p class="lead text-secondary text-center mt-3 mb-4">
+                <span>Se actualizarán</span>
+                <span class="fw-bold">
+                    <span id="<?= $component->counter_id ?>"></span>
+                    <span>entradas</span>
+                </span>
+            </p>
             <div class="mb-3">
-                <label for="" class="form-label small">Editar</label>
                 <select name="editor" id="editorSelector" class="form-select">
-                    <option disabled selected label="Seleccionar..."></option>
+                    <option disabled selected label="Editar..."></option>
                     @foreach($component->editors as $editor)
                     <option value="<?= $editor ?>">{{ ucfirst($editor) }}</option>
                     @endforeach
                 </select>
             </div>
-    
-            <div>
+            <div class="">
                 @foreach($component->editors as $editor_name)
                 @includeIf("entradas.components.index.modal-edit.{$editor_name}")
                 @endforeach
