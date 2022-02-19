@@ -24,7 +24,7 @@ $settings = [
     'footer' => [
         'classes' => isset($footer['classes']) && is_string($footer['classes']) ? $footer['classes'] : null,
         'content' => isset($footer_content) ? $footer_content : null,
-        'button_close' => isset($footer['button_close']) && is_array($footer['button_close']) || $footer['button_close'] === true ? [
+        'button_close' => isset($footer['button_close']) && boolval($footer['button_close']) ? [
             'classes' => isset($footer['button_close']['classes']) && is_string($footer['button_close']['classes']) ? $footer['button_close']['classes'] : 'btn btn-secondary',
             'text' => isset($footer['button_close']['text']) && is_string($footer['button_close']['text']) ? $footer['button_close']['text'] : 'Cerrar',
         ] : null,
