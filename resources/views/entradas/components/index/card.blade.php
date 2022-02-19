@@ -62,7 +62,7 @@ $component = new class ($entradas, $settings)
 
     @if( $component->has('filtered') )   
     <div class="col-sm col-sm-3">
-    @include('entradas.components.index.modal-filter.filtered-display')
+    @include('entradas.components.index.modal-filter.display')
 
     </div>
     @endif

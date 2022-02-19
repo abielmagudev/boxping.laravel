@@ -58,9 +58,7 @@ $component = new class ($settings)
 ?>
 
 <div class="btn-group" role="group">
-    @includeWhen($component->hasOption('filters'), 'entradas.components.index.modal-filter', [
-        'button_class' => 'btn btn-sm btn-outline-primary'    
-    ])
+    @includeWhen($component->hasOption('filters'), 'entradas.components.index.modal-filter')
 
     @includeWhen($component->hasOption('printings'), 'entradas.components.index.card.dropdown-toprint')
 

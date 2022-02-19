@@ -53,7 +53,7 @@ $displayHandler = new class( request() )
         return $this->titles;
     }
 
-    public function title(mixed $content)
+    public function title($content)
     {
         if(! is_array($content) )
             return $content;
