@@ -22,13 +22,21 @@ $component = (object) [
 @push('modals')
     @component('@.bootstrap.modal', [
         'id' => $component->modal_id,
-        'header_close' => true,
-        'footer_close' => true,
+        'header' => [
+            'title' => 'Eliminar entradas',
+            'classes' => 'bg-danger text-white'
+        ],
+        'footer' => [
+            'button_close' => [
+                'text' => 'Cancelar'
+            ],
+        ],
     ])
+        @slot('body_content')
         <div class="row my-3 px-5" id='<?= $component->content_id ?>'>
             <div class="col-sm">
                 <div class="text-center text-danger">
-                    {!! $graffiti->design('exclamation-triangle-fill', ['width' => 112, 'height' => 112])->svg() !!}
+                    {!! $graffiti->design('exclamation-octagon-fill', ['width' => 112, 'height' => 112])->svg() !!}
                 </div>
             </div>
             <div class="col-sm">
@@ -41,9 +49,10 @@ $component = (object) [
                 </div>
             </div>
         </div>
+        @endslot
 
-        @slot('footer')
-        <button class="btn btn-danger" type="button" data-entradas-form-action="<?= route('entradas.destroy.multiple') ?>" data-entradas-form-method="delete">Eliminar</button>
+        @slot('footer_content')
+        <button class="btn btn-outline-danger" type="button" data-entradas-form-action="<?= route('entradas.destroy.multiple') ?>" data-entradas-form-method="delete">Eliminar</button>
         @endslot
     @endcomponent
 @endpush
@@ -78,7 +87,7 @@ const modalDeleteMultipleContent = {
         this.updateCounter()
     }
 }
-
 modalDeleteMultipleTrigger.listening()
+
 </script>
 @endpush

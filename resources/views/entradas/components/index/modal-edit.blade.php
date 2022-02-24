@@ -33,21 +33,29 @@ $component = (object) [
         ],
         'footer' => [
             'button_close' => [
-                'classes' => 'btn btn-outline-secondary',
                 'text' => 'Cancelar',
             ]
         ], 
     ])
         @slot('body_content')
         <div id='<?= $component->content_id ?>'>
-            <p class="lead text-secondary text-center mt-3 mb-4">
-                <span>{!! $graffiti->design('exclamation-triangle-fill', ['width' => 32, 'height' => 32])->svg() !!}</span>
-                <span>Se actualizarán</span>
-                <span class="fw-bold">
-                    <span id="<?= $component->counter_id ?>"></span>
-                    <span>entradas</span>
-                </span>
-            </p>
+            <div class="row my-3 px-5">
+                <div class="col-sm">
+                    <div class="text-center text-warning">
+                        {!! $graffiti->design('exclamation-triangle-fill', ['width' => 112, 'height' => 112])->svg() !!}
+                    </div>
+                </div>
+                <div class="col-sm">
+                    <div class="text-center text-secondary lead">
+                        <p class="mt-2 mb-0">Se actualizarán</p>
+                        <p class="h4">
+                            <span id="<?= $component->counter_id ?>"></span>
+                            <span>entradas</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+ 
             <div class="mb-3">
                 <select name="editor" id="editorSelector" class="form-select">
                     <option disabled selected label="Editar..."></option>
@@ -63,7 +71,7 @@ $component = (object) [
         @endslot
 
         @slot('footer_content')
-        <button class="btn btn-warning" type="button" data-entradas-form-action="<?= route('entradas.update.multiple') ?>" data-entradas-form-method="put">Actualizar</button>
+        <button class="btn btn-outline-warning" type="button" data-entradas-form-action="<?= route('entradas.update.multiple') ?>" data-entradas-form-method="put">Actualizar</button>
         @endslot
     @endcomponent
 @endpush
