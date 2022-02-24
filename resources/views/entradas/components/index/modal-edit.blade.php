@@ -15,24 +15,33 @@ $component = (object) [
 
 ?>
 
-@include('@.bootstrap.modal-trigger', [
-    'modal_id' => $component->modal_id,
-    'data' => ['id' => $component->trigger_id],
+@component('@.bootstrap.modal-trigger', [
     'classes' => 'dropdown-item',
-    'text' => "<span>{$graffiti->design('pencil')->svg()}</span>
-                <span class='align-middle ms-1'>Editar</span>",
-]) 
+    'dataset' => ['id' => $component->trigger_id],
+    'modal_id' => $component->modal_id,
+])
+    <span>{!! $graffiti->design('pencil')->svg() !!}</span>
+    <span class='align-middle ms-1'>Editar</span>
+@endcomponent
 
 @push('modals')
     @component('@.bootstrap.modal', [
         'id' => $component->modal_id,
-        'header_close' => true,
-        'footer_close' => true,
-        'header_classes' => 'bg-warning',
-        'title' => "<span>{$graffiti->design('exclamation-triangle-fill', ['width' => 24, 'height' => 24])->svg()}</span><span class='h4 align-middle ms-1'>Atención</span>"
+        'header' => [
+            'classes' => 'bg-warning',
+            'title' => 'Editar entradas'
+        ],
+        'footer' => [
+            'button_close' => [
+                'classes' => 'btn btn-outline-secondary',
+                'text' => 'Cancelar',
+            ]
+        ], 
     ])
+        @slot('body_content')
         <div id='<?= $component->content_id ?>'>
             <p class="lead text-secondary text-center mt-3 mb-4">
+                <span>{!! $graffiti->design('exclamation-triangle-fill', ['width' => 32, 'height' => 32])->svg() !!}</span>
                 <span>Se actualizarán</span>
                 <span class="fw-bold">
                     <span id="<?= $component->counter_id ?>"></span>
@@ -48,13 +57,12 @@ $component = (object) [
                 </select>
             </div>
             <div class="">
-                @foreach($component->editors as $editor_name)
-                @includeIf("entradas.components.index.modal-edit.{$editor_name}")
-                @endforeach
+            @include("entradas.components.index.modal-edit.all")
             </div>
         </div>
+        @endslot
 
-        @slot('footer')
+        @slot('footer_content')
         <button class="btn btn-warning" type="button" data-entradas-form-action="<?= route('entradas.update.multiple') ?>" data-entradas-form-method="put">Actualizar</button>
         @endslot
     @endcomponent
