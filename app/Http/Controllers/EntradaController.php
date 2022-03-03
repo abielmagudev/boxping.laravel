@@ -76,6 +76,21 @@ class EntradaController extends Controller
         return back()->with('success', $updater->success());
     }
 
+    public function destroy(Entrada $entrada)
+    {
+        if(! $entrada->delete() )
+            return back()->with('failure', 'Error al eliminar entrada');
+        
+        $route = $entrada->hasConsolidado()
+                ? route('consolidados.show', $entrada->consolidado_id)
+                : route('entradas.index');
+
+        return redirect($route)->with('success', "{$entrada->numero} eliminada");
+    }
+
+
+    //  MULTIPLE
+
     public function updateMultiple(Request $request)
     {
         $entradas_count = count($request->entradas);
@@ -98,18 +113,6 @@ class EntradaController extends Controller
         return back()->with('failure', $message);
     }
 
-    public function destroy(Entrada $entrada)
-    {
-        if(! $entrada->delete() )
-            return back()->with('failure', 'Error al eliminar entrada');
-        
-        $route = $entrada->hasConsolidado()
-                ? route('consolidados.show', $entrada->consolidado_id)
-                : route('entradas.index');
-
-        return redirect($route)->with('success', "{$entrada->numero} eliminada");
-    }
-
     public function destroyMultiple(MultipleRequest $request)
     {
         if(! Entrada::destroy($request->entradas) )
@@ -119,6 +122,9 @@ class EntradaController extends Controller
         
         return back()->with('success', "Se eliminarón {$entradas_count} entradas con éxito");        
     }
+
+
+    // TO PRINT
 
     public function toPrint(Entrada $entrada, GuiaImpresion $guia = null)
     {
