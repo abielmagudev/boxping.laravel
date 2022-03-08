@@ -126,7 +126,7 @@ class EntradaController extends Controller
 
     // TO PRINT
 
-    public function toPrint(Entrada $entrada, GuiaImpresion $guia = null)
+    public function print(Entrada $entrada, GuiaImpresion $guia = null)
     {
         if(! is_object($guia) ) 
             return view('entradas.print.single')->with('entrada', $entrada);
@@ -137,7 +137,7 @@ class EntradaController extends Controller
         ]);
     }
 
-    public function toPrintMultiple(MultipleRequest $request, GuiaImpresion $guia = null)
+    public function printMultiple(MultipleRequest $request, GuiaImpresion $guia = null)
     {
         $entradas = Entrada::withRelations()->whereIn('id', $request->entradas)->get();
 
