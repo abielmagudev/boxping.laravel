@@ -1,6 +1,6 @@
 <?php
 
-$displayHandler = new class( request() )
+$component = new class( request() )
 {
     public $titles = [
         'entrada' => [
@@ -83,18 +83,18 @@ $displayHandler = new class( request() )
 
 ?>
 
-@if( $displayHandler->hasBeenFiltered() )
+@if( $component->hasBeenFiltered() )
 <div class="alert alert-info small" role="alert">
     <h5 class="alert-heading fw-bold">Filtrado de entradas</h5>
-    @foreach($displayHandler->allTitles() as $group_name => $filtered)
+    @foreach($component->allTitles() as $group_name => $filtered)
     <div id="filtrado-<?= $group_name ?>">
         <p class="text-capitalize d-none">{{ $group_name }}</p>
         <ul class="list-unstyled mb-0">
         @foreach($filtered as $filter => $content)
-            @if( $displayHandler->exists($filter) )              
+            @if( $component->exists($filter) )              
             <li class="mb-2">
-                <span class="small">{{ $displayHandler->title($content) }}</span>
-                <span class="d-block text-capitalize fw-bold">{{ $displayHandler->get($filter, 'cualquier') }}</span>
+                <span class="small">{{ $component->title($content) }}</span>
+                <span class="d-block text-capitalize fw-bold">{{ $component->get($filter, 'cualquier') }}</span>
             </li>
             @endif
         @endforeach
@@ -105,7 +105,7 @@ $displayHandler = new class( request() )
     
     <p class="m-0">
         <span>Por página:</span>
-        <b>{{ $displayHandler->get('mostrar', 'Completo') }}</b>
+        <b>{{ $component->get('mostrar', 'Completo') }}</b>
     </p>
 </div>
 @endif

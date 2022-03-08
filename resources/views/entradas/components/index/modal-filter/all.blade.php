@@ -1,7 +1,0 @@
-@include("entradas.components.index.modal-filter.filters.numero")
-@include("entradas.components.index.modal-filter.filters.ambitos")
-@include("entradas.components.index.modal-filter.filters.clientes")
-@include("entradas.components.index.modal-filter.filters.salidas")
-@include("entradas.components.index.modal-filter.filters.etapas")
-@include("entradas.components.index.modal-filter.filters.tiempos")
-@include("entradas.components.index.modal-filter.filters.muestreos")

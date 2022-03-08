@@ -4,6 +4,15 @@ $component = (object) [
     'form_id' => 'formFiltrarEntradas',
     'modal_id' => 'modalFiltrarEntradas',
     'route' => isset($route) && is_string($route) ? $route : url()->current(),
+    'filters' => [
+        'numero',
+        'ambitos',
+        'clientes',
+        'salidas',
+        'etapas',
+        'tiempos',
+        'muestreos',
+    ],
 ];
 
 ?>
@@ -31,7 +40,9 @@ $component = (object) [
     ])
         @slot('body_content')
         <form action="<?= $component->route ?>" id="<?= $component->form_id ?>" autocomplete="off">
-            @include("entradas.components.index.modal-filter.all")
+            @foreach($component->filters as $filter)
+            @include("entradas.components.index.filters.{$filter}")
+            @endforeach
             <input type="hidden" name="filter_token" value="<?= csrf_token() ?>">
         </form>
         @endslot

@@ -1,11 +1,7 @@
 <?php
 
-include resource_path('views/entradas/components/index/_entradas_form_config.php');
-
 $component = (object) [
-    'trigger_id' => 'modalEditMultipleTrigger',
-    'content_id' => 'modalEditMultipleContent',
-    'counter_id' => 'modalEditMultipleCounter',
+    'modal_content_id' => 'modalEditMultipleContent',
     'modal_id' => 'modalEditMultiple',
     'editors' => [
         'cliente',
@@ -16,8 +12,7 @@ $component = (object) [
 ?>
 
 @component('@.bootstrap.modal-trigger', [
-    'classes' => 'dropdown-item',
-    'dataset' => ['id' => $component->trigger_id],
+    'classes' => 'dropdown-item trigger-count-checked-entradas',
     'modal_id' => $component->modal_id,
 ])
     <span>{!! $graffiti->design('pencil')->svg() !!}</span>
@@ -38,8 +33,8 @@ $component = (object) [
         ], 
     ])
         @slot('body_content')
-        <div id='<?= $component->content_id ?>'>
-            <div class="row my-3 px-5">
+        <div id='<?= $component->modal_content_id ?>'>
+            <div class="row my-3 px-5 align-items-center">
                 <div class="col-sm">
                     <div class="text-center text-warning">
                         {!! $graffiti->design('exclamation-triangle-fill', ['width' => 112, 'height' => 112])->svg() !!}
@@ -47,16 +42,18 @@ $component = (object) [
                 </div>
                 <div class="col-sm">
                     <div class="text-center text-secondary lead">
-                        <p class="mt-2 mb-0">Se actualizarán</p>
+                        <p class="mb-0">Se actualizarán</p>
                         <p class="h4">
-                            <span id="<?= $component->counter_id ?>"></span>
+                            <span class="show-count-checked-entradas"></span>
                             <span>entradas</span>
                         </p>
                     </div>
                 </div>
             </div>
- 
+            <br>
+            
             <div class="mb-3">
+                <label for="editorSelector" class="form-label small d-none">Editar</label>
                 <select name="editor" id="editorSelector" class="form-select">
                     <option disabled selected label="Editar..."></option>
                     @foreach($component->editors as $editor)
@@ -65,69 +62,42 @@ $component = (object) [
                 </select>
             </div>
             <div class="">
-            @include("entradas.components.index.modal-edit.all")
+            @foreach($component->editors as $editor)
+            @include("entradas.components.index.editors.{$editor}")
+            @endforeach
             </div>
         </div>
         @endslot
 
         @slot('footer_content')
-        <button class="btn btn-outline-warning" type="button" data-entradas-form-action="<?= route('entradas.update.multiple') ?>" data-entradas-form-method="put">Actualizar</button>
+        <button class="btn btn-outline-warning" type="button" data-entradas-form-action="<?= route('entradas.update.multiple') ?>" data-entradas-form-verb="put">Actualizar</button>
         @endslot
     @endcomponent
 @endpush
    
 @push('scripts')
 <script>
-const modalEditMultipleContent = {
-    element: document.getElementById('<?= $component->content_id ?>'),
-    counter: document.getElementById('<?= $component->counter_id ?>'),
-    allCheckboxesEntradas: function () {
-        return document.querySelectorAll('input[type=checkbox][id^=<?= $entradas_form_config->checkbox_prefix ?>]:checked');
-    },
-    countCheckboxesEntradas: function () {
-        return this.allCheckboxesEntradas().length
-    },
-    hasCheckboxesEntradas: function () {
-        return this.countCheckboxesEntradas > 0
-    },
-    updateCounter: function () {
-        this.counter.innerText = this.countCheckboxesEntradas()
-    },
-    update: function () {
-        this.updateCounter()
-    },
-    showEditor: function (name) {
-        let editors = this.element.querySelectorAll('.is-editor-multiple')
+const editorsContainerHandler = {
+    container: document.getElementById('<?= $component->modal_content_id ?>'),
+    selector: document.getElementById('editorSelector'),
+    loader: function (name) {
+        this.container.querySelectorAll('.is-editor-multiple').forEach(editor => {
 
-        editors.forEach(editor => {
+            editor.parentNode.classList.toggle('d-none', (editor.name != name))
+            editor.disabled = editor.name != name
 
             if( editor.nodeName == 'SELECT' ) {
                 editor.selectedIndex = 0
             } else {
                 editor.value = null
             }
-
-            editor.disabled = editor.name != name
-            editor.parentNode.classList.toggle('d-none', editor.name != name)
         })
-    }
-}
-
-const modalEditMultipleTrigger = {
-    trigger: document.getElementById("<?= $component->trigger_id ?>"),
+    },
     listening: function () {
-        this.trigger.addEventListener('click', (e) => modalEditMultipleContent.update() )
+         this.selector.addEventListener('change', (e) => this.loader(e.target.value))
     }
 }
-modalEditMultipleTrigger.listening()
-
-const editorSelector = {
-    element: document.getElementById('editorSelector'),
-    listening: function () {
-        this.element.addEventListener('change', (e) => modalEditMultipleContent.showEditor(e.target.value))
-    }
-}
-editorSelector.listening()
+editorsContainerHandler.listening()
 
 </script>
 @endpush

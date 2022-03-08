@@ -5,7 +5,6 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
 use Illuminate\Pagination\Paginator;
-use App\Ahex\Entrada\Application\Printing\PrintingContainer;
 
 use \App\Ahex\Zowner\Infrastructure\Graffiti\Graffiti;
 use \App\Ahex\Zowner\Infrastructure\Graffiti\Samples\BootstrapIcons;

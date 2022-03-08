@@ -1,6 +1,7 @@
 <?php
 
-include resource_path('views/entradas/components/index/_entradas_form_config.php');
+if( isset($efc) )
+    $efc = include resource_path('views/entradas/components/index/form_config.php');
 
 $settings = [
     'checkboxes' => $checkboxes ?? true,
@@ -66,8 +67,8 @@ $component = new class ($entradas, $settings)
             @if( $component->hasCheckboxes() )
             <th class="align-middle text-center ps-3" style="width:1%">
                 @include('@.partials.checkboxes-switcher', [
-                    'checkboxes_name' => $entradas_form_config->checkbox_name,
-                    'switcher' => $entradas_form_config->type_switcher,
+                    'checkboxes_name' => $efc->checkbox->name,
+                    'switcher' => $efc->checkbox->type,
                 ])
             </th>
 
@@ -81,7 +82,7 @@ $component = new class ($entradas, $settings)
         @endslot
 
         @foreach($component->entradas() as $entrada)
-        <?php $checkbox_id = $entradas_form_config->checkbox_prefix . $entrada->id ?>
+        <?php $checkbox_id = $efc->checkbox->prefix . $entrada->id ?>
         <tr>
             <?php // Checkboxes ?>
             @if( $component->hasCheckboxes() )
@@ -89,9 +90,9 @@ $component = new class ($entradas, $settings)
                 <input 
                     type="checkbox" 
                     class="form-check-input" 
-                    form="<?= $entradas_form_config->id ?>"
                     id="<?= $checkbox_id ?>" 
-                    name="<?= $entradas_form_config->checkbox_name ?>" 
+                    form="<?= $efc->id ?>"
+                    name="<?= $efc->checkbox->name ?>" 
                     value="<?= $entrada->id ?>" 
                 >
             </td>
@@ -142,5 +143,5 @@ $component = new class ($entradas, $settings)
         @endforeach
     @endcomponent
 
-    @includeWhen($component->hasCheckboxes(), 'entradas.components.index.form', ['entradas' => $entradas])
+    @includeWhen($component->hasCheckboxes(), 'entradas.components.index.form')
 @endif

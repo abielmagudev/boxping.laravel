@@ -1,0 +1,4 @@
+<div class="mb-3 d-none">
+    <label for="input-consolidado" class="form-label small d-none">Número de consolidado</label>
+    <input type="text" name="consolidado" id="input-consolidado" class="form-control border-warning is-editor-multiple" placeholder="Número ó sin consolidar" form="<?= $efc->id ?>" autocomplete="off">
+</div>

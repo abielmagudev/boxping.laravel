@@ -1,41 +1,12 @@
 <?php
 
-$settings = [
+$efc = include resource_path('views/entradas/components/index/form_config.php');
+
+$component = (object) [
+    'counter' => method_exists($entradas, 'total') ? $entradas->total() : $entradas->count(),
+    'entradas' => $entradas ?? collect([]),
     'filtered' => request()->filled('filter_token'),
-    'options' => isset($options) ? boolval($options) : false,
-    'pagination' => $pagination ?? false,
 ];
-
-$component = new class ($entradas, $settings)
-{
-    private $entradas;
-
-    private $settings;
-
-    public function __construct(object $entradas, array $settings)
-    {
-        $this->entradas = $entradas;
-
-        $this->settings = $settings;
-    }
-
-    public function has(string $setting)
-    {
-        return $this->settings[$setting] ?? false;
-    }
-
-    public function entradas()
-    {
-        return $this->entradas;
-    }
-
-    public function entradasCount()
-    {
-        return method_exists($this->entradas, 'total') 
-                ? $this->entradas->total() 
-                : $this->entradas->count();
-    }
-};
 
 ?>
 
@@ -45,28 +16,26 @@ $component = new class ($entradas, $settings)
     <div class="col-sm">
     @component('@.bootstrap.card', [
         'title' => 'Entradas',
-        'counter' => $component->entradasCount(),
+        'counter' => $component->counter,
     ])
-
         @slot('options')
-        @includeWhen($component->has('options'), 'entradas.components.index.card.options')
-        
+        @include('entradas.components.index.card-options')
         @endslot
 
         @include('entradas.components.index.table', [
-            'entradas' => $component->entradas(),
+            'entradas' => $component->entradas,
         ])
-
     @endcomponent
     </div>
 
-    @if( $component->has('filtered') )   
+    @if( $component->filtered )   
     <div class="col-sm col-sm-3">
-    @include('entradas.components.index.modal-filter.display')
-
+    @include('entradas.components.index.filtered')
     </div>
     @endif
 </div>
 <br>
 
-@includeWhen($component->has('pagination'), '@.bootstrap.pagination-simple', ['collection' => $component->entradas()])
+@include('@.bootstrap.pagination-simple', [
+    'collection' => $component->entradas
+])
