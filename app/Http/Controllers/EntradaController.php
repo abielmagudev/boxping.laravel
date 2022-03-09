@@ -7,6 +7,7 @@ use App\Ahex\Entrada\Application\EditCalled\EditorsContainer;
 use App\Ahex\Entrada\Application\RedirectAfterStored;
 use App\Ahex\Entrada\Application\ShowPresenter;
 use App\Ahex\Entrada\Application\UpdateCalled\Updaters\UpdatersContainer;
+use App\Ahex\Entrada\Application\UpdateMultipleCalled\UpdatersMultipleContainer;
 use App\Http\Requests\Entrada\CreateRequest;
 use App\Http\Requests\Entrada\EditRequest;
 use App\Http\Requests\Entrada\MultipleRequest;
@@ -91,26 +92,18 @@ class EntradaController extends Controller
 
     //  MULTIPLE
 
-    public function updateMultiple(Request $request)
+    public function updateMultiple(MultipleRequest $request)
     {
+        if(! $updater = UpdatersMultipleContainer::get( $request->all() ) )
+            return back()->with('failure', 'Editor no válido para actualizar la selección de entradas');
+
+        if(! $updater->validate() )
+            return back()->with('failure', $updater->invalid_message);
+
+        $entradas_updated = $updater->update($request->entradas);
         $entradas_count = count($request->entradas);
-        $message = 'Error al actualizar la selección de entradas';
 
-        if( $request->has('consolidado') && is_null($request->consolidado) || Consolidado::isAbierto($request->consolidado) )
-        {
-            $consolidado_id = Consolidado::isAbierto($request->consolidado) ? Consolidado::findByNumero($request->consolidado)->id : null;
-
-            Entrada::whereIn('id', $request->entradas)->update(['consolidado_id' => $consolidado_id]);
-            return back()->with('success', "Actualización de consolidado a {$entradas_count} entradas");
-        }
-
-        if( $request->has('cliente') && \App\Cliente::exists($request->cliente) )
-        {
-            Entrada::whereIn('id', $request->entradas)->update(['cliente_id' => $request->cliente]);
-            return back()->with('success', "Actualización de cliente a {$entradas_count} entradas");
-        }
-
-        return back()->with('failure', $message);
+        return back()->with('success', "Actualización de {$updater->name} de {$entradas_count} / {$entradas_updated} entradas");
     }
 
     public function destroyMultiple(MultipleRequest $request)
