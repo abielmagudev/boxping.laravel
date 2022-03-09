@@ -9,6 +9,8 @@ class ConsolidadoUpdater extends UpdaterMultiple
 {
     public $name = 'consolidado';
 
+    public $invalid_message = 'Consolidado no existe ó status cerrado para la selección de entradas';
+
     public function validate():bool
     {
         return Consolidado::isAbierto($this->value) || is_null($this->value);
