@@ -21,8 +21,8 @@ class MultipleRequest extends FormRequest
     public function messages()
     {
         return [
-            'entradas.required' => __('Selecciona las entradas a imprimir'),
-            'entradas.array' => __('Selecciona las entradas válidas para imprimir'),
+            'entradas.required' => __('Selecciona una ó varias entradas'),
+            'entradas.array' => __('Selecciona una ó varias entradas válidas'),
         ];
     }
 }
