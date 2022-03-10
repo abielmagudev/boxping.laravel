@@ -44,7 +44,7 @@ $component = (object) [
                     <div class="text-center text-secondary lead">
                         <p class="mb-0">Se actualizarán</p>
                         <p class="h4">
-                            <span class="show-count-checked-entradas"></span>
+                            <span class="show-count-checked-entradas">0</span>
                             <span>entradas</span>
                         </p>
                     </div>
