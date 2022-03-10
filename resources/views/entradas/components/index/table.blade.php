@@ -1,6 +1,6 @@
 <?php
 
-if( isset($efc) )
+if(! isset($efc) )
     $efc = include resource_path('views/entradas/components/index/form_config.php');
 
 $settings = [
