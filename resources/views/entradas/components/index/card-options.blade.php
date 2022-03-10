@@ -40,6 +40,7 @@ $component = (object) [
     </div>
 
     {{-- Acciones --}}
+    @if(! in_array('all', $component->except) )        
     <div class="btn-group btn-group-sm" role="group" id="wrapperDropdownActions">
         <button id="buttonDropdownActions" type="button" class="btn btn-sm btn-outline-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
             <span>{!! $graffiti->design('list')->svg() !!}</span>
@@ -53,13 +54,18 @@ $component = (object) [
                 </a>
             </li>
             @endif
+            @if(! in_array('edit', $component->except) )        
             <li>
                 @include('entradas.components.index.modal-edit')
             </li>
+            @endif
+            @if(! in_array('delete', $component->except) )        
             <li>
                 @include('entradas.components.index.modal-delete')
             </li>
+            @endif
         </ul>
     </div>
+    @endif
 
 </div>
