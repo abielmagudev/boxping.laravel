@@ -2,8 +2,9 @@
 
 $component = (object) [
     'routes' => [
-        'create' => $routes['create'] ?? route('entradas.create')
+        'create' => isset($routes['create']) ? $routes['create'] : route('entradas.create')
     ],
+    'except' => isset($except['actions']) && is_array($except['actions']) ? $except['actions']: [],
 ];
 
 ?>
@@ -44,12 +45,14 @@ $component = (object) [
             <span>{!! $graffiti->design('list')->svg() !!}</span>
         </button>
         <ul class="dropdown-menu" aria-labelledby="buttonDropdownActions">
+            @if(! in_array('create', $component->except) )        
             <li>
                 <a class="dropdown-item" href="<?= $component->routes['create'] ?>">
                     <span>{!! $graffiti->design('plus-lg')->svg() !!}</span>
                     <span class="align-middle ms-1">Nueva</span>
                 </a>
             </li>
+            @endif
             <li>
                 @include('entradas.components.index.modal-edit')
             </li>
