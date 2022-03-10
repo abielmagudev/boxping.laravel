@@ -28,12 +28,12 @@ $settings = (object) [
         <tr>
             <td class="text-nowrap">
                 <span class='d-block'>
-                    <a href="{{ route('entradas.show', $salida->entrada) }}" class="link-primary text-decoration-none">{{ $salida->entrada->numero }}</a>
+                    <a href="{{ route('entradas.show', $salida->entrada_id) }}" class="link-primary text-decoration-none">{{ $salida->entrada->numero ?? '?' }}</a>
                 </span>
 
-                @if( $salida->entrada->hasConsolidado() )
+                @if( $salida->entrada ? $salida->entrada->hasConsolidado() : false )
                 <small>
-                    <a href="{{ route('consolidados.show', $salida->entrada->consolidado) }}" class="link-primary text-decoration-none">{{ $salida->entrada->consolidado->numero }}</a>
+                    <a href="{{ route('consolidados.show', $salida->entrada->consolidado_id) }}" class="link-primary text-decoration-none">{{ $salida->entrada->consolidado->numero }}</a>
                 </small>
 
                 @else
@@ -47,12 +47,12 @@ $settings = (object) [
             @if( $settings->options->render ) 
                 @if( $settings->options->show )                 
                 <a href="{{ route('salidas.show', $salida) }}" class="btn btn-sm btn-outline-primary">
-                    @include('@.bootstrap.icon', ['icon' => 'eye'])
+                    {!! $graffiti->design('eye')->svg() !!}
                 </a>
                 @endif
                 @if( $settings->options->edit )     
                 <a href="{{ route('salidas.edit', $salida) }}" class="btn btn-sm btn-outline-warning">
-                    @include('@.bootstrap.icon', ['icon' => 'pencil-fill'])
+                    {!! $graffiti->design('pencil-fill')->svg() !!}
                 </a>
                 @endif
             @endif

@@ -67,6 +67,7 @@
             @include('entradas.components.index.table', [
                 'entradas' => $entradas,
                 'cliente' => $cliente,
+                'checkboxes' => false,
             ])
         @endcomponent
     </div>

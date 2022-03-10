@@ -17,13 +17,13 @@
         @foreach($clientes as $cliente)
         <tr>
             <td class="text-nowrap">
-                <span>{{ $cliente->nombre }}</span>
-                <small class="text-secondary">: {{ $cliente->alias }}</small>
+                <span>{{ $cliente->nombre }}</span> 
+                <small class="text-secondary">({{ $cliente->alias }})</small>
             </td>
             <td class="text-nowrap">{{ $cliente->contacto }}</td>
             <td class="text-nowrap">{{ $cliente->correo_electronico }}</td>
             <td class="text-nowrap">{{ $cliente->telefono }}</td>
-            <td class="text-end">
+            <td class="text-nowrap text-end">
                 <a href="{{ route('clientes.show', $cliente) }}" class="btn btn-sm btn-outline-primary">
                     {!! $graffiti->design('eye')->svg() !!}
                 </a>

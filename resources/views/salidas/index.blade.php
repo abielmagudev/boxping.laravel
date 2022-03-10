@@ -71,8 +71,7 @@
 <br>
 
 @include('@.bootstrap.pagination-simple', [
-    'prev' => $salidas->previousPageUrl(),    
-    'next' => $salidas->nextPageUrl(),    
+    'collection' => $salidas 
 ])
 
 @endsection
