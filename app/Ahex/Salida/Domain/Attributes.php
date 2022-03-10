@@ -118,7 +118,7 @@ trait Attributes
         if( $tag === 'br' )
             return $this->incidentes->implode('nombre', '<br>');
 
-        $tagged = $this->incidentes->map( function($incidente) { 
+        $tagged = $this->incidentes->map( function($incidente) use ($tag) { 
             return "<{$tag}>{$incidente->nombre}</{$tag}>";
         });
         
