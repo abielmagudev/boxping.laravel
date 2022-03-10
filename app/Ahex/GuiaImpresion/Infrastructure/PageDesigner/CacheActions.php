@@ -11,12 +11,12 @@ trait CacheActions
         return isset( self::$cache[$key] );
     }
 
-    public static function setCache(string $key, mixed $value)
+    public static function setCache(string $key, $value)
     {
         return self::$cache[$key] = $value;
     }
 
-    public static function cache(string $key, mixed $default = null)
+    public static function cache(string $key, $default = null)
     {
         return self::$cache[$key] ?? $default;
     }
