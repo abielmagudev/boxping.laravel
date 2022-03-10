@@ -108,12 +108,12 @@ class EntradaController extends Controller
 
     public function destroyMultiple(MultipleRequest $request)
     {
-        if(! Entrada::destroy($request->entradas) )
+        if(! ($entradas_deleted = Entrada::destroy($request->entradas)) <> false )
             return back()->with('failure', 'Error al eliminar la selección de entradas');
         
         $entradas_count = count($request->entradas);
         
-        return back()->with('success', "Se eliminarón {$entradas_count} entradas con éxito");        
+        return back()->with('success', "Eliminación de {$entradas_count} / {$entradas_deleted} entradas");        
     }
 
 
