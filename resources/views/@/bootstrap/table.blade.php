@@ -5,15 +5,11 @@ $settings = (object) [
     'caption_top' => isset($caption_top) && $caption_top === true ? 'caption-top' : '',
     'caption' => $caption ?? null,
     'has_caption' => isset($caption) && is_string($caption),
-    'has_thead_items' => isset($thead_items) && is_array($thead_items),
     'has_thead' => isset($thead),
     'has_tbody' => $slot->isNotEmpty(),
-    'has_tfoot_items' => isset($tfoot_items) && is_array($tfoot_items),
     'has_tfoot' => isset($tfoot),
-    'thead_items' => $thead_items ?? false,
     'thead' => $thead ?? false,
-    'tbody' => $slot,
-    'tfoot_items' => $tfoot_items ?? false,
+    'tbody' => $slot ?? '',
     'tfoot' => $tfoot ?? false,
 ];
 
@@ -25,11 +21,11 @@ $settings = (object) [
         <caption>{{ $settings->caption }}</caption>
         @endif
 
-        @if( $settings->has_thead || $settings->has_thead_items )    
+        @if( $settings->has_thead )    
         <thead>
-            @if( $settings->has_thead_items  )
+            @if( is_array($settings->thead) )
             <tr>
-                @foreach ($settings->thead_items as $thead)
+                @foreach ($settings->thead as $thead)
                 <th class="small">{!! $thead !!}</th>
                 @endforeach
             </tr>
@@ -49,9 +45,17 @@ $settings = (object) [
         
         @if( $settings->has_tfoot )          
         <tfoot>
-            @foreach ($settings->tfoot as $tfoot)
-            <td class="small">{!! $tfoot !!}</td>
-            @endforeach
+            @if( is_array($settings->tfoot) )
+            <tr>
+                @foreach ($settings->tfoot as $tfoot)
+                <td class="small">{!! $tfoot !!}</th>
+                @endforeach
+            </tr>
+
+            @else
+            {!! $settings->tfoot !!}
+
+            @endif
         </tfoot>
         @endif
     </table>
