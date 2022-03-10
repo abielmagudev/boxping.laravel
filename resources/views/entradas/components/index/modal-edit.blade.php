@@ -53,9 +53,9 @@ $component = (object) [
             <br>
             
             <div class="mb-3">
-                <label for="editorSelector" class="form-label small d-none">Editar</label>
+                <label for="editorSelector" class="form-label small">Editar</label>
                 <select name="editor" id="editorSelector" class="form-select">
-                    <option disabled selected label="Editar..."></option>
+                    <option disabled selected label="Selecciona para editar..."></option>
                     @foreach($component->editors as $editor)
                     <option value="<?= $editor ?>">{{ ucfirst($editor) }}</option>
                     @endforeach
