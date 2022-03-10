@@ -82,7 +82,7 @@
         'filter' => route('consolidados.show', $consolidado)
     ],
     'except' => [
-        'actions' => $consolidado->hasCerrado() ? ['create'] : [],
+        'actions' => $consolidado->hasCerrado() ? ['all'] : [],
         'filters' => ['ambitos', 'clientes'],
     ],
 ])
