@@ -77,15 +77,13 @@
     'entradas' => $entradas,
     'consolidado' => $consolidado,
     'cliente' => $consolidado->cliente,
-    'dropdown' => [
-        'routes' => [
-            'create' => route('entradas.create', ['consolidado' => $consolidado->id])
-        ],
-        'except' => $consolidado->hasCerrado() ? ['create'] : [],
+    'routes' => [
+        'create' => route('entradas.create', ['consolidado' => $consolidado->id]),
+        'filter' => route('consolidados.show', $consolidado)
     ],
-    'filter' => [
-        'route' => route('consolidados.show', [$consolidado, '#lista-entradas']),
-        'except' => ['ambitos', 'clientes'],
+    'except' => [
+        'actions' => $consolidado->hasCerrado() ? ['create'] : [],
+        'filters' => ['ambitos', 'clientes'],
     ],
 ])
 @endcomponent
