@@ -1,8 +1,8 @@
 <?php
 
 $component = (object) [
-    'form_id' => 'formFiltrarEntradas',
-    'modal_id' => 'modalFiltrarEntradas',
+    'form_id' => 'formEntradasFilter',
+    'modal_id' => 'modalEntradasFilter',
     'route' => isset($routes['filter']) ? $routes['filter'] : url()->current(),
     'filters' => [
         'numero',
