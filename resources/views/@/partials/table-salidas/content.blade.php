@@ -28,12 +28,12 @@ $settings = (object) [
         <tr>
             <td class="text-nowrap">
                 <span class='d-block'>
-                    <a href="{{ route('entradas.show', $salida->entrada_id) }}" class="link-primary text-decoration-none">{{ $salida->entrada->numero ?? '?' }}</a>
+                    <a href="{{ route('entradas.show', $salida->entrada) }}" class="link-primary text-decoration-none">{{ $salida->entrada->numero }}</a>
                 </span>
 
-                @if( $salida->entrada ? $salida->entrada->hasConsolidado() : false )
+                @if( $salida->entrada->hasConsolidado() )
                 <small>
-                    <a href="{{ route('consolidados.show', $salida->entrada->consolidado_id) }}" class="link-primary text-decoration-none">{{ $salida->entrada->consolidado->numero }}</a>
+                    <a href="{{ route('consolidados.show', $salida->entrada->consolidado) }}" class="link-primary text-decoration-none">{{ $salida->entrada->consolidado->numero }}</a>
                 </small>
 
                 @else

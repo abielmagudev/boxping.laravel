@@ -32,6 +32,11 @@ class CreateSalidasTable extends Migration
             $table->unsignedSmallInteger('created_by');
             $table->unsignedSmallInteger('updated_by');
             $table->timestamps();
+
+            $table->foreign('entrada_id')
+                  ->references('id')
+                  ->on('entradas')
+                  ->onDelete('cascade');
         });
     }
 
