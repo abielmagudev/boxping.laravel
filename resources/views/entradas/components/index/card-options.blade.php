@@ -54,6 +54,11 @@ $component = (object) [
                 </a>
             </li>
             @endif
+            @if(! in_array('import', $component->except) )        
+            <li>
+                @include('entradas.components.index.modal-import')
+            </li>
+            @endif
             @if(! in_array('edit', $component->except) )        
             <li>
                 @include('entradas.components.index.modal-edit')

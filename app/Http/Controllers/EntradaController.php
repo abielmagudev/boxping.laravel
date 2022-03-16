@@ -11,13 +11,18 @@ use App\Ahex\Entrada\Application\UpdateMultipleCalled\UpdatersMultipleContainer;
 use App\Http\Requests\Entrada\CreateRequest;
 use App\Http\Requests\Entrada\EditRequest;
 use App\Http\Requests\Entrada\MultipleRequest;
+use App\Http\Requests\Entrada\ImportRequest;
 use App\Http\Requests\Entrada\StoreRequest;
 use App\Http\Requests\Entrada\UpdateRequest;
 use Illuminate\Http\Request;
 use App\Ahex\GuiaImpresion\Infrastructure\PageDesigner\PageDesigner;
 use App\Consolidado;
+use App\Cliente;
 use App\GuiaImpresion;
 use App\Entrada;
+
+use App\Imports\EntradasImport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class EntradaController extends Controller
 {
@@ -91,6 +96,20 @@ class EntradaController extends Controller
 
 
     //  MULTIPLE
+
+    public function importMultiple(ImportRequest $request)
+    {
+        $csv   = $request->file('import_entradas');
+        $owner = $request->has('import_entradas_consolidado') 
+                ? Consolidado::find($request->get('import_entradas_consolidado')) 
+                : Cliente::find($request->get('import_entradas_cliente'));
+
+        $entradasImport = new EntradasImport($owner);
+
+        Excel::import($entradasImport, $csv);
+
+        return back()->with('success', "De <b>{$entradasImport->getRowsTotal()} filas</b> / <b>{$entradasImport->getRowsSaved()} entradas</b> han sido importadas");
+    }
 
     public function updateMultiple(MultipleRequest $request)
     {
