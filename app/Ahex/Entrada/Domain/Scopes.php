@@ -4,6 +4,11 @@ namespace App\Ahex\Entrada\Domain;
 
 trait Scopes
 {
+    public function scopeExistsNumero($query, $numero)
+    {
+        return $query->where('numero', $numero)->exists();
+    }
+
     public function scopeFindByNumero($query, $numero)
     {
         return $query->where('numero', $numero)->first();
