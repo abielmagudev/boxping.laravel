@@ -108,7 +108,7 @@ class EntradaController extends Controller
 
         Excel::import($entradasImport, $csv);
 
-        return back()->with('success', "Se importó <b>{$entradasImport->getRowsTotal()} filas</b> / <b>{$entradasImport->getRowsSaved()} entradas</b>");
+        return back()->with('success', "Se importó de <b>{$entradasImport->getRowsTotal()} filas</b> / <b>{$entradasImport->getRowsSaved()} entradas</b>");
     }
 
     public function updateMultiple(MultipleRequest $request)
