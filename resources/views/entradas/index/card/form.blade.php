@@ -1,10 +1,9 @@
-
-<form action='<?= $efc->action ?>' id='<?= $efc->id ?>'></form>
+<form action="#!" method="get" id='<?= $component->form('id') ?>'></form>
 
 @push('scripts')
 <script type="text/javascript">
 const entradasFormHandler = {
-    element: document.getElementById('<?= $efc->id ?>'),
+    element: document.getElementById('<?= $component->form('id') ?>'),
     append: function (type, name, value) {
         let input = document.createElement('input')
         input.type = type
@@ -48,7 +47,7 @@ const formEntradasCounter = {
     shows: document.querySelectorAll('.show-count-checked-entradas'),
     triggers: document.querySelectorAll('.trigger-count-checked-entradas'),
     allCheckedEntradas: function () {
-        return document.querySelectorAll('input[type=checkbox][id^=<?= $efc->checkbox->prefix ?>]:checked');
+        return document.querySelectorAll("input[type=checkbox][name='<?= $component->form('checkboxes', 'name') ?>']:checked");
     },
     countCheckedEntradas: function () {
         return this.allCheckedEntradas().length

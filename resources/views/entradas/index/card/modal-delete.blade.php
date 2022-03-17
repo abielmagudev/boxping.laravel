@@ -1,14 +1,14 @@
 <?php
 
-$component = (object) [
-    'modal_content_id' => 'modalDeleteMultipleContent',
-    'modal_id' => 'modalDeleteMultiple',
+$modal = (object) [
+    'id' => 'modalDeleteMultiple',
+    'content_id' => 'modalDeleteMultipleContent',
 ];
 
 ?>
 
 @component('@.bootstrap.modal-trigger', [
-    'modal_id' => $component->modal_id,
+    'modal_id' => $modal->id,
     'classes' => 'dropdown-item trigger-count-checked-entradas',
 ])
     <span>{!! $graffiti->design('trash')->svg() !!}</span>
@@ -17,7 +17,7 @@ $component = (object) [
 
 @push('modals')
     @component('@.bootstrap.modal', [
-        'id' => $component->modal_id,
+        'id' => $modal->id,
         'header' => [
             'title' => 'Eliminar entradas',
             'classes' => 'bg-danger text-white'
@@ -29,7 +29,7 @@ $component = (object) [
         ],
     ])
         @slot('body_content')
-        <div id='<?= $component->modal_content_id ?>'>
+        <div id='<?= $modal->content_id ?>'>
             <div class="row my-3 px-5 align-items-center" >
                 <div class="col-sm">
                     <div class="text-center text-danger">

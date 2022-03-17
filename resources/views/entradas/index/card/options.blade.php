@@ -1,19 +1,9 @@
-<?php
-
-$component = (object) [
-    'routes' => [
-        'create' => isset($routes['create']) ? $routes['create'] : route('entradas.create')
-    ],
-    'except' => isset($except['actions']) && is_array($except['actions']) ? $except['actions']: [],
-];
-
-?>
-
 <div class="btn-group" role="group">
     {{-- Filtrar --}}
-    @include('entradas.components.index.modal-filter')
+    @includeWhen($component->allow('filter'), 'entradas.index.card.modal-filter')
 
     {{-- Guias de impresión --}}
+    @if( $component->allow('print') )
     <div class="btn-group btn-group-sm" role="group" id="wrapperDropdownImprimirMultiple">
         <button id="buttonDropdownImprimirMultiple" type="button" class="btn btn-sm btn-outline-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
             <span>{!! $graffiti->design('printer')->svg() !!}</span>
@@ -38,35 +28,36 @@ $component = (object) [
             @endif
         </ul>
     </div>
+    @endif
 
     {{-- Acciones --}}
-    @if(! in_array('all', $component->except) )        
+    @if( $component->allow('actions') )        
     <div class="btn-group btn-group-sm" role="group" id="wrapperDropdownActions">
         <button id="buttonDropdownActions" type="button" class="btn btn-sm btn-outline-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
             <span>{!! $graffiti->design('list')->svg() !!}</span>
         </button>
         <ul class="dropdown-menu" aria-labelledby="buttonDropdownActions">
-            @if(! in_array('create', $component->except) )        
+            @if( $component->allow('actions', 'create') )        
             <li>
-                <a class="dropdown-item" href="<?= $component->routes['create'] ?>">
+                <a class="dropdown-item" href="<?= $component->hasCache('consolidado') ? route('entradas.create', ['consolidado' => $component->cache('consolidado')->id]) : route('entradas.create') ?>">
                     <span>{!! $graffiti->design('plus-lg')->svg() !!}</span>
                     <span class="align-middle ms-1">Nueva</span>
                 </a>
             </li>
             @endif
-            @if(! in_array('import', $component->except) )        
+            @if( $component->allow('actions', 'import') )        
             <li>
-                @include('entradas.components.index.modal-import')
+                @include('entradas.index.card.modal-import')
             </li>
             @endif
-            @if(! in_array('edit', $component->except) )        
+            @if( $component->allow('actions', 'edit') )        
             <li>
-                @include('entradas.components.index.modal-edit')
+                @include('entradas.index.card.modal-edit')
             </li>
             @endif
-            @if(! in_array('delete', $component->except) )        
+            @if( $component->allow('actions', 'delete') )        
             <li>
-                @include('entradas.components.index.modal-delete')
+                @include('entradas.index.card.modal-delete')
             </li>
             @endif
         </ul>

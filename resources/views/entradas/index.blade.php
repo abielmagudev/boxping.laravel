@@ -3,8 +3,8 @@
 
 @include('@.layouts.errors')
 
-@include('entradas.components.index.card', [
-    'entradas' => $entradas
+@include('entradas.index.card', [
+    'entradas' => $entradas,
 ])
 
 @endsection

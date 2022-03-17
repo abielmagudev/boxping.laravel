@@ -73,19 +73,16 @@
 </div>
 <br>
 
-@component('entradas.components.index.card', [
+@include('entradas.index.card', [
     'entradas' => $entradas,
-    'consolidado' => $consolidado,
-    'cliente' => $consolidado->cliente,
-    'routes' => [
-        'create' => route('entradas.create', ['consolidado' => $consolidado->id]),
-        'filter' => route('consolidados.show', $consolidado)
+    'cache' => [
+        'consolidado' => $consolidado,
+        'cliente' => $consolidado->cliente,
     ],
     'except' => [
-        'actions' => $consolidado->hasCerrado() ? ['all'] : [],
         'filters' => ['ambitos', 'clientes'],
+        'actions' => $consolidado->hasCerrado() ? ['create', 'import'] : [],
     ],
 ])
-@endcomponent
 
 @endsection

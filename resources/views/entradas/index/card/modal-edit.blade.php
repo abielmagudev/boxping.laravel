@@ -1,19 +1,41 @@
 <?php
 
-$component = (object) [
-    'modal_content_id' => 'modalEditMultipleContent',
-    'modal_id' => 'modalEditMultiple',
-    'editors' => [
-        'cliente',
-        'consolidado',
-    ],
-];
+$modal = new class($component)
+{
+    public $id = 'modalEditMultiple';
+
+    public $content_id = 'modalEditMultipleContent';
+
+    public $form = [
+        'select_id' => 'selectEditEditors',
+        'editors' => [
+            'cliente',
+            'consolidado',
+        ]
+    ];
+
+    public function __construct(object $component)
+    {
+        $this->form['id'] = $component->form('id');
+        $this->form['except'] = $component->except('editors', []);
+    }
+
+    public function form(string $key)
+    {
+        return ! array_key_exists($key, $this->form) ?: $this->form[$key];
+    }
+
+    public function allowEditor(string $editor)
+    {
+        return ! in_array($editor, $this->form('except'));
+    }
+}
 
 ?>
 
 @component('@.bootstrap.modal-trigger', [
     'classes' => 'dropdown-item trigger-count-checked-entradas',
-    'modal_id' => $component->modal_id,
+    'modal_id' => $modal->id,
 ])
     <span>{!! $graffiti->design('pencil')->svg() !!}</span>
     <span class='align-middle ms-1'>Editar</span>
@@ -21,7 +43,7 @@ $component = (object) [
 
 @push('modals')
     @component('@.bootstrap.modal', [
-        'id' => $component->modal_id,
+        'id' => $modal->id,
         'header' => [
             'classes' => 'bg-warning',
             'title' => 'Editar entradas'
@@ -33,7 +55,7 @@ $component = (object) [
         ], 
     ])
         @slot('body_content')
-        <div id='<?= $component->modal_content_id ?>'>
+        <div id='<?= $modal->content_id ?>'>
             <div class="row my-3 px-5 align-items-center">
                 <div class="col-sm">
                     <div class="text-center text-warning">
@@ -53,17 +75,17 @@ $component = (object) [
             <br>
             
             <div class="mb-3">
-                <label for="editorSelector" class="form-label small">Editar</label>
-                <select name="editor" id="editorSelector" class="form-select">
+                <label for="<?= $modal->form('select_id') ?>" class="form-label small">Editar</label>
+                <select name="editor" id="<?= $modal->form('select_id') ?>" class="form-select">
                     <option disabled selected label="Selecciona para editar..."></option>
-                    @foreach($component->editors as $editor)
+                    @foreach($modal->form('editors') as $editor)
                     <option value="<?= $editor ?>">{{ ucfirst($editor) }}</option>
                     @endforeach
                 </select>
             </div>
-            <div class="">
-            @foreach($component->editors as $editor)
-            @include("entradas.components.index.editors.{$editor}")
+            <div>
+            @foreach($modal->form('editors') as $editor)
+                @includeWhen($modal->allowEditor($editor), "entradas.index.card.modal-edit-editors.{$editor}")
             @endforeach
             </div>
         </div>
@@ -78,9 +100,9 @@ $component = (object) [
 @push('scripts')
 <script>
 const editorsContainerHandler = {
-    container: document.getElementById('<?= $component->modal_content_id ?>'),
-    selector: document.getElementById('editorSelector'),
-    loader: function (name) {
+    container: document.getElementById('<?= $modal->content_id ?>'),
+    selector: document.getElementById('<?= $modal->form('select_id') ?>'),
+    load: function (name) {
         this.container.querySelectorAll('.is-editor-multiple').forEach(editor => {
 
             editor.parentNode.classList.toggle('d-none', (editor.name != name))
@@ -94,7 +116,7 @@ const editorsContainerHandler = {
         })
     },
     listening: function () {
-         this.selector.addEventListener('change', (e) => this.loader(e.target.value))
+         this.selector.addEventListener('change', (e) => this.load(e.target.value))
     }
 }
 editorsContainerHandler.listening()
