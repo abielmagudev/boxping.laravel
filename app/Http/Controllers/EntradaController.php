@@ -108,7 +108,7 @@ class EntradaController extends Controller
 
         Excel::import($entradasImport, $csv);
 
-        return back()->with('success', "De <b>{$entradasImport->getRowsTotal()} filas</b> / <b>{$entradasImport->getRowsSaved()} entradas</b> han sido importadas");
+        return back()->with('success', "Se importó <b>{$entradasImport->getRowsTotal()} filas</b> / <b>{$entradasImport->getRowsSaved()} entradas</b>");
     }
 
     public function updateMultiple(MultipleRequest $request)
@@ -122,7 +122,7 @@ class EntradaController extends Controller
         $entradas_updated = $updater->update($request->entradas);
         $entradas_count = count($request->entradas);
 
-        return back()->with('success', "Actualización de {$updater->name} de {$entradas_count} / {$entradas_updated} entradas");
+        return back()->with('success', "Se actualizó <em>{$updater->name}</em> de <b>{$entradas_count} filas</b> / <b>{$entradas_updated} entradas</b>");
     }
 
     public function destroyMultiple(MultipleRequest $request)
@@ -132,7 +132,7 @@ class EntradaController extends Controller
         
         $entradas_count = count($request->entradas);
         
-        return back()->with('success', "Eliminación de {$entradas_count} / {$entradas_deleted} entradas");        
+        return back()->with('success', "Se eliminó de <b>{$entradas_count} filas</b> / <b>{$entradas_deleted} entradas</b>");        
     }
 
 
