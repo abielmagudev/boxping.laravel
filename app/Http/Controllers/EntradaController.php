@@ -91,7 +91,7 @@ class EntradaController extends Controller
                 ? route('consolidados.show', $entrada->consolidado_id)
                 : route('entradas.index');
 
-        return redirect($route)->with('success', "{$entrada->numero} eliminada");
+        return redirect($route)->with('success', "Entrada con número <b>{$entrada->numero}</b> eliminada");
     }
 
 
