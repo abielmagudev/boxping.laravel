@@ -49,25 +49,24 @@
             @endslot
 
             @slot('right')
-            @include('@.partials.modal-confirm-delete.trigger', ['only' => 'text'])
+            @component('@.partials.modal-delete-confirm', [
+                'destroy' => true,
+                'route' => route('entradas.destroy', $entrada),
+            ])
+                <p class="text-secondary">Se eliminará procesos, etapas, salidas <br> y la entrada con número:</p>
+                <p class="h4">{{ $entrada->numero }}</p>
+                @if( $entrada->hasConsolidado() )
+                <p class="text-uppercase">Consolidado <em>{{ $entrada->consolidado->numero }}</em></p>
+                @endif
+            @endcomponent
             @endslot
         @endcomponent
     </form>
 @endcomponent
 <br>
 
-@include('@.partials.block-modifiers.content', ['model' => $entrada])
-
-@component('@.partials.modal-confirm-delete.modal', [
-    'route' => route('entradas.destroy', $entrada),
-    'category' => 'entrada',
-    'name' => $entrada->numero,
-    'is_hard' => true,
+@include('@.partials.block-modifiers.content', [
+    'model' => $entrada
 ])
-    @if( ! is_null($entrada->consolidado_id) )
-    <p class="small text-dark text-uppercase">Consolidado <em>{{ $entrada->consolidado->numero }}</em></p>
-
-    @endif
-@endcomponent
 
 @endsection
