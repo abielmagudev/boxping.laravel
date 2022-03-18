@@ -54,7 +54,7 @@ $modal = (object) [
         @endslot
 
         @slot('footer_content')
-        <button class="btn btn-outline-danger" type="button" form="<?= $modal->form['id'] ?>">Eliminar</button>
+        <button class="btn btn-outline-danger" type="submit" form="<?= $modal->form['id'] ?>">Eliminar</button>
         @endslot
     @endcomponent
 @endpush
