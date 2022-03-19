@@ -2,14 +2,13 @@
 @section('content')
 
 @component('@.bootstrap.card', [
-    'pretitle' => $entrada->numero,
     'title' => 'Editar información',
 ])
     <form action="{{ route('entradas.update', $entrada) }}" method="post" autocomplete="off">
         @csrf
         @method('put')
         <div class="mb-3">
-            <label for="input-numero" class="form-label small">Número de entrada</label>
+            <label for="input-numero" class="form-label small">Número de entrada <span class="text-muted">({{ $entrada->numero }})</span></label>
             <input name="numero" value="{{ old('numero', $entrada->numero) }}" id="input-numero" type="text" class="form-control <?= bootstrap_isInputInvalid('numero', $errors) ?>" autofocus required>
             @include('@.bootstrap.invalid-input-message', ['name' => 'numero'])
         </div>
@@ -53,7 +52,7 @@
                 'destroy' => true,
                 'route' => route('entradas.destroy', $entrada),
             ])
-                <p class="text-secondary">Se eliminará procesos, etapas, salidas <br> y la entrada con número:</p>
+                <p class="text-secondary lead">Se eliminará procesos, etapas, salidas <br> y la entrada con número:</p>
                 <p class="h4">{{ $entrada->numero }}</p>
                 @if( $entrada->hasConsolidado() )
                 <p class="text-uppercase">Consolidado <em>{{ $entrada->consolidado->numero }}</em></p>

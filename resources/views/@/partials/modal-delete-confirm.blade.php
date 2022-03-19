@@ -29,6 +29,7 @@ $modal = (object) [
     @component('@.bootstrap.modal', [
         'id' => $modal->id,
         'header' => [
+            'title' => 'ATENCION',
             'classes' => 'bg-danger text-white'
         ],
         'footer' => [
@@ -38,7 +39,7 @@ $modal = (object) [
         ],
     ])
         @slot('body_content')
-        <div class="text-center mt-5 px-4">
+        <div class="text-center mt-4 px-4">
             <div>{{ $modal->message }}</div>
             <form action="<?= $modal->form['route'] ?>" method="post" id="<?= $modal->form['id'] ?>">
                 @csrf
