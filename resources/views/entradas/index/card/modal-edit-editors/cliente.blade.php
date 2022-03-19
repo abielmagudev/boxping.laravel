@@ -6,4 +6,8 @@
         <option value="{{ $cliente->id }}">{{ $cliente->nombre }} ({{ $cliente->alias }})</option>
         @endforeach
     </select>
+    <div class="alert alert-warning mt-3">
+        <b class="alert-heading">IMPORTANTE</b>
+        <div class="small mt-1">Solo afectará las entradas que están <b>sin consolidar</b>.</div>
+    </div>
 </div>

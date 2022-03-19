@@ -46,7 +46,7 @@ $modal = new class($component)
         'id' => $modal->id,
         'header' => [
             'classes' => 'bg-warning',
-            'title' => 'Editar entradas'
+            'title' => 'ATENCION'
         ],
         'footer' => [
             'button_close' => [
@@ -55,24 +55,14 @@ $modal = new class($component)
         ], 
     ])
         @slot('body_content')
-        <div id='<?= $modal->content_id ?>'>
-            <div class="row my-3 px-5 align-items-center">
-                <div class="col-sm">
-                    <div class="text-center text-warning">
-                        {!! $graffiti->design('exclamation-triangle-fill', ['width' => 112, 'height' => 112])->svg() !!}
-                    </div>
-                </div>
-                <div class="col-sm">
-                    <div class="text-center text-secondary lead">
-                        <p class="mb-0">Se actualizarán</p>
-                        <p class="h4">
-                            <span class="show-count-checked-entradas">0</span>
-                            <span>entradas</span>
-                        </p>
-                    </div>
-                </div>
+        <div id='<?= $modal->content_id ?>' class="px-4 mt-4">
+            <div class="text-center">
+                <p class="text-muted lead">Se actualizarán un total de entradas</p>
+                <p class="h3">
+                    <span class="show-count-checked-entradas">0</span>
+                </p>
             </div>
-            <br>
+            <hr>
             
             <div class="mb-3">
                 <label for="<?= $modal->form('select_id') ?>" class="form-label small">Editar</label>

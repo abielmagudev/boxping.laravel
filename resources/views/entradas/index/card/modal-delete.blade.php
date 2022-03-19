@@ -19,7 +19,7 @@ $modal = (object) [
     @component('@.bootstrap.modal', [
         'id' => $modal->id,
         'header' => [
-            'title' => 'Eliminar entradas',
+            'title' => 'ATENCION',
             'classes' => 'bg-danger text-white'
         ],
         'footer' => [
@@ -29,23 +29,12 @@ $modal = (object) [
         ],
     ])
         @slot('body_content')
-        <div id='<?= $modal->content_id ?>'>
-            <div class="row my-3 px-5 align-items-center" >
-                <div class="col-sm">
-                    <div class="text-center text-danger">
-                        {!! $graffiti->design('exclamation-octagon-fill', ['width' => 112, 'height' => 112])->svg() !!}
-                    </div>
-                </div>
-                <div class="col-sm">
-                    <div class="text-center text-secondary lead">
-                        <p class="mb-0">Se eliminarán</p>
-                        <p class="h4">
-                            <span class="show-count-checked-entradas">0</span>
-                            <span>entradas</span>
-                        </p>
-                    </div>
-                </div>
-            </div>
+        <div id='<?= $modal->content_id ?>' class="px-4 mt-4 text-center">
+            <p class="text-muted lead">Se eliminarán procesos, etapas, salidas <br> y un total de entradas</p>
+            <p class="h3">
+                <span class="show-count-checked-entradas">0</span>
+            </p>
+            <p class="text-danger text-uppercase small mt-5">Eliminación permanente, no es recuperable</p>
         </div>
         @endslot
 
