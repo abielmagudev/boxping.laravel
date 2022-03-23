@@ -2,14 +2,17 @@
 
 $settings = [
     'button' => isset($button) && is_bool($button) ? $button : true,
-    'classes' => isset($classes) && is_string($classes) ? $classes : null,
+    'classes' => isset($classes) && is_string($classes) ? $classes : '',
     'dataset' => isset($dataset) && is_array($dataset) ? $dataset : [],
+    'disabled' => isset($disabled) && is_bool($disabled) ? $disabled : false,
     'modal_id' => isset($modal_id) && is_string($modal_id) ? "#{$modal_id}" : null,
-    'text' => isset($slot) ? $slot : (isset($text) ? $text : null),
+    'text' => isset($text) ? $text : (isset($slot) ? $slot : $modal_id),
 ];
 
-$modal_trigger = new class ($settings)
+$component = new class ($settings)
 {
+    const DEFAULT_SETTING_VALUE = null;
+
     private $settings = [];
 
     public function __construct($settings)
@@ -20,7 +23,7 @@ $modal_trigger = new class ($settings)
     public function __get($name)
     {
         if(! isset($this->settings[$name]) )
-            return '';
+            return self::DEFAULT_SETTING_VALUE;
 
         return $this->settings[$name];
     }
@@ -38,6 +41,11 @@ $modal_trigger = new class ($settings)
         return implode(' ', $props);
     }
 
+    public function isAvailable()
+    {
+        return ! $this->disabled;
+    }
+
     public function isButton()
     {
         return $this->button === true;
@@ -46,10 +54,10 @@ $modal_trigger = new class ($settings)
 
 ?>
 
-@if( $modal_trigger->isButton() )
-<button type="button" data-bs-toggle="modal" data-bs-target="<?= $modal_trigger->modal_id ?>" class="<?= $modal_trigger->classes ?>" <?= $modal_trigger->dataset() ?> >{!! $modal_trigger->text !!}</button>
+@if( $component->isButton() )
+<button type="button" data-bs-toggle="modal" data-bs-target="<?= $component->modal_id ?>" class="<?= $component->classes ?>" <?= $component->dataset() ?> <?= $component->isAvailable() ?: 'disabled' ?>>{!! $component->text !!}</button>
 
 @else
-<a href="#!" data-bs-toggle="modal" data-bs-target="<?= $modal_trigger->modal_id ?>" class="<?= $modal_trigger->classes ?>" <?= $modal_trigger->dataset() ?> >{!! $modal_trigger->text !!}</a>
+<a href="#!" data-bs-toggle="modal" data-bs-target="<?= $component->modal_id ?>" class="<?= $component->classes ?>" <?= $component->dataset() ?> <?= $component->isAvailable() ?: 'disabled' ?>>{!! $component->text !!}</a>
 
 @endif

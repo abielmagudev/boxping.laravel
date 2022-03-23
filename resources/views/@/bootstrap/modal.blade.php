@@ -1,38 +1,36 @@
 <?php
 
 $settings = [
+    'id' => isset($id) && is_string($id) ? $id : null,
     'animation' => isset($animation) && is_bool($animation) ? $animation : false,
     'backstatic' => isset($backstatic) && is_bool($backstatic) ? $backstatic : false,
     'centered' => isset($centered) && is_bool($centered) ? $centered : false,
-    'scrollable' => isset($scrollable) && is_bool($scrollable) ? $scrollable : false,
-    'id' => isset($id) && is_string($id) ? $id : null,
-    'size' => isset($size) && is_string($size) ? $size : null,
     'fullscreen' => isset($fullscreen) && is_string($fullscreen) ? $fullscreen : null,
-
-    'body' => [
-        'classes' => isset($body['classes']) && is_string($body['classes']) ? $body['classes'] : null,
-        'content' => isset($body_content) ? $body_content : null,
+    'scrollable' => isset($scrollable) && is_bool($scrollable) ? $scrollable : false,
+    'size' => isset($size) && is_string($size) ? $size : null,
+    'header' => isset($header) &&! is_array($header) ? $header : null,
+    'body' => isset($body) &&! is_array($body) ? $body : null,
+    'footer' => isset($footer) &&! is_array($footer) ? $footer : null,
+    'header_settings' => [
+        'classes' => isset($header_settings['classes']) && is_string($header_settings['classes']) ? $header_settings['classes'] : null,
+        'close' => isset($header_settings['close']) && is_bool($header_settings['close']) ? $header_settings['close'] : true,
+        'title' => isset($header_settings['title']) && is_string($header_settings['title']) ? $header_settings['title'] : null,
     ],
-
-    'header' => [
-        'button_close' => isset($header['button_close']) && is_bool($header['button_close']) ? $header['button_close'] : true,
-        'classes' => isset($header['classes']) && is_string($header['classes']) ? $header['classes'] : null,
-        'content' => isset($header_content) ? $header_content : null,
-        'title' => isset($header['title']) && is_string($header['title']) ? $header['title'] : null,
+    'body_settings' => [
+        'classes' => isset($body_settings['classes']) && is_string($body_settings['classes']) ? $body_settings['classes'] : null,
     ],
-
-    'footer' => [
-        'classes' => isset($footer['classes']) && is_string($footer['classes']) ? $footer['classes'] : null,
-        'content' => isset($footer_content) ? $footer_content : null,
-        'button_close' => ! isset($footer['button_close']) ||! boolval($footer['button_close']) ?: [
-            'classes' => isset($footer['button_close']['classes']) && is_string($footer['button_close']['classes']) ? $footer['button_close']['classes'] : 'btn btn-secondary',
-            'text' => isset($footer['button_close']['text']) && is_string($footer['button_close']['text']) ? $footer['button_close']['text'] : 'Cerrar',
-        ],
+    'footer_settings' => [
+        'classes' => isset($footer_settings['classes']) && is_string($footer_settings['classes']) ? $footer_settings['classes'] : null,
+        'close' => isset($footer_settings['close']) && (is_bool($footer_settings['close']) || is_array($footer_settings['close'])) ? $footer_settings['close'] : true,
     ],
 ];
 
-$modal = new class ($settings)
+$component = new class ($settings)
 {
+    const DEFAULT_SETTING_VALUE = null;
+
+    const EMPTY_SETTING_VALUE = '';
+
     private $fullscreens = [
         'sm' => 'modal-fullscreen-sm-down', // Below 576px
         'md' => 'modal-fullscreen-md-down', // Below 768px
@@ -58,136 +56,151 @@ $modal = new class ($settings)
     public function __get(string $name)
     {
         if(! $this->has($name) )
-            return;
+            return self::DEFAULT_SETTING_VALUE;
 
         return $this->settings[$name];
     }
 
-    public function has(string $setting)
+    public function has(string $name, string $subname = null)
     {
-        return isset($this->settings[$setting]);
+        if(! is_null($subname) )
+            return isset($this->settings[$name][$subname]);
+
+        return isset($this->settings[$name]);
     }
 
-    public function id(string $postfix = null)
+    public function id(string $after_id = null)
     {
-        return isset($postfix) && is_string($postfix) ? $this->id . $postfix : $this->id;
+        return isset($after_id) && is_string($after_id) ? ($this->id . $after_id) : $this->id;
     }
 
     public function animation()
     {
-        return $this->animation ? 'fade' : '';
+        return $this->animation ? 'fade' : self::EMPTY_SETTING_VALUE;
     }
 
     public function backstatic()
     {
-        return $this->backstatic ? 'data-bs-backdrop="static" data-bs-keyboard="false"' : '';
+        return $this->backstatic ? 'data-bs-backdrop="static" data-bs-keyboard="false"' : self::EMPTY_SETTING_VALUE;
     }
 
     public function centered()
     {
-        return $this->centered ? 'modal-dialog-centered' : '';
+        return $this->centered ? 'modal-dialog-centered' : self::EMPTY_SETTING_VALUE;
     }
 
     public function scrollable()
     {
-        return $this->scrollable ? 'modal-dialog-scrollable' : '';
+        return $this->scrollable ? 'modal-dialog-scrollable' : self::EMPTY_SETTING_VALUE;
     }
 
     public function fullscreen()
     {
         if(! $this->has('fullscreen') ||! array_key_exists($this->fullscreen, $this->fullscreens) )
-            return '';
+            return self::EMPTY_SETTING_VALUE;
 
         return $this->fullscreens[ $this->fullscreen ];
     }
 
     public function size()
     {
-        if(! $this->has('size') )
-            return '';
+        if(! $this->has('size') ||! array_key_exists($this->size, $this->sizes))
+            return self::EMPTY_SETTING_VALUE;
 
-        return array_key_exists($this->size, $this->sizes) ? $this->sizes[ $this->size ] : '';
+        return $this->sizes[ $this->size ];
     }
 
-    public function header(string $key)
+    public function header(string $setting = null)
     {
-        if(! isset( $this->header[$key] ) )
-            return '';
-
-        return $this->header[$key];
+        if( is_null($setting) )
+            return $this->header;
+        
+        return $this->has('header_settings', $setting) 
+                ? $this->header_settings[$setting] 
+                : self::EMPTY_SETTING_VALUE;
     }
 
-    public function body(string $key)
+    public function body(string $setting = null)
     {
-        if(! isset( $this->body[$key] ) )
-            return '';
+        if( is_null($setting) )
+            return $this->body;
 
-        return $this->body[$key];
+        return $this->has('body_settings', $setting) 
+                ? $this->body_settings[$setting] 
+                : self::EMPTY_SETTING_VALUE;
     }
 
-    public function footer(string $key, string $subkey = null)
+    public function footer(string $setting = null, string $sub = null)
     {
-        if( isset($subkey, $this->footer[$key][$subkey]) )
-            return $this->footer[$key][$subkey];
+        if( is_null($setting) )
+            return $this->footer;
 
-        if( isset($this->footer[$key]) && is_null($subkey) )
-            return $this->footer[$key];
+        if( $this->has('footer_settings', $setting) && is_null($sub) )
+            return $this->footer_settings[$setting];
+        
+        if( $setting === 'close' && $sub === 'classes' )
+            return $this->footer_settings['close']['classes'] ?? 'btn btn-secondary';
+            
+        if( $setting === 'close' && $sub === 'text' )
+            return $this->footer_settings['close']['text'] ?? 'Cerrar';
 
-        return '';
+        return $this->footer_settings[$setting][$sub] ?? self::EMPTY_SETTING_VALUE;
     }
 
     public function hasHeader()
     {
-        return $this->header('button_close') === true ||! empty($this->header('title')) ||! empty($this->header('content'));
+        return ! empty($this->header()) || $this->header_settings['title'] || $this->header_settings['close'];
     }
 
     public function hasBody()
     {
-        return ! empty($this->body('content'));
+        return ! empty($this->body());
     }
 
     public function hasFooter()
     {
-        return $this->footer('button_close') ||! empty($this->footer('content'));
+        return ! empty($this->footer()) || isset($this->footer_settings['close']);
     }
-}
+};
 
 ?>
 
-@if( $modal->has('id') )
-<div class="modal fade" tabindex="-1" aria-hidden="true" id="<?= $modal->id() ?>" aria-labelledby="<?= $modal->id('Label') ?>" <?= $modal->backstatic() ?>>
-    <div class="modal-dialog <?= $modal->size() ?> <?= $modal->centered() ?> <?= $modal->scrollable() ?> <?= $modal->fullscreen() ?>">
+@if( $component->has('id') )
+@push('modals')
+<div class="modal fade" tabindex="-1" aria-hidden="true" id="<?= $component->id() ?>" aria-labelledby="<?= $component->id('Label') ?>" <?= $component->backstatic() ?>>
+    <div class="modal-dialog <?= $component->size() ?> <?= $component->centered() ?> <?= $component->scrollable() ?> <?= $component->fullscreen() ?>">
         <div class="modal-content">
-            @if( $modal->hasHeader() )             
-            <div class="modal-header border-0 <?= $modal->header('classes') ?>">
-                @if( $modal->header('title') )
-                <h5 class="modal-title" id="<?= $modal->id('Label') ?>">{!! $modal->header('title') !!}</h5>
+            @if( $component->hasHeader() )             
+            <div class="modal-header border-0 <?= $component->header('classes') ?>">
+                @if( $component->header('title') )
+                <h5 class="modal-title" id="<?= $component->id('Label') ?>">{!! $component->header('title') !!}</h5>
                 @endif
 
-                {!! $modal->header('content') !!}
+                {!! $component->header() !!}
 
-                @if( $modal->header('button_close') )
+                @if( $component->header('close') )
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
                 @endif
             </div>
             @endif
 
-            @if( $modal->hasBody() )             
-            <div class="modal-body <?= $modal->body('classes') ?>">
-                {!! $modal->body('content') !!}
+            @if( $component->hasBody() )             
+            <div class="modal-body <?= $component->body('classes') ?>">
+                {!! $component->body() !!}
             </div>
             @endif
             
-            @if( $modal->hasFooter() )
-            <div class="modal-footer border-0 bg-light <?= $modal->footer('classes') ?>">
-                {!! $modal->footer('content') !!}
+            @if( $component->hasFooter() )
+            <div class="modal-footer border-0 bg-light <?= $component->footer('classes') ?>">
+                {!! $component->footer() !!}
 
-                @if( is_array($modal->footer('button_close')) ) 
-                <button type="button" class="<?= $modal->footer('button_close', 'classes') ?>" data-bs-dismiss="modal">{{ $modal->footer('button_close', 'text') }}</button>
+                @if( $component->footer('close') ) 
+                <button type="button" class="<?= $component->footer('close', 'classes') ?>" data-bs-dismiss="modal">{{ $component->footer('close', 'text') }}</button>
                 @endif
             </div>
             @endif
         </div>
     </div>
 </div>
+@endpush
 @endif
