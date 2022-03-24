@@ -32,10 +32,21 @@
     @endcomponent
     <br>
     <div class="text-end">
-        @include('destinatarios.modal-search.trigger', [
-            'text' => 'Cambiar destinatario', 
-            'classes' => 'btn btn-sm btn-primary',   
+        @component('@.partials.modal-search-endpoints', [
+            'id' => 'modalSearchDestinatarios',
+            'title' => 'Buscar destinatarios',
+            'form' => [
+                'route' => route('entradas.edit', $entrada),
+            ],
+            'trigger' => [
+                'text' => 'Cambiar destinatario',
+            ],
         ])
+            @slot('inputs')
+            <input type="hidden" name="editor" value="destinatario">
+            @endslot 
+        @endcomponent
+
         <a href="{{ route('destinatarios.edit', ['destinatario' => $entrada->destinatario_id, 'entrada' => $entrada->id]) }}" class="btn btn-warning btn-sm" data-toggle="tooltip" data-placement="left" title="Editar destinatario">
             <span>Editar destinatario</span>
         </a>
@@ -44,18 +55,22 @@
 @else
     <br>
     <div class="text-center">
-        @include('destinatarios.modal-search.trigger', [
-            'text' => 'Agregar destinatario',
-            'classes' => 'btn btn-primary',
+        @component('@.partials.modal-search-endpoints', [
+            'id' => 'modalSearchDestinatarios',
+            'title' => 'Buscar destinatarios',
+            'form' => [
+                'route' => route('entradas.edit', $entrada),
+            ],
+            'trigger' => [
+                'text' => 'Agregar destinatario',
+            ],
         ])
+            @slot('inputs')
+            <input type="hidden" name="editor" value="destinatario">
+            @endslot 
+        @endcomponent
     </div>
 
 @endif
-
-@component('destinatarios.modal-search.modal', [
-    'route' => route('entradas.edit', $entrada),    
-])
-    <input type="hidden" name="editor" value="destinatario">
-@endcomponent
 
 </div>

@@ -12,11 +12,22 @@
    'title' => 'Agregar destinatario',
 ])
    @slot('options')
-      @include('destinatarios.modal-search.trigger', [
-         'classes' => 'btn btn-sm btn-primary',
-         'text' => $graffiti->design('search')->svg()
+      @component('@.partials.modal-search-endpoints', [
+         'id' => 'modalSearchDestinatarios',
+         'title' => 'Buscar destinatarios',
+         'form' => [
+            'route' => route('entradas.edit', $entrada),
+         ],
+         'trigger' => [
+            'classes' => 'btn btn-primary btn-sm',
+            'text' => $graffiti->design('search')->svg(),
+         ],
       ])
-
+         @slot('inputs')
+         <input type="hidden" name="editor" value="destinatario">
+         @endslot 
+      @endcomponent
+      
       <a href="{{ route('destinatarios.create', ['entrada' => $entrada->id]) }}" class="btn btn-primary btn-sm ms-1" data-toggle="tooltip" data-placement="left" title="Nuevo destinatario">
          {!!  $graffiti->design('plus-lg')->svg() !!}
       </a>
@@ -60,12 +71,6 @@
    </div>
 
    @endif
-@endcomponent
-
-@component('destinatarios.modal-search.modal', [
-    'route' => route('entradas.edit', $entrada),    
-])
-    <input type="hidden" name="editor" value="destinatario">
 @endcomponent
 
 @endsection
