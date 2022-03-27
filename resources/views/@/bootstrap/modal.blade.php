@@ -159,7 +159,7 @@ $component = new class ($settings)
 
     public function hasFooter()
     {
-        return ! empty($this->footer()) || isset($this->footer_settings['close']);
+        return ! empty($this->footer()) || (isset($this->footer_settings['close']) && $this->footer_settings['close'] <> false);
     }
 };
 
