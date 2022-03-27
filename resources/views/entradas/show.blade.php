@@ -20,7 +20,7 @@
 
         @slot('options')
         <!-- Comentarios -->
-        @include('entradas.show.modal-comentarios.trigger')
+        @include('entradas.show.modal-comentarios')
 
         <!-- Imprimir -->
         <div class="dropdown d-inline-block ms-1">
@@ -74,7 +74,5 @@
         @include("entradas.show.{$presenter->showname()}")
     </div>
 </div>
-
-@include('entradas.show.modal-comentarios.modal')
 
 @endsection
