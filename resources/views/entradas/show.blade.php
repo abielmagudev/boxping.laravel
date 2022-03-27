@@ -17,8 +17,8 @@
     @component('@.bootstrap.card', [
         'title' => 'Entrada'
     ])
-
         @slot('options')
+
         <!-- Comentarios -->
         @include('entradas.show.modal-comentarios')
 
@@ -28,14 +28,21 @@
                 {!! $graffiti->design('printer-fill')->svg() !!}
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuPrintEntrada">
-                <li><a class="dropdown-item" href="{{ route('entradas.imprimir', $entrada) }}">Información</a></li>
+                <li>
+                    <a class="dropdown-item" href="{{ route('entradas.imprimir', $entrada) }}">Información</a>
+                </li>
+            @if( $guias_impresion->count() )
                 <li class="dropdown-divider"></li>
                 <li class="dropdown-header">Guías de impresión</li>
                 @foreach ($guias_impresion as $guia)
-                <li><a class="dropdown-item" href="{{ route('entradas.imprimir', [$entrada, $guia]) }}">{{ $guia->nombre }}</a></li>
+                <li>
+                    <a class="dropdown-item" href="{{ route('entradas.imprimir', [$entrada, $guia]) }}">{{ $guia->nombre }}</a>
+                </li>
                 @endforeach
+            @endif
             </ul>
         </div>
+        
         @endslot
 
         <label class="text-muted small">Número</label>
