@@ -32,20 +32,16 @@
     @endcomponent
     <br>
     <div class="text-end">
-        @component('@.partials.modal-search-endpoints', [
+        @include('@.partials.modal-search-endpoints', [
             'id' => 'modalSearchDestinatarios',
             'title' => 'Buscar destinatarios',
             'form' => [
-                'route' => route('entradas.edit', $entrada),
+                'route' => route('entradas.edit', [$entrada,'destinatario']),
             ],
             'trigger' => [
                 'text' => 'Cambiar destinatario',
             ],
         ])
-            @slot('inputs')
-            <input type="hidden" name="editor" value="destinatario">
-            @endslot 
-        @endcomponent
 
         <a href="{{ route('destinatarios.edit', ['destinatario' => $entrada->destinatario_id, 'entrada' => $entrada->id]) }}" class="btn btn-warning btn-sm" data-toggle="tooltip" data-placement="left" title="Editar destinatario">
             <span>Editar destinatario</span>
@@ -55,22 +51,17 @@
 @else
     <br>
     <div class="text-center">
-        @component('@.partials.modal-search-endpoints', [
+        @include('@.partials.modal-search-endpoints', [
             'id' => 'modalSearchDestinatarios',
             'title' => 'Buscar destinatarios',
             'form' => [
-                'route' => route('entradas.edit', $entrada),
+                'route' => route('entradas.edit', [$entrada, 'destinatario']),
             ],
             'trigger' => [
                 'text' => 'Agregar destinatario',
             ],
         ])
-            @slot('inputs')
-            <input type="hidden" name="editor" value="destinatario">
-            @endslot 
-        @endcomponent
     </div>
 
 @endif
-
 </div>

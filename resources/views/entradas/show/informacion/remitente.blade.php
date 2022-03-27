@@ -28,10 +28,17 @@
     @endcomponent
     <br>
     <div class="text-end">
-        @include('remitentes.modal-search.trigger', [
-            'text' => 'Cambiar remitente',
-            'classes' => 'btn btn-sm btn-primary',
+        @include('@.partials.modal-search-endpoints', [
+            'id' => 'modalSearchRemitentes',
+            'title' => 'Buscar remitentes',
+            'form' => [
+                'route' => route('entradas.edit', [$entrada, 'remitente']),
+            ],
+            'trigger' => [
+                'text' => 'Cambiar remitente',
+            ],
         ])
+        
         <a href="{{ route('remitentes.edit', ['remitente' => $entrada->remitente->id, 'entrada' => $entrada->id]) }}" class="btn btn-warning btn-sm" data-toggle="tooltip" data-placement="left" title="Editar remitente">
             <span>Editar remitente</span>
         </a>
@@ -40,17 +47,17 @@
 @else
     <br>
     <div class="text-center">
-        @include('remitentes.modal-search.trigger', [
-            'text' => 'Agregar remitente',
-            'classes' => 'btn btn-primary',
+        @include('@.partials.modal-search-endpoints', [
+            'id' => 'modalSearchRemitentes',
+            'title' => 'Buscar remitentes',
+            'form' => [
+                'route' => route('entradas.edit', [$entrada, 'remitente']),
+            ],
+            'trigger' => [
+                'text' => 'Agregar remitente',
+            ],
         ])
     </div>
 
 @endif
-
-@component('remitentes.modal-search.modal', [
-    'route' => route('entradas.edit', $entrada),    
-])
-    <input type="hidden" name="editor" value="remitente">
-@endcomponent
 </div>

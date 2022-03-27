@@ -1,7 +1,7 @@
 @extends('app')
 @section('content')
 
-<p class="">
+<p>
    <a href="{{ route('entradas.show', $entrada) }}" class="link-primary text-decoration-none small">&laquo; Regresar</a>
    <br>
    <b>{{ $entrada->numero }}</b>
@@ -12,10 +12,17 @@
    'subtitle' => "Encontrados con \"{$searched}\": {$remitentes->count()}",
 ])
    @slot('options')
-      @include('remitentes.modal-search.trigger', [
-         'classes' => 'btn btn-sm btn-primary',
-         'text' => $graffiti->design('search')->svg()
-      ])
+      @include('@.partials.modal-search-endpoints', [
+         'id' => 'modalSearchRemitentes',
+         'title' => 'Buscar remitentes',
+         'form' => [
+            'route' => route('entradas.edit', [$entrada, 'remitente']),
+         ],
+         'trigger' => [
+            'classes' => 'btn btn-primary btn-sm',
+            'text' => $graffiti->design('search')->svg(),
+         ],
+      ]) 
 
       <a href="{{ route('remitentes.create', ['entrada' => $entrada->id]) }}" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="left" title="Nuevo destinatario">
          {!!  $graffiti->design('plus-lg')->svg() !!}
@@ -39,7 +46,7 @@
             <button name="remitente" value="{{ $remitente->id }}" class="btn btn-outline-primary btn-sm" form="form-update-remitente" type="submit">Agregar</button>
          
          @else
-            <button class="btn btn-sm btn-secondary disabled">Agregado</button>
+            <span class="btn btn-sm btn-secondary disabled">Agregado</span>
 
          @endif
          </td>
@@ -61,11 +68,4 @@
 
    @endif
 @endcomponent
-
-@component('remitentes.modal-search.modal', [
-    'route' => route('entradas.edit', $entrada),    
-])
-    <input type="hidden" name="editor" value="remitente">
-@endcomponent
-
 @endsection

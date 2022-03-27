@@ -68,7 +68,7 @@ class EntradaController extends Controller
 
     public function edit(Entrada $entrada, EditRequest $request)
     {
-        $editor = EditorsContainer::editor($request, $entrada);
+        $editor = EditorsContainer::get($entrada, $request);
         return view($editor->template(), $editor->data());
     }
 

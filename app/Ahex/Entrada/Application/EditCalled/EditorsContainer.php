@@ -14,25 +14,29 @@ abstract class EditorsContainer
         'reempacado' => ReempacadoEditor::class,
         'remitente' => RemitenteEditor::class,
     ];
-
-    public static function editor(Request $request, Entrada $entrada)
+    
+    public static function get(Entrada $entrada, Request $request)
     {
-        $editor_class = self::get( $request->editor );
+        $editor_class = self::editor( $request->editor );
         return new $editor_class($entrada, $request);
     }
-    
-    public static function get($editor_name)
+
+    public static function editor(string $name)
     {
-        return self::$editors[ $editor_name ];
+        return self::$editors[ $name ];
     }
 
-    public static function classes()
+    public static function classes(string $glue = null)
     {
-        return array_values( self::$editors );
+        return is_null($glue) 
+                ? array_values( self::$editors ) 
+                : implode($glue, array_values(self::$editors));
     }
 
-    public static function names()
+    public static function names(string $glue = null)
     {
-        return array_keys( self::$editors );
+        return is_null($glue) 
+                ? array_keys( self::$editors ) 
+                : implode($glue, array_keys(self::$editors));
     }
 }

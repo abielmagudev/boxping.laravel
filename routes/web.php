@@ -40,6 +40,8 @@ Route::middleware('auth')->group( function () {
     
     // Entradas
     Route::prefix('entradas')->group( function () {
+        Route::get('{entrada}/edit/{editor?}', 'EntradaController@edit')->name('entradas.edit');
+
         // Comentarios
         Route::post('{entrada}/comentarios', 'ComentarioController@store')->name('comentarios.store');
         
@@ -59,7 +61,8 @@ Route::middleware('auth')->group( function () {
         Route::match(['put','patch'], 'multiple', 'EntradaController@updateMultiple')->name('entradas.update.multiple');
         Route::delete('multiple', 'EntradaController@destroyMultiple')->name('entradas.destroy.multiple');
     });
-    
+    Route::resource('entradas', EntradaController::class)->except(['edit']);
+
     // Zonas
     Route::resource('etapas/{etapa}/zonas', 'ZonaController')->except(['index', 'show']);
     
@@ -79,7 +82,6 @@ Route::middleware('auth')->group( function () {
         'conductores' => ConductorController::class,
         'consolidados' => ConsolidadoController::class,
         'destinatarios' => DestinatarioController::class,
-        'entradas' => EntradaController::class,
         'etapas' => EtapaController::class,
         'incidentes' => IncidenteController::class,
         'reempacadores' => ReempacadorController::class,

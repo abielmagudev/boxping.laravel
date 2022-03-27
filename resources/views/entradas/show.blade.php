@@ -1,6 +1,8 @@
 @extends('app')
 @section('content')
 
+@include('@.layouts.errors')
+
 <div class="text-center">
     <div class="btn-group">
     @foreach( $presenter->links() as $link )

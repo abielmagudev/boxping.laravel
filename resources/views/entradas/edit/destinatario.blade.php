@@ -1,7 +1,7 @@
 @extends('app')
 @section('content')
 
-<p class="">
+<p>
    <a href="{{ route('entradas.show', $entrada) }}" class="link-primary text-decoration-none small">&laquo; Regresar</a>
    <br>
    <b>{{ $entrada->numero }}</b>
@@ -12,21 +12,17 @@
    'title' => 'Agregar destinatario',
 ])
    @slot('options')
-      @component('@.partials.modal-search-endpoints', [
+      @include('@.partials.modal-search-endpoints', [
          'id' => 'modalSearchDestinatarios',
          'title' => 'Buscar destinatarios',
          'form' => [
-            'route' => route('entradas.edit', $entrada),
+            'route' => route('entradas.edit', [$entrada, 'destinatario']),
          ],
          'trigger' => [
             'classes' => 'btn btn-primary btn-sm',
             'text' => $graffiti->design('search')->svg(),
          ],
       ])
-         @slot('inputs')
-         <input type="hidden" name="editor" value="destinatario">
-         @endslot 
-      @endcomponent
       
       <a href="{{ route('destinatarios.create', ['entrada' => $entrada->id]) }}" class="btn btn-primary btn-sm ms-1" data-toggle="tooltip" data-placement="left" title="Nuevo destinatario">
          {!!  $graffiti->design('plus-lg')->svg() !!}
@@ -50,7 +46,7 @@
             <button name="destinatario" value="{{ $destinatario->id }}" class="btn btn-outline-primary btn-sm" form="formUpdateDestinatario" type="submit">Agregar</button>
             
          @else
-            <button class="btn btn-sm btn-secondary disabled">Agregado</button>
+            <span class="btn btn-sm btn-secondary disabled">Agregado</span>
 
          @endif
          </td>

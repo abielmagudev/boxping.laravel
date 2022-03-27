@@ -15,11 +15,11 @@ class ConfirmadoUpdater extends Updater
 
     public function success(): string
     {
-        return 'Error al actualizar la confirmación de la entrada.';
+        return 'Confirmación de la entrada actualizada.';
     }
-
+    
     public function failure(): string
     {
-        return 'Confirmación de la entrada actualizada.';
+        return 'Error al actualizar la confirmación de la entrada.';
     }
 }

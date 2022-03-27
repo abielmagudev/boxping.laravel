@@ -14,7 +14,7 @@
         <span class="lead">Para habilitar la opción de crear ó mostrar la salida, <br> es necesario <b>confirmar el destinatario</b>.</span>
     </p>
     <div class="text-center">
-        @include('entradas.edit.modal-destinatario-confirm')
+        @include('entradas.edit.modal-confirm-destinatario')
     </div>
         
 <?php // Si la Entrada no tiene Salida ?>
