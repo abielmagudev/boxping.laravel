@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Ahex\Zowner\Application\Features\HasValidations;
 use App\Ahex\Entrada\Application\EditCalled\EditorsContainer;
 use App\Ahex\Entrada\Application\RedirectAfterStored;
-use App\Ahex\Entrada\Application\ShowPresenter;
+use App\Ahex\Entrada\Application\ShowCalled\ShowPresenter;
 use App\Ahex\Entrada\Application\UpdateCalled\Updaters\UpdatersContainer;
 use App\Ahex\Entrada\Application\UpdateMultipleCalled\UpdatersMultipleContainer;
 use App\Http\Requests\Entrada\CreateRequest;
@@ -58,11 +58,11 @@ class EntradaController extends Controller
         return $redirect->with('success', "{$entrada->numero} guardada");
     }
 
-    public function show(Entrada $entrada, Request $request)
+    public function show(Entrada $entrada, string $show = null)
     {
         return view('entradas.show', [
             'entrada' => $entrada,
-            'presenter' => new ShowPresenter($entrada, $request),
+            'presenter' => new ShowPresenter($entrada, $show),
         ]);
     }
 

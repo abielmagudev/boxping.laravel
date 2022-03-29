@@ -6,7 +6,7 @@
 <div class="text-center">
     <div class="btn-group">
     @foreach( $presenter->links() as $link )
-        {!! $link !!}
+        <a href="<?= $link->route ?>" class="btn btn-outline-primary <?= ! $link->actived ?: 'active' ?>" <?= ! $link->actived ?: "aria-current='page'" ?>>{{ $link->title }}</a>
     @endforeach
     </div>
 </div>
