@@ -28,19 +28,21 @@ $modal = (object) [
 @push('modals')
     @component('@.bootstrap.modal', [
         'id' => $modal->id,
-        'header' => [
+        'header_settings' => [
             'title' => 'ATENCION',
-            'classes' => 'bg-danger text-white'
+            'classes' => 'bg-danger text-white',
         ],
-        'footer' => [
-            'button_close' => [
+        'footer_settings' => [
+            'close' => [
                 'text' => 'Cancelar'
             ],
         ],
     ])
-        @slot('body_content')
+        @slot('body')
         <div class="text-center mt-4 px-4">
-            <div>{{ $modal->message }}</div>
+            <div>
+                {!! $modal->message !!}
+            </div>
             <form action="<?= $modal->form['route'] ?>" method="post" id="<?= $modal->form['id'] ?>">
                 @csrf
                 @method('delete')
@@ -54,7 +56,7 @@ $modal = (object) [
 
         @endslot
 
-        @slot('footer_content')
+        @slot('footer')
         <button class="btn btn-outline-danger" type="submit" form="<?= $modal->form['id'] ?>">Eliminar</button>
         @endslot
     @endcomponent
