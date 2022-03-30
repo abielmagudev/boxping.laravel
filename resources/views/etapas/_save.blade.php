@@ -12,7 +12,7 @@
 <div class="mb-3">
     <label class="form-label small">Tareas</label>
     <div class="border rounded p-3 {{ bootstrap_isInputInvalid('pais', $errors, 'border-danger') }}">
-        @foreach($etapa->todas_tareas as $tarea => $descripcion)   
+        @foreach($etapa::tareas() as $tarea => $descripcion)   
         <?php 
             $switch_id = 'checkbox' . ucfirst($tarea);
             $has_tarea = $etapa->hasTarea($tarea) ? $tarea : false;
@@ -32,7 +32,7 @@
             <label for="select-medicion_peso" class="form-label small">Medición de peso</label>
             <select name="medicion_peso" id="select-medicion_peso" class="form-select {{ bootstrap_isInputInvalid('medicion_peso', $errors) }}">
                 <option label="Cuaquiera" selected></option>
-                @foreach($etapa->todas_mediciones_peso as $abbr => $value)
+                @foreach($etapa::medicionesPeso() as $abbr => $value)
                 <option value="{{ $abbr }}" {{ toggleSelected($abbr, old('medicion_peso', $etapa->medicion_unica_peso)) }}>{{ ucfirst($value) }}</option>
                 @endforeach
             </select>
@@ -44,7 +44,7 @@
             <label for="select-medicion_volumen" class="form-label small">Medición de volúmen</label>
             <select name="medicion_volumen" id="select-medicion_volumen" class="form-select {{ bootstrap_isInputInvalid('medicion_volumen', $errors) }}">
                 <option label="Cualquiera" selected></option>
-                @foreach($etapa->todas_mediciones_volumen as $abbr => $value)
+                @foreach($etapa::medicionesVolumen() as $abbr => $value)
                 <option value="{{ $abbr }}" {{ toggleSelected($abbr, old('medicion_volumen', $etapa->medicion_unica_volumen)) }}>{{ ucfirst($value) }}</option>
                 @endforeach
             </select>

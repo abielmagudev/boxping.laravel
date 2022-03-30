@@ -1,14 +1,16 @@
 <?php 
 
-$peso_pivot = $etapa->entrada_etapa->peso ?? null;
-$medicion_peso_pivot = $etapa->entrada_etapa->medicion_peso ?? null;
+$pivot = (object) [
+    'peso' => $etapa->entrada_etapa->peso ?? null,
+    'medicion' => $etapa->entrada_etapa->medicion_peso ?? null,
+];
 
 ?>
 <!-- Peso -->
 <div class="row mb-3">
     <div class="col-sm">
         <label for="input-peso" class="form-label small">Peso</label>
-        <input name="peso" value="{{ old('peso', $peso_pivot) }}" id="input-peso" type="number" step="0.01" min="0.01" class="form-control {{ bootstrap_isInputInvalid('peso', $errors) }}">
+        <input name="peso" value="{{ old('peso', $pivot->peso) }}" id="input-peso" type="number" step="0.01" min="0.01" class="form-control {{ bootstrap_isInputInvalid('peso', $errors) }}">
         @include('@.bootstrap.invalid-input-message', ['name' => 'peso'])
     </div>
     <div class="col-sm col-sm-3">
@@ -19,7 +21,7 @@ $medicion_peso_pivot = $etapa->entrada_etapa->medicion_peso ?? null;
             @endif
 
             @foreach($etapa->mediciones_peso as $abbr => $medicion)
-            <option value="{{ $abbr }}" {{ toggleSelected($abbr, old('medicion_peso', $medicion_peso_pivot)) }}>{{ ucfirst($medicion) }}</option>
+            <option value="{{ $abbr }}" {{ toggleSelected($abbr, old('medicion_peso', $pivot->medicion)) }}>{{ ucfirst($medicion) }}</option>
             @endforeach
         </select>
         @include('@.bootstrap.invalid-input-message', ['name' => 'medicion_peso'])

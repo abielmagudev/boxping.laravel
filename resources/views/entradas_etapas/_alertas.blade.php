@@ -1,13 +1,13 @@
 @if( $alertas->count() )
 <label class="form-label small">
     <span>Alertas</span>
-    <span class="badge bg-dark">{{ count($attached_alertas) }}</span>
+    <span class="badge bg-dark">{{ count($alertas_attached) }}</span>
 </label>
 <div class="border rounded overflow-auto {{ bootstrap_isInputInvalid('slug', $errors, 'border-danger') }}" style="height:33vh">
     <ul class="list-group list-group-flush">
         @foreach($alertas as $alerta)
-        <?php $alerta_checkbox_id = "checkbox-alerta-{$alerta->id}" ?>
-        <?php $alerta_checked = in_array($alerta->id, $attached_alertas) ? 'checked' : '' ?>
+        <?php $alerta_checkbox_id = "checkboxAlerta{$alerta->id}" ?>
+        <?php $alerta_checked = in_array($alerta->id, $alertas_attached) ? 'checked' : '' ?>
         <li class="list-group-item list-group-item-action d-flex">
             <div class="me-3">
                 <input class="form-check-input" type="checkbox" id="{{ $alerta_checkbox_id }}" name="alertas[]" value="{{ $alerta->id }}" {{ $alerta_checked }}>

@@ -55,14 +55,4 @@ trait Validations
     {
         return $this->havePeso() || $this->hasVolumen();
     }
-
-    public function existsNombreMedicionPeso($key)
-    {
-        return isset($this->todas_mediciones_peso[$key]);
-    }
-
-    public function existsNombreMedicionVolumen($key)
-    {
-        return isset($this->todas_mediciones_volumen[$key]);
-    }
 }

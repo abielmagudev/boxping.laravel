@@ -14,24 +14,11 @@ class EntradaEtapa extends Pivot implements ModifierIdentifiable
 {
     use HasFactory,
         HasModifiers,
+        Attributes,
         Relations,
-        Validations,
-        Attributes;
-
-    const MEDICION_SIN_NOMBRE = null;
+        Validations;
 
     public $incrementing = true;
-
-    public $todas_mediciones_peso,
-           $todas_mediciones_volumen;
-
-    public function __construct(array $attributes = [])
-    {
-        parent::__construct($attributes);
-
-        $this->todas_mediciones_peso = config('system.mediciones.peso');
-        $this->todas_mediciones_volumen = config('system.mediciones.longitud');
-    }
     
     public static function prepare($validated)
     {

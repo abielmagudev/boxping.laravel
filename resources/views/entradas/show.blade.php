@@ -79,6 +79,7 @@
 
     <div class="col-sm col-sm-8">
         @include("entradas.show.{$presenter->showname()}")
+        <br>
     </div>
 </div>
 

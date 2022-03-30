@@ -23,17 +23,14 @@ class EtapaFactory extends Factory
     public function definition()
     {
         $nombre = 'Stage ' . $this->faker->unique(true)->randomNumber() . $this->faker->lexify('?');
-        $tareas_json = json_encode( Etapa::getTodasTareas(true) ); // true: Solo nombres
-        $todas_mediciones_peso = Etapa::getTodasMedicionesPeso(true); // true: Solo claves|abreviaciones
-        $todas_mediciones_volumen = Etapa::getTodasMedicionesVolumen(true); // true: Solo claves|abreviaciones
 
         return [
             'nombre' => $nombre,
             'slug' => Str::slug($nombre),
             'orden' => $this->faker->numberBetween(1, 20),
-            'json_tareas' => $this->faker->boolean ? $tareas_json : null,
-            'medicion_unica_peso' => $this->faker->boolean ? $this->faker->randomElement( $todas_mediciones_peso ) : null,
-            'medicion_unica_volumen' => $this->faker->boolean ? $this->faker->randomElement( $todas_mediciones_volumen ) : null,
+            'json_tareas' => $this->faker->boolean ? json_encode( Etapa::tareas(true) ) : null,
+            'medicion_unica_peso' => $this->faker->boolean ? $this->faker->randomElement( Etapa::medicionesPeso(true) ) : null,
+            'medicion_unica_volumen' => $this->faker->boolean ? $this->faker->randomElement( Etapa::medicionesVolumen(true) ) : null,
             'created_by' => $this->faker->numberBetween(1,10),
             'updated_by' => $this->faker->numberBetween(1,10),
         ];

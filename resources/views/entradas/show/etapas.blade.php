@@ -4,7 +4,7 @@
 ])
     <!-- Options -->
     @slot('options')
-    <a href="{{ route('entradas.etapas.add', $entrada) }}" class="btn btn-sm btn-primary">
+    <a href="{{ route('entradas.etapas.create', $entrada) }}" class="btn btn-sm btn-primary">
         <span class="fw-bold">+</span>
     </a>
     @endslot
@@ -13,7 +13,7 @@
     @if( $entrada->hasEtapas() )
 
         @component('@.bootstrap.table', [
-            'thead' => ['Nombre','Peso','','Ancho','Altura','Largo','','Zona']
+            'thead' => ['Nombre','Peso','Ancho / Altura / Largo','Zona','']
         ])
             @foreach($entrada->etapas as $etapa)
             <tr>
@@ -40,15 +40,19 @@
                 </td>
 
                 @if( $etapa->hasTarea('peso') || $etapa->hasTarea('volumen') )
-                <td>{{ $etapa->entrada_etapa->peso }}</td>
-                <td>{{ $etapa->entrada_etapa->medicion_peso }}</td>
-                <td>{{ $etapa->entrada_etapa->ancho }}</td>
-                <td>{{ $etapa->entrada_etapa->altura }}</td>
-                <td>{{ $etapa->entrada_etapa->largo }}</td>
-                <td>{{ $etapa->entrada_etapa->medicion_volumen }}</td>
+                <td class="text-nowrap">
+                    <span>{{ $etapa->entrada_etapa->peso }}</span>
+                    <span>{{ $etapa->entrada_etapa->medicion_peso }}</span>
+                </td>
+                <td class="text-nowrap">
+                    <span>{{ $etapa->entrada_etapa->ancho }} / </span>
+                    <span>{{ $etapa->entrada_etapa->altura }} / </span>
+                    <span>{{ $etapa->entrada_etapa->largo }}</span>
+                    <span>{{ $etapa->entrada_etapa->medicion_volumen }}</span>
+                </td>
 
                 @else
-                <td colspan="6">
+                <td colspan="2">
                     <p class="text-center p-1 m-0" style="background-color:rgba(0,0,0,0.04); color:rgba(0,0,0,0.2)">
                         <b>REGISTRADO</b>   
                     </p>
@@ -74,4 +78,3 @@
     @endif
 
 @endcomponent
-<br>

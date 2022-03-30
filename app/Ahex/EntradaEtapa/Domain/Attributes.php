@@ -2,6 +2,8 @@
 
 namespace App\Ahex\EntradaEtapa\Domain;
 
+use App\Etapa;
+
 trait Attributes
 {
     public function getListaAlertasHtmlAttribute()
@@ -29,17 +31,17 @@ trait Attributes
 
     public function getNombreMedicionPesoAttribute()
     {
-        if( ! $this->existsNombreMedicionPeso($this->medicion_peso) )
-            return self::MEDICION_SIN_NOMBRE;
+        if( ! Etapa::existsMedicionPeso($this->medicion_peso) )
+            return Etapa::MEDICION_SIN_NOMBRE;
 
-        return $this->todas_mediciones_peso[$this->medicion_peso];
+        return Etapa::nombreMedicionPeso($this->medicion_peso);
     }
 
     public function getNombreMedicionVolumenAttribute()
     {
-        if( ! $this->existsNombreMedicionVolumen($this->medicion_volumen) )
-            return self::MEDICION_SIN_NOMBRE;
+        if( ! Etapa::existsMedicionVolumen($this->medicion_volumen) )
+            return Etapa::MEDICION_SIN_NOMBRE;
 
-        return $this->todas_mediciones_volumen[$this->medicion_volumen];
+        return Etapa::nombreMedicionVolumen($this->medicion_volumen);
     }
 }

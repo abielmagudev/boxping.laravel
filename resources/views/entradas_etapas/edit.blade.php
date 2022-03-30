@@ -1,8 +1,12 @@
 @extends('app')
 @section('content')
 
+<p class="text-secondary">
+    <span class="me-1">Entrada</span>
+    <b>{{ $entrada->numero }}</b>
+</p>
+
 @component('@.bootstrap.card', [
-    'pretitle' => $entrada->numero,
     'title' => 'Editar etapa',
 ])
     <div class="mb-3">
@@ -13,19 +17,28 @@
     <form action="{{ route('entradas.etapas.update', [$entrada, $etapa]) }}" method="post" autocomplete="off">
         @method('patch')
         @csrf
+    
+        {{-- Medidas de peso --}}
         @includeWhen($etapa->hasTarea('peso'),'entradas_etapas._medidas_peso')
+        
+        {{-- Medidas de volumen --}}
         @includeWhen($etapa->hasTarea('volumen'),'entradas_etapas._medidas_volumen')
+
+        {{-- Zonas --}}
         @include('entradas_etapas._zonas')
+
+        {{-- Alertas --}}
         @include('entradas_etapas._alertas')
         <br>
 
         @component('@.bootstrap.grid-left-right')
             @slot('left')
-            <button class="btn btn-warning" type="submit" name="etapa" value="{{ $etapa->id }}">Actualizar etapa</button>
-            <a href="{{ route('entradas.show', [$entrada, 'show' => 'etapas']) }}" class="btn btn-secondary">Regresar</a>
+                <button class="btn btn-warning" type="submit" name="etapa" value="{{ $etapa->id }}">Actualizar etapa</button>
+                <a href="{{ route('entradas.show', [$entrada,'etapas']) }}" class="btn btn-secondary">Regresar</a>
             @endslot
+
             @slot('right')
-            @include('@.partials.modal-confirm-delete.trigger', ['only' => 'text'])
+                @include('@.partials.modal-confirm-delete.trigger', ['only' => 'text'])
             @endslot
         @endcomponent
     </form>

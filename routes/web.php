@@ -51,20 +51,14 @@ Route::middleware('auth')->group( function () {
         // Imprimir
         Route::get('{entrada}/imprimir/{guia?}', 'EntradaController@print')->name('entradas.imprimir')->middleware('guia_impresion.activada');
         Route::get('imprimir/{guia?}', 'EntradaController@printMultiple')->name('entradas.imprimir.multiple')->middleware('guia_impresion.activada');
-    
-        // EntradaEtapa
-        Route::get('{entrada}/etapas/add', 'EntradaEtapaController@add')->name('entradas.etapas.add');
-        Route::get('{entrada}/etapas/{etapa}/edit', 'EntradaEtapaController@edit')->name('entradas.etapas.edit');
-        Route::post('{entrada}/etapas', 'EntradaEtapaController@store')->name('entradas.etapas.store');
-        Route::match(['put','patch'],'{entrada}/etapas/{etapa}', 'EntradaEtapaController@update')->name('entradas.etapas.update');
-        Route::delete('{entrada}/etapas/{etapa}', 'EntradaEtapaController@destroy')->name('entradas.etapas.destroy');
 
         // Multiple
         Route::post('multiple', 'EntradaController@importMultiple')->name('entradas.import.multiple');
         Route::match(['put','patch'], 'multiple', 'EntradaController@updateMultiple')->name('entradas.update.multiple');
         Route::delete('multiple', 'EntradaController@destroyMultiple')->name('entradas.destroy.multiple');
     });
-    Route::resource('entradas', EntradaController::class)->except(['show', 'edit']);
+    Route::resource('entradas.etapas', EntradaEtapaController::class)->except(['index','show']);
+    Route::resource('entradas', EntradaController::class)->except(['show','edit']);
 
     // Zonas
     Route::resource('etapas/{etapa}/zonas', 'ZonaController')->except(['index', 'show']);

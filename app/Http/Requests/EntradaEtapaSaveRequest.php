@@ -9,21 +9,19 @@ class EntradaEtapaSaveRequest extends FormRequest
 {
     const ETAPA_NO_EXISTE = null;
 
-    private $mediciones_peso_imploded;
-    private $mediciones_volumen_imploded;
+    private $etapa_mediciones;
 
     public function authorize()
     {
         return true;
     }
 
-    protected function prepareForValidation()
+    public function prepareForValidation()
     {
-        if( ! $etapa_model = Etapa::where('id', $this->etapa)->first() )
-            return self::ETAPA_NO_EXISTE;
-
-        $this->mediciones_peso_imploded = implode(',', $etapa_model->abreviacionesMedicionesPeso());
-        $this->mediciones_volumen_imploded = implode(',', $etapa_model->abreviacionesMedicionesVolumen());
+        $this->etapa_mediciones = (object) [
+            'peso' => implode(',', Etapa::medicionesPeso(true)),
+            'volumen' => implode(',', Etapa::medicionesVolumen(true))
+        ];
     }
 
     public function rules()
@@ -31,11 +29,11 @@ class EntradaEtapaSaveRequest extends FormRequest
         return [
             'etapa' => ['bail','required','exists:etapas,id'],
             'peso' => ['nullable','min:0'],
-            'medicion_peso' => ['nullable','in:' . $this->mediciones_peso_imploded],
+            'medicion_peso' => ['nullable','in:' . $this->etapa_mediciones->peso],
             'ancho' => ['nullable','min:0'],
             'altura' => ['nullable','min:0'],
             'largo' => ['nullable','min:0'],
-            'medicion_volumen' => ['nullable','in:' . $this->mediciones_volumen_imploded],
+            'medicion_volumen' => ['nullable','in:' . $this->etapa_mediciones->volumen],
             'zona' => ['nullable','exists:etapa_zonas,id'],
             'alertas' => ['nullable','array'],
         ];
