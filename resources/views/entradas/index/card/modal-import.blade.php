@@ -32,24 +32,27 @@ $modal = new class($component)
 @push('modals')
     @component('@.bootstrap.modal', [
         'id' => $modal->id,
-        'header' => [
+        'header_settings' => [
             'title' => 'Importar entradas',
         ],
-        'footer' => [
-            'button_close' => [
+        'footer_settings' => [
+            'close' => [
                 'text' => 'Cancelar'
             ],
         ],
     ])
-        @slot('body_content')
-        <p>Instrucciones para importar información de entradas:</p>
-        <ol>
-            <li>Descargar la plantilla <a href="<?= asset('downloads/importar_entradas.csv') ?>" class="link-primary">importar_entradas.csv</a></li>
-            <li>Llenar la información de cada columna de la plantilla.</li>
-            <li>Las columnas <em>número de entrada</em>, <em>pesaje</em> y <em>destinatario</em> de la plantilla son obligatorios.</li>
-        </ol>
-        <p class="small mb-4"><b>IMPORTANTE</b>: Los números de entrada ya existentes ó no cumplir con los requerimientos de la plantilla, <b>no se importará</b>.</p>
-        <form action="<?= route('entradas.import.multiple') ?>" id="<?= $modal->form('id') ?>" method="post" enctype="multipart/form-data" class="border border-primary rounded p-3">
+        @slot('body')
+        <div class="text-muted px-3">
+            <p>Instrucciones:</p>
+            <ol>
+                <li>Descargar la plantilla <a href="<?= asset('downloads/importar_entradas.csv') ?>" class="link-primary">importar_entradas.csv</a></li>
+                <li>Llenar con información de cada columna de la plantilla.</li>
+                <li>Las columnas <em>número de entrada</em>, <em>pesaje</em> y <em>destinatario</em> de la plantilla son obligatorios.</li>
+            </ol>
+            <p class="small mt-3 mb-0"><b>IMPORTANTE</b>: Los números de entrada ya existentes ó no cumplir con los requerimientos de la plantilla, <b>no se importará</b>.</p>
+        </div>
+        <br>
+        <form action="<?= route('entradas.import.multiple') ?>" id="<?= $modal->form('id') ?>" method="post" enctype="multipart/form-data" class="alert alert-light">
             @csrf
             <div class="mb-3">
                 <label for="importEntradas" class="form-label small">Cargar plantilla</label>
@@ -73,7 +76,7 @@ $modal = new class($component)
         </form>
         @endslot
 
-        @slot('footer_content')
+        @slot('footer')
         <button class="btn btn-outline-primary" type="submit" form="<?= $modal->form('id') ?>">Importar</button>
         @endslot
     @endcomponent

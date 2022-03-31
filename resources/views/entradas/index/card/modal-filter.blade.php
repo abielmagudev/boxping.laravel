@@ -45,10 +45,10 @@ $modal = new class($component)
 @push('modals')
     @component('@.bootstrap.modal', [
         'id' => $modal->id,
-        'header' => [
+        'header_settings' => [
             'title' => 'Filtrar entradas',
         ],
-        'footer' => [
+        'footer_settings' => [
             'classes' => 'bg-light',
             'button_close' => [
                 'classes' => 'btn btn-outline-secondary',
@@ -56,7 +56,7 @@ $modal = new class($component)
             ],
         ],
     ])
-        @slot('body_content')
+        @slot('body')
         <form action="<?= url()->current() ?>" id="<?= $modal->form('id') ?>" autocomplete="off">
             @foreach($modal->form('filters') as $filter)
                 @includeWhen($modal->allowFilter($filter), "entradas.index.card.modal-filter-filters.{$filter}")
@@ -65,7 +65,7 @@ $modal = new class($component)
         </form>
         @endslot
         
-        @slot('footer_content')
+        @slot('footer')
         <button type="submit" class="btn btn-primary" form="<?= $modal->form('id') ?>">Filtrar entradas</button>
         @endslot
     @endcomponent

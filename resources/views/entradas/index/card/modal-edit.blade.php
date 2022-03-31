@@ -44,44 +44,45 @@ $modal = new class($component)
 @push('modals')
     @component('@.bootstrap.modal', [
         'id' => $modal->id,
-        'header' => [
+        'header_settings' => [
             'classes' => 'bg-warning',
-            'title' => 'ATENCION'
+            'title' => 'Editar',
         ],
-        'footer' => [
-            'button_close' => [
+        'footer_settings' => [
+            'close' => [
                 'text' => 'Cancelar',
             ]
         ], 
     ])
-        @slot('body_content')
-        <div id='<?= $modal->content_id ?>' class="px-4 mt-4">
-            <div class="text-center">
+        @slot('body')
+        <div id='<?= $modal->content_id ?>'>
+            <div class="text-center px-4 mt-4">
                 <p class="text-muted lead">Se actualizarán un total de entradas</p>
                 <p class="h3">
                     <span class="show-count-checked-entradas">0</span>
                 </p>
             </div>
-            <hr>
-            
-            <div class="mb-3">
-                <label for="<?= $modal->form('select_id') ?>" class="form-label small">Editar</label>
-                <select name="editor" id="<?= $modal->form('select_id') ?>" class="form-select">
-                    <option disabled selected label="Selecciona para editar..."></option>
-                    @foreach($modal->form('editors') as $editor)
-                    <option value="<?= $editor ?>">{{ ucfirst($editor) }}</option>
-                    @endforeach
-                </select>
-            </div>
-            <div>
-            @foreach($modal->form('editors') as $editor)
-                @includeWhen($modal->allowEditor($editor), "entradas.index.card.modal-edit-editors.{$editor}")
-            @endforeach
+            <br>
+            <div class="alert alert-light">
+                <div class="mb-3">
+                    <label for="<?= $modal->form('select_id') ?>" class="form-label small d-none">Editar</label>
+                    <select name="editor" id="<?= $modal->form('select_id') ?>" class="form-select">
+                        <option disabled selected label="Selecciona para editar..."></option>
+                        @foreach($modal->form('editors') as $editor)
+                        <option value="<?= $editor ?>">{{ ucfirst($editor) }}</option>
+                        @endforeach
+                    </select>
+                </div>           
+                <div id="displayEditors">
+                @foreach($modal->form('editors') as $editor)
+                    @includeWhen($modal->allowEditor($editor), "entradas.index.card.modal-edit-editors.{$editor}")
+                @endforeach
+                </div>
             </div>
         </div>
         @endslot
 
-        @slot('footer_content')
+        @slot('footer')
         <button class="btn btn-outline-warning" type="button" data-entradas-form-action="<?= route('entradas.update.multiple') ?>" data-entradas-form-verb="put">Actualizar</button>
         @endslot
     @endcomponent
