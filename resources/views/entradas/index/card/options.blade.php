@@ -39,7 +39,7 @@
         <ul class="dropdown-menu" aria-labelledby="buttonDropdownActions">
             @if( $component->allow('actions', 'create') )        
             <li>
-                <a class="dropdown-item" href="<?= $component->hasCache('consolidado') ? route('entradas.create', ['consolidado' => $component->cache('consolidado')->id]) : route('entradas.create') ?>">
+                <a class="dropdown-item" href="<?= $component->hasCache('consolidado') ? route('entradas.create', $component->cache('consolidado')) : route('entradas.create') ?>">
                     <span>{!! $graffiti->design('plus-lg')->svg() !!}</span>
                     <span class="align-middle ms-1">Nueva</span>
                 </a>

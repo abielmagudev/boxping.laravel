@@ -39,11 +39,13 @@ class EntradaController extends Controller
 
     public function create(CreateRequest $request)
     {   
+        $consolidado = $request->has('consolidado') ? Consolidado::find($request->consolidado) : false;
+
         return view('entradas.create', [
+            'clientes' => $consolidado ?: Cliente::all(),
+            'consolidado' => $consolidado,
+            'route_cancel' => $consolidado ? route('consolidados.show', $consolidado) : route('entradas.index'),
             'entrada' => new Entrada,
-            'clientes' => $request->has('consolidado') ?: \App\Cliente::all(),
-            'consolidado' => $request->has('consolidado') ? Consolidado::findOrFail($request->consolidado) : false,
-            'route_cancel' => $request->has('consolidado') ? route('consolidados.show', $request->consolidado) : route('entradas.index'),
         ]);
     }
 

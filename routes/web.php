@@ -42,6 +42,7 @@ Route::middleware('auth')->group( function () {
     Route::group(['prefix' => 'entradas'], function () {
         
         // Entrada
+        Route::get('create/{consolidado?}', 'EntradaController@create')->name('entradas.create');
         Route::get('{entrada}/{show?}', 'EntradaController@show')->name('entradas.show');
         Route::get('{entrada}/edit/{editor}', 'EntradaController@edit')->name('entradas.edit');
         
@@ -55,7 +56,7 @@ Route::middleware('auth')->group( function () {
         Route::delete('multiple', 'EntradaController@destroyMultiple')->name('entradas.destroy.multiple');
     });
     Route::resource('entradas.etapas', EntradaEtapaController::class)->except(['index','show']);
-    Route::resource('entradas', EntradaController::class)->except(['show','edit']);
+    Route::resource('entradas', EntradaController::class)->except(['create','show','edit']);
 
     // Comentarios
     Route::resource('comentarios', ComentarioController::class)->only('store');
