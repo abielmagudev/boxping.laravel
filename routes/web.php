@@ -44,9 +44,6 @@ Route::middleware('auth')->group( function () {
         // Entrada
         Route::get('{entrada}/{show?}', 'EntradaController@show')->name('entradas.show');
         Route::get('{entrada}/edit/{editor}', 'EntradaController@edit')->name('entradas.edit');
-
-        // Comentarios
-        Route::post('{entrada}/comentarios', 'ComentarioController@store')->name('comentarios.store');
         
         // Imprimir
         Route::get('{entrada}/imprimir/{guia?}', 'EntradaController@print')->name('entradas.imprimir')->middleware('guia_impresion.activada');
@@ -59,6 +56,9 @@ Route::middleware('auth')->group( function () {
     });
     Route::resource('entradas.etapas', EntradaEtapaController::class)->except(['index','show']);
     Route::resource('entradas', EntradaController::class)->except(['show','edit']);
+
+    // Comentarios
+    Route::resource('comentarios', ComentarioController::class)->only('store');
 
     // Zonas
     Route::resource('etapas/{etapa}/zonas', 'ZonaController')->except(['index', 'show']);

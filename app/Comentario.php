@@ -39,7 +39,7 @@ class Comentario extends Model
         return nl2br( e($this->contenido) );
     }
 
-    public static function prepare($validated)
+    public static function prepare(array $validated)
     {
         return [
             'entrada_id' => $validated['entrada'],

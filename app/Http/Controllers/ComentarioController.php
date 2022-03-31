@@ -2,17 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+use App\Http\Requests\ComentarioSaveRequest as SaveRequest;
 use App\Comentario;
 use App\Entrada;
-use App\Http\Requests\ComentarioSaveRequest as SaveRequest;
-use Illuminate\Http\Request;
 
 class ComentarioController extends Controller
 {
-    public function store(SaveRequest $request, Entrada $entrada)
+    public function store(SaveRequest $request)
     {
-        $validated = array_merge($request->validated(), ['entrada' => $entrada->id]);
-        $prepared = Comentario::prepare($validated);
+        $prepared = Comentario::prepare($request->validated());
 
         if(! Comentario::create($prepared) )
             return back()->with('failure', 'Error al guardar comentario');

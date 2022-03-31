@@ -14,7 +14,8 @@ class ComentarioSaveRequest extends FormRequest
     public function rules()
     {
         return [
-            'contenido' => 'required',
+            'contenido' => ['required','string'],
+            'entrada' => ['required','exists:entradas,id'],
         ];
     }
 
@@ -22,6 +23,9 @@ class ComentarioSaveRequest extends FormRequest
     {
         return [
             'contenido.required' => __('Escribe el contenido del comentario'),
+            'contenido.string' => __('Escribe un contenido válido para el comentario'),
+            'entrada.required' => __('Selecciona una entrada para comentar'),
+            'entrada.exists' => __('Selecciona una entrada válida para comentar'),
         ];
     }
 }
