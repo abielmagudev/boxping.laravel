@@ -2,27 +2,27 @@
 
 namespace App\Http\Controllers;
 
-use App\Ahex\Zowner\Application\Features\HasValidations;
-use App\Ahex\Entrada\Application\EditCalled\EditorsContainer;
-use App\Ahex\Entrada\Application\RedirectAfterStored;
-use App\Ahex\Entrada\Application\ShowCalled\ShowPresenter;
-use App\Ahex\Entrada\Application\UpdateCalled\Updaters\UpdatersContainer;
-use App\Ahex\Entrada\Application\UpdateMultipleCalled\UpdatersMultipleContainer;
+use Illuminate\Http\Request;
 use App\Http\Requests\Entrada\CreateRequest;
 use App\Http\Requests\Entrada\EditRequest;
 use App\Http\Requests\Entrada\MultipleRequest;
 use App\Http\Requests\Entrada\ImportRequest;
 use App\Http\Requests\Entrada\StoreRequest;
 use App\Http\Requests\Entrada\UpdateRequest;
-use Illuminate\Http\Request;
+use App\Ahex\Zowner\Application\Features\HasValidations;
+use App\Ahex\Entrada\Application\EditCalled\EditorsContainer;
+use App\Ahex\Entrada\Application\StoreCalled\Redirector;
+use App\Ahex\Entrada\Application\ShowCalled\ShowPresenter;
+use App\Ahex\Entrada\Application\UpdateCalled\Updaters\UpdatersContainer;
+use App\Ahex\Entrada\Application\UpdateMultipleCalled\UpdatersMultipleContainer;
 use App\Ahex\GuiaImpresion\Infrastructure\PageDesigner\PageDesigner;
+use App\Imports\EntradasImport;
+use Maatwebsite\Excel\Facades\Excel;
 use App\Consolidado;
 use App\Cliente;
 use App\GuiaImpresion;
 use App\Entrada;
 
-use App\Imports\EntradasImport;
-use Maatwebsite\Excel\Facades\Excel;
 
 class EntradaController extends Controller
 {
@@ -54,10 +54,12 @@ class EntradaController extends Controller
         $prepared = Entrada::prepare( $request->validated() );
 
         if(! $entrada = Entrada::create($prepared) )
-            return back()->with('failure', 'Error al guardar entrada');
+            return back()->with('failure', 'Error al guardar la nueva entrada');
 
-        $redirect = RedirectAfterStored::next($entrada, $request->siguiente);
-        return $redirect->with('success', "{$entrada->numero} guardada");
+        $redirector = new Redirector($entrada);
+        return redirect( $redirector->route($request->siguiente) )
+                ->onlyInput( $redirector->feedback() )
+                ->with('success', "Entrada {$entrada->numero} guardada");
     }
 
     public function show(Entrada $entrada, string $show = null)
