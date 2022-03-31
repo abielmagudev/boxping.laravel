@@ -85,6 +85,14 @@ return [
             'endpoint' => env('DYNAMODB_ENDPOINT'),
         ],
 
+        /**
+         * Disable cache in Laravel
+         * https://krishan.blog/articles/2019-11-02/disable-cache-in-laravel
+         * 
+         */
+        'none' => [
+            'driver' => 'null',
+        ],
     ],
 
     /*
