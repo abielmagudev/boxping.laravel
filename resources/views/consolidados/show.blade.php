@@ -81,7 +81,7 @@
     ],
     'except' => [
         'filters' => ['ambitos', 'clientes'],
-        'actions' => $consolidado->hasCerrado() ? ['create', 'import'] : [],
+        'actions' => $consolidado->isCerrado() ? ['create', 'import'] : [],
     ],
 ])
 

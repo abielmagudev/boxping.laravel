@@ -15,7 +15,35 @@
             @endslot
 
             @slot('right')
-            @include('@.partials.modal-confirm-delete.trigger', ['only' => 'text'])
+            @component('@.partials.modal-delete-confirm', [
+                'route' => route('consolidados.destroy', $consolidado),
+                'destroy' => true,
+            ])
+                <div class="text-center mb-4">
+                    <p class="text-secondary lead m-0">Se eliminará consolidado con número</p>
+                    <p class="fw-bold lead m-0">{{ $consolidado->numero }}</p>
+                    <p class="small m-0"><b>{{ $consolidado->cliente->nombre }}</b> (<b>{{ $consolidado->cliente->alias }}</b>)</p>
+                </div>
+
+                @if( $consolidado->hasEntradas() )
+                @slot('form')
+                <div class="alert alert-warning">
+                    <p class="text-center">Este consolidado contiene <b>{{ $consolidado->entradas->count() }} entradas</b><br> que serán afectadas por las siguientes opciones:</p>
+
+                    <div class="d-flex flex-column px-5">
+                        <div class="form-check mb-1">
+                            <input class="form-check-input" type="radio" name="eliminar_entradas" value="no" id="radioMantenerEntradas" checked>
+                            <label class="form-check-label small" for="radioMantenerEntradas">Mantener entradas con cliente actual</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="eliminar_entradas" value="yes" id="radioEliminarEntradas">
+                            <label class="form-check-label small" for="radioEliminarEntradas">Eliminar entradas permanentemente</label>
+                        </div>
+                    </div>
+                </div>
+                @endslot
+                @endif
+            @endcomponent
             @endslot
         @endcomponent
     </form>
@@ -23,19 +51,5 @@
 <br>
 
 @include('@.partials.block-modifiers.content', ['model' => $consolidado])
-
-@component('@.partials.modal-confirm-delete.modal', [
-    'route' => route('consolidados.destroy', $consolidado),
-    'category' => 'consolidado', 
-    'name' => $consolidado->numero,
-    'is_hard' => true,
-])
-<div class="border border-danger rounded p-3 my-3">
-    <div class="form-check d-flex align-items-center justify-content-center">
-        <input class="form-check-input border-danger mt-0 me-1" type="checkbox" name="eliminar_entradas" value="yes" id="checkbox-eliminar-entradas">
-        <label class="form-check-label" for="checkbox-eliminar-entradas">Eliminar las {{ $consolidado->entradas->count() }} entradas del consolidado.</label>
-    </div>
-</div>
-@endcomponent
 
 @endsection

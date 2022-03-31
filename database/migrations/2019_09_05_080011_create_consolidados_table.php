@@ -14,13 +14,13 @@ class CreateConsolidadosTable extends Migration
      */
     public function up()
     {
-        $all_status = Consolidado::getAllStatusKeys();
+        // $all_status = Consolidado::getAllStatusKeys();
         
-        Schema::create('consolidados', function (Blueprint $table) use ($all_status) {
+        Schema::create('consolidados', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('numero', 80)->unique()->index();
             $table->unsignedTinyInteger('tarimas')->nullable();
-            $table->enum('status', $all_status);
+            $table->enum('status', Consolidado::allStatusNames());
             $table->text('notas')->nullable();
             $table->unsignedSmallInteger('cliente_id');
             $table->unsignedSmallInteger('created_by');

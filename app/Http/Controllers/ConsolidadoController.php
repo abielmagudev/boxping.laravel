@@ -3,23 +3,25 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\ConsolidadoSaveRequest as SaveRequest;
+use App\Ahex\Consolidado\Application\StoreCalled\Redirector;
+use App\Cliente;
 use App\Consolidado;
 use App\Entrada;
-use App\Cliente;
-use App\Http\Requests\ConsolidadoSaveRequest as SaveRequest;
-use App\Ahex\Consolidado\Application\AfterStored;
 
 class ConsolidadoController extends Controller
 {
     public function index()
-    {        
+    {   
+        $consolidados = Consolidado::with(['cliente'])
+                        ->withCount(['entradas'])
+                        ->orderBy('id', 'desc')
+                        ->paginate(25);
+
         return view('consolidados/index', [
             'all_consolidados' => Consolidado::all(),
-            'consolidados' => Consolidado::with(['cliente'])
-                                        ->withCount(['entradas'])
-                                        ->orderBy('id', 'desc')
-                                        ->paginate(10),
-            'all_status' => Consolidado::getAllStatus(),
+            'all_status' => Consolidado::allStatus(true),
+            'consolidados' => $consolidados,
         ]);
     }
 
@@ -38,7 +40,7 @@ class ConsolidadoController extends Controller
         if(! $consolidado = Consolidado::create($prepared) )
             return back()->with('failure', 'Error al guardar consolidado');
         
-        return redirect( AfterStored::route($request->guardar, $consolidado) )
+        return redirect( Redirector::route($request->guardar, $consolidado) )
                 ->with('success', "Consolidado {$consolidado->numero} guardado");
     }
 
@@ -59,9 +61,9 @@ class ConsolidadoController extends Controller
     public function edit(Consolidado $consolidado)
     {
         return view('consolidados.edit', [
-            'consolidado' => $consolidado,
+            'all_status' => Consolidado::allStatus(),
             'clientes' => Cliente::all(['id','nombre','alias']),
-            'all_status' => Consolidado::getAllStatus(),
+            'consolidado' => $consolidado,
         ]);
     }
 
@@ -82,20 +84,27 @@ class ConsolidadoController extends Controller
         if(! $consolidado->delete() )
             return back()->with('failure', 'Error al eliminar consolidado');
         
-        $consolidado->unbindEntradas( $request->has('eliminar_entradas') );
+        $eliminar_entradas = $request->get('eliminar_entradas', 'no') === 'yes';
+        $consolidado->unbindEntradas( $eliminar_entradas );
 
         return redirect()->route('consolidados.index')->with('success', "Consolidado {$consolidado->numero} eliminado");
     }
 
+    /**
+     * Configuracion para impresión del consolidado
+     *
+     * $entradas = $consolidado->entradas()->with('salida')->has('salida')->get();
+     * @param Consolidado $consolidado
+     * @return void
+     */
     public function toPrint(Consolidado $consolidado)
     {
-        // $entradas = $consolidado->entradas()->with('salida')->has('salida')->get();
         $entradas = $consolidado->entradas()->with('salida')->get();
 
         $counters = (object) [
+            'entregadas' => $entradas->where('salida.status', 'entregado')->count(),
             'pendientes' => $entradas->whereNull('importado_fecha')->count(),
             'registradas' => $entradas->whereNotNull('importado_fecha')->count(),
-            'entregadas' => $entradas->where('salida.status', 'entregado')->count(),
             'total' => $entradas->count(),
         ];
 

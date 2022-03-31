@@ -16,25 +16,15 @@ use App\Ahex\Zowner\Domain\Features\HasModifiers;
 class Consolidado extends Model implements ModifierIdentifiable, ValueSearchable
 {
     use HasFactory, 
+        HasModifiers,
         Attributes,
-        Scopes,
-        Validations,
-        Relationships,
         EntradasHandler,
-        HasModifiers;
+        Relationships,
+        Scopes,
+        Validations;
 
     const STATUS_NO_EXISTE = null;
     
-    protected $fillable = array(
-        'numero',
-        'tarimas',
-        'status',
-        'notas',
-        'cliente_id',
-        'created_by',
-        'updated_by',
-    );
-
     public static $all_status = [
         'abierto' => [
             'color' => '#FFC108',
@@ -46,7 +36,17 @@ class Consolidado extends Model implements ModifierIdentifiable, ValueSearchable
         ],
     ];
 
-    public static function prepare($validated)
+    protected $fillable = array(
+        'numero',
+        'tarimas',
+        'status',
+        'notas',
+        'cliente_id',
+        'created_by',
+        'updated_by',
+    );
+
+    public static function prepare(array $validated)
     {
         $prepared = [
             'numero'     => $validated['numero'],
@@ -61,5 +61,34 @@ class Consolidado extends Model implements ModifierIdentifiable, ValueSearchable
             $prepared['created_by'] = $prepared['updated_by'];
 
         return $prepared;
+    }
+
+    public static function allStatus(bool $like_object = false)
+    {
+        return $like_object ? (object) self::$all_status : self::$all_status;
+    }
+
+    public static function allStatusNames()
+    {
+        return array_keys( static::allStatus() );
+    }
+
+    public static function statusExists(string $key, string $attr = null)
+    {
+        if(! is_null($attr) )
+            return isset(self::allStatus()[$key]);
+
+        return isset(self::allStatus()[$key][$attr]);
+    }
+
+    public static function status(string $key, string $attr = null)
+    {
+        if(! self::statusExists($key) &&! self::statusExists($key, $attr) )
+            return self::STATUS_NO_EXISTE;
+
+        if(! self::statusExists($key, $attr) )
+            return self::$all_status[$key];
+
+        return self::$all_status[$key][$attr];
     }
 }

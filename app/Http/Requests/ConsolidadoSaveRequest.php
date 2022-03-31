@@ -4,10 +4,11 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use App\Consolidado;
 
 class ConsolidadoSaveRequest extends FormRequest
 {
-    private $consolidado_id_route;
+    private $consolidado_id;
     private $consolidado_all_status;
 
     public function authorize()
@@ -17,15 +18,15 @@ class ConsolidadoSaveRequest extends FormRequest
 
     public function prepareForValidation()
     {
-        $this->consolidado_id_route = $this->route('consolidado')->id ?? 0;
-        $this->consolidado_all_status = implode(',', \App\Consolidado::getAllStatusKeys());
+        $this->consolidado_id = $this->route('consolidado')->id ?? 0;
+        $this->consolidado_all_status = implode(',', Consolidado::allStatusNames());
     }
 
     public function rules()
     {
         return [
             'cliente' => ['required','exists:clientes,id'],
-            'numero'  => ['required','unique:consolidados,numero,' . $this->consolidado_id_route],
+            'numero'  => ['required','unique:consolidados,numero,' . $this->consolidado_id],
             'tarimas' => ['required','numeric'],
             'status'  => ['in:' . $this->consolidado_all_status],
             'notas'   => 'nullable',

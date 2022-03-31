@@ -1,10 +1,12 @@
 <?php
 
-namespace App\Ahex\Consolidado\Application;
+namespace App\Ahex\Consolidado\Application\StoreCalled;
 
-abstract class AfterStored
+use App\Consolidado;
+
+abstract class Redirector
 {
-    public static function route($next = 0, \App\Consolidado $consolidado)
+    public static function route($next = 0, Consolidado $consolidado)
     {
         switch ($next) {
             case 2:
