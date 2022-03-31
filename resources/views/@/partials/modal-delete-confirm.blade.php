@@ -2,12 +2,12 @@
 
 $modal = (object) [
     'trigger' => [
-        'text' => $button['text'] ?? 'Eliminar',
-        'classes' => $button['classes'] ?? 'link-danger',
+        'text' => $trigger['text'] ?? 'Eliminar',
+        'classes' => $trigger['classes'] ?? 'link-danger',
     ],
     'form' => [
-        'id' => 'formConfirmDelete',
-        'content' => $form ?? null,
+        'id' => 'modalDeleteConfirmForm',
+        'inputs' => $form ?? null,
         'route' => $route,
     ],
     'destroy' => isset($destroy) && is_bool($destroy) ? $destroy : false, 
@@ -39,18 +39,20 @@ $modal = (object) [
         ],
     ])
         @slot('body')
-        <div class="text-center mt-4 px-4">
-            <div>
+        <div class="">
+            <div id="modalDeleteConfirmMessage">
                 {!! $modal->message !!}
             </div>
+
             <form action="<?= $modal->form['route'] ?>" method="post" id="<?= $modal->form['id'] ?>">
                 @csrf
                 @method('delete')
-                {{ $modal->form['content'] }}
+                {{ $modal->form['inputs'] }}
             </form>
 
             @if( $modal->destroy )
-            <p class="text-danger text-uppercase small mt-5">Eliminación permanente, no es recuperable</p>
+            <br>
+            <p class="text-center text-danger text-uppercase small m-0">Eliminación permanente, no es recuperable</p>
             @endif
         </div>
 
