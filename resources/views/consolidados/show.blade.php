@@ -1,6 +1,8 @@
 @extends('app')
 @section('content')
 
+@include('@.layouts.errors')
+
 @include('@.bootstrap.page-header', [
     'title' => $consolidado->numero,
     'pretitle' => 'Consolidado',
