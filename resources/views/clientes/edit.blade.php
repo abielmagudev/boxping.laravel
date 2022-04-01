@@ -29,6 +29,6 @@
 @endcomponent
 <br>
 
-@include('@.partials.block-modifiers.content', ['model' => $cliente])
+@include('@.partials.block-modifiers', ['model' => $cliente])
 
 @endsection

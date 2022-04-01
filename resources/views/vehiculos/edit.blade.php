@@ -30,6 +30,6 @@
 @endcomponent
 <br>
 
-@include('@.partials.block-modifiers.content', ['model' => $vehiculo])
+@include('@.partials.block-modifiers', ['model' => $vehiculo])
 
 @endsection

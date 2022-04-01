@@ -30,6 +30,6 @@
 @endcomponent
 <br>
 
-@include('@.partials.block-modifiers.content', ['model' => $codigor])
+@include('@.partials.block-modifiers', ['model' => $codigor])
 
 @endsection

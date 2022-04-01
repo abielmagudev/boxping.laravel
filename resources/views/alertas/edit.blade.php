@@ -32,6 +32,6 @@
 @endcomponent
 <br>
 
-@include('@.partials.block-modifiers.content', ['model' => $alerta])
+@include('@.partials.block-modifiers', ['model' => $alerta])
 
 @endsection

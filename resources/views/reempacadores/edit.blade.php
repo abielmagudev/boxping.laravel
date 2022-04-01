@@ -31,6 +31,6 @@
 @endcomponent
 <br>
 
-@include('@.partials.block-modifiers.content', ['model' => $reempacador])
+@include('@.partials.block-modifiers', ['model' => $reempacador])
 
 @endsection

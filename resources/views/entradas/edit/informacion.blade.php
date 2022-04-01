@@ -66,6 +66,6 @@
 @endcomponent
 <br>
 
-@include('@.partials.block-modifiers.content', ['model' => $entrada])
+@include('@.partials.block-modifiers', ['model' => $entrada])
 
 @endsection

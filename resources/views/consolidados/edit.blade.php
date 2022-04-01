@@ -50,6 +50,6 @@
 @endcomponent
 <br>
 
-@include('@.partials.block-modifiers.content', ['model' => $consolidado])
+@include('@.partials.block-modifiers', ['model' => $consolidado])
 
 @endsection

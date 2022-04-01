@@ -32,6 +32,6 @@
 @endcomponent
 <br>
 
-@include('@.partials.block-modifiers.content', ['model' => $zona])
+@include('@.partials.block-modifiers', ['model' => $zona])
 
 @endsection

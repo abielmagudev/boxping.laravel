@@ -47,6 +47,6 @@
 @endcomponent
 <br>
 
-@include('@.partials.block-modifiers.content', ['model' => $salida])
+@include('@.partials.block-modifiers', ['model' => $salida])
 
 @endsection
