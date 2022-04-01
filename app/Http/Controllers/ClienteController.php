@@ -31,12 +31,16 @@ class ClienteController extends Controller
 
     public function show(Cliente $cliente)
     {
-        $entradas = Entrada::with(['destinatario'])->where('cliente_id', $cliente->id)->orderBy('id', 'desc')->get();
+        $entradas = Entrada::with(['consolidado','destinatario'])
+                    ->where('cliente_id', $cliente->id)
+                    ->orderBy('id', 'desc')
+                    ->take(25)
+                    ->get();
         
         return view('clientes.show', [
             'cliente' => $cliente,
             'entradas' => $entradas,
-            'entradas_take' => 10
+            'entradas_total' => Entrada::where('cliente_id', $cliente->id)->count()
         ]);
     }
 

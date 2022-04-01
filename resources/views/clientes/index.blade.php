@@ -12,7 +12,7 @@
     @endslot
 
     @component('@.bootstrap.table', [
-        'thead' => ['Nombre','Contacto','Correo electrónico','Teléfono'],
+        'thead' => ['Nombre','Contacto','Información'],
     ])
         @foreach($clientes as $cliente)
         <tr>
@@ -21,8 +21,10 @@
                 <small class="text-secondary">({{ $cliente->alias }})</small>
             </td>
             <td class="text-nowrap">{{ $cliente->contacto }}</td>
-            <td class="text-nowrap">{{ $cliente->correo_electronico }}</td>
-            <td class="text-nowrap">{{ $cliente->telefono }}</td>
+            <td class="text-nowrap">
+                <span class="d-block">{{ $cliente->correo_electronico }}</span>
+                <span>{{ $cliente->telefono }}</span>
+            </td>
             <td class="text-nowrap text-end">
                 <a href="{{ route('clientes.show', $cliente) }}" class="btn btn-sm btn-outline-primary">
                     {!! $graffiti->design('eye')->svg() !!}

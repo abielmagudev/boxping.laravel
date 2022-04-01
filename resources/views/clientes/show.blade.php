@@ -43,15 +43,15 @@
         </p>
         @component('@.bootstrap.table')
             <tr>
-                <td class="ps-1">Consolidados</td>
+                <td class="ps-1">Entradas</td>
                 <td class="text-end">
-                    <a class="link-primary text-decoration-none" href="{{ route('consolidados.index') }}">{{ $cliente->consolidados->count() }}</a>
+                    <a class="link-primary text-decoration-none" href="{{ route('entradas.index', ['cliente' => $cliente->id, 'filter_token' => csrf_token()]) }}">{{ $entradas_total }}</a>
                 </td>
             </tr>
             <tr>
-                <td class="ps-1">Entradas</td>
+                <td class="ps-1">Consolidados</td>
                 <td class="text-end">
-                    <a class="link-primary text-decoration-none" href="{{ route('entradas.index') }}">{{ $entradas->count() }}</a>
+                    <a class="link-primary text-decoration-none" href="{{ route('consolidados.index', ['cliente' => $cliente->id, 'filter_token' => csrf_token()]) }}">{{ $cliente->consolidados->count() }}</a>
                 </td>
             </tr>
         @endcomponent
@@ -61,14 +61,17 @@
 
     <!-- Column Entradas -->
     <div class="col-sm">
-        @component('@.bootstrap.card', [
+        @component('entradas.index.card', [
             'title' => 'Entradas recientes',
-        ])
-            @include('entradas.components.index.table', [
-                'entradas' => $entradas,
+            'entradas' => $entradas,
+            'cache' => [
                 'cliente' => $cliente,
-                'checkboxes' => false,
-            ])
+            ],
+            'except' => [
+                'checkboxes',
+                'options',
+            ],
+        ])
         @endcomponent
     </div>
 </div>
