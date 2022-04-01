@@ -16,6 +16,7 @@ use App\Ahex\Entrada\Application\ShowCalled\ShowPresenter;
 use App\Ahex\Entrada\Application\UpdateCalled\Updaters\UpdatersContainer;
 use App\Ahex\Entrada\Application\UpdateMultipleCalled\UpdatersMultipleContainer;
 use App\Ahex\GuiaImpresion\Infrastructure\PageDesigner\PageDesigner;
+use App\Http\Middleware\Custom\GuiaImpresionActivada;
 use App\Imports\EntradasImport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Consolidado;
@@ -27,6 +28,11 @@ use App\Entrada;
 class EntradaController extends Controller
 {
     use HasValidations;
+
+    public function __construct()
+    {
+        $this->middleware(GuiaImpresionActivada::class)->only(['toPrint','toPrintMultiple']);
+    }
 
     public function index(Request $request)
     {
@@ -142,10 +148,12 @@ class EntradaController extends Controller
 
     // TO PRINT
 
-    public function print(Entrada $entrada, GuiaImpresion $guia = null)
+    public function toPrint(Entrada $entrada, GuiaImpresion $guia = null)
     {
-        if(! is_object($guia) ) 
+        if(! is_a($guia, GuiaImpresion::class) ) 
             return view('entradas.print.single')->with('entrada', $entrada);
+
+        $guia->incrementarIntentosImpresion();
 
         return view('guias_impresion.print.single', [
             'entrada' => $entrada,
@@ -153,12 +161,14 @@ class EntradaController extends Controller
         ]);
     }
 
-    public function printMultiple(MultipleRequest $request, GuiaImpresion $guia = null)
+    public function toPrintMultiple(MultipleRequest $request, GuiaImpresion $guia = null)
     {
         $entradas = Entrada::withRelations()->whereIn('id', $request->entradas)->get();
 
-        if(! is_object($guia) ) 
+        if(! is_a($guia, GuiaImpresion::class) ) 
             return view('entradas.print.multiple', compact('entradas'));
+
+        $guia->incrementarIntentosImpresion( $entradas->count() );
 
         return view('guias_impresion.print.multiple', [
             'entradas' => $entradas,

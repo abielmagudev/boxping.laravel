@@ -40,16 +40,15 @@ Route::middleware('auth')->group( function () {
 
     // Entradas
     Route::group(['prefix' => 'entradas'], function () {
-        
+         // Imprimir
+         Route::get('{entrada}/imprimir/{guia?}', 'EntradaController@toPrint')->name('entradas.imprimir');
+         Route::get('imprimir/{guia?}', 'EntradaController@toPrintMultiple')->name('entradas.imprimir.multiple');
+
         // Entrada
         Route::get('create/{consolidado?}', 'EntradaController@create')->name('entradas.create');
-        Route::get('{entrada}/{show?}', 'EntradaController@show')->name('entradas.show');
         Route::get('{entrada}/edit/{editor}', 'EntradaController@edit')->name('entradas.edit');
+        Route::get('{entrada}/{show?}', 'EntradaController@show')->name('entradas.show');
         
-        // Imprimir
-        Route::get('{entrada}/imprimir/{guia?}', 'EntradaController@print')->name('entradas.imprimir')->middleware('guia_impresion.activada');
-        Route::get('imprimir/{guia?}', 'EntradaController@printMultiple')->name('entradas.imprimir.multiple')->middleware('guia_impresion.activada');
-
         // Multiple
         Route::post('multiple', 'EntradaController@importMultiple')->name('entradas.import.multiple');
         Route::match(['put','patch'], 'multiple', 'EntradaController@updateMultiple')->name('entradas.update.multiple');
