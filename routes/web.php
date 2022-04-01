@@ -38,25 +38,6 @@ Route::middleware('auth')->group( function () {
         ],
     ])->except(['create','store','destroy']);
 
-    // Entradas
-    Route::group(['prefix' => 'entradas'], function () {
-         // Imprimir
-         Route::get('{entrada}/imprimir/{guia?}', 'EntradaController@toPrint')->name('entradas.imprimir');
-         Route::get('imprimir/{guia?}', 'EntradaController@toPrintMultiple')->name('entradas.imprimir.multiple');
-
-        // Entrada
-        Route::get('create/{consolidado?}', 'EntradaController@create')->name('entradas.create');
-        Route::get('{entrada}/edit/{editor}', 'EntradaController@edit')->name('entradas.edit');
-        Route::get('{entrada}/{show?}', 'EntradaController@show')->name('entradas.show');
-        
-        // Multiple
-        Route::post('multiple', 'EntradaController@importMultiple')->name('entradas.import.multiple');
-        Route::match(['put','patch'], 'multiple', 'EntradaController@updateMultiple')->name('entradas.update.multiple');
-        Route::delete('multiple', 'EntradaController@destroyMultiple')->name('entradas.destroy.multiple');
-    });
-    Route::resource('entradas.etapas', EntradaEtapaController::class)->except(['index','show']);
-    Route::resource('entradas', EntradaController::class)->except(['create','show','edit']);
-
     // Comentarios
     Route::resource('comentarios', ComentarioController::class)->only('store');
 
@@ -70,6 +51,25 @@ Route::middleware('auth')->group( function () {
     Route::get('registrar', 'RegistrarController@index')->name('registrar.index');
     Route::post('registrar', 'RegistrarController@update')->name('registrar.update');
     // Route::match(['put','patch'], 'registrar', 'RegistrarController@update')->name('registrar.update');
+
+    // Entradas
+    Route::group(['prefix' => 'entradas'], function () {
+        // Imprimir
+        Route::get('{entrada}/imprimir/{guia?}', 'EntradaController@toPrint')->name('entradas.imprimir');
+        Route::get('imprimir/{guia?}', 'EntradaController@toPrintMultiple')->name('entradas.imprimir.multiple');
+
+        // Entrada
+        Route::get('create/{consolidado?}', 'EntradaController@create')->name('entradas.create');
+        Route::get('{entrada}/edit/{editor}', 'EntradaController@edit')->name('entradas.edit');
+        Route::get('{entrada}/{show?}', 'EntradaController@show')->name('entradas.show');
+        
+        // Multiple
+        Route::post('multiple', 'EntradaController@importMultiple')->name('entradas.import.multiple');
+        Route::match(['put','patch'], 'multiple', 'EntradaController@updateMultiple')->name('entradas.update.multiple');
+        Route::delete('multiple', 'EntradaController@destroyMultiple')->name('entradas.destroy.multiple');
+    });
+    Route::resource('entradas.etapas', EntradaEtapaController::class)->except(['index','show']);
+    Route::resource('entradas', EntradaController::class)->except(['create','show','edit']);
 
     // Resources
     Route::resources([
