@@ -1,6 +1,7 @@
 <?php
 
 $settings = [
+    'title' => isset($title) && is_string($title) ? $title : null,
     'cache' => isset($cache) && is_array($cache) ? collect($cache) : collect([]),
     'except' => isset($except) && is_array($except) ? collect($except) : collect([]),
 ];
@@ -19,8 +20,14 @@ $component = new class($entradas, $settings)
     public function __construct(object $entradas, array $settings)
     {
         $this->entradas = $entradas;
+        $this->title = $settings['title'];
         $this->cache = $settings['cache'];
         $this->except = $settings['except'];
+    }
+
+    public function title()
+    {
+        return $this->title ?? 'Entradas';
     }
 
     public function countEntradas()
@@ -33,7 +40,9 @@ $component = new class($entradas, $settings)
 
     public function hasEntradas()
     {
-        return $this->entradas->isNotEmpty();
+        return method_exists($this->entradas, 'isNotEmpty') 
+                ? $this->entradas->isNotEmpty() 
+                : ($this->entradas->count() > 0);
     }
 
     public function hasFilteredEntradas()
@@ -91,7 +100,7 @@ $component = new class($entradas, $settings)
 <div class="row">
     <div class="col-sm">
     @component('@.bootstrap.card', [
-        'title' => 'Entradas',
+        'title' => $component->title(),
         'counter' => $component->countEntradas(),
     ])
         @slot('options')
