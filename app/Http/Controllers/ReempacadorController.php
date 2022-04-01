@@ -64,6 +64,6 @@ class ReempacadorController extends Controller
         if(! $reempacador->delete() )
             return back()->with('failure', 'Error al eliminar reempacador');
 
-        return redirect()->route('reempaque.index')->with('success', "{$reempacador->nombre} eliminado");
+        return redirect()->route('reempacadores.index')->with('success', "{$reempacador->nombre} eliminado");
     }
 }
