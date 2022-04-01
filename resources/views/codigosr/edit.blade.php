@@ -15,7 +15,15 @@
             @endslot
 
             @slot('right')
-            @include('@.partials.modal-confirm-delete.trigger', ['only' => 'text'])
+                @component('@.partials.modal-delete-confirm', [
+                    'route' => route('codigosr.destroy', $codigor),
+                ])
+                    <div class="text-center">
+                        <p class="m-0 lead text-muted">Se eliminará código de reempacado</p>
+                        <p class="m-0 lead fw-bold">{{ $codigor->nombre }}</p>
+                        <p class="m-0 px-5 small text-muted fst-italic">{{ $codigor->descripcion }}</p>
+                    </div>
+                @endcomponent
             @endslot
         @endcomponent
     </form>
@@ -23,11 +31,5 @@
 <br>
 
 @include('@.partials.block-modifiers.content', ['model' => $codigor])
-
-@include('@.partials.modal-confirm-delete.modal', [
-    'route' => route('codigosr.destroy', $codigor),
-    'category' => 'código de reempacado',
-    'name' => $codigor->nombre,
-])
 
 @endsection

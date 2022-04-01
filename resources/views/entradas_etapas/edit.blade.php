@@ -38,22 +38,22 @@
             @endslot
 
             @slot('right')
-                @include('@.partials.modal-confirm-delete.trigger', ['only' => 'text'])
+                @component('@.partials.modal-delete-confirm', [
+                    'route' => route('entradas.etapas.destroy', [$entrada, $etapa]),
+                    'destroy' => true,
+                ])
+                    <div class="text-center">
+                        <p class="m-0 lead text-muted">Se eliminará etapa de la entrada</p>
+                        <p class="m-0 lead fw-bold">{{ $etapa->nombre }}</p>
+                        <p class="m-0 px-5 small">{{ $entrada->numero }}</p>
+                    </div>
+                @endcomponent
             @endslot
         @endcomponent
     </form>
 @endcomponent
 <br>
 
-<!-- @ include('@.partials.block-modifiers.content', ['model' => $etapa]) -->
-
-@component('@.partials.modal-confirm-delete.modal', [
-    'route' => route('entradas.etapas.destroy', [$entrada, $etapa]),
-    'category' => 'etapa',
-    'name' => $etapa->nombre,
-    'is_hard' => true,
-])
-    <p class="small text-uppercase">Entrada {{ $entrada->numero }}</p>
-@endcomponent
+{{-- @include('@.partials.block-modifiers.content', ['model' => $etapa]) --}}
 
 @endsection

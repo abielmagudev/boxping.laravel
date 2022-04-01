@@ -16,7 +16,15 @@
             @endslot
 
             @slot('right')
-            @include('@.partials.modal-confirm-delete.trigger', ['only' => 'text'])
+                @component('@.partials.modal-delete-confirm', [
+                    'route' => route('reempacadores.destroy', $reempacador),
+                ])
+                    <div class="text-center">
+                        <p class="m-0 lead text-muted">Se eliminará reempacador</p>
+                        <p class="m-0 lead fw-bold">{{ $reempacador->nombre }}</p>
+                        <p class="m-0 px-5 small text-muted fst-italic"></p>
+                    </div>
+                @endcomponent
             @endslot
         @endcomponent
     </form>
@@ -24,12 +32,5 @@
 <br>
 
 @include('@.partials.block-modifiers.content', ['model' => $reempacador])
-
-@component('@.partials.modal-confirm-delete.modal', [
-    'route' => route('reempacadores.destroy', $reempacador),
-    'name' => $reempacador->nombre,
-    'category' => 'reempacador',
-])
-@endcomponent
 
 @endsection

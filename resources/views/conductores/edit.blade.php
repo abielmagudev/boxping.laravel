@@ -15,7 +15,14 @@
             @endslot
 
             @slot('right')
-            @include('@.partials.modal-confirm-delete.trigger', ['only' => 'text'])
+                @component('@.partials.modal-delete-confirm', [
+                    'route' => route('conductores.destroy', $conductor),
+                ])
+                    <div class="text-center">
+                        <p class="m-0 lead text-muted">Se eliminará conductor</p>
+                        <p class="m-0 lead fw-bold">{{ $conductor->nombre }}</p>
+                    </div>
+                @endcomponent
             @endslot
         @endcomponent
     </form>
@@ -23,11 +30,5 @@
 <br>
     
 @include('@.partials.block-modifiers.content', ['model' => $conductor])
-
-@include('@.partials.modal-confirm-delete.modal', [
-    'route' => route('conductores.destroy', $conductor),
-    'category' => 'conductor',
-    'name' => $conductor->nombre
-])
 
 @endsection

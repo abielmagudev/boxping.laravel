@@ -48,24 +48,24 @@
             @endslot
 
             @slot('right')
-            @component('@.partials.modal-delete-confirm', [
-                'destroy' => true,
-                'route' => route('entradas.destroy', $entrada),
-            ])
-                <p class="text-secondary lead">Se eliminará procesos, etapas, salidas <br> y la entrada con número:</p>
-                <p class="h4">{{ $entrada->numero }}</p>
-                @if( $entrada->hasConsolidado() )
-                <p class="text-uppercase">Consolidado <em>{{ $entrada->consolidado->numero }}</em></p>
-                @endif
-            @endcomponent
+                @component('@.partials.modal-delete-confirm', [
+                    'destroy' => true,
+                    'route' => route('entradas.destroy', $entrada),
+                ])
+                    <div class="text-center">
+                        <p class="text-secondary lead">Se eliminará procesos, etapas, salidas <br> y la entrada con número:</p>
+                        <p class="h4">{{ $entrada->numero }}</p>
+                        @if( $entrada->hasConsolidado() )
+                        <p class="text-uppercase small">Consolidado <em>{{ $entrada->consolidado->numero }}</em></p>
+                        @endif
+                    </div>
+                @endcomponent
             @endslot
         @endcomponent
     </form>
 @endcomponent
 <br>
 
-@include('@.partials.block-modifiers.content', [
-    'model' => $entrada
-])
+@include('@.partials.block-modifiers.content', ['model' => $entrada])
 
 @endsection

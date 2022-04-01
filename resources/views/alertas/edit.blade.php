@@ -16,22 +16,22 @@
         @endslot
         
         @slot('right')
-        @include('@.partials.modal-confirm-delete.trigger', ['only' => 'text'])
+            @component('@.partials.modal-delete-confirm', [
+                'route' => route('alertas.destroy', $alerta),
+                'destroy' => true,
+            ])
+                <div class="text-center">
+                    <p class="m-0 lead text-muted">Se eliminará alerta</p>
+                    <p class="m-0 lead fw-bold">{{ $alerta->nombre }}</p>
+                    <p class="badge" style="background-color:<?= $alerta->color ?>">Nivel {{ $alerta->nivel }}</p>
+                </div>
+            @endcomponent
         @endslot
     @endcomponent
     </form>
 @endcomponent
 <br>
 
-<div class="my-3">
-    @include('@.partials.block-modifiers.content', ['model' => $alerta])
-</div>
-
-@include('@.partials.modal-confirm-delete.modal', [
-    'route' => route('alertas.destroy', $alerta),
-    'category' => 'alerta',
-    'name' => $alerta->nombre,
-    'is_hard' => true,
-])
+@include('@.partials.block-modifiers.content', ['model' => $alerta])
 
 @endsection

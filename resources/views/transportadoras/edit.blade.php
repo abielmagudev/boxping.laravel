@@ -15,7 +15,17 @@
             @endslot
 
             @slot('right')
-            @include('@.partials.modal-confirm-delete.trigger', ['only' => 'text'])
+                @component('@.partials.modal-delete-confirm', [
+                    'route' => route('transportadoras.destroy', $transportadora),
+                ])
+                    <div class="text-center">
+                        <p class="m-0 lead text-muted">Se eliminará transportadora</p>
+                        <p class="m-0 lead fw-bold">{{ $transportadora->nombre }}</p>
+                        <p class="m-0 px-5 small">
+                            <a href="{{ $transportadora->web }}" target="_blank">{{ $transportadora->web }}</a>
+                        </p>
+                    </div>
+                @endcomponent
             @endslot
         @endcomponent
     </form>
@@ -23,11 +33,5 @@
 <br>
 
 @include('@.partials.block-modifiers.content', ['model' => $transportadora])
-
-@include('@.partials.modal-confirm-delete.modal', [
-    'route' => route('transportadoras.destroy', $transportadora),
-    'name' => $transportadora->nombre,
-    'category' => 'transportadora',
-])
 
 @endsection

@@ -12,8 +12,17 @@
             <button class="btn btn-warning" type="submit">Actualizar etapa</button>
             <a href="{{ route('etapas.index') }}" class="btn btn-secondary">Regresar</a>
             @endslot
+            
             @slot('right')
-            @include('@.partials.modal-confirm-delete.trigger', ['only' => 'text'])
+                @component('@.partials.modal-delete-confirm', [
+                    'route' => route('etapas.destroy', $etapa),
+                ])
+                    <div class="text-center">
+                        <p class="m-0 lead text-muted">Se eliminará etapa</p>
+                        <p class="m-0 lead fw-bold">{{ $etapa->nombre }}</p>
+                        <p class="badge bg-secondary">{{ $etapa->zonas->count() }} zonas</p>
+                    </div>
+                @endcomponent
             @endslot
         @endcomponent
     </form>
@@ -21,11 +30,5 @@
 <br>
 
 @include('@.partials.block-modifiers.content', ['model' => $etapa])
-
-@include('@.partials.modal-confirm-delete.modal', [
-    'route' => route('etapas.destroy', $etapa),
-    'category' => 'etapa',
-    'name' => $etapa->nombre,
-])
 
 @endsection

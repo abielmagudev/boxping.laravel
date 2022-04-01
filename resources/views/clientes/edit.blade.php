@@ -15,7 +15,14 @@
             @endslot
             
             @slot('right')
-            @include('@.partials.modal-confirm-delete.trigger', ['only' => 'text'])
+                @component('@.partials.modal-delete-confirm', [
+                    'route' => route('clientes.destroy', $cliente),
+                ])
+                    <div class="text-center">
+                        <p class="m-0 lead text-muted">Se eliminará cliente</p>
+                        <p class="lead fw-bold">{{ $cliente->nombre }} ({{ $cliente->alias }})</p>
+                    </div>
+                @endcomponent
             @endslot
         @endcomponent
     </form>
@@ -23,11 +30,5 @@
 <br>
 
 @include('@.partials.block-modifiers.content', ['model' => $cliente])
-
-@include('@.partials.modal-confirm-delete.modal', [
-    'route' => route('clientes.destroy', $cliente),
-    'category' => 'cliente',
-    'name' => $cliente->nombre,
-])
 
 @endsection

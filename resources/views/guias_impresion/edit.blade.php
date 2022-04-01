@@ -14,7 +14,16 @@
             @endslot
 
             @slot('right')
-            @include('@.partials.modal-confirm-delete.trigger', ['only' => 'text'])
+                @component('@.partials.modal-delete-confirm', [
+                    'route' => route('guias_impresion.destroy', $guia),
+                    'destroy' => true,
+                ])
+                    <div class="text-center">
+                        <p class="m-0 lead text-muted">Se eliminará guía de impresión</p>
+                        <p class="m-0 lead fw-bold">{{ $guia->nombre }}</p>
+                        <p class="m-0 px-5 small fst-italic">{{ $guia->descripcion }}</p>
+                    </div>
+                @endcomponent
             @endslot
         @endcomponent
     </form>
@@ -22,12 +31,5 @@
 <br>
 
 @include('@.partials.block-modifiers.content', ['model' => $guia])
-
-@include('@.partials.modal-confirm-delete.modal', [
-    'route' => route('guias_impresion.destroy', $guia),
-    'category' => 'guía de impresión',
-    'name' => $guia->nombre,
-    'is_hard' => true,
-])
 
 @endsection

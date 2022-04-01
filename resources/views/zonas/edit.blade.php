@@ -16,7 +16,16 @@
             @endslot
             
             @slot('right')
-            @include('@.partials.modal-confirm-delete.trigger', ['only' => 'text'])
+                @component('@.partials.modal-delete-confirm', [
+                    'route' => route('zonas.destroy', [$etapa, $zona]),
+                    'destroy' => true,
+                ])
+                    <div class="text-center">
+                        <p class="m-0 lead text-muted">Se eliminará zona</p>
+                        <p class="m-0 lead fw-bold">{{ $zona->nombre }}</p>
+                        <p class="small">{{ $etapa->nombre }}</p>
+                    </div>
+                @endcomponent
             @endslot
         @endcomponent
     </form>
@@ -24,13 +33,5 @@
 <br>
 
 @include('@.partials.block-modifiers.content', ['model' => $zona])
-
-@include('@.partials.modal-confirm-delete.modal', [
-    'route' => route('zonas.destroy', [$etapa, $zona]),
-    'name' => $zona->nombre,
-    'category' => 'zona',
-    'is_hard' => true,
-])
-
 
 @endsection

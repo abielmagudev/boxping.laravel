@@ -14,7 +14,15 @@
             @endslot
 
             @slot('right')
-            @include('@.partials.modal-confirm-delete.trigger', ['only' => 'text'])
+                @component('@.partials.modal-delete-confirm', [
+                    'route' => route('remitentes.destroy', $remitente),
+                ])
+                    <div class="text-center">
+                        <p class="m-0 lead text-muted">Se eliminará remitente</p>
+                        <p class="m-0 lead fw-bold">{{ $remitente->nombre }}</p>
+                        <p class="m-0 px-5 small text-muted">{{ $remitente->localidad }}</p>
+                    </div>
+                @endcomponent
             @endslot
         @endcomponent
     </form>
@@ -22,11 +30,5 @@
 <br>
 
 @include('@.partials.block-modifiers.content', ['model' => $remitente])
-
-@include('@.partials.modal-confirm-delete.modal', [
-    'route' => route('remitentes.destroy', $remitente),
-    'name' => $remitente->nombre,
-    'category' => 'remitente'
-])
 
 @endsection
