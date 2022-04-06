@@ -32,13 +32,15 @@ class VehiculoController extends Controller
 
     public function show(Vehiculo $vehiculo)
     {
-        $entradas = Entrada::with(['conductor','consolidado','cliente','destinatario'])
+        $entradas = Entrada::withIndex('conductor')
                             ->where('vehiculo_id', $vehiculo->id)
                             ->orderBy('id', 'desc')
+                            ->take(25)
                             ->get();
 
         return view('vehiculos.show', [
             'conductores_counter' => EntradaCounter::byConductor($entradas),
+            'entradas_total' => Entrada::where('vehiculo_id', $vehiculo->id)->count(),
             'entradas' => $entradas,
             'vehiculo' => $vehiculo,
         ]);

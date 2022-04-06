@@ -32,13 +32,15 @@ class CodigorController extends Controller
 
     public function show(Codigor $codigor)
     {
-        $entradas = Entrada::with(['reempacador','consolidado','cliente','destinatario'])
+        $entradas = Entrada::withindex('reempacador')
                             ->where('codigor_id', $codigor->id)
                             ->orderBy('id', 'desc')
+                            ->take(25)
                             ->get();
 
         return view('codigosr.show', [
             'codigor' => $codigor,
+            'entradas_total' => Entrada::where('codigor_id', $codigor->id)->count(),
             'entradas' => $entradas,
             'reempacadores' => EntradaCounter::byReempacador($entradas),
         ]);

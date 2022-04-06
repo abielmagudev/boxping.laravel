@@ -31,9 +31,15 @@ class DestinatarioController extends Controller
 
     public function show(Destinatario $destinatario)
     {
+        $entradas = Entrada::withIndex()
+                            ->where('destinatario_id', $destinatario->id)
+                            ->take(25)
+                            ->get();
+
         return view('destinatarios.show', [
             'destinatario' => $destinatario,
-            'entradas' => Entrada::with(['consolidado', 'cliente', 'destinatario'])->where('destinatario_id', $destinatario->id)->get()
+            'entradas_total' => Entrada::where('destinatario_id', $destinatario->id)->count(),
+            'entradas' => $entradas,
         ]);
     }
 

@@ -12,6 +12,16 @@
         @component('@.bootstrap.card', [
             'title' => 'Información',
         ])
+            <div class="d-flex justify-content-between">
+                <div>
+                    <small class="fw-bold">Total de entradas</small>
+                </div>
+                <div class="text-end">
+                    <a href="<?= route('entradas.index', ['remitente' => $remitente->id, 'filtered_token' => csrf_token()]) ?>">{{ $entradas_total }}</a>
+                </div>
+            </div>
+            <br>
+        
             <p>
                 <small class="d-block text-muted">Teléfono</small>
                 <span>{{ $remitente->telefono }}</span>
@@ -37,13 +47,14 @@
 
     <!-- Column entradas recientes -->
     <div class="col-sm col-sm-8">
-        @component('@.bootstrap.card', [
+        @include('entradas.index.card', [
             'title' => 'Entradas recientes',
+            'entradas' => $entradas,
+            'except' => [
+                'checkboxes',
+                'options'
+            ],
         ])
-            @include('entradas.components.index.table', [
-                'entradas' => $entradas,
-            ])
-        @endcomponent
     </div>
 </div>
 <br>

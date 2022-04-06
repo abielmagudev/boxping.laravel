@@ -12,19 +12,21 @@
         @component('@.bootstrap.card', [
             'title' => 'Información',   
         ])
-            @include('@.partials.grid-total-entradas.content', [
-                'route' => route('entradas.index', ['reempacador' => $reempacador->id, 'filter' => csrf_token()]),
-                'total' => $entradas->count(),
-            ])
-            
-            <hr class="text-secondary">
+            <div class="d-flex justify-content-between">
+                <div>
+                    <small class="fw-bold">Total de entradas</small>
+                </div>
+                <div class="text-end">
+                    <a href="<?= route('entradas.index', ['reempacador' => $reempacador->id, 'filtered_token' => csrf_token()]) ?>">{{ $entradas_total }}</a>
+                </div>
+            </div>
+            <br>
 
-            <small class="text-muted">Contadores</small>
             @component('@.bootstrap.table', [
                 'thead' => ['Código', 'Entradas'],
             ])
                 @foreach($codigosr_counter as $codigor)
-                <?php $params = ['reempacador' => $reempacador->id, 'codigor' => $codigor->id, 'filter' => csrf_token()] ?>
+                <?php $params = ['reempacador' => $reempacador->id, 'codigor' => $codigor->id, 'filtered_token' => csrf_token()] ?>
                 <tr>
                     <td>{{ $codigor->nombre }}</td>
                     <td class="text-end">
@@ -38,13 +40,14 @@
 
     <!-- Column reempacados -->
     <div class="col-sm col-sm-8">
-        @component('@.bootstrap.card', [
-            'title' => 'Entradas recientes'
+        @include('entradas.index.card', [
+            'title' => 'Entradas recientes',
+            'entradas' => $entradas,
+            'except' => [
+                'checkboxes',
+                'options'
+            ],
         ])
-            @include('entradas.components.index.table', [
-                'entradas' => $entradas
-            ])
-        @endcomponent
     </div>
 </div>
 <br>

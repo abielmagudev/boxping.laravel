@@ -30,15 +30,17 @@ class ConductorController extends Controller
         return redirect()->route('conductores.index')->with('success', 'Conductor guardado');
     }
 
-    public function show(Request $request, Conductor $conductor)
+    public function show(Conductor $conductor)
     {
-        $entradas = Entrada::with(['vehiculo','consolidado','cliente','destinatario'])
+        $entradas = Entrada::withIndex('vehiculo')
                             ->where('conductor_id', $conductor->id)
                             ->orderBy('id', 'desc')
+                            ->take(25)
                             ->get();
         
         return view('conductores.show', [
             'conductor' => $conductor,
+            'entradas_total' => Entrada::where('conductor_id', $conductor->id)->count(),
             'entradas' => $entradas,
             'vehiculos_counter' => EntradaCounter::byVehiculo($entradas),
         ]);

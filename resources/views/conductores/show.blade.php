@@ -12,18 +12,21 @@
         @component('@.bootstrap.card', [
             'title' => 'Información',
         ])
-            @include('@.partials.grid-total-entradas.content', [
-                'route' => route('entradas.index', ['conductor' => $conductor->id, 'filter' => csrf_token()]),
-                'total' =>  $entradas->count(),   
-            ])
+            <div class="d-flex justify-content-between">
+                <div>
+                    <small class="fw-bold">Total de entradas</small>
+                </div>
+                <div class="text-end">
+                    <a href="<?= route('entradas.index', ['conductor' => $conductor->id, 'filtered_token' => csrf_token()]) ?>">{{ $entradas_total }}</a>
+                </div>
+            </div>
             <br>
 
-            <small class="text-muted">Contadores</small>
             @component('@.bootstrap.table',[
                 'thead' => ['Vehículo', 'Entradas']
             ])
                 @foreach($vehiculos_counter as $vehiculo_id => $vehiculo)
-                <?php $params = ['conductor' => $conductor->id, 'vehiculo' => $vehiculo_id, 'filter' => csrf_token()] ?>
+                <?php $params = ['conductor' => $conductor->id, 'vehiculo' => $vehiculo_id, 'filtered_token' => csrf_token()] ?>
                 <tr>
                     <td>{{ $vehiculo->nombre }}</td>
                     <td class="text-end">
@@ -37,13 +40,14 @@
 
     <!-- Column entradas -->
     <div class="col-sm col-sm-8">
-        @component('@.bootstrap.card', [
-            'title' => 'Entradas recientes'
+        @include('entradas.index.card', [
+            'entradas' => $entradas,
+            'title' => 'Entradas recientes',
+            'except' => [
+                'checkboxes',
+                'options'
+            ],
         ])
-            @include('entradas.components.index.table', [
-                'entradas' => $entradas
-            ])
-        @endcomponent
     </div>
 </div>
 <br>

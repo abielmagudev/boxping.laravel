@@ -31,9 +31,15 @@ class RemitenteController extends Controller
 
     public function show(Remitente $remitente)
     {
+        $entradas =Entrada::withIndex()
+                            ->where('remitente_id', $remitente->id)
+                            ->take(25)
+                            ->get();
+
         return view('remitentes.show', [
             'remitente' => $remitente,
-            'entradas' => Entrada::with(['consolidado','cliente','destinatario'])->where('remitente_id', $remitente->id)->get(),
+            'entradas_total' => Entrada::where('remitente_id', $remitente->id)->count(),
+            'entradas' => $entradas,
         ]);
     }
 
