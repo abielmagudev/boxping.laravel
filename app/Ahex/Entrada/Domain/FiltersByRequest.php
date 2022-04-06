@@ -11,10 +11,12 @@ trait FiltersByRequest
         'cliente' => 'filterClient',
         'codigor' => 'filterCodigor',
         'conductor' => 'filterConductor',
+        'destinatario' => 'filterDestinatario',
         'etapa' => 'filterStage',
         'numero' => 'filterNumber',
         'orden' => 'filterOrder',
         'reempacador' => 'filterReempacador',
+        'remitente' => 'filterRemitente',
         'salida' => 'filterSalida',
         'tiempo' => 'filterDatetime',
         'vehiculo' => 'filterVehiculo',
@@ -106,6 +108,22 @@ trait FiltersByRequest
             return $query->orderBy('id', 'desc');
 
         return $query->orderBy('id', $request->orden);
+    }
+
+    public function scopeFilterRemitente($query, $request)
+    {
+        if(! isMinNumber($request->remitente, 1) )
+            return $query;
+
+        return $query->where('remitente_id', $request->remitente);
+    }
+    
+    public function scopeFilterDestinatario($query, $request)
+    {
+        if(! isMinNumber($request->destinatario, 1) )
+            return $query;
+
+        return $query->where('destinatario_id', $request->destinatario);
     }
 
     public function scopeFilterVehiculo($query, $request)
