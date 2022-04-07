@@ -2,8 +2,8 @@
 
 $options_ambito = (object) [
     'cualquier' => '- Cualquier ámbito -',
-    'consolidadas' => 'Consolidadas',
-    'sin-consolidar' => 'Sin consolidar',
+    'con' => 'Consolidadas',
+    'sin' => 'Sin consolidar',
 ];
 
 ?>
