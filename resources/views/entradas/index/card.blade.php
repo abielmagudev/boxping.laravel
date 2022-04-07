@@ -115,7 +115,7 @@ $component = new class($entradas, $settings)
 
     @if( $component->hasFilteredEntradas() )   
     <div class="col-sm col-sm-3">
-        @include('entradas.index.filters-settings')
+        @include('entradas.index.filtered-settings')
     </div>
     @endif
 </div>

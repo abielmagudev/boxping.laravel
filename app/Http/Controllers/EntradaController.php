@@ -10,6 +10,7 @@ use App\Http\Requests\Entrada\ImportRequest;
 use App\Http\Requests\Entrada\StoreRequest;
 use App\Http\Requests\Entrada\UpdateRequest;
 use App\Ahex\Zowner\Application\Features\HasValidations;
+use App\Ahex\Entrada\Application\IndexCalled\FilteredPresenter;
 use App\Ahex\Entrada\Application\EditCalled\EditorsContainer;
 use App\Ahex\Entrada\Application\StoreCalled\Redirector;
 use App\Ahex\Entrada\Application\ShowCalled\ShowPresenter;
@@ -36,11 +37,10 @@ class EntradaController extends Controller
 
     public function index(Request $request)
     {
-        $entradas = Entrada::with(['consolidado','cliente','destinatario'])
-                            ->filterByRequest($request)
-                            ->getFiltered();
-
-        return view('entradas.index', compact('entradas'));
+        return view('entradas.index', [
+            'entradas' => Entrada::withIndex()->filterByRequest($request)->getFiltered(),
+            'filtered' => new FilteredPresenter($request),
+        ]);
     }
 
     public function create(CreateRequest $request)
