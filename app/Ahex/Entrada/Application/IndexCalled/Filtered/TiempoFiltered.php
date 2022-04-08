@@ -5,15 +5,29 @@ namespace App\Ahex\Entrada\Application\IndexCalled\Filtered;
 use Carbon\Carbon;
 
 class TiempoFiltered extends ZFiltered
-{    
-    public $patterns = [
-        'date' => '/[0-9]{4}.-.[0-9]{2}.-.[0-9]{2}/',
-        'time' => '/[0-9]{2}.:.[0-9{2}].:.[0-9]{2}/',
+{
+    const OPTION_NO_EXISTS = null;
+
+    public $inputs = [
+        'from' => [
+            'desde_fecha' => 'date',
+            'desde_hora' => 'time',
+        ],
+        'to' => [
+            'hasta_fecha' => 'date',
+            'hasta_hora' => 'time',
+        ],
     ];
 
-    public $formats = [
-        'date' => 'M, d Y',
-        'time' => 'h:i:s A',
+    public $options = [
+        'date' => [
+            'format' => 'M, d Y',
+            'regexp' => '/^[0-9]{4}(-[0-9]{2}){2}$/',
+        ],
+        'time' => [
+            'format' => 'h:i:sA',
+            'regexp' => '/^([01]?[0-9]|2[0-3]):[0-5][0-9](:[0-5][0-9])?$/', // http://w3.unpocodetodo.info/utiles/regex-ejemplos.php?type=hora
+        ],
     ];
 
     public $times = [
@@ -42,51 +56,48 @@ class TiempoFiltered extends ZFiltered
         return in_array($time, $this->times);
     }
 
-    public function pattern(string $type)
+    public function config(string $name, string $option)
     {
-        return $this->patterns[$type];
+        if(! isset($this->options[$name][$option]) )
+            return self::OPTION_NO_EXISTS;
+
+        return $this->options[$name][$option];
     }
 
-    public function format(string $type)
+    public function validate($value, string $config)
     {
-        return $this->formats[$type];
+        return preg_match($this->config($config, 'regexp'), $value);
     }
 
-    public function validate(string $value = '', string $type)
-    {
-        return is_int( preg_match($this->pattern($type), $value) );
-    }
-
-    public function carbon(string $value, string $type)
+    public function carbon(string $value, string $config)
     {
         $carbon = new Carbon($value);
-        return $carbon->format( $this->format($type) );
-        // dd($carbon->format('M, d Y h:i:s A'));
+        return $carbon->format( $this->config($config, 'format') );
     }
 
     public function datetimeFrom()
     {
-        $datetime = '';
+        foreach($this->inputs['from'] as $input => $rule)
+        {
+            if(! $this->validate($this->request->get($input), $rule) )
+                continue;
 
-        if( $this->validate($this->request->desde_fecha, 'date') )
-            return $datetime = $this->carbon($this->request->desde_fecha, 'date');
+            $datetime[] = $this->carbon($this->request->get($input), $rule);
+        }
 
-        if( $this->validate($this->request->desde_hora, 'time') )
-            return $datetime .= ' ' . $this->carbon($this->request->desde_hora, 'time');
-
-        return $datetime;
+        return implode(' ', $datetime);
     }
 
     public function datetimeTo()
     {
-        $datetime = '';
+        foreach($this->inputs['to'] as $input => $rule)
+        {
+            if(! $this->validate($this->request->get($input), $rule) )
+                continue;
 
-        if( $this->validate($this->request->hasta_fecha, 'date') )
-            return $datetime = $this->carbon($this->request->hasta_fecha, 'date');
+            $datetime[] = $this->carbon($this->request->get($input), $rule);
+        }
 
-        if( $this->validate($this->request->hasta_hora, 'time') )
-            return $datetime .= ' ' . $this->carbon($this->request->hasta_hora, 'time');
-
-        return $datetime;
+        return implode(' ', $datetime);
     }
 }
