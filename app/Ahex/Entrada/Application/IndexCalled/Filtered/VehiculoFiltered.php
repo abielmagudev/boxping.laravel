@@ -21,6 +21,6 @@ class VehiculoFiltered extends ZFiltered
 
     public function validate()
     {
-        return $this->request->filled('vehiculo') && is_int( (int) $this->request->vehiculo );
+        return $this->request->filled('vehiculo') && ctype_digit($this->request->vehiculo);
     }
 }

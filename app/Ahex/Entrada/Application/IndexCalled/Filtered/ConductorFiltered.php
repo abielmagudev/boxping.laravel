@@ -21,6 +21,6 @@ class ConductorFiltered extends ZFiltered
 
     public function validate()
     {
-        return $this->request->filled('conductor') && is_int( (int) $this->request->conductor );
+        return $this->request->filled('conductor') && ctype_digit($this->request->conductor);
     }
 }

@@ -21,6 +21,6 @@ class ClienteFiltered extends ZFiltered
 
     public function validate()
     {
-        return $this->request->filled('cliente') && is_int( (int) $this->request->cliente );
+        return $this->request->filled('cliente') && ctype_digit($this->request->cliente);
     }
 }

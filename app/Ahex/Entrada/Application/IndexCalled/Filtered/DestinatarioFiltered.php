@@ -26,6 +26,6 @@ class DestinatarioFiltered extends ZFiltered
 
     public function validate()
     {
-        return $this->request->filled('destinatario') && is_int( (int) $this->request->destinatario );
+        return $this->request->filled('destinatario') && ctype_digit($this->request->destinatario);
     }
 }

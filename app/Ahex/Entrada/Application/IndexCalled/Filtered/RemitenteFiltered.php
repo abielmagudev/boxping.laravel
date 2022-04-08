@@ -26,6 +26,6 @@ class RemitenteFiltered extends ZFiltered
 
     public function validate()
     {
-        return $this->request->filled('remitente') && is_int( (int) $this->request->remitente );
+        return $this->request->filled('remitente') && ctype_digit($this->request->remitente);
     }
 }

@@ -21,6 +21,7 @@ class EtapaFiltered extends ZFiltered
 
     public function validate()
     {
-        return $this->request->filled('etapa') && is_int( (int) $this->request->etapa );
+        // ctype_digit
+        return $this->request->filled('etapa') && ctype_digit($this->request->etapa);
     }
 }

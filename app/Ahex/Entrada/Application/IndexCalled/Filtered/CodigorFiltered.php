@@ -21,6 +21,6 @@ class CodigorFiltered extends ZFiltered
 
     public function validate()
     {
-        return $this->request->filled('codigor') && is_int( (int) $this->request->codigor );
+        return $this->request->filled('codigor') && ctype_digit($this->request->codigor);
     }
 }

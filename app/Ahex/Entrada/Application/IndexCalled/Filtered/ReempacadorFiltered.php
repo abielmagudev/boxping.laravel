@@ -21,6 +21,6 @@ class ReempacadorFiltered extends ZFiltered
 
     public function validate()
     {
-        return $this->request->filled('reempacador') && is_int( (int) $this->request->reempacador);
+        return $this->request->filled('reempacador') && ctype_digit($this->request->reempacador);
     }
 }
