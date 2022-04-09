@@ -9,6 +9,11 @@ trait Scopes
         return $query->where('numero', $numero)->exists();
     }
 
+    public function scopeNotExistsNumero($query, $numero)
+    {
+        return ! $query->where('numero', $numero)->exists();
+    }
+
     public function scopeFindByNumero($query, $numero)
     {
         return $query->where('numero', $numero)->first();
