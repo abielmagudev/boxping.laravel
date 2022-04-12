@@ -29,6 +29,10 @@ class ImportRequest extends FormRequest
                 'required',
                 'mimes:csv,txt',
             ],
+            'import_entradas_etapa' => [
+                'required',
+                'exists:etapas,id'
+            ],
             'import_entradas_consolidado' => [
                 Rule::exists('consolidados','id')->where( function ($query) {
                     return $query->where('status', 'abierto');

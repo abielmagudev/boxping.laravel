@@ -63,6 +63,8 @@ class Etapa extends Model implements ModifierIdentifiable
     }
 
 
+    
+    // Tareas
 
     public static function tareas(bool $only_names = null)
     {
@@ -83,6 +85,10 @@ class Etapa extends Model implements ModifierIdentifiable
     {
         return isset( self::tareas()[$key] );
     }
+
+
+
+    // Mediciones
 
     public static function medicionesPeso(bool $only_shortnames = null)
     {

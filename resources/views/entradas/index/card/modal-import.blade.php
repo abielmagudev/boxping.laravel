@@ -42,22 +42,24 @@ $modal = new class($component)
         ],
     ])
         @slot('body')
-        <div class="text-muted px-3">
+        <div class=" px-3">
             <p>Instrucciones:</p>
             <ol>
-                <li>Descargar la plantilla <a href="<?= asset('downloads/importar_entradas.csv') ?>" class="link-primary">importar_entradas.csv</a></li>
-                <li>Llenar con información de cada columna de la plantilla.</li>
-                <li>Las columnas <em>número de entrada</em>, <em>pesaje</em> y <em>destinatario</em> de la plantilla son obligatorios.</li>
+                <li>Descargar la plantilla <a href="<?= asset('download/importar_guias.csv') ?>" class="link-primary">importar guias.csv</a></li>
+                <li>Llenar con información cada columna de la plantilla.</li>
+                <li>Las columnas <em>número de entrada</em>, <em>medidas</em> y <em>destinatario</em> son obligatorios.</li>
             </ol>
-            <p class="small mt-3 mb-0"><b>IMPORTANTE</b>: Los números de entrada ya existentes ó no cumplir con los requerimientos de la plantilla, <b>no se importará</b>.</p>
         </div>
-        <br>
-        <form action="<?= route('entradas.import.multiple') ?>" id="<?= $modal->form('id') ?>" method="post" enctype="multipart/form-data" class="alert alert-light">
+        <form action="<?= route('entradas.import.multiple') ?>" id="<?= $modal->form('id') ?>" method="post" enctype="multipart/form-data" class="alert alert-light border">
             @csrf
+
+            {{-- Archivo CSV para importar guias de entrada --}}
             <div class="mb-3">
-                <label for="importEntradas" class="form-label small">Cargar plantilla</label>
+                <label for="importEntradas" class="form-label small">Plantilla CSV</label>
                 <input type="file" name="import_entradas" id="importEntradas" class="form-control" accept=".csv" required>
             </div>
+
+            {{-- Cliente del consolidado o cliente de entrada sin consolidar --}}
             @if(! is_object($modal->form('consolidado')) )
             <div class="mb-3">
                 <label for="importEntradasCliente" class="form-label small">Cliente</label>
@@ -73,7 +75,21 @@ $modal = new class($component)
             <input type="hidden" name="import_entradas_consolidado" value="<?= $modal->form('consolidado')->id ?? '' ?>">
 
             @endif
+
+            {{-- Etapa de entradas (pesaje y volumen) - OBLIGATORIO??? --}}
+            <div class="mb-3">
+                <label for="importEntradasEtapa" class="form-label small">Etapa</label>
+                <select name="import_entradas_etapa" id="importEntradasEtapa" class="form-select">
+                    <option disabled selected label="Seleccionar..."></option>
+                    @foreach($etapas as $etapa)
+                    <option value="<?= $etapa->id ?>">{{ $etapa->nombre }}</option>
+                    @endforeach
+                </select>
+            </div>
         </form>
+        <div class="alert alert-warning">
+            <small><b>IMPORTANTE</b>: Los números de entrada ya existentes ó no cumplir con los datos obligatorios de la plantilla, <b>no se importarán</b>.</small>
+        </div>
         @endslot
 
         @slot('footer')

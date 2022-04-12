@@ -19,11 +19,13 @@ use App\Ahex\Entrada\Application\UpdateMultipleCalled\UpdatersMultipleContainer;
 use App\Ahex\GuiaImpresion\Infrastructure\PageDesigner\PageDesigner;
 use App\Http\Middleware\Custom\GuiaImpresionActivada;
 use App\Imports\EntradasImport;
+use App\Imports\EntradasImport2;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Consolidado;
 use App\Cliente;
 use App\GuiaImpresion;
 use App\Entrada;
+use App\Etapa;
 
 
 class EntradaController extends Controller
@@ -109,16 +111,23 @@ class EntradaController extends Controller
 
     public function importMultiple(ImportRequest $request)
     {
-        $csv   = $request->file('import_entradas');
-        $owner = $request->has('import_entradas_consolidado') 
-                ? Consolidado::find($request->get('import_entradas_consolidado')) 
-                : Cliente::find($request->get('import_entradas_cliente'));
+        $entradas_import = new EntradasImport([
+            'cliente' => $request->has('import_entradas_consolidado') ? Consolidado::find($request->import_entradas_consolidado)->cliente_id : $request->import_entradas_cliente,
+            'consolidado' => $request->get('import_entradas_consolidado'),
+            'etapa' => $request->get('import_entradas_etapa'),
+        ]);
 
-        $entradasImport = new EntradasImport($owner);
+        $entradas_import->import($request->file('import_entradas'));
 
-        Excel::import($entradasImport, $csv);
+        if( $entradas_import->failureRowsCount() === 0 )
+            return back()->with('success', "Se importó las <b>{$entradas_import->rowsCount()} filas</b> del CSV en entradas</b>");
 
-        return back()->with('success', "Se importó de <b>{$entradasImport->getRowsTotal()} filas</b> / <b>{$entradasImport->getRowsSaved()} entradas</b>");
+        foreach($entradas_import->failureRows() as $row => $column)
+            $errors[] = "<li>{$row}: {$column}</li>";
+
+        $list = implode('', $errors);
+
+        return back()->with('warning', "Se importó de <b>{$entradas_import->rowsCount()} filas</b> / <b>{$entradas_import->successRowsCount()} entradas</b> <br> <small>Revisar fila: columna</small><ul>{$list}</ul>"); 
     }
 
     public function updateMultiple(MultipleRequest $request)
