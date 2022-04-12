@@ -30,6 +30,7 @@ Class Remitente extends Model implements ValueSearchable, ModifierIdentifiable
 
 
     // Relationships
+
     public function entradas()
     {
         return $this->hasMany(Entrada::class);
@@ -37,6 +38,7 @@ Class Remitente extends Model implements ValueSearchable, ModifierIdentifiable
 
 
     // Attributes
+
     public function getLocalidadAttribute()
     {
         $localidad = array();
@@ -62,29 +64,56 @@ Class Remitente extends Model implements ValueSearchable, ModifierIdentifiable
 
 
     // Scopes
+
     public function scopeSearch($query, $value)
     {
         return $query->where('nombre', 'like', "%{$value}%")
-                     ->orWhere('direccion', 'like', "%{$value}%")
-                     ->orWhere('postal', 'like', "%{$value}%")
-                     ->orWhere('telefono', 'like', "%{$value}%")
-                     ->orWhere('ciudad', 'like', "%{$value}%")
-                     ->orderBy('id', 'desc');
+                    ->orWhere('direccion', 'like', "%{$value}%")
+                    ->orWhere('postal', 'like', "%{$value}%")
+                    ->orWhere('telefono', 'like', "%{$value}%")
+                    ->orWhere('ciudad', 'like', "%{$value}%")
+                    ->orderBy('id', 'desc');
+    }
+
+    public function scopeExistsExactly($query, array $data)
+    {
+        return $query->where('nombre', $data['nombre'])
+                    ->where('direccion', $data['direccion'])
+                    ->where('postal', $data['postal'])
+                    ->where('ciudad', $data['ciudad'])
+                    ->where('estado', $data['estado'])
+                    ->where('pais', $data['pais'])
+                    ->where('telefono', $data['telefono'])
+                    ->exists();
+    }
+
+    public function scopeFindExactly($query, array $data)
+    {
+        return $query->where('nombre', $data['nombre'])
+                    ->where('direccion', $data['direccion'])
+                    ->where('postal', $data['postal'])
+                    ->where('ciudad', $data['ciudad'])
+                    ->where('estado', $data['estado'])
+                    ->where('pais', $data['pais'])
+                    ->where('telefono', $data['telefono'])
+                    ->orderBy('id', 'ASC')
+                    ->first();
     }
 
 
     // Statics
+    
     public static function prepare($validated)
     {
         $prepared = [
-            'nombre' => capitalize($validated['nombre']),
-            'direccion' => capitalize($validated['direccion']),
-            'postal' => $validated['postal'],
-            'ciudad' => capitalize($validated['ciudad']),
-            'estado' => capitalize($validated['estado']),
-            'pais' => capitalize($validated['pais']),
-            'telefono' => $validated['telefono'],
-            'notas' => $validated['notas'] ?? null,
+            'nombre' => trim(capitalize($validated['nombre'])),
+            'direccion' => trim(capitalize($validated['direccion'])),
+            'postal' => trim($validated['postal']),
+            'ciudad' => trim(capitalize($validated['ciudad'])),
+            'estado' => trim(capitalize($validated['estado'])),
+            'pais' => trim(capitalize($validated['pais'])),
+            'telefono' => trim($validated['telefono']),
+            'notas' => trim( $validated['notas']) ?? null,
             'updated_by' => auth()->user()->id,
         ];
 
