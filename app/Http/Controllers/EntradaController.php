@@ -120,14 +120,16 @@ class EntradaController extends Controller
         $entradas_import->import($request->file('import_entradas'));
 
         if( $entradas_import->failureRowsCount() === 0 )
-            return back()->with('success', "Se importó las <b>{$entradas_import->rowsCount()} filas</b> del CSV en entradas</b>");
+            return back()->with('success', "Se importó de <b>{$entradas_import->rowsCount()} filas</b> / <b>{$entradas_import->successRowsCount()} entradas</b>");
+
 
         foreach($entradas_import->failureRows() as $row => $column)
-            $errors[] = "<li>{$row}: {$column}</li>";
+            $failures[] = "<li>Fila {$row}: {$column}</li>";
 
-        $list = implode('', $errors);
+        $list = implode($failures);
 
-        return back()->with('warning', "Se importó de <b>{$entradas_import->rowsCount()} filas</b> / <b>{$entradas_import->successRowsCount()} entradas</b> <br> <small>Revisar fila: columna</small><ul>{$list}</ul>"); 
+        return back()->with('warning', "Se importó de <b>{$entradas_import->rowsCount()} filas</b> / <b>{$entradas_import->successRowsCount()} entradas</b>, revisar:
+                                        <ul class='list-unstyled small mt-3 ms-3'>{$list}</ul>"); 
     }
 
     public function updateMultiple(MultipleRequest $request)

@@ -26,34 +26,34 @@ class EntradasImport implements OnEachRow, WithStartRow
     const SAVED_ROW = null;
 
     private $columns = [
-        0 => 'número de entrada',
-        1 => 'contenido',
+        0 => 'Número de entrada',
+        1 => 'Contenido',
         2 => null, // Separador
-        3 => 'peso',
-        4 => 'medición(g,kg,oz,lb)',
-        5 => 'largo',
-        6 => 'ancho',
-        7 => 'alto',
-        8 => 'medición(mm,cm,in,ft)',
+        3 => 'Peso',
+        4 => 'Medición(g,kg,oz,lb)',
+        5 => 'Largo',
+        6 => 'Ancho',
+        7 => 'Alto',
+        8 => 'Medición(mm,cm,in,ft)',
         9 => null, // Separador
-        10 => 'nombre(destinatario)',
-        11 => 'dirección(destinatario)',
-        12 => 'postal(destinatario)',
-        13 => 'ciudad(destinatario',
-        14 => 'estado(destinatario)',
-        15 => 'pais(destinatario)',
-        16 => 'referencias(destinatario)',
-        17 => 'teléfono(destinatario)',
+        10 => 'Nombre(destinatario)',
+        11 => 'Dirección(destinatario)',
+        12 => 'Postal(destinatario)',
+        13 => 'Ciudad(destinatario',
+        14 => 'Estado(destinatario)',
+        15 => 'Pais(destinatario)',
+        16 => 'Referencias(destinatario)',
+        17 => 'Teléfono(destinatario)',
         18 => null, // Separador
-        19 => 'nombre(remitente)',
-        20 => 'dirección(remitente)',
-        21 => 'postal(remitente)',
-        22 => 'ciudad(remitente',
-        23 => 'estado(remitente)',
-        24 => 'pais(remitente)',
-        25 => 'teléfono(remitente)',
+        19 => 'Nombre(remitente)',
+        20 => 'Dirección(remitente)',
+        21 => 'Postal(remitente)',
+        22 => 'Ciudad(remitente',
+        23 => 'Estado(remitente)',
+        24 => 'Pais(remitente)',
+        25 => 'Teléfono(remitente)',
         26 => null, // Separador
-        27 => 'notas adicionales',
+        27 => 'Notas adicionales',
     ];
 
     private $rows = [
@@ -88,8 +88,8 @@ class EntradasImport implements OnEachRow, WithStartRow
         return 2;
     }
 
-
     // ABOUT ALL ROWS
+
     public function rowsCount()
     {
         return $this->rows['total'];
@@ -100,8 +100,8 @@ class EntradasImport implements OnEachRow, WithStartRow
         return ++$this->rows['total'];
     }
 
-
     // ABOUT FAILURE ROWS
+
     public function failureRow(int $column_id)
     {
         return $this->rows['failure'][ $this->rowsCount() ] = $this->columns[$column_id] ?? 'columna desconocída';
@@ -117,8 +117,8 @@ class EntradasImport implements OnEachRow, WithStartRow
         return count($this->rows['failure']);
     }
 
-
     // ABOUT SUCCESS ROWS
+
     public function successRow($numero_entrada)
     {
         return $this->rows['success'][ $this->rowsCount() ] = $numero_entrada;
@@ -133,7 +133,6 @@ class EntradasImport implements OnEachRow, WithStartRow
     {
         return count($this->rows['success']);
     }
-
 
     /**
      * Validate current row after to save
@@ -151,7 +150,6 @@ class EntradasImport implements OnEachRow, WithStartRow
 
         return count($errors) ? array_key_first($errors) : self::VALIDATED_ROW;
     }
-
 
     /**
      * Rules to validate row's cells
@@ -278,9 +276,6 @@ class EntradasImport implements OnEachRow, WithStartRow
         ]);
     }
 
-
-
-
      /**
      * Importing the rows to database with Eloquent
      *
@@ -290,9 +285,6 @@ class EntradasImport implements OnEachRow, WithStartRow
     public function onRow(Row $row)
     {
         $this->increaseRowsCount();
-
-        // if( $this->rowsCount() == 2 )
-        //     dd($row->toArray());
 
         $the_row = $row->toArray();
 
