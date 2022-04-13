@@ -188,8 +188,6 @@ class EntradasImport implements OnEachRow, WithStartRow
             14 => isset($row[14]) && is_string($row[14]),
             // Pais del destinatario
             15 => isset($row[15]) && is_string($row[15]),
-            // Referencias del destinatario
-            16 => isset($row[16]) && is_string($row[16]),
             // Telefono del destinatario
             17 => isset($row[17]) && is_string($row[17]),
 
