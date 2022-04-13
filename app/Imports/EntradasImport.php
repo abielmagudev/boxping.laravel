@@ -7,11 +7,8 @@ use App\Entrada;
 use App\EntradaEtapa;
 use App\Etapa;
 use App\Remitente;
-use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\Importable;
 use Maatwebsite\Excel\Concerns\OnEachRow;
-use Maatwebsite\Excel\Concerns\ToCollection;
-use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithStartRow;
 use Maatwebsite\Excel\Row;
 
@@ -210,17 +207,17 @@ class EntradasImport implements OnEachRow, WithStartRow
 
     public function create(array $row)
     {
-        // Prepare???...
-        return Entrada::create([
+        $prepared = Entrada::prepare([
             'numero' => $row[0],
-            'cliente_id' => $this->settings['cliente'],
-            'consolidado_id' => $this->settings['consolidado'],
-            'destinatario_id' => $this->detinatarioId($row),
-            'remintente_id' => $this->remitenteId($row),
             'contenido' => $row[1],
-            'created_by' => auth()->user()->id,
-            'updated_by' => auth()->user()->id,
+            'cliente' => $this->settings['cliente'],
         ]);
+
+        $prepared['consolidado_id'] = $this->settings['consolidado'];
+        $prepared['destinatario_id'] = $this->detinatarioId($row);
+        $prepared['remintente_id'] = $this->remitenteId($row);
+
+        return Entrada::create($prepared);
     }
 
     public function detinatarioId(array $row)
