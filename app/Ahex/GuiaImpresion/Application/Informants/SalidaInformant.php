@@ -27,6 +27,10 @@ class SalidaInformant extends Informant
             'completa' => 'Tipo de cobertura de la transportadora',
             'minima' => 'Salida(cobertura)',
         ],
+        'destino' => [
+            'completa' => 'Domicilio del destinatario ó dirección de ocurre',
+            'minima' => 'Salida(destinatario ú ocurre)',
+        ],
         'ocurre' => [
             'completa' => 'Información de cobertura "Ocurre"',
             'minima' => 'Salida(ocurre)',
@@ -64,6 +68,17 @@ class SalidaInformant extends Informant
     public static function cobertura(Entrada $entrada)
     {
         return $entrada->hasSalida() && $entrada->salida->hasCobertura() ? $entrada->salida->cobertura_titulo : '?';
+    }
+
+    public static function destino(Entrada $entrada)
+    {
+        if( $entrada->hasSalida() && $entrada->salida->hasCobertura('ocurre') )
+            return $entrada->salida->domicilio_ocurre;
+
+        if( $entrada->hasDestinatario() )
+            return $entrada->destinatario->domicilio_completo;
+
+        return '?';
     }
 
     public static function ocurre(Entrada $entrada)
