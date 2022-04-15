@@ -6,7 +6,7 @@
             <select name="informacion[]" id="select-informacion" class="form-select">
                 <option selected disabled></option>
                 @foreach($informantsManager::all() as $informant_name => $informant_class)
-                <optgroup label="<?= ucfirst($informant_name) ?>">
+                <optgroup label="+ <?= ucfirst($informant_name) ?>">
                     @foreach($informant_class::getActionsDescriptions() as $action => $description)
                     <option value='<?= "{$informant_name}.{$action}" ?>'>{{ $description['completa'] }}</option>
                     @endforeach
