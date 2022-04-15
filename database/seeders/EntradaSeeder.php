@@ -69,9 +69,9 @@ class EntradaSeeder extends Seeder
 
             $entrada->etapas()->attach($etapa_random->id, [
                 'peso'             => $etapa_random->hasTarea('peso') ? $this->fakerphp->randomFloat(2, 0.1, 999) : null,
-                'ancho'            => $etapa_random->hasTarea('volumen') ? $this->fakerphp->randomFloat(2, 0.1, 999) : null,
-                'altura'           => $etapa_random->hasTarea('volumen') ? $this->fakerphp->randomFloat(2, 0.1, 999) : null,
                 'largo'            => $etapa_random->hasTarea('volumen') ? $this->fakerphp->randomFloat(2, 0.1, 999) : null,
+                'ancho'            => $etapa_random->hasTarea('volumen') ? $this->fakerphp->randomFloat(2, 0.1, 999) : null,
+                'alto'             => $etapa_random->hasTarea('volumen') ? $this->fakerphp->randomFloat(2, 0.1, 999) : null,
                 'medicion_peso'    => $this->fakerphp->randomElement( $etapa_random::medicionesPeso(true) ),
                 'medicion_volumen' => $this->fakerphp->randomElement( $etapa_random::medicionesVolumen(true) ),
                 'zona_id'          => $this->fakerphp->boolean ? $this->fakerphp->numberBetween(1,5) : null,

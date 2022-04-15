@@ -25,9 +25,9 @@ class EntradaEtapa extends Pivot implements ModifierIdentifiable
         $prepared = [
             'peso'             => $validated['peso'] ?? null,
             'medicion_peso'    => $validated['medicion_peso'] ?? null,
-            'ancho'            => $validated['ancho'] ?? null,
-            'altura'           => $validated['altura'] ?? null,
             'largo'            => $validated['largo'] ?? null,
+            'ancho'            => $validated['ancho'] ?? null,
+            'alto'             => $validated['alto'] ?? null,
             'medicion_volumen' => $validated['medicion_volumen'] ?? null,
             'zona_id'          => $validated['zona'] ?? null,
             'alertas_id'       => isset($validated['alertas']) ? json_encode($validated['alertas']) : null,

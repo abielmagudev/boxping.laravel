@@ -54,9 +54,9 @@ trait Relationships
                     ->withPivot([
                         'peso',
                         'medicion_peso',
-                        'ancho',
-                        'altura',
                         'largo',
+                        'ancho',
+                        'alto',
                         'medicion_volumen',
                         'zona_id',
                         'alertas_id',

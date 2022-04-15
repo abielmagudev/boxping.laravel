@@ -12,9 +12,15 @@
     <!-- Body -->
     @if( $entrada->hasEtapas() )
 
-        @component('@.bootstrap.table', [
-            'thead' => ['Nombre','Peso','Ancho / Altura / Largo','Zona','']
-        ])
+        @component('@.bootstrap.table')
+            @slot('thead')
+                <th class="small">Nombre</th>
+                <th class="small">Pesáje</th>
+                <th class="small">Volúmen <span class="fw-normal">(largo/ancho/alto)</span></th>
+                <th class="small">Zona</th>
+                <th class="small"></th>
+            @endslot
+
             @foreach($entrada->etapas as $etapa)
             <tr>
                 <td class="text-center text-nowrap">
@@ -45,9 +51,11 @@
                     <span>{{ $etapa->entrada_etapa->medicion_peso }}</span>
                 </td>
                 <td class="text-nowrap">
-                    <span>{{ $etapa->entrada_etapa->ancho }} / </span>
-                    <span>{{ $etapa->entrada_etapa->altura }} / </span>
                     <span>{{ $etapa->entrada_etapa->largo }}</span>
+                    <span class="text-muted">/</span>
+                    <span>{{ $etapa->entrada_etapa->ancho }} </span>
+                    <span class="text-muted">/</span>
+                    <span>{{ $etapa->entrada_etapa->alto }} </span>
                     <span>{{ $etapa->entrada_etapa->medicion_volumen }}</span>
                 </td>
 

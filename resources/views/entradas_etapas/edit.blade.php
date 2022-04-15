@@ -43,9 +43,9 @@
                     'destroy' => true,
                 ])
                     <div class="text-center">
-                        <p class="m-0 lead text-muted">Se eliminará etapa de la entrada</p>
+                        <p class="m-0 lead">Se eliminará la etapa</p>
                         <p class="m-0 lead fw-bold">{{ $etapa->nombre }}</p>
-                        <p class="m-0 px-5 small">{{ $entrada->numero }}</p>
+                        <p class="m-0 px-5 text-muted small">ENTRADA {{ $entrada->numero }}</p>
                     </div>
                 @endcomponent
             @endslot
