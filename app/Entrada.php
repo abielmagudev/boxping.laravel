@@ -19,27 +19,29 @@ use Illuminate\Database\Eloquent\Model;
 
 class Entrada extends Model implements ModifierIdentifiable
 {
-    use HasFactory,
+        use Attributes,
         ConfirmadoTopic,
-        ImportadoTopic,
-        ReempacadTopic,
-        Attributes,
-        Relationships,
-        Validations,
-        Scopes,
         FiltersByRequest,
         HasModifiers,
+        ImportadoTopic,
+        ReempacadTopic,
+        Relationships,
+        Scopes,
+        UpdateDescriptionHandler,
         UpdatesDescriptions,
-        UpdateDescriptionHandler;
+        Validations,
+        HasFactory;
     
     const SIN_CONSOLIDADO = false;
 
     protected $fillable = array(
         // Entrada
         'numero',
-        'consolidado_id',
-        'cliente_id',
         'contenido',
+        
+        // Consolidado, Cliente
+        'cliente_id',
+        'consolidado_id',
 
         // Trayectoria
         'destinatario_id',
