@@ -25,8 +25,8 @@ class CreateClientesTable extends Migration
             $table->string('estado');
             $table->string('pais');
             $table->text('notas')->nullable();
-            $table->unsignedTinyInteger('created_by')->index();
-            $table->unsignedTinyInteger('updated_by')->index();
+            $table->unsignedSmallInteger('created_by');
+            $table->unsignedSmallInteger('updated_by');
             $table->timestamps();
             $table->softDeletes();
         });

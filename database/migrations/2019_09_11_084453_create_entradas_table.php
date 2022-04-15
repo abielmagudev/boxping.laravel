@@ -18,10 +18,12 @@ class CreateEntradasTable extends Migration
             // Entrada
             $table->bigIncrements('id');
             $table->string('numero')->unique();
-            $table->unsignedInteger('consolidado_id')->nullable();
-            $table->unsignedInteger('cliente_id');
             $table->text('contenido')->nullable();
 
+            // Consolidado | Cliente
+            $table->unsignedInteger('cliente_id');
+            $table->unsignedInteger('consolidado_id')->nullable();
+            
             // Trayectoria
             $table->unsignedInteger('destinatario_id')->nullable();
             $table->unsignedInteger('remitente_id')->nullable();

@@ -27,8 +27,8 @@ class CreateSalidasTable extends Migration
             $table->string('pais', 64)->nullable();
             $table->text('notas')->nullable();
             $table->enum('status', Salida::allStatus())->default(Salida::defaultStatus())->index();
-            $table->unsignedTinyInteger('transportadora_id');
             $table->unsignedBigInteger('entrada_id');
+            $table->unsignedTinyInteger('transportadora_id');
             $table->unsignedSmallInteger('created_by');
             $table->unsignedSmallInteger('updated_by');
             $table->timestamps();
