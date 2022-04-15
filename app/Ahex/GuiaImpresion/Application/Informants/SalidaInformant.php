@@ -24,19 +24,19 @@ class SalidaInformant extends Informant
             'minima' => 'Salida(status)',
         ],
         'cobertura' => [
-            'completa' => 'Tipo de cobertura de la transportadora',
+            'completa' => 'Tipo de cobertura',
             'minima' => 'Salida(cobertura)',
         ],
         'domicilio' => [
-            'completa' => 'Domicilio del destinatario ú ocurre',
+            'completa' => 'Domicilio del destinatario ó cobertura: ocurre',
             'minima' => 'Salida(destinatario ú ocurre)',
         ],
         'ocurre' => [
-            'completa' => 'Información de cobertura "Ocurre"',
+            'completa' => 'Información de cobertura: ocurre',
             'minima' => 'Salida(ocurre)',
         ],
         'incidentes' => [
-            'completa' => 'Lista de incidentes en la transportadora',
+            'completa' => 'Incidentes en la transportadora',
             'minima' => 'Salida(incidentes)',
         ],
         'notas' => [
