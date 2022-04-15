@@ -178,7 +178,7 @@ class EntradasImport implements OnEachRow, WithStartRow
             // Direccion del destinatario
             11 => isset($row[11]) && is_string($row[11]),
             // Postal del destinatario
-            12 => isset($row[12]) && is_string($row[12]) || is_int($row[12]),
+            12 => isset($row[12]),
             // Ciudad del destinatario
             13 => isset($row[13]) && is_string($row[13]),
             // Estado del destinatario
@@ -186,7 +186,7 @@ class EntradasImport implements OnEachRow, WithStartRow
             // Pais del destinatario
             15 => isset($row[15]) && is_string($row[15]),
             // Telefono del destinatario
-            17 => isset($row[17]) && is_string($row[17]),
+            17 => isset($row[17]),
 
             // Nombre del remitente
             19 => isset($row[19]) && is_string($row[19]),
