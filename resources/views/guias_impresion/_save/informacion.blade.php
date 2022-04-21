@@ -19,13 +19,15 @@
         <button class="btn btn-outline-danger fw-bold remove-information-button" type="button">-</button>
     </div>
 </div>
-<button class="btn btn-outline-primary fw-bold w-100 mb-2" type="button" style="padding:6px 10px" id="addInformationButton">+</button>
+<button class="btn btn-outline-primary w-100 mb-2" type="button" style="padding:6px 10px" id="addInformationButton">Agregar linea de información</button>
 @include('@.bootstrap.invalid-input-message', ['name' => 'informacion'])
-<div class="form-check">
-    <input class="form-check-input" type="checkbox" name="tipo_descripcion" value="<?= $informantsManager::defaultDescriptionType() ?>" id="checkbox-tipo-descripcion-informacion" <?= $guia->hasTipoDescripcion() ? 'checked' : '' ?>>
+
+{{-- <div class="form-check">
+    <input class="form-check-input" type="checkbox" name="tipo_descripcion" value="<-?= $informantsManager::defaultDescriptionType() ?>" id="checkbox-tipo-descripcion-informacion" <?= $guia->hasTipoDescripcion() ? 'checked' : '' ?>>
     <label class="form-check-label" for="checkbox-tipo-descripcion-informacion">Mostrar descripciones de la información seleccionada en la guía impresa.</label>
 </div>
-@include('@.bootstrap.invalid-input-message', ['name' => 'tipo_descripcion'])
+@include('@.bootstrap.invalid-input-message', ['name' => 'tipo_descripcion']) --}}
+
 <br>
 <br>
 

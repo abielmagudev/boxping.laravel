@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use App\Ahex\GuiaImpresion\Application\InformantsMananger;
+// use App\Ahex\GuiaImpresion\Application\InformantsMananger;
 
 class CreateGuiasImpresionTable extends Migration
 {
@@ -22,12 +22,16 @@ class CreateGuiasImpresionTable extends Migration
             $table->text('margenes_encoded');
             $table->text('tipografia_encoded');
             $table->text('informacion_encoded');
-            $table->text('informacion_final')->nullable();
-            $table->enum('tipo_descripcion_informacion', InformantsMananger::descriptionTypes())->nullable();
+            $table->text('informacion_adicional')->nullable();
+            // $table->enum('tipo_descripcion_informacion', InformantsMananger::descriptionTypes())->nullable();
             $table->boolean('activada')->default(1);
             $table->unsignedInteger('intentos_impresion')->default(0);
             $table->timestamps();
-            $table->index(['activada','intentos_impresion']);
+
+            $table->index([
+                'activada',
+                'intentos_impresion'
+            ]);
         });
     }
 

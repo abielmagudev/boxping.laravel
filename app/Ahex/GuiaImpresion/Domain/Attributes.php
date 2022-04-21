@@ -32,20 +32,22 @@ trait Attributes
         return json_decode($this->informacion_encoded, true); // get_object_vars( $this->informacion )
     }
 
-    public function getInformacionJsonAttribute()
-    {
-        return $this->informacion_encoded;
-    }
-
     public function getInformacionCounterAttribute()
     {
         return count( $this->informacion_array );
     }
 
+    public function getInformacionJsonAttribute()
+    {
+        return $this->informacion_encoded;
+    }
+
+    /*
     public function getTipoDescripcionAttribute()
     {
         return $this->tipo_descripcion_informacion;
     }
+    */
 
     // Formato
     public function getFormatoAnchoAttribute()

@@ -42,11 +42,12 @@ trait Validations
         return isset($this->informacion->{$prop});
     }
 
-    public function hasInformacionFinal()
+    public function hasInformacionAdicional()
     {
-        return isset($this->informacion_final);
+        return isset($this->informacion_adicional);
     }
     
+    /*
     public function hasTipoDescripcion($type = null)
     {
         if(! isset($type) )
@@ -54,6 +55,7 @@ trait Validations
 
         return $this->tipo_descripcion_informacion === $type;
     }
+    */
 
     /**
      * 

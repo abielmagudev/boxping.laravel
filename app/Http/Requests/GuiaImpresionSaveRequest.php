@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use App\Ahex\GuiaImpresion\Infrastructure\PageDesigner\PageDesigner;
-use App\Ahex\GuiaImpresion\Application\InformantsMananger;
+// use App\Ahex\GuiaImpresion\Application\InformantsMananger;
 
 class GuiaImpresionSaveRequest extends FormRequest
 {
@@ -25,7 +25,7 @@ class GuiaImpresionSaveRequest extends FormRequest
             'mediciones_fuente' => PageDesigner::allFontMeasurements(','),
             'mediciones_pagina' => PageDesigner::allMeasurements(','),
             'tipos_alineacion' => PageDesigner::allAlignments(','),
-            'tipos_descripcion' => InformantsMananger::descriptionTypes(','),
+            // 'tipos_descripcion' => InformantsMananger::descriptionTypes(','),
         ];
     }
 
@@ -59,8 +59,8 @@ class GuiaImpresionSaveRequest extends FormRequest
 
             // Informacion
             'informacion' => ['required','array'],
-            'informacion_final' => ['nullable','string'],
-            'tipo_descripcion' => ['nullable',"in:{$this->in_list['tipos_descripcion']}"],
+            'informacion_adicional' => ['nullable','string'],
+            // 'tipo_descripcion' => ['nullable',"in:{$this->in_list['tipos_descripcion']}"],
 
             // Extra
             'resetear' => 'boolean',
@@ -101,7 +101,7 @@ class GuiaImpresionSaveRequest extends FormRequest
             // Informacion
             'informacion.required' => __('Debe contener al menos una información para la página'),
             'informacion.array' => __('Selecciona una informacion válida'),
-            'tipo_descripcion.in' => __('Selecciona un tipo de descripción válido de información'),
+            // 'tipo_descripcion.in' => __('Selecciona un tipo de descripción válido de información'),
         ];
     }
 }
