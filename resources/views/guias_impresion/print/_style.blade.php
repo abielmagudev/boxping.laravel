@@ -4,13 +4,13 @@
     print-color-adjust: exact;
 }
 @page {
-    size: <?= $page->size() ?>; /* A4, Letter, Legal ... */
-    margin: <?= $page->margins() ?>;
+    size: <?= $designer->dimensions() ?>; /* A4, Letter, Legal ... */
+    margin: <?= $designer->margins() ?>;
 }
 .information {
-    font-family: "<?= $page->fontName() ?>";
-    font-size: <?= $page->fontSize() ?>; /* calc(tamano_fuente - ?%); */
-    text-align: <?= $page->textAlign() ?>;
+    font-family: "<?= $designer->fontName() ?>";
+    font-size: <?= $designer->fontSize() ?>; /* calc(tamano_fuente - ?%); */
+    text-align: <?= $designer->textAlign() ?>;
 }
 .break-before {
     page-break-before: always;

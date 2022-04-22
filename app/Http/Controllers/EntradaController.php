@@ -27,6 +27,7 @@ use App\GuiaImpresion;
 use App\Entrada;
 use App\Etapa;
 
+use App\Ahex\GuiaImpresion\Application\InformantsMananger;
 
 class EntradaController extends Controller
 {
@@ -168,7 +169,7 @@ class EntradaController extends Controller
 
         return view('guias_impresion.print.single', [
             'entrada' => $entrada,
-            'page' => new PageDesigner($guia),
+            'designer' => new PageDesigner($guia),
         ]);
     }
 
@@ -177,13 +178,13 @@ class EntradaController extends Controller
         $entradas = Entrada::withRelations()->whereIn('id', $request->entradas)->get();
 
         if(! is_a($guia, GuiaImpresion::class) ) 
-            return view('entradas.print.multiple', compact('entradas'));
+            return view('entradas.print.multiple')->with('entradas', $entradas);
 
         $guia->incrementarIntentosImpresion( $entradas->count() );
 
         return view('guias_impresion.print.multiple', [
             'entradas' => $entradas,
-            'page' => new PageDesigner($guia),
+            'designer' => new PageDesigner($guia),
         ]);
     }
 }
