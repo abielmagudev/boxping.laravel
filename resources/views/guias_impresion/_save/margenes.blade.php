@@ -23,7 +23,7 @@
    <div class="col-sm col-sm-3">
       <label class="form-label small" for="select-margen-medicion">Medición</label>
       <select id="select-margen-medicion" class="form-select <?= bootstrap_isInputInvalid('margenes.medicion', $errors) ?>" name="margenes[medicion]">
-         @foreach ($pageDesigner::allMeasurements() as $value => $label)
+         @foreach ($designer::measurements() as $value => $label)
          <option value="<?= $value ?>" <?= toggleSelected($value, old('margenes.medicion', $guia->margenes_medicion)) ?>><?= ucfirst($label) ?></option>
          @endforeach
       </select>

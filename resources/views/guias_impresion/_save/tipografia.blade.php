@@ -3,7 +3,7 @@
    <div class="col-sm mb-3">
       <label class="form-label small" for="select-fuente">Alineación</label>
       <select id="select-fuente" class="form-select <?= bootstrap_isInputInvalid('tipografia.alineacion', $errors) ?>" name="tipografia[alineacion]" required>
-         @foreach ($pageDesigner::allAlignments() as $value => $label)
+         @foreach ($designer::alignments() as $value => $label)
          <option value="<?= $value ?>" <?= toggleSelected($value, old('tipografia.alineacion', $guia->tipografia_alineacion)) ?>>{{ $label }}</option>
          @endforeach
       </select>
@@ -12,7 +12,7 @@
    <div class="col-sm mb-3">
       <label class="form-label small" for="select-fuente">Fuente</label>
       <select id="select-fuente" class="form-select <?= bootstrap_isInputInvalid('tipografia.fuente', $errors) ?>" name="tipografia[fuente]" required>
-         @foreach ($pageDesigner::allFonts() as $value => $label)
+         @foreach ($designer::fonts() as $value => $label)
          <option value="<?= $value ?>" <?= toggleSelected($value, old('tipografia.fuente', $guia->tipografia_fuente)) ?>>{{ $label }}</option>
          @endforeach
       </select>
@@ -26,7 +26,7 @@
    <div class="col-sm">
       <label class="form-label small" for="select-fuente-medicion">Medición</label>
       <select id="select-fuente-medicion" class="form-select <?= bootstrap_isInputInvalid('tipografia.medicion', $errors) ?>" name="tipografia[medicion]" required>
-         @foreach ($pageDesigner::allFontMeasurements() as $value => $label)
+         @foreach ($designer::fontMeasurements() as $value => $label)
          <option value="<?= $value ?>" <?= toggleSelected($value, old('tipografia.medicion', $guia->tipografia_medicion)) ?>>{{ $label }}</option>
          @endforeach
       </select>

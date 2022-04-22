@@ -21,10 +21,10 @@ class GuiaImpresionSaveRequest extends FormRequest
         $this->guia_impresion_actual = $this->guia->id ?? 0;
 
         $this->in_list = [
-            'fuentes' => PageDesigner::allFonts(','),
-            'mediciones_fuente' => PageDesigner::allFontMeasurements(','),
-            'mediciones_pagina' => PageDesigner::allMeasurements(','),
-            'tipos_alineacion' => PageDesigner::allAlignments(','),
+            'fuentes' => implode(',', array_keys(PageDesigner::fonts())),
+            'mediciones_fuente' => implode(',', array_keys(PageDesigner::fontMeasurements())),
+            'mediciones_pagina' => implode(',', array_keys(PageDesigner::measurements())),
+            'tipos_alineacion' => implode(',', array_keys(PageDesigner::alignments())),
             // 'tipos_descripcion' => InformantsMananger::descriptionTypes(','),
         ];
     }

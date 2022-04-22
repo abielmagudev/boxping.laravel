@@ -56,7 +56,7 @@ class GuiaImpresion extends Model
         return json_encode([
             'ancho' => $formato['ancho'] ?? null,
             'alto' => $formato['alto'] ?? null,
-            'medicion' => $formato['medicion'] ?? PageDesigner::defaultMeasurement(),
+            'medicion' => $formato['medicion'] ?? PageDesigner::default('measurement'),
         ]);
     }
 
@@ -67,7 +67,7 @@ class GuiaImpresion extends Model
             'derecha' => $margenes['derecha'] ?? null,
             'abajo' => $margenes['abajo'] ?? null,
             'izquierda' => $margenes['izquierda'] ?? null,
-            'medicion' => $margenes['medicion'] ?? PageDesigner::defaultMeasurement(),
+            'medicion' => $margenes['medicion'] ?? PageDesigner::default('measurement'),
         ]);
     }
 
@@ -75,10 +75,10 @@ class GuiaImpresion extends Model
     {
         return json_encode([
             'alineacion' => $tipografia['alineacion'],
-            'fuente' => $tipografia['fuente'] ?? PageDesigner::defaultFont(),
-            'medicion' => $tipografia['medicion'] ?? PageDesigner::defaultFontMeasurement(),
-            'tamano' => (float) $tipografia['tamano'] ?? PageDesigner::DEFAULT_FONT_SIZE,
-            'interlineado' => PageDesigner::defaultLineHeight(),
+            'fuente' => $tipografia['fuente'] ?? PageDesigner::default('font'),
+            'medicion' => $tipografia['medicion'] ?? PageDesigner::default('font measurement'),
+            'tamano' => (float) $tipografia['tamano'] ?? PageDesigner::default('font size'),
+            'interlineado' => PageDesigner::default('line height'),
         ]);
     }
 

@@ -23,8 +23,8 @@ class GuiaImpresionController extends Controller
     public function create()
     {
         return view('guias_impresion.create', [
-            'pageDesigner' => PageDesigner::class,
-            'informantsManager' => InformantsMananger::class,
+            'designer' => PageDesigner::class,
+            'informants' => InformantsMananger::all(),
             'guia' => new GuiaImpresion,
         ]);
     }
@@ -42,8 +42,8 @@ class GuiaImpresionController extends Controller
     public function edit(GuiaImpresion $guia)
     {
         return view('guias_impresion.edit', [
-            'pageDesigner' => PageDesigner::class,
-            'informantsManager' => InformantsMananger::class,
+            'designer' => PageDesigner::class,
+            'informants' => InformantsMananger::all(),
             'guia' => $guia,
         ]);
     }

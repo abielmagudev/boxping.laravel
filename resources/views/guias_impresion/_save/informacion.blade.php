@@ -5,7 +5,7 @@
             <small class="input-group-text text-muted information-order"></small>
             <select name="informacion[]" id="select-informacion" class="form-select">
                 <option selected disabled></option>
-                @foreach($informantsManager::all() as $informant_name => $informant_class)
+                @foreach($informants as $informant_name => $informant_class)
                 <optgroup label="+ <?= ucfirst($informant_name) ?>">
                     @foreach($informant_class::getActionsDescriptions() as $action => $description)
                     <option value='<?= "{$informant_name}.{$action}" ?>'>{{ $description['completa'] }}</option>
@@ -23,7 +23,7 @@
 @include('@.bootstrap.invalid-input-message', ['name' => 'informacion'])
 
 {{-- <div class="form-check">
-    <input class="form-check-input" type="checkbox" name="tipo_descripcion" value="<-?= $informantsManager::defaultDescriptionType() ?>" id="checkbox-tipo-descripcion-informacion" <?= $guia->hasTipoDescripcion() ? 'checked' : '' ?>>
+    <input class="form-check-input" type="checkbox" name="tipo_descripcion" value="<-?= $informantsManager::defaultDescriptionType() ?>" id="checkbox-tipo-descripcion-informacion" <-?= $guia->hasTipoDescripcion() ? 'checked' : '' ?>>
     <label class="form-check-label" for="checkbox-tipo-descripcion-informacion">Mostrar descripciones de la información seleccionada en la guía impresa.</label>
 </div>
 @include('@.bootstrap.invalid-input-message', ['name' => 'tipo_descripcion']) --}}

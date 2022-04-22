@@ -67,12 +67,12 @@ class PageDesigner
     public static function defaults()
     {
         return [
-            'alignment' => array_key_first( self::allAlignments() ),
-            'font' => array_key_first( self::allFonts() ),
+            'alignment' => array_key_first( self::alignments() ),
+            'font' => array_key_first( self::fonts() ),
             'font size' => 16,
-            'font measurement' => array_key_first( self::allFontMeasurements() ),
-            'line height' => self::allLineHeights()[0],
-            'measurement' => array_key_first( self::allMeasurements() ),
+            'font measurement' => array_key_first( self::fontMeasurements() ),
+            'line height' => self::lineHeights()[0],
+            'measurement' => array_key_first( self::measurements() ),
         ];
     }
 
