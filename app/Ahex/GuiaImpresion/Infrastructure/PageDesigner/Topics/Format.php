@@ -16,7 +16,7 @@ trait Format
 
     public function dimensions()
     {
-        return $this->width() . $this->height();
+        return "{$this->width()} {$this->height()}";
     }
 
     public function margins()
