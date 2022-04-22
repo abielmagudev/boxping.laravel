@@ -5,16 +5,16 @@ namespace App\Ahex\GuiaImpresion\Application;
 class InformantsMananger
 {
     private static $informants = [
-        'cliente' => \App\Ahex\GuiaImpresion\Application\Informants\ClienteInformant::class,
-        'confirmado' => \App\Ahex\GuiaImpresion\Application\Informants\ConfirmadoInformant::class,
-        'consolidado' => \App\Ahex\GuiaImpresion\Application\Informants\ConsolidadoInformant::class,
-        'destinatario' => \App\Ahex\GuiaImpresion\Application\Informants\DestinatarioInformant::class,
         'entrada' => \App\Ahex\GuiaImpresion\Application\Informants\EntradaInformant::class,
-        'etapa' => \App\Ahex\GuiaImpresion\Application\Informants\EtapaInformant::class,
+        'cliente' => \App\Ahex\GuiaImpresion\Application\Informants\ClienteInformant::class,
+        'consolidado' => \App\Ahex\GuiaImpresion\Application\Informants\ConsolidadoInformant::class,
+        'confirmado' => \App\Ahex\GuiaImpresion\Application\Informants\ConfirmadoInformant::class,
+        'destinatario' => \App\Ahex\GuiaImpresion\Application\Informants\DestinatarioInformant::class,
+        'remitente' => \App\Ahex\GuiaImpresion\Application\Informants\RemitenteInformant::class,
         'importado' => \App\Ahex\GuiaImpresion\Application\Informants\ImportadoInformant::class,
         'reempacado' => \App\Ahex\GuiaImpresion\Application\Informants\ReempacadoInformant::class,
-        'remitente' => \App\Ahex\GuiaImpresion\Application\Informants\RemitenteInformant::class,
         'salida' => \App\Ahex\GuiaImpresion\Application\Informants\SalidaInformant::class,
+        'etapa' => \App\Ahex\GuiaImpresion\Application\Informants\EtapaInformant::class,
         'tareas' => \App\Ahex\GuiaImpresion\Application\Informants\EtapaTareasInformant::class,
     ];
 
