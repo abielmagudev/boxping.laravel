@@ -35,7 +35,7 @@ class InformantsMananger
 
     public static function has(string $name, string $action)
     {
-        return self::exists($name) && method_exists(self::get($name), $action);
+        return self::exists($name) && is_callable([self::get($name), $action]);
     }
 
     public static function call(string $name, string $action, \App\Entrada $entrada)
