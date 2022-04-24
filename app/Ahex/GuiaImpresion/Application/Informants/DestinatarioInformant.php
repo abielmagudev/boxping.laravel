@@ -6,42 +6,42 @@ use App\Entrada;
 
 class DestinatarioInformant extends Informant
 {
-    protected static $actions_descriptions = [
+    protected static $tags = [
         'informacion' => [
-            'completa' => 'Información del destinatario (excepto notas)',
-            'minima' => 'Destinatario',
+            'complete' => 'Información del destinatario (excepto notas)',
+            'compact' => 'Destinatario',
         ],
         'nombre' => [
-            'completa' => 'Nombre del destinatario',
-            'minima' => 'Destinatario(nombre)',
+            'complete' => 'Nombre del destinatario',
+            'compact' => 'Destinatario(nombre)',
         ],
         'domicilio' => [
-            'completa' => 'Domicilio del destinatario (calle, número y código postal)',
-            'minima' => 'Destinatario(domicilio)',
+            'complete' => 'Domicilio del destinatario (calle, número y código postal)',
+            'compact' => 'Destinatario(domicilio)',
         ],
         'direccion' => [
-            'completa' => 'Direccion del destinatario (calle y número)',
-            'minima' => 'Destinatario(dirección)',
+            'complete' => 'Direccion del destinatario (calle y número)',
+            'compact' => 'Destinatario(dirección)',
         ],
         'postal' => [
-            'completa' => 'Código postal del destinatario',
-            'minima' => 'Destinatario(postal)',
+            'complete' => 'Código postal del destinatario',
+            'compact' => 'Destinatario(postal)',
         ],
         'localidad' => [
-            'completa' => 'Localidad del destinatario (ciudad, estado y pais)',
-            'minima' => 'Destinatario(localidad)',
+            'complete' => 'Localidad del destinatario (ciudad, estado y pais)',
+            'compact' => 'Destinatario(localidad)',
         ],
         'referencias' => [
-            'completa' => 'Referencias del destinatario',
-            'minima' => 'Destinatario(referencias)',
+            'complete' => 'Referencias del destinatario',
+            'compact' => 'Destinatario(referencias)',
         ],
         'telefono' => [
-            'completa' => 'Telefóno(s) del destinatario',
-            'minima' => 'Destinatario(teléfono)',
+            'complete' => 'Telefóno(s) del destinatario',
+            'compact' => 'Destinatario(teléfono)',
         ],
         'notas' => [
-            'completa' => 'Notas del destinatario',
-            'minima' => 'Destinatario(notas)',
+            'complete' => 'Notas del destinatario',
+            'compact' => 'Destinatario(notas)',
         ],
     ];
     

@@ -6,34 +6,34 @@ use App\Entrada;
 
 class ClienteInformant extends Informant
 {
-    protected static $actions_descriptions = [
+    protected static $tags = [
         'nombre_alias' => [
-            'completa' => 'Nombre y alias del cliente',
-            'minima' => 'Cliente',
+            'complete' => 'Nombre y alias del cliente',
+            'compact' => 'Cliente',
         ],
         'nombre' => [
-            'completa' => 'Nombre del cliente',
-            'minima' => 'Cliente(nombre)',
+            'complete' => 'Nombre del cliente',
+            'compact' => 'Cliente(nombre)',
         ],
         'alias' => [
-            'completa' => 'Alias del cliente',
-            'minima' => 'Cliente(alias)',
+            'complete' => 'Alias del cliente',
+            'compact' => 'Cliente(alias)',
         ],
         'contacto' => [
-            'completa' => 'Información del contacto del cliente',
-            'minima' => 'Cliente(contactar)',
+            'complete' => 'Información del contacto del cliente',
+            'compact' => 'Cliente(contactar)',
         ],
         'contacto_nombre' => [
-            'completa' => 'Nombre del contacto del cliente',
-            'minima' => 'Cliente(contacto)',
+            'complete' => 'Nombre del contacto del cliente',
+            'compact' => 'Cliente(contacto)',
         ],
         'telefono' => [
-            'completa' => 'Teléfono del cliente',
-            'minima' => 'Cliente(teléfono)',
+            'complete' => 'Teléfono del cliente',
+            'compact' => 'Cliente(teléfono)',
         ],
         'correo_electronico' => [
-            'completa' => 'Correo electrónico del cliente',
-            'minima' => 'Cliente(email)',
+            'complete' => 'Correo electrónico del cliente',
+            'compact' => 'Cliente(email)',
         ],
     ];
 

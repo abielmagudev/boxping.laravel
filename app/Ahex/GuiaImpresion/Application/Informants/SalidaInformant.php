@@ -6,42 +6,42 @@ use App\Entrada;
 
 class SalidaInformant extends Informant
 {
-    protected static $actions_descriptions = [
+    protected static $tags = [
         'transportadora' => [
-            'completa' => 'Nombre de la transportadora',
-            'minima' => 'Salida(transportadora)',
+            'complete' => 'Nombre de la transportadora',
+            'compact' => 'Salida(transportadora)',
         ],
         'rastreo' => [
-            'completa' => 'Número de rastreo',
-            'minima' => 'Salida(rastreo)',
+            'complete' => 'Número de rastreo',
+            'compact' => 'Salida(rastreo)',
         ],
         'confirmacion' => [
-            'completa' => 'Número de confirmación',
-            'minima' => 'Salida(confirmación)',
+            'complete' => 'Número de confirmación',
+            'compact' => 'Salida(confirmación)',
         ],
         'status' => [
-            'completa' => 'Status de salida',
-            'minima' => 'Salida(status)',
+            'complete' => 'Status de salida',
+            'compact' => 'Salida(status)',
         ],
         'cobertura' => [
-            'completa' => 'Tipo de cobertura',
-            'minima' => 'Salida(cobertura)',
+            'complete' => 'Tipo de cobertura',
+            'compact' => 'Salida(cobertura)',
         ],
         'domicilio' => [
-            'completa' => 'Domicilio del destinatario ó cobertura: ocurre',
-            'minima' => 'Salida(destinatario ú ocurre)',
+            'complete' => 'Domicilio del destinatario ó cobertura: ocurre',
+            'compact' => 'Salida(destinatario ú ocurre)',
         ],
         'ocurre' => [
-            'completa' => 'Información de cobertura: ocurre',
-            'minima' => 'Salida(ocurre)',
+            'complete' => 'Información de cobertura: ocurre',
+            'compact' => 'Salida(ocurre)',
         ],
         'incidentes' => [
-            'completa' => 'Incidentes en la transportadora',
-            'minima' => 'Salida(incidentes)',
+            'complete' => 'Incidentes en la transportadora',
+            'compact' => 'Salida(incidentes)',
         ],
         'notas' => [
-            'completa' => 'Notas de salida',
-            'minima' => 'Salida(notas)',
+            'complete' => 'Notas de salida',
+            'compact' => 'Salida(notas)',
         ],
     ];
 

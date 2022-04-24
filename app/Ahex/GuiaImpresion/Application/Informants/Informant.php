@@ -4,19 +4,15 @@ namespace App\Ahex\GuiaImpresion\Application\Informants;
 
 abstract class Informant
 {   
-    public static $description_types = ['completa', 'minima'];
+    protected static $tags = [];
 
-    public static $default_description_type = 'minima';
-
-    protected static $actions_descriptions = [];
-
-    public static function getActionsDescriptions()
+    public static function tags()
     {
-        return static::$actions_descriptions;
+        return static::$tags;
     }
 
-    public static function getActionDescription(string $action, string $type_description)
+    public static function tag(string $name, string $size = 'complete')
     {
-        return static::$actions_descriptions[$action][$type_description];
+        return isset( self::tags()[$name][$size] ) ? self::tags()[$name][$size] : null;
     }
 }

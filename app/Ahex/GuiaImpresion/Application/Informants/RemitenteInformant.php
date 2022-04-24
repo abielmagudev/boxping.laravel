@@ -6,38 +6,38 @@ use App\Entrada;
 
 class RemitenteInformant extends Informant
 {
-    protected static $actions_descriptions = [
+    protected static $tags = [
         'informacion' => [
-            'completa' => 'Información del remitente (excepto notas)',
-            'minima' => 'Remitente',
+            'complete' => 'Información del remitente (excepto notas)',
+            'compact' => 'Remitente',
         ],
         'nombre' => [
-            'completa' => 'Nombre del remitente',
-            'minima' => 'Remitente(nombre)',
+            'complete' => 'Nombre del remitente',
+            'compact' => 'Remitente(nombre)',
         ],
         'domicilio' => [
-            'completa' => 'Domicilio del remitente (calle, número y código postal)',
-            'minima' => 'Remitente(domicilio)',
+            'complete' => 'Domicilio del remitente (calle, número y código postal)',
+            'compact' => 'Remitente(domicilio)',
         ],
         'direccion' => [
-            'completa' => 'Dirección del remitente (calle y número)',
-            'minima' => 'Remitente(dirección)',
+            'complete' => 'Dirección del remitente (calle y número)',
+            'compact' => 'Remitente(dirección)',
         ],
         'postal' => [
-            'completa' => 'Código postal del remitente',
-            'minima' => 'Remitente(postal)',
+            'complete' => 'Código postal del remitente',
+            'compact' => 'Remitente(postal)',
         ],
         'localidad' => [
-            'completa' => 'Localidad del remitente (ciudad, estado y pais)',
-            'minima' => 'Remitente(localidad)',
+            'complete' => 'Localidad del remitente (ciudad, estado y pais)',
+            'compact' => 'Remitente(localidad)',
         ],
         'telefono' => [
-            'completa' => 'Telefóno(s) del remitente',
-            'minima' => 'Remitente(teléfono)',
+            'complete' => 'Telefóno(s) del remitente',
+            'compact' => 'Remitente(teléfono)',
         ],
         'notas' => [
-            'completa' => 'Notas del remitente',
-            'minima' => 'Remitente(notas)',
+            'complete' => 'Notas del remitente',
+            'compact' => 'Remitente(notas)',
         ],
     ];
 

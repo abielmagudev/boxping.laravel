@@ -6,34 +6,34 @@ use App\Entrada;
 
 class ImportadoInformant extends Informant
 {
-    protected static $actions_descriptions = [
+    protected static $tags = [
         'informacion' => [
-            'completa' => 'Información de importado de la entrada (excepto número de cruce)',
-            'minima' => 'Importado',
+            'complete' => 'Información de importado de la entrada (excepto número de cruce)',
+            'compact' => 'Importado',
         ],
         'fecha_hora' => [
-            'completa' => 'Fecha y hora de importado de la entrada',
-            'minima' => 'Importado(fecha hora)',
+            'complete' => 'Fecha y hora de importado de la entrada',
+            'compact' => 'Importado(fecha hora)',
         ],
         'fecha' => [
-            'completa' => 'Fecha de importado de la entrada',
-            'minima' => 'Importado(fecha)',
+            'complete' => 'Fecha de importado de la entrada',
+            'compact' => 'Importado(fecha)',
         ],
         'hora' => [
-            'completa' => 'Hora de importado de la entrada',
-            'minima' => 'Importado(hora)',
+            'complete' => 'Hora de importado de la entrada',
+            'compact' => 'Importado(hora)',
         ],
         'vehiculo' => [
-            'completa' => 'Vehículo que realizó el importado la entrada',
-            'minima' => 'Importado(vehículo)',
+            'complete' => 'Vehículo que realizó el importado la entrada',
+            'compact' => 'Importado(vehículo)',
         ],
         'conductor' => [
-            'completa' => 'Conductor que realizó el importado la entrada',
-            'minima' => 'Importado(conductor)',
+            'complete' => 'Conductor que realizó el importado la entrada',
+            'compact' => 'Importado(conductor)',
         ],
         'numero_cruce' => [
-            'completa' => 'Número de cruce de importado de la entrada',
-            'minima' => 'Importado(cruce)',
+            'complete' => 'Número de cruce de importado de la entrada',
+            'compact' => 'Importado(cruce)',
         ],
     ];
 

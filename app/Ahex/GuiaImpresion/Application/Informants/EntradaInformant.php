@@ -6,38 +6,38 @@ use App\Entrada;
 
 class EntradaInformant extends Informant
 {
-    protected static $actions_descriptions = [
+    protected static $tags = [
         'numero' => [
-            'completa' => 'Número de entrada',
-            'minima' => 'Entrada',
+            'complete' => 'Número de entrada',
+            'compact' => 'Entrada',
         ],
         'contenido' => [
-            'completa' => 'Contenido de la entrada',
-            'minima' => 'Contenido',
+            'complete' => 'Contenido de la entrada',
+            'compact' => 'Contenido',
         ],
         'actualizado' => [
-            'completa' => 'Información de la reciente actualización de la entrada',
-            'minima' => 'Actualizado',
+            'complete' => 'Información de la reciente actualización de la entrada',
+            'compact' => 'Actualizado',
         ],
         'creado' => [
-            'completa' => 'Información de creación de la entrada',
-            'minima' => 'Creado',
+            'complete' => 'Información de creación de la entrada',
+            'compact' => 'Creado',
         ],
         'actualizado_fecha_hora' => [
-            'completa' => 'Fecha y hora de la reciente actualización de la entrada',
-            'minima' => 'Actualizado(fecha hora)',
+            'complete' => 'Fecha y hora de la reciente actualización de la entrada',
+            'compact' => 'Actualizado(fecha hora)',
         ],
         'creado_fecha_hora' => [
-            'completa' => 'Fecha y hora de creación de la entrada',
-            'minima' => 'Creado(fecha hora)',
+            'complete' => 'Fecha y hora de creación de la entrada',
+            'compact' => 'Creado(fecha hora)',
         ],
         'actualizado_usuario' => [
-            'completa' => 'Usuario que recién actualizó la entrada',
-            'minima' => 'Actualizado(usuario)',
+            'complete' => 'Usuario que recién actualizó la entrada',
+            'compact' => 'Actualizado(usuario)',
         ],
         'creado_usuario' => [
-            'completa' => 'Usuario que creó la entrada',
-            'minima' => 'Creado(usuario)',
+            'complete' => 'Usuario que creó la entrada',
+            'compact' => 'Creado(usuario)',
         ],
     ];
 

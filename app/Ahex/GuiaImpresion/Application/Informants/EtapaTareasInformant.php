@@ -6,22 +6,22 @@ use App\Entrada;
 
 class EtapaTareasInformant extends Informant
 {
-    protected static $actions_descriptions = [
+    protected static $tags = [
         'contenido' => [
-            'completa' => 'Contenido de la caja',
-            'minima' => 'Contenido(caja)',
+            'complete' => 'Contenido de la caja',
+            'compact' => 'Contenido(caja)',
         ],
         'pesaje' => [
-            'completa' => 'Pesaje de la caja',
-            'minima' => 'Pesaje(caja)',
+            'complete' => 'Pesaje de la caja',
+            'compact' => 'Pesaje(caja)',
         ],
         'volumen' => [
-            'completa' => 'Volúmen de la caja',
-            'minima' => 'Volúmen(caja)',
+            'complete' => 'Volúmen de la caja',
+            'compact' => 'Volúmen(caja)',
         ],
         'pesaje_volumen' => [
-            'completa' => 'Pesaje y volúmen de la caja',
-            'minima' => 'Medidas(caja)',
+            'complete' => 'Pesaje y volúmen de la caja',
+            'compact' => 'Medidas(caja)',
         ],
     ];
 

@@ -6,18 +6,18 @@ use App\Entrada;
 
 class ConfirmadoInformant extends Informant
 {
-    protected static $actions_descriptions = [
+    protected static $tags = [
         'informacion' => [
-            'completa' => 'Información completa de confirmado de la entrada',
-            'minima' => 'Confirmado',
+            'complete' => 'Información completa de confirmado de la entrada',
+            'compact' => 'Confirmado',
         ],
         'fecha_hora' => [
-            'completa' => 'Fecha y hora de confirmado de la entrada',
-            'minima' => 'Confirmado(fecha hora)',
+            'complete' => 'Fecha y hora de confirmado de la entrada',
+            'compact' => 'Confirmado(fecha hora)',
         ],
         'usuario' => [
-            'completa' => 'Usuario que confirmó la entrada',
-            'minima' => 'Confirmado(usuario)',
+            'complete' => 'Usuario que confirmó la entrada',
+            'compact' => 'Confirmado(usuario)',
         ],
     ];
 

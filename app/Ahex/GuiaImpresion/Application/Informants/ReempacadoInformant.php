@@ -6,34 +6,34 @@ use App\Entrada;
 
 class ReempacadoInformant extends Informant
 {
-    protected static $actions_descriptions = [
+    protected static $tags = [
         'informacion' => [
-            'completa' => 'Información de reempacado de la entrada (excepto descripción)',
-            'minima' => 'Reempacado',
+            'complete' => 'Información de reempacado de la entrada (excepto descripción)',
+            'compact' => 'Reempacado',
         ],
         'fecha_hora' => [
-            'completa' => 'Fecha y hora de reempacado de la entrada',
-            'minima' => 'Reempacado(fecha hora)',
+            'complete' => 'Fecha y hora de reempacado de la entrada',
+            'compact' => 'Reempacado(fecha hora)',
         ],
         'fecha' => [
-            'completa' => 'Fecha de reempacado de la entrada',
-            'minima' => 'Reempacado(fecha)',
+            'complete' => 'Fecha de reempacado de la entrada',
+            'compact' => 'Reempacado(fecha)',
         ],
         'hora' => [
-            'completa' => 'Hora de reempacado de la entrada',
-            'minima' => 'Reempacado(hora)',
+            'complete' => 'Hora de reempacado de la entrada',
+            'compact' => 'Reempacado(hora)',
         ],
         'codigor' => [
-            'completa' => 'Código de reempacado de la entrada',
-            'minima' => 'Reempacado(código)',
+            'complete' => 'Código de reempacado de la entrada',
+            'compact' => 'Reempacado(código)',
         ],
         'descripcion' => [
-            'completa' => 'Descripción del código de reempacado de la entrada',
-            'minima' => 'Reempacadod(descripción)',
+            'complete' => 'Descripción del código de reempacado de la entrada',
+            'compact' => 'Reempacadod(descripción)',
         ],
         'reempacador' => [
-            'completa' => 'Reempacador que realizó el reempacado de la entrada',
-            'minima' => 'Reempacado(usuario)',
+            'complete' => 'Reempacador que realizó el reempacado de la entrada',
+            'compact' => 'Reempacado(usuario)',
         ],
     ];
 
