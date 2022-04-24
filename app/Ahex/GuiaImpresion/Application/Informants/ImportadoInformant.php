@@ -6,6 +6,8 @@ use App\Entrada;
 
 class ImportadoInformant extends Informant
 {
+    protected static $title = 'Importación';
+
     protected static $tags = [
         'informacion' => [
             'complete' => 'Información de importado de la entrada (excepto número de cruce)',

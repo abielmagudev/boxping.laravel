@@ -6,6 +6,8 @@ use App\Entrada;
 
 class ReempacadoInformant extends Informant
 {
+    protected static $title = 'Reempacado';
+
     protected static $tags = [
         'informacion' => [
             'complete' => 'Información de reempacado de la entrada (excepto descripción)',

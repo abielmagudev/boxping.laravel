@@ -6,6 +6,8 @@ use App\Entrada;
 
 class ConsolidadoInformant extends Informant
 {
+    protected static $title = 'Consolidado';
+
     protected static $tags = [
         'numero' => [
             'complete' => 'Número de consolidado',

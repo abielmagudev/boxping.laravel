@@ -6,6 +6,8 @@ use App\Entrada;
 
 class ClienteInformant extends Informant
 {
+    protected static $title = 'Cliente';
+
     protected static $tags = [
         'nombre_alias' => [
             'complete' => 'Nombre y alias del cliente',

@@ -6,6 +6,8 @@ use App\Entrada;
 
 class ConfirmadoInformant extends Informant
 {
+    protected static $title = 'Confirmación';
+
     protected static $tags = [
         'informacion' => [
             'complete' => 'Información completa de confirmado de la entrada',

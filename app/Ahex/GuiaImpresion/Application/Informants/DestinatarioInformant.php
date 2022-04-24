@@ -6,6 +6,8 @@ use App\Entrada;
 
 class DestinatarioInformant extends Informant
 {
+    protected static $title = 'Destinatario';
+
     protected static $tags = [
         'informacion' => [
             'complete' => 'Información del destinatario (excepto notas)',

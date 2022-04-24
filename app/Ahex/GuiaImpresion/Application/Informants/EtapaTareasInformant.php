@@ -6,6 +6,8 @@ use App\Entrada;
 
 class EtapaTareasInformant extends Informant
 {
+    protected static $title = 'Tareas (Seleccionar la etapa previamente)';
+
     protected static $tags = [
         'contenido' => [
             'complete' => 'Contenido de la caja',

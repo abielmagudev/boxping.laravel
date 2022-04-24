@@ -6,9 +6,9 @@
             <select name="informacion[]" id="select-informacion" class="form-select">
                 <option selected disabled></option>
                 @foreach($informants as $name => $class)
-                <optgroup label="+ <?= ucfirst($name) ?>">
+                <optgroup label="+ <?= $class::title() ?>">
                     @foreach($class::tags() as $action => $tag)
-                    <option value='<?= $name.'.'.$action ?>'>{{ $tag['complete'] }}</option>
+                    <option value='<?= "{$name}.{$action}" ?>'>{{ $tag['complete'] }}</option>
                     @endforeach
                 </optgroup>
                 @endforeach

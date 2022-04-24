@@ -6,6 +6,8 @@ use App\Entrada;
 
 class SalidaInformant extends Informant
 {
+    protected static $title = 'Salida';
+
     protected static $tags = [
         'transportadora' => [
             'complete' => 'Nombre de la transportadora',
