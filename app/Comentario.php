@@ -8,9 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Comentario extends Model
 {
     use HasFactory;
-    
-    protected $table = 'entrada_comentarios';
-    
+        
     protected $with = ['creator'];
     
     protected $fillable = array(
