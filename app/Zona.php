@@ -6,8 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Zona extends Model
 {
-    protected $table = 'etapa_zonas';
-
     protected $fillable = [
         'nombre',
         'descripcion',
