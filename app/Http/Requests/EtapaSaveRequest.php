@@ -46,8 +46,8 @@ class EtapaSaveRequest extends FormRequest
             'orden.integer' => __('La propiedad orden debe ser numerico entero'),
             'orden.min' => __('La propiedad orden de etapa es 1'),
             'tareas.array' => __('Selecciona una opción válida de tareas'),
-            'medicion_peso.in' => __('Selecciona una opción valida en medición de peso'),
-            'medicion_volumen.in' => __('Selecciona una opción valida en medición de volúmen'),
+            'medicion_peso.in' => __('Selecciona una opción valida de única medición de peso'),
+            'medicion_volumen.in' => __('Selecciona una opción valida de única medición de volúmen'),
         ];
     }
 }

@@ -29,7 +29,7 @@
 <div class="row">
     <div class="col-sm">
         <div class="mb-3">
-            <label for="select-medicion_peso" class="form-label small">Medición de peso</label>
+            <label for="select-medicion_peso" class="form-label small">Única medición de peso</label>
             <select name="medicion_peso" id="select-medicion_peso" class="form-select {{ bootstrap_isInputInvalid('medicion_peso', $errors) }}">
                 <option label="Cuaquiera" selected></option>
                 @foreach($etapa::medicionesPeso() as $abbr => $value)
@@ -41,7 +41,7 @@
     </div>
     <div class="col-sm">
         <div class="mb-3">
-            <label for="select-medicion_volumen" class="form-label small">Medición de volúmen</label>
+            <label for="select-medicion_volumen" class="form-label small">Única medición de volúmen</label>
             <select name="medicion_volumen" id="select-medicion_volumen" class="form-select {{ bootstrap_isInputInvalid('medicion_volumen', $errors) }}">
                 <option label="Cualquiera" selected></option>
                 @foreach($etapa::medicionesVolumen() as $abbr => $value)

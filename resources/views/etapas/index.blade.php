@@ -15,7 +15,7 @@
     ])
         @foreach($etapas as $etapa)
         <tr>
-            <td>{{ $etapa->orden }}</td>
+            <td class="text-center">{{ $etapa->orden }}</td>
             <td>{{ $etapa->nombre }}</td>
             <td>{!! $etapa->descripcionesTareas(', ') !!}</td>
             <td class="text-end">

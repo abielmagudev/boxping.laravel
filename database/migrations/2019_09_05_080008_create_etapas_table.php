@@ -16,9 +16,9 @@ class CreateEtapasTable extends Migration
             $table->string('nombre')->unique()->index();
             $table->string('slug')->unique()->index();
             $table->unsignedTinyInteger('orden')->default(1);
-            $table->string('json_tareas', 80)->nullable();
-            $table->enum('medicion_unica_peso', $mediciones_peso)->nullable();
-            $table->enum('medicion_unica_volumen', $mediciones_volumen)->nullable();
+            $table->string('tareas_encoded', 80)->nullable();
+            $table->enum('unica_medicion_peso', $mediciones_peso)->nullable();
+            $table->enum('unica_medicion_volumen', $mediciones_volumen)->nullable();
             $table->unsignedInteger('created_by');
             $table->unsignedInteger('updated_by');
             $table->timestamps();

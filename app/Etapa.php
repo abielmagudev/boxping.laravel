@@ -26,8 +26,8 @@ class Etapa extends Model implements ModifierIdentifiable
      * @var array
      */
     public static $tareas = [
-        'peso' => 'Medición de peso',
-        'volumen' => 'Medición de volúmen',
+        'pesaje' => 'Medidas de pesaje',
+        'volumen' => 'Medidas de volúmen',
         'conteo' => 'Conteo de artículos',
     ];
 
@@ -35,9 +35,9 @@ class Etapa extends Model implements ModifierIdentifiable
         'nombre',
         'slug',
         'orden',
-        'json_tareas',
-        'medicion_unica_peso',
-        'medicion_unica_volumen',
+        'tareas_encoded',
+        'unica_medicion_peso',
+        'unica_medicion_volumen',
         'created_by',
         'updated_by',
     ];
@@ -50,9 +50,9 @@ class Etapa extends Model implements ModifierIdentifiable
             'nombre' => $validated['nombre'],
             'slug' => Str::slug($validated['nombre']),
             'orden' => $validated['orden'],
-            'json_tareas' => isset($validated['tareas']) ? json_encode($validated['tareas']) : null,
-            'medicion_unica_peso' => isset($validated['medicion_peso']) ? $validated['medicion_peso'] : null,
-            'medicion_unica_volumen' => isset($validated['medicion_volumen']) ? $validated['medicion_volumen'] : null,
+            'tareas_encoded' => isset($validated['tareas']) ? json_encode($validated['tareas']) : null,
+            'unica_medicion_peso' => isset($validated['medicion_peso']) ? $validated['medicion_peso'] : null,
+            'unica_medicion_volumen' => isset($validated['medicion_volumen']) ? $validated['medicion_volumen'] : null,
             'updated_by' => auth()->user()->id,
         ];
 
@@ -140,65 +140,65 @@ class Etapa extends Model implements ModifierIdentifiable
 
     // Attributes
 
-    public function getArrayTareasAttribute()
+    public function getTareasArrayAttribute()
     {
-        return json_decode($this->json_tareas) ?? [];
+        return json_decode($this->tareas_encoded, true) ?? [];
     }
 
     public function getTareasAttribute()
     {
-        if( ! $this->hasTareas() )
+        if(! $this->hasTareas() )
             return 'ninguna';
 
-        return implode(', ', $this->array_tareas);
+        return implode(', ', $this->tareas_array);
     }
 
-    public function getArrayDescripcionesTareasAttribute()
+    public function getDescripcionesTareasAttribute()
     {
-        if( ! $this->hasTareas() )
+        if(! $this->hasTareas() )
             return self::ETAPA_SIN_TAREAS;
 
-        $tareas_filtradas = self::filterTareas( $this->array_tareas );
+        $tareas_filtradas = self::filterTareas( $this->tareas_array );
         return array_values($tareas_filtradas);
     }
 
     public function descripcionesTareas(string $glue = null)
     {
         return is_string($glue) &&! empty($glue) 
-                ? implode($glue, $this->array_descripciones_tareas) 
-                : $this->array_descripciones_tareas;
+                ? implode($glue, $this->descripciones_tareas) 
+                : $this->descripciones_tareas;
     }
 
-    public function getNombreMedicionUnicaPesoAttribute()
+    public function getNombreUnicaMedicionPesoAttribute()
     {
-        if( ! $this->hasMedicionUnicaPeso() )
+        if(! $this->hasUnicaMedicionPeso() )
             return 'cualquiera';
         
-        return self::medicionesPeso()[$this->medicion_unica_peso];
+        return self::medicionesPeso()[$this->unica_medicion_peso];
     }
 
-    public function getNombreMedicionUnicaVolumenAttribute()
+    public function getNombreUnicaMedicionVolumenAttribute()
     {
-        if( ! $this->hasMedicionUnicaVolumen() )
+        if(! $this->hasUnicaMedicionVolumen() )
             return 'cualquiera';
 
-        return self::medicionesVolumen()[$this->medicion_unica_volumen];
+        return self::medicionesVolumen()[$this->unica_medicion_volumen];
     }
 
     public function getMedicionesPesoAttribute()
     {
-        if( ! $this->hasMedicionUnicaPeso() )
+        if(! $this->hasMedicionUnicaPeso() )
             return self::medicionesPeso();
         
-        return [$this->medicion_unica_peso => $this->nombreMedicionUnicaPeso];
+        return [$this->unica_medicion_peso => $this->nombreMedicionUnicaPeso];
     }
 
     public function getMedicionesVolumenAttribute()
     {
-        if( ! $this->hasMedicionUnicaVolumen() )
+        if(! $this->hasMedicionUnicaVolumen() )
             return self::medicionesVolumen();
         
-        return [$this->medicion_unica_volumen => $this->nombreMedicionUnicaVolumen];
+        return [$this->unica_medicion_volumen => $this->nombreMedicionUnicaVolumen];
     }
 
 
@@ -212,25 +212,25 @@ class Etapa extends Model implements ModifierIdentifiable
 
     public function hasTareas()
     {
-        return count($this->array_tareas) > 0;
+        return count($this->tareas_array) > 0;
     }
 
     public function hasTarea(string $key)
     {
-        if( ! $this->hasTareas() )
+        if(! $this->hasTareas() )
             return (bool) self::ETAPA_SIN_TAREAS;
 
-        return in_array($key, $this->array_tareas);
+        return in_array($key, $this->tareas_array);
     }
 
-    public function hasMedicionUnicaPeso()
+    public function hasUnicaMedicionPeso()
     {
-        return ! is_null($this->medicion_unica_peso) && isset( self::medicionesPeso()[ $this->medicion_unica_peso ] );
+        return ! is_null($this->unica_medicion_peso) && isset( self::medicionesPeso()[ $this->unica_medicion_peso ] );
     }
 
-    public function hasMedicionUnicaVolumen()
+    public function hasUnicaMedicionVolumen()
     {
-        return ! is_null($this->medicion_unica_volumen) && isset( self::medicionesVolumen()[ $this->medicion_unica_volumen ] );
+        return ! is_null($this->unica_medicion_volumen) && isset( self::medicionesVolumen()[ $this->unica_medicion_volumen ] );
     }
 
 

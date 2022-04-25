@@ -20,17 +20,17 @@
                 <li>{{ $descripcion }}</li>
 
                 @empty
-                <li>Solamente registrar</li>
+                <li>Registrar únicamente</li>
 
                 @endforelse
             </ul>
             <p>
                 <small class="d-block text-muted small">Medición de peso</small>
-                <span class="text-capitalize">{{ $etapa->nombreMedicionUnicaPeso }}</span>
+                <span class="text-capitalize">{{ $etapa->nombreUnicaMedicionPeso }}</span>
             </p>
             <p>
                 <small class="d-block text-muted small">Medición de volúmen</small>
-                <span class="text-capitalize">{{ $etapa->nombreMedicionUnicaVolumen }}</span>
+                <span class="text-capitalize">{{ $etapa->nombreUnicaMedicionVolumen }}</span>
             </p>
         @endcomponent   
     </div>

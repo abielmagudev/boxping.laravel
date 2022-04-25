@@ -28,9 +28,9 @@ class EtapaFactory extends Factory
             'nombre' => $nombre,
             'slug' => Str::slug($nombre),
             'orden' => $this->faker->numberBetween(1, 20),
-            'json_tareas' => $this->faker->boolean ? json_encode( Etapa::tareas(true) ) : null,
-            'medicion_unica_peso' => $this->faker->boolean ? $this->faker->randomElement( Etapa::medicionesPeso(true) ) : null,
-            'medicion_unica_volumen' => $this->faker->boolean ? $this->faker->randomElement( Etapa::medicionesVolumen(true) ) : null,
+            'tareas_encoded' => $this->faker->boolean ? json_encode( Etapa::tareas(true) ) : null,
+            'unica_medicion_peso' => $this->faker->boolean ? $this->faker->randomElement( Etapa::medicionesPeso(true) ) : null,
+            'unica_medicion_volumen' => $this->faker->boolean ? $this->faker->randomElement( Etapa::medicionesVolumen(true) ) : null,
             'created_by' => $this->faker->numberBetween(1,10),
             'updated_by' => $this->faker->numberBetween(1,10),
         ];
