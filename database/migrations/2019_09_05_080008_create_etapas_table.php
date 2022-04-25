@@ -3,22 +3,20 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Etapa;
 
 class CreateEtapasTable extends Migration
 {
     public function up()
     {
-        $mediciones_peso = array_keys(config('system.mediciones.peso'));
-        $mediciones_volumen = array_keys(config('system.mediciones.longitud'));
-
-        Schema::create('etapas', function (Blueprint $table) use ($mediciones_peso, $mediciones_volumen) {
+        Schema::create('etapas', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('nombre')->unique()->index();
             $table->string('slug')->unique()->index();
             $table->unsignedTinyInteger('orden')->default(1);
             $table->string('tareas_encoded', 80)->nullable();
-            $table->enum('unica_medicion_peso', $mediciones_peso)->nullable();
-            $table->enum('unica_medicion_volumen', $mediciones_volumen)->nullable();
+            $table->enum('unica_medicion_peso', Etapa::medicionesPeso(true))->nullable();
+            $table->enum('unica_medicion_volumen', Etapa::medicionesVolumen(true))->nullable();
             $table->unsignedInteger('created_by');
             $table->unsignedInteger('updated_by');
             $table->timestamps();
