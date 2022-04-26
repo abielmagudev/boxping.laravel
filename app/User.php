@@ -6,6 +6,8 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
 
 class User extends Authenticatable
 {
@@ -37,4 +39,19 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public static function prepare(array $validated)
+    {
+        $prepared = [
+            'name' => $validated['nombre'],
+            'email' => $validated['email'],
+            'email_verified_at' => now(),
+            // 'remember_token' => Str::random(10)
+        ];
+
+        if( isset($validated['clave']) )
+            $prepared['password'] = Hash::make($validated['clave']);
+
+        return $prepared;
+    }
 }
