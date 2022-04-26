@@ -104,7 +104,7 @@ trait Attributes
 
     public function getTipografiaTamanoAttribute()
     {
-        return $this->tipografia->tamano ?? PageDesigner::DEFAULT_FONT_SIZE;
+        return $this->tipografia->tamano ?? PageDesigner::default('font size');
     }
 
     public function getTipografiaMedicionAttribute()
