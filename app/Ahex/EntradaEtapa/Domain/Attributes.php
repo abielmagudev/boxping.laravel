@@ -19,14 +19,19 @@ trait Attributes
         return $mapped->implode('');
     }
 
-    public function getLecturaPesoAttribute()
+    public function getLecturaPesajeAttribute()
     {
-        return "{$this->peso} {$this->medida_peso}";
+        return ($this->peso ?? '0') . $this->medicion_peso;
     }
 
     public function getLecturaVolumenAttribute()
     {
-        return "{$this->ancho} x {$this->altura} x {$this->largo} {$this->medida_volumen}";
+        return "{$this->largo} x {$this->ancho} x {$this->alto}{$this->medicion_volumen}";
+    }
+
+    public function getLecturaPesajeVolumenAttribute()
+    {
+        return "{$this->lectura_pesaje} {$this->lectura_volumen}";
     }
 
     public function getNombreMedicionPesoAttribute()

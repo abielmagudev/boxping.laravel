@@ -9,10 +9,6 @@ class EtapaTareasInformant extends Informant
     protected static $title = 'Tareas (Seleccionar la etapa previamente)';
 
     protected static $tags = [
-        'contenido' => [
-            'complete' => 'Contenido de la caja',
-            'compact' => 'Contenido(caja)',
-        ],
         'pesaje' => [
             'complete' => 'Pesaje de la caja',
             'compact' => 'Pesaje(caja)',
@@ -25,25 +21,46 @@ class EtapaTareasInformant extends Informant
             'complete' => 'Pesaje y volúmen de la caja',
             'compact' => 'Medidas(caja)',
         ],
+        'cantidad' => [
+            'complete' => 'Cantidad de artículos en la caja',
+            'compact' => 'Articulos(caja)',
+        ],
     ];
 
-    public static function contenido(Entrada $entrada)
+    public static function etapa()
     {
-        return 'Contenido de la caja en la etapa';
+        $etapas = EtapaInformant::etapas();
+        return end( $etapas );
+    }
+
+    public static function validateEtapa(string $tarea)
+    {
+        return self::etapa()->isReal() && self::etapa()->hasTarea($tarea);
     }
 
     public static function pesaje(Entrada $entrada)
     {
-        return 'Pesaje de la caja en la etapa';
+        if(! self::validateEtapa('pesaje') )
+            return '...pesaje?';
+
+        return $entrada->etapas()->find(self::etapa()->id)->entrada_etapa->lectura_pesaje ?? 'Sin pesaje';
     }
 
     public static function volumen(Entrada $entrada)
     {
-        return 'Volúmen de la caja en la etapa';
+        if(! self::validateEtapa('volumen') )
+            return '...volúmen?';
+
+        return $entrada->etapas()->find(self::etapa()->id)->entrada_etapa->lectura_volumen ?? 'Sin volúmen';
     }
 
     public static function pesaje_volumen(Entrada $entrada)
     {
-        return 'Pesaje y volúmen de la caja en la etapa';
+        return self::pesaje($entrada) . ' / ' . self::volumen($entrada);
+    }
+
+    public static function cantidad_articulos(Entrada $entrada)
+    {
+        return 'Cantidad de articulos';
     }
 }

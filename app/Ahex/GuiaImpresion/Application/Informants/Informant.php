@@ -4,7 +4,7 @@ namespace App\Ahex\GuiaImpresion\Application\Informants;
 
 abstract class Informant
 {   
-    protected static $title = 'Titulo?...';
+    protected static $title = '...titulo?';
 
     protected static $tags = [];
 
