@@ -77,6 +77,7 @@
 
 @include('entradas.index.card', [
     'entradas' => $entradas,
+    'title' => 'Entradas',
     'cache' => [
         'consolidado' => $consolidado,
         'cliente' => $consolidado->cliente,
