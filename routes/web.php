@@ -94,6 +94,7 @@ Route::middleware('auth')->group( function () {
             'conductores' => 'conductor',
             'reempacadores' => 'reempacador',
             'guias_impresion' => 'guia', 
+            'usuario' => 'user',
         ]
     ]);
 });
