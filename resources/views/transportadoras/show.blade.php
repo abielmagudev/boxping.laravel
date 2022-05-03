@@ -20,10 +20,7 @@
             <p class="text-wrap">
                 <small class="d-block text-muted">Sitio web</small>
                 @if( $transportadora->hasWeb() )
-                <span class="">{{ $transportadora->web }}</span>
-                <span class="d-block text-end mt-2">
-                    <a href="{{ $transportadora->web }}" target="_blank" class="small link-primary">Ver sitio web</a>
-                </span>
+                <a href="{{ $transportadora->web }}" target="_blank" class="small link-primary">{{ $transportadora->web }}</a>
                 @endif
             </p>
             <p class="text-wrap">
@@ -35,18 +32,17 @@
 
     <!-- Salidas -->
     <div class="col-sm col-sm-9">
-        @component('@.bootstrap.card', [
-            'title' => 'Salidas recientes',    
+        @include('salidas.index.card', [
+            'settings' => [
+                'except' => ['transportadora', 'edit'],
+            ],
         ])
-            @include('@.partials.table-salidas.content', [
-                'salidas' => $salidas,
-                'edit' => false,
-            ])
-        @endcomponent
     </div>
 
 </div>
 <!-- End row -->
 <br>
+
+@include('salidas.index.pagination')
 
 @endsection
