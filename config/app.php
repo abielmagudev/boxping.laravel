@@ -177,7 +177,8 @@ return [
 
         // Infrastructure
         App\Providers\FortifyServiceProvider::class,
-
+        Spatie\Permission\PermissionServiceProvider::class,
+        
     ],
 
     /*
