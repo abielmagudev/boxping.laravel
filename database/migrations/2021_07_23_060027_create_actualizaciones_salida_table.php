@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateEntradaActualizacionesTable extends Migration
+class CreateActualizacionesSalidaTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,16 @@ class CreateEntradaActualizacionesTable extends Migration
      */
     public function up()
     {
-        Schema::create('entrada_actualizaciones', function (Blueprint $table) {
+        Schema::create('actualizaciones_salida', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('descripcion', 128);
-            $table->unsignedBigInteger('entrada_id')->index();
+            $table->unsignedBigInteger('salida_id')->index();
             $table->unsignedInteger('user_id')->index();
-            $table->timestamp('created_at');
+            $table->timestamps();
 
-            $table->foreign('entrada_id')
+            $table->foreign('salida_id')
                   ->references('id')
-                  ->on('entradas')
+                  ->on('salidas')
                   ->onDelete('cascade');
         });
     }
@@ -34,6 +34,6 @@ class CreateEntradaActualizacionesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('entrada_actualizaciones');
+        Schema::dropIfExists('salida_actualizaciones');
     }
 }

@@ -4,9 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class SalidaActualizacion extends Model
+class ActualizacionSalida extends Model
 {
-    protected $table = 'salida_actualizaciones';
+    protected $table = 'actualizaciones_salida';
 
     protected $fillable = [
         'descripcion',

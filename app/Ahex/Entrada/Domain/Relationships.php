@@ -8,7 +8,7 @@ trait Relationships
 {
     public function actualizaciones()
     {
-        return $this->hasMany(\App\EntradaActualizacion::class)->with('updater')->orderByDesc('id');
+        return $this->hasMany(\App\ActualizacionEntrada::class)->with('updater')->orderByDesc('id');
     }
 
     public function comentarios()

@@ -3,7 +3,7 @@
 namespace App\Observers;
 
 use App\Salida;
-use App\SalidaActualizacion;
+use App\ActualizacionSalida;
 
 class SalidaObserver
 {
@@ -20,7 +20,7 @@ class SalidaObserver
             if( ! $salida->hasUpdateDescription($updated) )
                 continue;
 
-            SalidaActualizacion::create([
+            ActualizacionSalida::create([
                 'descripcion' => $salida->getUpdateDescription($updated),
                 'salida_id' => $salida->id,
                 'user_id' => $salida->updated_by,

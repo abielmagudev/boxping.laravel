@@ -4,7 +4,7 @@ namespace App\Observers;
 
 use App\Etapa;
 use App\EntradaEtapa;
-use App\EntradaActualizacion;
+use App\ActualizacionEntrada;
 
 class EntradaEtapaObserver
 {
@@ -16,7 +16,7 @@ class EntradaEtapaObserver
      */
     public function created(EntradaEtapa $entradaEtapa)
     {
-        return EntradaActualizacion::create([
+        return ActualizacionEntrada::create([
             'descripcion' => "agregó etapa {$entradaEtapa->etapa->nombre}",
             'entrada_id' => $entradaEtapa->entrada_id,
             'user_id' => $entradaEtapa->updated_by,
@@ -31,7 +31,7 @@ class EntradaEtapaObserver
      */
     public function updated(EntradaEtapa $entradaEtapa)
     {
-        return EntradaActualizacion::create([
+        return ActualizacionEntrada::create([
             'descripcion' => "actualizó etapa {$entradaEtapa->etapa->nombre}",
             'entrada_id' => $entradaEtapa->entrada_id,
             'user_id' => $entradaEtapa->updated_by,
@@ -46,7 +46,7 @@ class EntradaEtapaObserver
      */
     public function deleted(EntradaEtapa $entradaEtapa)
     {
-        return EntradaActualizacion::create([
+        return ActualizacionEntrada::create([
             'descripcion' => "eliminó etapa {$entradaEtapa->etapa->nombre}",
             'entrada_id' => $entradaEtapa->entrada_id,
             'user_id' => rand(1,9),

@@ -3,7 +3,7 @@
 namespace App\Observers;
 
 use App\SalidaIncidente;
-use App\SalidaActualizacion;
+use App\ActualizacionSalida;
 
 class SalidaIncidenteObserver
 {
@@ -15,7 +15,7 @@ class SalidaIncidenteObserver
      */
     public function created(SalidaIncidente $salidaIncidente)
     {
-        SalidaActualizacion::create([
+        ActualizacionSalida::create([
             'descripcion' => "agregó incidente {$salidaIncidente->incidente->titulo}",
             'salida_id' => $salidaIncidente->salida_id,
             'user_id' => $salidaIncidente->salida->updated_by,
@@ -30,7 +30,7 @@ class SalidaIncidenteObserver
      */
     public function deleted(SalidaIncidente $salidaIncidente)
     {
-        SalidaActualizacion::create([
+        ActualizacionSalida::create([
             'descripcion' => "eliminó incidente {$salidaIncidente->incidente->titulo}",
             'salida_id' => $salidaIncidente->salida_id,
             'user_id' => $salidaIncidente->salida->updated_by,

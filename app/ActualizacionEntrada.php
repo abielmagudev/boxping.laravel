@@ -4,9 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class EntradaActualizacion extends Model
+class ActualizacionEntrada extends Model
 {
-    protected $table = 'entrada_actualizaciones';
+    protected $table = 'actualizaciones_entrada';
 
     protected $fillable = [
         'descripcion',

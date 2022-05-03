@@ -3,7 +3,7 @@
 namespace App\Observers;
 
 use App\Entrada;
-use App\EntradaActualizacion;
+use App\ActualizacionEntrada;
 
 class EntradaObserver
 {
@@ -20,7 +20,7 @@ class EntradaObserver
             if( ! $entrada->hasUpdateDescription($updated) )
                 continue;
 
-            EntradaActualizacion::create([
+            ActualizacionEntrada::create([
                 'descripcion' => $entrada->getUpdateDescription($updated),
                 'entrada_id' => $entrada->id,
                 'user_id' => $entrada->updated_by,
