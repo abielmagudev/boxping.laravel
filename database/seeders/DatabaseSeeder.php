@@ -29,6 +29,7 @@ class DatabaseSeeder extends Seeder
             RemitenteSeeder::class,
             TransportadoraSeeder::class,
             VehiculoSeeder::class,
+            RoleSeeder::class,
             UserSeeder::class,
 
             // OPERATIVAS
