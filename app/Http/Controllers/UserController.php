@@ -10,6 +10,12 @@ use Spatie\Permission\Models\Permission;
 
 class UserController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('can:users'); // ->only('permissions method')
+    }
+
     /**
      * Display a listing of the resource.
      *

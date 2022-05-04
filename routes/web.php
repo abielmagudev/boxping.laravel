@@ -27,7 +27,7 @@ Route::middleware('guest')->group( function () {
 Route::middleware('auth')->group( function () {
 
     // Escritorio
-    Route::get('/{home?}', function() { return view('app'); })
+    Route::middleware('can:escritorio')->get('/{home?}', function() { return view('app'); })
             ->name('escritorio')
             ->where(['home' => 'home|dashboard']);
     
