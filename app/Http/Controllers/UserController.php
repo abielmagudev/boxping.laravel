@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\UserSaveRequest;
 use App\User;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 class UserController extends Controller
 {
@@ -26,7 +28,8 @@ class UserController extends Controller
     public function create()
     {
         return view('users.create', [
-            'user' => new User
+            'user' => new User,
+            'roles' => Role::all()->except(1),
         ]);
     }
 
@@ -42,6 +45,8 @@ class UserController extends Controller
 
         if(! $user = User::create($prepared) )
             return redirect()->route('usuarios.create')->withInput( $request->except('clave') )->with('failure', 'Error al guardar nuevo usuario');
+
+        $user->roles()->sync($request->role);
 
         return redirect()->route('usuarios.index')->with('success', "Usuario {$user->name} guardado");
     }
@@ -65,7 +70,10 @@ class UserController extends Controller
      */
     public function edit(User $usuario)
     {
-        return view('users.edit')->with('user', $usuario);
+        return view('users.edit', [
+            'user' => $usuario,
+            'roles' => Role::all()->except(1),
+        ]);
     }
 
     /**
@@ -77,13 +85,15 @@ class UserController extends Controller
      */
     public function update(UserSaveRequest $request, $id)
     {
+        $user = User::findOrFail($id);
         $prepared = User::prepare($request->validated());
 
-        $saved = User::where('id', $id)->update($prepared) 
-                ? ['success', 'Usuario actualizado']
-                : ['failure', 'Error al actualizar usuario'];
+        if(! $user->fill($prepared)->update() )
+            return redirect()->route('usuarios.edit', $id)->with('failure', 'Error al actualizar usuario');
 
-        return redirect()->route('usuarios.edit', $id)->with($saved[0], $saved[1]);
+        $user->roles()->sync($request->role);
+
+        return redirect()->route('usuarios.edit', $id)->with('success', 'Usuario actualizado');
     }
 
     /**

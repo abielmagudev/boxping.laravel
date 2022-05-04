@@ -20,6 +20,7 @@ class UserSaveRequest extends FormRequest
         $rules = [
             'nombre' => ['required', 'string'],
             'email' => ['required', 'email', "unique:users,email,{$this->user_id}"],
+            'role' => ['required','exists:roles,id'],
         ];
 
         if( $this->isMethod('post') || $this->filled('clave') )
@@ -38,6 +39,8 @@ class UserSaveRequest extends FormRequest
             'email.unique' => __('Escribe un email de usuario diferente'),
             'clave.required' => __('Requiere una clave de usuario'),
             'clave.confirmed' => __('La clave y la confirmación de clave deben ser idénticas'),
+            'role.required' => __('Selecciona un rol para el usuario'),
+            'role.exists' => __('Selecciona un rol válido para el usuario'),
         ];
     }
 
