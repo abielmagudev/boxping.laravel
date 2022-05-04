@@ -36,6 +36,7 @@ class RoleSeeder extends Seeder
 
         // Supervisor
         $roles->supervisor->givePermissionTo([
+            $permissions['escritorio'],
             $permissions['alertas'],
             $permissions['comentarios'],
             $permissions['conductores'],
@@ -72,6 +73,7 @@ class RoleSeeder extends Seeder
             'consolidados' => Permission::create(['name' => 'consolidados']),
             'destinatarios' => Permission::create(['name' => 'destinatarios']),
             'entradas' => Permission::create(['name' => 'entradas']),
+            'escritorio' => Permission::create(['name' => 'escritorio']),
             'etapas' => Permission::create(['name' => 'etapas']),
             'impresiones' => Permission::create(['name' => 'impresiones']),
             'incidentes' => Permission::create(['name' => 'incidentes']),
